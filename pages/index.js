@@ -42,7 +42,7 @@ export default function Home() {
 
       <footer>
         
-          <p>Built by <a href="https://weshuber.com" className={styles.linkTheme}>Wesley Huber</a></p>
+      <a href="https://weshuber.com" className={styles.linkTheme}>Built by Wesley Huber</a>
           {/* <img src="/vercel.svg" alt="Vercel" className={styles.logo} /> */}
       </footer>
 
