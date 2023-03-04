@@ -1,0 +1,14 @@
+.textMedium {
+    line-height: 1.5;
+    font-size: 1.5rem;
+  }
+.link{
+    color: #0070f3;
+    border-color: #0070f3;
+    display: inline-block;
+  }
+  .link:hover,
+  .link:focus,
+  .link:active {
+    text-decoration: underline;
+  }

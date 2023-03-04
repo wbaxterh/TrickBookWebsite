@@ -1,63 +1,49 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import Link from 'next/link';
+import Image from 'next/image';
+
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>The Trick Book</title>
+        <link rel="icon" href="/favicon.png" />
+        <meta name="description" content="The Trick Book - App Landing Page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://thetrickbook.com/" />
+        <meta name="author" content="Wes Huber" />
+        <meta name="keywords" content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App" />
       </Head>
 
       <main>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          The <a href="#">Trick Book</a>
         </h1>
-
+        <Image
+    className={styles.icon} src="/adaptive-icon.png" // Route of the image file
+    height={250} // Desired size with correct aspect ratio
+    width={250} // Desired size with correct aspect ratio
+    alt="Trick Book"
+  />
+  <Image 
+  src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+  width={224}
+  height={76}
+  className={styles.badge}
+  />
         <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
+          View Our <Link href="/privacy-policy">Privacy Policy</Link>
         </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
+        
+          <p>Built by <a href="https://weshuber.com" className={styles.linkTheme}>Wesley Huber</a></p>
+          {/* <img src="/vercel.svg" alt="Vercel" className={styles.logo} /> */}
       </footer>
 
       <style jsx>{`

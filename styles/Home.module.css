@@ -8,10 +8,16 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #fff100;
+  text-shadow: 0px 0px 1px #000;
   text-decoration: none;
 }
-
+.icon{
+  max-width: 250px;
+}
+.badge{
+  margin-top: 1em;
+}
 .title a:hover,
 .title a:focus,
 .title a:active {
@@ -81,6 +87,16 @@
 
 .logo {
   height: 1em;
+}
+.linkTheme{
+  color: #0070f3;
+  border-color: #0070f3;
+  display: inline-block;
+}
+.linkTheme:hover,
+.linkTheme:focus,
+.linkTheme:active {
+  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
