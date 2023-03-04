@@ -19,9 +19,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className={styles.title}>
+        {/* <h1 className={styles.title}>
           The <a href="#">Trick Book</a>
-        </h1>
+        </h1> */}
         <Image
     className={styles.icon} src="/adaptive-icon.png" // Route of the image file
     height={250} // Desired size with correct aspect ratio
