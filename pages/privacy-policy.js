@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
     </p>
     <p>
         Contact Us
-        If you have any questions about this Privacy Policy or want to exercise any of your rights under applicable privacy laws, please contact us by email at wesleybaxterhuber@gmail.com or by visiting our website at https://weshuber.com/.
+        If you have any questions about this Privacy Policy or want to exercise any of your rights under applicable privacy laws, please contact us by email at wesleybaxterhuber@gmail.com or by visiting our website at <a href="mailto:wesleybaxterhuber@gmail.com">https://weshuber.com/</a>.
     </p>
       <h2>
         <Link href="/">Back to home</Link>
