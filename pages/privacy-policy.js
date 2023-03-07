@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
 import Layout from '../components/layout';
+import Image from 'next/image';
 
 export default function PrivacyPolicy() {
   return (
@@ -16,7 +17,15 @@ export default function PrivacyPolicy() {
         <meta name="author" content="Wes Huber" />
         <meta name="keywords" content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App" />
       </Head>
-      <h1>Privacy Policy</h1>
+      
+      <Image
+    className={styles.icon} src="/adaptive-icon.png" // Route of the image file
+    style={{margin: '0 auto', textAlign: 'center'}}
+    height={250} // Desired size with correct aspect ratio
+    width={250} // Desired size with correct aspect ratio
+    alt="Trick Book"
+  />
+  <h1 style={{textAlign:'center'}}>Privacy Policy</h1>
       <p>
       Privacy Policy for The Trick Book</p>
       <p>Effective date: 03.03.2023</p>
@@ -48,7 +57,7 @@ export default function PrivacyPolicy() {
         If you have any questions about this Privacy Policy or want to exercise any of your rights under applicable privacy laws, please contact us by email at wesleybaxterhuber@gmail.com or by visiting our website at <a href="mailto:wesleybaxterhuber@gmail.com">https://weshuber.com/</a>.
     </p>
       <h2>
-        <Link href="/">Back to home</Link>
+        <Link href="/"> <span class="material-icons">arrow_back</span> Back to home</Link>
       </h2>
     </Layout>
   );

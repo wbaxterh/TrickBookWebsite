@@ -35,8 +35,11 @@ export default function Home() {
   className={styles.badge}
   />
         <p className={styles.description}>
-          View Our <Link href="/privacy-policy">Privacy Policy</Link>
+        
+          View Our <Link href="/privacy-policy">Privacy Policy</Link> <br/>
+          <Link href="/questions-support">Questions & Support</Link>
         </p>
+        
 
       </main>
 
