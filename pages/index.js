@@ -45,7 +45,7 @@ export default function Home() {
 
       <footer>
         
-      <a href="https://weshuber.com" className={styles.linkTheme}>Built by Wesley Huber</a>
+      <a href="https://weshuber.com" className={styles.linkTheme}>Made with love ♥</a>
           {/* <img src="/vercel.svg" alt="Vercel" className={styles.logo} /> */}
       </footer>
 
