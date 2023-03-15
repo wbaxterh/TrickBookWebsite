@@ -5,13 +5,14 @@ import Layout from '../components/layout';
 import React from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
+import Header from '../components/header';
 
 
 
 export default function QuestionsSupport() {
     return(
-        <div className={styles.container}>
-        <Layout>
+        <>
+     
     <Head>
         <title>The Trick Book - Questions & Support</title>
         <link rel="icon" href="/favicon.png" />
@@ -22,6 +23,8 @@ export default function QuestionsSupport() {
         <meta name="author" content="Wes Huber" />
         <meta name="keywords" content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App" />
       </Head>
+        <Header />
+    <Layout>
       <div style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
      
       <Image
@@ -31,7 +34,7 @@ export default function QuestionsSupport() {
     width={250} // Desired size with correct aspect ratio
     alt="Trick Book"
   />
-   <h1>Questions & Support</h1>
+   <h1 className="pt-3" >Questions & Support</h1>
   
         <h3>For Questions & Support please email me <a href="mailto:wesleybaxterhuber@gmail.com">wesleybaxterhuber@gmail.com</a></h3>
         
@@ -40,6 +43,7 @@ export default function QuestionsSupport() {
       </h2>
       </div>
       </Layout>
-      </div>
+      </>
+      
     );
 }

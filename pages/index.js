@@ -2,11 +2,12 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import Header from '../components/header';
 
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>The Trick Book</title>
         <link rel="icon" href="/favicon.png" />
@@ -17,25 +18,30 @@ export default function Home() {
         <meta name="author" content="Wes Huber" />
         <meta name="keywords" content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App" />
       </Head>
-
+      <Header />
+      <div className={styles.container}>
       <main>
+    
+      
+    
         {/* <h1 className={styles.title}>
           The <a href="#">Trick Book</a>
         </h1> */}
-        <Image
-    className={styles.icon} src="/adaptive-icon.png" // Route of the image file
-    height={250} // Desired size with correct aspect ratio
-    width={250} // Desired size with correct aspect ratio
-    alt="Trick Book"
-  />
-  <Image 
-  src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-  width={224}
-  height={76}
-  className={styles.badge}
-  />
-        <p className={styles.description}>
         
+        <Image
+            className={styles.icon} src="/adaptive-icon.png" // Route of the image file
+            height={250} // Desired size with correct aspect ratio
+            width={250} // Desired size with correct aspect ratio
+            alt="Trick Book"
+          />
+          <Image 
+          src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+          width={224}
+          height={76}
+          className={styles.badge}
+          />
+          <p className={styles.description}>
+          <br/>
           View Our <Link href="/privacy-policy">Privacy Policy</Link> <br/>
           <Link href="/questions-support">Questions & Support</Link>
         </p>
@@ -100,5 +106,6 @@ export default function Home() {
         }
       `}</style>
     </div>
+    </>
   )
 }

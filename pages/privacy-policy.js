@@ -3,10 +3,11 @@ import styles from '../styles/Home.module.css';
 import Head from 'next/head';
 import Layout from '../components/layout';
 import Image from 'next/image';
+import Header from '../components/header';
 
 export default function PrivacyPolicy() {
   return (
-    <Layout>
+    <>
     <Head>
         <title>The Trick Book - Privacy Policy</title>
         <link rel="icon" href="/favicon.png" />
@@ -17,7 +18,8 @@ export default function PrivacyPolicy() {
         <meta name="author" content="Wes Huber" />
         <meta name="keywords" content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App" />
       </Head>
-      
+      <Header />
+      <Layout>
       <Image
     className={styles.icon} src="/adaptive-icon.png" // Route of the image file
     style={{margin: '0 auto', textAlign: 'center'}}
@@ -25,7 +27,7 @@ export default function PrivacyPolicy() {
     width={250} // Desired size with correct aspect ratio
     alt="Trick Book"
   />
-  <h1 style={{textAlign:'center'}}>Privacy Policy</h1>
+  <h1 className="pt-3" style={{textAlign:'center'}}>Privacy Policy</h1>
       <p>
       Privacy Policy for The Trick Book</p>
       <p>Effective date: 03.03.2023</p>
@@ -60,5 +62,6 @@ export default function PrivacyPolicy() {
         <Link href="/"> <span class="material-icons">arrow_back</span> Back to home</Link>
       </h2>
     </Layout>
+    </>
   );
 }
