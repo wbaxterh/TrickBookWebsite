@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "isomorphic-unfetch": "^4.0.2",
     "material-icons": "^1.13.2",
+    "mongodb": "^5.1.0",
     "next": "latest",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",

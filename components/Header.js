@@ -3,12 +3,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
 function Header() {
     return (
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">The Trick Book</Navbar.Brand>
+          <Navbar.Brand href="/"><Image
+    className={styles.icon} src="/adaptive-icon.png" // Route of the image file
+    style={{margin: '0 auto', textAlign: 'center'}}
+    height={55} // Desired size with correct aspect ratio
+    width={55} // Desired size with correct aspect ratio
+    alt="Trick Book"
+  /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

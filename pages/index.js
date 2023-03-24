@@ -34,12 +34,14 @@ export default function Home() {
             width={250} // Desired size with correct aspect ratio
             alt="Trick Book"
           />
+          <Link href="https://apps.apple.com/us/app/the-trick-book/id6446022788">
           <Image 
           src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
           width={224}
           height={76}
           className={styles.badge}
           />
+          </Link>
           <p className={styles.description}>
           <br/>
           View Our <Link href="/privacy-policy">Privacy Policy</Link> <br/>
