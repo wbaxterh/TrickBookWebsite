@@ -29,7 +29,10 @@ export default function Blog() {
 				<p>Hi From blog page</p>
 				<Link href="/">
 					{" "}
-					<span class="material-icons">arrow_back</span> Back to home
+					<span className="material-icons align-middle pb-1">
+						arrow_back
+					</span>{" "}
+					Back to home
 				</Link>
 			</Layout>
 		</>

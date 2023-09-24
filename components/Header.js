@@ -38,6 +38,12 @@ function Header() {
                 </NavDropdown.Item>
               </NavDropdown> */}
 					</Nav>
+					<Nav className={`ms-auto ${styles.justifyRight}`}>
+						<Nav.Link className="btn btn-primary" href="login">
+							Log In
+						</Nav.Link>
+						<Nav.Link href="signup">Sign Up</Nav.Link>
+					</Nav>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

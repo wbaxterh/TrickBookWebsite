@@ -138,6 +138,12 @@
 	font-size: 1rem;
 	color: #495057;
 }
+.justifyRight {
+	margin-left: auto;
+}
+.textRight {
+	text-align: right;
+}
 
 @media (max-width: 600px) {
 	.grid {
