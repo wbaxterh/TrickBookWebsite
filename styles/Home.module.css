@@ -144,6 +144,12 @@
 .textRight {
 	text-align: right;
 }
+/* Overwrite btn-primary */
+.btn-primary .custom-primary {
+	background-color: #fcf150 !important;
+	border-color: #fcf150 !important;
+	color: #333 !important; /* You may want to change the text color too */
+}
 
 @media (max-width: 600px) {
 	.grid {

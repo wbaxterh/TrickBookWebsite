@@ -22,7 +22,7 @@ const validate = (values) => {
 
 	return errors;
 };
-export default function Login() {
+export default function Signup() {
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -37,7 +37,7 @@ export default function Login() {
 	return (
 		<>
 			<Head>
-				<title>The Trick Book - Login</title>
+				<title>The Trick Book - Sign Up</title>
 				<link rel="icon" href="/favicon.png" />
 				<meta name="description" content="The Trick Book - Login" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,11 +53,11 @@ export default function Login() {
 			<Layout>
 				<div className="container">
 					<div className="row mb-5">
-						<h1 className="text-center">Log In to your Account</h1>
+						<h1 className="text-center">Register an Account</h1>
 						<h6 className="text-center">
-							Don't have an account?{" "}
-							<Link className={"underline"} href="/sign-up">
-								Sign up here
+							Already have an account?{" "}
+							<Link className={"underline"} href="/login">
+								Log in here
 							</Link>
 						</h6>
 					</div>
@@ -94,13 +94,32 @@ export default function Login() {
 									value={formik.values.password}
 								/>
 							</div>
+
 							{formik.errors.password ? (
 								<div>{formik.errors.password}</div>
 							) : null}
 						</div>
+						<div className="row m-1">
+							<div className={`col-sm-3 text-right ${styles.textRight}`}>
+								<label htmlFor="confirmPassword">Confirm Password</label>
+							</div>
+							<div className="col">
+								<input
+									id="confirmPassword"
+									name="confirmPassword"
+									type="password"
+									className="w-100"
+									onChange={formik.handleChange}
+									value={formik.values.confirmPassword}
+								/>
+								{formik.errors.confirmPassword ? (
+									<div>{formik.errors.confirmPassword}</div>
+								) : null}
+							</div>
+						</div>
 						<div className="row m-1 mt-2 ms-auto">
 							<div
-								className={`col-sm-6 ms-auto justify-content-end ${styles.textRight}`}
+								className={`col-sm ms-auto justify-content-end ${styles.textRight}`}
 							>
 								<Link className={"btn btn-secondary p-1 px-2 me-1"} href="/">
 									{" "}
@@ -113,7 +132,7 @@ export default function Login() {
 									className="btn btn-primary custom-primary p-1 px-2"
 									type="submit"
 								>
-									Submit
+									Create my Account
 								</button>
 							</div>
 						</div>
