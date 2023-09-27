@@ -27,22 +27,25 @@ export default function Home() {
 						{/* <h1 className={styles.title}>
           The <a href="#">Trick Book</a>
         </h1> */}
-
-						<Image
-							className={styles.icon}
-							src="/adaptive-icon.png" // Route of the image file
-							height={250} // Desired size with correct aspect ratio
-							width={250} // Desired size with correct aspect ratio
-							alt="Trick Book"
-						/>
-						<Link href="https://apps.apple.com/us/app/the-trick-book/id6446022788">
+						<div className="d-flex justify-content-center">
 							<Image
-								src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-								width={224}
-								height={76}
-								className={styles.badge}
+								className={styles.icon}
+								src="/adaptive-icon.png" // Route of the image file
+								height={250} // Desired size with correct aspect ratio
+								width={250} // Desired size with correct aspect ratio
+								alt="Trick Book"
 							/>
-						</Link>
+						</div>
+						<div className="d-flex justify-content-center">
+							<Link href="https://apps.apple.com/us/app/the-trick-book/id6446022788">
+								<Image
+									src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+									width={224}
+									height={76}
+									className={styles.badge}
+								/>
+							</Link>
+						</div>
 						<p className={styles.description}>
 							<br />
 							View Our <Link href="/privacy-policy">Privacy Policy</Link> <br />

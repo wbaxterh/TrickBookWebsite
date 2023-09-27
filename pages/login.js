@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
@@ -23,17 +25,39 @@ const validate = (values) => {
 	return errors;
 };
 export default function Login() {
+	//API fetch
+	const loginUser = async (email, password) => {
+		const response = await fetch("/api/auth", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email, password }),
+		});
+
+		return response;
+	};
+
+	//onSubmit handle errors or redirect the user
+	const [loginError, setLoginError] = useState(null);
+	const router = useRouter();
+
 	const formik = useFormik({
 		initialValues: {
 			email: "",
 			password: "",
 		},
 		validate,
-		onSubmit: (values) => {
-			// Here you would typically make an API request for login
-			console.log(values);
+		onSubmit: async (values) => {
+			const response = await loginUser(values.email, values.password);
+			if (response.ok) {
+				// Navigate to profile page
+				router.push("/profile");
+			} else {
+				const data = await response.json();
+				setLoginError(data.error || "An unknown error occurred");
+			}
 		},
 	});
+
 	return (
 		<>
 			<Head>
@@ -62,6 +86,12 @@ export default function Login() {
 						</h6>
 					</div>
 					<form onSubmit={formik.handleSubmit}>
+						{loginError && (
+							<div className="row m-1">
+								<div className="col text-center text-danger">{loginError}</div>
+							</div>
+						)}
+
 						<div className="row m-1">
 							<div className={`col-sm-3 text-right ${styles.textRight}`}>
 								<label htmlFor="email">Email Address</label>
