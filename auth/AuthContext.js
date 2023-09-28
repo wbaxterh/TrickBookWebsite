@@ -5,10 +5,12 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [token, setToken] = useState(null); // Initializing token state
+	const [email, setEmail] = useState(null);
 
-	const logIn = (newToken) => {
+	const logIn = (newToken, email) => {
 		setLoggedIn(true);
 		setToken(newToken);
+		setEmail(email);
 		// Optionally store token in localStorage for persistence
 		// localStorage.setItem("userToken", newToken);
 	};
@@ -16,6 +18,7 @@ export function AuthProvider({ children }) {
 	const logOut = () => {
 		setLoggedIn(false);
 		setToken(null);
+		setEmail(null);
 		// Remove token from localStorage
 		// localStorage.removeItem("userToken");
 	};
@@ -25,6 +28,7 @@ export function AuthProvider({ children }) {
 		token,
 		logIn,
 		logOut,
+		email,
 	};
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

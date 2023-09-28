@@ -38,11 +38,19 @@ function Header() {
                 </NavDropdown.Item>
               </NavDropdown> */}
 					</Nav>
-					<Nav className={`ms-auto ${styles.justifyRight}`}>
-						<Nav.Link className="btn btn-primary" href="login">
+					<Nav className={`ms-auto`}>
+						<Nav.Link
+							className={`btn btn-primary ${styles.login}`}
+							href="login"
+						>
 							Log In
 						</Nav.Link>
-						<Nav.Link href="signup">Sign Up</Nav.Link>
+						<Nav.Link
+							className={`btn btn-secondary ${styles.login}`}
+							href="signup"
+						>
+							Sign Up
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

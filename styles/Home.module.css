@@ -156,4 +156,7 @@
 		width: 100%;
 		flex-direction: column;
 	}
+	.login {
+		width: 150px;
+	}
 }

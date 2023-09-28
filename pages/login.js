@@ -8,6 +8,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import { useFormik } from "formik";
 import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
+import Footer from "../components/Footer";
 
 const validate = (values) => {
 	const errors = {};
@@ -61,8 +62,8 @@ export default function Login() {
 			const response = await loginUser(values.email, values.password);
 			if (response.ok) {
 				const data = await response.json(); // Assuming the token is returned in JSON payload
-				console.log(data);
-				logIn(data.token); // Update AuthContext loggedIn state
+				console.log(data, values.email);
+				logIn(data.token, values.email); // Update AuthContext loggedIn state
 				//setToken(data.token); // Update AuthContext token state, again assuming token is returned in 'data'
 
 				// Navigate to profile page
@@ -166,6 +167,7 @@ export default function Login() {
 					</form>
 				</div>
 			</Layout>
+			<Footer />
 		</>
 	);
 }

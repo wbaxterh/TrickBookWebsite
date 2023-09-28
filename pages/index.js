@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
 	return (
@@ -69,12 +70,7 @@ export default function Home() {
 					</section>
 				</main>
 
-				<footer>
-					<a href="https://weshuber.com" className={styles.linkTheme}>
-						Made with love ♥
-					</a>
-					{/* <img src="/vercel.svg" alt="Vercel" className={styles.logo} /> */}
-				</footer>
+				<Footer />
 
 				<style jsx>{`
 					main {

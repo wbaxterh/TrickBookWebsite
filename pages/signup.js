@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
 import { useFormik } from "formik";
+import Footer from "../components/Footer";
 
 const validate = (values) => {
 	const errors = {};
@@ -139,6 +140,7 @@ export default function Signup() {
 					</form>
 				</div>
 			</Layout>
+			<Footer />
 		</>
 	);
 }

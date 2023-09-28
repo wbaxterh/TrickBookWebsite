@@ -5,9 +5,14 @@ import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
 import jwt from "jsonwebtoken";
-import { useAuth } from "../auth/AuthContext";
+import { useContext } from "react";
+import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
+import Footer from "../components/Footer";
 
 export default function Profile() {
+	const { email, token } = useContext(AuthContext);
+	console.log(email);
+	console.log(token);
 	return (
 		<>
 			<Head>
@@ -28,7 +33,7 @@ export default function Profile() {
 				<h1 className="pt-3" style={{ textAlign: "left" }}>
 					Profile
 				</h1>
-				<p>Hi From profile page</p>
+				<p>Hi {email} your profile will be available on the web soon</p>
 				<Link href="/">
 					{" "}
 					<span className="material-icons align-middle pb-1">
@@ -37,6 +42,7 @@ export default function Profile() {
 					Back to home
 				</Link>
 			</Layout>
+			<Footer />
 		</>
 	);
 }

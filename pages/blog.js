@@ -4,6 +4,7 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Blog() {
 	return (
@@ -26,7 +27,7 @@ export default function Blog() {
 				<h1 className="pt-3" style={{ textAlign: "left" }}>
 					Blog
 				</h1>
-				<p>Hi From blog page</p>
+				<p>Nothing here yet.</p>
 				<Link href="/">
 					{" "}
 					<span className="material-icons align-middle pb-1">
@@ -35,6 +36,7 @@ export default function Blog() {
 					Back to home
 				</Link>
 			</Layout>
+			<Footer />
 		</>
 	);
 }
