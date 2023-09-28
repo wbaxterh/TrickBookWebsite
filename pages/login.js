@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { React, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
@@ -7,6 +7,7 @@ import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
 import { useFormik } from "formik";
+import AuthContext from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
 
 const validate = (values) => {
 	const errors = {};
@@ -25,6 +26,7 @@ const validate = (values) => {
 	return errors;
 };
 export default function Login() {
+	const { logIn, setToken } = useContext(AuthContext);
 	//API fetch
 	const loginUser = async (email, password) => {
 		const response = await fetch("/api/auth", {
@@ -49,6 +51,11 @@ export default function Login() {
 		onSubmit: async (values) => {
 			const response = await loginUser(values.email, values.password);
 			if (response.ok) {
+				const data = await response.json(); // Assuming the token is returned in JSON payload
+				console.log(data);
+				logIn(); // Update AuthContext loggedIn state
+				setToken(data.token); // Update AuthContext token state, again assuming token is returned in 'data'
+
 				// Navigate to profile page
 				router.push("/profile");
 			} else {

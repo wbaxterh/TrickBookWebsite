@@ -4,10 +4,9 @@ import fetch from "isomorphic-unfetch";
 export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const { email, password } = req.body;
-		console.log(req.body);
 		try {
 			// Forward the request to your existing Express.js backend
-			const response = await fetch("http://localhost:9000/auth", {
+			const response = await fetch("http://localhost:9000/api/auth", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password }),
@@ -16,14 +15,19 @@ export default async function handler(req, res) {
 			const data = await response.json();
 
 			if (response.ok) {
-				// Handle success (store token, etc.)
-				res.status(200).json(data);
+				// Handle successful login
+				// For example, store the token and redirect to profile page
+				res.setHeader("Set-Cookie", `token=${data.token}; HttpOnly; Path=/;`);
+				res.status(200);
+				res.send("logged in");
 			} else {
-				// Forward any errors
-				res.status(response.status).json(data);
+				// Handle error message
+				console.error("Invalid login:", data.error);
+				res.status(400);
+				res.send(data);
 			}
 		} catch (error) {
-			res.status(500).json({ error: "Internal Server Error" });
+			console.error("An error occurred:", error);
 		}
 	} else {
 		res.status(405).end(); // Method not allowed

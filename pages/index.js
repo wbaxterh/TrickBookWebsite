@@ -58,53 +58,11 @@ export default function Home() {
 								<div className="col">
 									<h2>About Trick Book</h2>
 									<p>
-										<strong>Developed by Riders, for Riders</strong>
+										<strong>
+											A pocketbook for your tricks. Connecting teachers and
+											students of Action Sports.
+										</strong>
 									</p>
-									<p>
-										In the world of action sports, progression is the heart of
-										passion. We understand that, because we are riders
-										ourselves. Trick Book is not just an app; it's a companion
-										in your journey to mastering new tricks, pushing your
-										limits, and connecting with a community that shares your
-										enthusiasm.
-									</p>
-
-									<h3>Our Mission</h3>
-									<p>To be a continually evolving platform where riders can:</p>
-									<ul>
-										<li>
-											<strong>Organize & Track</strong> their repertoire of
-											tricks with ease.
-										</li>
-										<li>
-											<strong>Discover & Learn</strong> new tricks that fuel
-											their passion and skillset.
-										</li>
-										<li>
-											<strong>Save & Share</strong> their favorite locations to
-											perform tricks.
-										</li>
-										<li>
-											<strong>Connect & Grow</strong> with a community of fellow
-											riders eager to share their experiences and knowledge.
-										</li>
-									</ul>
-
-									<p>
-										Together, we ride. Together, we progress. Join us in
-										crafting a space that embodies the spirit of action sports.
-									</p>
-								</div>
-								<div className="col d-flex align-items-center justify-content-center">
-									<Image
-										src="/skaterKids.png"
-										width={0}
-										height={0}
-										sizes="100vw"
-										style={{ width: "100%", height: "auto" }} // optional
-										alt="Kids skateboarding together"
-										className="align-self-center"
-									/>
 								</div>
 							</div>
 						</div>

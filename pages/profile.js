@@ -4,8 +4,10 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
+import jwt from "jsonwebtoken";
+import { useAuth } from "../auth/AuthContext";
 
-export default function Blog() {
+export default function Profile() {
 	return (
 		<>
 			<Head>
@@ -24,7 +26,7 @@ export default function Blog() {
 			<Header />
 			<Layout>
 				<h1 className="pt-3" style={{ textAlign: "left" }}>
-					Blog
+					Profile
 				</h1>
 				<p>Hi From profile page</p>
 				<Link href="/">
@@ -37,4 +39,35 @@ export default function Blog() {
 			</Layout>
 		</>
 	);
+}
+export async function getServerSideProps(context) {
+	const { req } = context;
+	const token = req.cookies.token; // Assuming the JWT is stored in a cookie named 'token'
+
+	if (!token) {
+		return {
+			redirect: {
+				destination: "/login", // Redirect to login page if no token
+				permanent: false,
+			},
+		};
+	}
+
+	try {
+		jwt.verify(token, "jwtPrivateKey"); // Replace 'your-secret-key' with the actual secret key
+	} catch (e) {
+		return {
+			redirect: {
+				destination: "/login", // Redirect to login if token is invalid
+				permanent: false,
+			},
+		};
+	}
+
+	// If token is valid, proceed to render the Profile page
+	return {
+		props: {
+			isloggedIn: "true",
+		},
+	};
 }
