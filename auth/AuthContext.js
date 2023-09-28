@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -10,14 +10,14 @@ export function AuthProvider({ children }) {
 		setLoggedIn(true);
 		setToken(newToken);
 		// Optionally store token in localStorage for persistence
-		localStorage.setItem("userToken", newToken);
+		// localStorage.setItem("userToken", newToken);
 	};
 
 	const logOut = () => {
 		setLoggedIn(false);
 		setToken(null);
 		// Remove token from localStorage
-		localStorage.removeItem("userToken");
+		// localStorage.removeItem("userToken");
 	};
 
 	const value = {

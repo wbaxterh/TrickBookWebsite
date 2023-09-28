@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 				// For example, store the token and redirect to profile page
 				res.setHeader("Set-Cookie", `token=${data.token}; HttpOnly; Path=/;`);
 				res.status(200);
-				res.send("logged in");
+				res.send(data);
 			} else {
 				// Handle error message
 				console.error("Invalid login:", data.error);

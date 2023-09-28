@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
 import { useFormik } from "formik";
-import AuthContext from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
+import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
 
 const validate = (values) => {
 	const errors = {};
@@ -26,7 +26,16 @@ const validate = (values) => {
 	return errors;
 };
 export default function Login() {
+	const authContext = useContext(AuthContext);
 	const { logIn, setToken } = useContext(AuthContext);
+
+	// Check if the context is available
+	if (!authContext) {
+		console.error("AuthContext is not available!");
+		return <div>Error: Could not get authentication context.</div>;
+	}
+
+	// const { logIn, setToken } = useContext(AuthContext);
 	//API fetch
 	const loginUser = async (email, password) => {
 		const response = await fetch("/api/auth", {
@@ -53,8 +62,8 @@ export default function Login() {
 			if (response.ok) {
 				const data = await response.json(); // Assuming the token is returned in JSON payload
 				console.log(data);
-				logIn(); // Update AuthContext loggedIn state
-				setToken(data.token); // Update AuthContext token state, again assuming token is returned in 'data'
+				logIn(data.token); // Update AuthContext loggedIn state
+				//setToken(data.token); // Update AuthContext token state, again assuming token is returned in 'data'
 
 				// Navigate to profile page
 				router.push("/profile");
@@ -87,7 +96,7 @@ export default function Login() {
 						<h1 className="text-center">Log In to your Account</h1>
 						<h6 className="text-center">
 							Don't have an account?{" "}
-							<Link className={"underline"} href="/sign-up">
+							<Link className={"underline"} href="/signup">
 								Sign up here
 							</Link>
 						</h6>
