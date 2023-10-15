@@ -23,9 +23,9 @@ function Header() {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						<Nav.Link href="/">Home</Nav.Link>
-						<Nav.Link href="blog">Blog</Nav.Link>
-						<Nav.Link href="privacy-policy">Privacy Policy</Nav.Link>
-						<Nav.Link href="questions-support">Support</Nav.Link>
+						<Nav.Link href="/blog">Blog</Nav.Link>
+						<Nav.Link href="/privacy-policy">Privacy Policy</Nav.Link>
+						<Nav.Link href="/questions-support">Support</Nav.Link>
 						{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -41,13 +41,13 @@ function Header() {
 					<Nav className={`ms-auto`}>
 						<Nav.Link
 							className={`btn btn-primary ${styles.login}`}
-							href="login"
+							href="/login"
 						>
 							Log In
 						</Nav.Link>
 						<Nav.Link
 							className={`btn btn-secondary ${styles.login}`}
-							href="signup"
+							href="/signup"
 						>
 							Sign Up
 						</Nav.Link>
