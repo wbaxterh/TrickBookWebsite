@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^5.3.2",
     "formik": "^2.4.5",
+    "gray-matter": "^4.0.3",
     "isomorphic-unfetch": "^4.0.2",
     "jsonwebtoken": "^9.0.2",
     "material-icons": "^1.13.2",
@@ -15,6 +16,8 @@
     "next": "latest",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   }
 }

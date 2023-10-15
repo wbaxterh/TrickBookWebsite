@@ -138,6 +138,14 @@
 	font-size: 1rem;
 	color: #495057;
 }
+.newsFeedSection {
+	padding: 2rem 0;
+	margin-top: 2rem;
+	padding: 1rem;
+	background-color: #f8f9fa;
+	text-align: left;
+	max-width: 800px;
+}
 .justifyRight {
 	margin-left: auto;
 }

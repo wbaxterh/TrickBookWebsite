@@ -68,6 +68,23 @@ export default function Home() {
 							</div>
 						</div>
 					</section>
+					{/* News Feed Section */}
+					<section className={styles.newsFeedSection}>
+						<div className={"container"}>
+							<div className="row">
+								<div className="col">
+									<h2>Latest News</h2>
+									<p>
+										We're stoked to announce that the first version of the Trick
+										Book app is now available for download! We'd love for you to
+										create your trick lists, test the app, and share your
+										feedback with us.
+									</p>
+									{/* Optional: Add a link or button for users to submit feedback */}
+								</div>
+							</div>
+						</div>
+					</section>
 				</main>
 
 				<Footer />

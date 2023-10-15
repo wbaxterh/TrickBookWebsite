@@ -5,8 +5,9 @@ import Layout from "../components/layout";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { getSortedPostsData } from "../lib/api";
 
-export default function Blog() {
+export default function Blog({ allPostsData }) {
 	return (
 		<>
 			<Head>
@@ -27,7 +28,15 @@ export default function Blog() {
 				<h1 className="pt-3" style={{ textAlign: "left" }}>
 					Blog
 				</h1>
-				<p>Nothing here yet.</p>
+				<ul>
+					{allPostsData.map(({ id, date, title }) => (
+						<li key={id}>
+							<Link href={`/blog/${id}`}>{title}</Link>
+							<br />
+							{date}
+						</li>
+					))}
+				</ul>
 				<Link href="/">
 					{" "}
 					<span className="material-icons align-middle pb-1">
@@ -39,4 +48,12 @@ export default function Blog() {
 			<Footer />
 		</>
 	);
+}
+export async function getStaticProps() {
+	const allPostsData = getSortedPostsData();
+	return {
+		props: {
+			allPostsData,
+		},
+	};
 }
