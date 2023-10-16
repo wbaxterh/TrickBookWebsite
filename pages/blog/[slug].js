@@ -2,6 +2,7 @@ import { getAllPostIds, getPostData } from "../../lib/api";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 export default function Post({ postData }) {
 	return (
 		<>
@@ -25,6 +26,7 @@ export default function Post({ postData }) {
 				{postData.date}
 				<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
 			</Layout>
+			<Footer />
 		</>
 	);
 }

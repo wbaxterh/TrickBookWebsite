@@ -6,7 +6,6 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getSortedPostsData } from "../lib/api";
-
 export default function Blog({ allPostsData }) {
 	return (
 		<>
@@ -28,20 +27,28 @@ export default function Blog({ allPostsData }) {
 				<h1 className="pt-3" style={{ textAlign: "left" }}>
 					Blog
 				</h1>
-				<ul>
-					{allPostsData.map(({ id, date, title }) => (
-						<li key={id}>
-							<Link href={`/blog/${id}`}>{title}</Link>
-							<br />
-							{date}
-						</li>
+				<div className="row">
+					{allPostsData.map(({ id, date, title, author, firstImage }) => (
+						<div className="col-md-3 col-sm-4 col-12 mb-4" key={id}>
+							<div className="card">
+								<img
+									src={firstImage} // Use the firstImage variable here
+									alt={`${title}`}
+									className="card-img-top"
+								/>
+								<div className="card-body">
+									<h5 className="card-title">
+										<Link href={`/blog/${id}`}>{title}</Link>
+									</h5>
+									<p className="card-text">{date}</p>
+									<p className="card-text">By {author}</p>
+								</div>
+							</div>
+						</div>
 					))}
-				</ul>
+				</div>
 				<Link href="/">
-					{" "}
-					<span className="material-icons align-middle pb-1">
-						arrow_back
-					</span>{" "}
+					<span className="material-icons align-middle pb-1">arrow_back</span>
 					Back to home
 				</Link>
 			</Layout>
@@ -49,6 +56,7 @@ export default function Blog({ allPostsData }) {
 		</>
 	);
 }
+
 export async function getStaticProps() {
 	const allPostsData = getSortedPostsData();
 	return {

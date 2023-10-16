@@ -1,11 +1,14 @@
 ---
 title: "Developing The Trick Book App"
+author: "Wes Huber"
 date: "2023-10-14"
 ---
 
 ## About the Author - Wes Huber
 
 I am deeply passionate about action sports and also hold a degree in computer science. For years, I've been using my web development skills to fund my travel adventures, shredding across various terrains and learning new tricks. But it was always in the back of my mind—why not align my programming skills with my passion?
+
+![Developing the app](developing-the-app.png)
 
 ## The Inception
 
