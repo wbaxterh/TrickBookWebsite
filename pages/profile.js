@@ -11,8 +11,7 @@ import Footer from "../components/Footer";
 
 export default function Profile() {
 	const { email, token } = useContext(AuthContext);
-	console.log(email);
-	console.log(token);
+	console.log("email from context: ", email);
 	return (
 		<>
 			<Head>
