@@ -6,7 +6,7 @@ date: "2023-10-14"
 
 ## About the Author - Wes Huber
 
-I am deeply passionate about action sports. I specifically like skateboarding, wakeboarding, and snowboarding. I also hold a degree in computer science. For years, I've been using my web development skills to fund my travel adventures, shredding across various terrains and learning new tricks. But it has always been in the back of my mind—why not align my programming skills with my passion?
+I am deeply passionate about action sports. I am a skateboarder, wakeboarder, and snowboarder. I also hold a degree in computer science. For years, I've been using my web development skills to fund my travel adventures, shredding across various terrains and learning new tricks. But it has always been in the back of my mind—why not align my programming skills with my passion?
 
 ![Developing the app](developing-the-app.png)
 
