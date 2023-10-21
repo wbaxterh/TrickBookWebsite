@@ -36,7 +36,6 @@ export default function Login() {
 		return <div>Error: Could not get authentication context.</div>;
 	}
 
-	// const { logIn, setToken } = useContext(AuthContext);
 	//API fetch
 	const loginUser = async (email, password) => {
 		const response = await fetch("/api/auth", {
@@ -79,64 +78,64 @@ export default function Login() {
 		<>
 			<Head>
 				<title>The Trick Book - Login</title>
-				<link rel="icon" href="/favicon.png" />
-				<meta name="description" content="The Trick Book - Login" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/" />
-				<meta name="author" content="Wes Huber" />
+				<link rel='icon' href='/favicon.png' />
+				<meta name='description' content='The Trick Book - Login' />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
 				<meta
-					name="keywords"
-					content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
 			<Header />
 			<Layout>
-				<div className="container">
-					<div className="row mb-5">
-						<h1 className="text-center">Log In to your Account</h1>
-						<h6 className="text-center">
+				<div className='container'>
+					<div className='row mb-5'>
+						<h1 className='text-center'>Log In to your Account</h1>
+						<h6 className='text-center'>
 							Don't have an account?{" "}
-							<Link className={"underline"} href="/signup">
+							<Link className={"underline"} href='/signup'>
 								Sign up here
 							</Link>
 						</h6>
 					</div>
 					<form onSubmit={formik.handleSubmit}>
 						{loginError && (
-							<div className="row m-1">
-								<div className="col text-center text-danger">{loginError}</div>
+							<div className='row m-1'>
+								<div className='col text-center text-danger'>{loginError}</div>
 							</div>
 						)}
 
-						<div className="row m-1">
+						<div className='row m-1'>
 							<div className={`col-sm-3 text-right ${styles.textRight}`}>
-								<label htmlFor="email">Email Address</label>
+								<label htmlFor='email'>Email Address</label>
 							</div>
-							<div className="col">
+							<div className='col'>
 								<input
-									id="email"
-									name="email"
-									type="email"
-									className="w-100"
+									id='email'
+									name='email'
+									type='email'
+									className='w-100'
 									onChange={formik.handleChange}
 									value={formik.values.email}
 								/>
 							</div>
 							{formik.errors.email ? <div>{formik.errors.email}</div> : null}
 						</div>
-						<div className="row m-1">
+						<div className='row m-1'>
 							<div className={`col-sm-3 text-right ${styles.textRight}`}>
-								<label className="justify-self-end" htmlFor="password">
+								<label className='justify-self-end' htmlFor='password'>
 									Password
 								</label>
 							</div>
-							<div className="col">
+							<div className='col'>
 								<input
-									id="password"
-									name="password"
-									type="password"
-									className="w-100"
+									id='password'
+									name='password'
+									type='password'
+									className='w-100'
 									onChange={formik.handleChange}
 									value={formik.values.password}
 								/>
@@ -145,20 +144,20 @@ export default function Login() {
 								<div>{formik.errors.password}</div>
 							) : null}
 						</div>
-						<div className="row m-1 mt-2 ms-auto">
+						<div className='row m-1 mt-2 ms-auto'>
 							<div
 								className={`col-sm-6 ms-auto justify-content-end ${styles.textRight}`}
 							>
-								<Link className={"btn btn-secondary p-1 px-2 me-1"} href="/">
+								<Link className={"btn btn-secondary p-1 px-2 me-1"} href='/'>
 									{" "}
-									<span className="material-icons align-middle pb-1">
+									<span className='material-icons align-middle pb-1'>
 										arrow_back
 									</span>{" "}
 									Back to home
 								</Link>
 								<button
-									className="btn btn-primary custom-primary p-1 px-2"
-									type="submit"
+									className='btn btn-primary custom-primary p-1 px-2'
+									type='submit'
 								>
 									Submit
 								</button>

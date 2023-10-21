@@ -1,31 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { AuthContext } from "../auth/AuthContext";
 function Header() {
+	const { loggedIn } = useContext(AuthContext);
+	console.log("Is logged in:", loggedIn);
+
 	return (
-		<Navbar bg="light" expand="lg">
+		<Navbar bg='light' expand='lg'>
 			<Container>
-				<Navbar.Brand href="/">
+				<Navbar.Brand href='/'>
 					<Image
 						className={styles.icon}
-						src="/adaptive-icon.png" // Route of the image file
+						src='/adaptive-icon.png' // Route of the image file
 						style={{ margin: "0 auto", textAlign: "center" }}
 						height={55} // Desired size with correct aspect ratio
 						width={55} // Desired size with correct aspect ratio
-						alt="Trick Book"
+						alt='Trick Book'
 					/>
 				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="me-auto">
-						<Nav.Link href="/">Home</Nav.Link>
-						<Nav.Link href="/blog">Blog</Nav.Link>
-						<Nav.Link href="/privacy-policy">Privacy Policy</Nav.Link>
-						<Nav.Link href="/questions-support">Support</Nav.Link>
+				<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Collapse id='basic-navbar-nav'>
+					<Nav className='me-auto'>
+						<Nav.Link href='/'>Home</Nav.Link>
+						<Nav.Link href='/blog'>Blog</Nav.Link>
+						<Nav.Link href='/privacy-policy'>Privacy Policy</Nav.Link>
+						<Nav.Link href='/questions-support'>Support</Nav.Link>
 						{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -40,14 +44,16 @@ function Header() {
 					</Nav>
 					<Nav className={`ms-auto`}>
 						<Nav.Link
-							className={`btn btn-primary ${styles.login}`}
-							href="/login"
+							className={`btn ${loggedIn ? "btn-secondary" : "btn-primary"} ${
+								styles.login
+							}`}
+							href={loggedIn ? "/profile" : "/login"}
 						>
-							Log In
+							{loggedIn ? "Profile" : "Log In"}
 						</Nav.Link>
 						<Nav.Link
 							className={`btn btn-secondary ${styles.login}`}
-							href="/signup"
+							href='/signup'
 						>
 							Sign Up
 						</Nav.Link>

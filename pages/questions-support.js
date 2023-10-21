@@ -13,18 +13,18 @@ export default function QuestionsSupport() {
 		<>
 			<Head>
 				<title>The Trick Book - Questions & Support</title>
-				<link rel="icon" href="/favicon.png" />
+				<link rel='icon' href='/favicon.png' />
 				<meta
-					name="description"
-					content="The Trick Book - App Privacy Policy"
+					name='description'
+					content='The Trick Book - App Privacy Policy'
 				/>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/" />
-				<meta name="author" content="Wes Huber" />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
 				<meta
-					name="keywords"
-					content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
 			<Header />
@@ -38,7 +38,7 @@ export default function QuestionsSupport() {
 				>
 					<Image
 						className={styles.icon}
-						src="/adaptive-icon.png" // Route of the image file
+						src='/adaptive-icon.png' // Route of the image file
 						style={{
 							alignItems: "center",
 							justifyContent: "center",
@@ -46,20 +46,20 @@ export default function QuestionsSupport() {
 						}}
 						height={250} // Desired size with correct aspect ratio
 						width={250} // Desired size with correct aspect ratio
-						alt="Trick Book"
+						alt='Trick Book'
 					/>
-					<h1 className="pt-3">Questions & Support</h1>
+					<h1 className='pt-3'>Questions & Support</h1>
 
 					<h3>
 						For Questions & Support please email me{" "}
-						<a href="mailto:wesleybaxterhuber@gmail.com">
+						<a href='mailto:wesleybaxterhuber@gmail.com'>
 							wesleybaxterhuber@gmail.com
 						</a>
 					</h3>
 
 					<h2>
-						<Link href="/">
-							<span class="material-icons">arrow_back</span> Back to home
+						<Link href='/'>
+							<span className='material-icons'>arrow_back</span> Back to home
 						</Link>
 					</h2>
 				</div>
