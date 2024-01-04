@@ -4,15 +4,20 @@ import fetch from "isomorphic-unfetch";
 export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const { email, password } = req.body;
+		console.log("request == ", JSON.stringify({ email, password }));
+		console.log("Base URL:", process.env.BASE_URL);
+
+		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
 		try {
 			// Forward the request to your existing Express.js backend
-			const response = await fetch("http://localhost:9000/api/auth", {
+			const response = await fetch(`${baseUrl}/api/auth`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password }),
 			});
 
 			const data = await response.json();
+			console.log("Raw response:", data);
 
 			if (response.ok) {
 				// Handle successful login

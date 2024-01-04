@@ -70,6 +70,7 @@ function admin({ isLoggedIn, users, tricklists }) {
 
 	const [showTable, setShowTable] = useState(false);
 	const [showTrickLists, setShowTrickLists] = useState(false);
+	const baseUrl = process.env.BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
 
 	const toggleTable = () => {
 		setShowTable((prevState) => !prevState);
@@ -81,33 +82,33 @@ function admin({ isLoggedIn, users, tricklists }) {
 		<>
 			<Head>
 				<title>The Trick Book - Admin</title>
-				<link rel="icon" href="/favicon.png" />
-				<meta name="description" content="The Trick Book - Admin" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/" />
-				<meta name="author" content="Wes Huber" />
+				<link rel='icon' href='/favicon.png' />
+				<meta name='description' content='The Trick Book - Admin' />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
 				<meta
-					name="keywords"
-					content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
 			<Header />
 			<Layout>
-				<h1 className="pt-3" style={{ textAlign: "center" }}>
+				<h1 className='pt-3' style={{ textAlign: "center" }}>
 					Current Data {email}
 				</h1>
 				<button
-					className="btn btn-light container-fluid my-1"
+					className='btn btn-light container-fluid my-1'
 					onClick={toggleTable}
 				>
 					{" "}
 					{!showTable ? (
-						<i className="material-icons" style={{ fontSize: "12px" }}>
+						<i className='material-icons' style={{ fontSize: "12px" }}>
 							add
 						</i>
 					) : (
-						<i className="material-icons" style={{ fontSize: "12px" }}>
+						<i className='material-icons' style={{ fontSize: "12px" }}>
 							remove
 						</i>
 					)}{" "}
@@ -115,15 +116,15 @@ function admin({ isLoggedIn, users, tricklists }) {
 				</button>
 				{showTable && <UsersTable users={users} />}
 				<button
-					className="btn btn-light container-fluid my-1"
+					className='btn btn-light container-fluid my-1'
 					onClick={toggleTrickLists}
 				>
 					{!showTrickLists ? (
-						<i className="material-icons" style={{ fontSize: "12px" }}>
+						<i className='material-icons' style={{ fontSize: "12px" }}>
 							add
 						</i>
 					) : (
-						<i className="material-icons" style={{ fontSize: "12px" }}>
+						<i className='material-icons' style={{ fontSize: "12px" }}>
 							remove
 						</i>
 					)}
@@ -140,9 +141,9 @@ function admin({ isLoggedIn, users, tricklists }) {
 
 export async function getServerSideProps(context) {
 	// Fetch all users from the API
-	const res = await fetch("http://localhost:9000/api/users/all");
-	const res2 = await fetch("http://localhost:9000/api/listings/all");
-	const res3 = await fetch(`http://localhost:9000/api/listing/allData`);
+	const res = await fetch(`${baseUrl}/api/users/all`);
+	const res2 = await fetch(`${baseUrl}/api/listings/all`);
+	const res3 = await fetch(`${baseUrl}/api/listing/allData`);
 	const tricks = await res3.json();
 	const users = await res.json();
 	const tricklists = await res2.json();
