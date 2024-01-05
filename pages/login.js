@@ -5,10 +5,13 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Image from "next/image";
+import axios from "axios";
 import Header from "../components/Header";
 import { useFormik } from "formik";
 import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
 import Footer from "../components/Footer";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
 
 const validate = (values) => {
 	const errors = {};
@@ -37,16 +40,29 @@ export default function Login() {
 	}
 
 	//API fetch
+	// const loginUser = async (email, password) => {
+	// 	const response = await fetch(`${baseUrl}/api/auth`, {
+	// 		method: "POST",
+	// 		headers: { "Content-Type": "application/json" },
+	// 		body: JSON.stringify({ email, password }),
+	// 	});
+
+	// 	return response;
+	// };
 	const loginUser = async (email, password) => {
-		const response = await fetch("/api/auth", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ email, password }),
-		});
-
-		return response;
+		try {
+			// Call the Next.js API route which will handle the authentication
+			const response = await axios.post("/api/auth", { email, password });
+			return response;
+		} catch (error) {
+			// Handle any errors here
+			console.error(
+				"Login error:",
+				error.response ? error.response.data : error.message
+			);
+			throw error; // Re-throw the error to be handled in onSubmit
+		}
 	};
-
 	//onSubmit handle errors or redirect the user
 	const [loginError, setLoginError] = useState(null);
 	const router = useRouter();
@@ -58,18 +74,22 @@ export default function Login() {
 		},
 		validate,
 		onSubmit: async (values) => {
-			const response = await loginUser(values.email, values.password);
-			if (response.ok) {
-				const data = await response.json(); // Assuming the token is returned in JSON payload
-				console.log(data, values.email);
+			try {
+				const response = await loginUser(values.email, values.password);
+				const data = response.data; // Axios automatically parses JSON responses
+
+				console.log("Data from api == ", data, values.email);
 				logIn(data.token, values.email); // Update AuthContext loggedIn state
-				//setToken(data.token); // Update AuthContext token state, again assuming token is returned in 'data'
 
 				// Navigate to profile page
 				router.push("/profile");
-			} else {
-				const data = await response.json();
-				setLoginError(data.error || "An unknown error occurred");
+			} catch (error) {
+				// Handle login errors
+				const errorMessage =
+					error.response && error.response.data
+						? error.response.data.error
+						: "An unknown error occurred";
+				setLoginError(errorMessage);
 			}
 		},
 	});

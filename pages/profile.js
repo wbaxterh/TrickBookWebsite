@@ -56,7 +56,7 @@ export default function Profile() {
 export async function getServerSideProps(context) {
 	const { req } = context;
 	const token = req.cookies.token; // Assuming the JWT is stored in a cookie named 'token'
-
+	console.log("token from server side props == ", token);
 	if (!token) {
 		return {
 			redirect: {

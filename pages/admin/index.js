@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Link from "next/link";
 import styles from "../../styles/admin.module.css";
 import Head from "next/head";
@@ -140,48 +141,43 @@ function admin({ isLoggedIn, users, tricklists }) {
 }
 
 export async function getServerSideProps(context) {
-	// Fetch all users from the API
-	const res = await fetch(`${baseUrl}/api/users/all`);
-	const res2 = await fetch(`${baseUrl}/api/listings/all`);
-	const res3 = await fetch(`${baseUrl}/api/listing/allData`);
-	const tricks = await res3.json();
-	const users = await res.json();
-	const tricklists = await res2.json();
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
 
-	// Join the tricklists and users data together
-	for (const user of users) {
-		for (const tricklist of tricklists) {
-			if (tricklist.user.$id === user._id) {
-				tricklist.user = user;
-			}
-			for (const trick of tricks) {
-				for (var i = 0; i < tricklist.tricks.length; i++) {
-					if (trick._id == tricklist.tricks[i]._id) {
-						// console.log(trick.name);
-						tricklist.tricks[i].name = trick.name;
+	try {
+		// Fetch all data using axios
+		const [usersResponse, listingsResponse, allDataResponse] =
+			await Promise.all([
+				axios.get(`${baseUrl}/api/users/all`),
+				axios.get(`${baseUrl}/api/listings/all`),
+				axios.get(`${baseUrl}/api/listing/allData`),
+			]);
+
+		const users = usersResponse.data;
+		const tricklists = listingsResponse.data;
+		const tricks = allDataResponse.data;
+
+		// Join the tricklists and users data together
+		for (const user of users) {
+			for (const tricklist of tricklists) {
+				if (tricklist.user.$id === user._id) {
+					tricklist.user = user;
+				}
+				for (const trick of tricks) {
+					for (var i = 0; i < tricklist.tricks.length; i++) {
+						if (trick._id == tricklist.tricks[i]._id) {
+							// console.log(trick.name);
+							tricklist.tricks[i].name = trick.name;
+						}
 					}
 				}
 			}
 		}
-	}
 
-	//check logged in user
-	const { req } = context;
-	const token = req.cookies.token;
+		// Check logged-in user
+		const { req } = context;
+		const token = req.cookies.token;
 
-	if (!token) {
-		return {
-			redirect: {
-				destination: "/login",
-				permanent: false,
-			},
-		};
-	}
-
-	try {
-		const decoded = jwt.verify(token, "jwtPrivateKey"); // Replace with your actual secret key
-		console.log("Decoded Token: ", decoded);
-		if (decoded.email !== "wesleybaxterhuber@gmail.com") {
+		if (!token) {
 			return {
 				redirect: {
 					destination: "/login",
@@ -189,23 +185,35 @@ export async function getServerSideProps(context) {
 				},
 			};
 		}
-	} catch (e) {
-		console.log("Token verification failed:", e);
+
+		try {
+			jwt.verify(token, "jwtPrivateKey"); // Replace with your actual secret key
+		} catch (e) {
+			console.log("Token verification failed:", e);
+			return {
+				redirect: {
+					destination: "/login",
+					permanent: false,
+				},
+			};
+		}
+
 		return {
-			redirect: {
-				destination: "/login",
-				permanent: false,
+			props: {
+				isLoggedIn: "true",
+				users,
+				tricklists,
+			},
+		};
+	} catch (error) {
+		console.error("Error fetching data:", error);
+		// Handle error or redirect
+		return {
+			props: {
+				error: "Failed to load data.",
 			},
 		};
 	}
-
-	return {
-		props: {
-			isLoggedIn: "true",
-			users,
-			tricklists,
-		},
-	};
 }
 
 export default admin;
