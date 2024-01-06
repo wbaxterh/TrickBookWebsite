@@ -26,7 +26,7 @@ Now that you've practiced in the grass or on a trampoline and landed with both f
 
 ## Where should I look?
 
-When starting out you can look down at the board, but you really to be looking ahead at where you're going. You can look down at the board to spot your landing.
+When starting out you can look down at the board, but you really want to be looking ahead at where you're going. You can look down at the board to spot your landing.
 
 ## How do I make it look cool?
 
