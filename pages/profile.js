@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Image from "next/image";
-import Header from "../components/Header";
+import Header from "../components/header";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import { useContext } from "react";

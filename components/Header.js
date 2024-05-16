@@ -11,7 +11,7 @@ function Header() {
 	console.log("Is logged in:", loggedIn);
 
 	return (
-		<Navbar bg='light' expand='lg'>
+		<Navbar bg='light' className='navbar-fixed-top' expand='lg'>
 			<Container>
 				<Navbar.Brand href='/'>
 					<Image
@@ -28,6 +28,7 @@ function Header() {
 					<Nav className='me-auto'>
 						<Nav.Link href='/'>Home</Nav.Link>
 						<Nav.Link href='/blog'>Blog</Nav.Link>
+						<Nav.Link href='/about'>About</Nav.Link>
 						<Nav.Link href='/privacy-policy'>Privacy Policy</Nav.Link>
 						<Nav.Link href='/questions-support'>Support</Nav.Link>
 						{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -44,18 +45,18 @@ function Header() {
 					</Nav>
 					<Nav className={`ms-auto`}>
 						<Nav.Link
-							className={`btn ${loggedIn ? "btn-secondary" : "btn-primary"} ${
-								styles.login
-							}`}
+							className={`mr-1 btn ${
+								loggedIn ? "btn-secondary" : "btn-primary"
+							} ${styles.login}`}
 							href={loggedIn ? "/profile" : "/login"}
 						>
-							{loggedIn ? "Profile" : "Log In"}
+							{loggedIn ? "Profile" : "Sign In"}
 						</Nav.Link>
 						<Nav.Link
-							className={`btn btn-secondary ${styles.login}`}
+							className={`ml-1 btn btn-secondary ${styles.login}`}
 							href='/signup'
 						>
-							Sign Up
+							Create Account
 						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>

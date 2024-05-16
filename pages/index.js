@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -10,15 +10,15 @@ export default function Home() {
 		<>
 			<Head>
 				<title>The Trick Book</title>
-				<link rel="icon" href="/favicon.png" />
-				<meta name="description" content="The Trick Book - App Landing Page" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/" />
-				<meta name="author" content="Wes Huber" />
+				<link rel='icon' href='/favicon.png' />
+				<meta name='description' content='The Trick Book - App Landing Page' />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
 				<meta
-					name="keywords"
-					content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
 			<Header />
@@ -28,19 +28,19 @@ export default function Home() {
 						{/* <h1 className={styles.title}>
           The <a href="#">Trick Book</a>
         </h1> */}
-						<div className="d-flex justify-content-center">
+						<div className='d-flex justify-content-center'>
 							<Image
 								className={styles.icon}
-								src="/adaptive-icon.png" // Route of the image file
+								src='/adaptive-icon.png' // Route of the image file
 								height={250} // Desired size with correct aspect ratio
 								width={250} // Desired size with correct aspect ratio
-								alt="Trick Book"
+								alt='Trick Book'
 							/>
 						</div>
-						<div className="d-flex justify-content-center">
-							<Link href="https://apps.apple.com/us/app/the-trick-book/id6446022788">
+						<div className='d-flex justify-content-center'>
+							<Link href='https://apps.apple.com/us/app/the-trick-book/id6446022788'>
 								<Image
-									src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+									src='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
 									width={224}
 									height={76}
 									className={styles.badge}
@@ -49,14 +49,14 @@ export default function Home() {
 						</div>
 						<p className={styles.description}>
 							<br />
-							View Our <Link href="/privacy-policy">Privacy Policy</Link> <br />
-							<Link href="/questions-support">Questions & Support</Link>
+							View Our <Link href='/privacy-policy'>Privacy Policy</Link> <br />
+							<Link href='/questions-support'>Questions & Support</Link>
 						</p>
 					</section>
 					<section className={[styles.missionSection]}>
 						<div className={"container"}>
-							<div className="row">
-								<div className="col">
+							<div className='row'>
+								<div className='col'>
 									<h2>About Trick Book</h2>
 									<p>
 										<strong>
@@ -71,8 +71,8 @@ export default function Home() {
 					{/* News Feed Section */}
 					<section className={styles.newsFeedSection}>
 						<div className={"container"}>
-							<div className="row">
-								<div className="col">
+							<div className='row'>
+								<div className='col'>
 									<h2>Latest News</h2>
 									<p>
 										We're stoked to announce that the first version of the Trick
@@ -121,8 +121,15 @@ export default function Home() {
 						border-radius: 5px;
 						padding: 0.75rem;
 						font-size: 1.1rem;
-						font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-							DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+						font-family:
+							Menlo,
+							Monaco,
+							Lucida Console,
+							Liberation Mono,
+							DejaVu Sans Mono,
+							Bitstream Vera Sans Mono,
+							Courier New,
+							monospace;
 					}
 				`}</style>
 
@@ -131,8 +138,17 @@ export default function Home() {
 					body {
 						padding: 0;
 						margin: 0;
-						font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-							Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+						font-family:
+							-apple-system,
+							BlinkMacSystemFont,
+							Segoe UI,
+							Roboto,
+							Oxygen,
+							Ubuntu,
+							Cantarell,
+							Fira Sans,
+							Droid Sans,
+							Helvetica Neue,
 							sans-serif;
 					}
 					* {

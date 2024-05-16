@@ -1,6 +1,6 @@
 .container {
 	min-height: 100vh;
-	padding: 0 0.5rem;
+	padding: 2rem 0.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -63,7 +63,9 @@
 	text-decoration: none;
 	border: 1px solid #eaeaea;
 	border-radius: 10px;
-	transition: color 0.15s ease, border-color 0.15s ease;
+	transition:
+		color 0.15s ease,
+		border-color 0.15s ease;
 }
 
 .card:hover,
@@ -153,12 +155,19 @@
 	text-align: right;
 }
 /* Overwrite btn-primary */
-.btn-primary .custom-primary {
+.btn-primary,
+.custom-primary {
 	background-color: #fcf150 !important;
 	border-color: #fcf150 !important;
 	color: #333 !important; /* You may want to change the text color too */
 }
-
+.navbar-fixed-top {
+	top: 0;
+	position: fixed;
+	right: 0;
+	left: 0;
+	/* border-width: 0 0 1px; */
+}
 @media (max-width: 600px) {
 	.grid {
 		width: 100%;

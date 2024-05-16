@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Footer from "../components/Footer";
 
 export default function QuestionsSupport() {
