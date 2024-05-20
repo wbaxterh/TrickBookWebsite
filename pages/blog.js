@@ -29,7 +29,7 @@ export default function Blog({ allPostsData }) {
 				</h1>
 				<div className='row'>
 					{allPostsData.map(({ id, date, title, author, firstImage }) => (
-						<div className='col-md-4 col-sm-4 col-4 mb-4' key={id}>
+						<div className='col-md-4 col-sm-12 mb-4' key={id}>
 							<div className='card'>
 								<div style={{ position: "relative", height: "150px" }}>
 									<Image
