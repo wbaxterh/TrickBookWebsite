@@ -22,3 +22,9 @@
 	text-decoration: none;
 	color: inherit;
 }
+.btn-primary,
+.custom-primary {
+	background-color: #fcf150 !important;
+	border-color: #fcf150 !important;
+	color: #333 !important; /* You may want to change the text color too */
+}

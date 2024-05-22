@@ -44,20 +44,22 @@ function Header() {
               </NavDropdown> */}
 					</Nav>
 					<Nav className={`ms-auto`}>
-						<Nav.Link
-							className={`mr-1 btn ${
-								loggedIn ? "btn-secondary" : "btn-primary"
+						<a
+							className={`mx-2 btn ${
+								loggedIn ? "btn-secondary" : styles.btnPrimary
 							} ${styles.login}`}
 							href={loggedIn ? "/profile" : "/login"}
 						>
 							{loggedIn ? "Profile" : "Sign In"}
-						</Nav.Link>
-						<Nav.Link
-							className={`ml-1 btn btn-secondary ${styles.login}`}
-							href='/signup'
-						>
-							Create Account
-						</Nav.Link>
+						</a>
+						{!loggedIn && (
+							<a
+								className={`ml-1 btn btn-secondary ${styles.login}`}
+								href='/signup'
+							>
+								Create Account
+							</a>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
