@@ -1,10 +1,7 @@
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
 import Head from "next/head";
-import Layout from "../components/layout";
+import styles from "../styles/blog.module.css";
 import Image from "next/image";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { getSortedPostsData } from "../lib/api";
 export default function Blog({ allPostsData }) {
 	return (
@@ -22,8 +19,7 @@ export default function Blog({ allPostsData }) {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<Header />
-			<Layout>
+			<div class={`container ${styles.postContainer}`}>
 				<h1 className='pt-3' style={{ textAlign: "left" }}>
 					Blog
 				</h1>
@@ -59,8 +55,7 @@ export default function Blog({ allPostsData }) {
 					<span className='material-icons align-middle pb-1'>arrow_back</span>
 					Back to home
 				</Link>
-			</Layout>
-			<Footer />
+			</div>
 		</>
 	);
 }

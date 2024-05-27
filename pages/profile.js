@@ -1,14 +1,10 @@
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/profile.module.css";
 import Head from "next/head";
-import Layout from "../components/layout";
-import Image from "next/image";
-import Header from "../components/Header";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
-import Footer from "../components/Footer";
+import { AuthContext } from "../auth/AuthContext";
 
 export default function Profile() {
 	const { email, token, logOut } = useContext(AuthContext);
@@ -32,8 +28,7 @@ export default function Profile() {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<Header />
-			<Layout>
+			<div className={`container ${styles.profileContainer}`}>
 				<h1 className='pt-3' style={{ textAlign: "left" }}>
 					Profile
 				</h1>
@@ -48,8 +43,7 @@ export default function Profile() {
 					</span>{" "}
 					Back to home
 				</Link>
-			</Layout>
-			<Footer />
+			</div>
 		</>
 	);
 }

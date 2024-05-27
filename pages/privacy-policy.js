@@ -1,41 +1,37 @@
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/privacy.module.css";
 import Head from "next/head";
-import Layout from "../components/layout";
 import Image from "next/image";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 export default function PrivacyPolicy() {
 	return (
 		<>
 			<Head>
 				<title>The Trick Book - Privacy Policy</title>
-				<link rel="icon" href="/favicon.png" />
+				<link rel='icon' href='/favicon.png' />
 				<meta
-					name="description"
-					content="The Trick Book - App Privacy Policy"
+					name='description'
+					content='The Trick Book - App Privacy Policy'
 				/>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/" />
-				<meta name="author" content="Wes Huber" />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
 				<meta
-					name="keywords"
-					content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<Header />
-			<Layout>
+			<div className={`container ${styles.privacyContainer}`}>
 				<Image
 					className={styles.icon}
-					src="/adaptive-icon.png" // Route of the image file
+					src='/adaptive-icon.png' // Route of the image file
 					style={{ margin: "0 auto", textAlign: "center" }}
 					height={250} // Desired size with correct aspect ratio
 					width={250} // Desired size with correct aspect ratio
-					alt="Trick Book"
+					alt='Trick Book'
 				/>
-				<h1 className="pt-3" style={{ textAlign: "center" }}>
+				<h1 className='pt-3' style={{ textAlign: "center" }}>
 					Privacy Policy
 				</h1>
 				<p>Privacy Policy for The Trick Book</p>
@@ -74,16 +70,15 @@ export default function PrivacyPolicy() {
 					Contact Us If you have any questions about this Privacy Policy or want
 					to exercise any of your rights under applicable privacy laws, please
 					contact us by email at wesleybaxterhuber@gmail.com or by visiting our
-					website at <a href="https://weshuber.com">https://weshuber.com/</a>.
+					website at <a href='https://weshuber.com'>https://weshuber.com/</a>.
 				</p>
 				<h2>
-					<Link href="/">
+					<Link href='/'>
 						{" "}
-						<span class="material-icons">arrow_back</span> Back to home
+						<span class='material-icons'>arrow_back</span> Back to home
 					</Link>
 				</h2>
-			</Layout>
-			<Footer />
+			</div>
 		</>
 	);
 }

@@ -1,61 +1,57 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-	const [loggedIn, setLoggedIn] = useState(false);
-	const [token, setToken] = useState(null); // Initializing token state
+	const [loggedIn, setLoggedIn] = useState(null); // null means loading
+	const [token, setToken] = useState(null);
 	const [email, setEmail] = useState(null);
 
-	// Run once when the component mounts to load the initial state from sessionStorage
 	useEffect(() => {
-		const initialToken = sessionStorage.getItem("userToken");
-		const initialEmail = sessionStorage.getItem("userEmail");
+		const initialToken = localStorage.getItem("userToken");
+		const initialEmail = localStorage.getItem("userEmail");
 		if (initialToken) {
 			setLoggedIn(true);
 			setToken(initialToken);
 			setEmail(initialEmail);
+		} else {
+			setLoggedIn(false);
 		}
 	}, []);
 
-	// Update sessionStorage whenever token or email changes
 	useEffect(() => {
 		if (token) {
-			sessionStorage.setItem("userToken", token);
+			localStorage.setItem("userToken", token);
 		} else {
-			sessionStorage.removeItem("userToken");
+			localStorage.removeItem("userToken");
 		}
 
 		if (email) {
-			sessionStorage.setItem("userEmail", email);
+			localStorage.setItem("userEmail", email);
 		} else {
-			sessionStorage.removeItem("userEmail");
+			localStorage.removeItem("userEmail");
 		}
 	}, [token, email]);
 
-	const logIn = (newToken, email) => {
+	const logIn = (newToken, newEmail) => {
 		setLoggedIn(true);
 		setToken(newToken);
-		setEmail(email);
-		// Optionally store token in localStorage for persistence
-		// localStorage.setItem("userToken", newToken);
+		setEmail(newEmail);
+		localStorage.setItem("userToken", newToken);
+		localStorage.setItem("userEmail", newEmail);
 	};
 
 	const logOut = () => {
 		setLoggedIn(false);
 		setToken(null);
 		setEmail(null);
-		// Remove token from localStorage
-		// localStorage.removeItem("userToken");
+		localStorage.removeItem("userToken");
+		localStorage.removeItem("userEmail");
 	};
 
-	const value = {
-		loggedIn,
-		token,
-		logIn,
-		logOut,
-		email,
-	};
-
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={{ loggedIn, token, logIn, logOut, email }}>
+			{children}
+		</AuthContext.Provider>
+	);
 }

@@ -1,12 +1,8 @@
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/questions.module.css";
 import Head from "next/head";
-import Layout from "../components/layout";
 import React from "react";
-import { useState } from "react";
 import Image from "next/image";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 export default function QuestionsSupport() {
 	return (
@@ -27,8 +23,7 @@ export default function QuestionsSupport() {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<Header />
-			<Layout>
+			<div className={`container ${styles.questionsContainer}`}>
 				<div
 					style={{
 						alignItems: "center",
@@ -63,8 +58,7 @@ export default function QuestionsSupport() {
 						</Link>
 					</h2>
 				</div>
-			</Layout>
-			<Footer />
+			</div>
 		</>
 	);
 }

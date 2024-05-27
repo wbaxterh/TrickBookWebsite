@@ -1,9 +1,24 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Slider from "react-slick";
+import { Container, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import styles from "../styles/Home.module.css";
+import { NextArrow, PrevArrow } from "../components/CustomArrow";
+
+const settings = {
+	dots: true,
+	infinite: true,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	autoplay: true,
+	speed: 500,
+	autoplaySpeed: 3000,
+	cssEase: "linear",
+	pauseOnHover: true,
+	nextArrow: <NextArrow />,
+	prevArrow: <PrevArrow />,
+};
 
 export default function Home() {
 	return (
@@ -18,144 +33,80 @@ export default function Home() {
 				<meta name='author' content='Wes Huber' />
 				<meta
 					name='keywords'
-					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App, The Trick Book, Action Sports App, Skateboarding App, Snowboarding App, Wakeboarding App, Trick Library, Trick Enyclopedia'
 				/>
 			</Head>
-			<Header />
-			<div className={styles.container}>
-				<main>
-					<section className={styles.splashSection}>
-						{/* <h1 className={styles.title}>
-          The <a href="#">Trick Book</a>
-        </h1> */}
-						<div className='d-flex justify-content-center'>
-							<Image
+			<section className={styles.splashSection}>
+				<div
+					className={`d-block justify-content-center ${styles.splashHeader}`}
+				>
+					{/* <Image
 								className={styles.icon}
 								src='/adaptive-icon.png' // Route of the image file
 								height={250} // Desired size with correct aspect ratio
 								width={250} // Desired size with correct aspect ratio
 								alt='Trick Book'
+							/> */}
+					<h1>The Encyclopedia of Action Sports</h1>
+					<div className='d-flex justify-content-center'>
+						<Link
+							className={styles.centerImage}
+							href='https://apps.apple.com/us/app/the-trick-book/id6446022788'
+						>
+							<Image
+								src='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
+								width={224}
+								height={76}
+								className={styles.badge}
 							/>
-						</div>
-						<div className='d-flex justify-content-center'>
-							<Link href='https://apps.apple.com/us/app/the-trick-book/id6446022788'>
-								<Image
-									src='Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
-									width={224}
-									height={76}
-									className={styles.badge}
-								/>
-							</Link>
-						</div>
-						<p className={styles.description}>
+						</Link>
+					</div>
+				</div>
+
+				{/* <p className={styles.description}>
 							<br />
 							View Our <Link href='/privacy-policy'>Privacy Policy</Link> <br />
-							<Link href='/questions-support'>Questions & Support</Link>
-						</p>
-					</section>
-					<section className={[styles.missionSection]}>
-						<div className={"container"}>
+							<Link href='/questions-support'>Questions & Support</Link> 
+						</p> */}
+			</section>
+			{/* <section className={styles.missionSection}>
+						<div className='container'>
 							<div className='row'>
 								<div className='col'>
 									<h2>About Trick Book</h2>
 									<p>
-										<strong>
-											A pocketbook for your tricks. Connecting teachers and
-											students of Action Sports.
-										</strong>
+										<strong>The Encyclopedia of Action Sports</strong>
 									</p>
 								</div>
 							</div>
 						</div>
-					</section>
-					{/* News Feed Section */}
-					<section className={styles.newsFeedSection}>
-						<div className={"container"}>
-							<div className='row'>
-								<div className='col'>
-									<h2>Latest News</h2>
-									<p>
-										We're stoked to announce that the first version of the Trick
-										Book app is now available for download! We'd love for you to
-										create your trick lists, test the app, and share your
-										feedback with us.
-									</p>
-									{/* Optional: Add a link or button for users to submit feedback */}
-								</div>
-							</div>
-						</div>
-					</section>
-				</main>
-
-				<Footer />
-
-				<style jsx>{`
-					main {
-						padding: 5rem 0;
-						flex: 1;
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						align-items: center;
-					}
-					footer {
-						width: 100%;
-						height: 100px;
-						border-top: 1px solid #eaeaea;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-					}
-					footer img {
-						margin-left: 0.5rem;
-					}
-					footer a {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						text-decoration: none;
-						color: inherit;
-					}
-					code {
-						background: #fafafa;
-						border-radius: 5px;
-						padding: 0.75rem;
-						font-size: 1.1rem;
-						font-family:
-							Menlo,
-							Monaco,
-							Lucida Console,
-							Liberation Mono,
-							DejaVu Sans Mono,
-							Bitstream Vera Sans Mono,
-							Courier New,
-							monospace;
-					}
-				`}</style>
-
-				<style jsx global>{`
-					html,
-					body {
-						padding: 0;
-						margin: 0;
-						font-family:
-							-apple-system,
-							BlinkMacSystemFont,
-							Segoe UI,
-							Roboto,
-							Oxygen,
-							Ubuntu,
-							Cantarell,
-							Fira Sans,
-							Droid Sans,
-							Helvetica Neue,
-							sans-serif;
-					}
-					* {
-						box-sizing: border-box;
-					}
-				`}</style>
-			</div>
+					</section> */}
+			<section className={styles.newsFeedSection}>
+				<Container>
+					<Slider {...settings}>
+						<Box className={styles.slide}>
+							<Typography variant='h2'>Latest News 1</Typography>
+							<Typography>Content for the first slide.</Typography>
+						</Box>
+						<Box className={styles.slide}>
+							<Typography variant='h2'>Latest News 2</Typography>
+							<Typography>Content for the second slide.</Typography>
+						</Box>
+						<Box className={styles.slide}>
+							<Typography variant='h2'>Latest News 3</Typography>
+							<Typography>Content for the third slide.</Typography>
+						</Box>
+						<Box className={styles.slide}>
+							<Typography variant='h2'>Latest News 4</Typography>
+							<Typography>Content for the fourth slide.</Typography>
+						</Box>
+						<Box className={styles.slide}>
+							<Typography variant='h2'>Latest News 5</Typography>
+							<Typography>Content for the fifth slide.</Typography>
+						</Box>
+					</Slider>
+				</Container>
+			</section>
 		</>
 	);
 }
