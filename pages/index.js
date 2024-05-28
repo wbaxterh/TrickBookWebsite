@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Slider from "react-slick";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Button } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -13,11 +13,11 @@ const settings = {
 	slidesToScroll: 1,
 	autoplay: true,
 	speed: 500,
-	autoplaySpeed: 3000,
+	autoplaySpeed: 7000,
 	cssEase: "linear",
 	pauseOnHover: true,
-	nextArrow: <NextArrow />,
-	prevArrow: <PrevArrow />,
+	// nextArrow: <NextArrow />,
+	// prevArrow: <PrevArrow />,
 };
 
 export default function Home() {
@@ -84,25 +84,80 @@ export default function Home() {
 			<section className={styles.newsFeedSection}>
 				<Container>
 					<Slider {...settings}>
-						<Box className={styles.slide}>
-							<Typography variant='h2'>Latest News 1</Typography>
-							<Typography>Content for the first slide.</Typography>
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2'>We've created a new vision</Typography>
+							<Typography className='mb-2'>
+								And with that, big things are coming. We are going to create
+								something even more useful than our "Trick List" tool. You might
+								have noticed the website getting a makeover, new features are
+								coming to both the app and the website in the near future. Stay
+								tuned for updates by signing up for an account and checking the
+								box to join our mailing list. If you already have an account you
+								can opt-in to the mailing list in your profile
+							</Typography>
+							<Button
+								variant={"outlined"}
+								color={"primary"}
+								className={`btn ${styles.customPrimary} me-3`}
+								sx={{}}
+							>
+								<Link href='/signup' className='text-dark'>
+									Register an Account
+								</Link>
+							</Button>
+							<Button
+								variant={"outlined"}
+								color={"secondary"}
+								disableRipple={true}
+								sx={{
+									borderColor: "#1E1E1E",
+									color: "#1E1E1E",
+									"&:hover": {
+										backgroundColor: "transparent",
+										borderColor: "#1E1E1E",
+									},
+								}}
+							>
+								<Link href='about' className='text-dark'>
+									Read More
+								</Link>
+							</Button>
 						</Box>
-						<Box className={styles.slide}>
-							<Typography variant='h2'>Latest News 2</Typography>
-							<Typography>Content for the second slide.</Typography>
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2'>Trick List on Google Play</Typography>
+							<Typography>
+								We've heard the requests for the app to get on google play and
+								we are putting in work to make it happen this week. Stay tuned
+								for a big update on all things "The Trick Book" by go skate day.
+							</Typography>
 						</Box>
-						<Box className={styles.slide}>
-							<Typography variant='h2'>Latest News 3</Typography>
-							<Typography>Content for the third slide.</Typography>
-						</Box>
-						<Box className={styles.slide}>
-							<Typography variant='h2'>Latest News 4</Typography>
-							<Typography>Content for the fourth slide.</Typography>
-						</Box>
-						<Box className={styles.slide}>
-							<Typography variant='h2'>Latest News 5</Typography>
-							<Typography>Content for the fifth slide.</Typography>
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2'>
+								We've launched on the App Store
+							</Typography>
+							<Typography>
+								The Trick Book app is available on the app store. It was a few
+								years in the making, a few different versions and codebases to
+								create the tricklist. We are happy with how we've architected
+								this app and it's only going to get better from here. Thanks
+								everyone whose tried the app, don't forget to give us some
+								feedback or kindly leave a review on the app store. We look
+								forward to shipping more useful features and helping you make
+								the most out of your time riding!
+							</Typography>
+							<Button
+								variant={"outlined"}
+								color={"primary"}
+								className={`btn ${styles.customPrimary} me-3`}
+								sx={{}}
+							>
+								<Link
+									href='https://apps.apple.com/us/app/the-trick-book/id6446022788'
+									className='text-dark'
+								>
+									Trick Book on the App Store
+								</Link>
+							</Button>
 						</Box>
 					</Slider>
 				</Container>

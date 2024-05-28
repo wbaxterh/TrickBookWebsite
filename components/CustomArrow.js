@@ -7,8 +7,8 @@ export function NextArrow(props) {
 	const { className, style, onClick } = props;
 	return (
 		<IconButton
-			className={`${className} ${styles.arrow} ${styles.nextArrow}`}
-			style={{ ...style, display: "block" }}
+			className={`${className} ${styles.arrow} ${styles.nextArrow} bg-dark mx-2`}
+			style={{ ...style, display: "block", color: "#1E1E1E" }}
 			onClick={onClick}
 		>
 			{/* <ArrowForward style={{ color: "#1E1E1E" }} /> */}
@@ -20,7 +20,7 @@ export function PrevArrow(props) {
 	const { className, style, onClick } = props;
 	return (
 		<IconButton
-			className={`${className} ${styles.arrow} ${styles.prevArrow}`}
+			className={`${className} ${styles.arrow} ${styles.prevArrow} bg-dark mx-2`}
 			style={{ ...style, display: "block" }}
 			onClick={onClick}
 		>

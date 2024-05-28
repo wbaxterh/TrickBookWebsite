@@ -148,6 +148,7 @@
 .newsFeedSection {
 	padding-top: 4em;
 	padding-bottom: 4em;
+	background: #fff;
 }
 .justifyRight {
 	margin-left: auto;
@@ -167,17 +168,20 @@
 }
 .slide {
 	width: 100%;
-	margin-right: 40px;
-	margin-left: 40px;
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	flex-shrink: 0;
-	background-color: red;
+	border: 1px solid #000;
+	border-radius: 4px;
 }
 .arrow {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	z-index: 2;
-	color: #1e1e1e; /* Dark color for the arrows */
+	color: #fff; /* Dark color for the arrows */
 }
 
 .nextArrow {
