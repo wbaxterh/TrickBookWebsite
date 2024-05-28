@@ -3,6 +3,9 @@ import Head from "next/head";
 import styles from "../styles/blog.module.css";
 import Image from "next/image";
 import { getSortedPostsData } from "../lib/api";
+import { Typography, Button } from "@mui/material";
+import BlogCard from "../components/BlogCard";
+import PageHeader from "../components/PageHeader";
 export default function Blog({ allPostsData }) {
 	return (
 		<>
@@ -19,41 +22,26 @@ export default function Blog({ allPostsData }) {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<div class={`container ${styles.postContainer}`}>
-				<h1 className='pt-3' style={{ textAlign: "left" }}>
-					Blog
-				</h1>
-				<div className='row'>
+			<div class={`container-fluid ${styles.postContainer}`}>
+				<PageHeader title='Blog' col='col-sm-2' />
+				<div className={`row mt-4`}>
 					{allPostsData.map(({ id, date, title, author, firstImage }) => (
 						<div className='col-md-4 col-sm-12 mb-4' key={id}>
-							<div className='card'>
-								<div style={{ position: "relative", height: "150px" }}>
-									<Image
-										src={"/" + firstImage}
-										alt={`${title}`}
-										layout='fill'
-										objectFit='cover'
-									/>
-								</div>
-								{/* <img
-									src={firstImage} // Use the firstImage variable here
-									alt={`${title}`}
-									className='card-img-top'
-								/> */}
-								<div className='card-body'>
-									<h5 className='card-title'>
-										<Link href={`/blog/${id}`}>{title}</Link>
-									</h5>
-									<p className='card-text'>{date}</p>
-									<p className='card-text'>By {author}</p>
-								</div>
-							</div>
+							<BlogCard
+								id={id}
+								firstImage={firstImage}
+								title={title}
+								date={date}
+								author={author}
+							/>
 						</div>
 					))}
 				</div>
 				<Link href='/'>
-					<span className='material-icons align-middle pb-1'>arrow_back</span>
-					Back to home
+					<Button variant='outlined' color={"secondary"}>
+						<span className='material-icons align-middle'>arrow_back</span>
+						Back to home
+					</Button>
 				</Link>
 			</div>
 		</>

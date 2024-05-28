@@ -27,7 +27,7 @@ body {
 }
 
 a {
-	color: #0070f3;
+	/* color: #0070f3; */
 	text-decoration: none;
 }
 
@@ -54,4 +54,33 @@ img {
 	right: 0;
 	left: 0;
 	z-index: 999999;
+}
+.app-primary,
+.app-primary a {
+	color: #fff000 !important;
+}
+.app-secondary,
+.app-secondary a {
+	color: #1f1f1f !important;
+}
+.app-primary-bg {
+	background-color: #fff000 !important;
+}
+.app-secondary-bg {
+	background-color: #1f1f1f !important;
+}
+.header-bg {
+	background-color: #1f1f1f;
+	opacity: 1;
+	background: repeating-linear-gradient(
+		45deg,
+		#fff000,
+		#fff000 5px,
+		#1f1f1f 5px,
+		#1f1f1f 25px
+	);
+}
+.header-text {
+	background-color: #1f1f1f;
+	color: #fff000;
 }

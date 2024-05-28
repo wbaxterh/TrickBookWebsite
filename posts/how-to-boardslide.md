@@ -4,8 +4,6 @@ author: "Wes Huber"
 date: "2024-01-21"
 ---
 
-## How to Boardslide
-
 Boardslide is easily one of the most fun tricks in skateboarding, once you master it. We'll go over the fundamentals of a boardslide in this tutorial. Check out our tutorial on instagram! @@https://www.instagram.com/p/CyjSxD7R-5C/@@ give us a follow for more trick tips
 
 ![How to boardslide](how-to-boardslide.png)

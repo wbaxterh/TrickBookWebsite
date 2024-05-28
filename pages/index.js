@@ -87,7 +87,7 @@ export default function Home() {
 					<Slider {...settings}>
 						<Box className={`py-4 ${styles.slide}`}>
 							<Typography variant='h2'>We've created a new vision</Typography>
-							<Typography className='mb-2'>
+							<Typography className='mb-3 mt-2'>
 								And with that, big things are coming. We are going to create
 								something even more useful than our "Trick List" tool. You might
 								have noticed the website getting a makeover, new features are
@@ -125,8 +125,8 @@ export default function Home() {
 							</Button>
 						</Box>
 						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2'>Trick List on Google Play</Typography>
-							<Typography>
+							<Typography variant='h2'>Trick Book on Google Play</Typography>
+							<Typography className='mb-3 mt-2'>
 								We've heard the requests for the app to get on google play and
 								we are putting in work to make it happen this week. Stay tuned
 								for a big update on all things "The Trick Book" by go skate day.
@@ -136,7 +136,7 @@ export default function Home() {
 							<Typography variant='h2'>
 								We've launched on the App Store
 							</Typography>
-							<Typography>
+							<Typography className='mb-3 mt-2'>
 								The Trick Book app is available on the app store. It was a few
 								years in the making, a few different versions and codebases to
 								create the tricklist. We are happy with how we've architected

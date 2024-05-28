@@ -4,8 +4,6 @@ author: "Wes Huber"
 date: "2023-10-19"
 ---
 
-## How to pop shuv-it
-
 Shove it or shuv-it, however you spell it we are going to show you how do this trick. Also, we're on instagram! @@https://www.instagram.com/trickbook.app@@ check us out and give us a follow for more trick tips
 
 ![How to pop shuv-it](pop-shuv-it.png)

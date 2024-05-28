@@ -1,6 +1,7 @@
 import { getAllPostIds, getPostData } from "../../lib/api";
 import Head from "next/head";
 import Link from "next/link";
+import { Typography } from "@mui/material";
 import styles from "../../styles/blog.module.css";
 
 export default function Post({ postData }) {
@@ -20,9 +21,11 @@ export default function Post({ postData }) {
 				/>
 			</Head>
 			<div className={`container ${styles.postContainer}`}>
-				{postData.title}
-				<br />
-				{postData.date}
+				<Typography variant='h1'>{postData.title}</Typography>
+				<Typography variant='h5'>{postData.author}</Typography>
+				<Typography variant='h5' className='mb-3'>
+					{postData.date}
+				</Typography>
 				<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
 			</div>
 		</>
