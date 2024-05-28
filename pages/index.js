@@ -49,8 +49,9 @@ export default function Home() {
 							/> */}
 					<h1>The Encyclopedia of Action Sports</h1>
 					<div className='d-flex justify-content-center'>
-						<Link
+						<a
 							className={styles.centerImage}
+							target='_blank'
 							href='https://apps.apple.com/us/app/the-trick-book/id6446022788'
 						>
 							<Image
@@ -59,7 +60,7 @@ export default function Home() {
 								height={76}
 								className={styles.badge}
 							/>
-						</Link>
+						</a>
 					</div>
 				</div>
 
@@ -151,12 +152,13 @@ export default function Home() {
 								className={`btn ${styles.customPrimary} me-3`}
 								sx={{}}
 							>
-								<Link
+								<a
 									href='https://apps.apple.com/us/app/the-trick-book/id6446022788'
 									className='text-dark'
+									target='_blank'
 								>
 									Trick Book on the App Store
-								</Link>
+								</a>
 							</Button>
 						</Box>
 					</Slider>
