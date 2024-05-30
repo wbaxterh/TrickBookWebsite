@@ -9,7 +9,7 @@ const PageHeader = ({ title, className, sx, col }) => {
 				<Typography
 					variant='h2'
 					className='p-3 m-3 header-text'
-					sx={{ textAlign: "center", width: "auto", ...sx }}
+					sx={{ textAlign: "center", fontWeight: 400, width: "auto", ...sx }}
 				>
 					{title}
 				</Typography>

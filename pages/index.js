@@ -86,8 +86,10 @@ export default function Home() {
 				<Container>
 					<Slider {...settings}>
 						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2'>We've created a new vision</Typography>
-							<Typography className='mb-3 mt-2'>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								We've created a new vision
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
 								And with that, big things are coming. We are going to create
 								something even more useful than our "Trick List" tool. You might
 								have noticed the website getting a makeover, new features are
@@ -125,18 +127,20 @@ export default function Home() {
 							</Button>
 						</Box>
 						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2'>Trick Book on Google Play</Typography>
-							<Typography className='mb-3 mt-2'>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								Trick Book on Google Play
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
 								We've heard the requests for the app to get on google play and
 								we are putting in work to make it happen this week. Stay tuned
 								for a big update on all things "The Trick Book" by go skate day.
 							</Typography>
 						</Box>
 						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2'>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
 								We've launched on the App Store
 							</Typography>
-							<Typography className='mb-3 mt-2'>
+							<Typography className='mb-3 mt-2 px-1'>
 								The Trick Book app is available on the app store. It was a few
 								years in the making, a few different versions and codebases to
 								create the tricklist. We are happy with how we've architected
@@ -163,6 +167,21 @@ export default function Home() {
 						</Box>
 					</Slider>
 				</Container>
+			</section>
+			<section className={`${styles.featuresSection} py-5 px-md-5`}>
+				<Box className={`p-4 px-md-5 col-md-10`}>
+					<Typography variant='h2' sx={{ fontWeight: 700 }}>
+						Organizing action sports data.
+					</Typography>
+					<Typography
+						variant='h5'
+						className='py-3 px-1'
+						sx={{ fontWeight: 400 }}
+					>
+						By curating and parsing data using modern technology, we provide
+						valuable insights to unlock your riding potential.
+					</Typography>
+				</Box>
 			</section>
 		</>
 	);

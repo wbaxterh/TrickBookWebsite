@@ -70,17 +70,32 @@ img {
 	background-color: #1f1f1f !important;
 }
 .header-bg {
-	background-color: #1f1f1f;
+	background-color: #fcf150;
 	opacity: 1;
 	background: repeating-linear-gradient(
+		45deg,
+		#1f1f1f,
+		#1f1f1f 8.5px,
+		#fcf150 8.5px,
+		#fcf150 42.5px
+	);
+
+	/* background-color: #1f1f1f;
+	opacity: 1; */
+
+	/* background: repeating-linear-gradient(
 		45deg,
 		#fff000,
 		#fff000 5px,
 		#1f1f1f 5px,
 		#1f1f1f 25px
-	);
+	); */
 }
 .header-text {
-	background-color: #1f1f1f;
-	color: #fff000;
+	color: #1f1f1f;
+	background-color: #fcf150 !important;
+	border: 1px solid #1f1f1f;
+	border-radius: 10px;
+	/* background-color: #1f1f1f;
+	color: #fff000; */
 }

@@ -191,6 +191,9 @@
 .prevArrow {
 	left: 0px; /* Position to the left edge */
 }
+.featuresSection {
+	background-color: #fcf150 !important;
+}
 .manual-btn {
 	border: 2px solid #333;
 	padding: 5px;
@@ -209,6 +212,9 @@ input:checked ~ .slides {
 	background-color: #fcf150 !important;
 	border-color: #fcf150 !important;
 	color: #333 !important; /* You may want to change the text color too */
+}
+.bgCustomPrimary {
+	background-color: #fcf150 !important;
 }
 .navbar-fixed-top {
 	top: 0;
