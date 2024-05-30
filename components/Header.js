@@ -6,9 +6,12 @@ import Image from "next/image";
 import Link from "next/link"; // Import Link from next/link
 import styles from "../styles/Home.module.css";
 import { AuthContext } from "../auth/AuthContext";
+import { Button } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import AddIcon from "@mui/icons-material/Add";
 
 const Header = () => {
-	const { loggedIn } = useContext(AuthContext);
+	const { email, loggedIn } = useContext(AuthContext);
 	// console.log("Is logged in:", loggedIn);
 
 	// Render nothing until the loggedIn state is determined
@@ -60,27 +63,44 @@ const Header = () => {
 						{!loggedIn ? (
 							<>
 								<Link href='/login' passHref legacyBehavior>
-									<Nav.Link
+									{/* <Nav.Link
 										className={`mx-2 btn ${styles.btnPrimary} ${styles.login}`}
+									> */}
+									<Button
+										variant='contained'
+										color='primary'
+										className='custom-primary p-1 px-2'
+										startIcon={<PersonIcon />}
+										sx={{
+											backgroundColor: "#fcf150",
+											color: "#333",
+										}} // Customize styles here
 									>
-										Sign In
-									</Nav.Link>
+										Login
+									</Button>
+									{/* </Nav.Link> */}
 								</Link>
 								<Link href='/signup' passHref legacyBehavior>
-									<Nav.Link
-										className={`ml-1 btn btn-secondary ${styles.login}`}
+									<Button
+										variant='outlined'
+										color='secondary'
+										className='p-1 px-2 ms-2'
+										startIcon={<AddIcon />}
 									>
 										Create Account
-									</Nav.Link>
+									</Button>
 								</Link>
 							</>
 						) : (
 							<Link href='/profile' passHref legacyBehavior>
-								<Nav.Link
-									className={`mx-2 btn btn-primary ${styles.btnPrimary} ${styles.login}`}
+								<Button
+									variant='contained'
+									color='secondary'
+									className='custom-primary p-1 px-2'
+									startIcon={<PersonIcon />}
 								>
-									Profile
-								</Nav.Link>
+									{email}
+								</Button>
 							</Link>
 						)}
 					</Nav>

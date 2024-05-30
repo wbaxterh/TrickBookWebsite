@@ -5,6 +5,7 @@ import styles from "../styles/login.module.css";
 import Head from "next/head";
 import axios from "axios";
 import { useFormik } from "formik";
+import { Typography, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
@@ -105,79 +106,100 @@ export default function Login() {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<div className={`container ${styles.loginContainer}`}>
-				<div className='row mb-5'>
-					<h1 className='text-center'>Log In to your Account</h1>
-					<h6 className='text-center'>
-						Don't have an account?{" "}
-						<Link className={"underline"} href='/signup'>
-							Sign up here
-						</Link>
-					</h6>
-				</div>
-				<form onSubmit={formik.handleSubmit}>
-					{loginError && (
-						<div className='row m-1'>
-							<div className='col text-center text-danger'>{loginError}</div>
-						</div>
-					)}
-
-					<div className='row m-1'>
-						<div className={`col-sm-3 text-right ${styles.textRight}`}>
-							<label htmlFor='email'>Email Address</label>
-						</div>
-						<div className='col'>
-							<input
-								id='email'
-								name='email'
-								type='email'
-								className='w-100'
-								onChange={formik.handleChange}
-								value={formik.values.email}
-							/>
-						</div>
-						{formik.errors.email ? <div>{formik.errors.email}</div> : null}
-					</div>
-					<div className='row m-1'>
-						<div className={`col-sm-3 text-right ${styles.textRight}`}>
-							<label className='justify-self-end' htmlFor='password'>
-								Password
-							</label>
-						</div>
-						<div className='col'>
-							<input
-								id='password'
-								name='password'
-								type='password'
-								className='w-100'
-								onChange={formik.handleChange}
-								value={formik.values.password}
-							/>
-						</div>
-						{formik.errors.password ? (
-							<div>{formik.errors.password}</div>
-						) : null}
-					</div>
-					<div className='row m-1 mt-2 ms-auto'>
-						<div
-							className={`col-sm-6 ms-auto justify-content-end ${styles.textRight}`}
-						>
-							<Link className={"btn btn-secondary p-1 px-2 me-1"} href='/'>
-								{" "}
-								<span className='material-icons align-middle pb-1'>
-									arrow_back
-								</span>{" "}
-								Back to home
+			<div className={`container-fluid ${styles.loginContainer}`}>
+				<div className='container'>
+					<div className='row mb-5'>
+						<Typography variant='h1' className='text-center'>
+							Sign In to your Account
+						</Typography>
+						<Typography variant='h6' className='text-center'>
+							Don't have an account?{" "}
+							<Link href='/signup'>
+								<Button variant='outlined' color='secondary'>
+									Sign up here
+								</Button>
 							</Link>
-							<button
-								className='btn btn-primary custom-primary p-1 px-2'
-								type='submit'
-							>
-								Submit
-							</button>
+						</Typography>
+					</div>
+					<div className='row mb-5'>
+						<div className='col'>
+							<div className={`container ${styles.formContainer}`}>
+								<form onSubmit={formik.handleSubmit}>
+									{loginError && (
+										<div className='row m-1'>
+											<div className='col text-center text-danger'>
+												{loginError}
+											</div>
+										</div>
+									)}
+
+									<div className='row m-1'>
+										<div className='col'>
+											<label htmlFor='email'>Email Address</label>
+											<input
+												id='email'
+												name='email'
+												type='email'
+												className='w-100'
+												onChange={formik.handleChange}
+												value={formik.values.email}
+											/>
+										</div>
+										{formik.errors.email ? (
+											<div>{formik.errors.email}</div>
+										) : null}
+									</div>
+									<div className='row m-1'>
+										<div className='col'>
+											<label className='justify-self-end' htmlFor='password'>
+												Password
+											</label>
+											<input
+												id='password'
+												name='password'
+												type='password'
+												className='w-100'
+												onChange={formik.handleChange}
+												value={formik.values.password}
+											/>
+										</div>
+										{formik.errors.password ? (
+											<div>{formik.errors.password}</div>
+										) : null}
+									</div>
+									<div className='row m-1 mt-2 ms-auto'>
+										<div
+											className={`col-sm justify-content-start ${styles.textRight}`}
+										>
+											<Button
+												variant='contained'
+												color='primary'
+												type='submit'
+												className='custom-primary p-1 px-2'
+												sx={{
+													backgroundColor: "#fcf150",
+													color: "#333",
+													width: 200,
+												}} // Customize styles here
+											>
+												Submit
+											</Button>
+											<Link className={"p-1 px-2 me-1"} href='/'>
+												<Button
+													variant='text'
+													color='secondary'
+													className='mt-1'
+												>
+													Forgot Password?
+												</Button>
+											</Link>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</>
 	);

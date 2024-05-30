@@ -9,6 +9,14 @@ const theme = createTheme({
 			main: "#1f1f1f", // Custom primary color
 		},
 	},
+	typography: {
+		h1: {
+			fontSize: "4em",
+		},
+		// In Chinese and Japanese the characters are usually larger,
+		// so a smaller fontsize may be appropriate.
+		fontSize: 14,
+	},
 });
 
 export default theme;

@@ -2,7 +2,9 @@ import Link from "next/link";
 import styles from "../styles/questions.module.css";
 import Head from "next/head";
 import React from "react";
+import PageHeader from "../components/PageHeader";
 import Image from "next/image";
+import { Button } from "@mui/material";
 
 export default function QuestionsSupport() {
 	return (
@@ -23,28 +25,9 @@ export default function QuestionsSupport() {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<div className={`container ${styles.questionsContainer}`}>
-				<div
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-						textAlign: "center",
-					}}
-				>
-					<Image
-						className={styles.icon}
-						src='/adaptive-icon.png' // Route of the image file
-						style={{
-							alignItems: "center",
-							justifyContent: "center",
-							margin: "0 auto",
-						}}
-						height={250} // Desired size with correct aspect ratio
-						width={250} // Desired size with correct aspect ratio
-						alt='Trick Book'
-					/>
-					<h1 className='pt-3'>Questions & Support</h1>
-
+			<div className={`container-fluid ${styles.questionsContainer}`}>
+				<PageHeader title='Questions & Support' col='col-sm-6' />
+				<div className='container'>
 					<h3>
 						For Questions & Support please email me{" "}
 						<a href='mailto:wesleybaxterhuber@gmail.com'>
@@ -52,11 +35,12 @@ export default function QuestionsSupport() {
 						</a>
 					</h3>
 
-					<h2>
-						<Link href='/'>
-							<span className='material-icons'>arrow_back</span> Back to home
-						</Link>
-					</h2>
+					<Link href='/'>
+						<Button variant='outlined' color={"secondary"}>
+							<span className='material-icons align-middle'>arrow_back</span>
+							Back to home
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</>

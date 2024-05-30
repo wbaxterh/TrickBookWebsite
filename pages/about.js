@@ -23,9 +23,7 @@ export default function About() {
 			</Head>
 			<div className={`container-fluid ${styles.aboutContainer}`}>
 				<PageHeader title='About Us' col='col-sm-4' />
-				<section
-					className={`my-5 p-5 border rounded ${styles.missionStatement}`}
-				>
+				<section className={`my-5 p-5 ${styles.missionStatement}`}>
 					<Typography variant='h2'>Our Mission</Typography>
 					<Typography variant='h5'>
 						We want to help make the world more fun. To offer valuable
