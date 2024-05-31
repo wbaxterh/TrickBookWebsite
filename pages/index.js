@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Slider from "react-slick";
-import { Container, Typography, Box, Button } from "@mui/material";
+import { Container, Typography, Box, Button, Grid } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -169,19 +169,64 @@ export default function Home() {
 				</Container>
 			</section>
 			<section className={`${styles.featuresSection} py-5 px-md-5`}>
-				<Box className={`p-4 px-md-5 col-md-10`}>
-					<Typography variant='h2' sx={{ fontWeight: 700 }}>
-						Organizing action sports data.
-					</Typography>
-					<Typography
-						variant='h5'
-						className='py-3 px-1'
-						sx={{ fontWeight: 400 }}
-					>
-						By curating and parsing data using modern technology, we provide
-						valuable insights to unlock your riding potential.
-					</Typography>
-				</Box>
+				<div className='row'>
+					<Box className={`p-4 px-md-5 col-md-10`}>
+						<Typography variant='h2' sx={{ fontWeight: 700 }}>
+							Organizing action sports data.
+						</Typography>
+						<Typography
+							variant='h5'
+							className='pt-3 px-1'
+							sx={{ fontWeight: 400 }}
+						>
+							By curating and parsing data using modern technology, we provide
+							valuable insights to unlock your riding potential.
+						</Typography>
+					</Box>
+				</div>
+				<div className='row p-0 m-0'>
+					<Grid container className='p-0 m-0'>
+						<Grid item xs={12} md={6} className='p-0 px-md-5'>
+							<Image
+								src='/homegraphic3.png'
+								width={500}
+								height={634}
+								className={styles.homegraphic}
+								alt='Home Graphic'
+							/>
+						</Grid>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							justifyContent='center'
+							alignItems='center'
+							container
+							sx={{ alignItems: "center", justifyContent: "center" }}
+						>
+							<Box>
+								<Typography
+									variant='h4'
+									sx={{ fontWeight: 500, alignSelf: "center" }}
+								>
+									Community driven knowledge base
+								</Typography>
+								<Typography variant='body1'>
+									Users of the platform help to create and edit content, making
+									the trick book a truly community driven project. Besides the
+									personal trick list tool which you can choose to share
+									publicly or keep your list private, we allow our user to edit
+									certain aspects of the applciation such as our "Trickipedia".
+									Our core values are community oriented and this tool is meant
+									to help drive innovation and progression in action sports.
+								</Typography>
+								<Button variant='outlined' color='secondary'>
+									Join the community
+								</Button>
+							</Box>
+						</Grid>
+					</Grid>
+				</div>
 			</section>
 		</>
 	);
