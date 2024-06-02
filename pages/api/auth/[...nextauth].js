@@ -11,6 +11,7 @@ export default NextAuth({
 	],
 	callbacks: {
 		async jwt({ token, account, user }) {
+			console.log("JWT callback:", { token, account, user });
 			if (account && user) {
 				token.id = user.id;
 				token.email = user.email;
@@ -18,6 +19,7 @@ export default NextAuth({
 			return token;
 		},
 		async session({ session, token }) {
+			console.log("Session callback:", { session, token });
 			session.user.id = token.id;
 			session.user.email = token.email;
 			return session;
@@ -27,4 +29,5 @@ export default NextAuth({
 	pages: {
 		signIn: "/auth/signin",
 	},
+	debug: true, // Enable NextAuth debug mode
 });
