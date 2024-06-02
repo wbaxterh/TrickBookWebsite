@@ -211,7 +211,7 @@ export default function Home() {
 								>
 									Community driven knowledge base
 								</Typography>
-								<Typography variant='body1'>
+								<Typography variant='body1' className='ms-1 mt-2'>
 									Users of the platform help to create and edit content, making
 									the trick book a truly community driven project. Besides the
 									personal trick list tool which you can choose to share
@@ -220,14 +220,43 @@ export default function Home() {
 									Our core values are community oriented and this tool is meant
 									to help drive innovation and progression in action sports.
 								</Typography>
-								<Button variant='outlined' color='secondary'>
+								<Button
+									variant='outlined'
+									color='secondary'
+									className={"ms-1 mt-2"}
+								>
 									Join the community
+								</Button>
+							</Box>
+							<Box>
+								<Typography
+									variant='h4'
+									sx={{ fontWeight: 500, alignSelf: "center" }}
+								>
+									Tools that unlock riding potential
+								</Typography>
+								<Typography variant='body1' className={"mt-2 ms-1"}>
+									Tools like our original "Trick List" are designed to help you
+									keep track of your own data. The "Trickipedia" feature serves
+									as a source of truth for external data, and we will even offer
+									video tutorials for tricks. With this extensive knowledgebase
+									we are in a position to leverage the existing trick data along
+									with your own data to give you personalized recommendations
+									for tricks and learning paths.
+								</Typography>
+								<Button
+									variant='outlined'
+									color='secondary'
+									className={"mt-2 ms-1"}
+								>
+									Explore our toolkit
 								</Button>
 							</Box>
 						</Grid>
 					</Grid>
 				</div>
 			</section>
+			<section className={`${styles.appFeatureSection} py-5 px-md-5`}></section>
 		</>
 	);
 }
