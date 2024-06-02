@@ -20,6 +20,7 @@
 		"material-ui-community-icons": "^0.15.0",
 		"mongodb": "^5.1.0",
 		"next": "latest",
+		"next-auth": "^4.24.7",
 		"prettier": "^3.0.3",
 		"react": "18.2.0",
 		"react-bootstrap": "^2.7.2",

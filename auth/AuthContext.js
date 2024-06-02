@@ -1,23 +1,33 @@
 import React, { createContext, useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-	const [loggedIn, setLoggedIn] = useState(null); // null means loading
+	const { data: session, status } = useSession();
+	const [loggedIn, setLoggedIn] = useState(null);
 	const [token, setToken] = useState(null);
 	const [email, setEmail] = useState(null);
 
 	useEffect(() => {
-		const initialToken = localStorage.getItem("userToken");
-		const initialEmail = localStorage.getItem("userEmail");
-		if (initialToken) {
+		if (status === "loading") {
+			setLoggedIn(null); // Loading state
+		} else if (status === "authenticated") {
 			setLoggedIn(true);
-			setToken(initialToken);
-			setEmail(initialEmail);
+			setToken(session.user.token);
+			setEmail(session.user.email);
 		} else {
-			setLoggedIn(false);
+			const initialToken = localStorage.getItem("userToken");
+			const initialEmail = localStorage.getItem("userEmail");
+			if (initialToken) {
+				setLoggedIn(true);
+				setToken(initialToken);
+				setEmail(initialEmail);
+			} else {
+				setLoggedIn(false);
+			}
 		}
-	}, []);
+	}, [status, session]);
 
 	useEffect(() => {
 		if (token) {

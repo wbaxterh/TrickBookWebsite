@@ -30,8 +30,8 @@ function Footer() {
 					<p>© 2024 The Trick Book</p>
 				</div>
 				<div className={styles.subnavRight}>
-					<Link href='/questions-support' passHref>
-						<span>Questions & Support</span>
+					<Link href='/terms-conditions' passHref>
+						<span>Terms & Conditions</span>
 					</Link>
 					<Link href='/privacy-policy' passHref>
 						<span>Privacy Policy</span>
