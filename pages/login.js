@@ -7,6 +7,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { Typography, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
+import { signIn } from "next-auth/react";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
 
@@ -26,6 +28,7 @@ const validate = (values) => {
 
 	return errors;
 };
+
 export default function Login() {
 	const authContext = useContext(AuthContext);
 	const { logIn, setToken } = useContext(AuthContext);
@@ -36,16 +39,6 @@ export default function Login() {
 		return <div>Error: Could not get authentication context.</div>;
 	}
 
-	//API fetch
-	// const loginUser = async (email, password) => {
-	// 	const response = await fetch(`${baseUrl}/api/auth`, {
-	// 		method: "POST",
-	// 		headers: { "Content-Type": "application/json" },
-	// 		body: JSON.stringify({ email, password }),
-	// 	});
-
-	// 	return response;
-	// };
 	const loginUser = async (email, password) => {
 		try {
 			// Call the Next.js API route which will handle the authentication
@@ -60,7 +53,7 @@ export default function Login() {
 			throw error; // Re-throw the error to be handled in onSubmit
 		}
 	};
-	//onSubmit handle errors or redirect the user
+
 	const [loginError, setLoginError] = useState(null);
 	const router = useRouter();
 
@@ -90,6 +83,10 @@ export default function Login() {
 			}
 		},
 	});
+
+	const handleGoogleSignIn = async () => {
+		signIn("google", { callbackUrl: "/profile" });
+	};
 
 	return (
 		<>
@@ -196,6 +193,22 @@ export default function Login() {
 										</div>
 									</div>
 								</form>
+								<div className='row mt-4'>
+									<div className='col text-center'>
+										<Typography variant='body1' className='mb-2'>
+											------ or ------
+										</Typography>
+										<Button
+											variant='contained'
+											color='secondary'
+											onClick={handleGoogleSignIn}
+											//sx={{ backgroundColor: "#fff", color: "#1f1f1f" }}
+											startIcon={<GoogleIcon />} // Add the Google icon here
+										>
+											Sign in with Google
+										</Button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
