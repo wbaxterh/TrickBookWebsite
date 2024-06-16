@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 
 export const AuthContext = createContext();
 
@@ -51,12 +52,26 @@ export function AuthProvider({ children }) {
 		localStorage.setItem("userEmail", newEmail);
 	};
 
+	// const logOut = () => {
+	// 	setLoggedIn(false);
+	// 	setToken(null);
+	// 	setEmail(null);
+	// 	localStorage.removeItem("userToken");
+	// 	localStorage.removeItem("userEmail");
+	// };
 	const logOut = () => {
 		setLoggedIn(false);
 		setToken(null);
 		setEmail(null);
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("userEmail");
+
+		// Clear cookies
+		Cookies.remove("next-auth.session-token"); // This name might vary depending on your NextAuth configuration
+		Cookies.remove("next-auth.csrf-token");
+
+		// Sign out from NextAuth
+		signOut({ callbackUrl: "/" }); // Redirect to the home page after sign-out
 	};
 
 	return (
