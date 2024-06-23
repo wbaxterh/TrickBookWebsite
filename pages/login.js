@@ -1,29 +1,27 @@
+// pages/login.js
 import { React, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
 import Head from "next/head";
-import axios from "axios";
 import { useFormik } from "formik";
 import { Typography, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@mui/icons-material/Google";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // Default to localhost if BASE_URL is not set
-
 const validate = (values) => {
 	const errors = {};
 	if (!values.email) {
 		errors.email = "Required";
 	} else if (values.email.length < 4) {
-		//errors.email = "Must be 4 characters or more";
+		errors.email = "Must be 4 characters or more";
 	}
 
 	if (!values.password) {
 		errors.password = "Required";
 	} else if (values.password.length < 8) {
-		//errors.password = "Must be 8 characters or more";
+		errors.password = "Must be 8 characters or more";
 	}
 
 	return errors;
@@ -31,28 +29,13 @@ const validate = (values) => {
 
 export default function Login() {
 	const authContext = useContext(AuthContext);
-	const { logIn, setToken } = useContext(AuthContext);
+	const { logIn } = useContext(AuthContext);
 
 	// Check if the context is available
 	if (!authContext) {
 		console.error("AuthContext is not available!");
 		return <div>Error: Could not get authentication context.</div>;
 	}
-
-	const loginUser = async (email, password) => {
-		try {
-			// Call the Next.js API route which will handle the authentication
-			const response = await axios.post("/api/auth", { email, password });
-			return response;
-		} catch (error) {
-			// Handle any errors here
-			console.error(
-				"Login error:",
-				error.response ? error.response.data : error.message
-			);
-			throw error; // Re-throw the error to be handled in onSubmit
-		}
-	};
 
 	const [loginError, setLoginError] = useState(null);
 	const router = useRouter();
@@ -64,22 +47,18 @@ export default function Login() {
 		},
 		validate,
 		onSubmit: async (values) => {
-			try {
-				const response = await loginUser(values.email, values.password);
-				const data = response.data; // Axios automatically parses JSON responses
-
-				console.log("Data from api == ", data, values.email);
-				logIn(data.token, values.email); // Update AuthContext loggedIn state
-
-				// Navigate to profile page
+			console.log("values sent to signIn == ", values);
+			const result = await signIn("credentials", {
+				redirect: false,
+				email: values.email,
+				password: values.password,
+			});
+			console.log("response from signin == ", result);
+			if (result.error) {
+				setLoginError(result.error);
+			} else {
+				logIn(result.token, values.email);
 				router.push("/profile");
-			} catch (error) {
-				// Handle login errors
-				const errorMessage =
-					error.response && error.response.data
-						? error.response.data.error
-						: "An unknown error occurred";
-				setLoginError(errorMessage);
 			}
 		},
 	});
@@ -202,7 +181,6 @@ export default function Login() {
 											variant='contained'
 											color='secondary'
 											onClick={handleGoogleSignIn}
-											//sx={{ backgroundColor: "#fff", color: "#1f1f1f" }}
 											startIcon={<GoogleIcon />} // Add the Google icon here
 										>
 											Sign in with Google

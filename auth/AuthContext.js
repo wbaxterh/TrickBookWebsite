@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 
 export const AuthContext = createContext();
@@ -11,12 +11,13 @@ export function AuthProvider({ children }) {
 	const [email, setEmail] = useState(null);
 
 	useEffect(() => {
+		console.log("Session data:", session);
 		if (status === "loading") {
 			setLoggedIn(null); // Loading state
 		} else if (status === "authenticated") {
 			setLoggedIn(true);
-			setToken(session.user.token);
-			setEmail(session.user.email);
+			setToken(session?.user?.token || null);
+			setEmail(session?.user?.email || null);
 		} else {
 			const initialToken = localStorage.getItem("userToken");
 			const initialEmail = localStorage.getItem("userEmail");
@@ -52,13 +53,6 @@ export function AuthProvider({ children }) {
 		localStorage.setItem("userEmail", newEmail);
 	};
 
-	// const logOut = () => {
-	// 	setLoggedIn(false);
-	// 	setToken(null);
-	// 	setEmail(null);
-	// 	localStorage.removeItem("userToken");
-	// 	localStorage.removeItem("userEmail");
-	// };
 	const logOut = () => {
 		setLoggedIn(false);
 		setToken(null);
@@ -71,7 +65,7 @@ export function AuthProvider({ children }) {
 		Cookies.remove("next-auth.csrf-token");
 
 		// Sign out from NextAuth
-		signOut({ callbackUrl: "/" }); // Redirect to the home page after sign-out
+		signOut({ callbackUrl: "/login" }); // Redirect to the home page after sign-out
 	};
 
 	return (
