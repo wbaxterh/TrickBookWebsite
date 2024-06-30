@@ -34,6 +34,7 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		if (token) {
 			localStorage.setItem("userToken", token);
+			Cookies.set("token", token);
 		} else {
 			localStorage.removeItem("userToken");
 		}
