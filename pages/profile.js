@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 
 export default function Profile() {
-	const { email, token, logOut } = useContext(AuthContext);
+	const { email, loggedIn, logOut } = useContext(AuthContext);
 	const router = useRouter();
 	const handleLogout = () => {
 		logOut(); // Clear token from AuthContext state
@@ -49,6 +49,7 @@ export default function Profile() {
 }
 export async function getServerSideProps(context) {
 	const { req } = context;
+	console.log("request from server side props", req);
 	const token = req.cookies.token; // Assuming the JWT is stored in a cookie named 'token'
 	console.log("token from server side props == ", token);
 	if (!token) {

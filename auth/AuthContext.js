@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		if (token) {
 			localStorage.setItem("userToken", token);
-			Cookies.set("token", token);
+			// Cookies.set("token", token);
 		} else {
 			localStorage.removeItem("userToken");
 		}
@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
 	const logIn = (newToken, newEmail) => {
 		setLoggedIn(true);
 		setToken(newToken);
+		Cookies.set("token", newToken);
 		setEmail(newEmail);
 		localStorage.setItem("userToken", newToken);
 		localStorage.setItem("userEmail", newEmail);
