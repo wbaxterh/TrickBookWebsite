@@ -2,3 +2,30 @@
 	padding-top: 4em;
 	padding-bottom: 2em;
 }
+.profileImage {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+.card {
+	border-radius: 10px;
+}
+
+.card-body {
+	text-align: center;
+}
+
+.card-title {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+.card-text {
+	font-size: 1rem;
+	margin-bottom: 20px;
+}
+
+.btn-primary {
+	margin-right: 10px;
+}

@@ -1,18 +1,21 @@
 import Link from "next/link";
-import styles from "../styles/profile.module.css";
 import Head from "next/head";
 import jwt from "jsonwebtoken";
+import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
+import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 
-export default function Profile() {
+export default function Profile({ name, imageUri }) {
 	const { email, loggedIn, logOut } = useContext(AuthContext);
 	const router = useRouter();
+
 	const handleLogout = () => {
 		logOut(); // Clear token from AuthContext state
 		router.push("/login"); // Redirect to login page
 	};
+
 	return (
 		<>
 			<Head>
@@ -28,31 +31,53 @@ export default function Profile() {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<div className={`container ${styles.profileContainer}`}>
-				<h1 className='pt-3' style={{ textAlign: "left" }}>
-					Profile
-				</h1>
-				<p>Hi {email} your profile will be available on the web soon</p>
-				<button className='btn btn-secondary' onClick={handleLogout}>
-					Logout
-				</button>
-				<Link href='/'>
-					{" "}
-					<span className='material-icons align-middle pb-1'>
-						arrow_back
-					</span>{" "}
-					Back to home
-				</Link>
+			<div className='container my-5'>
+				<div className='row justify-content-center'>
+					<div className='col-md-8 text-center'>
+						<div className='card shadow-sm p-4'>
+							<div className='card-body'>
+								<img
+									src={imageUri}
+									alt='Profile Picture'
+									className='rounded-circle mb-4'
+									style={{ width: "150px", height: "150px" }}
+								/>
+								<h2 className='card-title'>Welcome, {name}!</h2>
+								<p className='card-text'>
+									Hi {email}, your profile will be available on the web soon.
+								</p>
+								<button
+									className='btn btn-secondary my-3'
+									onClick={handleLogout}
+								>
+									Logout
+								</button>
+								<Link className='btn btn-primary' href='/'>
+									<span className='material-icons align-middle pb-1'>
+										arrow_back
+									</span>{" "}
+									Back to home
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);
 }
+
 export async function getServerSideProps(context) {
 	const { req } = context;
-	console.log("request from server side props", req);
-	const token = req.cookies.token; // Assuming the JWT is stored in a cookie named 'token'
-	console.log("token from server side props == ", token);
-	if (!token) {
+	const session = await getSession(context);
+	console.log("session data from profile js == ", session);
+
+	if (
+		!session ||
+		!session.user ||
+		!session.user.jwtToken ||
+		!session.user.jwtToken.token
+	) {
 		return {
 			redirect: {
 				destination: "/login", // Redirect to login page if no token
@@ -61,8 +86,13 @@ export async function getServerSideProps(context) {
 		};
 	}
 
+	const token = session.user.jwtToken.token; // Assuming the JWT is stored in the session
+	console.log("token from server side props == ", token);
+
+	let profileInfo = {};
 	try {
 		jwt.verify(token, "jwtPrivateKey"); // Replace 'your-secret-key' with the actual secret key
+		profileInfo = jwt.verify(token, "jwtPrivateKey");
 	} catch (e) {
 		return {
 			redirect: {
@@ -76,6 +106,8 @@ export async function getServerSideProps(context) {
 	return {
 		props: {
 			isloggedIn: "true",
+			name: profileInfo.name,
+			imageUri: profileInfo.imageUri,
 		},
 	};
 }

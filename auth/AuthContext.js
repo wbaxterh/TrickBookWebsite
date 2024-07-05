@@ -1,5 +1,6 @@
+// auth/AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 
 export const AuthContext = createContext();
@@ -15,11 +16,13 @@ export function AuthProvider({ children }) {
 		if (status === "loading") {
 			setLoggedIn(null); // Loading state
 		} else if (status === "authenticated") {
+			console.log("User is authenticated");
+			console.log("token = ", session?.user?.jwtToken?.token);
 			setLoggedIn(true);
-			setToken(session?.user?.token || null);
+			setToken(session?.user?.jwtToken?.token || Cookies.get("token"));
 			setEmail(session?.user?.email || null);
 		} else {
-			const initialToken = localStorage.getItem("userToken");
+			const initialToken = Cookies.get("token");
 			const initialEmail = localStorage.getItem("userEmail");
 			if (initialToken) {
 				setLoggedIn(true);
@@ -34,7 +37,6 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		if (token) {
 			localStorage.setItem("userToken", token);
-			// Cookies.set("token", token);
 		} else {
 			localStorage.removeItem("userToken");
 		}
@@ -49,7 +51,6 @@ export function AuthProvider({ children }) {
 	const logIn = (newToken, newEmail) => {
 		setLoggedIn(true);
 		setToken(newToken);
-		Cookies.set("token", newToken);
 		setEmail(newEmail);
 		localStorage.setItem("userToken", newToken);
 		localStorage.setItem("userEmail", newEmail);
@@ -65,6 +66,7 @@ export function AuthProvider({ children }) {
 		// Clear cookies
 		Cookies.remove("next-auth.session-token"); // This name might vary depending on your NextAuth configuration
 		Cookies.remove("next-auth.csrf-token");
+		Cookies.remove("token");
 
 		// Sign out from NextAuth
 		signOut({ callbackUrl: "/login" }); // Redirect to the home page after sign-out

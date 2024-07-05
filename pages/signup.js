@@ -3,6 +3,9 @@ import styles from "../styles/login.module.css";
 import Head from "next/head";
 import { useFormik } from "formik";
 import { Typography, Button } from "@mui/material";
+import { signIn } from "next-auth/react";
+import GoogleIcon from "@mui/icons-material/Google";
+import axios from "axios";
 
 const validate = (values) => {
 	const errors = {};
@@ -18,26 +21,51 @@ const validate = (values) => {
 		errors.password = "Must be 8 characters or more";
 	}
 
+	if (!values.confirmPassword) {
+		errors.confirmPassword = "Required";
+	} else if (values.confirmPassword !== values.password) {
+		errors.confirmPassword = "Passwords must match";
+	}
+
 	return errors;
 };
+
 export default function Signup() {
 	const formik = useFormik({
 		initialValues: {
 			email: "",
 			password: "",
+			confirmPassword: "",
 		},
 		validate,
-		onSubmit: (values) => {
-			// Here you would typically make an API request for login
-			console.log(values);
+		onSubmit: async (values) => {
+			try {
+				const response = await axios.post("/api/register", {
+					email: values.email,
+					password: values.password,
+				});
+				console.log("User registered successfully", response.data);
+				// Redirect to login or profile page, or show a success message
+			} catch (error) {
+				console.error(
+					"Registration error:",
+					error.response ? error.response.data : error.message
+				);
+				// Handle the error appropriately
+			}
 		},
 	});
+
+	const handleGoogleSignIn = async () => {
+		signIn("google", { callbackUrl: "/profile" });
+	};
+
 	return (
 		<>
 			<Head>
 				<title>The Trick Book - Sign Up</title>
 				<link rel='icon' href='/favicon.png' />
-				<meta name='description' content='The Trick Book - Login' />
+				<meta name='description' content='The Trick Book - Sign Up' />
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<meta name='robots' content='index, follow' />
 				<link rel='canonical' href='https://thetrickbook.com/' />
@@ -69,7 +97,6 @@ export default function Signup() {
 									<div className='row m-1'>
 										<div className='col'>
 											<label htmlFor='email'>Email Address</label>
-
 											<input
 												id='email'
 												name='email'
@@ -97,7 +124,6 @@ export default function Signup() {
 												value={formik.values.password}
 											/>
 										</div>
-
 										{formik.errors.password ? (
 											<div>{formik.errors.password}</div>
 										) : null}
@@ -138,6 +164,22 @@ export default function Signup() {
 										</div>
 									</div>
 								</form>
+								<div className='row mt-4'>
+									<div className='col text-center'>
+										<Typography variant='body1' className='mb-2'>
+											------ or ------
+										</Typography>
+										<Button
+											variant='contained'
+											color='secondary'
+											onClick={handleGoogleSignIn}
+											// sx={{ backgroundColor: "#4285F4", color: "#fff" }}
+											startIcon={<GoogleIcon />} // Add the Google icon here
+										>
+											Sign up with Google
+										</Button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

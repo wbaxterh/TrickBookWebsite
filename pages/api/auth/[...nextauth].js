@@ -2,6 +2,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 import axios from "axios";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000";
@@ -19,7 +20,7 @@ export default NextAuth({
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials) {
-				console.log("Authorize function called with credentials:", credentials);
+				// console.log("Authorize function called with credentials:", credentials);
 
 				try {
 					const response = await axios.post(`${baseUrl}/api/auth`, {
@@ -27,13 +28,14 @@ export default NextAuth({
 						password: credentials.password,
 					});
 
-					const user = response.data;
-					console.log("User authenticated:", user);
+					const jwtToken = response.data;
+					console.log("User hasJWT token:", jwtToken);
+					// Set the JWT token as a cookie
+					Cookies.set("token", jwtToken);
 
 					return {
-						id: user.userId,
 						email: credentials.email,
-						name: user.name,
+						jwtToken: jwtToken,
 					};
 				} catch (error) {
 					console.error(
@@ -50,12 +52,19 @@ export default NextAuth({
 			if (user) {
 				token.id = user.id;
 				token.email = user.email;
+				token.jwtToken = user.jwtToken; // Store the JWT token in the token object
 			}
 			return token;
 		},
 		async session({ session, token }) {
-			session.user.id = token.id;
+			// console.log("token from async session == ", token);
+			// session.user.id = token.id;
 			session.user.email = token.email;
+			session.user.jwtToken = token.jwtToken; // Include the JWT token in the session object
+
+			// Set the JWT token as a cookie
+			Cookies.set("token", token.jwtToken);
+
 			return session;
 		},
 	},

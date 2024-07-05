@@ -1,4 +1,3 @@
-// pages/login.js
 import { React, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,7 +5,7 @@ import styles from "../styles/login.module.css";
 import Head from "next/head";
 import { useFormik } from "formik";
 import { Typography, Button } from "@mui/material";
-import { AuthContext } from "../auth/AuthContext"; // Adjust the path to where your AuthContext is located
+import { AuthContext } from "../auth/AuthContext";
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@mui/icons-material/Google";
 
@@ -47,18 +46,23 @@ export default function Login() {
 		},
 		validate,
 		onSubmit: async (values) => {
-			console.log("values sent to signIn == ", values);
-			const result = await signIn("credentials", {
-				redirect: false,
-				email: values.email,
-				password: values.password,
-			});
-			console.log("response from signin == ", result);
-			if (result.error) {
-				setLoginError(result.error);
-			} else {
-				logIn(result.token, values.email);
-				router.push("/profile");
+			try {
+				const result = await signIn("credentials", {
+					redirect: false,
+					email: values.email,
+					password: values.password,
+				});
+
+				if (result.error) {
+					setLoginError(result.error);
+				} else {
+					logIn(result.token, values.email);
+					router.push("/profile");
+				}
+			} catch (error) {
+				const errorMessage =
+					error.response?.data?.error || "An unknown error occurred";
+				setLoginError(errorMessage);
 			}
 		},
 	});
@@ -156,7 +160,7 @@ export default function Login() {
 													backgroundColor: "#fcf150",
 													color: "#333",
 													width: 200,
-												}} // Customize styles here
+												}}
 											>
 												Submit
 											</Button>
