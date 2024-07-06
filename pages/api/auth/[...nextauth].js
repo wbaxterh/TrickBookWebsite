@@ -12,6 +12,19 @@ export default NextAuth({
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			async profile(profile) {
+				const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
+					tokenId: profile.idToken,
+				});
+
+				const jwtToken = response.data;
+				return {
+					email: profile.email,
+					name: profile.name,
+					image: profile.picture,
+					jwtToken: jwtToken,
+				};
+			},
 		}),
 		CredentialsProvider({
 			name: "Credentials",
