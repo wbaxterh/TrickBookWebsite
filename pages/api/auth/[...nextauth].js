@@ -30,6 +30,7 @@ export default NextAuth({
 					console.log("JWT Token from backend:", jwtToken);
 
 					return {
+						id: profile.sub, // Ensure you have a unique identifier
 						email: profile.email,
 						name: profile.name,
 						image: profile.picture,

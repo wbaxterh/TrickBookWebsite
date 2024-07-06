@@ -9,7 +9,7 @@ export default function Trickipedia() {
 	return (
 		<>
 			<Head>
-				<title>The Trick Book - Trickipedia</title>
+				<title>The Trick Book - Skateboarding</title>
 				<link rel='icon' href='/favicon.png' />
 				<meta name='description' content='The Trick Book - About Us' />
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -24,20 +24,9 @@ export default function Trickipedia() {
 			<div className={`container-fluid ${styles.trickipediaContainer}`}>
 				<PageHeader title='Trickipedia' col='col-sm-4' />
 				<section className={`my-5 p-5 ${styles.missionStatement}`}>
-					<Typography variant='h2'>Trickipedia</Typography>
-					<Typography variant='h5'>Choose a category / sport</Typography>
+					<Typography variant='h2'>Skateboarding</Typography>
 				</section>
-				<section className={`m-5 ${styles.aboutUs}`}>
-					<Typography variant='h2'>
-						<Link href='/trickipedia/skateboarding'>Skateboarding</Link>
-					</Typography>
-					<Typography variant='h2'>
-						<Link href='/trickipedia/snowboarding'>Snowboarding</Link>
-					</Typography>
-					<Typography variant='h2'>
-						<Link href='/trickipedia/bmx'>BMX</Link>
-					</Typography>
-				</section>
+				<section className={`m-5 ${styles.aboutUs}`}></section>
 			</div>
 		</>
 	);
