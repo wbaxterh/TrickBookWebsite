@@ -17,33 +17,27 @@ export default NextAuth({
 					scope: "openid email profile",
 				},
 			},
-			async profile(profile, tokens) {
-				console.log("Google Profile:", profile);
+			profile: async (profile, tokens) => {
 				// Log tokens to confirm presence of id_token
 				console.log("Tokens:", tokens);
 
-				// Use the sub field as the unique identifier for the user
-				const sub = profile.sub;
-
 				try {
 					const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
-						sub: sub,
-						email: profile.email,
-						name: profile.name,
-						picture: profile.picture,
+						tokenId: tokens.id_token,
 					});
+
 					const jwtToken = response.data;
+					console.log("JWT Token from backend:", jwtToken);
 
 					return {
-						id: sub,
 						email: profile.email,
 						name: profile.name,
 						image: profile.picture,
 						jwtToken: jwtToken,
 					};
 				} catch (error) {
-					console.error("Error authenticating with backend:", error);
-					return null;
+					console.error("Error during Google authentication:", error);
+					throw new Error("Failed to authenticate with Google.");
 				}
 			},
 		}),
