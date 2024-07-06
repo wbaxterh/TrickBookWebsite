@@ -13,10 +13,11 @@ export default NextAuth({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 			async profile(profile) {
+				console.log("Google Profile:", profile);
 				const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
 					tokenId: profile.idToken,
 				});
-
+				console.log("Token from google == ", profile.idToken);
 				const jwtToken = response.data;
 				return {
 					email: profile.email,
