@@ -17,8 +17,10 @@ export default NextAuth({
 					scope: "openid email profile",
 				},
 			},
-			async profile(profile) {
+			async profile(profile, tokens) {
 				console.log("Google Profile:", profile);
+				// Log tokens to confirm presence of id_token
+				console.log("Tokens:", tokens);
 
 				// Use the sub field as the unique identifier for the user
 				const sub = profile.sub;
