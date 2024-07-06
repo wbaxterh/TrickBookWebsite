@@ -14,17 +14,30 @@ export default NextAuth({
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 			async profile(profile) {
 				console.log("Google Profile:", profile);
-				const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
-					tokenId: profile.idToken,
-				});
-				console.log("Token from google == ", profile.idToken);
-				const jwtToken = response.data;
-				return {
-					email: profile.email,
-					name: profile.name,
-					image: profile.picture,
-					jwtToken: jwtToken,
-				};
+
+				// Use the sub field as the unique identifier for the user
+				const sub = profile.sub;
+
+				try {
+					const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
+						sub: sub,
+						email: profile.email,
+						name: profile.name,
+						picture: profile.picture,
+					});
+					const jwtToken = response.data;
+
+					return {
+						id: sub,
+						email: profile.email,
+						name: profile.name,
+						image: profile.picture,
+						jwtToken: jwtToken,
+					};
+				} catch (error) {
+					console.error("Error authenticating with backend:", error);
+					return null;
+				}
 			},
 		}),
 		CredentialsProvider({
