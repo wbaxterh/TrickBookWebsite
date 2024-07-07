@@ -17,7 +17,7 @@
 		"gray-matter": "^4.0.3",
 		"isomorphic-unfetch": "^4.0.2",
 		"js-cookie": "^3.0.5",
-		"jsonwebtoken": "^9.0.2",
+		"jsonwebtoken": "8.5.1",
 		"material-icons": "^1.13.2",
 		"material-ui-community-icons": "^0.15.0",
 		"mongodb": "^5.1.0",

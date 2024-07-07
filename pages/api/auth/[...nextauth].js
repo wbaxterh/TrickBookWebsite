@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 import axios from "axios";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // || process.env.NEXT_PUBLIC_BASE_URL
 
 export default NextAuth({
 	providers: [

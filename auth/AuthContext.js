@@ -1,6 +1,6 @@
-// auth/AuthContext.js
 import React, { createContext, useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import jwt from "jsonwebtoken";
 import Cookies from "js-cookie"; // Importing js-cookie to manage cookies
 
 export const AuthContext = createContext();
@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
 	const [loggedIn, setLoggedIn] = useState(null);
 	const [token, setToken] = useState(null);
 	const [email, setEmail] = useState(null);
+	const [role, setRole] = useState(null);
 
 	useEffect(() => {
 		console.log("Session data:", session);
@@ -17,19 +18,52 @@ export function AuthProvider({ children }) {
 			setLoggedIn(null); // Loading state
 		} else if (status === "authenticated") {
 			console.log("User is authenticated");
-			console.log("token = ", session?.user?.jwtToken?.token);
-			setLoggedIn(true);
-			setToken(session?.user?.jwtToken?.token || Cookies.get("token"));
-			setEmail(session?.user?.email || null);
+			console.log("Session JWT token: ", session?.user?.jwtToken?.token);
+
+			const jwtToken = session?.user?.jwtToken?.token || Cookies.get("token");
+
+			if (jwtToken) {
+				try {
+					const profileInfo = jwt.verify(jwtToken.toString(), "jwtPrivateKey"); // Ensure the correct secret key is used
+					setLoggedIn(true);
+					setToken(jwtToken);
+					setEmail(session?.user?.email || null);
+					setRole(profileInfo.role || null); // Assuming the role is stored in the JWT
+				} catch (err) {
+					console.error("Error verifying JWT:", err);
+					setLoggedIn(false);
+					setToken(null);
+					setEmail(null);
+					setRole(null);
+				}
+			} else {
+				setLoggedIn(false);
+				setToken(null);
+				setEmail(null);
+				setRole(null);
+			}
 		} else {
 			const initialToken = Cookies.get("token");
 			const initialEmail = localStorage.getItem("userEmail");
 			if (initialToken) {
-				setLoggedIn(true);
-				setToken(initialToken);
-				setEmail(initialEmail);
+				try {
+					const profileInfo = jwt.verify(initialToken, "jwtPrivateKey");
+					setLoggedIn(true);
+					setToken(initialToken);
+					setEmail(initialEmail);
+					setRole(profileInfo.role || null);
+				} catch (err) {
+					console.error("Error verifying JWT from cookie:", err);
+					setLoggedIn(false);
+					setToken(null);
+					setEmail(null);
+					setRole(null);
+				}
 			} else {
 				setLoggedIn(false);
+				setToken(null);
+				setEmail(null);
+				setRole(null);
 			}
 		}
 	}, [status, session]);
@@ -60,6 +94,7 @@ export function AuthProvider({ children }) {
 		setLoggedIn(false);
 		setToken(null);
 		setEmail(null);
+		setRole(null);
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("userEmail");
 
@@ -73,7 +108,9 @@ export function AuthProvider({ children }) {
 	};
 
 	return (
-		<AuthContext.Provider value={{ loggedIn, token, logIn, logOut, email }}>
+		<AuthContext.Provider
+			value={{ loggedIn, token, logIn, logOut, email, role }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

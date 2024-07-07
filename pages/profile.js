@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 
 export default function Profile({ name, imageUri }) {
-	const { email, loggedIn, logOut } = useContext(AuthContext);
+	const { email, loggedIn, logOut, role } = useContext(AuthContext);
 	const router = useRouter();
 
 	const handleLogout = () => {
@@ -46,6 +46,13 @@ export default function Profile({ name, imageUri }) {
 								<p className='card-text'>
 									Hi {email}, your profile will be available on the web soon.
 								</p>
+								{role === "admin" && (
+									<Link href='/admin/blog'>
+										<button className='btn btn-primary my-3'>
+											Write a Blog Post
+										</button>
+									</Link>
+								)}
 								<button
 									className='btn btn-secondary my-3'
 									onClick={handleLogout}
@@ -70,7 +77,6 @@ export default function Profile({ name, imageUri }) {
 export async function getServerSideProps(context) {
 	const { req } = context;
 	const session = await getSession(context);
-	console.log("session data from profile js == ", session);
 
 	if (
 		!session ||
@@ -87,8 +93,6 @@ export async function getServerSideProps(context) {
 	}
 
 	const token = session.user.jwtToken.token; // Assuming the JWT is stored in the session
-	console.log("token from server side props == ", token);
-
 	let profileInfo = {};
 	try {
 		jwt.verify(token, "jwtPrivateKey"); // Replace 'your-secret-key' with the actual secret key
