@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Link from "next/link";
 import styles from "../../styles/admin.module.css";
 import Head from "next/head";
-import Layout from "../../components/layout";
 import Image from "next/image";
 import Header from "../../components/Header";
-import fetch from "isomorphic-unfetch";
-import { useContext } from "react";
+import { Typography, CircularProgress } from "@mui/material";
+import { useRouter } from "next/router";
 import { AuthContext } from "../../auth/AuthContext"; // Adjust the path accordingly
-import jwt from "jsonwebtoken";
 
 const UsersTable = ({ users }) => (
 	<table className={styles.table}>
@@ -67,7 +65,22 @@ const TrickListsTable = ({ tricklists }) => (
 );
 
 function admin({ isLoggedIn, users, tricklists }) {
-	const { email } = useContext(AuthContext);
+	const { email, loggedIn, role } = useContext(AuthContext);
+	const router = useRouter();
+	const [loading, setLoading] = useState(true); // Add loading state
+
+	useEffect(() => {
+		if (loggedIn === null) {
+			// Still checking login status
+			return;
+		}
+
+		if (loggedIn && role === "admin") {
+			setLoading(false); // User is authenticated and has admin role
+		} else {
+			router.push("/login");
+		}
+	}, [loggedIn, role, router]);
 
 	const [showTable, setShowTable] = useState(false);
 	const [showTrickLists, setShowTrickLists] = useState(false);
@@ -79,6 +92,15 @@ function admin({ isLoggedIn, users, tricklists }) {
 	const toggleTrickLists = () => {
 		setShowTrickLists((prevState) => !prevState);
 	};
+	if (loading) {
+		return (
+			<div className='loading'>
+				<CircularProgress />
+				<Typography variant='h5'>Loading...</Typography>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<Head>
@@ -95,7 +117,7 @@ function admin({ isLoggedIn, users, tricklists }) {
 				/>
 			</Head>
 			<Header />
-			<Layout>
+			<div className='container-fluid m-2 mt-5'>
 				<h1 className='pt-3' style={{ textAlign: "center" }}>
 					Current Data {email}
 				</h1>
@@ -132,10 +154,7 @@ function admin({ isLoggedIn, users, tricklists }) {
 					Trick Lists
 				</button>
 				{showTrickLists && <TrickListsTable tricklists={tricklists} />}
-				{/* <h2>
-              <Link href="/"> <span class="material-icons">arrow_back</span> Back to home</Link>
-              </h2> */}
-			</Layout>
+			</div>
 		</>
 	);
 }
@@ -174,33 +193,33 @@ export async function getServerSideProps(context) {
 		}
 
 		// Check logged-in user
-		const { req } = context;
-		const token = req.cookies.token;
+		// const { req } = context;
+		// const token = req.cookies.token;
 
-		if (!token) {
-			return {
-				redirect: {
-					destination: "/login",
-					permanent: false,
-				},
-			};
-		}
+		// if (!token) {
+		// 	return {
+		// 		redirect: {
+		// 			destination: "/login",
+		// 			permanent: false,
+		// 		},
+		// 	};
+		// }
 
-		try {
-			jwt.verify(token, "jwtPrivateKey"); // Replace with your actual secret key
-		} catch (e) {
-			console.log("Token verification failed:", e);
-			return {
-				redirect: {
-					destination: "/login",
-					permanent: false,
-				},
-			};
-		}
+		// try {
+		// 	jwt.verify(token, "jwtPrivateKey"); // Replace with your actual secret key
+		// } catch (e) {
+		// 	console.log("Token verification failed:", e);
+		// 	return {
+		// 		redirect: {
+		// 			destination: "/login",
+		// 			permanent: false,
+		// 		},
+		// 	};
+		// }
 
 		return {
 			props: {
-				isLoggedIn: "true",
+				// isLoggedIn: "true",
 				users,
 				tricklists,
 			},

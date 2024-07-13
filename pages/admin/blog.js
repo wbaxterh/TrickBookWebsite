@@ -64,48 +64,60 @@ export default function BlogAdmin() {
 	return (
 		<div className={`container ${styles.container}`}>
 			<Head>
-				<title>Blog Administration - The Trick Book</title>
+				<title>The Trick Book - Blog Admin</title>
+				<link rel='icon' href='/favicon.png' />
+				<meta name='description' content='The Trick Book - Admin' />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href='https://thetrickbook.com/' />
+				<meta name='author' content='Wes Huber' />
+				<meta
+					name='keywords'
+					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
+				/>
 			</Head>
-			<Typography variant='h2' gutterBottom>
-				Blog Administration
-			</Typography>
-			<form onSubmit={handleSubmit} className={styles.form}>
-				<TextField
-					label='Title'
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-					fullWidth
-					margin='normal'
-				/>
-				<TextField
-					label='Author'
-					value={author}
-					onChange={(e) => setAuthor(e.target.value)}
-					fullWidth
-					margin='normal'
-				/>
-				<TextField
-					label='Date'
-					type='date'
-					value={date}
-					onChange={(e) => setDate(e.target.value)}
-					fullWidth
-					margin='normal'
-					InputLabelProps={{ shrink: true }}
-				/>
-				<TextField
-					label='Content'
-					value={content}
-					onChange={(e) => setContent(e.target.value)}
-					fullWidth
-					margin='normal'
-					multiline
-					rows={10}
-				/>
-				<Button type='submit' variant='contained' color='primary'>
-					Submit
-				</Button>
-			</form>
+			<div className='container m-4 mt-5 pt-3'>
+				<Typography variant='h2' gutterBottom>
+					Blog Administration
+				</Typography>
+				<form onSubmit={handleSubmit} className={styles.form}>
+					<TextField
+						label='Title'
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+						fullWidth
+						margin='normal'
+					/>
+					<TextField
+						label='Author'
+						value={author}
+						onChange={(e) => setAuthor(e.target.value)}
+						fullWidth
+						margin='normal'
+					/>
+					<TextField
+						label='Date'
+						type='date'
+						value={date}
+						onChange={(e) => setDate(e.target.value)}
+						fullWidth
+						margin='normal'
+						InputLabelProps={{ shrink: true }}
+					/>
+					<TextField
+						label='Content'
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
+						fullWidth
+						margin='normal'
+						multiline
+						rows={10}
+					/>
+					<Button type='submit' variant='contained' color='primary'>
+						Submit
+					</Button>
+				</form>
+			</div>
 		</div>
 	);
 }
