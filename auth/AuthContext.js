@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
 			if (jwtToken) {
 				try {
 					const profileInfo = jwt.verify(jwtToken.toString(), "jwtPrivateKey"); // Ensure the correct secret key is used
+					console.log("Token data == ", profileInfo);
 					setLoggedIn(true);
 					setToken(jwtToken);
 					setEmail(session?.user?.email || null);
@@ -48,6 +49,7 @@ export function AuthProvider({ children }) {
 			if (initialToken) {
 				try {
 					const profileInfo = jwt.verify(initialToken, "jwtPrivateKey");
+					console.log("initial Token data == ", profileInfo);
 					setLoggedIn(true);
 					setToken(initialToken);
 					setEmail(initialEmail);
