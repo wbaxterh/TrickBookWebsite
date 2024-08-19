@@ -4,3 +4,42 @@
 	padding-top: 2.35em;
 	padding-bottom: 3em;
 }
+.heroImage {
+	display: flex !important;
+	text-align: center;
+	justify-self: center;
+	flex: 1;
+	width: 100% !important;
+	max-width: 100%;
+	max-height: 70vh;
+	padding: 0px !important;
+	margin: 0px !important;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+.heroImageContainer {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.overlay {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.headerText {
+	font-weight: 700;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.authorDate {
+	font-weight: 300;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 5px;
+}

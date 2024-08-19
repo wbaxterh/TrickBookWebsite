@@ -6,7 +6,9 @@ import { getSortedPostsData } from "../lib/api";
 import { Typography, Button } from "@mui/material";
 import BlogCard from "../components/BlogCard";
 import PageHeader from "../components/PageHeader";
+
 export default function Blog({ allPostsData }) {
+	console.log("All posts data from blog == ", allPostsData);
 	return (
 		<>
 			<Head>
@@ -22,14 +24,16 @@ export default function Blog({ allPostsData }) {
 					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
 				/>
 			</Head>
-			<div class={`container-fluid ${styles.postContainer}`}>
+			<div className={`container-fluid ${styles.postContainer}`}>
 				<PageHeader title='Blog' col='col-sm-2' />
 				<div className={`row mt-4`}>
-					{allPostsData.map(({ id, date, title, author, firstImage }) => (
+					{allPostsData.map(({ id, date, title, author, url, images }) => (
 						<div className='col-md-4 col-sm-12 mb-4' key={id}>
 							<BlogCard
-								id={id}
-								firstImage={firstImage}
+								id={url}
+								firstImage={images.find((image) =>
+									image.includes("?hero=true")
+								)}
 								title={title}
 								date={date}
 								author={author}
@@ -49,7 +53,7 @@ export default function Blog({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-	const allPostsData = getSortedPostsData();
+	const allPostsData = await getSortedPostsData();
 	return {
 		props: {
 			allPostsData,

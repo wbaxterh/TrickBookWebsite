@@ -1,55 +1,72 @@
-import { useState, useContext, useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Typography, Button, TextField, CircularProgress } from "@mui/material";
-import axios from "axios";
+import {
+	Typography,
+	Button,
+	CircularProgress,
+	IconButton,
+} from "@mui/material";
+import { getSortedPostsData, deleteBlogPost } from "../../lib/api";
 import { AuthContext } from "../../auth/AuthContext";
+import BlogCard from "../../components/BlogCard";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "../../styles/admin.module.css";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000"; // process.env.NEXT_PUBLIC_BASE_URL ||
-
 export default function BlogAdmin() {
-	const { user, token, loggedIn, role } = useContext(AuthContext);
-	const [title, setTitle] = useState("");
-	const [author, setAuthor] = useState("");
-	const [date, setDate] = useState("");
-	const [content, setContent] = useState("");
-	const [loading, setLoading] = useState(true); // Add loading state
+	const { loggedIn, role, token } = useContext(AuthContext);
+	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const router = useRouter();
 
 	useEffect(() => {
 		if (loggedIn === null) {
-			// Still checking login status
 			return;
 		}
 
 		if (loggedIn && role === "admin") {
-			setLoading(false); // User is authenticated and has admin role
+			fetchPosts();
 		} else {
 			router.push("/login");
 		}
 	}, [loggedIn, role, router]);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const postData = {
-			title,
-			author,
-			date,
-			content,
-		};
+	const fetchPosts = async () => {
+		try {
+			const fetchedPosts = await getSortedPostsData();
+			setPosts(fetchedPosts);
+		} catch (error) {
+			console.error("Error fetching posts", error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const handleEdit = (postId) => {
+		router.push({
+			pathname: "/admin/create-blog-post",
+			query: { isEdit: true, postId },
+		});
+	};
+
+	const handleDelete = async (postId) => {
+		if (!confirm("Are you sure you want to delete this post?")) {
+			return;
+		}
 
 		try {
-			await axios.post(`${baseUrl}/api/blog`, postData, {
-				headers: {
-					"x-auth-token": token,
-				},
-			});
-			alert("Blog post submitted successfully!");
+			await deleteBlogPost(postId, token);
+			setPosts(posts.filter((post) => post.id !== postId));
+			alert("Blog post deleted successfully!");
 		} catch (error) {
-			console.error("Error submitting blog post", error);
-			alert("Failed to submit blog post");
+			console.error("Error deleting post", error);
+			alert("Failed to delete blog post");
 		}
+	};
+
+	const handleCreateNewPost = () => {
+		router.push("/admin/create-blog-post");
 	};
 
 	if (loading) {
@@ -64,59 +81,55 @@ export default function BlogAdmin() {
 	return (
 		<div className={`container ${styles.container}`}>
 			<Head>
-				<title>The Trick Book - Blog Admin</title>
-				<link rel='icon' href='/favicon.png' />
-				<meta name='description' content='The Trick Book - Admin' />
-				<meta name='viewport' content='width=device-width, initial-scale=1' />
-				<meta name='robots' content='index, follow' />
-				<link rel='canonical' href='https://thetrickbook.com/' />
-				<meta name='author' content='Wes Huber' />
-				<meta
-					name='keywords'
-					content='Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App'
-				/>
+				<title>The Trick Book - Blog Administration</title>
 			</Head>
 			<div className='container m-4 mt-5 pt-3'>
 				<Typography variant='h2' gutterBottom>
-					Blog Administration
+					Manage Blog Posts
 				</Typography>
-				<form onSubmit={handleSubmit} className={styles.form}>
-					<TextField
-						label='Title'
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-						fullWidth
-						margin='normal'
-					/>
-					<TextField
-						label='Author'
-						value={author}
-						onChange={(e) => setAuthor(e.target.value)}
-						fullWidth
-						margin='normal'
-					/>
-					<TextField
-						label='Date'
-						type='date'
-						value={date}
-						onChange={(e) => setDate(e.target.value)}
-						fullWidth
-						margin='normal'
-						InputLabelProps={{ shrink: true }}
-					/>
-					<TextField
-						label='Content'
-						value={content}
-						onChange={(e) => setContent(e.target.value)}
-						fullWidth
-						margin='normal'
-						multiline
-						rows={10}
-					/>
-					<Button type='submit' variant='contained' color='primary'>
-						Submit
-					</Button>
-				</form>
+				<Button
+					variant='contained'
+					color='primary'
+					onClick={handleCreateNewPost}
+					className='mb-4'
+				>
+					Create a New Post
+				</Button>
+				{posts.length > 0 ? (
+					<div className='row'>
+						{posts.map((post) => (
+							<div className='col-md-4 col-sm-12 mb-4' key={post.id}>
+								<BlogCard
+									id={post.url}
+									firstImage={post.images.find((image) =>
+										image.includes("?hero=true")
+									)}
+									title={post.title}
+									date={post.date}
+									author={post.author}
+								/>
+								<div className='mt-2 text-center'>
+									<IconButton
+										onClick={() => handleEdit(post.id)}
+										color='text-dark'
+									>
+										<EditIcon />
+									</IconButton>
+									<IconButton
+										onClick={() => handleDelete(post.id)}
+										color='secondary'
+									>
+										<DeleteIcon />
+									</IconButton>
+								</div>
+							</div>
+						))}
+					</div>
+				) : (
+					<Typography variant='h6' color='textSecondary'>
+						No posts found.
+					</Typography>
+				)}
 			</div>
 		</div>
 	);
