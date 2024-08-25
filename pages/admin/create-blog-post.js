@@ -112,6 +112,7 @@ export default function CreateBlogPost() {
 
 			// Upload images and collect their URLs
 			for (let i = 0; i < selectedFiles.length; i++) {
+				console.log("upload file + ", selectedFiles[i]);
 				const imageUrl = await uploadImage(selectedFiles[i], blogUrl, token);
 				// Mark the hero image with ?hero=true
 				if (i === heroImageIndex) {
@@ -162,6 +163,10 @@ export default function CreateBlogPost() {
 			<div className='container m-4 mt-5 pt-3'>
 				<Typography variant='h2' gutterBottom>
 					{isEdit === "true" ? "Edit" : "Create"} Blog Post
+				</Typography>
+				<Typography variant='p'>
+					Add images with a shortcode format in the order you upload them like
+					this: [image1] [image2]
 				</Typography>
 				<form onSubmit={handleSubmit} className={styles.form}>
 					<TextField
