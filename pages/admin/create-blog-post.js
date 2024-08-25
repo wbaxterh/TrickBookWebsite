@@ -23,6 +23,7 @@ import styles from "../../styles/admin.module.css";
 
 export default function CreateBlogPost() {
 	const { token, loggedIn, role } = useContext(AuthContext);
+	console.log("Token from create / edit == ", token);
 	const [title, setTitle] = useState("");
 	const [author, setAuthor] = useState("");
 	const [date, setDate] = useState("");
