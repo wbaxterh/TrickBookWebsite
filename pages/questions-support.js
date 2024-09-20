@@ -1,10 +1,15 @@
 import Link from "next/link";
 import styles from "../styles/questions.module.css";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import Image from "next/image";
-import { Button, TextField, CircularProgress } from "@mui/material";
+import {
+	Button,
+	TextField,
+	CircularProgress,
+	Snackbar,
+	Alert,
+} from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -16,6 +21,9 @@ const ContactSchema = Yup.object().shape({
 });
 
 export default function QuestionsSupport() {
+	const [successMessage, setSuccessMessage] = useState(null);
+	const [errorMessage, setErrorMessage] = useState(null);
+
 	return (
 		<>
 			<Head>
@@ -36,8 +44,40 @@ export default function QuestionsSupport() {
 			</Head>
 			<div className={`container-fluid ${styles.questionsContainer}`}>
 				<PageHeader title='Questions & Support' col='col-sm-6' />
-				<div className='container'>
+				<div className='container mt-4'>
 					<h3>Contact Us</h3>
+
+					{/* Success / Error Notification */}
+					{successMessage && (
+						<Snackbar
+							open
+							autoHideDuration={6000}
+							onClose={() => setSuccessMessage(null)}
+						>
+							<Alert
+								onClose={() => setSuccessMessage(null)}
+								severity='success'
+								sx={{ width: "100%" }}
+							>
+								{successMessage}
+							</Alert>
+						</Snackbar>
+					)}
+					{errorMessage && (
+						<Snackbar
+							open
+							autoHideDuration={6000}
+							onClose={() => setErrorMessage(null)}
+						>
+							<Alert
+								onClose={() => setErrorMessage(null)}
+								severity='error'
+								sx={{ width: "100%" }}
+							>
+								{errorMessage}
+							</Alert>
+						</Snackbar>
+					)}
 
 					<Formik
 						initialValues={{ name: "", email: "", message: "" }}
@@ -54,11 +94,11 @@ export default function QuestionsSupport() {
 										message: values.message,
 									}
 								);
-								alert("Message sent successfully!");
+								setSuccessMessage("Message sent successfully!");
 								resetForm();
 							} catch (error) {
 								console.error(error);
-								alert("Failed to send message. Please try again.");
+								setErrorMessage("Failed to send message. Please try again.");
 							} finally {
 								setSubmitting(false);
 							}

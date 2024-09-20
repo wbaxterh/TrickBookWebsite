@@ -46,17 +46,20 @@ const Header = () => {
 						<Link href='/' passHref legacyBehavior>
 							<Nav.Link>Home</Nav.Link>
 						</Link>
+						<Link href='/trickipedia' passHref legacyBehavior>
+							<Nav.Link>Trickipedia</Nav.Link>
+						</Link>
 						<Link href='/blog' passHref legacyBehavior>
 							<Nav.Link>Blog</Nav.Link>
 						</Link>
 						<Link href='/about' passHref legacyBehavior>
 							<Nav.Link>About</Nav.Link>
 						</Link>
-						<Link href='/privacy-policy' passHref legacyBehavior>
+						{/* <Link href='/privacy-policy' passHref legacyBehavior>
 							<Nav.Link>Privacy Policy</Nav.Link>
-						</Link>
+						</Link> */}
 						<Link href='/questions-support' passHref legacyBehavior>
-							<Nav.Link>Support</Nav.Link>
+							<Nav.Link>Contact</Nav.Link>
 						</Link>
 					</Nav>
 					<Nav className={`ms-auto`}>
