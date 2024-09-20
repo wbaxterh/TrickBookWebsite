@@ -46,11 +46,14 @@ export default function QuestionsSupport() {
 							try {
 								setSubmitting(true);
 								// Send form data to your email endpoint
-								await axios.post("/api/contact/send-email", {
-									name: values.name,
-									email: values.email,
-									message: values.message,
-								});
+								await axios.post(
+									"https://api.thetrickbook.com/api/contact/send-email",
+									{
+										name: values.name,
+										email: values.email,
+										message: values.message,
+									}
+								);
 								alert("Message sent successfully!");
 								resetForm();
 							} catch (error) {
