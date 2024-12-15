@@ -8,6 +8,7 @@ import { Typography, Button } from "@mui/material";
 import { AuthContext } from "../auth/AuthContext";
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@mui/icons-material/Google";
+import jwt from "jsonwebtoken";
 
 const validate = (values) => {
 	const errors = {};

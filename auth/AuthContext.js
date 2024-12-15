@@ -11,31 +11,31 @@ export function AuthProvider({ children }) {
 	const [token, setToken] = useState(null);
 	const [email, setEmail] = useState(null);
 	const [role, setRole] = useState(null);
+	const [imageUri, setImageUri] = useState(null);
+	const [name, setName] = useState(null);
 
 	useEffect(() => {
-		console.log("Session data:", session);
 		if (status === "loading") {
 			setLoggedIn(null); // Loading state
 		} else if (status === "authenticated") {
-			console.log("User is authenticated");
-			console.log("Session JWT token: ", session?.user?.jwtToken?.token);
-
 			const jwtToken = session?.user?.jwtToken?.token || Cookies.get("token");
-
 			if (jwtToken) {
 				try {
 					const profileInfo = jwt.verify(jwtToken.toString(), "jwtPrivateKey"); // Ensure the correct secret key is used
-					console.log("Token data == ", profileInfo);
 					setLoggedIn(true);
 					setToken(jwtToken);
 					setEmail(session?.user?.email || null);
+					setImageUri(profileInfo.imageUri || "/default-profile.png");
 					setRole(profileInfo.role || null); // Assuming the role is stored in the JWT
+					setName(profileInfo.name || null);
 				} catch (err) {
 					console.error("Error verifying JWT:", err);
 					setLoggedIn(false);
 					setToken(null);
 					setEmail(null);
 					setRole(null);
+					setImageUri(null);
+					setName(null);
 				}
 			} else {
 				setLoggedIn(false);
@@ -49,25 +49,32 @@ export function AuthProvider({ children }) {
 			if (initialToken) {
 				try {
 					const profileInfo = jwt.verify(initialToken, "jwtPrivateKey");
-					console.log("initial Token data == ", profileInfo);
 					setLoggedIn(true);
 					setToken(initialToken);
 					setEmail(initialEmail);
 					setRole(profileInfo.role || null);
+					setImageUri(profileInfo.imageUri || "/default-profile.png");
+					setName(profileInfo.name || null);
 				} catch (err) {
 					console.error("Error verifying JWT from cookie:", err);
 					setLoggedIn(false);
 					setToken(null);
 					setEmail(null);
 					setRole(null);
+					setImageUri(null);
+					setName(null);
 				}
 			} else {
 				setLoggedIn(false);
 				setToken(null);
 				setEmail(null);
 				setRole(null);
+				setImageUri(null);
+				setName(null);
 			}
 		}
+		localStorage.setItem("userImageUri", imageUri);
+		localStorage.setItem("userName", name);
 	}, [status, session]);
 
 	useEffect(() => {
@@ -88,7 +95,7 @@ export function AuthProvider({ children }) {
 		setLoggedIn(true);
 		setToken(newToken);
 		setEmail(newEmail);
-		localStorage.setItem("userToken", newToken);
+		localStorage.setItem("userImageUri", decodedToken.imageUri || null);
 		localStorage.setItem("userEmail", newEmail);
 	};
 
@@ -97,8 +104,10 @@ export function AuthProvider({ children }) {
 		setToken(null);
 		setEmail(null);
 		setRole(null);
+		setImageUri(null);
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("userEmail");
+		localStorage.removeItem("userImageUri");
 
 		// Clear cookies
 		Cookies.remove("next-auth.session-token"); // This name might vary depending on your NextAuth configuration
@@ -111,7 +120,18 @@ export function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider
-			value={{ loggedIn, token, logIn, logOut, email, role }}
+			value={{
+				loggedIn,
+				token,
+				logIn,
+				logOut,
+				email,
+				role,
+				imageUri,
+				setImageUri,
+				name,
+				setName,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

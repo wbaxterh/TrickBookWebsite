@@ -58,7 +58,7 @@ export default NextAuth({
 					});
 
 					const jwtToken = response.data;
-					console.log("User hasJWT token:", jwtToken);
+					// console.log("User hasJWT token:", jwtToken);
 					// Set the JWT token as a cookie
 					Cookies.set("token", jwtToken);
 

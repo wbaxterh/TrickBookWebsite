@@ -1,3 +1,5 @@
+import { React, useContext, useState } from "react";
+import { AuthContext } from "../auth/AuthContext";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
 import Head from "next/head";
@@ -6,6 +8,7 @@ import { Typography, Button } from "@mui/material";
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const validate = (values) => {
 	const errors = {};
@@ -31,8 +34,11 @@ const validate = (values) => {
 };
 
 export default function Signup() {
+	const { logIn } = useContext(AuthContext); // Use AuthContext's login function
+	const router = useRouter();
 	const formik = useFormik({
 		initialValues: {
+			name: "",
 			email: "",
 			password: "",
 			confirmPassword: "",
@@ -40,12 +46,34 @@ export default function Signup() {
 		validate,
 		onSubmit: async (values) => {
 			try {
-				const response = await axios.post("/api/register", {
+				const response = await axios.post(
+					`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
+					{
+						name: values.name,
+						email: values.email,
+						password: values.password,
+					}
+				);
+				console.log("Registration successful!");
+
+				// Simulate login after successful registration
+				const loginResult = await signIn("credentials", {
+					redirect: false,
 					email: values.email,
 					password: values.password,
 				});
-				console.log("User registered successfully", response.data);
-				// Redirect to login or profile page, or show a success message
+
+				if (loginResult.error) {
+					setRegisterError("Login after registration failed.");
+					return;
+				}
+
+				// Decode token, update AuthContext, and redirect
+				const token = loginResult.token;
+				//const user = jwtDecode(token);
+
+				logIn(token, values.email); // Save login state
+				router.push("/profile"); // Redirect to profile
 			} catch (error) {
 				console.error(
 					"Registration error:",
@@ -96,6 +124,17 @@ export default function Signup() {
 								<form onSubmit={formik.handleSubmit}>
 									<div className='row m-1'>
 										<div className='col'>
+											<div className='col'>
+												<label htmlFor='name'>Name</label>
+												<input
+													id='name'
+													name='name'
+													type='text'
+													className='w-100'
+													onChange={formik.handleChange}
+													value={formik.values.name}
+												/>
+											</div>
 											<label htmlFor='email'>Email Address</label>
 											<input
 												id='email'
