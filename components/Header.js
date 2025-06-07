@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 import Link from "next/link"; // Import Link from next/link
 import styles from "../styles/Home.module.css";
@@ -12,7 +13,6 @@ import AddIcon from "@mui/icons-material/Add";
 
 const Header = () => {
 	const { email, loggedIn } = useContext(AuthContext);
-	// console.log("Is logged in:", loggedIn);
 
 	// Render nothing until the loggedIn state is determined
 	if (loggedIn === null) {
@@ -46,9 +46,14 @@ const Header = () => {
 						<Link href='/' passHref legacyBehavior>
 							<Nav.Link>Home</Nav.Link>
 						</Link>
-						<Link href='/trickipedia' passHref legacyBehavior>
-							<Nav.Link>Trickipedia</Nav.Link>
-						</Link>
+						<NavDropdown title='Tools' id='tools-nav-dropdown'>
+							<Link href='/trickipedia' passHref legacyBehavior>
+								<NavDropdown.Item>Trickipedia</NavDropdown.Item>
+							</Link>
+							<Link href='/tricklist' passHref legacyBehavior>
+								<NavDropdown.Item>TrickList</NavDropdown.Item>
+							</Link>
+						</NavDropdown>
 						<Link href='/blog' passHref legacyBehavior>
 							<Nav.Link>Blog</Nav.Link>
 						</Link>
@@ -58,9 +63,6 @@ const Header = () => {
 						{/* <Link href='/privacy-policy' passHref legacyBehavior>
 							<Nav.Link>Privacy Policy</Nav.Link>
 						</Link> */}
-						<Link href='/questions-support' passHref legacyBehavior>
-							<Nav.Link>Contact</Nav.Link>
-						</Link>
 					</Nav>
 					<Nav className={`ms-auto`}>
 						{!loggedIn ? (
