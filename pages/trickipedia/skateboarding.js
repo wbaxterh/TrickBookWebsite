@@ -15,7 +15,7 @@ export default function Skateboarding() {
 
 	useEffect(() => {
 		const fetchTricks = async () => {
-			const tricksData = await getSortedTricksData();
+			const tricksData = await getSortedTricksData("Skateboarding");
 			setTricks(tricksData);
 			setFilteredTricks(tricksData);
 		};
