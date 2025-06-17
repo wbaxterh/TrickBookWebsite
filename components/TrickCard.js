@@ -10,6 +10,7 @@ export default function TrickCard({
 	difficulty,
 	description,
 	images,
+	url,
 }) {
 	const difficultyColors = {
 		Beginner: "success",
@@ -19,11 +20,7 @@ export default function TrickCard({
 	};
 
 	return (
-		<Link
-			href={`/trickipedia/skateboarding/${id}`}
-			passHref
-			style={{ textDecoration: "none" }}
-		>
+		<Link href={url} passHref style={{ textDecoration: "none" }}>
 			<div className={`card ${styles.trickCard}`}>
 				{images && images[0] && (
 					<div className={styles.trickImageContainer}>

@@ -1,16 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import Header from "./Header";
 
 const HeaderWrapper = () => {
-	const { loggedIn } = useContext(AuthContext);
-	const [authState, setAuthState] = useState(loggedIn);
-
-	useEffect(() => {
-		setAuthState(loggedIn);
-	}, [loggedIn]);
-
-	return <Header loggedIn={authState} />;
+	useContext(AuthContext); // Just to ensure context is available
+	return <Header />;
 };
 
 export default React.memo(HeaderWrapper);

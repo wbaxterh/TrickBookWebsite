@@ -1,3 +1,5 @@
+// This file was refactored from skateboarding.js to [category].js for dynamic category routing.
+
 import Link from "next/link";
 import styles from "../../styles/trickipedia.module.css";
 import Head from "next/head";
@@ -7,20 +9,26 @@ import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import TrickCard from "../../components/TrickCard";
 import { getSortedTricksData } from "../../lib/api";
+import { useRouter } from "next/router";
 
-export default function Skateboarding() {
+export default function CategoryPage() {
+	const router = useRouter();
+	const { category } = router.query;
 	const [tricks, setTricks] = useState([]);
 	const [filteredTricks, setFilteredTricks] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 
 	useEffect(() => {
+		if (!category) return;
 		const fetchTricks = async () => {
-			const tricksData = await getSortedTricksData("Skateboarding");
+			const tricksData = await getSortedTricksData(
+				category.charAt(0).toUpperCase() + category.slice(1)
+			);
 			setTricks(tricksData);
 			setFilteredTricks(tricksData);
 		};
 		fetchTricks();
-	}, []);
+	}, [category]);
 
 	useEffect(() => {
 		const filtered = tricks.filter(
@@ -35,26 +43,44 @@ export default function Skateboarding() {
 	return (
 		<>
 			<Head>
-				<title>The Trick Book - Skateboarding Tricks</title>
+				<title>
+					The Trick Book -{" "}
+					{category
+						? `${category.charAt(0).toUpperCase() + category.slice(1)}`
+						: "Tricks"}
+				</title>
 				<link rel='icon' href='/favicon.png' />
 				<meta
 					name='description'
-					content='The Trick Book - Skateboarding Tricks Encyclopedia'
+					content={`The Trick Book - ${
+						category
+							? `${category.charAt(0).toUpperCase() + category.slice(1)}`
+							: "Tricks"
+					} Encyclopedia`}
 				/>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<meta name='robots' content='index, follow' />
 				<link
 					rel='canonical'
-					href='https://thetrickbook.com/trickipedia/skateboarding'
+					href={`https://thetrickbook.com/trickipedia/${category || ""}`}
 				/>
 				<meta name='author' content='Wes Huber' />
 				<meta
 					name='keywords'
-					content='Skateboarding, Tricks, How to, Tutorial, Skate, Skateboard'
+					content={`${
+						category ? category : "Tricks"
+					}, How to, Tutorial, Action Sports`}
 				/>
 			</Head>
 			<div className={`container-fluid ${styles.trickipediaContainer}`}>
-				<PageHeader title='Skateboarding Tricks' col='col-sm-4' />
+				<PageHeader
+					title={`${
+						category
+							? category.charAt(0).toUpperCase() + category.slice(1)
+							: "Tricks"
+					} Tricks`}
+					col='col-sm-4'
+				/>
 
 				<div className='container mt-4'>
 					<TextField
@@ -83,6 +109,7 @@ export default function Skateboarding() {
 									difficulty={trick.difficulty}
 									description={trick.description}
 									images={trick.images}
+									url={`/trickipedia/${category}/${trick.url || trick.id}`}
 								/>
 							</Grid>
 						))}

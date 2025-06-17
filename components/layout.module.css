@@ -66,3 +66,13 @@
 		justify-content: center; /* Center content in left and right sections */
 	}
 }
+
+.mainContent {
+	padding-top: 64px;
+}
+
+@media (max-width: 600px) {
+	.mainContent {
+		padding-top: 56px;
+	}
+}

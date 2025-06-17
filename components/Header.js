@@ -7,17 +7,12 @@ import Image from "next/image";
 import Link from "next/link"; // Import Link from next/link
 import styles from "../styles/Home.module.css";
 import { AuthContext } from "../auth/AuthContext";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
 
 const Header = () => {
 	const { email, loggedIn } = useContext(AuthContext);
-
-	// Render nothing until the loggedIn state is determined
-	if (loggedIn === null) {
-		return null;
-	}
 
 	return (
 		<Navbar
@@ -65,7 +60,9 @@ const Header = () => {
 						</Link> */}
 					</Nav>
 					<Nav className={`ms-auto`}>
-						{!loggedIn ? (
+						{loggedIn === null ? (
+							<Skeleton variant='rectangular' width={120} height={36} />
+						) : !loggedIn ? (
 							<>
 								<Link href='/login' passHref legacyBehavior>
 									{/* <Nav.Link

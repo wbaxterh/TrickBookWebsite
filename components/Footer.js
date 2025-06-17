@@ -27,7 +27,7 @@ function Footer() {
 					</Link>
 				</div>
 				<div className={styles.subnavCenter}>
-					<p>© 2024 The Trick Book</p>
+					<p>© 2025 The Trick Book</p>
 				</div>
 				<div className={styles.subnavRight}>
 					<Link href='/questions-support' passHref>
