@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Typography, Chip, Container, Box } from "@mui/material";
 import PageHeader from "../../../components/PageHeader";
 import styles from "../../../styles/trickipedia.module.css";
-import { getSortedTricksData } from "../../../lib/api";
+import { getSortedTricksData } from "../../../lib/apiTrickipedia";
 
 export default function TrickDetailPage() {
 	const router = useRouter();
