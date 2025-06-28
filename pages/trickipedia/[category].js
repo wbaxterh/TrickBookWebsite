@@ -8,7 +8,7 @@ import PageHeader from "../../components/PageHeader";
 import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import TrickCard from "../../components/TrickCard";
-import { getSortedTricksData } from "../../lib/api";
+import { getSortedTricksData } from "../../lib/apiTrickipedia";
 import { useRouter } from "next/router";
 
 export default function CategoryPage() {

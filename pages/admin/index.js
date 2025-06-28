@@ -5,7 +5,7 @@ import styles from "../../styles/admin.module.css";
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../../components/Header";
-import { Typography, CircularProgress } from "@mui/material";
+import { Typography, CircularProgress, Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../auth/AuthContext"; // Adjust the path accordingly
 
@@ -118,6 +118,30 @@ function admin({ isLoggedIn, users, tricklists }) {
 			</Head>
 			<Header />
 			<div className='container-fluid m-2 mt-5'>
+				<Button
+					variant='contained'
+					color='primary'
+					sx={{ mb: 2, mr: 2 }}
+					href='/admin/categories'
+				>
+					Manage Categories
+				</Button>
+				<Button
+					variant='contained'
+					color='secondary'
+					sx={{ mb: 2, mr: 2 }}
+					href='/admin/trickipedia'
+				>
+					Manage Trickipedia
+				</Button>
+				<Button
+					variant='contained'
+					color='info'
+					sx={{ mb: 2 }}
+					href='/admin/blog'
+				>
+					Manage Blog
+				</Button>
 				<h1 className='pt-3' style={{ textAlign: "center" }}>
 					Current Data {email}
 				</h1>

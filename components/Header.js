@@ -38,26 +38,28 @@ const Header = () => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
-						<Link href='/' passHref legacyBehavior>
-							<Nav.Link>Home</Nav.Link>
+						<Link href='/trickipedia' passHref legacyBehavior>
+							<Nav.Link>
+								<span role='img' aria-label='book'>
+									📖
+								</span>{" "}
+								Trickipedia
+							</Nav.Link>
 						</Link>
-						<NavDropdown title='Tools' id='tools-nav-dropdown'>
-							<Link href='/trickipedia' passHref legacyBehavior>
-								<NavDropdown.Item>Trickipedia</NavDropdown.Item>
-							</Link>
-							<Link href='/tricklist' passHref legacyBehavior>
-								<NavDropdown.Item>TrickList</NavDropdown.Item>
-							</Link>
-						</NavDropdown>
+						<Link href='/spots' passHref legacyBehavior>
+							<Nav.Link>
+								<span role='img' aria-label='pin'>
+									📍
+								</span>{" "}
+								Spots
+							</Nav.Link>
+						</Link>
 						<Link href='/blog' passHref legacyBehavior>
 							<Nav.Link>Blog</Nav.Link>
 						</Link>
 						<Link href='/about' passHref legacyBehavior>
 							<Nav.Link>About</Nav.Link>
 						</Link>
-						{/* <Link href='/privacy-policy' passHref legacyBehavior>
-							<Nav.Link>Privacy Policy</Nav.Link>
-						</Link> */}
 					</Nav>
 					<Nav className={`ms-auto`}>
 						{loggedIn === null ? (
