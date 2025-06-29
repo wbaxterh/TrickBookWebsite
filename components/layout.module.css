@@ -43,6 +43,18 @@
 
 .subnavRight {
 	justify-content: flex-end;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 2rem;
+	font-size: 1rem;
+}
+
+@media (min-width: 900px) {
+	.subnavRight {
+		font-size: 0.95rem;
+		gap: 2.5rem;
+		flex-wrap: nowrap;
+	}
 }
 
 .icon {
@@ -64,6 +76,9 @@
 		width: 100%; /* Make each section take full width on mobile */
 		text-align: center; /* Center align text in all sections */
 		justify-content: center; /* Center content in left and right sections */
+		font-size: 1.1rem;
+		gap: 1.2rem;
+		flex-wrap: wrap;
 	}
 }
 

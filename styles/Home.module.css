@@ -26,14 +26,7 @@
 	text-decoration: underline;
 }
 .splashSection {
-	background-color: #ffffff;
-	opacity: 0.8;
-	background-image: repeating-radial-gradient(
-			circle at 0 0,
-			transparent 0,
-			#ffffff 40px
-		),
-		repeating-linear-gradient(#3b3b3b55, #3b3b3b);
+	background: url("/tbBackground.png") center center/cover no-repeat;
 	padding-top: 8em;
 	padding-bottom: 5em;
 	margin: 0 auto;

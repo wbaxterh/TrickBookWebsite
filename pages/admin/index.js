@@ -121,26 +121,10 @@ function admin({ isLoggedIn, users, tricklists }) {
 				<Button
 					variant='contained'
 					color='primary'
-					sx={{ mb: 2, mr: 2 }}
+					sx={{ mb: 2 }}
 					href='/admin/categories'
 				>
 					Manage Categories
-				</Button>
-				<Button
-					variant='contained'
-					color='secondary'
-					sx={{ mb: 2, mr: 2 }}
-					href='/admin/trickipedia'
-				>
-					Manage Trickipedia
-				</Button>
-				<Button
-					variant='contained'
-					color='info'
-					sx={{ mb: 2 }}
-					href='/admin/blog'
-				>
-					Manage Blog
 				</Button>
 				<h1 className='pt-3' style={{ textAlign: "center" }}>
 					Current Data {email}
