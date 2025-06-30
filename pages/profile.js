@@ -125,7 +125,7 @@ export default function Profile() {
 				/>
 			</Head>
 			{role === "admin" && (
-				<div className='mb-4'>
+				<div className='m-4'>
 					<AdminNav />
 				</div>
 			)}

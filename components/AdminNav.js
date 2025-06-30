@@ -18,9 +18,18 @@ export default function AdminNav() {
 				<Button
 					key={item.path}
 					variant={currentPath === item.path ? "contained" : "outlined"}
-					color='primary'
 					onClick={() => router.push(item.path)}
-					sx={{ minWidth: "120px" }}
+					sx={{
+						minWidth: "120px",
+						backgroundColor:
+							currentPath === item.path ? "#FFF000" : "transparent",
+						color: currentPath === item.path ? "#1f1f1f" : "#1f1f1f",
+						borderColor: "#FFF000",
+						"&:hover": {
+							backgroundColor: "#FFF000",
+							color: "#1f1f1f",
+						},
+					}}
 				>
 					{item.label}
 				</Button>
