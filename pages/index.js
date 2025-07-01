@@ -188,11 +188,17 @@ export default function Home() {
 					<Grid container className='p-0 m-0'>
 						<Grid item xs={12} md={6} className='p-0 px-md-5'>
 							<Image
-								src='/homegraphic3.png'
+								src='/screenshotWithGraphic.png'
 								width={500}
 								height={634}
 								className={styles.homegraphic}
 								alt='Home Graphic'
+								style={{
+									minWidth: 300,
+									width: "100%",
+									maxWidth: 500,
+									height: "auto",
+								}}
 							/>
 						</Grid>
 						<Grid
@@ -256,7 +262,15 @@ export default function Home() {
 					</Grid>
 				</div>
 			</section>
-			<section className={`${styles.appFeatureSection} py-5 px-md-5`}></section>
+			<section className={`${styles.appFeatureSection} py-5 px-md-2`}>
+				<div className={styles.rodneyQuoteSection}>
+					<blockquote className={styles.rodneyQuote}>
+						“There's an intrinsic value in creating something for the sake of
+						creating it.”
+					</blockquote>
+					<div className={styles.rodneyAttribution}>– Rodney Mullen</div>
+				</div>
+			</section>
 		</>
 	);
 }
