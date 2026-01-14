@@ -21,15 +21,19 @@ export function AuthProvider({ children }) {
 			const jwtToken = session?.user?.jwtToken?.token || Cookies.get("token");
 			if (jwtToken) {
 				try {
-					const profileInfo = jwt.verify(jwtToken.toString(), "jwtPrivateKey"); // Ensure the correct secret key is used
-					setLoggedIn(true);
-					setToken(jwtToken);
-					setEmail(session?.user?.email || null);
-					setImageUri(profileInfo.imageUri || "/default-profile.png");
-					setRole(profileInfo.role || null); // Assuming the role is stored in the JWT
-					setName(profileInfo.name || null);
+					const profileInfo = jwt.decode(jwtToken.toString()); // Decode JWT (verification happens on backend)
+					if (profileInfo) {
+						setLoggedIn(true);
+						setToken(jwtToken);
+						setEmail(session?.user?.email || null);
+						setImageUri(profileInfo.imageUri || "/default-profile.png");
+						setRole(profileInfo.role || null);
+						setName(profileInfo.name || null);
+					} else {
+						throw new Error("Invalid token");
+					}
 				} catch (err) {
-					console.error("Error verifying JWT:", err);
+					console.error("Error decoding JWT:", err);
 					setLoggedIn(false);
 					setToken(null);
 					setEmail(null);
@@ -48,15 +52,19 @@ export function AuthProvider({ children }) {
 			const initialEmail = localStorage.getItem("userEmail");
 			if (initialToken) {
 				try {
-					const profileInfo = jwt.verify(initialToken, "jwtPrivateKey");
-					setLoggedIn(true);
-					setToken(initialToken);
-					setEmail(initialEmail);
-					setRole(profileInfo.role || null);
-					setImageUri(profileInfo.imageUri || "/default-profile.png");
-					setName(profileInfo.name || null);
+					const profileInfo = jwt.decode(initialToken); // Decode JWT (verification happens on backend)
+					if (profileInfo) {
+						setLoggedIn(true);
+						setToken(initialToken);
+						setEmail(initialEmail);
+						setRole(profileInfo.role || null);
+						setImageUri(profileInfo.imageUri || "/default-profile.png");
+						setName(profileInfo.name || null);
+					} else {
+						throw new Error("Invalid token");
+					}
 				} catch (err) {
-					console.error("Error verifying JWT from cookie:", err);
+					console.error("Error decoding JWT from cookie:", err);
 					setLoggedIn(false);
 					setToken(null);
 					setEmail(null);
