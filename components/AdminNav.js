@@ -9,6 +9,7 @@ export default function AdminNav() {
 		{ label: "Dashboard", path: "/admin" },
 		{ label: "Categories", path: "/admin/categories" },
 		{ label: "Trickipedia", path: "/admin/trickipedia" },
+		{ label: "Spots", path: "/admin/spots" },
 		{ label: "Blog", path: "/admin/blog" },
 	];
 

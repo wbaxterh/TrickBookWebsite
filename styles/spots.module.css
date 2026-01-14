@@ -1,0 +1,140 @@
+.spotsContainer {
+	min-height: 100vh;
+	background-color: var(--app-background);
+	padding-bottom: 2rem;
+}
+
+.headerSection {
+	border: 1px solid #1f1f1f;
+	border-radius: 10px;
+}
+
+.spotCard {
+	height: 100%;
+	transition: transform 0.2s ease-in-out;
+	background-color: var(--app-secondary-bg);
+	border: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.spotCard:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.spotImageContainer {
+	position: relative;
+	height: 180px;
+	overflow: hidden;
+	background-color: #2a2a2a;
+}
+
+.spotImageContainer img {
+	transition: transform 0.3s ease-in-out;
+}
+
+.spotCard:hover .spotImageContainer img {
+	transform: scale(1.05);
+}
+
+.noImage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background-color: #2a2a2a;
+}
+
+.searchSection {
+	background-color: #1f1f1f;
+	padding: 1.5rem;
+	border-radius: 10px;
+	margin-bottom: 2rem;
+}
+
+.filterChip {
+	margin: 0.25rem;
+}
+
+.stateButton {
+	background-color: #1f1f1f !important;
+	color: #fff000 !important;
+	border: 2px solid #fff000 !important;
+	padding: 15px 20px !important;
+	font-size: 1.2rem !important;
+	transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.stateButton:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(255, 240, 0, 0.35) !important;
+}
+
+.spotCount {
+	color: #aaa;
+	font-size: 0.9rem;
+}
+
+.spotListCard {
+	background-color: #1f1f1f;
+	border: 1px solid #333;
+	border-radius: 10px;
+	padding: 1.5rem;
+	transition: transform 0.2s, border-color 0.2s;
+	cursor: pointer;
+}
+
+.spotListCard:hover {
+	transform: translateY(-3px);
+	border-color: #fff000;
+}
+
+.emptyState {
+	text-align: center;
+	padding: 3rem;
+	color: #aaa;
+}
+
+.loadingState {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 2rem;
+}
+
+.mapContainer {
+	height: 300px;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 1rem;
+}
+
+.detailsSection {
+	background-color: #1f1f1f;
+	border-radius: 10px;
+	padding: 2rem;
+}
+
+.spotDetailImage {
+	position: relative;
+	height: 400px;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 1.5rem;
+}
+
+.tagContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 1rem 0;
+}
