@@ -54,13 +54,19 @@ export default function Login() {
 					password: values.password,
 				});
 
-				if (result.error) {
+				console.log("signIn result:", result);
+
+				if (result?.error) {
 					setLoginError(result.error);
-				} else {
-					logIn(result.token, values.email);
+				} else if (result?.ok) {
+					logIn(null, values.email);
 					router.push("/profile");
+				} else {
+					console.log("No error and no ok - unexpected result");
+					setLoginError("An unknown error occurred");
 				}
 			} catch (error) {
+				console.log("Caught error:", error);
 				const errorMessage =
 					error.response?.data?.error || "An unknown error occurred";
 				setLoginError(errorMessage);

@@ -103,7 +103,14 @@ export function AuthProvider({ children }) {
 		setLoggedIn(true);
 		setToken(newToken);
 		setEmail(newEmail);
-		localStorage.setItem("userImageUri", decodedToken.imageUri || null);
+		if (newToken) {
+			try {
+				const decodedToken = jwt.decode(newToken);
+				localStorage.setItem("userImageUri", decodedToken?.imageUri || null);
+			} catch (err) {
+				console.error("Error decoding token in logIn:", err);
+			}
+		}
 		localStorage.setItem("userEmail", newEmail);
 	};
 
