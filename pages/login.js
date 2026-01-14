@@ -165,7 +165,7 @@ export default function Login() {
 											>
 												Submit
 											</Button>
-											<Link className={"p-1 px-2 me-1"} href='/'>
+											<Link className={"p-1 px-2 me-1"} href='/forgot-password'>
 												<Button
 													variant='text'
 													color='secondary'
