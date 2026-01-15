@@ -1,22 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
-import Link from "next/link"; // Import Link from next/link
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { AuthContext } from "../auth/AuthContext";
 import { Button, Skeleton } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 
 const Header = () => {
 	const { email, loggedIn } = useContext(AuthContext);
+	const { theme, setTheme, resolvedTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	const isDark = mounted && resolvedTheme === 'dark';
 
 	return (
 		<Navbar
-			bg='light'
+			bg={isDark ? 'dark' : 'light'}
+			variant={isDark ? 'dark' : 'light'}
 			className={`navbar-fixed-top ${styles.navWrapper}`}
 			expand='lg'
 		>
@@ -61,47 +71,55 @@ const Header = () => {
 							<Nav.Link>About</Nav.Link>
 						</Link>
 					</Nav>
-					<Nav className={`ms-auto`}>
+					<Nav className={`ms-auto align-items-center`}>
+						{/* Theme Toggle */}
+						{mounted && (
+							<button
+								onClick={() => setTheme(isDark ? 'light' : 'dark')}
+								className='btn btn-link p-2 me-2'
+								style={{
+									color: isDark ? '#ffd700' : '#333',
+									border: 'none',
+									background: 'transparent'
+								}}
+								aria-label='Toggle theme'
+							>
+								{isDark ? <Sun size={20} /> : <Moon size={20} />}
+							</button>
+						)}
 						{loggedIn === null ? (
 							<Skeleton variant='rectangular' width={120} height={36} />
 						) : !loggedIn ? (
-							<>
-								<Link href='/login' passHref legacyBehavior>
-									{/* <Nav.Link
-										className={`mx-2 btn ${styles.btnPrimary} ${styles.login}`}
-									> */}
-									<Button
-										variant='contained'
-										color='primary'
-										className='custom-primary p-1 px-2'
-										startIcon={<PersonIcon />}
-										sx={{
-											backgroundColor: "#fcf150",
-											color: "#333",
-										}} // Customize styles here
-									>
-										Login
-									</Button>
-									{/* </Nav.Link> */}
-								</Link>
-								<Link href='/signup' passHref legacyBehavior>
-									<Button
-										variant='outlined'
-										color='secondary'
-										className='p-1 px-2 ms-2'
-										startIcon={<AddIcon />}
-									>
-										Create Account
-									</Button>
-								</Link>
-							</>
+							<Link href='/login' passHref legacyBehavior>
+								<Button
+									variant='contained'
+									color='primary'
+									className='custom-primary p-1 px-2'
+									startIcon={<PersonIcon />}
+									sx={{
+										backgroundColor: "#fcf150",
+										color: "#333",
+									}}
+								>
+									Login
+								</Button>
+							</Link>
 						) : (
 							<Link href='/profile' passHref legacyBehavior>
 								<Button
 									variant='contained'
-									color='secondary'
-									className='custom-primary p-1 px-2'
+									className='p-1 px-2'
 									startIcon={<PersonIcon />}
+									sx={{
+										backgroundColor: isDark ? "#e0e0e0 !important" : "#1f1f1f !important",
+										color: isDark ? "#1f1f1f !important" : "#fff !important",
+										'&:hover': {
+											backgroundColor: isDark ? "#d0d0d0 !important" : "#333 !important",
+										},
+										'& .MuiSvgIcon-root': {
+											color: isDark ? "#1f1f1f !important" : "#fff !important",
+										}
+									}}
 								>
 									{email}
 								</Button>

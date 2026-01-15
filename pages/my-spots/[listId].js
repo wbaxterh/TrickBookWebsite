@@ -1,23 +1,19 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useContext } from "react";
-import PageHeader from "../../components/PageHeader";
-import SpotCard from "../../components/SpotCard";
+import { ArrowLeft, Trash2, Loader2, MapPin } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
 import {
-	Typography,
-	Grid,
-	CircularProgress,
-	Button,
-	Box,
-	IconButton,
 	Dialog,
-	DialogTitle,
 	DialogContent,
-	DialogActions,
-} from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DeleteIcon from "@mui/icons-material/Delete";
-import styles from "../../styles/spots.module.css";
+	DialogHeader,
+	DialogTitle,
+	DialogFooter,
+	DialogDescription,
+} from "../../components/ui/dialog";
+import SpotCard from "../../components/SpotCard";
 import {
 	getSpotList,
 	getSpotsInList,
@@ -65,7 +61,9 @@ export default function SpotListDetail() {
 		}
 	};
 
-	const handleRemoveClick = (spot) => {
+	const handleRemoveClick = (spot, e) => {
+		e.preventDefault();
+		e.stopPropagation();
 		setSpotToRemove(spot);
 		setDeleteDialogOpen(true);
 	};
@@ -86,10 +84,10 @@ export default function SpotListDetail() {
 
 	if (loggedIn === null || loading) {
 		return (
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<div className={styles.loadingState}>
-					<CircularProgress sx={{ color: "#fff000" }} />
-					<Typography className="mt-3 text-light">Loading...</Typography>
+			<div className="min-h-screen bg-background flex items-center justify-center">
+				<div className="flex flex-col items-center">
+					<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+					<p className="mt-4 text-muted-foreground">Loading...</p>
 				</div>
 			</div>
 		);
@@ -97,24 +95,22 @@ export default function SpotListDetail() {
 
 	if (!list) {
 		return (
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<PageHeader title="List Not Found" col="col-sm-4" />
-				<div className={styles.emptyState}>
-					<Typography variant="h5" className="text-light">
-						List not found
-					</Typography>
-					<Button
-						variant="outlined"
-						startIcon={<ArrowBackIcon />}
-						onClick={() => router.push("/my-spots")}
-						sx={{
-							mt: 3,
-							color: "#fff000",
-							borderColor: "#fff000",
-						}}
-					>
-						Back to My Lists
-					</Button>
+			<div className="min-h-screen bg-background">
+				<div className="container py-16">
+					<div className="flex flex-col items-center justify-center text-center">
+						<MapPin className="h-16 w-16 text-muted-foreground mb-4" />
+						<h1 className="text-2xl font-semibold text-foreground mb-2">
+							List not found
+						</h1>
+						<Button
+							variant="outline"
+							onClick={() => router.push("/my-spots")}
+							className="mt-4"
+						>
+							<ArrowLeft className="h-4 w-4 mr-2" />
+							Back to My Lists
+						</Button>
+					</div>
 				</div>
 			</div>
 		);
@@ -128,44 +124,42 @@ export default function SpotListDetail() {
 				<meta name="description" content={`View spots in ${list.name}`} />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				{/* Back Navigation */}
-				<Box className="m-4">
-					<Button
-						variant="text"
-						startIcon={<ArrowBackIcon />}
-						onClick={() => router.push("/my-spots")}
-						sx={{
-							color: "#fff000",
-							"&:hover": { backgroundColor: "rgba(255, 240, 0, 0.1)" },
-						}}
-					>
-						Back to My Lists
-					</Button>
-				</Box>
 
-				<PageHeader title={list.name} col="col-sm-6" />
+			<div className="min-h-screen bg-background">
+				{/* Header */}
+				<section className="border-b border-border">
+					<div className="container py-8">
+						{/* Back Link */}
+						<Link
+							href="/my-spots"
+							className="inline-flex items-center gap-1 text-muted-foreground hover:text-yellow-500 transition-colors mb-6 no-underline"
+						>
+							<ArrowLeft className="h-4 w-4" />
+							<span>Back to My Lists</span>
+						</Link>
 
-				{list.description && (
-					<Box className="mx-5 mb-4">
-						<Typography variant="body1" className="text-light">
-							{list.description}
-						</Typography>
-					</Box>
-				)}
+						<h1 className="text-3xl font-bold text-foreground">
+							{list.name}
+						</h1>
 
-				<Box className="mx-5 mb-4">
-					<Typography variant="body2" sx={{ color: "#aaa" }}>
-						{spots.length} spot{spots.length !== 1 ? "s" : ""} in this list
-					</Typography>
-				</Box>
+						{list.description && (
+							<p className="text-muted-foreground mt-2">
+								{list.description}
+							</p>
+						)}
+
+						<Badge variant="secondary" className="mt-4">
+							{spots.length} spot{spots.length !== 1 ? "s" : ""}
+						</Badge>
+					</div>
+				</section>
 
 				{/* Spots Grid */}
-				<section className="mx-5">
-					<Grid container spacing={3}>
-						{spots.map((spot) => (
-							<Grid item key={spot._id} xs={12} sm={6} md={4} lg={3}>
-								<Box position="relative">
+				<section className="container py-8">
+					{spots.length > 0 ? (
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+							{spots.map((spot) => (
+								<div key={spot._id} className="relative group">
 									<SpotCard
 										id={spot._id}
 										name={spot.name}
@@ -175,50 +169,33 @@ export default function SpotListDetail() {
 										description={spot.description}
 										tags={spot.tags}
 										rating={spot.rating}
+										approvalStatus={spot.approvalStatus}
+										showStatus={true}
 									/>
-									<IconButton
-										size="small"
-										onClick={(e) => {
-											e.preventDefault();
-											e.stopPropagation();
-											handleRemoveClick(spot);
-										}}
-										sx={{
-											position: "absolute",
-											top: 8,
-											right: 8,
-											backgroundColor: "rgba(0,0,0,0.7)",
-											color: "#f44336",
-											"&:hover": {
-												backgroundColor: "rgba(0,0,0,0.9)",
-											},
-										}}
+									<Button
+										variant="destructive"
+										size="icon"
+										className="absolute top-2 right-2 h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+										onClick={(e) => handleRemoveClick(spot, e)}
 									>
-										<DeleteIcon fontSize="small" />
-									</IconButton>
-								</Box>
-							</Grid>
-						))}
-					</Grid>
-
-					{spots.length === 0 && (
-						<div className={styles.emptyState}>
-							<Typography variant="h5" className="text-light">
+										<Trash2 className="h-4 w-4" />
+									</Button>
+								</div>
+							))}
+						</div>
+					) : (
+						<div className="flex flex-col items-center justify-center py-24 text-center">
+							<MapPin className="h-16 w-16 text-muted-foreground mb-4" />
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
 								No spots in this list yet
-							</Typography>
-							<Typography variant="body1" className="text-light mt-2">
+							</h2>
+							<p className="text-muted-foreground max-w-md mb-6">
 								Use our Chrome extension to add spots from Google Maps, or browse
 								spots and add them to your lists.
-							</Typography>
+							</p>
 							<Button
-								variant="contained"
 								onClick={() => router.push("/spots")}
-								sx={{
-									mt: 3,
-									backgroundColor: "#fff000",
-									color: "#1f1f1f",
-									"&:hover": { backgroundColor: "#e6d900" },
-								}}
+								className="bg-yellow-500 text-black hover:bg-yellow-400"
 							>
 								Browse Spots
 							</Button>
@@ -227,33 +204,24 @@ export default function SpotListDetail() {
 				</section>
 
 				{/* Remove Confirmation Dialog */}
-				<Dialog
-					open={deleteDialogOpen}
-					onClose={() => setDeleteDialogOpen(false)}
-					PaperProps={{
-						sx: {
-							backgroundColor: "#1f1f1f",
-							color: "#fff",
-						},
-					}}
-				>
-					<DialogTitle>Remove Spot</DialogTitle>
+				<Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
 					<DialogContent>
-						<Typography>
-							Remove &quot;{spotToRemove?.name}&quot; from this list?
-						</Typography>
+						<DialogHeader>
+							<DialogTitle>Remove Spot</DialogTitle>
+							<DialogDescription>
+								Remove &quot;{spotToRemove?.name}&quot; from this list?
+							</DialogDescription>
+						</DialogHeader>
+
+						<DialogFooter>
+							<Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+								Cancel
+							</Button>
+							<Button variant="destructive" onClick={handleConfirmRemove}>
+								Remove
+							</Button>
+						</DialogFooter>
 					</DialogContent>
-					<DialogActions>
-						<Button
-							onClick={() => setDeleteDialogOpen(false)}
-							sx={{ color: "#aaa" }}
-						>
-							Cancel
-						</Button>
-						<Button onClick={handleConfirmRemove} sx={{ color: "#f44336" }}>
-							Remove
-						</Button>
-					</DialogActions>
 				</Dialog>
 			</div>
 		</>

@@ -1,102 +1,434 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+@layer base {
+  :root {
+    /* Light mode - greyscale with yellow accents, high contrast */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+
+    /* Yellow primary - TrickBook brand */
+    --primary: 56 100% 50%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 56 100% 50%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 56 100% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode - dark background with yellow accents, high contrast */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Yellow primary stays the same */
+    --primary: 56 100% 50%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 56 100% 50%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 56 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Base styles */
 html,
 body {
-	padding: 0;
-	margin: 0;
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		Segoe UI,
-		Roboto,
-		Oxygen,
-		Ubuntu,
-		Cantarell,
-		Fira Sans,
-		Droid Sans,
-		Helvetica Neue,
-		sans-serif;
-	line-height: 1.6;
-	font-size: 18px;
-	max-width: 100vw;
-	overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-* {
-	box-sizing: border-box;
+.dark body,
+html.dark body,
+.dark {
+  background-color: #121212;
+  color: #f0f0f0;
 }
 
+/* Theme-aware containers and cards */
+.card,
+.container-fluid,
+.modal-content {
+  background-color: inherit;
+  color: inherit;
+}
+
+.dark .card {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+.dark .modal-content {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+/* Theme-aware Bootstrap overrides */
+.dark .navbar-light {
+  background-color: #1a1a1a !important;
+}
+
+.dark .bg-light {
+  background-color: #1a1a1a !important;
+}
+
+.dark .text-dark {
+  color: #f0f0f0 !important;
+}
+
+.dark .text-muted {
+  color: #aaa !important;
+}
+
+.dark .border {
+  border-color: #333 !important;
+}
+
+/* Theme-aware links */
 a {
-	/* color: #0070f3; */
-	text-decoration: none;
+  color: #333;
+}
+
+.dark a {
+  color: #f0f0f0;
 }
 
 a:hover {
-	text-decoration: underline;
+  color: #ffd700;
+}
+
+/* Theme-aware form elements */
+.dark .form-control {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border-color: #333;
+}
+
+.dark .form-control:focus {
+  background-color: #252525;
+  color: #f0f0f0;
+  border-color: #ffd700;
+}
+
+/* Theme-aware buttons */
+.dark .btn-outline-secondary {
+  color: #ccc;
+  border-color: #555;
+}
+
+.dark .btn-outline-secondary:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* MUI outlined/secondary buttons in dark mode */
+.dark .MuiButton-outlinedSecondary,
+.dark .MuiButton-outlined {
+  color: #f0f0f0 !important;
+  border-color: #666 !important;
+}
+
+.dark .MuiButton-outlinedSecondary:hover,
+.dark .MuiButton-outlined:hover {
+  border-color: #ffd700 !important;
+  color: #ffd700 !important;
+}
+
+/* MUI contained buttons with dark bg should have yellow/light text */
+.dark .MuiButton-contained[style*="background-color: rgb(31, 31, 31)"],
+.dark .MuiButton-contained[style*="backgroundColor: #1f1f1f"],
+.dark .MuiButton-root[style*="background-color: rgb(31, 31, 31)"] {
+  color: #fff000 !important;
+}
+
+/* Generic: buttons with dark backgrounds should have light/yellow text in dark mode */
+.dark .MuiButton-contained:not(.MuiButton-containedPrimary) {
+  color: #f0f0f0 !important;
+}
+
+/* Keep text dark on yellow/primary buttons regardless of theme */
+.btn-warning,
+.btn-primary,
+[style*="background-color: #fcf150"],
+[style*="backgroundColor: #fcf150"],
+[style*="background-color: rgb(252, 241, 80)"],
+.bg-yellow-500,
+.app-primary-bg,
+.custom-primary {
+  color: #1a1a1a !important;
+}
+
+.btn-warning *,
+.btn-primary *,
+[style*="background-color: #fcf150"] *,
+[style*="backgroundColor: #fcf150"] *,
+.bg-yellow-500 *,
+.app-primary-bg *,
+.custom-primary * {
+  color: #1a1a1a !important;
+}
+
+/* MUI buttons with yellow background */
+.dark .MuiButton-containedPrimary,
+.dark .MuiButton-contained[style*="background-color"],
+.dark .MuiButton-root[style*="background-color: rgb(252"],
+.dark .MuiButton-root[style*="backgroundColor"],
+.MuiButton-containedPrimary,
+.MuiButton-contained.custom-primary {
+  color: #1a1a1a !important;
+}
+
+.dark .MuiButton-containedPrimary .MuiSvgIcon-root,
+.dark .MuiButton-contained[style*="background-color"] .MuiSvgIcon-root,
+.dark .MuiButton-root[style*="background-color"] .MuiSvgIcon-root,
+.MuiButton-containedPrimary .MuiSvgIcon-root {
+  color: #1a1a1a !important;
+}
+
+/* Force dark text on any yellow background button */
+.dark button[style*="background-color: rgb(252, 241, 80)"],
+.dark button[style*="background-color:#fcf150"],
+.dark a[style*="background-color: rgb(252, 241, 80)"],
+.dark a[style*="background-color:#fcf150"] {
+  color: #1a1a1a !important;
+}
+
+/* Preserve .text-dark class in dark mode */
+.dark .text-dark,
+.dark .MuiButton-containedPrimary .text-dark,
+.dark .MuiButton-containedPrimary a,
+.dark .MuiButton-containedPrimary Link {
+  color: #1a1a1a !important;
+}
+
+/* Any link inside a yellow button should be dark */
+.dark .MuiButton-root[class*="MuiButton-containedPrimary"] a,
+.dark .MuiButton-root[class*="MuiButton-contained"] a.text-dark,
+.dark button.MuiButton-containedPrimary a {
+  color: #1a1a1a !important;
+}
+
+/* Theme-aware tables */
+.dark table,
+.dark .table {
+  color: #f0f0f0;
+}
+
+.dark .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .table-hover > tbody > tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Theme-aware dropdowns */
+.dark .dropdown-menu {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+.dark .dropdown-item {
+  color: #f0f0f0;
+}
+
+.dark .dropdown-item:hover {
+  background-color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 img {
-	max-width: 100%;
-	display: block;
+  max-width: 100%;
+  display: block;
 }
+
 .icon {
-	font-family: "MaterialIcons";
-	font-size: 1.5rem; /* Adjust size as needed */
+  font-family: "MaterialIcons";
+  font-size: 1.5rem;
 }
+
 .card-img-top {
-	height: 150px;
-	border: 4px solid green;
+  height: 150px;
+  border: 4px solid green;
 }
+
 .navbar-fixed-top {
-	top: 0;
-	/* border-width: 0 0 1px; */
-	position: fixed;
-	right: 0;
-	left: 0;
-	z-index: 999999;
+  top: 0;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 999999;
 }
+
+/* Legacy TrickBook classes - keep for backward compatibility */
 .app-primary,
 .app-primary a {
-	color: #fff000 !important;
+  color: #fff000 !important;
 }
+
 .app-secondary,
 .app-secondary a {
-	color: #1f1f1f !important;
+  color: #1f1f1f !important;
 }
+
 .app-primary-bg {
-	background-color: #fff000 !important;
+  background-color: #fff000 !important;
 }
+
 .app-secondary-bg {
-	background-color: #1f1f1f !important;
+  background-color: #1f1f1f !important;
 }
+
 .header-bg {
-	background-color: #ffee58;
-	opacity: 1;
-	background: repeating-linear-gradient(
-		45deg,
-		#1f1f1f,
-		#1f1f1f 8.5px,
-		#fcf150 8.5px,
-		#fcf150 42.5px
-	);
-
-	/* background-color: #1f1f1f;
-	opacity: 1; */
-
-	/* background: repeating-linear-gradient(
-		45deg,
-		#fff000,
-		#fff000 5px,
-		#1f1f1f 5px,
-		#1f1f1f 25px
-	); */
+  background-color: #ffee58;
+  opacity: 1;
+  background: repeating-linear-gradient(
+    45deg,
+    #1f1f1f,
+    #1f1f1f 8.5px,
+    #fcf150 8.5px,
+    #fcf150 42.5px
+  );
 }
+
 .header-text {
-	color: #1f1f1f;
-	background-color: #fcf150 !important;
-	border: 1px solid #1f1f1f;
-	border-radius: 10px;
-	/* background-color: #1f1f1f;
-	color: #fff000; */
+  color: #1f1f1f;
+  background-color: #fcf150 !important;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+/* Global input styling for theme compatibility */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #0d0d0d !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Dark mode inputs */
+.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+.dark textarea,
+.dark select {
+  background-color: #121212 !important;
+  color: #f2f2f2 !important;
+  border: 1px solid #333333 !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #666666;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #999999;
 }

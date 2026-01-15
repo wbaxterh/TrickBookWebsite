@@ -7,10 +7,12 @@ import Cookies from "js-cookie";
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import { useTheme } from "next-themes";
 import { AuthContext } from "../auth/AuthContext";
 import { deleteUser } from "../lib/apiUser";
 import axios from "axios";
 import AdminNav from "../components/AdminNav";
+import { Sun, Moon } from "lucide-react";
 
 export default function Profile() {
 	const {
@@ -25,10 +27,17 @@ export default function Profile() {
 		loggedIn,
 	} = useContext(AuthContext);
 	const router = useRouter();
+	const { theme, setTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
 	const [newProfileImage, setNewProfileImage] = useState(null);
 	const [tricklists, setTricklists] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	// Avoid hydration mismatch for theme
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -218,6 +227,41 @@ export default function Profile() {
 											Update Picture
 										</button>
 									</form>
+								</div>
+
+								{/* Theme Toggle */}
+								<div className='mb-4'>
+									<h5>Appearance</h5>
+									<div className='d-flex align-items-center gap-3' style={{ maxWidth: 350, margin: '0 auto' }}>
+										<span>Theme:</span>
+										{mounted && (
+											<div className='btn-group' role='group'>
+												<button
+													type='button'
+													className={`btn btn-sm ${theme === 'light' ? 'btn-warning' : 'btn-outline-secondary'}`}
+													onClick={() => setTheme('light')}
+												>
+													<Sun size={16} className='me-1' />
+													Light
+												</button>
+												<button
+													type='button'
+													className={`btn btn-sm ${theme === 'dark' ? 'btn-warning' : 'btn-outline-secondary'}`}
+													onClick={() => setTheme('dark')}
+												>
+													<Moon size={16} className='me-1' />
+													Dark
+												</button>
+												<button
+													type='button'
+													className={`btn btn-sm ${theme === 'system' ? 'btn-warning' : 'btn-outline-secondary'}`}
+													onClick={() => setTheme('system')}
+												>
+													System
+												</button>
+											</div>
+										)}
+									</div>
 								</div>
 
 								<button

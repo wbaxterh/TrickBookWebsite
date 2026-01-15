@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import PageHeader from "../components/PageHeader";
-import { Typography, Button, Grid, CircularProgress } from "@mui/material";
-import styles from "../styles/spots.module.css";
+import { MapPin, Loader2 } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { getSpotsByState } from "../lib/apiSpots";
 
 // US State names mapping
@@ -59,93 +60,73 @@ export default function Spots() {
 					content="Discover skate spots across the United States. Find skateparks, street spots, and more in your area."
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://thetrickbook.com/spots" />
-				<meta name="author" content="Wes Huber" />
-				<meta
-					name="keywords"
-					content="skate spots, skateparks, street spots, skateboarding locations, skate spot finder"
-				/>
 			</Head>
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<PageHeader title="Skate Spots" col="col-sm-4" />
 
-				<section className={`my-5 p-5 ${styles.headerSection}`}>
-					<Typography variant="h2" align="center" className="app-primary">
-						Find Skate Spots
-					</Typography>
-					<Typography variant="h6" align="center" className="text-light mt-3">
-						{loading
-							? "Loading spots..."
-							: `${totalSpots} spots across ${sortedStates.length} states`}
-					</Typography>
+			<div className="min-h-screen bg-background">
+				{/* Hero Section */}
+				<section className="border-b border-border">
+					<div className="container py-16 md:py-24">
+						<div className="flex flex-col items-center text-center space-y-4">
+							<div className="flex items-center gap-2">
+								<MapPin className="h-8 w-8 text-yellow-500" />
+								<h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+									Find Skate Spots
+								</h1>
+							</div>
+							<p className="text-xl text-muted-foreground max-w-2xl">
+								{loading
+									? "Loading spots..."
+									: `Discover ${totalSpots} spots across ${sortedStates.length} states`}
+							</p>
+						</div>
+					</div>
 				</section>
 
-				{loading ? (
-					<div className={styles.loadingState}>
-						<CircularProgress sx={{ color: "#fff000" }} />
-						<Typography className="mt-3 text-light">
-							Loading spots...
-						</Typography>
-					</div>
-				) : (
-					<section className="m-5 text-center">
-						<Typography variant="h4" className="mb-4 text-light">
-							Browse by State
-						</Typography>
-						<Grid container spacing={3} justifyContent="center">
-							{sortedStates.map((state) => (
-								<Grid item key={state} xs={12} sm={6} md={4} lg={3}>
-									<Link href={`/spots/${state.toLowerCase()}`} passHref>
-										<Button
-											variant="contained"
-											fullWidth
-											sx={{
-												backgroundColor: "#1f1f1f",
-												color: "#fff000",
-												padding: "20px",
-												fontSize: "1.2rem",
-												border: "2px solid #fff000",
-												boxShadow: "0 4px 15px rgba(255, 240, 0, 0.25)",
-												transition: "transform 0.2s, box-shadow 0.2s",
-												display: "flex",
-												flexDirection: "column",
-												"&:hover": {
-													backgroundColor: "#1f1f1f",
-													transform: "translateY(-3px)",
-													boxShadow: "0 8px 20px rgba(255, 240, 0, 0.35)",
-												},
-											}}
-										>
-											<span>{STATE_NAMES[state] || state}</span>
-											<span
-												style={{
-													fontSize: "0.8rem",
-													color: "#aaa",
-													marginTop: "4px",
-												}}
-											>
-												{spotsByState[state].length} spot
-												{spotsByState[state].length !== 1 ? "s" : ""}
-											</span>
-										</Button>
+				{/* Content Section */}
+				<section className="container py-12">
+					{loading ? (
+						<div className="flex flex-col items-center justify-center py-24">
+							<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+							<p className="mt-4 text-muted-foreground">Loading spots...</p>
+						</div>
+					) : sortedStates.length > 0 ? (
+						<>
+							<h2 className="text-2xl font-semibold text-foreground mb-8 text-center">
+								Browse by State
+							</h2>
+							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+								{sortedStates.map((state) => (
+									<Link
+										key={state}
+										href={`/spots/${state.toLowerCase()}`}
+										className="no-underline"
+									>
+										<Card className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full">
+											<CardContent className="p-6 flex flex-col items-center text-center">
+												<h3 className="font-semibold text-lg text-foreground group-hover:text-yellow-500 transition-colors">
+													{STATE_NAMES[state] || state}
+												</h3>
+												<Badge variant="secondary" className="mt-2">
+													{spotsByState[state].length} spot{spotsByState[state].length !== 1 ? "s" : ""}
+												</Badge>
+											</CardContent>
+										</Card>
 									</Link>
-								</Grid>
-							))}
-						</Grid>
-
-						{sortedStates.length === 0 && (
-							<div className={styles.emptyState}>
-								<Typography variant="h5" className="text-light">
-									No spots found yet
-								</Typography>
-								<Typography variant="body1" className="text-light mt-2">
-									Check back soon or add spots using our Chrome extension!
-								</Typography>
+								))}
 							</div>
-						)}
-					</section>
-				)}
+						</>
+					) : (
+						<div className="flex flex-col items-center justify-center py-24 text-center">
+							<MapPin className="h-16 w-16 text-muted-foreground mb-4" />
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
+								No spots found yet
+							</h2>
+							<p className="text-muted-foreground max-w-md">
+								Check back soon or add spots using our Chrome extension!
+							</p>
+						</div>
+					)}
+				</section>
 			</div>
 		</>
 	);

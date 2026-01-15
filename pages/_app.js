@@ -2,11 +2,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/global.css";
 import "material-icons/iconfont/material-icons.css";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { SessionProvider } from "next-auth/react";
 import { AuthProvider } from "../auth/AuthContext";
 import { CategoryProvider } from "../auth/CategoryContext";
-import theme from "../config/theme"; // Adjust the path as necessary
+import { ThemeProvider } from "../components/theme-provider";
+import muiTheme from "../config/theme";
 import Layout from "../components/layout";
 
 export default function App({
@@ -14,16 +15,23 @@ export default function App({
 	pageProps: { session, ...pageProps },
 }) {
 	return (
-		<ThemeProvider theme={theme}>
-			<SessionProvider session={session}>
-				<AuthProvider>
-					<CategoryProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
-					</CategoryProvider>
-				</AuthProvider>
-			</SessionProvider>
+		<ThemeProvider
+			attribute="class"
+			defaultTheme="dark"
+			enableSystem
+			disableTransitionOnChange
+		>
+			<MuiThemeProvider theme={muiTheme}>
+				<SessionProvider session={session}>
+					<AuthProvider>
+						<CategoryProvider>
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						</CategoryProvider>
+					</AuthProvider>
+				</SessionProvider>
+			</MuiThemeProvider>
 		</ThemeProvider>
 	);
 }

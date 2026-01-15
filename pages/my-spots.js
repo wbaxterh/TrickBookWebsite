@@ -2,27 +2,19 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useContext } from "react";
-import PageHeader from "../components/PageHeader";
+import { Folder, Plus, Pencil, Trash2, Loader2, MapPin } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Input } from "../components/ui/input";
 import {
-	Typography,
-	Grid,
-	CircularProgress,
-	Button,
-	Box,
-	Card,
-	CardContent,
-	IconButton,
 	Dialog,
-	DialogTitle,
 	DialogContent,
-	DialogActions,
-	TextField,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FolderIcon from "@mui/icons-material/Folder";
-import styles from "../styles/spots.module.css";
+	DialogHeader,
+	DialogTitle,
+	DialogFooter,
+	DialogDescription,
+} from "../components/ui/dialog";
 import {
 	getSpotLists,
 	createSpotList,
@@ -42,7 +34,7 @@ export default function MySpots() {
 
 	// Dialog states
 	const [dialogOpen, setDialogOpen] = useState(false);
-	const [dialogMode, setDialogMode] = useState("create"); // 'create' or 'edit'
+	const [dialogMode, setDialogMode] = useState("create");
 	const [editingList, setEditingList] = useState(null);
 	const [listName, setListName] = useState("");
 	const [listDescription, setListDescription] = useState("");
@@ -86,7 +78,8 @@ export default function MySpots() {
 		setDialogOpen(true);
 	};
 
-	const handleOpenEditDialog = (list) => {
+	const handleOpenEditDialog = (list, e) => {
+		e.stopPropagation();
 		setDialogMode("edit");
 		setListName(list.name);
 		setListDescription(list.description || "");
@@ -121,7 +114,8 @@ export default function MySpots() {
 		}
 	};
 
-	const handleDeleteClick = (list) => {
+	const handleDeleteClick = (list, e) => {
+		e.stopPropagation();
 		setListToDelete(list);
 		setDeleteDialogOpen(true);
 	};
@@ -142,10 +136,10 @@ export default function MySpots() {
 
 	if (loggedIn === null || loading) {
 		return (
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<div className={styles.loadingState}>
-					<CircularProgress sx={{ color: "#fff000" }} />
-					<Typography className="mt-3 text-light">Loading...</Typography>
+			<div className="min-h-screen bg-background flex items-center justify-center">
+				<div className="flex flex-col items-center">
+					<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+					<p className="mt-4 text-muted-foreground">Loading...</p>
 				</div>
 			</div>
 		);
@@ -159,216 +153,196 @@ export default function MySpots() {
 				<meta name="description" content="Manage your saved skate spot lists" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<PageHeader title="My Spot Lists" col="col-sm-4" />
 
-				{/* Usage Info */}
-				{usage && (
-					<Box className="mx-5 mb-4">
-						<Typography variant="body1" className="text-light">
-							{usage.spotListCount} of {usage.maxSpotLists === -1 ? "Unlimited" : usage.maxSpotLists} lists used
-							{usage.maxSpotLists !== -1 && (
-								<span className="ms-3">
-									| {usage.totalSpotsCount} of {usage.maxTotalSpots === -1 ? "Unlimited" : usage.maxTotalSpots} total spots
+			<div className="min-h-screen bg-background">
+				{/* Header */}
+				<section className="border-b border-border">
+					<div className="container py-8">
+						<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+							<div className="flex items-center gap-2">
+								<Folder className="h-6 w-6 text-yellow-500" />
+								<h1 className="text-3xl font-bold text-foreground">
+									My Spot Lists
+								</h1>
+							</div>
+
+							<Button
+								onClick={handleOpenCreateDialog}
+								className="bg-yellow-500 text-black hover:bg-yellow-400"
+							>
+								<Plus className="h-4 w-4 mr-2" />
+								Create New List
+							</Button>
+						</div>
+
+						{/* Usage Info */}
+						{usage && (
+							<div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+								<span>
+									{usage.spotListCount} of {usage.maxSpotLists === -1 ? "Unlimited" : usage.maxSpotLists} lists
 								</span>
-							)}
-						</Typography>
-						{usage.subscription !== "premium" && (
-							<Link href="/pricing" passHref>
-								<Button
-									variant="text"
-									size="small"
-									sx={{ color: "#fff000", mt: 1 }}
-								>
-									Upgrade for unlimited lists
-								</Button>
-							</Link>
+								{usage.maxSpotLists !== -1 && (
+									<span>
+										{usage.totalSpotsCount} of {usage.maxTotalSpots === -1 ? "Unlimited" : usage.maxTotalSpots} total spots
+									</span>
+								)}
+								{usage.subscription !== "premium" && (
+									<Link href="/pricing" className="text-yellow-500 hover:text-yellow-400 no-underline">
+										Upgrade for unlimited
+									</Link>
+								)}
+							</div>
 						)}
-					</Box>
-				)}
+					</div>
+				</section>
 
-				{/* Create Button */}
-				<Box className="mx-5 mb-4">
-					<Button
-						variant="contained"
-						startIcon={<AddIcon />}
-						onClick={handleOpenCreateDialog}
-						sx={{
-							backgroundColor: "#fff000",
-							color: "#1f1f1f",
-							fontWeight: "bold",
-							"&:hover": { backgroundColor: "#e6d900" },
-						}}
-					>
-						Create New List
-					</Button>
-				</Box>
-
-				{/* Spot Lists */}
-				<section className="mx-5">
-					<Grid container spacing={3}>
-						{spotLists.map((list) => (
-							<Grid item key={list._id} xs={12} sm={6} md={4}>
+				{/* Lists Grid */}
+				<section className="container py-8">
+					{spotLists.length > 0 ? (
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+							{spotLists.map((list) => (
 								<Card
-									className={styles.spotListCard}
+									key={list._id}
+									className="group cursor-pointer hover:border-yellow-500 transition-colors"
 									onClick={() => router.push(`/my-spots/${list._id}`)}
 								>
-									<CardContent>
-										<Box display="flex" justifyContent="space-between" alignItems="flex-start">
-											<Box display="flex" alignItems="center" gap={1}>
-												<FolderIcon sx={{ color: "#fff000", fontSize: 30 }} />
-												<Typography variant="h6" className="app-primary">
-													{list.name}
-												</Typography>
-											</Box>
-											<Box>
-												<IconButton
-													size="small"
-													onClick={(e) => {
-														e.stopPropagation();
-														handleOpenEditDialog(list);
-													}}
-													sx={{ color: "#aaa", "&:hover": { color: "#fff000" } }}
+									<CardContent className="p-6">
+										<div className="flex items-start justify-between">
+											<div className="flex items-center gap-3">
+												<Folder className="h-8 w-8 text-yellow-500" />
+												<div>
+													<h3 className="font-semibold text-foreground group-hover:text-yellow-500 transition-colors">
+														{list.name}
+													</h3>
+													<Badge variant="secondary" className="mt-1">
+														{list.spotCount || 0} spot{list.spotCount !== 1 ? "s" : ""}
+													</Badge>
+												</div>
+											</div>
+
+											<div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+												<Button
+													variant="ghost"
+													size="icon"
+													className="h-8 w-8"
+													onClick={(e) => handleOpenEditDialog(list, e)}
 												>
-													<EditIcon fontSize="small" />
-												</IconButton>
-												<IconButton
-													size="small"
-													onClick={(e) => {
-														e.stopPropagation();
-														handleDeleteClick(list);
-													}}
-													sx={{ color: "#aaa", "&:hover": { color: "#f44336" } }}
+													<Pencil className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="icon"
+													className="h-8 w-8 text-destructive hover:text-destructive"
+													onClick={(e) => handleDeleteClick(list, e)}
 												>
-													<DeleteIcon fontSize="small" />
-												</IconButton>
-											</Box>
-										</Box>
+													<Trash2 className="h-4 w-4" />
+												</Button>
+											</div>
+										</div>
+
 										{list.description && (
-											<Typography variant="body2" className="text-light mt-2">
+											<p className="text-sm text-muted-foreground mt-3 line-clamp-2">
 												{list.description}
-											</Typography>
+											</p>
 										)}
-										<Typography variant="body2" sx={{ color: "#aaa", mt: 2 }}>
-											{list.spotCount || 0} spot{list.spotCount !== 1 ? "s" : ""}
-										</Typography>
 									</CardContent>
 								</Card>
-							</Grid>
-						))}
-					</Grid>
-
-					{spotLists.length === 0 && (
-						<div className={styles.emptyState}>
-							<Typography variant="h5" className="text-light">
+							))}
+						</div>
+					) : (
+						<div className="flex flex-col items-center justify-center py-24 text-center">
+							<Folder className="h-16 w-16 text-muted-foreground mb-4" />
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
 								No spot lists yet
-							</Typography>
-							<Typography variant="body1" className="text-light mt-2">
+							</h2>
+							<p className="text-muted-foreground max-w-md mb-6">
 								Create a list to start saving your favorite skate spots
-							</Typography>
+							</p>
+							<Button
+								onClick={handleOpenCreateDialog}
+								className="bg-yellow-500 text-black hover:bg-yellow-400"
+							>
+								<Plus className="h-4 w-4 mr-2" />
+								Create Your First List
+							</Button>
 						</div>
 					)}
 				</section>
 
 				{/* Create/Edit Dialog */}
-				<Dialog
-					open={dialogOpen}
-					onClose={handleCloseDialog}
-					PaperProps={{
-						sx: {
-							backgroundColor: "#1f1f1f",
-							color: "#fff",
-							minWidth: 400,
-						},
-					}}
-				>
-					<DialogTitle className="app-primary">
-						{dialogMode === "create" ? "Create New List" : "Edit List"}
-					</DialogTitle>
+				<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
 					<DialogContent>
-						<TextField
-							autoFocus
-							margin="dense"
-							label="List Name"
-							fullWidth
-							value={listName}
-							onChange={(e) => setListName(e.target.value)}
-							sx={{
-								mt: 2,
-								"& .MuiOutlinedInput-root": {
-									color: "#fff",
-									"& fieldset": { borderColor: "#444" },
-									"&:hover fieldset": { borderColor: "#fff000" },
-									"&.Mui-focused fieldset": { borderColor: "#fff000" },
-								},
-								"& .MuiInputLabel-root": { color: "#aaa" },
-								"& .MuiInputLabel-root.Mui-focused": { color: "#fff000" },
-							}}
-						/>
-						<TextField
-							margin="dense"
-							label="Description (optional)"
-							fullWidth
-							multiline
-							rows={3}
-							value={listDescription}
-							onChange={(e) => setListDescription(e.target.value)}
-							sx={{
-								mt: 2,
-								"& .MuiOutlinedInput-root": {
-									color: "#fff",
-									"& fieldset": { borderColor: "#444" },
-									"&:hover fieldset": { borderColor: "#fff000" },
-									"&.Mui-focused fieldset": { borderColor: "#fff000" },
-								},
-								"& .MuiInputLabel-root": { color: "#aaa" },
-								"& .MuiInputLabel-root.Mui-focused": { color: "#fff000" },
-							}}
-						/>
+						<DialogHeader>
+							<DialogTitle>
+								{dialogMode === "create" ? "Create New List" : "Edit List"}
+							</DialogTitle>
+							<DialogDescription>
+								{dialogMode === "create"
+									? "Create a new list to organize your favorite skate spots."
+									: "Update your list details."}
+							</DialogDescription>
+						</DialogHeader>
+
+						<div className="space-y-4 py-4">
+							<div className="space-y-2">
+								<label className="text-sm font-medium text-foreground">
+									List Name
+								</label>
+								<Input
+									placeholder="My Favorite Parks"
+									value={listName}
+									onChange={(e) => setListName(e.target.value)}
+								/>
+							</div>
+							<div className="space-y-2">
+								<label className="text-sm font-medium text-foreground">
+									Description (optional)
+								</label>
+								<Input
+									placeholder="The best skate spots in my area"
+									value={listDescription}
+									onChange={(e) => setListDescription(e.target.value)}
+								/>
+							</div>
+						</div>
+
+						<DialogFooter>
+							<Button variant="outline" onClick={handleCloseDialog}>
+								Cancel
+							</Button>
+							<Button
+								onClick={handleSaveList}
+								disabled={!listName.trim() || saving}
+								className="bg-yellow-500 text-black hover:bg-yellow-400"
+							>
+								{saving ? "Saving..." : dialogMode === "create" ? "Create" : "Save"}
+							</Button>
+						</DialogFooter>
 					</DialogContent>
-					<DialogActions>
-						<Button onClick={handleCloseDialog} sx={{ color: "#aaa" }}>
-							Cancel
-						</Button>
-						<Button
-							onClick={handleSaveList}
-							disabled={!listName.trim() || saving}
-							sx={{
-								color: "#fff000",
-								"&:disabled": { color: "#666" },
-							}}
-						>
-							{saving ? "Saving..." : dialogMode === "create" ? "Create" : "Save"}
-						</Button>
-					</DialogActions>
 				</Dialog>
 
 				{/* Delete Confirmation Dialog */}
-				<Dialog
-					open={deleteDialogOpen}
-					onClose={() => setDeleteDialogOpen(false)}
-					PaperProps={{
-						sx: {
-							backgroundColor: "#1f1f1f",
-							color: "#fff",
-						},
-					}}
-				>
-					<DialogTitle>Delete List</DialogTitle>
+				<Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
 					<DialogContent>
-						<Typography>
-							Are you sure you want to delete &quot;{listToDelete?.name}&quot;? This action
-							cannot be undone.
-						</Typography>
+						<DialogHeader>
+							<DialogTitle>Delete List</DialogTitle>
+							<DialogDescription>
+								Are you sure you want to delete &quot;{listToDelete?.name}&quot;? This action cannot be undone.
+							</DialogDescription>
+						</DialogHeader>
+
+						<DialogFooter>
+							<Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+								Cancel
+							</Button>
+							<Button
+								variant="destructive"
+								onClick={handleConfirmDelete}
+							>
+								Delete
+							</Button>
+						</DialogFooter>
 					</DialogContent>
-					<DialogActions>
-						<Button onClick={() => setDeleteDialogOpen(false)} sx={{ color: "#aaa" }}>
-							Cancel
-						</Button>
-						<Button onClick={handleConfirmDelete} sx={{ color: "#f44336" }}>
-							Delete
-						</Button>
-					</DialogActions>
 				</Dialog>
 			</div>
 		</>

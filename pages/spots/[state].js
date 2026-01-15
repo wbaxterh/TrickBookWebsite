@@ -1,19 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import PageHeader from "../../components/PageHeader";
+import { MapPin, Search, Loader2, ArrowLeft } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Badge } from "../../components/ui/badge";
 import SpotCard from "../../components/SpotCard";
-import {
-	Typography,
-	Grid,
-	CircularProgress,
-	TextField,
-	InputAdornment,
-	Chip,
-	Box,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import styles from "../../styles/spots.module.css";
 import { searchSpots } from "../../lib/apiSpots";
 
 // US State names mapping
@@ -94,90 +87,83 @@ export default function StateSpots() {
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<PageHeader title={`Spots in ${stateName}`} col="col-sm-6" />
 
-				{/* Search and Filter Section */}
-				<section className={`mx-5 ${styles.searchSection}`}>
-					<Grid container spacing={3} alignItems="center">
-						<Grid item xs={12} md={6}>
-							<TextField
-								fullWidth
-								placeholder="Search spots..."
-								value={searchQuery}
-								onChange={(e) => setSearchQuery(e.target.value)}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position="start">
-											<SearchIcon sx={{ color: "#aaa" }} />
-										</InputAdornment>
-									),
-								}}
-								sx={{
-									"& .MuiOutlinedInput-root": {
-										backgroundColor: "#2a2a2a",
-										color: "#fff",
-										"& fieldset": { borderColor: "#444" },
-										"&:hover fieldset": { borderColor: "#fff000" },
-										"&.Mui-focused fieldset": { borderColor: "#fff000" },
-									},
-									"& .MuiInputBase-input": { color: "#fff" },
-								}}
-							/>
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Box display="flex" flexWrap="wrap" gap={1}>
-								<Typography variant="body2" className="text-light me-2">
-									Filter:
-								</Typography>
-								{AVAILABLE_TAGS.map((tag) => (
-									<Chip
-										key={tag}
-										label={tag}
-										clickable
-										onClick={() => handleTagToggle(tag)}
-										sx={{
-											backgroundColor: selectedTags.includes(tag)
-												? "#fff000"
-												: "#2a2a2a",
-											color: selectedTags.includes(tag) ? "#1f1f1f" : "#fff",
-											borderColor: "#fff000",
-											"&:hover": {
-												backgroundColor: selectedTags.includes(tag)
-													? "#e6d900"
-													: "#3a3a3a",
-											},
-										}}
-									/>
-								))}
-							</Box>
-						</Grid>
-					</Grid>
+			<div className="min-h-screen bg-background">
+				{/* Header */}
+				<section className="border-b border-border">
+					<div className="container py-8">
+						{/* Back Link */}
+						<Link href="/spots" className="inline-flex items-center gap-1 text-muted-foreground hover:text-yellow-500 transition-colors mb-6 no-underline">
+							<ArrowLeft className="h-4 w-4" />
+							<span>All States</span>
+						</Link>
+
+						<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+							<div className="flex items-center gap-2">
+								<MapPin className="h-6 w-6 text-yellow-500" />
+								<h1 className="text-3xl font-bold text-foreground">
+									Spots in {stateName}
+								</h1>
+							</div>
+							<p className="text-muted-foreground">
+								{loading
+									? "Searching..."
+									: `${pagination.totalCount || spots.length} spot${(pagination.totalCount || spots.length) !== 1 ? "s" : ""} found`}
+							</p>
+						</div>
+					</div>
 				</section>
 
-				{/* Results Info */}
-				<section className="mx-5 my-3">
-					<Typography variant="body1" className="text-light">
-						{loading
-							? "Searching..."
-							: `Found ${pagination.totalCount || spots.length} spot${
-									(pagination.totalCount || spots.length) !== 1 ? "s" : ""
-							  }`}
-					</Typography>
+				{/* Filters */}
+				<section className="border-b border-border bg-card">
+					<div className="container py-6">
+						<div className="flex flex-col md:flex-row gap-4">
+							{/* Search */}
+							<div className="relative flex-1 max-w-md">
+								<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+								<Input
+									placeholder="Search spots..."
+									value={searchQuery}
+									onChange={(e) => setSearchQuery(e.target.value)}
+									className="pl-10"
+								/>
+							</div>
+
+							{/* Tag Filters */}
+							<div className="flex flex-wrap items-center gap-2">
+								<span className="text-sm text-muted-foreground">Filter:</span>
+								{AVAILABLE_TAGS.map((tag) => (
+									<Badge
+										key={tag}
+										variant={selectedTags.includes(tag) ? "default" : "outline"}
+										className={`cursor-pointer transition-colors ${
+											selectedTags.includes(tag)
+												? "bg-yellow-500 text-black hover:bg-yellow-400"
+												: "hover:border-yellow-500 hover:text-yellow-500"
+										}`}
+										onClick={() => handleTagToggle(tag)}
+									>
+										{tag}
+									</Badge>
+								))}
+							</div>
+						</div>
+					</div>
 				</section>
 
 				{/* Spots Grid */}
-				{loading ? (
-					<div className={styles.loadingState}>
-						<CircularProgress sx={{ color: "#fff000" }} />
-						<Typography className="mt-3 text-light">Loading spots...</Typography>
-					</div>
-				) : (
-					<section className="m-5">
-						<Grid container spacing={3}>
-							{spots.map((spot) => (
-								<Grid item key={spot._id} xs={12} sm={6} md={4} lg={3}>
+				<section className="container py-8">
+					{loading ? (
+						<div className="flex flex-col items-center justify-center py-24">
+							<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+							<p className="mt-4 text-muted-foreground">Loading spots...</p>
+						</div>
+					) : spots.length > 0 ? (
+						<>
+							<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+								{spots.map((spot) => (
 									<SpotCard
+										key={spot._id}
 										id={spot._id}
 										name={spot.name}
 										city={spot.city}
@@ -187,49 +173,40 @@ export default function StateSpots() {
 										tags={spot.tags}
 										rating={spot.rating}
 									/>
-								</Grid>
-							))}
-						</Grid>
-
-						{spots.length === 0 && (
-							<div className={styles.emptyState}>
-								<Typography variant="h5" className="text-light">
-									No spots found
-								</Typography>
-								<Typography variant="body1" className="text-light mt-2">
-									{searchQuery || selectedTags.length > 0
-										? "Try adjusting your search or filters"
-										: "No spots have been added for this state yet"}
-								</Typography>
-							</div>
-						)}
-
-						{/* Pagination */}
-						{pagination.totalPages > 1 && (
-							<div className={styles.pagination}>
-								{Array.from({ length: pagination.totalPages }, (_, i) => (
-									<Chip
-										key={i + 1}
-										label={i + 1}
-										clickable
-										onClick={() =>
-											setPagination((prev) => ({ ...prev, page: i + 1 }))
-										}
-										sx={{
-											backgroundColor:
-												pagination.page === i + 1 ? "#fff000" : "#2a2a2a",
-											color: pagination.page === i + 1 ? "#1f1f1f" : "#fff",
-											"&:hover": {
-												backgroundColor:
-													pagination.page === i + 1 ? "#e6d900" : "#3a3a3a",
-											},
-										}}
-									/>
 								))}
 							</div>
-						)}
-					</section>
-				)}
+
+							{/* Pagination */}
+							{pagination.totalPages > 1 && (
+								<div className="flex justify-center gap-2 mt-8">
+									{Array.from({ length: Math.min(pagination.totalPages, 10) }, (_, i) => (
+										<Button
+											key={i + 1}
+											variant={pagination.page === i + 1 ? "default" : "outline"}
+											size="sm"
+											onClick={() => setPagination((prev) => ({ ...prev, page: i + 1 }))}
+											className={pagination.page === i + 1 ? "bg-yellow-500 text-black hover:bg-yellow-400" : ""}
+										>
+											{i + 1}
+										</Button>
+									))}
+								</div>
+							)}
+						</>
+					) : (
+						<div className="flex flex-col items-center justify-center py-24 text-center">
+							<MapPin className="h-16 w-16 text-muted-foreground mb-4" />
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
+								No spots found
+							</h2>
+							<p className="text-muted-foreground max-w-md">
+								{searchQuery || selectedTags.length > 0
+									? "Try adjusting your search or filters"
+									: "No spots have been added for this state yet"}
+							</p>
+						</div>
+					)}
+				</section>
 			</div>
 		</>
 	);

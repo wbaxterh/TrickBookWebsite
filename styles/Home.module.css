@@ -30,6 +30,10 @@
 	padding-top: 11em;
 	padding-bottom: 5em;
 	margin: 0 auto;
+	transition: background-image 0.3s ease;
+}
+:global(.dark) .splashSection {
+	background: url("/tbBackgroundDark.png") center center/cover no-repeat;
 }
 .splashHeader {
 	margin: 0 auto;
@@ -37,6 +41,10 @@
 	padding: 3em;
 	max-width: 34em;
 	text-align: center;
+	transition: background-color 0.2s ease;
+}
+:global(.dark) .splashHeader {
+	background-color: #1e1e1e;
 }
 .navWrapper {
 	/* border: 1px solid blue; */
@@ -76,13 +84,24 @@
 	border-radius: 10px;
 	transition:
 		color 0.15s ease,
-		border-color 0.15s ease;
+		border-color 0.15s ease,
+		background-color 0.15s ease;
+}
+:global(.dark) .card {
+	border-color: #333;
+	background-color: #1e1e1e;
 }
 .card:hover,
 .card:focus,
 .card:active {
-	color: #0070f3;
-	border-color: #0070f3;
+	color: #ffd700;
+	border-color: #ffd700;
+}
+:global(.dark) .card:hover,
+:global(.dark) .card:focus,
+:global(.dark) .card:active {
+	color: #ffd700;
+	border-color: #ffd700;
 }
 .card h3 {
 	margin: 0 0 1rem 0;
@@ -112,11 +131,18 @@
 	background-color: #f8f9fa;
 	text-align: left;
 	margin: 0px !important;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+:global(.dark) .missionSection {
+	background-color: #1a1a1a;
 }
 .missionSection h2 {
 	margin-bottom: 1rem;
 	font-size: 2rem;
 	color: #343a40;
+}
+:global(.dark) .missionSection h2 {
+	color: #f0f0f0;
 }
 .missionSection h3 {
 	margin-top: 1.5rem;
@@ -124,10 +150,16 @@
 	font-size: 1.5rem;
 	color: #343a40;
 }
+:global(.dark) .missionSection h3 {
+	color: #f0f0f0;
+}
 .missionSection p {
 	margin-bottom: 1rem;
 	font-size: 1rem;
 	color: #495057;
+}
+:global(.dark) .missionSection p {
+	color: #ccc;
 }
 .missionSection ul {
 	list-style-type: disc;
@@ -138,10 +170,17 @@
 	font-size: 1rem;
 	color: #495057;
 }
+:global(.dark) .missionSection ul li {
+	color: #ccc;
+}
 .newsFeedSection {
 	padding-top: 4em;
 	padding-bottom: 4em;
 	background: #fff;
+	transition: background-color 0.2s ease;
+}
+:global(.dark) .newsFeedSection {
+	background: #121212;
 }
 .justifyRight {
 	margin-left: auto;
@@ -186,6 +225,19 @@
 }
 .featuresSection {
 	background-color: #ffee58 !important;
+	color: #1a1a1a !important;
+}
+.featuresSection h1,
+.featuresSection h2,
+.featuresSection h3,
+.featuresSection h4,
+.featuresSection h5,
+.featuresSection h6,
+.featuresSection p,
+.featuresSection span,
+.featuresSection li,
+.featuresSection a {
+	color: #1a1a1a !important;
 }
 .manual-btn {
 	border: 2px solid #333;
@@ -208,6 +260,18 @@ input:checked ~ .slides {
 }
 .bgCustomPrimary {
 	background-color: #fcf150 !important;
+	color: #1a1a1a !important;
+}
+.bgCustomPrimary a,
+.bgCustomPrimary span,
+.bgCustomPrimary * {
+	color: #1a1a1a !important;
+}
+.btnPrimary a,
+.customPrimary a,
+.btnPrimary *,
+.customPrimary * {
+	color: #1a1a1a !important;
 }
 .navbar-fixed-top {
 	top: 0;
@@ -260,6 +324,9 @@ input:checked ~ .slides {
 		Bitstream Vera Sans Mono,
 		Courier New,
 		monospace;
+}
+:global(.dark) .code {
+	background: #1e1e1e;
 }
 .appFeatureSection {
 	background: #1f1f1f;

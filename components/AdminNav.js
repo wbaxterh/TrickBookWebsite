@@ -10,6 +10,7 @@ export default function AdminNav() {
 		{ label: "Categories", path: "/admin/categories" },
 		{ label: "Trickipedia", path: "/admin/trickipedia" },
 		{ label: "Spots", path: "/admin/spots" },
+		{ label: "Pending Spots", path: "/admin/pending-spots" },
 		{ label: "Blog", path: "/admin/blog" },
 	];
 

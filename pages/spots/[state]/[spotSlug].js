@@ -3,20 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useContext } from "react";
-import PageHeader from "../../../components/PageHeader";
-import {
-	Typography,
-	Grid,
-	CircularProgress,
-	Chip,
-	Button,
-	Box,
-	Paper,
-} from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import styles from "../../../styles/spots.module.css";
+import { MapPin, ArrowLeft, ExternalLink, Loader2, Plus } from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { Card, CardContent } from "../../../components/ui/card";
+import { Badge } from "../../../components/ui/badge";
+import { Separator } from "../../../components/ui/separator";
 import { getSpotData } from "../../../lib/apiSpots";
 import { AuthContext } from "../../../auth/AuthContext";
 
@@ -83,10 +74,10 @@ export default function SpotDetail() {
 
 	if (loading) {
 		return (
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<div className={styles.loadingState}>
-					<CircularProgress sx={{ color: "#fff000" }} />
-					<Typography className="mt-3 text-light">Loading spot...</Typography>
+			<div className="min-h-screen bg-background flex items-center justify-center">
+				<div className="flex flex-col items-center">
+					<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+					<p className="mt-4 text-muted-foreground">Loading spot...</p>
 				</div>
 			</div>
 		);
@@ -94,25 +85,22 @@ export default function SpotDetail() {
 
 	if (error || !spot) {
 		return (
-			<div className={`container-fluid ${styles.spotsContainer}`}>
-				<PageHeader title="Spot Not Found" col="col-sm-4" />
-				<div className={styles.emptyState}>
-					<Typography variant="h5" className="text-light">
-						{error || "Spot not found"}
-					</Typography>
-					<Button
-						variant="outlined"
-						startIcon={<ArrowBackIcon />}
-						onClick={() => router.back()}
-						sx={{
-							mt: 3,
-							color: "#fff000",
-							borderColor: "#fff000",
-							"&:hover": { borderColor: "#e6d900" },
-						}}
-					>
-						Go Back
-					</Button>
+			<div className="min-h-screen bg-background">
+				<div className="container py-16">
+					<div className="flex flex-col items-center justify-center text-center">
+						<MapPin className="h-16 w-16 text-muted-foreground mb-4" />
+						<h1 className="text-2xl font-semibold text-foreground mb-2">
+							{error || "Spot not found"}
+						</h1>
+						<Button
+							variant="outline"
+							onClick={() => router.back()}
+							className="mt-4"
+						>
+							<ArrowLeft className="h-4 w-4 mr-2" />
+							Go Back
+						</Button>
+					</div>
 				</div>
 			</div>
 		);
@@ -129,137 +117,130 @@ export default function SpotDetail() {
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
-			<div className={`container-fluid ${styles.spotsContainer}`}>
+
+			<div className="min-h-screen bg-background">
 				{/* Back Navigation */}
-				<Box className="m-4">
+				<div className="container pt-6">
 					<Button
-						variant="text"
-						startIcon={<ArrowBackIcon />}
+						variant="ghost"
 						onClick={() => router.back()}
-						sx={{
-							color: "#fff000",
-							"&:hover": { backgroundColor: "rgba(255, 240, 0, 0.1)" },
-						}}
+						className="text-muted-foreground hover:text-yellow-500"
 					>
+						<ArrowLeft className="h-4 w-4 mr-2" />
 						Back to {stateName} Spots
 					</Button>
-				</Box>
+				</div>
 
-				<Grid container spacing={4} className="px-4 pb-5">
-					{/* Image Section */}
-					<Grid item xs={12} md={6}>
-						<div className={styles.spotDetailImage}>
+				<div className="container py-8">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+						{/* Image Section */}
+						<div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
 							{spot.imageURL ? (
 								<Image
 									src={spot.imageURL}
 									alt={spot.name}
 									fill
-									style={{ objectFit: "cover" }}
+									className="object-cover"
 									unoptimized
 								/>
 							) : (
-								<div className={styles.noImage} style={{ height: "100%" }}>
-									<LocationOnIcon sx={{ fontSize: 100, color: "#fff000" }} />
+								<div className="absolute inset-0 flex items-center justify-center bg-secondary">
+									<MapPin className="h-24 w-24 text-yellow-500" />
 								</div>
 							)}
 						</div>
-					</Grid>
 
-					{/* Details Section */}
-					<Grid item xs={12} md={6}>
-						<Paper className={styles.detailsSection}>
-							<Typography variant="h3" className="app-primary mb-3">
-								{spot.name}
-							</Typography>
+						{/* Details Section */}
+						<Card>
+							<CardContent className="p-6 space-y-6">
+								<div>
+									<h1 className="text-3xl font-bold text-foreground">
+										{spot.name}
+									</h1>
 
-							{/* Location */}
-							<Box display="flex" alignItems="center" gap={1} mb={2}>
-								<LocationOnIcon sx={{ color: "#fff000" }} />
-								<Typography variant="h6" className="text-light">
-									{spot.city && spot.state
-										? `${spot.city}, ${STATE_NAMES[spot.state.toLowerCase()] || spot.state}`
-										: spot.state
-										? STATE_NAMES[spot.state.toLowerCase()] || spot.state
-										: "Unknown location"}
-								</Typography>
-							</Box>
-
-							{/* Tags */}
-							{tagList.length > 0 && (
-								<div className={styles.tagContainer}>
-									{tagList.map((tag, index) => (
-										<Chip
-											key={index}
-											label={tag}
-											sx={{
-												color: "#fff000",
-												borderColor: "#fff000",
-												fontSize: "0.9rem",
-											}}
-											variant="outlined"
-										/>
-									))}
+									{/* Location */}
+									<div className="flex items-center gap-2 mt-2 text-muted-foreground">
+										<MapPin className="h-5 w-5 text-yellow-500" />
+										<span className="text-lg">
+											{spot.city && spot.state
+												? `${spot.city}, ${STATE_NAMES[spot.state.toLowerCase()] || spot.state}`
+												: spot.state
+												? STATE_NAMES[spot.state.toLowerCase()] || spot.state
+												: "Unknown location"}
+										</span>
+									</div>
 								</div>
-							)}
 
-							{/* Coordinates */}
-							<Box my={3}>
-								<Typography variant="body2" className="text-light">
-									<strong>Coordinates:</strong> {spot.latitude?.toFixed(6)}, {spot.longitude?.toFixed(6)}
-								</Typography>
-							</Box>
-
-							{/* Description */}
-							{spot.description && (
-								<Box my={3}>
-									<Typography variant="h6" className="app-primary mb-2">
-										About this spot
-									</Typography>
-									<Typography variant="body1" className="text-light">
-										{spot.description}
-									</Typography>
-								</Box>
-							)}
-
-							{/* Actions */}
-							<Box mt={4} display="flex" flexWrap="wrap" gap={2}>
-								<Button
-									variant="contained"
-									startIcon={<OpenInNewIcon />}
-									href={googleMapsUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-									sx={{
-										backgroundColor: "#fff000",
-										color: "#1f1f1f",
-										fontWeight: "bold",
-										"&:hover": { backgroundColor: "#e6d900" },
-									}}
-								>
-									Open in Google Maps
-								</Button>
-
-								{loggedIn && (
-									<Link href="/my-spots" passHref>
-										<Button
-											variant="outlined"
-											sx={{
-												color: "#fff000",
-												borderColor: "#fff000",
-												"&:hover": {
-													borderColor: "#e6d900",
-													backgroundColor: "rgba(255, 240, 0, 0.1)",
-												},
-											}}
-										>
-											Add to My Lists
-										</Button>
-									</Link>
+								{/* Tags */}
+								{tagList.length > 0 && (
+									<div className="flex flex-wrap gap-2">
+										{tagList.map((tag, index) => (
+											<Badge
+												key={index}
+												variant="outline"
+												className="border-yellow-500/50 text-yellow-600 dark:text-yellow-400"
+											>
+												{tag}
+											</Badge>
+										))}
+									</div>
 								)}
-							</Box>
-						</Paper>
-					</Grid>
-				</Grid>
+
+								<Separator />
+
+								{/* Coordinates */}
+								<div>
+									<h3 className="text-sm font-medium text-muted-foreground mb-1">
+										Coordinates
+									</h3>
+									<p className="text-foreground font-mono text-sm">
+										{spot.latitude?.toFixed(6)}, {spot.longitude?.toFixed(6)}
+									</p>
+								</div>
+
+								{/* Description */}
+								{spot.description && (
+									<div>
+										<h3 className="text-sm font-medium text-muted-foreground mb-2">
+											About this spot
+										</h3>
+										<p className="text-foreground">
+											{spot.description}
+										</p>
+									</div>
+								)}
+
+								<Separator />
+
+								{/* Actions */}
+								<div className="flex flex-wrap gap-3">
+									<Button
+										asChild
+										className="bg-yellow-500 text-black hover:bg-yellow-400"
+									>
+										<a
+											href={googleMapsUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<ExternalLink className="h-4 w-4 mr-2" />
+											Open in Google Maps
+										</a>
+									</Button>
+
+									{loggedIn && (
+										<Button variant="outline" asChild>
+											<Link href="/my-spots">
+												<Plus className="h-4 w-4 mr-2" />
+												Add to My Lists
+											</Link>
+										</Button>
+									)}
+								</div>
+							</CardContent>
+						</Card>
+					</div>
+				</div>
 			</div>
 		</>
 	);

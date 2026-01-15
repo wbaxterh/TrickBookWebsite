@@ -52,3 +52,12 @@
 .difficultyExpert {
 	color: #9c27b0;
 }
+
+/* Category buttons - ensure yellow text is visible */
+.trickipediaContainer :global(.MuiButton-contained) {
+	color: #fff000 !important;
+}
+
+.trickipediaContainer :global(.MuiButton-contained):hover {
+	color: #fff000 !important;
+}

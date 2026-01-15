@@ -6,6 +6,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+:global(.dark) .footer {
+	background-color: #1a1a1a;
+	color: #f0f0f0;
 }
 
 .footerContent {
@@ -35,6 +41,17 @@
 	text-decoration: none;
 	color: #333;
 	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+:global(.dark) .subnavLeft span,
+:global(.dark) .subnavRight span {
+	color: #ccc;
+}
+
+.subnavLeft span:hover,
+.subnavRight span:hover {
+	color: #ffd700;
 }
 
 .subnavCenter p {

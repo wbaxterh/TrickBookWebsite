@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Typography, Chip } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import styles from "../styles/spots.module.css";
+import { MapPin } from "lucide-react";
+import { Card, CardContent } from "./ui/card";
+import { Badge } from "./ui/badge";
 
 export default function SpotCard({
 	id,
@@ -13,6 +13,8 @@ export default function SpotCard({
 	description,
 	tags,
 	rating,
+	approvalStatus,
+	showStatus = false,
 }) {
 	// Parse tags if it's a string
 	const tagList = tags
@@ -29,70 +31,102 @@ export default function SpotCard({
 
 	const spotUrl = `/spots/${state?.toLowerCase() || "unknown"}/${spotSlug}?id=${id}`;
 
+	// Get status badge styling
+	const getStatusBadge = () => {
+		if (!showStatus || !approvalStatus) return null;
+
+		const statusConfig = {
+			approved: {
+				className: "bg-green-500 text-white hover:bg-green-500",
+				label: "Approved",
+			},
+			pending: {
+				className: "bg-yellow-500 text-black hover:bg-yellow-500",
+				label: "Pending Review",
+			},
+			rejected: {
+				className: "bg-red-500 text-white hover:bg-red-500",
+				label: "Rejected",
+			},
+			private: {
+				className: "bg-gray-500 text-white hover:bg-gray-500",
+				label: "Private",
+			},
+		};
+
+		const config = statusConfig[approvalStatus];
+		if (!config) return null;
+
+		return (
+			<Badge className={`absolute top-2 left-2 z-10 ${config.className}`}>
+				{config.label}
+			</Badge>
+		);
+	};
+
 	return (
-		<Link href={spotUrl} passHref style={{ textDecoration: "none" }}>
-			<div className={`card ${styles.spotCard}`}>
-				<div className={styles.spotImageContainer}>
+		<Link href={spotUrl} className="no-underline block h-full">
+			<Card className="group overflow-hidden hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full flex flex-col">
+				{/* Image Container */}
+				<div className="relative h-44 bg-muted overflow-hidden">
+					{getStatusBadge()}
 					{imageURL ? (
 						<Image
-							className="rounded-top"
 							src={imageURL}
 							alt={name}
 							fill
-							style={{ objectFit: "cover" }}
+							className="object-cover group-hover:scale-105 transition-transform duration-300"
 							unoptimized
 						/>
 					) : (
-						<div className={styles.noImage}>
-							<LocationOnIcon sx={{ fontSize: 60, color: "#fff000" }} />
+						<div className="absolute inset-0 flex items-center justify-center bg-secondary">
+							<MapPin className="h-12 w-12 text-yellow-500" />
 						</div>
 					)}
 				</div>
-				<div className="card-body app-secondary-bg rounded-bottom">
-					<Typography variant="h6" className="card-title app-primary">
+
+				{/* Content */}
+				<CardContent className="p-4 flex-1 flex flex-col">
+					<h3 className="font-semibold text-foreground group-hover:text-yellow-500 transition-colors line-clamp-1">
 						{name}
-					</Typography>
-					<div className="d-flex align-items-center gap-1 mb-2">
-						<LocationOnIcon sx={{ fontSize: 16, color: "#aaa" }} />
-						<Typography variant="body2" className="text-light">
+					</h3>
+
+					{/* Location */}
+					<div className="flex items-center gap-1 mt-1 text-muted-foreground">
+						<MapPin className="h-3.5 w-3.5" />
+						<span className="text-sm">
 							{city && state ? `${city}, ${state}` : state || "Unknown location"}
-						</Typography>
+						</span>
 					</div>
+
+					{/* Tags */}
 					{tagList.length > 0 && (
-						<div className="d-flex gap-1 mb-2 flex-wrap">
+						<div className="flex flex-wrap gap-1 mt-3">
 							{tagList.slice(0, 3).map((tag, index) => (
-								<Chip
+								<Badge
 									key={index}
-									label={tag}
-									size="small"
-									variant="outlined"
-									sx={{
-										color: "#fff000",
-										borderColor: "#fff000",
-										fontSize: "0.7rem",
-									}}
-								/>
+									variant="outline"
+									className="text-xs border-yellow-500/50 text-yellow-600 dark:text-yellow-400"
+								>
+									{tag}
+								</Badge>
 							))}
 							{tagList.length > 3 && (
-								<Chip
-									label={`+${tagList.length - 3}`}
-									size="small"
-									sx={{
-										color: "#aaa",
-										fontSize: "0.7rem",
-									}}
-								/>
+								<Badge variant="secondary" className="text-xs">
+									+{tagList.length - 3}
+								</Badge>
 							)}
 						</div>
 					)}
+
+					{/* Description */}
 					{description && (
-						<Typography className="card-text text-light" variant="body2">
-							{description.substring(0, 100)}
-							{description.length > 100 ? "..." : ""}
-						</Typography>
+						<p className="text-sm text-muted-foreground mt-3 line-clamp-2">
+							{description}
+						</p>
 					)}
-				</div>
-			</div>
+				</CardContent>
+			</Card>
 		</Link>
 	);
 }
