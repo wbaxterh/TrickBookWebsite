@@ -1,21 +1,30 @@
 .spotsContainer {
 	min-height: 100vh;
-	background-color: var(--app-background);
 	padding-bottom: 2rem;
 }
 
 .headerSection {
-	border: 1px solid #1f1f1f;
+	border: 1px solid #ddd;
 	border-radius: 10px;
+	transition: border-color 0.2s ease;
+}
+
+:global(.dark) .headerSection {
+	border-color: #333;
 }
 
 .spotCard {
 	height: 100%;
-	transition: transform 0.2s ease-in-out;
-	background-color: var(--app-secondary-bg);
-	border: none;
+	transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+	background-color: #fff;
+	border: 1px solid #eee;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
+}
+
+:global(.dark) .spotCard {
+	background-color: #1e1e1e;
+	border-color: #333;
 }
 
 .spotCard:hover {
@@ -27,6 +36,10 @@
 	position: relative;
 	height: 180px;
 	overflow: hidden;
+	background-color: #f0f0f0;
+}
+
+:global(.dark) .spotImageContainer {
 	background-color: #2a2a2a;
 }
 
@@ -43,14 +56,23 @@
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	background-color: #f0f0f0;
+}
+
+:global(.dark) .noImage {
 	background-color: #2a2a2a;
 }
 
 .searchSection {
-	background-color: #1f1f1f;
+	background-color: #f8f9fa;
 	padding: 1.5rem;
 	border-radius: 10px;
 	margin-bottom: 2rem;
+	transition: background-color 0.2s ease;
+}
+
+:global(.dark) .searchSection {
+	background-color: #1f1f1f;
 }
 
 .filterChip {
@@ -58,41 +80,61 @@
 }
 
 .stateButton {
-	background-color: #1f1f1f !important;
-	color: #fff000 !important;
-	border: 2px solid #fff000 !important;
+	background-color: #fff !important;
+	color: #333 !important;
+	border: 2px solid #ffd700 !important;
 	padding: 15px 20px !important;
 	font-size: 1.2rem !important;
-	transition: transform 0.2s, box-shadow 0.2s !important;
+	transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s !important;
+}
+
+:global(.dark) .stateButton {
+	background-color: #1f1f1f !important;
+	color: #fff000 !important;
 }
 
 .stateButton:hover {
 	transform: translateY(-3px);
-	box-shadow: 0 8px 20px rgba(255, 240, 0, 0.35) !important;
+	box-shadow: 0 8px 20px rgba(255, 215, 0, 0.35) !important;
+	background-color: #ffd700 !important;
+	color: #333 !important;
 }
 
 .spotCount {
-	color: #aaa;
+	color: #666;
 	font-size: 0.9rem;
 }
 
+:global(.dark) .spotCount {
+	color: #aaa;
+}
+
 .spotListCard {
-	background-color: #1f1f1f;
-	border: 1px solid #333;
+	background-color: #fff;
+	border: 1px solid #ddd;
 	border-radius: 10px;
 	padding: 1.5rem;
-	transition: transform 0.2s, border-color 0.2s;
+	transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
 	cursor: pointer;
+}
+
+:global(.dark) .spotListCard {
+	background-color: #1f1f1f;
+	border-color: #333;
 }
 
 .spotListCard:hover {
 	transform: translateY(-3px);
-	border-color: #fff000;
+	border-color: #ffd700;
 }
 
 .emptyState {
 	text-align: center;
 	padding: 3rem;
+	color: #666;
+}
+
+:global(.dark) .emptyState {
 	color: #aaa;
 }
 
@@ -119,9 +161,14 @@
 }
 
 .detailsSection {
-	background-color: #1f1f1f;
+	background-color: #f8f9fa;
 	border-radius: 10px;
 	padding: 2rem;
+	transition: background-color 0.2s ease;
+}
+
+:global(.dark) .detailsSection {
+	background-color: #1f1f1f;
 }
 
 .spotDetailImage {
