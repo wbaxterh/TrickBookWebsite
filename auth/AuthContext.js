@@ -13,6 +13,7 @@ export function AuthProvider({ children }) {
 	const [role, setRole] = useState(null);
 	const [imageUri, setImageUri] = useState(null);
 	const [name, setName] = useState(null);
+	const [userId, setUserId] = useState(null);
 
 	useEffect(() => {
 		if (status === "loading") {
@@ -29,6 +30,7 @@ export function AuthProvider({ children }) {
 						setImageUri(profileInfo.imageUri || "/default-profile.png");
 						setRole(profileInfo.role || null);
 						setName(profileInfo.name || null);
+						setUserId(profileInfo.userId || null);
 					} else {
 						throw new Error("Invalid token");
 					}
@@ -40,12 +42,14 @@ export function AuthProvider({ children }) {
 					setRole(null);
 					setImageUri(null);
 					setName(null);
+					setUserId(null);
 				}
 			} else {
 				setLoggedIn(false);
 				setToken(null);
 				setEmail(null);
 				setRole(null);
+				setUserId(null);
 			}
 		} else {
 			const initialToken = Cookies.get("token");
@@ -60,6 +64,7 @@ export function AuthProvider({ children }) {
 						setRole(profileInfo.role || null);
 						setImageUri(profileInfo.imageUri || "/default-profile.png");
 						setName(profileInfo.name || null);
+						setUserId(profileInfo.userId || null);
 					} else {
 						throw new Error("Invalid token");
 					}
@@ -71,6 +76,7 @@ export function AuthProvider({ children }) {
 					setRole(null);
 					setImageUri(null);
 					setName(null);
+					setUserId(null);
 				}
 			} else {
 				setLoggedIn(false);
@@ -79,6 +85,7 @@ export function AuthProvider({ children }) {
 				setRole(null);
 				setImageUri(null);
 				setName(null);
+				setUserId(null);
 			}
 		}
 		localStorage.setItem("userImageUri", imageUri);
@@ -120,6 +127,7 @@ export function AuthProvider({ children }) {
 		setEmail(null);
 		setRole(null);
 		setImageUri(null);
+		setUserId(null);
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("userEmail");
 		localStorage.removeItem("userImageUri");
@@ -146,6 +154,7 @@ export function AuthProvider({ children }) {
 				setImageUri,
 				name,
 				setName,
+				userId,
 			}}
 		>
 			{children}

@@ -48,12 +48,12 @@ const Header = () => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
-						<Link href='/trickipedia' passHref legacyBehavior>
+						<Link href='/trickbook' passHref legacyBehavior>
 							<Nav.Link>
 								<span role='img' aria-label='book'>
 									📖
 								</span>{" "}
-								Trickipedia
+								TrickBook
 							</Nav.Link>
 						</Link>
 						<Link href='/spots' passHref legacyBehavior>
