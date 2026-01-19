@@ -42,6 +42,7 @@ export default function TrickBook() {
 	const [tricks, setTricks] = useState([]);
 	const [filteredTricks, setFilteredTricks] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [searchFocused, setSearchFocused] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 
@@ -246,13 +247,21 @@ export default function TrickBook() {
 			{/* Search Bar */}
 			<div className="mb-6">
 				<div className="relative">
-					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+					<Search
+						className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-opacity duration-200 ${
+							searchFocused || searchTerm ? 'opacity-0' : 'opacity-100'
+						}`}
+					/>
 					<Input
 						type="text"
-						placeholder="Search tricks..."
+						placeholder={searchFocused || searchTerm ? "" : "Search tricks..."}
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
-						className="pl-10 bg-background border-input focus:border-yellow-500"
+						onFocus={() => setSearchFocused(true)}
+						onBlur={() => setSearchFocused(false)}
+						className={`bg-background border-input focus:border-yellow-500 transition-all duration-200 ${
+							searchFocused || searchTerm ? 'pl-4' : 'pl-10'
+						}`}
 					/>
 				</div>
 			</div>
@@ -544,7 +553,7 @@ export default function TrickBook() {
 			<div className="mb-6">
 				<h2 className="text-xl font-semibold text-foreground">Homie Trick Lists</h2>
 				<p className="text-sm text-muted-foreground mt-1">
-					Discover what tricks other skaters are learning
+					Discover what tricks other riders are learning
 				</p>
 			</div>
 

@@ -64,11 +64,21 @@ const Header = () => {
 								Spots
 							</Nav.Link>
 						</Link>
-						<Link href='/blog' passHref legacyBehavior>
-							<Nav.Link>Blog</Nav.Link>
+						<Link href='/homies' passHref legacyBehavior>
+							<Nav.Link>
+								<span role='img' aria-label='homies'>
+									🤝
+								</span>{" "}
+								Homies
+							</Nav.Link>
 						</Link>
-						<Link href='/about' passHref legacyBehavior>
-							<Nav.Link>About</Nav.Link>
+						<Link href='/media' passHref legacyBehavior>
+							<Nav.Link>
+								<span role='img' aria-label='media'>
+									🎬
+								</span>{" "}
+								Media
+							</Nav.Link>
 						</Link>
 					</Nav>
 					<Nav className={`ms-auto align-items-center`}>
