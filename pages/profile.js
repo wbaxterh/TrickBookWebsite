@@ -10,9 +10,11 @@ import { useContext } from "react";
 import { useTheme } from "next-themes";
 import { AuthContext } from "../auth/AuthContext";
 import { deleteUser } from "../lib/apiUser";
+import { toggleNetwork, getNetworkStatus } from "../lib/apiHomies";
 import axios from "axios";
 import AdminNav from "../components/AdminNav";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Users } from "lucide-react";
+import { Switch } from "../components/ui/switch";
 
 export default function Profile() {
 	const {
@@ -33,6 +35,8 @@ export default function Profile() {
 	const [tricklists, setTricklists] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [networkEnabled, setNetworkEnabled] = useState(false);
+	const [networkLoading, setNetworkLoading] = useState(false);
 
 	// Avoid hydration mismatch for theme
 	useEffect(() => {
@@ -66,6 +70,39 @@ export default function Profile() {
 		};
 		fetchData();
 	}, [token]);
+
+	// Fetch network status
+	useEffect(() => {
+		const fetchNetworkStatus = async () => {
+			if (!token) return;
+			try {
+				const status = await getNetworkStatus(token);
+				setNetworkEnabled(status.network || false);
+			} catch (err) {
+				// If endpoint doesn't exist yet, default to false
+				console.log("Network status not available yet");
+				setNetworkEnabled(false);
+			}
+		};
+		fetchNetworkStatus();
+	}, [token]);
+
+	const handleNetworkToggle = async (checked) => {
+		setNetworkLoading(true);
+		try {
+			const userId = jwt.decode(token)?.userId;
+			if (!userId) {
+				throw new Error("Could not determine user ID");
+			}
+			await toggleNetwork(userId, checked, token);
+			setNetworkEnabled(checked);
+		} catch (err) {
+			console.error("Error toggling network:", err);
+			alert("Failed to update network settings. The feature may not be available yet.");
+		} finally {
+			setNetworkLoading(false);
+		}
+	};
 
 	const handleLogout = () => {
 		logOut();
@@ -261,6 +298,39 @@ export default function Profile() {
 												</button>
 											</div>
 										)}
+									</div>
+								</div>
+
+								{/* Network Settings */}
+								<div className='mb-4'>
+									<h5>
+										<Users size={18} className='me-2' style={{ display: 'inline' }} />
+										Network Settings
+									</h5>
+									<div
+										className='d-flex align-items-center justify-content-between p-3 rounded bg-secondary bg-opacity-10'
+										style={{
+											maxWidth: 400,
+											margin: '0 auto',
+											border: '1px solid var(--bs-border-color)'
+										}}
+									>
+										<div>
+											<div style={{ fontWeight: 500 }}>Discoverable</div>
+											<small style={{ opacity: 0.7 }}>
+												Allow other riders to find you and send homie requests
+											</small>
+										</div>
+										<Switch
+											checked={networkEnabled}
+											onCheckedChange={handleNetworkToggle}
+											disabled={networkLoading}
+										/>
+									</div>
+									<div className='text-center mt-2'>
+										<Link href='/homies' className='text-decoration-none'>
+											<small>View Homies &rarr;</small>
+										</Link>
 									</div>
 								</div>
 
