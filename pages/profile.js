@@ -13,7 +13,7 @@ import { deleteUser } from "../lib/apiUser";
 import { toggleNetwork, getNetworkStatus } from "../lib/apiHomies";
 import axios from "axios";
 import AdminNav from "../components/AdminNav";
-import { Sun, Moon, Users } from "lucide-react";
+import { Sun, Moon, Users, User } from "lucide-react";
 import { Switch } from "../components/ui/switch";
 
 export default function Profile() {
@@ -190,14 +190,23 @@ export default function Profile() {
 										marginBottom: 24,
 									}}
 								>
-									<Image
-										src={imageUri || "/default-profile.png"}
-										alt='Profile Picture'
-										className='rounded-circle'
-										width={90}
-										height={90}
-										style={{ objectFit: "cover", borderRadius: "50%" }}
-									/>
+									{imageUri ? (
+										<Image
+											src={imageUri}
+											alt='Profile Picture'
+											className='rounded-circle'
+											width={90}
+											height={90}
+											style={{ objectFit: "cover", borderRadius: "50%" }}
+										/>
+									) : (
+										<div
+											className='d-flex align-items-center justify-content-center rounded-circle bg-secondary'
+											style={{ width: 90, height: 90 }}
+										>
+											<User size={40} className='text-muted' />
+										</div>
+									)}
 									<h3 style={{ margin: 0 }}>{name}</h3>
 								</div>
 								<p className='card-text mb-4' style={{ textAlign: "center" }}>

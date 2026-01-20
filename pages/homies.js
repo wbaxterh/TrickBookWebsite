@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
-import { Users, UserPlus, Bell, Search, UserMinus, Check, X, Loader2 } from "lucide-react";
+import { Users, UserPlus, Bell, Search, UserMinus, Check, X, Loader2, User } from "lucide-react";
 import {
 	getDiscoverableUsers,
 	getMyHomies,
@@ -150,14 +150,20 @@ export default function Homies() {
 	const UserCard = ({ user, actions }) => (
 		<div className="flex items-center justify-between p-4 rounded-lg bg-secondary/10 border border-border">
 			<div className="flex items-center gap-3">
-				<Image
-					src={user.imageUri || "/default-profile.png"}
-					alt={user.name || "User"}
-					width={48}
-					height={48}
-					className="rounded-full object-cover"
-					style={{ width: 48, height: 48 }}
-				/>
+				{user.imageUri ? (
+					<Image
+						src={user.imageUri}
+						alt={user.name || "User"}
+						width={48}
+						height={48}
+						className="rounded-full object-cover"
+						style={{ width: 48, height: 48 }}
+					/>
+				) : (
+					<div className="flex items-center justify-center w-12 h-12 rounded-full bg-muted">
+						<User className="h-6 w-6 text-muted-foreground" />
+					</div>
+				)}
 				<div>
 					<p className="font-medium text-foreground">{user.name || "Unknown"}</p>
 					<p className="text-sm text-muted-foreground">{user.email}</p>
