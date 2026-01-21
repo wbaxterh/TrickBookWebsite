@@ -432,3 +432,53 @@ textarea::placeholder {
 .dark textarea::placeholder {
   color: #999999;
 }
+
+/* Mobile typography improvements */
+@media (max-width: 640px) {
+  html, body {
+    font-size: 16px;
+  }
+
+  /* MUI Typography mobile overrides */
+  .MuiTypography-h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  .MuiTypography-h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+  .MuiTypography-h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+  .MuiTypography-h4 {
+    font-size: 1.125rem !important;
+    line-height: 1.4 !important;
+  }
+  .MuiTypography-h5 {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+  .MuiTypography-h6 {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+  .MuiTypography-body1,
+  .MuiTypography-body2 {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Container padding on mobile */
+  .container, .MuiContainer-root {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Better button sizing on mobile */
+  .MuiButton-root {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
