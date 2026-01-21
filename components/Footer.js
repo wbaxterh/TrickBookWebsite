@@ -101,10 +101,10 @@ function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/questions-support"
+									href="/contact"
 									className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
 								>
-									Contact
+									Contact & Feedback
 								</Link>
 							</li>
 							<li>
