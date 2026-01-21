@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, MessageCircle, Share2, Bookmark, User, MoreHorizontal, Flag, Link as LinkIcon } from "lucide-react";
 import VideoPlayer from "./VideoPlayer";
+import CommentSection from "./CommentSection";
 
 export default function FeedPost({
 	post,
@@ -330,11 +331,13 @@ export default function FeedPost({
 
 			{/* Comments Section (expandable) */}
 			{showComments && (
-				<div className="border-t border-border p-3">
-					<p className="text-sm text-muted-foreground text-center py-4">
-						Comments coming soon
-					</p>
-				</div>
+				<CommentSection
+					postId={post._id}
+					initialCommentCount={post.stats?.commentCount || 0}
+					onCommentCountChange={(count) => {
+						// Update local comment count if needed
+					}}
+				/>
 			)}
 		</div>
 	);
