@@ -30,6 +30,7 @@ import {
 	Globe,
 	Award,
 	TrendingUp,
+	MessageCircle,
 } from "lucide-react";
 
 // Sport emoji mapping
@@ -236,12 +237,20 @@ export default function PublicProfile() {
 								{/* Action buttons */}
 								<div className="flex flex-wrap justify-center sm:justify-start gap-2">
 									{isOwnProfile ? (
-										<Link href="/settings">
-											<Button variant="outline">
-												<Settings className="w-4 h-4 mr-2" />
-												Edit Profile
-											</Button>
-										</Link>
+										<>
+											<Link href="/messages">
+												<Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+													<MessageCircle className="w-4 h-4 mr-2" />
+													Messages
+												</Button>
+											</Link>
+											<Link href="/settings">
+												<Button variant="outline">
+													<Settings className="w-4 h-4 mr-2" />
+													Edit Profile
+												</Button>
+											</Link>
+										</>
 									) : (
 										<>
 											{homieStatus === "none" && (
@@ -257,10 +266,28 @@ export default function PublicProfile() {
 												</Button>
 											)}
 											{homieStatus === "homies" && (
-												<Button variant="secondary" disabled>
-													<UserCheck className="w-4 h-4 mr-2" />
-													Homies
-												</Button>
+												<>
+													<Button
+														className="bg-yellow-500 hover:bg-yellow-600 text-black"
+														onClick={() => {
+															// Start conversation and redirect
+															import("../../lib/apiMessages").then(({ startConversation }) => {
+																startConversation(userId, token).then((conversation) => {
+																	router.push(`/messages/${conversation._id}`);
+																}).catch((err) => {
+																	console.error("Error starting conversation:", err);
+																});
+															});
+														}}
+													>
+														<MessageCircle className="w-4 h-4 mr-2" />
+														Message
+													</Button>
+													<Button variant="secondary" disabled>
+														<UserCheck className="w-4 h-4 mr-2" />
+														Homies
+													</Button>
+												</>
 											)}
 										</>
 									)}

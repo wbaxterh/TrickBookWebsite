@@ -247,21 +247,23 @@ export default function TrickBook() {
 			{/* Search Bar */}
 			<div className="mb-6">
 				<div className="relative">
-					<Search
-						className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-opacity duration-200 ${
-							searchFocused || searchTerm ? 'opacity-0' : 'opacity-100'
+					<div
+						className={`absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+							searchFocused || searchTerm
+								? "opacity-0 -translate-x-2"
+								: "opacity-100 translate-x-0"
 						}`}
-					/>
-					<Input
+					>
+						<Search className="h-4 w-4 text-muted-foreground" />
+						<span className="text-muted-foreground text-sm">Search tricks...</span>
+					</div>
+					<input
 						type="text"
-						placeholder={searchFocused || searchTerm ? "" : "Search tricks..."}
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 						onFocus={() => setSearchFocused(true)}
 						onBlur={() => setSearchFocused(false)}
-						className={`bg-background border-input focus:border-yellow-500 transition-all duration-200 ${
-							searchFocused || searchTerm ? 'pl-4' : 'pl-10'
-						}`}
+						className="w-full h-11 px-4 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500/50 focus:border-yellow-500 transition-all duration-200"
 					/>
 				</div>
 			</div>

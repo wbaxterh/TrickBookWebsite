@@ -10,12 +10,12 @@ import { AuthContext } from "../auth/AuthContext";
 import { Button, Skeleton } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "next-themes";
-import { Sun, Moon, MessageCircle } from "lucide-react";
+import { Sun, Moon, MessageCircle, User, LogOut, ChevronDown } from "lucide-react";
 import { getUnreadCount } from "../lib/apiMessages";
 import { connectMessagesSocket } from "../lib/socket";
 
 const Header = () => {
-	const { email, loggedIn, token } = useContext(AuthContext);
+	const { email, loggedIn, token, logOut } = useContext(AuthContext);
 	const { theme, setTheme, resolvedTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [unreadCount, setUnreadCount] = useState(0);
@@ -125,36 +125,6 @@ const Header = () => {
 								Media
 							</Nav.Link>
 						</Link>
-						{loggedIn && (
-							<Link href='/messages' passHref legacyBehavior>
-								<Nav.Link style={{ position: 'relative' }}>
-									<MessageCircle size={18} style={{ marginRight: 4 }} />
-									Messages
-									{unreadCount > 0 && (
-										<span
-											style={{
-												position: 'absolute',
-												top: 4,
-												right: -2,
-												backgroundColor: '#fcf150',
-												color: '#000',
-												borderRadius: '50%',
-												minWidth: 18,
-												height: 18,
-												fontSize: 11,
-												fontWeight: 'bold',
-												display: 'flex',
-												alignItems: 'center',
-												justifyContent: 'center',
-												padding: '0 4px',
-											}}
-										>
-											{unreadCount > 99 ? '99+' : unreadCount}
-										</span>
-									)}
-								</Nav.Link>
-							</Link>
-						)}
 					</Nav>
 					<Nav className={`ms-auto align-items-center`}>
 						{/* Theme Toggle */}
@@ -190,25 +160,91 @@ const Header = () => {
 								</Button>
 							</Link>
 						) : (
-							<Link href='/profile' passHref legacyBehavior>
-								<Button
-									variant='contained'
-									className='p-1 px-2'
-									startIcon={<PersonIcon />}
-									sx={{
-										backgroundColor: isDark ? "#e0e0e0 !important" : "#1f1f1f !important",
-										color: isDark ? "#1f1f1f !important" : "#fff !important",
-										'&:hover': {
-											backgroundColor: isDark ? "#d0d0d0 !important" : "#333 !important",
-										},
-										'& .MuiSvgIcon-root': {
-											color: isDark ? "#1f1f1f !important" : "#fff !important",
-										}
-									}}
+							<NavDropdown
+								align="end"
+								title={
+									<span style={{
+										display: 'inline-flex',
+										alignItems: 'center',
+										gap: 6,
+										position: 'relative'
+									}}>
+										<PersonIcon style={{ fontSize: 20 }} />
+										<span style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+											{email}
+										</span>
+										{unreadCount > 0 && (
+											<span
+												style={{
+													position: 'absolute',
+													top: -8,
+													right: -8,
+													backgroundColor: '#fcf150',
+													color: '#000',
+													borderRadius: '50%',
+													minWidth: 18,
+													height: 18,
+													fontSize: 11,
+													fontWeight: 'bold',
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+													padding: '0 4px',
+												}}
+											>
+												{unreadCount > 99 ? '99+' : unreadCount}
+											</span>
+										)}
+									</span>
+								}
+								id="profile-dropdown"
+								className="profile-dropdown"
+								style={{
+									backgroundColor: isDark ? "#e0e0e0" : "#1f1f1f",
+									borderRadius: 4,
+								}}
+							>
+								<Link href='/profile' passHref legacyBehavior>
+									<NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+										<User size={18} />
+										My Profile
+									</NavDropdown.Item>
+								</Link>
+								<Link href='/messages' passHref legacyBehavior>
+									<NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+										<MessageCircle size={18} />
+										Messages
+										{unreadCount > 0 && (
+											<span
+												style={{
+													marginLeft: 'auto',
+													backgroundColor: '#fcf150',
+													color: '#000',
+													borderRadius: '50%',
+													minWidth: 20,
+													height: 20,
+													fontSize: 12,
+													fontWeight: 'bold',
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+													padding: '0 6px',
+												}}
+											>
+												{unreadCount > 99 ? '99+' : unreadCount}
+											</span>
+										)}
+									</NavDropdown.Item>
+								</Link>
+								<NavDropdown.Divider />
+								<NavDropdown.Item
+									onClick={logOut}
+									style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#dc3545', cursor: 'pointer' }}
 								>
-									{email}
-								</Button>
-							</Link>
+									<LogOut size={18} />
+									Logout
+								</NavDropdown.Item>
+							</NavDropdown>
 						)}
 					</Nav>
 				</Navbar.Collapse>

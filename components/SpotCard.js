@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
@@ -16,6 +17,7 @@ export default function SpotCard({
 	approvalStatus,
 	showStatus = false,
 }) {
+	const [imageError, setImageError] = useState(false);
 	// Parse tags if it's a string
 	const tagList = tags
 		? typeof tags === "string"
@@ -70,13 +72,14 @@ export default function SpotCard({
 				{/* Image Container */}
 				<div className="relative h-44 bg-muted overflow-hidden">
 					{getStatusBadge()}
-					{imageURL ? (
+					{imageURL && !imageError ? (
 						<Image
 							src={imageURL}
 							alt={name}
 							fill
 							className="object-cover group-hover:scale-105 transition-transform duration-300"
 							unoptimized
+							onError={() => setImageError(true)}
 						/>
 					) : (
 						<div className="absolute inset-0 flex items-center justify-center bg-secondary">

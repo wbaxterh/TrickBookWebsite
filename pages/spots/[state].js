@@ -1,10 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MapPin, Search, Loader2, ArrowLeft } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
 import { Badge } from "../../components/ui/badge";
 import SpotCard from "../../components/SpotCard";
 import { searchSpots } from "../../lib/apiSpots";
@@ -33,6 +32,8 @@ export default function StateSpots() {
 	const [spots, setSpots] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [searchQuery, setSearchQuery] = useState("");
+	const [searchFocused, setSearchFocused] = useState(false);
+	const searchInputRef = useRef(null);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [pagination, setPagination] = useState({
 		page: 1,
@@ -120,12 +121,24 @@ export default function StateSpots() {
 						<div className="flex flex-col md:flex-row gap-4">
 							{/* Search */}
 							<div className="relative flex-1 max-w-md">
-								<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-								<Input
-									placeholder="Search spots..."
+								<div
+									className={`absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+										searchFocused || searchQuery
+											? "opacity-0 -translate-x-2"
+											: "opacity-100 translate-x-0"
+									}`}
+								>
+									<Search className="h-4 w-4 text-muted-foreground" />
+									<span className="text-muted-foreground text-sm">Search spots...</span>
+								</div>
+								<input
+									ref={searchInputRef}
+									type="text"
 									value={searchQuery}
 									onChange={(e) => setSearchQuery(e.target.value)}
-									className="pl-10"
+									onFocus={() => setSearchFocused(true)}
+									onBlur={() => setSearchFocused(false)}
+									className="w-full h-10 px-4 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500/50 focus:border-yellow-500 transition-all duration-200"
 								/>
 							</div>
 

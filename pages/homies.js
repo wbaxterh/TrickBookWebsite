@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
-import { Users, UserPlus, Bell, Search, UserMinus, Check, X, Loader2, User } from "lucide-react";
+import { Users, UserPlus, Bell, Search, UserMinus, Check, X, Loader2, User, MessageCircle } from "lucide-react";
 import {
 	getDiscoverableUsers,
 	getMyHomies,
@@ -17,6 +17,7 @@ import {
 	rejectHomieRequest,
 	removeHomie,
 } from "../lib/apiHomies";
+import { getConversations, startConversation } from "../lib/apiMessages";
 
 export default function Homies() {
 	const { loggedIn, token } = useContext(AuthContext);
@@ -28,11 +29,13 @@ export default function Homies() {
 	const [discoverableUsers, setDiscoverableUsers] = useState([]);
 	const [requests, setRequests] = useState({ received: [], sent: [] });
 	const [sentRequestIds, setSentRequestIds] = useState(new Set()); // Track locally sent requests
+	const [conversations, setConversations] = useState([]);
 
 	// Loading states
 	const [loadingHomies, setLoadingHomies] = useState(true);
 	const [loadingDiscoverable, setLoadingDiscoverable] = useState(true);
 	const [loadingRequests, setLoadingRequests] = useState(true);
+	const [loadingConversations, setLoadingConversations] = useState(true);
 	const [actionLoading, setActionLoading] = useState(null); // Track which action is loading
 
 	// Fetch data on mount
@@ -41,6 +44,7 @@ export default function Homies() {
 			fetchHomies();
 			fetchDiscoverableUsers();
 			fetchRequests();
+			fetchConversations();
 		}
 	}, [token]);
 
@@ -82,6 +86,47 @@ export default function Homies() {
 		} finally {
 			setLoadingRequests(false);
 		}
+	};
+
+	const fetchConversations = async () => {
+		setLoadingConversations(true);
+		try {
+			const data = await getConversations(token);
+			setConversations(data || []);
+		} catch (error) {
+			console.error("Error fetching conversations:", error);
+		} finally {
+			setLoadingConversations(false);
+		}
+	};
+
+	const handleStartConversation = async (userId) => {
+		setActionLoading(`msg-${userId}`);
+		try {
+			const conversation = await startConversation(userId, token);
+			router.push(`/messages/${conversation._id}`);
+		} catch (error) {
+			console.error("Error starting conversation:", error);
+			alert(error.response?.data?.error || "Failed to start conversation");
+		} finally {
+			setActionLoading(null);
+		}
+	};
+
+	const formatTime = (date) => {
+		if (!date) return "";
+		const now = new Date();
+		const msgDate = new Date(date);
+		const diffMs = now - msgDate;
+		const diffMins = Math.floor(diffMs / 60000);
+		const diffHours = Math.floor(diffMs / 3600000);
+		const diffDays = Math.floor(diffMs / 86400000);
+
+		if (diffMins < 1) return "now";
+		if (diffMins < 60) return `${diffMins}m`;
+		if (diffHours < 24) return `${diffHours}h`;
+		if (diffDays < 7) return `${diffDays}d`;
+		return msgDate.toLocaleDateString();
 	};
 
 	const handleSendRequest = async (userId) => {
@@ -231,7 +276,7 @@ export default function Homies() {
 					</div>
 
 					<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-						<TabsList className="grid w-full grid-cols-3 mb-8">
+						<TabsList className="grid w-full grid-cols-4 mb-8">
 							<TabsTrigger
 								value="my-homies"
 								className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
@@ -240,6 +285,18 @@ export default function Homies() {
 								My Homies
 								{homies.length > 0 && (
 									<Badge variant="secondary" className="ml-2">{homies.length}</Badge>
+								)}
+							</TabsTrigger>
+							<TabsTrigger
+								value="messages"
+								className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
+							>
+								<MessageCircle className="h-4 w-4 mr-2" />
+								Messages
+								{conversations.filter(c => c.unreadCount > 0).length > 0 && (
+									<Badge className="ml-2 bg-red-500">
+										{conversations.reduce((sum, c) => sum + (c.unreadCount || 0), 0)}
+									</Badge>
 								)}
 							</TabsTrigger>
 							<TabsTrigger
@@ -296,24 +353,118 @@ export default function Homies() {
 													key={homie._id}
 													user={homie}
 													actions={
-														<Button
-															variant="outline"
-															size="sm"
-															onClick={() => handleRemoveHomie(homie._id)}
-															disabled={actionLoading === homie._id}
-															className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
-														>
-															{actionLoading === homie._id ? (
-																<Loader2 className="h-4 w-4 animate-spin" />
-															) : (
-																<>
-																	<UserMinus className="h-4 w-4 mr-1" />
-																	Remove
-																</>
-															)}
-														</Button>
+														<>
+															<Button
+																variant="outline"
+																size="sm"
+																onClick={() => handleStartConversation(homie._id)}
+																disabled={actionLoading === `msg-${homie._id}`}
+																className="text-yellow-500 hover:text-yellow-600 hover:bg-yellow-500/10"
+															>
+																{actionLoading === `msg-${homie._id}` ? (
+																	<Loader2 className="h-4 w-4 animate-spin" />
+																) : (
+																	<>
+																		<MessageCircle className="h-4 w-4 mr-1" />
+																		Message
+																	</>
+																)}
+															</Button>
+															<Button
+																variant="outline"
+																size="sm"
+																onClick={() => handleRemoveHomie(homie._id)}
+																disabled={actionLoading === homie._id}
+																className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+															>
+																{actionLoading === homie._id ? (
+																	<Loader2 className="h-4 w-4 animate-spin" />
+																) : (
+																	<>
+																		<UserMinus className="h-4 w-4 mr-1" />
+																		Remove
+																	</>
+																)}
+															</Button>
+														</>
 													}
 												/>
+											))}
+										</div>
+									)}
+								</CardContent>
+							</Card>
+						</TabsContent>
+
+						{/* Messages Tab */}
+						<TabsContent value="messages">
+							<Card>
+								<CardHeader>
+									<CardTitle>Messages</CardTitle>
+									<CardDescription>
+										Your conversations with homies
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									{loadingConversations ? (
+										<div className="text-center py-12">
+											<Loader2 className="h-8 w-8 mx-auto text-yellow-500 animate-spin" />
+										</div>
+									) : conversations.length === 0 ? (
+										<div className="text-center py-12">
+											<MessageCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+											<p className="text-muted-foreground mb-4">
+												No conversations yet.
+											</p>
+											<p className="text-sm text-muted-foreground">
+												Start chatting with your homies!
+											</p>
+										</div>
+									) : (
+										<div className="space-y-3">
+											{conversations.map((convo) => (
+												<div
+													key={convo._id}
+													onClick={() => router.push(`/messages/${convo._id}`)}
+													className="flex items-center justify-between p-4 rounded-lg bg-secondary/10 border border-border hover:border-yellow-500/50 cursor-pointer transition-all"
+												>
+													<div className="flex items-center gap-3 flex-1 min-w-0">
+														{convo.otherUser?.imageUri ? (
+															<Image
+																src={convo.otherUser.imageUri}
+																alt={convo.otherUser.name || "User"}
+																width={48}
+																height={48}
+																className="rounded-full object-cover flex-shrink-0"
+																style={{ width: 48, height: 48 }}
+															/>
+														) : (
+															<div className="flex items-center justify-center w-12 h-12 rounded-full bg-muted flex-shrink-0">
+																<User className="h-6 w-6 text-muted-foreground" />
+															</div>
+														)}
+														<div className="flex-1 min-w-0">
+															<div className="flex items-center justify-between">
+																<p className="font-medium text-foreground truncate">
+																	{convo.otherUser?.name || "Unknown"}
+																</p>
+																<span className="text-xs text-muted-foreground flex-shrink-0 ml-2">
+																	{formatTime(convo.lastMessage?.createdAt)}
+																</span>
+															</div>
+															{convo.lastMessage && (
+																<p className={`text-sm truncate ${convo.unreadCount > 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+																	{convo.lastMessage.content}
+																</p>
+															)}
+														</div>
+													</div>
+													{convo.unreadCount > 0 && (
+														<Badge className="ml-2 bg-yellow-500 text-black">
+															{convo.unreadCount}
+														</Badge>
+													)}
+												</div>
 											))}
 										</div>
 									)}

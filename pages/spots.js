@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
-import { MapPin, Loader2, ChevronDown, Filter, Globe } from "lucide-react";
+import React, { useState, useEffect, useContext } from "react";
+import { MapPin, Loader2, ChevronDown, Filter, Globe, Plus } from "lucide-react";
+import { AuthContext } from "../auth/AuthContext";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
@@ -61,6 +62,7 @@ const STATE_NAMES = {
 };
 
 export default function Spots() {
+	const { loggedIn } = useContext(AuthContext);
 	const [spotsByState, setSpotsByState] = useState({});
 	const [spotsByCountry, setSpotsByCountry] = useState({});
 	const [allSpots, setAllSpots] = useState({});
@@ -251,6 +253,14 @@ export default function Spots() {
 										</div>
 									)}
 								</div>
+
+								{/* Add Spot Button */}
+								<Link href={loggedIn ? "/spots/add" : "/login?redirect=/spots/add"}>
+									<button className="flex items-center gap-2 px-5 py-3 bg-yellow-500 text-black font-medium rounded-xl hover:bg-yellow-400 transition-all">
+										<Plus className="h-5 w-5" />
+										<span>Add Spot</span>
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>

@@ -25,8 +25,7 @@ import {
 export default function Conversation() {
 	const router = useRouter();
 	const { conversationId } = router.query;
-	const { token, loggedIn, user } = useContext(AuthContext);
-	const userId = user?.userId || user?._id;
+	const { token, loggedIn, userId } = useContext(AuthContext);
 
 	const [conversation, setConversation] = useState(null);
 	const [messages, setMessages] = useState([]);
@@ -59,28 +58,46 @@ export default function Conversation() {
 
 	// Socket setup
 	useEffect(() => {
-		if (!token || !conversationId) return;
+		console.log("[Chat] Socket useEffect triggered - token:", !!token, "conversationId:", conversationId, "userId:", userId);
+		if (!token || !conversationId) {
+			console.log("[Chat] Missing token or conversationId, skipping socket setup");
+			return;
+		}
 
+		console.log("[Chat] Setting up socket for conversation:", conversationId);
 		const socket = connectMessagesSocket(token);
+		console.log("[Chat] Socket returned from connectMessagesSocket, connected:", socket?.connected);
 		socketRef.current = socket;
 
-		// Join conversation room for typing indicators
+		// Join conversation room for typing indicators and real-time messages
 		socket.emit("join:conversation", conversationId);
+		console.log("[Chat] Emitted join:conversation for:", conversationId);
 
 		// Listen for new messages
 		socket.on("message:new", ({ message }) => {
+			console.log("[Chat] Received message:new event:", message);
+			console.log("[Chat] Comparing conversationIds:", message.conversationId, "vs", conversationId);
+
+			// Skip messages we sent ourselves (handled via HTTP response)
+			if (message.senderId === userId) {
+				console.log("[Chat] Skipping own message from socket (handled via HTTP)");
+				return;
+			}
+
 			if (message.conversationId === conversationId) {
 				setMessages((prev) => {
 					// Avoid duplicates
-					if (prev.some((m) => m._id === message._id)) return prev;
+					if (prev.some((m) => m._id === message._id)) {
+						console.log("[Chat] Duplicate message, skipping:", message._id);
+						return prev;
+					}
+					console.log("[Chat] Adding new message to state");
 					return [...prev, message];
 				});
 				scrollToBottom();
 
-				// Mark as read if we receive it
-				if (message.senderId !== userId) {
-					markAsRead(conversationId, token);
-				}
+				// Mark as read
+				markAsRead(conversationId, token);
 			}
 		});
 
@@ -370,14 +387,14 @@ export default function Conversation() {
 									return (
 										<div
 											key={msg._id}
-											className={`flex ${isMine ? "justify-end" : "justify-start"}`}
+											className={`flex ${isMine ? "justify-start" : "justify-end"}`}
 										>
-											<div className={`max-w-[75%] ${isMine ? "order-2" : ""}`}>
+											<div className="max-w-[75%]">
 												<div
 													className={`px-4 py-2 rounded-2xl ${
 														isMine
-															? "bg-yellow-500 text-black rounded-br-sm"
-															: "bg-secondary text-foreground rounded-bl-sm"
+															? "bg-yellow-500 text-black rounded-bl-sm"
+															: "bg-secondary text-foreground rounded-br-sm"
 													}`}
 												>
 													<p className="text-sm whitespace-pre-wrap break-words">
@@ -386,7 +403,7 @@ export default function Conversation() {
 												</div>
 												<div
 													className={`flex items-center gap-1 mt-1 ${
-														isMine ? "justify-end" : "justify-start"
+														isMine ? "justify-start" : "justify-end"
 													}`}
 												>
 													<span className="text-xs text-muted-foreground">
@@ -419,8 +436,8 @@ export default function Conversation() {
 
 					{/* Typing Indicator */}
 					{otherTyping && (
-						<div className="flex justify-start">
-							<div className="bg-secondary rounded-2xl rounded-bl-sm px-4 py-2">
+						<div className="flex justify-end">
+							<div className="bg-secondary rounded-2xl rounded-br-sm px-4 py-2">
 								<div className="flex gap-1">
 									<span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
 									<span
