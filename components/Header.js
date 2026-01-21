@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,16 +10,61 @@ import { AuthContext } from "../auth/AuthContext";
 import { Button, Skeleton } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, MessageCircle } from "lucide-react";
+import { getUnreadCount } from "../lib/apiMessages";
+import { connectMessagesSocket } from "../lib/socket";
 
 const Header = () => {
-	const { email, loggedIn } = useContext(AuthContext);
+	const { email, loggedIn, token } = useContext(AuthContext);
 	const { theme, setTheme, resolvedTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
+	const [unreadCount, setUnreadCount] = useState(0);
+	const socketRef = useRef(null);
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
+
+	// Fetch unread count and setup socket for real-time updates
+	useEffect(() => {
+		if (!loggedIn || !token) {
+			setUnreadCount(0);
+			return;
+		}
+
+		// Fetch initial unread count
+		const fetchUnread = async () => {
+			try {
+				const data = await getUnreadCount(token);
+				setUnreadCount(data.unreadCount || 0);
+			} catch (error) {
+				console.error("Error fetching unread count:", error);
+			}
+		};
+
+		fetchUnread();
+
+		// Setup socket for real-time updates
+		const socket = connectMessagesSocket(token);
+		socketRef.current = socket;
+
+		// Listen for new messages to increment badge
+		socket.on("message:new", ({ message }) => {
+			// Only increment if not from current user
+			setUnreadCount((prev) => prev + 1);
+		});
+
+		// Listen for read receipts to decrement badge
+		socket.on("messages:read", () => {
+			// Refetch to get accurate count
+			fetchUnread();
+		});
+
+		return () => {
+			socket.off("message:new");
+			socket.off("messages:read");
+		};
+	}, [loggedIn, token]);
 
 	const isDark = mounted && resolvedTheme === 'dark';
 
@@ -80,6 +125,36 @@ const Header = () => {
 								Media
 							</Nav.Link>
 						</Link>
+						{loggedIn && (
+							<Link href='/messages' passHref legacyBehavior>
+								<Nav.Link style={{ position: 'relative' }}>
+									<MessageCircle size={18} style={{ marginRight: 4 }} />
+									Messages
+									{unreadCount > 0 && (
+										<span
+											style={{
+												position: 'absolute',
+												top: 4,
+												right: -2,
+												backgroundColor: '#fcf150',
+												color: '#000',
+												borderRadius: '50%',
+												minWidth: 18,
+												height: 18,
+												fontSize: 11,
+												fontWeight: 'bold',
+												display: 'flex',
+												alignItems: 'center',
+												justifyContent: 'center',
+												padding: '0 4px',
+											}}
+										>
+											{unreadCount > 99 ? '99+' : unreadCount}
+										</span>
+									)}
+								</Nav.Link>
+							</Link>
+						)}
 					</Nav>
 					<Nav className={`ms-auto align-items-center`}>
 						{/* Theme Toggle */}
