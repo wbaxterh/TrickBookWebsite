@@ -222,9 +222,9 @@ export default function Signup() {
 					<div
 						className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
 							s < step
-								? "bg-primary text-primary-foreground"
+								? "bg-yellow-500 text-black"
 								: s === step
-								? "bg-primary text-primary-foreground ring-4 ring-primary/30"
+								? "bg-yellow-500 text-black ring-4 ring-yellow-500/30"
 								: "bg-muted text-muted-foreground"
 						}`}
 					>
@@ -233,7 +233,7 @@ export default function Signup() {
 					{s < 4 && (
 						<div
 							className={`w-8 h-1 mx-1 ${
-								s < step ? "bg-primary" : "bg-muted"
+								s < step ? "bg-yellow-500" : "bg-muted"
 							}`}
 						/>
 					)}
@@ -336,12 +336,12 @@ export default function Signup() {
 							alt="Profile preview"
 							width={120}
 							height={120}
-							className="rounded-full object-cover border-4 border-primary"
+							className="rounded-full object-cover border-4 border-yellow-500"
 							style={{ width: 120, height: 120 }}
 						/>
 					) : selectedIcon ? (
 						<div
-							className={`w-[120px] h-[120px] rounded-full ${selectedIcon.bg} flex items-center justify-center text-5xl border-4 border-primary`}
+							className={`w-[120px] h-[120px] rounded-full ${selectedIcon.bg} flex items-center justify-center text-5xl border-4 border-yellow-500`}
 						>
 							{selectedIcon.emoji}
 						</div>
@@ -387,7 +387,7 @@ export default function Signup() {
 							onClick={() => handleIconSelect(avatar)}
 							className={`w-14 h-14 rounded-full ${avatar.bg} flex items-center justify-center text-2xl transition-all hover:scale-110 ${
 								selectedIcon?.id === avatar.id
-									? "ring-4 ring-primary ring-offset-2"
+									? "ring-4 ring-yellow-500 ring-offset-2"
 									: ""
 							}`}
 						>
@@ -420,14 +420,14 @@ export default function Signup() {
 						onClick={() => toggleSport(sport.id)}
 						className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${
 							selectedSports.includes(sport.id)
-								? "border-primary bg-primary/10"
-								: "border-border hover:border-primary/50"
+								? "border-yellow-500 bg-yellow-500/10"
+								: "border-border hover:border-yellow-500/50"
 						}`}
 					>
 						<div className="text-3xl mb-2">{sport.emoji}</div>
 						<div className="font-medium text-sm">{sport.name}</div>
 						{selectedSports.includes(sport.id) && (
-							<Check className="w-4 h-4 text-primary mx-auto mt-1" />
+							<Check className="w-4 h-4 text-yellow-500 mx-auto mt-1" />
 						)}
 					</button>
 				))}
@@ -445,9 +445,9 @@ export default function Signup() {
 		<div className="space-y-6">
 			<div className="text-center mb-6">
 				<div className="flex items-center justify-center gap-2 mb-2">
-					<Sparkles className="w-6 h-6 text-primary" />
+					<Sparkles className="w-6 h-6 text-yellow-500" />
 					<h2 className="text-2xl font-bold">Rider Profile</h2>
-					<Sparkles className="w-6 h-6 text-primary" />
+					<Sparkles className="w-6 h-6 text-yellow-500" />
 				</div>
 				<p className="text-muted-foreground mt-1">
 					Optional but fun! Build your rider card
@@ -707,7 +707,6 @@ export default function Signup() {
 									<Button
 										onClick={handleSubmit}
 										disabled={isSubmitting}
-										className="bg-primary hover:bg-primary/90"
 									>
 										{isSubmitting ? "Creating Account..." : "Create My Account"}
 									</Button>
@@ -717,7 +716,7 @@ export default function Signup() {
 							{step === 1 && (
 								<p className="text-center text-sm text-muted-foreground mt-4">
 									Already have an account?{" "}
-									<Link href="/login" className="text-primary hover:underline font-medium">
+									<Link href="/login" className="text-yellow-500 hover:underline font-medium">
 										Log in
 									</Link>
 								</p>
