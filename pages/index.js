@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Head from "next/head";
 import Slider from "react-slick";
 import { Container, Typography, Box, Button, Grid } from "@mui/material";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { NextArrow, PrevArrow } from "../components/CustomArrow";
+import { AuthContext } from "../auth/AuthContext";
 
 const settings = {
 	dots: true,
@@ -21,6 +23,8 @@ const settings = {
 };
 
 export default function Home() {
+	const { loggedIn } = useContext(AuthContext);
+
 	return (
 		<>
 			<Head>
@@ -82,6 +86,170 @@ export default function Home() {
 							</div>
 						</div>
 					</section> */}
+			<section className={styles.newsFeedSection}>
+				<Container>
+					<Slider {...settings}>
+						{/* Trickbook Slide */}
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								Trickipedia
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
+								The ultimate trick encyclopedia for action sports. Browse thousands
+								of tricks across skateboarding, snowboarding, surfing, and more.
+								Track your personal progress, discover new tricks to learn, and
+								get step-by-step tutorials to level up your skills.
+							</Typography>
+							<Button
+								variant={"outlined"}
+								color={"primary"}
+								className={`btn ${styles.customPrimary} me-3`}
+							>
+								<Link href='/trickbook' className='text-dark'>
+									Explore Tricks
+								</Link>
+							</Button>
+							{!loggedIn && (
+								<Button
+									variant={"outlined"}
+									color={"secondary"}
+									disableRipple={true}
+									sx={{
+										borderColor: "#1E1E1E",
+										color: "#1E1E1E",
+										"&:hover": {
+											backgroundColor: "transparent",
+											borderColor: "#1E1E1E",
+										},
+									}}
+								>
+									<Link href='/signup' className='text-dark'>
+										Become a Rider
+									</Link>
+								</Button>
+							)}
+						</Box>
+
+						{/* Spots Slide */}
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								Spots
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
+								Discover the best skate spots, snow parks, and surf breaks near you.
+								Our community-driven spot database helps you find new places to ride,
+								complete with photos, ratings, and directions. Share your favorite
+								spots and help fellow riders explore.
+							</Typography>
+							<Button
+								variant={"outlined"}
+								color={"primary"}
+								className={`btn ${styles.customPrimary} me-3`}
+							>
+								<Link href='/spots' className='text-dark'>
+									Find Spots
+								</Link>
+							</Button>
+							{!loggedIn && (
+								<Button
+									variant={"outlined"}
+									color={"secondary"}
+									disableRipple={true}
+									sx={{
+										borderColor: "#1E1E1E",
+										color: "#1E1E1E",
+										"&:hover": {
+											backgroundColor: "transparent",
+											borderColor: "#1E1E1E",
+										},
+									}}
+								>
+									<Link href='/signup' className='text-dark'>
+										Become a Rider
+									</Link>
+								</Button>
+							)}
+						</Box>
+
+						{/* Homies Slide */}
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								Homies
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
+								Connect with riders who share your passion. Build your crew,
+								follow their progress, and stay motivated together. Send direct
+								messages, share clips, and plan sessions with your homies.
+								Action sports are better with friends.
+							</Typography>
+							{loggedIn ? (
+								<Button
+									variant={"outlined"}
+									color={"primary"}
+									className={`btn ${styles.customPrimary} me-3`}
+								>
+									<Link href='/homies' className='text-dark'>
+										Find Homies
+									</Link>
+								</Button>
+							) : (
+								<Button
+									variant={"outlined"}
+									color={"primary"}
+									className={`btn ${styles.customPrimary} me-3`}
+								>
+									<Link href='/signup' className='text-dark'>
+										Become a Rider
+									</Link>
+								</Button>
+							)}
+						</Box>
+
+						{/* Media Slide */}
+						<Box className={`py-4 ${styles.slide}`}>
+							<Typography variant='h2' sx={{ fontWeight: 500 }}>
+								Media
+							</Typography>
+							<Typography className='mb-3 mt-2 px-1'>
+								Watch and share action sports content. Browse The Couch for
+								full-length films and edits, or scroll the Feed to see clips
+								from the community. Post your own footage, react to your
+								favorites, and get inspired by riders worldwide.
+							</Typography>
+							<Button
+								variant={"outlined"}
+								color={"primary"}
+								className={`btn ${styles.customPrimary} me-3`}
+							>
+								<Link href='/media' className='text-dark'>
+									Watch Now
+								</Link>
+							</Button>
+							{!loggedIn && (
+								<Button
+									variant={"outlined"}
+									color={"secondary"}
+									disableRipple={true}
+									sx={{
+										borderColor: "#1E1E1E",
+										color: "#1E1E1E",
+										"&:hover": {
+											backgroundColor: "transparent",
+											borderColor: "#1E1E1E",
+										},
+									}}
+								>
+									<Link href='/signup' className='text-dark'>
+										Become a Rider
+									</Link>
+								</Button>
+							)}
+						</Box>
+					</Slider>
+				</Container>
+			</section>
+
+			{/* OLD SLIDER CONTENT - COMMENTED OUT
 			<section className={styles.newsFeedSection}>
 				<Container>
 					<Slider {...settings}>
@@ -168,6 +336,7 @@ export default function Home() {
 					</Slider>
 				</Container>
 			</section>
+			*/}
 			<section className={`${styles.featuresSection} py-5 px-md-5`}>
 				<div className='row'>
 					<Box className={`p-4 px-md-5 col-md-10`}>
