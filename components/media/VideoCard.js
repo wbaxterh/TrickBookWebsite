@@ -40,13 +40,14 @@ export default function VideoCard({
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			{/* Thumbnail */}
-			{video.thumbnails?.poster && !imageError ? (
+			{(video.thumbnails?.poster || video.driveThumbnail) && !imageError ? (
 				<Image
-					src={video.thumbnails.poster}
+					src={video.thumbnails?.poster || video.driveThumbnail}
 					alt={video.title}
 					fill
 					className="object-cover transition-transform duration-300 group-hover:scale-105"
 					onError={() => setImageError(true)}
+					unoptimized={!!video.driveThumbnail}
 				/>
 			) : (
 				<div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-black/50 flex items-center justify-center">

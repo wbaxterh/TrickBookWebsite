@@ -26,6 +26,15 @@ import {
 	Eye,
 	Check,
 	X,
+	Shield,
+	Tv,
+	ChevronRight,
+	FileText,
+	BookOpen,
+	MapPin,
+	Clock,
+	LayoutDashboard,
+	FolderTree,
 } from "lucide-react";
 
 // Sport categories
@@ -65,7 +74,7 @@ const RIDER_STYLES = [
 
 export default function SettingsPage() {
 	const router = useRouter();
-	const { token, logOut, name, email, imageUri, setImageUri, setName } = useContext(AuthContext);
+	const { token, logOut, name, email, imageUri, setImageUri, setName, role } = useContext(AuthContext);
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
@@ -656,6 +665,148 @@ export default function SettingsPage() {
 
 						{/* Account Tab */}
 						<TabsContent value="account" className="space-y-6">
+							{/* Admin Section - Only shown for admins */}
+							{role === "admin" && (
+								<Card className="border-yellow-500/50 bg-yellow-500/5">
+									<CardHeader>
+										<CardTitle className="flex items-center gap-2 text-yellow-500">
+											<Shield className="w-5 h-5" />
+											Admin Access
+										</CardTitle>
+										<CardDescription>
+											Manage content, users, and site settings
+										</CardDescription>
+									</CardHeader>
+									<CardContent className="space-y-2">
+										{/* Admin Dashboard */}
+										<Link href="/admin">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+														<LayoutDashboard className="w-4 h-4 text-yellow-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Dashboard</p>
+														<p className="text-xs text-muted-foreground">
+															Users and tricklists overview
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* The Couch */}
+										<Link href="/admin/couch">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-purple-500/20 flex items-center justify-center">
+														<Tv className="w-4 h-4 text-purple-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">The Couch</p>
+														<p className="text-xs text-muted-foreground">
+															Manage videos and collections
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* Trickipedia */}
+										<Link href="/admin/trickipedia">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-blue-500/20 flex items-center justify-center">
+														<BookOpen className="w-4 h-4 text-blue-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Trickipedia</p>
+														<p className="text-xs text-muted-foreground">
+															Manage tricks database
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* Spots */}
+										<Link href="/admin/spots">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-green-500/20 flex items-center justify-center">
+														<MapPin className="w-4 h-4 text-green-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Spots</p>
+														<p className="text-xs text-muted-foreground">
+															Manage skate spots
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* Pending Spots */}
+										<Link href="/admin/pending-spots">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-orange-500/20 flex items-center justify-center">
+														<Clock className="w-4 h-4 text-orange-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Pending Spots</p>
+														<p className="text-xs text-muted-foreground">
+															Review user-submitted spots
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* Blog */}
+										<Link href="/admin/blog">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-pink-500/20 flex items-center justify-center">
+														<FileText className="w-4 h-4 text-pink-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Blog</p>
+														<p className="text-xs text-muted-foreground">
+															Manage blog posts
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+
+										{/* Categories */}
+										<Link href="/admin/categories">
+											<div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group">
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+														<FolderTree className="w-4 h-4 text-cyan-500" />
+													</div>
+													<div>
+														<p className="font-medium text-sm">Categories</p>
+														<p className="text-xs text-muted-foreground">
+															Manage trick categories
+														</p>
+													</div>
+												</div>
+												<ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+											</div>
+										</Link>
+									</CardContent>
+								</Card>
+							)}
+
 							{/* Logout */}
 							<Card>
 								<CardHeader>

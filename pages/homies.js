@@ -22,7 +22,7 @@ import { getConversations, startConversation } from "../lib/apiMessages";
 export default function Homies() {
 	const { loggedIn, token } = useContext(AuthContext);
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState("my-homies");
+	const [activeTab, setActiveTab] = useState("find");
 
 	// Data states
 	const [homies, setHomies] = useState([]);
@@ -278,6 +278,13 @@ export default function Homies() {
 					<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
 						<TabsList className="grid w-full grid-cols-4 mb-8">
 							<TabsTrigger
+								value="find"
+								className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
+							>
+								<Search className="h-4 w-4 mr-2" />
+								Find Homies
+							</TabsTrigger>
+							<TabsTrigger
 								value="my-homies"
 								className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
 							>
@@ -308,13 +315,6 @@ export default function Homies() {
 								{pendingCount > 0 && (
 									<Badge className="ml-2 bg-red-500">{pendingCount}</Badge>
 								)}
-							</TabsTrigger>
-							<TabsTrigger
-								value="find"
-								className="data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
-							>
-								<Search className="h-4 w-4 mr-2" />
-								Find Homies
 							</TabsTrigger>
 						</TabsList>
 

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import FeedPost from "../components/media/FeedPost";
 import VideoCard from "../components/media/VideoCard";
-import { getFeatured, getCollections, SPORT_TYPES } from "../lib/apiMedia";
+import { getFeatured, getCollections, getCouchVideos, SPORT_TYPES } from "../lib/apiMedia";
 import { getFeed, getTrendingFeed, addReaction, removeReaction } from "../lib/apiFeed";
 
 export default function Media() {
@@ -33,6 +33,7 @@ export default function Media() {
 	// Data states
 	const [featured, setFeatured] = useState(null);
 	const [collections, setCollections] = useState([]);
+	const [recentVideos, setRecentVideos] = useState([]);
 	const [feedPosts, setFeedPosts] = useState([]);
 	const [trendingPosts, setTrendingPosts] = useState([]);
 
@@ -45,12 +46,14 @@ export default function Media() {
 		const fetchCouchData = async () => {
 			setLoadingCouch(true);
 			try {
-				const [featuredData, collectionsData] = await Promise.all([
+				const [featuredData, collectionsData, videosData] = await Promise.all([
 					getFeatured().catch(() => null),
 					getCollections({ sport: sportFilter }).catch(() => []),
+					getCouchVideos({ sport: sportFilter, limit: 20 }).catch(() => []),
 				]);
 				setFeatured(featuredData);
 				setCollections(collectionsData);
+				setRecentVideos(videosData || []);
 			} catch (error) {
 				console.error("Error fetching couch data:", error);
 			} finally {
@@ -154,7 +157,7 @@ export default function Media() {
 		},
 	];
 
-	const displayCollections = collections.length > 0 ? collections : sampleCollections;
+	const displayCollections = collections.length > 0 ? collections : [];
 	const displayPosts = feedPosts.length > 0 ? feedPosts : samplePosts;
 
 	return (
@@ -276,7 +279,7 @@ export default function Media() {
 							</div>
 						</div>
 
-						{/* Collections */}
+						{/* Collections and Videos */}
 						<div className="container mx-auto px-4 pb-12">
 							{loadingCouch ? (
 								<div className="flex justify-center py-12">
@@ -284,6 +287,7 @@ export default function Media() {
 								</div>
 							) : (
 								<div className="space-y-10">
+									{/* Show collections if any */}
 									{displayCollections.map((collection) => (
 										<div key={collection._id}>
 											<div className="flex items-center justify-between mb-4">
@@ -312,6 +316,39 @@ export default function Media() {
 											</div>
 										</div>
 									))}
+
+									{/* Show recent videos */}
+									{recentVideos.length > 0 && (
+										<div>
+											<div className="flex items-center justify-between mb-4">
+												<div>
+													<h2 className="text-xl font-bold text-foreground">
+														Recent Videos
+													</h2>
+													<p className="text-sm text-muted-foreground">
+														Latest additions to The Couch
+													</p>
+												</div>
+											</div>
+
+											<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+												{recentVideos.map((video) => (
+													<VideoCard key={video._id} video={video} size="medium" />
+												))}
+											</div>
+										</div>
+									)}
+
+									{/* Empty state */}
+									{displayCollections.length === 0 && recentVideos.length === 0 && (
+										<div className="text-center py-16">
+											<Film className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+											<h2 className="text-xl font-bold text-foreground mb-2">No videos yet</h2>
+											<p className="text-muted-foreground">
+												Check back soon for action sports films and documentaries.
+											</p>
+										</div>
+									)}
 								</div>
 							)}
 						</div>
