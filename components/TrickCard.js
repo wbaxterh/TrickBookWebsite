@@ -28,8 +28,9 @@ export default function TrickCard({
 							className='rounded-top'
 							src={images[0]}
 							alt={`${name}`}
-							layout='fill'
-							objectFit='cover'
+							fill
+							style={{ objectFit: 'cover' }}
+							unoptimized={images[0]?.includes('s3.amazonaws.com')}
 						/>
 					</div>
 				)}

@@ -17,8 +17,9 @@ export default function BlogCard({ id, firstImage, title, date, author }) {
 							className='rounded-top'
 							src={firstImage}
 							alt={`${title}`}
-							layout='fill'
-							objectFit='cover'
+							fill
+							style={{ objectFit: 'cover' }}
+							unoptimized={firstImage?.includes('s3.amazonaws.com')}
 						/>
 					</div>
 				)}

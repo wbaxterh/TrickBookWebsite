@@ -156,7 +156,7 @@ const Header = () => {
 										color: "#333",
 									}}
 								>
-									Login
+									Login / Register
 								</Button>
 							</Link>
 						) : (
