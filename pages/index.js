@@ -47,7 +47,7 @@ export default function Home() {
 								width={250} // Desired size with correct aspect ratio
 								alt='Trick Book'
 							/> */}
-					<h1>Welcome to the World of Action Sports</h1>
+					<h1>The platform dedicated to Action Sports</h1>
 					<div className='d-flex justify-content-center'>
 						<a
 							className={styles.centerImage}
