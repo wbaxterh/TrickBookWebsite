@@ -92,7 +92,7 @@ export default function Home() {
 						{/* Trickbook Slide */}
 						<Box className={`py-4 ${styles.slide}`}>
 							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								Trickipedia
+								📘 Trickipedia
 							</Typography>
 							<Typography className='mb-3 mt-2 px-1'>
 								The ultimate trick encyclopedia for action sports. Browse thousands
@@ -133,7 +133,7 @@ export default function Home() {
 						{/* Spots Slide */}
 						<Box className={`py-4 ${styles.slide}`}>
 							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								Spots
+								📍 Spots
 							</Typography>
 							<Typography className='mb-3 mt-2 px-1'>
 								Discover the best skate spots, snow parks, and surf breaks near you.
@@ -174,7 +174,7 @@ export default function Home() {
 						{/* Homies Slide */}
 						<Box className={`py-4 ${styles.slide}`}>
 							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								Homies
+								🤝 Homies
 							</Typography>
 							<Typography className='mb-3 mt-2 px-1'>
 								Connect with riders who share your passion. Build your crew,
@@ -208,7 +208,7 @@ export default function Home() {
 						{/* Media Slide */}
 						<Box className={`py-4 ${styles.slide}`}>
 							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								Media
+								🎬 Media
 							</Typography>
 							<Typography className='mb-3 mt-2 px-1'>
 								Watch and share action sports content. Browse The Couch for
