@@ -33,6 +33,8 @@ export default function Login() {
 	const [loginError, setLoginError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+	const [emailFocused, setEmailFocused] = useState(false);
+	const [passwordFocused, setPasswordFocused] = useState(false);
 	const router = useRouter();
 
 	const formik = useFormik({
@@ -112,15 +114,25 @@ export default function Login() {
 										Email Address
 									</label>
 									<div className="relative">
-										<Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+										<Mail
+											className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-all duration-200 ${
+												emailFocused || formik.values.email ? "opacity-0 -translate-x-2" : "opacity-100"
+											}`}
+										/>
 										<Input
 											id="email"
 											name="email"
 											type="email"
-											placeholder="you@example.com"
-											className="pl-10"
+											placeholder={emailFocused || formik.values.email ? "" : "you@example.com"}
+											className={`transition-all duration-200 ${
+												emailFocused || formik.values.email ? "pl-3" : "pl-10"
+											}`}
 											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
+											onFocus={() => setEmailFocused(true)}
+											onBlur={(e) => {
+												setEmailFocused(false);
+												formik.handleBlur(e);
+											}}
 											value={formik.values.email}
 											disabled={isLoading}
 										/>
@@ -144,15 +156,25 @@ export default function Login() {
 										</Link>
 									</div>
 									<div className="relative">
-										<Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+										<Lock
+											className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-all duration-200 ${
+												passwordFocused || formik.values.password ? "opacity-0 -translate-x-2" : "opacity-100"
+											}`}
+										/>
 										<Input
 											id="password"
 											name="password"
 											type="password"
-											placeholder="Enter your password"
-											className="pl-10"
+											placeholder={passwordFocused || formik.values.password ? "" : "Enter your password"}
+											className={`transition-all duration-200 ${
+												passwordFocused || formik.values.password ? "pl-3" : "pl-10"
+											}`}
 											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
+											onFocus={() => setPasswordFocused(true)}
+											onBlur={(e) => {
+												setPasswordFocused(false);
+												formik.handleBlur(e);
+											}}
 											value={formik.values.password}
 											disabled={isLoading}
 										/>

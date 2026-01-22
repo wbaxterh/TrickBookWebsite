@@ -11,6 +11,7 @@ export default function ForgotPassword() {
 	const [email, setEmail] = useState("");
 	const [status, setStatus] = useState("idle"); // idle, loading, success, error
 	const [message, setMessage] = useState("");
+	const [emailFocused, setEmailFocused] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -109,15 +110,23 @@ export default function ForgotPassword() {
 												Email Address
 											</label>
 											<div className="relative">
-												<Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+												<Mail
+													className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-all duration-200 ${
+														emailFocused || email ? "opacity-0 -translate-x-2" : "opacity-100"
+													}`}
+												/>
 												<Input
 													id="email"
 													name="email"
 													type="email"
-													placeholder="you@example.com"
-													className="pl-10"
+													placeholder={emailFocused || email ? "" : "you@example.com"}
+													className={`transition-all duration-200 ${
+														emailFocused || email ? "pl-3" : "pl-10"
+													}`}
 													value={email}
 													onChange={(e) => setEmail(e.target.value)}
+													onFocus={() => setEmailFocused(true)}
+													onBlur={() => setEmailFocused(false)}
 													disabled={status === "loading"}
 												/>
 											</div>
