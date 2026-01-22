@@ -221,7 +221,6 @@ export default function FeedPost({
 						src={post.hlsUrl || post.videoUrl}
 						poster={post.thumbnailUrl}
 						loop
-						muted
 						autoPlay={autoPlay && isInView}
 						controls={true}
 						aspectRatio={post.aspectRatio || "9:16"}

@@ -27,6 +27,7 @@ import {
 	SPORT_TYPES,
 	CONTENT_TYPES,
 } from "../../../../lib/apiMedia";
+import { uploadImageToS3 } from "../../../../lib/apiUpload";
 
 const TAGS = [
 	"street",
@@ -81,6 +82,8 @@ export default function EditVideo() {
 	const [fetchingYouTube, setFetchingYouTube] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState(0);
+	const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
+	const [thumbnailProgress, setThumbnailProgress] = useState(0);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
 
@@ -272,6 +275,48 @@ export default function EditVideo() {
 			setError("Failed to upload video. Please try again.");
 		} finally {
 			setUploading(false);
+		}
+	};
+
+	const handleThumbnailUpload = async (e) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+
+		// Validate file type
+		if (!file.type.startsWith("image/")) {
+			setError("Please select an image file");
+			return;
+		}
+
+		// Validate file size (max 5MB)
+		if (file.size > 5 * 1024 * 1024) {
+			setError("Thumbnail must be less than 5MB");
+			return;
+		}
+
+		setUploadingThumbnail(true);
+		setThumbnailProgress(0);
+		setError("");
+
+		try {
+			const result = await uploadImageToS3(file, token, (progress) => {
+				setThumbnailProgress(progress);
+			});
+
+			// Update form with the uploaded thumbnail URL
+			setFormData((prev) => ({
+				...prev,
+				thumbnails: { ...prev.thumbnails, poster: result.fileUrl },
+			}));
+
+			setThumbnailProgress(100);
+			setSuccess("Thumbnail uploaded successfully!");
+			setTimeout(() => setSuccess(""), 3000);
+		} catch (err) {
+			console.error("Thumbnail upload error:", err);
+			setError("Failed to upload thumbnail. Please try again.");
+		} finally {
+			setUploadingThumbnail(false);
 		}
 	};
 
@@ -523,39 +568,93 @@ export default function EditVideo() {
 									/>
 								</div>
 
-								{/* Thumbnail Preview */}
-								{(formData.thumbnails?.poster || formData.driveThumbnail) && (
+								{/* Thumbnail Section */}
+								<div className="space-y-4 p-4 bg-secondary/30 rounded-lg border border-border">
+									<label className="block text-sm font-medium text-foreground">
+										Thumbnail
+									</label>
+
+									{/* Current Thumbnail Preview */}
+									{(formData.thumbnails?.poster || formData.driveThumbnail) && (
+										<div className="flex items-start gap-4">
+											<div className="relative w-48 h-28 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+												<img
+													src={formData.thumbnails?.poster || formData.driveThumbnail}
+													alt="Thumbnail"
+													className="w-full h-full object-cover"
+												/>
+											</div>
+											<div className="text-sm text-muted-foreground">
+												<p className="font-medium text-foreground mb-1">Current thumbnail</p>
+												<p className="text-xs truncate max-w-xs">
+													{formData.thumbnails?.poster || formData.driveThumbnail}
+												</p>
+											</div>
+										</div>
+									)}
+
+									{/* Upload Thumbnail File */}
 									<div>
-										<label className="block text-sm font-medium text-foreground mb-1">
-											Current Thumbnail
-										</label>
-										<div className="relative w-48 h-28 bg-muted rounded-lg overflow-hidden">
-											<img
-												src={formData.thumbnails?.poster || formData.driveThumbnail}
-												alt="Thumbnail"
-												className="w-full h-full object-cover"
-											/>
+										<p className="text-sm text-muted-foreground mb-2">
+											Upload a new thumbnail image:
+										</p>
+										{uploadingThumbnail ? (
+											<div className="space-y-2">
+												<div className="h-2 bg-secondary rounded-full overflow-hidden">
+													<div
+														className="h-full bg-yellow-500 transition-all"
+														style={{ width: `${thumbnailProgress}%` }}
+													/>
+												</div>
+												<p className="text-sm text-muted-foreground">
+													Uploading thumbnail... {thumbnailProgress.toFixed(0)}%
+												</p>
+											</div>
+										) : (
+											<label className="flex flex-col items-center justify-center h-24 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-yellow-500 transition-colors">
+												<Upload className="h-6 w-6 text-muted-foreground mb-1" />
+												<span className="text-sm text-muted-foreground">
+													Click to upload image (max 5MB)
+												</span>
+												<span className="text-xs text-muted-foreground">
+													JPG, PNG, WebP supported
+												</span>
+												<input
+													type="file"
+													accept="image/jpeg,image/png,image/webp,image/gif"
+													onChange={handleThumbnailUpload}
+													className="hidden"
+												/>
+											</label>
+										)}
+									</div>
+
+									{/* Or: Enter URL */}
+									<div className="relative">
+										<div className="absolute inset-0 flex items-center">
+											<span className="w-full border-t border-border" />
+										</div>
+										<div className="relative flex justify-center text-xs uppercase">
+											<span className="bg-card px-2 text-muted-foreground">
+												or enter URL
+											</span>
 										</div>
 									</div>
-								)}
 
-								{/* Custom Thumbnail URL */}
-								<div>
-									<label className="block text-sm font-medium text-foreground mb-1">
-										Custom Thumbnail URL
-									</label>
-									<input
-										type="text"
-										value={formData.thumbnails?.poster || ""}
-										onChange={(e) =>
-											setFormData((prev) => ({
-												...prev,
-												thumbnails: { ...prev.thumbnails, poster: e.target.value },
-											}))
-										}
-										placeholder="https://..."
-										className="w-full px-4 py-2 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500"
-									/>
+									<div>
+										<input
+											type="text"
+											value={formData.thumbnails?.poster || ""}
+											onChange={(e) =>
+												setFormData((prev) => ({
+													...prev,
+													thumbnails: { ...prev.thumbnails, poster: e.target.value },
+												}))
+											}
+											placeholder="https://example.com/thumbnail.jpg"
+											className="w-full px-4 py-2 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500"
+										/>
+									</div>
 								</div>
 							</div>
 						</div>

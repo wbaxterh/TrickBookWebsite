@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -36,6 +36,16 @@ export default function VideoPage() {
 	const [userReaction, setUserReaction] = useState({ love: false, respect: false });
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [showComments, setShowComments] = useState(false);
+	const videoRef = useRef(null);
+
+	// Auto-play video when isPlaying becomes true
+	useEffect(() => {
+		if (isPlaying && videoRef.current) {
+			videoRef.current.play().catch((err) => {
+				console.log("Autoplay prevented:", err);
+			});
+		}
+	}, [isPlaying]);
 
 	useEffect(() => {
 		if (!id) return;
@@ -143,17 +153,19 @@ export default function VideoPage() {
 						</div>
 					) : streamUrl?.embedUrl ? (
 						<iframe
-							src={streamUrl.embedUrl}
+							src={`${streamUrl.embedUrl}${streamUrl.embedUrl.includes('?') ? '&' : '?'}autoplay=true`}
 							className="absolute inset-0 w-full h-full"
-							allow="autoplay; encrypted-media"
+							allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
 							allowFullScreen
 						/>
 					) : (
 						<video
+							ref={videoRef}
 							src={streamUrl?.streamUrl}
 							className="absolute inset-0 w-full h-full"
 							controls
 							autoPlay
+							playsInline
 						/>
 					)}
 				</div>

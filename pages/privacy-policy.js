@@ -431,8 +431,8 @@ export default function PrivacyPolicy() {
 								<div className="space-y-2 text-muted-foreground">
 									<p>
 										<strong className="text-foreground">Email:</strong>{" "}
-										<a href="mailto:privacy@thetrickbook.com" className="text-yellow-500 hover:text-yellow-400">
-											privacy@thetrickbook.com
+										<a href="mailto:admin@thetrickbook.com" className="text-yellow-500 hover:text-yellow-400">
+											admin@thetrickbook.com
 										</a>
 									</p>
 									<p>

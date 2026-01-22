@@ -521,8 +521,8 @@ export default function TermsConditions() {
 									<div className="space-y-2 text-sm">
 										<p>
 											<strong className="text-foreground">Email:</strong>{" "}
-											<a href="mailto:support@thetrickbook.com" className="text-yellow-500 hover:text-yellow-400">
-												support@thetrickbook.com
+											<a href="mailto:admin@thetrickbook.com" className="text-yellow-500 hover:text-yellow-400">
+												admin@thetrickbook.com
 											</a>
 										</p>
 										<p>

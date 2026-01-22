@@ -16,6 +16,8 @@ export default function ResetPassword() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [status, setStatus] = useState("idle"); // idle, loading, success, error
 	const [message, setMessage] = useState("");
+	const [passwordFocused, setPasswordFocused] = useState(false);
+	const [confirmFocused, setConfirmFocused] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -132,15 +134,25 @@ export default function ResetPassword() {
 												New Password
 											</label>
 											<div className="relative">
-												<Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+												<div
+													className={`absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+														passwordFocused || password
+															? "opacity-0 -translate-x-2"
+															: "opacity-100 translate-x-0"
+													}`}
+												>
+													<Lock className="h-4 w-4 text-muted-foreground" />
+													<span className="text-muted-foreground text-sm">Enter new password</span>
+												</div>
 												<Input
 													id="password"
 													name="password"
 													type="password"
-													placeholder="Enter new password"
-													className="pl-10"
+													className="h-11 px-3"
 													value={password}
 													onChange={(e) => setPassword(e.target.value)}
+													onFocus={() => setPasswordFocused(true)}
+													onBlur={() => setPasswordFocused(false)}
 													disabled={status === "loading"}
 													minLength={5}
 												/>
@@ -153,15 +165,25 @@ export default function ResetPassword() {
 												Confirm Password
 											</label>
 											<div className="relative">
-												<Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+												<div
+													className={`absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+														confirmFocused || confirmPassword
+															? "opacity-0 -translate-x-2"
+															: "opacity-100 translate-x-0"
+													}`}
+												>
+													<Lock className="h-4 w-4 text-muted-foreground" />
+													<span className="text-muted-foreground text-sm">Confirm new password</span>
+												</div>
 												<Input
 													id="confirmPassword"
 													name="confirmPassword"
 													type="password"
-													placeholder="Confirm new password"
-													className="pl-10"
+													className="h-11 px-3"
 													value={confirmPassword}
 													onChange={(e) => setConfirmPassword(e.target.value)}
+													onFocus={() => setConfirmFocused(true)}
+													onBlur={() => setConfirmFocused(false)}
 													disabled={status === "loading"}
 													minLength={5}
 												/>
