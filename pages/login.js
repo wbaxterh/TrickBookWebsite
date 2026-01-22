@@ -114,19 +114,21 @@ export default function Login() {
 										Email Address
 									</label>
 									<div className="relative">
-										<Mail
-											className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-all duration-200 ${
-												emailFocused || formik.values.email ? "opacity-0 -translate-x-2" : "opacity-100"
+										<div
+											className={`absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+												emailFocused || formik.values.email
+													? "opacity-0 -translate-x-2"
+													: "opacity-100 translate-x-0"
 											}`}
-										/>
+										>
+											<Mail className="h-4 w-4 text-muted-foreground" />
+											<span className="text-muted-foreground text-sm">you@example.com</span>
+										</div>
 										<Input
 											id="email"
 											name="email"
 											type="email"
-											placeholder={emailFocused || formik.values.email ? "" : "you@example.com"}
-											className={`transition-all duration-200 ${
-												emailFocused || formik.values.email ? "pl-3" : "pl-10"
-											}`}
+											className="h-11 px-3"
 											onChange={formik.handleChange}
 											onFocus={() => setEmailFocused(true)}
 											onBlur={(e) => {
@@ -156,19 +158,21 @@ export default function Login() {
 										</Link>
 									</div>
 									<div className="relative">
-										<Lock
-											className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-all duration-200 ${
-												passwordFocused || formik.values.password ? "opacity-0 -translate-x-2" : "opacity-100"
+										<div
+											className={`absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
+												passwordFocused || formik.values.password
+													? "opacity-0 -translate-x-2"
+													: "opacity-100 translate-x-0"
 											}`}
-										/>
+										>
+											<Lock className="h-4 w-4 text-muted-foreground" />
+											<span className="text-muted-foreground text-sm">Enter your password</span>
+										</div>
 										<Input
 											id="password"
 											name="password"
 											type="password"
-											placeholder={passwordFocused || formik.values.password ? "" : "Enter your password"}
-											className={`transition-all duration-200 ${
-												passwordFocused || formik.values.password ? "pl-3" : "pl-10"
-											}`}
+											className="h-11 px-3"
 											onChange={formik.handleChange}
 											onFocus={() => setPasswordFocused(true)}
 											onBlur={(e) => {
