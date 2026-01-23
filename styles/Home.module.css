@@ -46,6 +46,12 @@
 :global(.dark) .splashHeader {
 	background-color: #1e1e1e;
 }
+.splashHeader h1 {
+	font-size: 2rem;
+	font-weight: 600;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+}
 .navWrapper {
 	/* border: 1px solid blue; */
 }
