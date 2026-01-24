@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../auth/AuthContext";
+import UserAvatar from "../../components/UserAvatar";
 import {
 	getConversation,
 	getMessages,
@@ -323,20 +324,7 @@ export default function Conversation() {
 						href={`/profile/${otherUser?._id}`}
 						className="flex items-center gap-3 flex-1 hover:opacity-80 transition-opacity"
 					>
-						{otherUser?.imageUri ? (
-							<Image
-								src={otherUser.imageUri}
-								alt={otherUser.name || "User"}
-								width={40}
-								height={40}
-								className="rounded-full object-cover"
-								style={{ width: 40, height: 40 }}
-							/>
-						) : (
-							<div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-								<User className="h-5 w-5 text-muted-foreground" />
-							</div>
-						)}
+						<UserAvatar user={otherUser} size={40} />
 						<div>
 							<p className="font-medium text-foreground">
 								{otherUser?.name || "Unknown"}
