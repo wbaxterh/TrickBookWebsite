@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AuthContext } from "../../auth/AuthContext";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import UserAvatar from "../UserAvatar";
 import {
 	getComments,
 	addComment,
@@ -265,25 +266,7 @@ export default function CommentSection({
 	const CommentItem = ({ comment, isReply = false }) => (
 		<div className={`flex gap-3 ${isReply ? "ml-10 mt-3" : ""}`}>
 			<Link href={`/profile/${comment.user?._id}`} className="flex-shrink-0">
-				{comment.user?.imageUri ? (
-					<Image
-						src={comment.user.imageUri}
-						alt={comment.user.name || "User"}
-						width={isReply ? 28 : 36}
-						height={isReply ? 28 : 36}
-						className="rounded-full object-cover"
-						style={{
-							width: isReply ? 28 : 36,
-							height: isReply ? 28 : 36,
-						}}
-					/>
-				) : (
-					<div
-						className={`${isReply ? "w-7 h-7" : "w-9 h-9"} rounded-full bg-muted flex items-center justify-center`}
-					>
-						<User className="h-4 w-4 text-muted-foreground" />
-					</div>
-				)}
+				<UserAvatar user={comment.user} size={isReply ? 28 : 36} />
 			</Link>
 
 			<div className="flex-1 min-w-0">

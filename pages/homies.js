@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { AuthContext } from "../auth/AuthContext";
+import UserAvatar from "../components/UserAvatar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
@@ -195,22 +197,13 @@ export default function Homies() {
 	const UserCard = ({ user, actions }) => (
 		<div className="flex items-center justify-between p-4 rounded-lg bg-secondary/10 border border-border">
 			<div className="flex items-center gap-3">
-				{user.imageUri ? (
-					<Image
-						src={user.imageUri}
-						alt={user.name || "User"}
-						width={48}
-						height={48}
-						className="rounded-full object-cover"
-						style={{ width: 48, height: 48 }}
-					/>
-				) : (
-					<div className="flex items-center justify-center w-12 h-12 rounded-full bg-muted">
-						<User className="h-6 w-6 text-muted-foreground" />
-					</div>
-				)}
+				<Link href={`/profile/${user._id}`} className="flex-shrink-0 hover:ring-2 hover:ring-yellow-500 rounded-full transition-all">
+					<UserAvatar user={user} size={48} />
+				</Link>
 				<div>
-					<p className="font-medium text-foreground">{user.name || "Unknown"}</p>
+					<Link href={`/profile/${user._id}`} className="hover:text-yellow-500 transition-colors">
+						<p className="font-medium text-foreground">{user.name || "Unknown"}</p>
+					</Link>
 					<p className="text-sm text-muted-foreground">{user.email}</p>
 				</div>
 			</div>

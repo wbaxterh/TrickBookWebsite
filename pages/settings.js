@@ -35,7 +35,20 @@ import {
 	Clock,
 	LayoutDashboard,
 	FolderTree,
+	CreditCard,
+	Crown,
+	Loader2,
+	AlertCircle,
+	CheckCircle2,
 } from "lucide-react";
+import {
+	getSubscription,
+	createCheckoutSession,
+	cancelSubscription,
+	reactivateSubscription,
+	getUsage,
+} from "../lib/apiPayments";
+import VerifiedBadge from "../components/ui/VerifiedBadge";
 
 // Sport categories
 const SPORT_CATEGORIES = [
@@ -82,6 +95,12 @@ export default function SettingsPage() {
 	const [saving, setSaving] = useState(false);
 	const [userId, setUserId] = useState(null);
 
+	// Subscription state
+	const [subscription, setSubscription] = useState({ plan: "free", status: "active" });
+	const [usage, setUsage] = useState(null);
+	const [subscriptionLoading, setSubscriptionLoading] = useState(false);
+	const [activeTab, setActiveTab] = useState("profile");
+
 	// Profile data
 	const [profileData, setProfileData] = useState({
 		name: "",
@@ -121,6 +140,13 @@ export default function SettingsPage() {
 		setMounted(true);
 	}, []);
 
+	// Handle tab query parameter (e.g., ?tab=billing)
+	useEffect(() => {
+		if (router.query.tab) {
+			setActiveTab(router.query.tab);
+		}
+	}, [router.query.tab]);
+
 	useEffect(() => {
 		if (!token) {
 			router.push("/login");
@@ -131,8 +157,22 @@ export default function SettingsPage() {
 		if (decoded?.userId) {
 			setUserId(decoded.userId);
 			fetchUserData(decoded.userId);
+			fetchSubscriptionData();
 		}
 	}, [token]);
+
+	const fetchSubscriptionData = async () => {
+		try {
+			const [subData, usageData] = await Promise.all([
+				getSubscription(token),
+				getUsage(token).catch(() => null),
+			]);
+			setSubscription(subData.subscription || { plan: "free", status: "active" });
+			setUsage(usageData);
+		} catch (error) {
+			console.error("Error fetching subscription:", error);
+		}
+	};
 
 	const fetchUserData = async (uid) => {
 		try {
@@ -356,10 +396,14 @@ export default function SettingsPage() {
 						</Link>
 					</div>
 
-					<Tabs defaultValue="profile" className="w-full">
-						<TabsList className="grid w-full grid-cols-3 mb-6">
+					<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+						<TabsList className="grid w-full grid-cols-4 mb-6">
 							<TabsTrigger value="profile">Profile</TabsTrigger>
 							<TabsTrigger value="preferences">Preferences</TabsTrigger>
+							<TabsTrigger value="billing">
+								<CreditCard className="w-4 h-4 mr-1" />
+								Billing
+							</TabsTrigger>
 							<TabsTrigger value="account">Account</TabsTrigger>
 						</TabsList>
 
@@ -661,6 +705,266 @@ export default function SettingsPage() {
 									</div>
 								</CardContent>
 							</Card>
+						</TabsContent>
+
+						{/* Billing Tab */}
+						<TabsContent value="billing" className="space-y-6">
+							{/* Current Plan */}
+							<Card className={subscription.plan === "premium" ? "border-[#1DA1F2]/50 bg-[#1DA1F2]/5" : ""}>
+								<CardHeader>
+									<CardTitle className="flex items-center gap-2">
+										{subscription.plan === "premium" ? (
+											<>
+												<Crown className="w-5 h-5 text-[#1DA1F2]" />
+												TrickBook Plus
+												<VerifiedBadge size="md" />
+											</>
+										) : (
+											<>
+												<User className="w-5 h-5" />
+												Free Plan
+											</>
+										)}
+									</CardTitle>
+									<CardDescription>
+										{subscription.plan === "premium"
+											? "You have access to all premium features"
+											: "Upgrade to TrickBook Plus for unlimited features"}
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									{subscription.plan === "premium" ? (
+										<div className="space-y-4">
+											{/* Subscription Status */}
+											<div className="flex items-center gap-2 p-3 rounded-lg bg-secondary/50">
+												{subscription.status === "active" ? (
+													<CheckCircle2 className="w-5 h-5 text-green-500" />
+												) : subscription.status === "canceled" ? (
+													<AlertCircle className="w-5 h-5 text-yellow-500" />
+												) : (
+													<AlertCircle className="w-5 h-5 text-red-500" />
+												)}
+												<div>
+													<p className="font-medium capitalize">
+														{subscription.status === "active"
+															? "Active"
+															: subscription.status === "canceled"
+															? "Canceling"
+															: subscription.status}
+													</p>
+													{subscription.currentPeriodEnd && (
+														<p className="text-sm text-muted-foreground">
+															{subscription.status === "canceled"
+																? "Access until "
+																: "Renews "}
+															{new Date(subscription.currentPeriodEnd).toLocaleDateString()}
+														</p>
+													)}
+												</div>
+											</div>
+
+											{/* Premium Features */}
+											<div className="space-y-2">
+												<p className="text-sm font-medium">Your benefits:</p>
+												<ul className="text-sm text-muted-foreground space-y-1">
+													<li className="flex items-center gap-2">
+														<Check className="w-4 h-4 text-green-500" />
+														Unlimited spot lists
+													</li>
+													<li className="flex items-center gap-2">
+														<Check className="w-4 h-4 text-green-500" />
+														Unlimited spots per list
+													</li>
+													<li className="flex items-center gap-2">
+														<Check className="w-4 h-4 text-green-500" />
+														Verified badge on your profile
+													</li>
+													<li className="flex items-center gap-2">
+														<Check className="w-4 h-4 text-green-500" />
+														Priority support
+													</li>
+												</ul>
+											</div>
+
+											{/* Manage Subscription */}
+											<div className="pt-4 border-t border-border">
+												{subscription.status === "canceled" ? (
+													<Button
+														onClick={async () => {
+															setSubscriptionLoading(true);
+															try {
+																await reactivateSubscription(token);
+																await fetchSubscriptionData();
+																alert("Subscription reactivated!");
+															} catch (error) {
+																alert("Failed to reactivate. Please try again.");
+															} finally {
+																setSubscriptionLoading(false);
+															}
+														}}
+														disabled={subscriptionLoading}
+														className="bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white"
+													>
+														{subscriptionLoading ? (
+															<Loader2 className="w-4 h-4 mr-2 animate-spin" />
+														) : null}
+														Reactivate Subscription
+													</Button>
+												) : (
+													<Button
+														variant="outline"
+														onClick={async () => {
+															if (
+																confirm(
+																	"Are you sure you want to cancel? You'll keep access until the end of your billing period."
+																)
+															) {
+																setSubscriptionLoading(true);
+																try {
+																	await cancelSubscription(token);
+																	await fetchSubscriptionData();
+																} catch (error) {
+																	alert("Failed to cancel. Please try again.");
+																} finally {
+																	setSubscriptionLoading(false);
+																}
+															}
+														}}
+														disabled={subscriptionLoading}
+														className="text-destructive hover:text-destructive"
+													>
+														{subscriptionLoading ? (
+															<Loader2 className="w-4 h-4 mr-2 animate-spin" />
+														) : null}
+														Cancel Subscription
+													</Button>
+												)}
+											</div>
+										</div>
+									) : (
+										<div className="space-y-4">
+											{/* Free Plan Limits */}
+											<div className="space-y-3">
+												<p className="text-sm font-medium">Free plan limits:</p>
+												{usage && (
+													<div className="space-y-2">
+														<div>
+															<div className="flex justify-between text-sm mb-1">
+																<span>Spot Lists</span>
+																<span className="text-muted-foreground">
+																	{usage.spotListCount || 0} / {usage.limits?.spotLists || 3}
+																</span>
+															</div>
+															<div className="h-2 rounded-full bg-secondary overflow-hidden">
+																<div
+																	className="h-full bg-yellow-500 transition-all"
+																	style={{
+																		width: `${Math.min(
+																			((usage.spotListCount || 0) / (usage.limits?.spotLists || 3)) * 100,
+																			100
+																		)}%`,
+																	}}
+																/>
+															</div>
+														</div>
+														<div>
+															<div className="flex justify-between text-sm mb-1">
+																<span>Total Spots</span>
+																<span className="text-muted-foreground">
+																	{usage.totalSpots || 0} / {usage.limits?.totalSpots || 15}
+																</span>
+															</div>
+															<div className="h-2 rounded-full bg-secondary overflow-hidden">
+																<div
+																	className="h-full bg-yellow-500 transition-all"
+																	style={{
+																		width: `${Math.min(
+																			((usage.totalSpots || 0) / (usage.limits?.totalSpots || 15)) * 100,
+																			100
+																		)}%`,
+																	}}
+																/>
+															</div>
+														</div>
+													</div>
+												)}
+											</div>
+
+											{/* Upgrade CTA */}
+											<div className="p-4 rounded-lg bg-gradient-to-r from-[#1DA1F2]/10 to-purple-500/10 border border-[#1DA1F2]/20">
+												<div className="flex items-start gap-3">
+													<div className="w-10 h-10 rounded-full bg-[#1DA1F2] flex items-center justify-center flex-shrink-0">
+														<Crown className="w-5 h-5 text-white" />
+													</div>
+													<div className="flex-1">
+														<h3 className="font-semibold text-lg">Upgrade to TrickBook Plus</h3>
+														<p className="text-sm text-muted-foreground mb-3">
+															$10/month for unlimited spots, lists, and a verified badge
+														</p>
+														<ul className="text-sm space-y-1 mb-4">
+															<li className="flex items-center gap-2">
+																<Check className="w-4 h-4 text-[#1DA1F2]" />
+																Unlimited spot lists
+															</li>
+															<li className="flex items-center gap-2">
+																<Check className="w-4 h-4 text-[#1DA1F2]" />
+																Unlimited spots per list
+															</li>
+															<li className="flex items-center gap-2">
+																<Check className="w-4 h-4 text-[#1DA1F2]" />
+																<span className="flex items-center gap-1">
+																	Verified badge <VerifiedBadge size="sm" />
+																</span>
+															</li>
+														</ul>
+														<Button
+															onClick={async () => {
+																setSubscriptionLoading(true);
+																try {
+																	const { url } = await createCheckoutSession(token);
+																	// Redirect to Stripe checkout
+																	window.location.href = url;
+																} catch (error) {
+																	console.error("Checkout error:", error);
+																	alert("Failed to start checkout. Please try again.");
+																} finally {
+																	setSubscriptionLoading(false);
+																}
+															}}
+															disabled={subscriptionLoading}
+															className="bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white"
+														>
+															{subscriptionLoading ? (
+																<Loader2 className="w-4 h-4 mr-2 animate-spin" />
+															) : (
+																<Crown className="w-4 h-4 mr-2" />
+															)}
+															Upgrade Now - $10/month
+														</Button>
+													</div>
+												</div>
+											</div>
+										</div>
+									)}
+								</CardContent>
+							</Card>
+
+							{/* Payment Success Message */}
+							{router.query.success === "true" && (
+								<Card className="border-green-500/50 bg-green-500/5">
+									<CardContent className="py-4">
+										<div className="flex items-center gap-3">
+											<CheckCircle2 className="w-6 h-6 text-green-500" />
+											<div>
+												<p className="font-medium">Welcome to TrickBook Plus!</p>
+												<p className="text-sm text-muted-foreground">
+													Your subscription is now active. Enjoy unlimited features!
+												</p>
+											</div>
+										</div>
+									</CardContent>
+								</Card>
+							)}
 						</TabsContent>
 
 						{/* Account Tab */}

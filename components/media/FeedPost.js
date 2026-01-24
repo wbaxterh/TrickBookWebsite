@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Heart, MessageCircle, Share2, Bookmark, User, MoreHorizontal, Flag, Link as LinkIcon } from "lucide-react";
 import VideoPlayer from "./VideoPlayer";
 import CommentSection from "./CommentSection";
+import UserAvatar from "../UserAvatar";
 
 export default function FeedPost({
 	post,
@@ -134,20 +135,7 @@ export default function FeedPost({
 					href={`/profile/${post.user?._id}`}
 					className="flex items-center gap-3 hover:opacity-80 transition-opacity"
 				>
-					{post.user?.imageUri ? (
-						<Image
-							src={post.user.imageUri}
-							alt={post.user.name || "User"}
-							width={40}
-							height={40}
-							className="rounded-full object-cover"
-							style={{ width: 40, height: 40 }}
-						/>
-					) : (
-						<div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-							<User className="h-5 w-5 text-muted-foreground" />
-						</div>
-					)}
+					<UserAvatar user={post.user} size={40} />
 					<div>
 						<p className="font-medium text-foreground text-sm">
 							{post.user?.name || "Unknown"}
@@ -215,18 +203,20 @@ export default function FeedPost({
 			</div>
 
 			{/* Video/Image Content */}
-			<div className="relative bg-black">
+			<div className="relative bg-black flex justify-center">
 				{post.mediaType === "video" ? (
-					<VideoPlayer
-						src={post.hlsUrl || post.videoUrl}
-						poster={post.thumbnailUrl}
-						loop
-						autoPlay={autoPlay && isInView}
-						controls={true}
-						aspectRatio={post.aspectRatio || "9:16"}
-						objectFit="cover"
-						className="max-h-[600px]"
-					/>
+					<div className={`w-full ${post.aspectRatio === "9:16" || !post.aspectRatio ? "max-w-[400px]" : ""}`}>
+						<VideoPlayer
+							src={post.hlsUrl || post.videoUrl}
+							poster={post.thumbnailUrl}
+							loop
+							autoPlay={autoPlay && isInView}
+							controls={true}
+							aspectRatio={post.aspectRatio || "9:16"}
+							objectFit="cover"
+							className="max-h-[600px]"
+						/>
+					</div>
 				) : (
 					<Image
 						src={post.imageUrls?.[0] || post.thumbnailUrl}

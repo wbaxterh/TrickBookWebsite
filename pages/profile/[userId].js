@@ -10,6 +10,7 @@ import { Card, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
+import VerifiedBadge from "../../components/ui/VerifiedBadge";
 import {
 	User,
 	Heart,
@@ -31,6 +32,10 @@ import {
 	Award,
 	TrendingUp,
 	MessageCircle,
+	Image as ImageIcon,
+	MessageSquare,
+	ThumbsUp,
+	Loader2,
 } from "lucide-react";
 
 // Sport emoji mapping
@@ -54,6 +59,8 @@ export default function PublicProfile() {
 	const [profile, setProfile] = useState(null);
 	const [stats, setStats] = useState(null);
 	const [tricklists, setTricklists] = useState([]);
+	const [activities, setActivities] = useState([]);
+	const [activitiesLoading, setActivitiesLoading] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [isOwnProfile, setIsOwnProfile] = useState(false);
@@ -108,6 +115,54 @@ export default function PublicProfile() {
 		fetchProfile();
 	}, [userId, token]);
 
+	// Fetch user activity
+	const fetchActivity = async () => {
+		if (!userId || activities.length > 0) return;
+		setActivitiesLoading(true);
+		try {
+			const activityRes = await axios.get(`${baseUrl}/api/user/${userId}/activity`);
+			setActivities(activityRes.data.activities || []);
+		} catch (err) {
+			console.error("Error fetching activity:", err);
+		} finally {
+			setActivitiesLoading(false);
+		}
+	};
+
+	// Format time ago
+	const timeAgo = (date) => {
+		const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+		if (seconds < 60) return "just now";
+		const minutes = Math.floor(seconds / 60);
+		if (minutes < 60) return `${minutes}m ago`;
+		const hours = Math.floor(minutes / 60);
+		if (hours < 24) return `${hours}h ago`;
+		const days = Math.floor(hours / 24);
+		if (days < 7) return `${days}d ago`;
+		const weeks = Math.floor(days / 7);
+		if (weeks < 4) return `${weeks}w ago`;
+		const months = Math.floor(days / 30);
+		return `${months}mo ago`;
+	};
+
+	// Get activity icon
+	const getActivityIcon = (type, reactionType) => {
+		switch (type) {
+			case "post":
+				return <Video className="w-5 h-5 text-purple-500" />;
+			case "reaction":
+				return reactionType === "love"
+					? <Heart className="w-5 h-5 text-red-500 fill-current" />
+					: <span className="text-xl">🙏</span>;
+			case "comment":
+				return <MessageSquare className="w-5 h-5 text-blue-500" />;
+			case "spot":
+				return <MapPin className="w-5 h-5 text-green-500" />;
+			default:
+				return <Zap className="w-5 h-5 text-yellow-500" />;
+		}
+	};
+
 	const handleHomieAction = async () => {
 		if (!token) {
 			router.push("/login");
@@ -131,9 +186,14 @@ export default function PublicProfile() {
 		}
 	};
 
+	const isPremium = profile?.subscription?.plan === "premium" &&
+		["active", "canceled"].includes(profile?.subscription?.status);
+
 	const renderAvatar = () => {
+		let avatarContent;
+
 		if (profile?.imageUri) {
-			return (
+			avatarContent = (
 				<Image
 					src={profile.imageUri}
 					alt={profile.name}
@@ -143,22 +203,31 @@ export default function PublicProfile() {
 					style={{ width: 120, height: 120 }}
 				/>
 			);
-		}
-
-		if (profile?.riderProfile?.avatarIcon) {
+		} else if (profile?.riderProfile?.avatarIcon) {
 			const icon = profile.riderProfile.avatarIcon;
-			return (
+			avatarContent = (
 				<div
 					className={`w-[120px] h-[120px] rounded-full ${icon.bg || "bg-primary"} flex items-center justify-center text-5xl border-4 border-primary`}
 				>
 					{icon.emoji}
 				</div>
 			);
+		} else {
+			avatarContent = (
+				<div className="w-[120px] h-[120px] rounded-full bg-muted flex items-center justify-center border-4 border-border">
+					<User className="w-12 h-12 text-muted-foreground" />
+				</div>
+			);
 		}
 
 		return (
-			<div className="w-[120px] h-[120px] rounded-full bg-muted flex items-center justify-center border-4 border-border">
-				<User className="w-12 h-12 text-muted-foreground" />
+			<div className="relative inline-block">
+				{avatarContent}
+				{isPremium && (
+					<div className="absolute bottom-1 right-1">
+						<VerifiedBadge size="xl" />
+					</div>
+				)}
 			</div>
 		);
 	};
@@ -527,16 +596,140 @@ export default function PublicProfile() {
 						</TabsContent>
 
 						{/* Activity Tab */}
-						<TabsContent value="activity">
-							<Card>
-								<CardContent className="py-12 text-center">
-									<Video className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-									<p className="text-muted-foreground">Recent activity coming soon</p>
-									<p className="text-sm text-muted-foreground mt-2">
-										Posts, spots, and interactions will appear here
-									</p>
-								</CardContent>
-							</Card>
+						<TabsContent value="activity" onFocusCapture={fetchActivity}>
+							{activitiesLoading ? (
+								<Card>
+									<CardContent className="py-12 text-center">
+										<Loader2 className="w-8 h-8 mx-auto text-yellow-500 animate-spin mb-4" />
+										<p className="text-muted-foreground">Loading activity...</p>
+									</CardContent>
+								</Card>
+							) : activities.length === 0 ? (
+								<Card>
+									<CardContent className="py-12 text-center">
+										<Video className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+										<p className="text-muted-foreground">No recent activity</p>
+										<p className="text-sm text-muted-foreground mt-2">
+											Posts, spots, and interactions will appear here
+										</p>
+									</CardContent>
+								</Card>
+							) : (
+								<div className="space-y-3">
+									{activities.map((activity, index) => (
+										<Card key={`${activity.type}-${index}`} className="hover:border-primary/50 transition-colors">
+											<CardContent className="py-4">
+												<div className="flex items-start gap-4">
+													{/* Activity Icon */}
+													<div className="flex-shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+														{getActivityIcon(activity.type, activity.reactionType)}
+													</div>
+
+													{/* Activity Content */}
+													<div className="flex-1 min-w-0">
+														<p className="text-sm">
+															<span className="font-medium">{profile.name}</span>{" "}
+															<span className="text-muted-foreground">{activity.action}</span>
+														</p>
+
+														{/* Activity Details */}
+														{activity.type === "post" && activity.data && (
+															<Link href={`/media/feed/${activity.data._id}`} className="block mt-2">
+																<div className="flex items-center gap-3 p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
+																	{activity.data.thumbnailUrl && (
+																		<Image
+																			src={activity.data.thumbnailUrl}
+																			alt="Post thumbnail"
+																			width={48}
+																			height={48}
+																			className="rounded object-cover"
+																			style={{ width: 48, height: 48 }}
+																		/>
+																	)}
+																	<div className="flex-1 min-w-0">
+																		<p className="text-sm truncate">
+																			{activity.data.caption || "Posted a clip"}
+																		</p>
+																		{activity.data.tricks?.length > 0 && (
+																			<p className="text-xs text-yellow-500">
+																				{activity.data.tricks.join(", ")}
+																			</p>
+																		)}
+																	</div>
+																</div>
+															</Link>
+														)}
+
+														{activity.type === "reaction" && activity.data && (
+															<Link href={`/media/feed/${activity.data._id}`} className="block mt-2">
+																<div className="flex items-center gap-3 p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
+																	{activity.data.thumbnailUrl && (
+																		<Image
+																			src={activity.data.thumbnailUrl}
+																			alt="Post thumbnail"
+																			width={48}
+																			height={48}
+																			className="rounded object-cover"
+																			style={{ width: 48, height: 48 }}
+																		/>
+																	)}
+																	<p className="text-sm text-muted-foreground truncate">
+																		{activity.data.caption || "A post"}
+																	</p>
+																</div>
+															</Link>
+														)}
+
+														{activity.type === "comment" && activity.data && (
+															<Link href={`/media/feed/${activity.data.postId}`} className="block mt-2">
+																<div className="p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
+																	<p className="text-sm">"{activity.data.content}"</p>
+																	{activity.data.postCaption && (
+																		<p className="text-xs text-muted-foreground mt-1 truncate">
+																			on: {activity.data.postCaption}
+																		</p>
+																	)}
+																</div>
+															</Link>
+														)}
+
+														{activity.type === "spot" && activity.data && (
+															<Link href={`/spots/${activity.data.state}/${activity.data.city}/${activity.data._id}`} className="block mt-2">
+																<div className="flex items-center gap-3 p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
+																	{activity.data.thumbnailUrl ? (
+																		<Image
+																			src={activity.data.thumbnailUrl}
+																			alt="Spot thumbnail"
+																			width={48}
+																			height={48}
+																			className="rounded object-cover"
+																			style={{ width: 48, height: 48 }}
+																		/>
+																	) : (
+																		<div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
+																			<MapPin className="w-6 h-6 text-muted-foreground" />
+																		</div>
+																	)}
+																	<div>
+																		<p className="text-sm font-medium">{activity.data.name}</p>
+																		<p className="text-xs text-muted-foreground">
+																			{activity.data.city}, {activity.data.state}
+																		</p>
+																	</div>
+																</div>
+															</Link>
+														)}
+
+														<p className="text-xs text-muted-foreground mt-2">
+															{timeAgo(activity.createdAt)}
+														</p>
+													</div>
+												</div>
+											</CardContent>
+										</Card>
+									))}
+								</div>
+							)}
 						</TabsContent>
 					</Tabs>
 				</div>
