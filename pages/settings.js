@@ -921,12 +921,16 @@ export default function SettingsPage() {
 															onClick={async () => {
 																setSubscriptionLoading(true);
 																try {
-																	const { url } = await createCheckoutSession(token);
+																	const response = await createCheckoutSession(token);
 																	// Redirect to Stripe checkout
-																	window.location.href = url;
+																	if (response?.url) {
+																		window.location.href = response.url;
+																	} else {
+																		throw new Error("Checkout URL not available. Please try again later.");
+																	}
 																} catch (error) {
 																	console.error("Checkout error:", error);
-																	alert("Failed to start checkout. Please try again.");
+																	alert(error.message || "Failed to start checkout. Please try again.");
 																} finally {
 																	setSubscriptionLoading(false);
 																}
@@ -960,6 +964,78 @@ export default function SettingsPage() {
 												<p className="text-sm text-muted-foreground">
 													Your subscription is now active. Enjoy unlimited features!
 												</p>
+											</div>
+										</div>
+									</CardContent>
+								</Card>
+							)}
+
+							{/* Admin Subscription Toggle - Only shown for admins */}
+							{role === "admin" && (
+								<Card className="border-yellow-500/50 bg-yellow-500/5">
+									<CardHeader>
+										<CardTitle className="flex items-center gap-2 text-yellow-500">
+											<Shield className="w-5 h-5" />
+											Admin Testing Mode
+										</CardTitle>
+										<CardDescription>
+											Override your subscription status for testing features
+										</CardDescription>
+									</CardHeader>
+									<CardContent>
+										<div className="space-y-3">
+											<p className="text-sm text-muted-foreground">
+												Current override: <span className="font-medium text-foreground">
+													{subscription.adminOverride || "None (using real subscription)"}
+												</span>
+											</p>
+											<div className="flex flex-wrap gap-2">
+												<Button
+													variant={subscription.adminOverride === "free" ? "default" : "outline"}
+													size="sm"
+													onClick={async () => {
+														try {
+															const { toggleAdminSubscription } = await import("../lib/apiPayments");
+															await toggleAdminSubscription(token, "free");
+															await fetchSubscriptionData();
+														} catch (error) {
+															alert("Failed to update override");
+														}
+													}}
+												>
+													Test as Free User
+												</Button>
+												<Button
+													variant={subscription.adminOverride === "premium" ? "default" : "outline"}
+													size="sm"
+													className={subscription.adminOverride === "premium" ? "bg-[#1DA1F2] hover:bg-[#1a8cd8]" : ""}
+													onClick={async () => {
+														try {
+															const { toggleAdminSubscription } = await import("../lib/apiPayments");
+															await toggleAdminSubscription(token, "premium");
+															await fetchSubscriptionData();
+														} catch (error) {
+															alert("Failed to update override");
+														}
+													}}
+												>
+													Test as Premium User
+												</Button>
+												<Button
+													variant="outline"
+													size="sm"
+													onClick={async () => {
+														try {
+															const { toggleAdminSubscription } = await import("../lib/apiPayments");
+															await toggleAdminSubscription(token, null);
+															await fetchSubscriptionData();
+														} catch (error) {
+															alert("Failed to clear override");
+														}
+													}}
+												>
+													Clear Override
+												</Button>
 											</div>
 										</div>
 									</CardContent>
