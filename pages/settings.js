@@ -48,6 +48,7 @@ import {
 	reactivateSubscription,
 	getUsage,
 } from "../lib/apiPayments";
+import { useToast } from "../components/ui/toast";
 import VerifiedBadge from "../components/ui/VerifiedBadge";
 
 // Sport categories
@@ -89,6 +90,7 @@ export default function SettingsPage() {
 	const router = useRouter();
 	const { token, logOut, name, email, imageUri, setImageUri, setName, role } = useContext(AuthContext);
 	const { theme, setTheme } = useTheme();
+	const { addToast } = useToast();
 	const [mounted, setMounted] = useState(false);
 
 	const [loading, setLoading] = useState(true);
@@ -232,10 +234,10 @@ export default function SettingsPage() {
 			// Update context
 			setName(profileData.name);
 
-			alert("Profile updated successfully!");
+			addToast("Profile updated successfully!", "success");
 		} catch (err) {
 			console.error("Error saving profile:", err);
-			alert("Failed to save profile. Please try again.");
+			addToast("Failed to save profile. Please try again.", "error");
 		} finally {
 			setSaving(false);
 		}

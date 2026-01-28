@@ -9,6 +9,7 @@ import { CategoryProvider } from "../auth/CategoryContext";
 import { ThemeProvider } from "../components/theme-provider";
 import muiTheme from "../config/theme";
 import Layout from "../components/layout";
+import { ToastProvider } from "../components/ui/toast";
 
 export default function App({
 	Component,
@@ -25,9 +26,11 @@ export default function App({
 				<SessionProvider session={session}>
 					<AuthProvider>
 						<CategoryProvider>
-							<Layout>
-								<Component {...pageProps} />
-							</Layout>
+							<ToastProvider>
+								<Layout>
+									<Component {...pageProps} />
+								</Layout>
+							</ToastProvider>
 						</CategoryProvider>
 					</AuthProvider>
 				</SessionProvider>

@@ -22,7 +22,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2">
         {toasts.map((toast) => (
           <Toast key={toast.id} toast={toast} onClose={() => removeToast(toast.id)} />
         ))}
@@ -45,7 +45,7 @@ function Toast({ toast, onClose }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-[400px] animate-in slide-in-from-right-full",
+        "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-[400px] animate-in slide-in-from-top-full",
         isSuccess
           ? "bg-green-900/90 border border-green-700 text-green-100"
           : "bg-red-900/90 border border-red-700 text-red-100"

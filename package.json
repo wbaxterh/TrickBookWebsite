@@ -30,6 +30,7 @@
 		"js-cookie": "^3.0.5",
 		"jsonwebtoken": "8.5.1",
 		"lucide-react": "^0.562.0",
+		"marked": "^17.0.1",
 		"material-icons": "^1.13.2",
 		"material-ui-community-icons": "^0.15.0",
 		"mongodb": "^5.1.0",
