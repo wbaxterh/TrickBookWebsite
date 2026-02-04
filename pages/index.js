@@ -355,17 +355,17 @@ export default function Home() {
 				</div>
 				<div className='row p-0 m-0'>
 					<Grid container className='p-0 m-0'>
-						<Grid item xs={12} md={6} className='p-0 px-md-5'>
+						<Grid item xs={12} md={6} className='p-0 px-md-5' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<Image
-								src='/screenshotWithGraphic.png'
-								width={500}
-								height={634}
+								src='/trickBookScreenShotNoBg.png'
+								width={300}
+								height={600}
 								className={styles.homegraphic}
-								alt='Home Graphic'
+								alt='TrickBook App Screenshot'
 								style={{
-									minWidth: 300,
+									minWidth: 200,
 									width: "100%",
-									maxWidth: 500,
+									maxWidth: 300,
 									height: "auto",
 								}}
 							/>
@@ -377,9 +377,9 @@ export default function Home() {
 							justifyContent='center'
 							alignItems='center'
 							container
-							sx={{ alignItems: "center", justifyContent: "center" }}
+							sx={{ alignItems: "center", justifyContent: "center", mt: { xs: 5, md: 0 } }}
 						>
-							<Box>
+							<Box sx={{ mb: { xs: 5, md: 3 }, px: { xs: 3, md: 0 } }}>
 								<Typography
 									variant='h4'
 									sx={{ fontWeight: 500, alignSelf: "center" }}
@@ -395,14 +395,14 @@ export default function Home() {
 								<Button
 									variant='outlined'
 									color='secondary'
-									className={"ms-1 mt-2"}
+									className={"ms-1 mt-3"}
 								>
 									<Link href='/privacy-policy' className='text-dark'>
 										Our Privacy Promise
 									</Link>
 								</Button>
 							</Box>
-							<Box>
+							<Box sx={{ mt: { xs: 4, md: 2 }, px: { xs: 3, md: 0 } }}>
 								<Typography
 									variant='h4'
 									sx={{ fontWeight: 500, alignSelf: "center" }}
@@ -418,7 +418,7 @@ export default function Home() {
 								<Button
 									variant='outlined'
 									color='secondary'
-									className={"mt-2 ms-1"}
+									className={"mt-3 ms-1"}
 								>
 									<Link href='/blog/trickbook-just-went-social---heres-why' className='text-dark'>
 										Read the Manifesto
