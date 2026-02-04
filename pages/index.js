@@ -341,15 +341,15 @@ export default function Home() {
 				<div className='row'>
 					<Box className={`p-4 px-md-5 col-md-10`}>
 						<Typography variant='h2' sx={{ fontWeight: 700 }}>
-							Organizing action sports data.
+							By Riders. For Riders.
 						</Typography>
 						<Typography
 							variant='h5'
 							className='pt-3 px-1'
 							sx={{ fontWeight: 400 }}
 						>
-							By curating and parsing data using modern technology, we provide
-							valuable insights to unlock your riding potential.
+							The community is the product, not your data and attention. We're building something
+							we control, together.
 						</Typography>
 					</Box>
 				</div>
@@ -384,23 +384,22 @@ export default function Home() {
 									variant='h4'
 									sx={{ fontWeight: 500, alignSelf: "center" }}
 								>
-									Community driven knowledge base
+									Take back your community
 								</Typography>
 								<Typography variant='body1' className='ms-1 mt-2'>
-									Users of the platform help to create and edit content, making
-									the trick book a truly community driven project. Besides the
-									personal trick list tool which you can choose to share
-									publicly or keep your list private, we allow our user to edit
-									certain aspects of the applciation such as our "Trickipedia".
-									Our core values are community oriented and this tool is meant
-									to help drive innovation and progression in action sports.
+									Big tech platforms don't have our best interests at heart, they have shareholders.
+									Algorithms bury your content unless you pay, and your attention is sold to advertisers.
+									We built TrickBook because action sports communities deserve better. Your data is encrypted,
+									your privacy is protected, and you own your content.
 								</Typography>
 								<Button
 									variant='outlined'
 									color='secondary'
 									className={"ms-1 mt-2"}
 								>
-									Join the community
+									<Link href='/privacy-policy' className='text-dark'>
+										Our Privacy Promise
+									</Link>
 								</Button>
 							</Box>
 							<Box>
@@ -408,23 +407,22 @@ export default function Home() {
 									variant='h4'
 									sx={{ fontWeight: 500, alignSelf: "center" }}
 								>
-									Tools that unlock riding potential
+									Built to empower, not exploit
 								</Typography>
 								<Typography variant='body1' className={"mt-2 ms-1"}>
-									Tools like our original "Trick List" are designed to help you
-									keep track of your own data. The "Trickipedia" feature serves
-									as a source of truth for external data, and we will even offer
-									video tutorials for tricks. With this extensive knowledgebase
-									we are in a position to leverage the existing trick data along
-									with your own data to give you personalized recommendations
-									for tricks and learning paths.
+									It's never been easier for communities to build their own tools.
+									Why continue to feed corporations when we have the power to create something great together?
+									TrickBook is a platform where riders connect, progress, and share, without being
+									the product. Join the movement and help shape the future of action sports.
 								</Typography>
 								<Button
 									variant='outlined'
 									color='secondary'
 									className={"mt-2 ms-1"}
 								>
-									Explore our toolkit
+									<Link href='/blog/trickbook-just-went-social---heres-why' className='text-dark'>
+										Read the Manifesto
+									</Link>
 								</Button>
 							</Box>
 						</Grid>

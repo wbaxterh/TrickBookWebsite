@@ -207,8 +207,8 @@ export default function FeedPost({
 				{post.mediaType === "video" ? (
 					<div className={`w-full ${post.aspectRatio === "9:16" || !post.aspectRatio ? "max-w-[400px]" : ""}`}>
 						<VideoPlayer
-							src={post.hlsUrl || post.videoUrl}
-							poster={post.thumbnailUrl}
+							src={post.signedHlsUrl || post.signedMp4Url || post.hlsUrl || post.videoUrl}
+							poster={post.signedThumbnailUrl || post.thumbnailUrl}
 							loop
 							autoPlay={autoPlay && isInView}
 							controls={true}

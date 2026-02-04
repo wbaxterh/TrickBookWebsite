@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { AuthContext } from "../auth/AuthContext";
-import { Button, Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { useTheme } from "next-themes";
 import { Sun, Moon, MessageCircle, User, LogOut, ChevronDown } from "lucide-react";
@@ -19,6 +19,7 @@ const Header = () => {
 	const { theme, setTheme, resolvedTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [unreadCount, setUnreadCount] = useState(0);
+	const [expanded, setExpanded] = useState(false);
 	const socketRef = useRef(null);
 
 	useEffect(() => {
@@ -73,7 +74,9 @@ const Header = () => {
 			bg={isDark ? 'dark' : 'light'}
 			variant={isDark ? 'dark' : 'light'}
 			className={`navbar-fixed-top ${styles.navWrapper}`}
-			expand='lg'
+			expand="lg"
+			expanded={expanded}
+			onToggle={(value) => setExpanded(value)}
 		>
 			<Container>
 				<Link href='/' legacyBehavior>
@@ -92,9 +95,9 @@ const Header = () => {
 				</Link>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
-					<Nav className='me-auto'>
+					<Nav className='me-auto mobile-nav-section'>
 						<Link href='/trickbook' passHref legacyBehavior>
-							<Nav.Link>
+							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='book'>
 									📖
 								</span>{" "}
@@ -102,7 +105,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/spots' passHref legacyBehavior>
-							<Nav.Link>
+							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='pin'>
 									📍
 								</span>{" "}
@@ -110,7 +113,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/homies' passHref legacyBehavior>
-							<Nav.Link>
+							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='homies'>
 									🤝
 								</span>{" "}
@@ -118,7 +121,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/media' passHref legacyBehavior>
-							<Nav.Link>
+							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='media'>
 									🎬
 								</span>{" "}
@@ -126,38 +129,34 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 					</Nav>
-					<Nav className={`ms-auto align-items-center`}>
+
+					{/* Mobile divider */}
+					<hr className='mobile-nav-divider d-lg-none' />
+
+					<Nav className={`ms-auto align-items-lg-center mobile-utility-section`}>
 						{/* Theme Toggle */}
 						{mounted && (
 							<button
 								onClick={() => setTheme(isDark ? 'light' : 'dark')}
-								className='btn btn-link p-2 me-2'
-								style={{
-									color: isDark ? '#ffd700' : '#333',
-									border: 'none',
-									background: 'transparent'
-								}}
+								className='theme-toggle-btn'
 								aria-label='Toggle theme'
 							>
-								{isDark ? <Sun size={20} /> : <Moon size={20} />}
+								{isDark ? <Sun size={18} /> : <Moon size={18} />}
+								<span className='theme-toggle-label'>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
 							</button>
 						)}
+
+						{/* Mobile divider before account section */}
+						<hr className='mobile-nav-divider d-lg-none' />
+
 						{loggedIn === null ? (
 							<Skeleton variant='rectangular' width={120} height={36} />
 						) : !loggedIn ? (
 							<Link href='/login' passHref legacyBehavior>
-								<Button
-									variant='contained'
-									color='primary'
-									className='custom-primary p-1 px-2'
-									startIcon={<PersonIcon />}
-									sx={{
-										backgroundColor: "#fcf150",
-										color: "#333",
-									}}
-								>
-									Login / Register
-								</Button>
+								<a className='login-btn'>
+									<PersonIcon style={{ fontSize: 18 }} />
+									<span>Login / Register</span>
+								</a>
 							</Link>
 						) : (
 							<NavDropdown

@@ -15,6 +15,7 @@ import {
 	Circle,
 	StickyNote,
 	Link as LinkIcon,
+	BookOpen,
 } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Card, CardContent } from "../../../components/ui/card";
@@ -464,6 +465,19 @@ export default function TrickListDetail() {
 															>
 																{trick.link}
 															</a>
+														</div>
+													)}
+
+													{/* Trickipedia link - shown when trick was added from Trickipedia */}
+													{trick.trickipediaId && (
+														<div className="mt-2">
+															<Link
+																href="/trickipedia"
+																className="inline-flex items-center gap-2 text-sm text-yellow-500 hover:text-yellow-400 no-underline"
+															>
+																<BookOpen className="h-4 w-4" />
+																<span>View Tutorial in Trickipedia</span>
+															</Link>
 														</div>
 													)}
 												</div>

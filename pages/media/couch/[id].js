@@ -161,7 +161,7 @@ export default function VideoPage() {
 					) : (
 						<video
 							ref={videoRef}
-							src={streamUrl?.streamUrl}
+							src={streamUrl?.mp4Url || streamUrl?.hlsUrl || streamUrl?.streamUrl}
 							className="absolute inset-0 w-full h-full"
 							controls
 							autoPlay

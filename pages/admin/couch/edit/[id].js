@@ -243,22 +243,37 @@ export default function EditVideo() {
 			// Create Bunny video first
 			const bunnyVideo = await createBunnyVideo(formData.title, token);
 
-			// Upload to Bunny.net
+			// Upload to Bunny.net using XMLHttpRequest for progress tracking
 			const libraryId = bunnyVideo.libraryId;
 			const videoId = bunnyVideo.guid;
 
-			const response = await fetch(`https://video.bunnycdn.com/library/${libraryId}/videos/${videoId}`, {
-				method: "PUT",
-				headers: {
-					"AccessKey": bunnyVideo.uploadKey,
-					"Content-Type": "application/octet-stream",
-				},
-				body: file,
-			});
+			await new Promise((resolve, reject) => {
+				const xhr = new XMLHttpRequest();
 
-			if (!response.ok) {
-				throw new Error("Upload failed");
-			}
+				// Track upload progress
+				xhr.upload.addEventListener("progress", (event) => {
+					if (event.lengthComputable) {
+						const percentComplete = Math.round((event.loaded / event.total) * 100);
+						setUploadProgress(percentComplete);
+					}
+				});
+
+				xhr.addEventListener("load", () => {
+					if (xhr.status >= 200 && xhr.status < 300) {
+						resolve(xhr.response);
+					} else {
+						reject(new Error(`Upload failed with status ${xhr.status}`));
+					}
+				});
+
+				xhr.addEventListener("error", () => {
+					reject(new Error("Upload failed"));
+				});
+
+				xhr.open("PUT", `https://video.bunnycdn.com/library/${libraryId}/videos/${videoId}`);
+				xhr.setRequestHeader("AccessKey", bunnyVideo.uploadKey);
+				xhr.send(file);
+			});
 
 			// Update form with Bunny video info
 			setFormData((prev) => ({
