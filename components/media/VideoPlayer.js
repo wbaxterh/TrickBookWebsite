@@ -31,10 +31,32 @@ export default function VideoPlayer({
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const controlsTimeoutRef = useRef(null);
 
+	// Helper to derive MP4 fallback URL from HLS URL
+	const getMp4FallbackUrl = (hlsUrl) => {
+		if (!hlsUrl || !hlsUrl.includes(".m3u8")) return null;
+		// Convert playlist.m3u8 to play_360p.mp4 (most compatible fallback)
+		return hlsUrl.replace("/playlist.m3u8", "/play_360p.mp4");
+	};
+
 	// Dynamic import of hls.js to avoid SSR issues
 	useEffect(() => {
 		const video = videoRef.current;
 		if (!video || !src) return;
+
+		let hlsInstance = null;
+		let usedFallback = false;
+
+		const loadFallbackMp4 = () => {
+			if (usedFallback) return;
+			usedFallback = true;
+			
+			const mp4Url = getMp4FallbackUrl(src);
+			if (mp4Url) {
+				console.log("HLS failed, falling back to MP4:", mp4Url);
+				video.src = mp4Url;
+				if (autoPlay) video.play().catch(() => {});
+			}
+		};
 
 		const initHls = async () => {
 			// Check if it's an HLS stream
@@ -44,16 +66,18 @@ export default function VideoPlayer({
 				const Hls = (await import("hls.js")).default;
 
 				if (Hls.isSupported()) {
-					hlsRef.current = new Hls({
+					hlsInstance = new Hls({
 						enableWorker: true,
 						lowLatencyMode: true,
 						backBufferLength: 90,
 					});
 
-					hlsRef.current.loadSource(src);
-					hlsRef.current.attachMedia(video);
+					hlsRef.current = hlsInstance;
 
-					hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+					hlsInstance.loadSource(src);
+					hlsInstance.attachMedia(video);
+
+					hlsInstance.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
 						const availableQualities = data.levels.map((level, i) => ({
 							index: i,
 							height: level.height,
@@ -70,15 +94,50 @@ export default function VideoPlayer({
 						}
 					});
 
-					hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
+					hlsInstance.on(Hls.Events.ERROR, (event, data) => {
 						if (data.fatal) {
 							console.error("HLS fatal error:", data);
+							switch (data.type) {
+								case Hls.ErrorTypes.NETWORK_ERROR:
+									// Try to recover network error
+									console.log("HLS network error, attempting recovery...");
+									hlsInstance.startLoad();
+									// If still failing after a brief delay, fall back to MP4
+									setTimeout(() => {
+										if (video.readyState === 0) {
+											loadFallbackMp4();
+										}
+									}, 3000);
+									break;
+								case Hls.ErrorTypes.MEDIA_ERROR:
+									console.log("HLS media error, attempting recovery...");
+									hlsInstance.recoverMediaError();
+									break;
+								default:
+									// Cannot recover, fall back to MP4
+									console.log("HLS unrecoverable error, falling back to MP4");
+									loadFallbackMp4();
+									break;
+							}
 						}
 					});
+
+					// Also handle case where HLS loads but video still can't play
+					video.addEventListener("error", () => {
+						if (!usedFallback) {
+							console.log("Video error detected, trying MP4 fallback");
+							loadFallbackMp4();
+						}
+					}, { once: true });
+
 				} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
 					// Safari native HLS support
 					video.src = src;
+					video.addEventListener("error", loadFallbackMp4, { once: true });
 					if (autoPlay) video.play().catch(() => {});
+				} else {
+					// No HLS support at all, go straight to MP4
+					loadFallbackMp4();
 				}
 			} else {
 				// Regular video source (mp4, webm, etc.)
