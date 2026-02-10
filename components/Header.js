@@ -166,7 +166,8 @@ const Header = () => {
 										display: 'inline-flex',
 										alignItems: 'center',
 										gap: 6,
-										position: 'relative'
+										position: 'relative',
+										color: isDark ? '#f0f0f0' : '#1a1a1a'
 									}}>
 										<PersonIcon style={{ fontSize: 20 }} />
 										<span style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -199,7 +200,7 @@ const Header = () => {
 								id="profile-dropdown"
 								className="profile-dropdown"
 								style={{
-									backgroundColor: isDark ? "#e0e0e0" : "#1f1f1f",
+									backgroundColor: isDark ? "#333" : "#e0e0e0",
 									borderRadius: 4,
 								}}
 							>
