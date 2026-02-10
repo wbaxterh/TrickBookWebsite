@@ -742,7 +742,13 @@ textarea::placeholder {
   .navbar-collapse.show,
   .navbar-collapse.collapsing {
     display: block !important;
+    visibility: visible !important;
     background-color: #f5f5f5;
+  }
+
+  .navbar-collapse.show *,
+  .navbar-collapse.collapsing * {
+    visibility: visible !important;
   }
 
   .dark .navbar-collapse.show,
