@@ -94,10 +94,10 @@ const Header = () => {
 					</Navbar.Brand>
 				</Link>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
-				<Navbar.Collapse id='basic-navbar-nav'>
+				<Navbar.Collapse id='basic-navbar-nav' style={{ backgroundColor: isDark ? '#1a1a1a' : '#f5f5f5' }}>
 					<Nav className='me-auto mobile-nav-section'>
 						<Link href='/trickbook' passHref legacyBehavior>
-							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
+							<Nav.Link className='mobile-nav-link' style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }} onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='book'>
 									📖
 								</span>{" "}
@@ -105,7 +105,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/spots' passHref legacyBehavior>
-							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
+							<Nav.Link className='mobile-nav-link' style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }} onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='pin'>
 									📍
 								</span>{" "}
@@ -113,7 +113,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/homies' passHref legacyBehavior>
-							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
+							<Nav.Link className='mobile-nav-link' style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }} onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='homies'>
 									🤝
 								</span>{" "}
@@ -121,7 +121,7 @@ const Header = () => {
 							</Nav.Link>
 						</Link>
 						<Link href='/media' passHref legacyBehavior>
-							<Nav.Link className='mobile-nav-link' onClick={() => setExpanded(false)}>
+							<Nav.Link className='mobile-nav-link' style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }} onClick={() => setExpanded(false)}>
 								<span role='img' aria-label='media'>
 									🎬
 								</span>{" "}
