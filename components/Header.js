@@ -167,7 +167,7 @@ const Header = () => {
 										alignItems: 'center',
 										gap: 6,
 										position: 'relative',
-										color: isDark ? '#f0f0f0' : '#1a1a1a'
+										color: isDark ? '#1a1a1a' : '#f0f0f0'
 									}}>
 										<PersonIcon style={{ fontSize: 20 }} />
 										<span style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>

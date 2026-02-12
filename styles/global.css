@@ -707,10 +707,16 @@ textarea::placeholder {
   }
 }
 
-.login-btn:hover {
+.login-btn,
+.dark .login-btn {
+  color: #1a1a1a !important;
+}
+
+.login-btn:hover,
+.dark .login-btn:hover {
   background: #e8dc40;
   border-color: #e8dc40;
-  color: #1a1a1a;
+  color: #1a1a1a !important;
 }
 
 /* Ensure navbar expands on desktop */

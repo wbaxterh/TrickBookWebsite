@@ -420,7 +420,7 @@ export default function Home() {
 									color='secondary'
 									className={"mt-3 ms-1"}
 								>
-									<Link href='/blog/trickbook-just-went-social---heres-why' className='text-dark'>
+									<Link href='/blog/trickbook-just-went-social' className='text-dark'>
 										Read the Manifesto
 									</Link>
 								</Button>
