@@ -50,7 +50,7 @@ export default function TermsConditions() {
             <CardContent className="pt-6">
               <h2 className="text-xl font-bold text-foreground mb-4">Welcome to TrickBook</h2>
               <p className="text-muted-foreground mb-4">
-                TrickBook is a community platform built by skaters, for skaters. These terms are
+                TrickBook is a community platform built by riders, for riders. These terms are
                 written to be fair, transparent, and actually readable (no lawyer-speak). By using
                 TrickBook, you agree to these terms. If you don't agree, please don't use our
                 service.
@@ -181,7 +181,7 @@ export default function TermsConditions() {
                   <div className="border-l-2 border-yellow-500 pl-4">
                     <h3 className="font-semibold text-foreground">Comments</h3>
                     <p className="text-sm mt-1">
-                      Engage with other skaters by commenting on posts. Comments should be
+                      Engage with other riders by commenting on posts. Comments should be
                       constructive and respectful. You can delete your own comments at any time.
                       Post authors can also remove comments from their posts.
                     </p>
@@ -199,8 +199,8 @@ export default function TermsConditions() {
                   <div className="border-l-2 border-yellow-500 pl-4">
                     <h3 className="font-semibold text-foreground">Homies (Friends)</h3>
                     <p className="text-sm mt-1">
-                      Connect with other skaters by becoming homies. Send and accept homie requests
-                      to build your skating network. You can remove homies at any time from your
+                      Connect with other riders by becoming homies. Send and accept homie requests
+                      to build your riding network. You can remove homies at any time from your
                       settings.
                     </p>
                   </div>
@@ -512,7 +512,7 @@ export default function TermsConditions() {
                   </p>
                   <p>
                     Before initiating any legal action, you agree to first contact us and attempt to
-                    resolve the dispute informally. We're skaters - we'd rather talk it out.
+                    resolve the dispute informally. We're riders - we'd rather talk it out.
                   </p>
                 </div>
               </CardContent>
