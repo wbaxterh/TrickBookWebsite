@@ -14,14 +14,15 @@
   padding: 0px;
   margin: 0px;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 .heroImageContainer {
   position: relative;
   text-align: center;
   color: white;
-  height: 80vh;
+  height: 50vh;
+  overflow: hidden;
 }
 
 .overlay {
@@ -30,18 +31,303 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  width: 90%;
+  max-width: 800px;
 }
 
 .headerText {
   font-weight: 700;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 15px 20px;
+  background: rgba(252, 241, 80, 0.95);
+  color: #1a1a1a;
+  border-radius: 8px;
+  text-shadow: none;
 }
 
 .authorDate {
   font-weight: 300;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
+  padding: 4px 12px;
+}
+
+/* Reading time badge */
+.readingTime {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 6px;
+}
+
+/* Blog post content typography */
+.blogContent {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.blogContent h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #fcf150;
+}
+
+.blogContent h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.blogContent p {
+  margin-bottom: 1.25rem;
+}
+
+.blogContent ul,
+.blogContent ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.blogContent li {
+  margin-bottom: 0.5rem;
+}
+
+.blogContent blockquote {
+  border-left: 4px solid #fcf150;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+
+:global(.dark) .blogContent blockquote {
+  background: rgba(252, 241, 80, 0.08);
+  color: #e0e0e0;
+}
+
+.blogContent blockquote {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.blogContent a {
+  color: #fcf150;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blogContent a:hover {
+  color: #ffd700;
+}
+
+.blogContent img,
+.blogContent :global(.blog-image) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.blogContent strong {
+  font-weight: 700;
+}
+
+.blogContent em {
+  font-style: italic;
+}
+
+/* Featured post card */
+.featuredPost {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  height: 400px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.featuredPost:hover {
+  transform: scale(1.005);
+}
+
+.featuredImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featuredOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  color: white;
+}
+
+.featuredBadge {
+  display: inline-block;
+  background: #fcf150;
+  color: #1a1a1a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.featuredTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.featuredMeta {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Post navigation (prev/next) */
+.postNav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid;
+}
+
+:global(.dark) .postNav {
+  border-color: #333;
+}
+
+.postNav {
+  border-color: #e0e0e0;
+}
+
+.postNavLink {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.postNavLink:hover {
+  background: rgba(252, 241, 80, 0.1);
+}
+
+.postNavLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+:global(.dark) .postNavLabel {
+  color: #aaa;
+}
+
+.postNavLabel {
+  color: #666;
+}
+
+.postNavTitle {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+:global(.dark) .postNavTitle {
+  color: #f0f0f0;
+}
+
+.postNavTitle {
+  color: #1a1a1a;
+}
+
+.postNavNext {
+  text-align: right;
+}
+
+/* Share section */
+.shareSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid;
+}
+
+:global(.dark) .shareSection {
+  border-color: #333;
+}
+
+.shareSection {
+  border-color: #e0e0e0;
+}
+
+.shareLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.shareBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+:global(.dark) .shareBtn {
+  background: #333;
+  color: #f0f0f0;
+}
+
+.shareBtn {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+
+.shareBtn:hover {
+  background: #fcf150;
+  color: #1a1a1a;
+  transform: scale(1.1);
+}
+
+/* Blog listing header */
+.blogHeader {
+  text-align: center;
+  padding: 3rem 1rem 1rem;
+}
+
+.blogHeaderTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.blogHeaderSub {
+  font-size: 1.1rem;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 992px) {
@@ -54,5 +340,27 @@
     font-size: 1.2em;
     margin-bottom: 10px;
     padding: 10px;
+  }
+  .blogContent {
+    padding: 1.5rem 0.5rem;
+    font-size: 1rem;
+  }
+  .blogContent h2 {
+    font-size: 1.5rem;
+  }
+  .blogContent h3 {
+    font-size: 1.2rem;
+  }
+  .featuredPost {
+    height: 280px;
+  }
+  .featuredTitle {
+    font-size: 1.4rem;
+  }
+  .postNav {
+    flex-direction: column;
+  }
+  .postNavNext {
+    text-align: left;
   }
 }

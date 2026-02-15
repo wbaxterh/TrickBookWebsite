@@ -69,7 +69,6 @@ const Header = () => {
 
   return (
     <Navbar
-      bg={isDark ? 'dark' : 'light'}
       variant={isDark ? 'dark' : 'light'}
       className={`navbar-fixed-top ${styles.navWrapper}`}
       expand="lg"
@@ -92,10 +91,7 @@ const Header = () => {
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          style={{ backgroundColor: isDark ? '#1a1a1a' : '#f5f5f5' }}
-        >
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mobile-nav-section">
             <Link href="/trickbook" passHref legacyBehavior>
               <Nav.Link

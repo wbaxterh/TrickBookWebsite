@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import styles from '../styles/blog.module.css'; // Assuming the styles file is in the same location
+import styles from '../styles/blog.module.css';
 
-const PageHeader = ({ title, className, sx, col, heroImage, author, date }) => {
+const PageHeader = ({ title, className, sx, col, heroImage, author, date, readingTime }) => {
   const imageSrc = heroImage || '/defaultBlogBG.png';
 
   return (
     <div className={`row ${className}`}>
       <div className={`${col} p-0`}>
         <div className={`position-relative ${styles.heroImageContainer}`}>
-          <img src={imageSrc} alt={`${title} Hero Image`} className={styles.heroImage} />
+          <img src={imageSrc} alt={`${title}`} className={styles.heroImage} />
           <div className={styles.overlay}>
             <Typography variant="h2" className={`header-text ${styles.headerText}`} sx={{ ...sx }}>
               {title}
@@ -19,6 +19,7 @@ const PageHeader = ({ title, className, sx, col, heroImage, author, date }) => {
                 By {author} on {new Date(date).toLocaleDateString()}
               </Typography>
             )}
+            {readingTime && <div className={styles.readingTime}>{readingTime} min read</div>}
           </div>
         </div>
       </div>
@@ -34,6 +35,7 @@ PageHeader.propTypes = {
   heroImage: PropTypes.string,
   author: PropTypes.string,
   date: PropTypes.string,
+  readingTime: PropTypes.number,
 };
 
 PageHeader.defaultProps = {
@@ -43,6 +45,7 @@ PageHeader.defaultProps = {
   heroImage: null,
   author: null,
   date: null,
+  readingTime: null,
 };
 
 export default PageHeader;
