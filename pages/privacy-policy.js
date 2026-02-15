@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
                 Our Privacy Promise
               </h2>
               <p className="text-muted-foreground mb-4">
-                TrickBook is built by skaters, for skaters. We believe your personal data belongs to
+                TrickBook is built by riders, for riders. We believe your personal data belongs to
                 <strong className="text-foreground"> you</strong>, not advertisers. Unlike big tech
                 platforms that profit from your information, we take a radically different approach:
               </p>
