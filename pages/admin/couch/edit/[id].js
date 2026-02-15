@@ -98,12 +98,6 @@ export default function EditVideo() {
     }
   }, [loggedIn, role, router]);
 
-  useEffect(() => {
-    if (id && token) {
-      fetchVideo();
-    }
-  }, [id, token, fetchVideo]);
-
   const fetchVideo = async () => {
     setLoading(true);
     try {
@@ -134,6 +128,12 @@ export default function EditVideo() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (id && token) {
+      fetchVideo();
+    }
+  }, [id, token, fetchVideo]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

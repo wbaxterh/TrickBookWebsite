@@ -30,17 +30,6 @@ export default function SpotListDetail() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [spotToRemove, setSpotToRemove] = useState(null);
 
-  useEffect(() => {
-    if (loggedIn === null) return;
-    if (!loggedIn) {
-      router.push('/login');
-      return;
-    }
-    if (!listId) return;
-
-    fetchData();
-  }, [loggedIn, listId, router, fetchData]);
-
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -55,6 +44,17 @@ export default function SpotListDetail() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loggedIn === null) return;
+    if (!loggedIn) {
+      router.push('/login');
+      return;
+    }
+    if (!listId) return;
+
+    fetchData();
+  }, [loggedIn, listId, router, fetchData]);
 
   const handleRemoveClick = (spot, e) => {
     e.preventDefault();

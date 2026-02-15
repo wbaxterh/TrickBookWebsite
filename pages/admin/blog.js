@@ -15,6 +15,16 @@ export default function BlogAdmin() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const fetchPosts = async () => {
+    try {
+      const fetchedPosts = await getSortedPostsData();
+      setPosts(fetchedPosts);
+    } catch (_error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (loggedIn === null) {
       return;
@@ -26,16 +36,6 @@ export default function BlogAdmin() {
       router.push('/login');
     }
   }, [loggedIn, role, router, fetchPosts]);
-
-  const fetchPosts = async () => {
-    try {
-      const fetchedPosts = await getSortedPostsData();
-      setPosts(fetchedPosts);
-    } catch (_error) {
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleEdit = (postId) => {
     router.push({

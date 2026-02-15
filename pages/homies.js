@@ -51,16 +51,6 @@ export default function Homies() {
   const [loadingConversations, setLoadingConversations] = useState(true);
   const [actionLoading, setActionLoading] = useState(null); // Track which action is loading
 
-  // Fetch data on mount
-  useEffect(() => {
-    if (token) {
-      fetchHomies();
-      fetchDiscoverableUsers();
-      fetchRequests();
-      fetchConversations();
-    }
-  }, [token, fetchConversations, fetchDiscoverableUsers, fetchHomies, fetchRequests]);
-
   const fetchHomies = async () => {
     setLoadingHomies(true);
     try {
@@ -108,6 +98,16 @@ export default function Homies() {
       setLoadingConversations(false);
     }
   };
+
+  // Fetch data on mount
+  useEffect(() => {
+    if (token) {
+      fetchHomies();
+      fetchDiscoverableUsers();
+      fetchRequests();
+      fetchConversations();
+    }
+  }, [token, fetchConversations, fetchDiscoverableUsers, fetchHomies, fetchRequests]);
 
   const handleStartConversation = async (userId) => {
     setActionLoading(`msg-${userId}`);

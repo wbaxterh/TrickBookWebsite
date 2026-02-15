@@ -89,6 +89,18 @@ export default function SpotsAdmin() {
   });
   const router = useRouter();
 
+  const fetchSpots = async () => {
+    setLoading(true);
+    try {
+      const data = await searchSpots(searchTerm, '', '', '', pagination.page, 20);
+      setSpots(data.spots || []);
+      setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
+    } catch (_error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (loggedIn === null) {
       return;
@@ -109,18 +121,6 @@ export default function SpotsAdmin() {
       return () => clearTimeout(debounceTimer);
     }
   }, [fetchSpots, loggedIn, role]);
-
-  const fetchSpots = async () => {
-    setLoading(true);
-    try {
-      const data = await searchSpots(searchTerm, '', '', '', pagination.page, 20);
-      setSpots(data.spots || []);
-      setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
-    } catch (_error) {
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleEdit = (spotId) => {
     router.push({

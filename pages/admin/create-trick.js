@@ -36,15 +36,6 @@ export default function CreateTrick() {
   const router = useRouter();
   const { isEdit, trickId } = router.query;
 
-  useEffect(() => {
-    if (isEdit && trickId) {
-      fetchTrickData(trickId);
-    } else {
-      setLoading(false);
-    }
-    fetchCategories();
-  }, [isEdit, trickId, fetchCategories, fetchTrickData]);
-
   const fetchTrickData = async (id) => {
     try {
       const trickData = await getTrickData(id);
@@ -67,6 +58,15 @@ export default function CreateTrick() {
       setCategories(cats);
     } catch (_error) {}
   };
+
+  useEffect(() => {
+    if (isEdit && trickId) {
+      fetchTrickData(trickId);
+    } else {
+      setLoading(false);
+    }
+    fetchCategories();
+  }, [isEdit, trickId, fetchCategories, fetchTrickData]);
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles, ...event.target.files]);

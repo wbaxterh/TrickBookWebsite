@@ -96,6 +96,18 @@ export default function PendingSpotsAdmin() {
   const [processing, setProcessing] = useState(false);
   const router = useRouter();
 
+  const fetchPendingSpots = async () => {
+    setLoading(true);
+    try {
+      const data = await getPendingSpots(token, pagination.page, 20);
+      setSpots(data.spots || []);
+      setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
+    } catch (_error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (loggedIn === null) {
       return;
@@ -113,18 +125,6 @@ export default function PendingSpotsAdmin() {
       fetchPendingSpots();
     }
   }, [fetchPendingSpots, loggedIn, role]);
-
-  const fetchPendingSpots = async () => {
-    setLoading(true);
-    try {
-      const data = await getPendingSpots(token, pagination.page, 20);
-      setSpots(data.spots || []);
-      setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
-    } catch (_error) {
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleApprove = async (spotId) => {
     if (!confirm('Are you sure you want to approve this spot for public listing?')) {

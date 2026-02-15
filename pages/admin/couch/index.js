@@ -27,17 +27,6 @@ export default function AdminCouch() {
   const [syncing, setSyncing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    if (loggedIn === false || (loggedIn && role !== 'admin')) {
-      router.push('/login');
-      return;
-    }
-
-    if (loggedIn && role === 'admin' && token) {
-      fetchVideos();
-    }
-  }, [loggedIn, role, token, router, fetchVideos]);
-
   const fetchVideos = async () => {
     setLoading(true);
     try {
@@ -48,6 +37,17 @@ export default function AdminCouch() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loggedIn === false || (loggedIn && role !== 'admin')) {
+      router.push('/login');
+      return;
+    }
+
+    if (loggedIn && role === 'admin' && token) {
+      fetchVideos();
+    }
+  }, [loggedIn, role, token, router, fetchVideos]);
 
   const handleSync = async () => {
     setSyncing(true);

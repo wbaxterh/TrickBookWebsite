@@ -156,20 +156,6 @@ export default function SettingsPage() {
     }
   }, [router.query.tab]);
 
-  useEffect(() => {
-    if (!token) {
-      router.push('/login');
-      return;
-    }
-
-    const decoded = jwt.decode(token);
-    if (decoded?.userId) {
-      setUserId(decoded.userId);
-      fetchUserData(decoded.userId);
-      fetchSubscriptionData();
-    }
-  }, [token, fetchSubscriptionData, fetchUserData, router.push]);
-
   const fetchSubscriptionData = async () => {
     try {
       const [subData, usageData] = await Promise.all([
@@ -221,6 +207,20 @@ export default function SettingsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    const decoded = jwt.decode(token);
+    if (decoded?.userId) {
+      setUserId(decoded.userId);
+      fetchUserData(decoded.userId);
+      fetchSubscriptionData();
+    }
+  }, [token, fetchSubscriptionData, fetchUserData, router.push]);
 
   const handleSave = async () => {
     setSaving(true);

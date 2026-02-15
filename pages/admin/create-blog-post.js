@@ -33,14 +33,6 @@ export default function CreateBlogPost() {
   const router = useRouter();
   const { isEdit, postId } = router.query; // Accessing query parameters
 
-  useEffect(() => {
-    if (isEdit && postId) {
-      fetchPostData(postId);
-    } else {
-      setLoading(false);
-    }
-  }, [isEdit, postId, fetchPostData]);
-
   const fetchPostData = async (id) => {
     try {
       const postData = await getBlogPostById(id);
@@ -55,6 +47,14 @@ export default function CreateBlogPost() {
       setLoading(false);
     } catch (_error) {}
   };
+
+  useEffect(() => {
+    if (isEdit && postId) {
+      fetchPostData(postId);
+    } else {
+      setLoading(false);
+    }
+  }, [isEdit, postId, fetchPostData]);
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles, ...event.target.files]);

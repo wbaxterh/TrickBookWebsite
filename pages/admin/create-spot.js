@@ -91,21 +91,6 @@ export default function CreateSpot() {
   const router = useRouter();
   const { isEdit, spotId } = router.query;
 
-  useEffect(() => {
-    if (loggedIn === null) return;
-
-    if (!loggedIn || role !== 'admin') {
-      router.push('/login');
-      return;
-    }
-
-    if (isEdit && spotId) {
-      fetchSpotData(spotId);
-    } else {
-      setLoading(false);
-    }
-  }, [isEdit, spotId, loggedIn, role, router, fetchSpotData]);
-
   const fetchSpotData = async (id) => {
     try {
       const spotData = await getSpotData(id);
@@ -136,6 +121,21 @@ export default function CreateSpot() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loggedIn === null) return;
+
+    if (!loggedIn || role !== 'admin') {
+      router.push('/login');
+      return;
+    }
+
+    if (isEdit && spotId) {
+      fetchSpotData(spotId);
+    } else {
+      setLoading(false);
+    }
+  }, [isEdit, spotId, loggedIn, role, router, fetchSpotData]);
 
   const handleTagToggle = (tag) => {
     setSelectedTags((prev) =>

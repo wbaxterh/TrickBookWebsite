@@ -26,18 +26,6 @@ export default function Messages() {
   const [startingConversation, setStartingConversation] = useState(null);
   const [homiesSearchQuery, setHomiesSearchQuery] = useState('');
 
-  useEffect(() => {
-    if (loggedIn === false) {
-      router.push('/login');
-      return;
-    }
-
-    if (token) {
-      loadConversations();
-      setupSocket();
-    }
-  }, [token, loggedIn, loadConversations, router.push, setupSocket]);
-
   const loadConversations = async () => {
     try {
       const data = await getConversations(token);
@@ -86,6 +74,18 @@ export default function Messages() {
       socket.off('messages:read');
     };
   };
+
+  useEffect(() => {
+    if (loggedIn === false) {
+      router.push('/login');
+      return;
+    }
+
+    if (token) {
+      loadConversations();
+      setupSocket();
+    }
+  }, [token, loggedIn, loadConversations, router.push, setupSocket]);
 
   // Load homies when modal opens
   const loadHomies = async () => {

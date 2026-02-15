@@ -44,16 +44,6 @@ export default function MySpots() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [listToDelete, setListToDelete] = useState(null);
 
-  useEffect(() => {
-    if (loggedIn === null) return;
-    if (!loggedIn) {
-      router.push('/login');
-      return;
-    }
-
-    fetchData();
-  }, [loggedIn, router, fetchData]);
-
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -65,6 +55,16 @@ export default function MySpots() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loggedIn === null) return;
+    if (!loggedIn) {
+      router.push('/login');
+      return;
+    }
+
+    fetchData();
+  }, [loggedIn, router, fetchData]);
 
   const handleOpenCreateDialog = () => {
     setDialogMode('create');

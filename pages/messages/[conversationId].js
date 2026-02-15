@@ -38,6 +38,36 @@ export default function Conversation() {
     }
   }, [loggedIn, router]);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const loadConversation = async () => {
+    try {
+      const [convoData, messagesData] = await Promise.all([
+        getConversation(conversationId, token),
+        getMessages(conversationId, { page: 1, limit: 50 }, token),
+      ]);
+
+      setConversation(convoData);
+      setMessages(messagesData.messages || []);
+      setHasMore(messagesData.pagination?.hasMore || false);
+      setPage(1);
+
+      // Mark as read on load
+      markAsRead(conversationId, token);
+
+      // Scroll to bottom after messages load
+      setTimeout(scrollToBottom, 100);
+    } catch (error) {
+      if (error.response?.status === 404) {
+        router.push('/messages');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Load conversation and messages
   useEffect(() => {
     if (!conversationId || !token) return;
@@ -111,32 +141,6 @@ export default function Conversation() {
     };
   }, [conversationId, token, userId, scrollToBottom]);
 
-  const loadConversation = async () => {
-    try {
-      const [convoData, messagesData] = await Promise.all([
-        getConversation(conversationId, token),
-        getMessages(conversationId, { page: 1, limit: 50 }, token),
-      ]);
-
-      setConversation(convoData);
-      setMessages(messagesData.messages || []);
-      setHasMore(messagesData.pagination?.hasMore || false);
-      setPage(1);
-
-      // Mark as read on load
-      markAsRead(conversationId, token);
-
-      // Scroll to bottom after messages load
-      setTimeout(scrollToBottom, 100);
-    } catch (error) {
-      if (error.response?.status === 404) {
-        router.push('/messages');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const loadMoreMessages = async () => {
     if (loadingMore || !hasMore) return;
 
@@ -153,10 +157,6 @@ export default function Conversation() {
     } finally {
       setLoadingMore(false);
     }
-  };
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleTyping = (e) => {

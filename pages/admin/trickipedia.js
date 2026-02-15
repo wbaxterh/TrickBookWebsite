@@ -26,6 +26,19 @@ export default function TrickipediaAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
+  const fetchTricks = async () => {
+    try {
+      const fetchedTricks = await getSortedTricksData();
+      // Filter out sample data
+      const realTricks = fetchedTricks.filter((trick) => !trick.sampleData);
+      setTricks(realTricks);
+      setFilteredTricks(realTricks);
+    } catch (_error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (loggedIn === null) {
       return;
@@ -47,19 +60,6 @@ export default function TrickipediaAdmin() {
     );
     setFilteredTricks(filtered);
   }, [searchTerm, tricks]);
-
-  const fetchTricks = async () => {
-    try {
-      const fetchedTricks = await getSortedTricksData();
-      // Filter out sample data
-      const realTricks = fetchedTricks.filter((trick) => !trick.sampleData);
-      setTricks(realTricks);
-      setFilteredTricks(realTricks);
-    } catch (_error) {
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleEdit = (trickId) => {
     router.push({
