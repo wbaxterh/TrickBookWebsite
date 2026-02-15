@@ -123,7 +123,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
@@ -150,7 +152,9 @@ body {
   overflow-x: hidden;
   background-color: #ffffff;
   color: #1a1a1a;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .dark body,
@@ -180,23 +184,23 @@ html.dark body,
 
 /* Theme-aware Bootstrap overrides */
 .dark .navbar-light {
-  background-color: #1a1a1a !important;
+  background-color: #1a1a1a;
 }
 
 .dark .bg-light {
-  background-color: #1a1a1a !important;
+  background-color: #1a1a1a;
 }
 
 .dark .text-dark {
-  color: #f0f0f0 !important;
+  color: #f0f0f0;
 }
 
 .dark .text-muted {
-  color: #aaa !important;
+  color: #aaa;
 }
 
 .dark .border {
-  border-color: #333 !important;
+  border-color: #333;
 }
 
 /* Theme-aware links */
@@ -239,26 +243,26 @@ a:hover {
 /* MUI outlined/secondary buttons in dark mode */
 .dark .MuiButton-outlinedSecondary,
 .dark .MuiButton-outlined {
-  color: #f0f0f0 !important;
-  border-color: #666 !important;
+  color: #f0f0f0;
+  border-color: #666;
 }
 
 .dark .MuiButton-outlinedSecondary:hover,
 .dark .MuiButton-outlined:hover {
-  border-color: #ffd700 !important;
-  color: #ffd700 !important;
+  border-color: #ffd700;
+  color: #ffd700;
 }
 
 /* MUI contained buttons with dark bg should have yellow/light text */
 .dark .MuiButton-contained[style*="background-color: rgb(31, 31, 31)"],
 .dark .MuiButton-contained[style*="backgroundColor: #1f1f1f"],
 .dark .MuiButton-root[style*="background-color: rgb(31, 31, 31)"] {
-  color: #fff000 !important;
+  color: #fff000;
 }
 
 /* Generic: buttons with dark backgrounds should have light/yellow text in dark mode */
 .dark .MuiButton-contained:not(.MuiButton-containedPrimary) {
-  color: #f0f0f0 !important;
+  color: #f0f0f0;
 }
 
 /* Keep text dark on yellow/primary buttons regardless of theme */
@@ -270,7 +274,7 @@ a:hover {
 .bg-yellow-500,
 .app-primary-bg,
 .custom-primary {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 .btn-warning *,
@@ -280,7 +284,7 @@ a:hover {
 .bg-yellow-500 *,
 .app-primary-bg *,
 .custom-primary * {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* MUI buttons with yellow background */
@@ -290,14 +294,14 @@ a:hover {
 .dark .MuiButton-root[style*="backgroundColor"],
 .MuiButton-containedPrimary,
 .MuiButton-contained.custom-primary {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 .dark .MuiButton-containedPrimary .MuiSvgIcon-root,
 .dark .MuiButton-contained[style*="background-color"] .MuiSvgIcon-root,
 .dark .MuiButton-root[style*="background-color"] .MuiSvgIcon-root,
 .MuiButton-containedPrimary .MuiSvgIcon-root {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* Force dark text on any yellow background button */
@@ -305,7 +309,7 @@ a:hover {
 .dark button[style*="background-color:#fcf150"],
 .dark a[style*="background-color: rgb(252, 241, 80)"],
 .dark a[style*="background-color:#fcf150"] {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* Preserve .text-dark class in dark mode */
@@ -313,14 +317,14 @@ a:hover {
 .dark .MuiButton-containedPrimary .text-dark,
 .dark .MuiButton-containedPrimary a,
 .dark .MuiButton-containedPrimary Link {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* Any link inside a yellow button should be dark */
 .dark .MuiButton-root[class*="MuiButton-containedPrimary"] a,
 .dark .MuiButton-root[class*="MuiButton-contained"] a.text-dark,
 .dark button.MuiButton-containedPrimary a {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* Theme-aware tables */
@@ -384,12 +388,12 @@ img {
   right: 0;
   left: 0;
   z-index: 999999;
-  background-color: #f5f5f5 !important;
+  background-color: #f5f5f5;
   transition: background-color 0.2s ease;
 }
 
 .dark .navbar-fixed-top {
-  background-color: #1a1a1a !important;
+  background-color: #1a1a1a;
 }
 
 /* Ensure navbar content is visible */
@@ -398,45 +402,45 @@ img {
 }
 
 .navbar-fixed-top .navbar-nav {
-  display: flex !important;
+  display: flex;
   align-items: center;
 }
 
 .navbar-fixed-top .nav-link {
-  color: rgba(0, 0, 0, 0.85) !important;
-  padding: 0.5rem 1rem !important;
+  color: rgba(0, 0, 0, 0.85);
+  padding: 0.5rem 1rem;
   transition: color 0.2s ease;
 }
 
 .dark .navbar-fixed-top .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .navbar-fixed-top .nav-link:hover {
-  color: #000 !important;
+  color: #000;
 }
 
 .dark .navbar-fixed-top .nav-link:hover {
-  color: #fff !important;
+  color: #fff;
 }
 
 /* Legacy TrickBook classes - keep for backward compatibility */
 .app-primary,
 .app-primary a {
-  color: #fff000 !important;
+  color: #fff000;
 }
 
 .app-secondary,
 .app-secondary a {
-  color: #1f1f1f !important;
+  color: #1f1f1f;
 }
 
 .app-primary-bg {
-  background-color: #fff000 !important;
+  background-color: #fff000;
 }
 
 .app-secondary-bg {
-  background-color: #1f1f1f !important;
+  background-color: #1f1f1f;
 }
 
 .header-bg {
@@ -453,7 +457,7 @@ img {
 
 .header-text {
   color: #1f1f1f;
-  background-color: #fcf150 !important;
+  background-color: #fcf150;
   border: 1px solid #1f1f1f;
   border-radius: 10px;
 }
@@ -471,9 +475,9 @@ img {
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 textarea,
 select {
-  background-color: #ffffff !important;
-  color: #0d0d0d !important;
-  border: 1px solid #d9d9d9 !important;
+  background-color: #ffffff;
+  color: #0d0d0d;
+  border: 1px solid #d9d9d9;
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
 }
@@ -482,16 +486,16 @@ select {
 .dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 .dark textarea,
 .dark select {
-  background-color: #121212 !important;
-  color: #f2f2f2 !important;
-  border: 1px solid #333333 !important;
+  background-color: #121212;
+  color: #f2f2f2;
+  border: 1px solid #333333;
 }
 
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #ffd700 !important;
+  border-color: #ffd700;
   box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
@@ -507,61 +511,63 @@ textarea::placeholder {
 
 /* Mobile typography improvements */
 @media (max-width: 640px) {
-  html, body {
+  html,
+  body {
     font-size: 16px;
   }
 
   /* MUI Typography mobile overrides */
   .MuiTypography-h1 {
-    font-size: 1.75rem !important;
-    line-height: 1.2 !important;
+    font-size: 1.75rem;
+    line-height: 1.2;
   }
   .MuiTypography-h2 {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
+    font-size: 1.5rem;
+    line-height: 1.3;
   }
   .MuiTypography-h3 {
-    font-size: 1.25rem !important;
-    line-height: 1.3 !important;
+    font-size: 1.25rem;
+    line-height: 1.3;
   }
   .MuiTypography-h4 {
-    font-size: 1.125rem !important;
-    line-height: 1.4 !important;
+    font-size: 1.125rem;
+    line-height: 1.4;
   }
   .MuiTypography-h5 {
-    font-size: 1rem !important;
-    line-height: 1.4 !important;
+    font-size: 1rem;
+    line-height: 1.4;
   }
   .MuiTypography-h6 {
-    font-size: 0.875rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.875rem;
+    line-height: 1.4;
   }
   .MuiTypography-body1,
   .MuiTypography-body2 {
-    font-size: 0.9375rem !important;
-    line-height: 1.6 !important;
+    font-size: 0.9375rem;
+    line-height: 1.6;
   }
 
   /* Container padding on mobile */
-  .container, .MuiContainer-root {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  .container,
+  .MuiContainer-root {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   /* Better button sizing on mobile */
   .MuiButton-root {
-    font-size: 0.875rem !important;
-    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
   }
 }
 
 /* Profile dropdown styling */
 .profile-dropdown .dropdown-toggle {
-  background-color: #1f1f1f !important;
-  color: #fff !important;
+  background-color: #1f1f1f;
+  color: #fff;
   border-radius: 4px;
-  padding: 6px 12px !important;
-  border: none !important;
+  padding: 6px 12px;
+  border: none;
 }
 
 .profile-dropdown .dropdown-toggle::after {
@@ -590,8 +596,8 @@ textarea::placeholder {
 
 /* Dark mode profile dropdown */
 .dark .profile-dropdown .dropdown-toggle {
-  background-color: #e0e0e0 !important;
-  color: #1f1f1f !important;
+  background-color: #e0e0e0;
+  color: #1f1f1f;
 }
 
 .dark .profile-dropdown .dropdown-menu {
@@ -709,24 +715,24 @@ textarea::placeholder {
 
 .login-btn,
 .dark .login-btn {
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 .login-btn:hover,
 .dark .login-btn:hover {
   background: #e8dc40;
   border-color: #e8dc40;
-  color: #1a1a1a !important;
+  color: #1a1a1a;
 }
 
 /* Ensure navbar expands on desktop */
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
-    display: flex !important;
+    display: flex;
     flex-basis: auto;
-    visibility: visible !important;
-    opacity: 1 !important;
-    height: auto !important;
+    visibility: visible;
+    opacity: 1;
+    height: auto;
   }
 
   .navbar-expand-lg .navbar-nav {
@@ -747,14 +753,14 @@ textarea::placeholder {
 @media (max-width: 991px) {
   .navbar-collapse.show,
   .navbar-collapse.collapsing {
-    display: block !important;
-    visibility: visible !important;
+    display: block;
+    visibility: visible;
     background-color: #f5f5f5;
   }
 
   .navbar-collapse.show *,
   .navbar-collapse.collapsing * {
-    visibility: visible !important;
+    visibility: visible;
   }
 
   .dark .navbar-collapse.show,
@@ -770,15 +776,15 @@ textarea::placeholder {
   }
 
   .mobile-nav-link {
-    padding: 12px 8px !important;
+    padding: 12px 8px;
     font-size: 16px;
     border-radius: 6px;
     transition: background 0.2s ease;
-    color: #1a1a1a !important;
+    color: #1a1a1a;
   }
 
   .dark .mobile-nav-link {
-    color: #f0f0f0 !important;
+    color: #f0f0f0;
   }
 
   .mobile-nav-link:hover {
@@ -800,10 +806,10 @@ textarea::placeholder {
 
   /* Ensure all nav text is visible on mobile */
   .navbar-collapse .nav-link {
-    color: #1a1a1a !important;
+    color: #1a1a1a;
   }
 
   .dark .navbar-collapse .nav-link {
-    color: #f0f0f0 !important;
+    color: #f0f0f0;
   }
 }

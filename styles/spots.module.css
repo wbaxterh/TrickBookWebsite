@@ -1,187 +1,195 @@
 .spotsContainer {
-	min-height: 100vh;
-	padding-bottom: 2rem;
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 .headerSection {
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	transition: border-color 0.2s ease;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
 }
 
 :global(.dark) .headerSection {
-	border-color: #333;
+  border-color: #333;
 }
 
 .spotCard {
-	height: 100%;
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease;
-	background-color: #fff;
-	border: 1px solid #eee;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	cursor: pointer;
+  height: 100%;
+  transition:
+    transform 0.2s ease-in-out,
+    background-color 0.2s ease;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 :global(.dark) .spotCard {
-	background-color: #1e1e1e;
-	border-color: #333;
+  background-color: #1e1e1e;
+  border-color: #333;
 }
 
 .spotCard:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .spotImageContainer {
-	position: relative;
-	height: 180px;
-	overflow: hidden;
-	background-color: #f0f0f0;
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background-color: #f0f0f0;
 }
 
 :global(.dark) .spotImageContainer {
-	background-color: #2a2a2a;
+  background-color: #2a2a2a;
 }
 
 .spotImageContainer img {
-	transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .spotCard:hover .spotImageContainer img {
-	transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .noImage {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f0f0f0;
 }
 
 :global(.dark) .noImage {
-	background-color: #2a2a2a;
+  background-color: #2a2a2a;
 }
 
 .searchSection {
-	background-color: #f8f9fa;
-	padding: 1.5rem;
-	border-radius: 10px;
-	margin-bottom: 2rem;
-	transition: background-color 0.2s ease;
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  transition: background-color 0.2s ease;
 }
 
 :global(.dark) .searchSection {
-	background-color: #1f1f1f;
+  background-color: #1f1f1f;
 }
 
 .filterChip {
-	margin: 0.25rem;
+  margin: 0.25rem;
 }
 
 .stateButton {
-	background-color: #fff !important;
-	color: #333 !important;
-	border: 2px solid #ffd700 !important;
-	padding: 15px 20px !important;
-	font-size: 1.2rem !important;
-	transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s !important;
+  background-color: #fff;
+  color: #333;
+  border: 2px solid #ffd700;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
 }
 
 :global(.dark) .stateButton {
-	background-color: #1f1f1f !important;
-	color: #fff000 !important;
+  background-color: #1f1f1f;
+  color: #fff000;
 }
 
 .stateButton:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 8px 20px rgba(255, 215, 0, 0.35) !important;
-	background-color: #ffd700 !important;
-	color: #333 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.35);
+  background-color: #ffd700;
+  color: #333;
 }
 
 .spotCount {
-	color: #666;
-	font-size: 0.9rem;
+  color: #666;
+  font-size: 0.9rem;
 }
 
 :global(.dark) .spotCount {
-	color: #aaa;
+  color: #aaa;
 }
 
 .spotListCard {
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	padding: 1.5rem;
-	transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
-	cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background-color 0.2s;
+  cursor: pointer;
 }
 
 :global(.dark) .spotListCard {
-	background-color: #1f1f1f;
-	border-color: #333;
+  background-color: #1f1f1f;
+  border-color: #333;
 }
 
 .spotListCard:hover {
-	transform: translateY(-3px);
-	border-color: #ffd700;
+  transform: translateY(-3px);
+  border-color: #ffd700;
 }
 
 .emptyState {
-	text-align: center;
-	padding: 3rem;
-	color: #666;
+  text-align: center;
+  padding: 3rem;
+  color: #666;
 }
 
 :global(.dark) .emptyState {
-	color: #aaa;
+  color: #aaa;
 }
 
 .loadingState {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
 }
 
 .pagination {
-	display: flex;
-	justify-content: center;
-	gap: 0.5rem;
-	margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
 .mapContainer {
-	height: 300px;
-	border-radius: 10px;
-	overflow: hidden;
-	margin-bottom: 1rem;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .detailsSection {
-	background-color: #f8f9fa;
-	border-radius: 10px;
-	padding: 2rem;
-	transition: background-color 0.2s ease;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+  transition: background-color 0.2s ease;
 }
 
 :global(.dark) .detailsSection {
-	background-color: #1f1f1f;
+  background-color: #1f1f1f;
 }
 
 .spotDetailImage {
-	position: relative;
-	height: 400px;
-	border-radius: 10px;
-	overflow: hidden;
-	margin-bottom: 1.5rem;
+  position: relative;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
 }
 
 .tagContainer {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
 }

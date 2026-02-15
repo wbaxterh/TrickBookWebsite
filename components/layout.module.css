@@ -1,110 +1,112 @@
 /* components/layout.module.css */
 
 .footer {
-	padding: 1rem 0;
-	background-color: #f1f1f1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 1rem 0;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 :global(.dark) .footer {
-	background-color: #1a1a1a;
-	color: #f0f0f0;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
 }
 
 .footerContent {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .subnavLeft,
 .subnavRight {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	width: 30%; /* Adjust width as needed for balance */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 30%; /* Adjust width as needed for balance */
 }
 
 .subnavCenter {
-	text-align: center;
-	flex-grow: 1; /* Allow the center to take remaining space */
+  text-align: center;
+  flex-grow: 1; /* Allow the center to take remaining space */
 }
 
 .subnavLeft span,
 .subnavRight span {
-	margin: 0 0.5rem;
-	text-decoration: none;
-	color: #333;
-	cursor: pointer;
-	transition: color 0.2s ease;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 :global(.dark) .subnavLeft span,
 :global(.dark) .subnavRight span {
-	color: #ccc;
+  color: #ccc;
 }
 
 .subnavLeft span:hover,
 .subnavRight span:hover {
-	color: #ffd700;
+  color: #ffd700;
 }
 
 .subnavCenter p {
-	margin: 0;
+  margin: 0;
 }
 
 .subnavRight {
-	justify-content: flex-end;
-	display: flex;
-	flex-wrap: nowrap;
-	gap: 2rem;
-	font-size: 1rem;
+  justify-content: flex-end;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  font-size: 1rem;
 }
 
 @media (min-width: 900px) {
-	.subnavRight {
-		font-size: 0.95rem;
-		gap: 2.5rem;
-		flex-wrap: nowrap;
-	}
+  .subnavRight {
+    font-size: 0.95rem;
+    gap: 2.5rem;
+    flex-wrap: nowrap;
+  }
 }
 
 .icon {
-	font-size: 1.5rem; /* Adjust size as needed */
-	color: inherit;
+  font-size: 1.5rem; /* Adjust size as needed */
+  color: inherit;
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-	.footerContent {
-		flex-direction: column; /* Stack the footer content vertically */
-		align-items: center;
-		gap: 1rem; /* Add some space between stacked elements */
-	}
+  .footerContent {
+    flex-direction: column; /* Stack the footer content vertically */
+    align-items: center;
+    gap: 1rem; /* Add some space between stacked elements */
+  }
 
-	.subnavLeft,
-	.subnavCenter,
-	.subnavRight {
-		width: 100%; /* Make each section take full width on mobile */
-		text-align: center; /* Center align text in all sections */
-		justify-content: center; /* Center content in left and right sections */
-		font-size: 1.1rem;
-		gap: 1.2rem;
-		flex-wrap: wrap;
-	}
+  .subnavLeft,
+  .subnavCenter,
+  .subnavRight {
+    width: 100%; /* Make each section take full width on mobile */
+    text-align: center; /* Center align text in all sections */
+    justify-content: center; /* Center content in left and right sections */
+    font-size: 1.1rem;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
 }
 
 .mainContent {
-	padding-top: 64px;
+  padding-top: 64px;
 }
 
 @media (max-width: 600px) {
-	.mainContent {
-		padding-top: 56px;
-	}
+  .mainContent {
+    padding-top: 56px;
+  }
 }

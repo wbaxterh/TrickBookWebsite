@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M1ZmQzNWE4NmM4NGUzNDc3N2YxNGEiLCJuYW1lIjoiV2VzbGV5IEh1YmVyIiwiZW1haWwiOiJ3ZXNsZXliYXh0ZXJodWJlckBnbWFpbC5jb20iLCJpbWFnZVVyaSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xyQTZkaG9qRmM0ZHd5bmNtQllsMWZhWXhsSTBoWFNjTUVYa1doN2NUMUFCek12a3pqPXM5Ni1jIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY5MDUwMjYyfQ.27It_LOyvmd9pEMEY9qFC2XOHk3KOtxIUyeEMmjCI00";
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M1ZmQzNWE4NmM4NGUzNDc3N2YxNGEiLCJuYW1lIjoiV2VzbGV5IEh1YmVyIiwiZW1haWwiOiJ3ZXNsZXliYXh0ZXJodWJlckBnbWFpbC5jb20iLCJpbWFnZVVyaSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xyQTZkaG9qRmM0ZHd5bmNtQllsMWZhWXhsSTBoWFNjTUVYa1doN2NUMUFCek12a3pqPXM5Ni1jIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY5MDUwMjYyfQ.27It_LOyvmd9pEMEY9qFC2XOHk3KOtxIUyeEMmjCI00';
 
 const htmlContent = `<p><em>By Riders. For Riders.</em></p>
 
@@ -68,15 +69,12 @@ const htmlContent = `<p><em>By Riders. For Riders.</em></p>
 
 async function updatePost() {
   try {
-    const response = await axios.patch(
+    const _response = await axios.patch(
       'https://api.thetrickbook.com/api/blog/update/6980e0ef50aee3d50c0dd263',
       { content: htmlContent },
-      { headers: { 'x-auth-token': token } }
+      { headers: { 'x-auth-token': token } },
     );
-    console.log('Success:', response.data);
-  } catch (error) {
-    console.error('Error:', error.response?.data || error.message);
-  }
+  } catch (_error) {}
 }
 
 updatePost();

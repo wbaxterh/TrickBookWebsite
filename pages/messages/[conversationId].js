@@ -1,482 +1,430 @@
-import { useState, useEffect, useContext, useRef } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { AuthContext } from "../../auth/AuthContext";
-import UserAvatar from "../../components/UserAvatar";
-import {
-	getConversation,
-	getMessages,
-	sendMessage,
-	markAsRead,
-} from "../../lib/apiMessages";
-import { connectMessagesSocket } from "../../lib/socket";
-import { Input } from "../../components/ui/input";
-import { Button } from "../../components/ui/button";
-import {
-	ArrowLeft,
-	User,
-	Loader2,
-	Send,
-	Check,
-	CheckCheck,
-} from "lucide-react";
+import { ArrowLeft, Check, CheckCheck, Loader2, Send } from 'lucide-react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../../auth/AuthContext';
+import UserAvatar from '../../components/UserAvatar';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { getConversation, getMessages, markAsRead, sendMessage } from '../../lib/apiMessages';
+import { connectMessagesSocket } from '../../lib/socket';
 
 export default function Conversation() {
-	const router = useRouter();
-	const { conversationId } = router.query;
-	const { token, loggedIn, userId } = useContext(AuthContext);
+  const router = useRouter();
+  const { conversationId } = router.query;
+  const { token, loggedIn, userId } = useContext(AuthContext);
 
-	const [conversation, setConversation] = useState(null);
-	const [messages, setMessages] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [loadingMore, setLoadingMore] = useState(false);
-	const [newMessage, setNewMessage] = useState("");
-	const [sending, setSending] = useState(false);
-	const [otherTyping, setOtherTyping] = useState(false);
-	const [page, setPage] = useState(1);
-	const [hasMore, setHasMore] = useState(true);
+  const [conversation, setConversation] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [newMessage, setNewMessage] = useState('');
+  const [sending, setSending] = useState(false);
+  const [otherTyping, setOtherTyping] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-	const messagesEndRef = useRef(null);
-	const messagesContainerRef = useRef(null);
-	const socketRef = useRef(null);
-	const typingTimeoutRef = useRef(null);
-	const isTypingRef = useRef(false);
+  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const socketRef = useRef(null);
+  const typingTimeoutRef = useRef(null);
+  const isTypingRef = useRef(false);
 
-	// Auth check
-	useEffect(() => {
-		if (loggedIn === false) {
-			router.push("/login");
-		}
-	}, [loggedIn, router]);
+  // Auth check
+  useEffect(() => {
+    if (loggedIn === false) {
+      router.push('/login');
+    }
+  }, [loggedIn, router]);
 
-	// Load conversation and messages
-	useEffect(() => {
-		if (!conversationId || !token) return;
-		loadConversation();
-	}, [conversationId, token]);
+  // Load conversation and messages
+  useEffect(() => {
+    if (!conversationId || !token) return;
+    loadConversation();
+  }, [conversationId, token, loadConversation]);
 
-	// Socket setup
-	useEffect(() => {
-		console.log("[Chat] Socket useEffect triggered - token:", !!token, "conversationId:", conversationId, "userId:", userId);
-		if (!token || !conversationId) {
-			console.log("[Chat] Missing token or conversationId, skipping socket setup");
-			return;
-		}
+  // Socket setup
+  useEffect(() => {
+    if (!token || !conversationId) {
+      return;
+    }
+    const socket = connectMessagesSocket(token);
+    socketRef.current = socket;
 
-		console.log("[Chat] Setting up socket for conversation:", conversationId);
-		const socket = connectMessagesSocket(token);
-		console.log("[Chat] Socket returned from connectMessagesSocket, connected:", socket?.connected);
-		socketRef.current = socket;
+    // Join conversation room for typing indicators and real-time messages
+    socket.emit('join:conversation', conversationId);
 
-		// Join conversation room for typing indicators and real-time messages
-		socket.emit("join:conversation", conversationId);
-		console.log("[Chat] Emitted join:conversation for:", conversationId);
+    // Listen for new messages
+    socket.on('message:new', ({ message }) => {
+      // Skip messages we sent ourselves (handled via HTTP response)
+      if (message.senderId === userId) {
+        return;
+      }
 
-		// Listen for new messages
-		socket.on("message:new", ({ message }) => {
-			console.log("[Chat] Received message:new event:", message);
-			console.log("[Chat] Comparing conversationIds:", message.conversationId, "vs", conversationId);
+      if (message.conversationId === conversationId) {
+        setMessages((prev) => {
+          // Avoid duplicates
+          if (prev.some((m) => m._id === message._id)) {
+            return prev;
+          }
+          return [...prev, message];
+        });
+        scrollToBottom();
 
-			// Skip messages we sent ourselves (handled via HTTP response)
-			if (message.senderId === userId) {
-				console.log("[Chat] Skipping own message from socket (handled via HTTP)");
-				return;
-			}
+        // Mark as read
+        markAsRead(conversationId, token);
+      }
+    });
 
-			if (message.conversationId === conversationId) {
-				setMessages((prev) => {
-					// Avoid duplicates
-					if (prev.some((m) => m._id === message._id)) {
-						console.log("[Chat] Duplicate message, skipping:", message._id);
-						return prev;
-					}
-					console.log("[Chat] Adding new message to state");
-					return [...prev, message];
-				});
-				scrollToBottom();
+    // Typing indicators
+    socket.on('typing:start', ({ userId: typerId }) => {
+      if (typerId !== userId) {
+        setOtherTyping(true);
+      }
+    });
 
-				// Mark as read
-				markAsRead(conversationId, token);
-			}
-		});
+    socket.on('typing:stop', ({ userId: typerId }) => {
+      if (typerId !== userId) {
+        setOtherTyping(false);
+      }
+    });
 
-		// Typing indicators
-		socket.on("typing:start", ({ userId: typerId }) => {
-			if (typerId !== userId) {
-				setOtherTyping(true);
-			}
-		});
+    // Read receipts
+    socket.on('messages:read', ({ conversationId: cId, readBy }) => {
+      if (cId === conversationId && readBy !== userId) {
+        // Update all our sent messages to "read"
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.senderId === userId && m.status !== 'read' ? { ...m, status: 'read' } : m,
+          ),
+        );
+      }
+    });
 
-		socket.on("typing:stop", ({ userId: typerId }) => {
-			if (typerId !== userId) {
-				setOtherTyping(false);
-			}
-		});
+    return () => {
+      socket.emit('leave:conversation', conversationId);
+      socket.off('message:new');
+      socket.off('typing:start');
+      socket.off('typing:stop');
+      socket.off('messages:read');
+    };
+  }, [conversationId, token, userId, scrollToBottom]);
 
-		// Read receipts
-		socket.on("messages:read", ({ conversationId: cId, readBy }) => {
-			if (cId === conversationId && readBy !== userId) {
-				// Update all our sent messages to "read"
-				setMessages((prev) =>
-					prev.map((m) =>
-						m.senderId === userId && m.status !== "read"
-							? { ...m, status: "read" }
-							: m
-					)
-				);
-			}
-		});
+  const loadConversation = async () => {
+    try {
+      const [convoData, messagesData] = await Promise.all([
+        getConversation(conversationId, token),
+        getMessages(conversationId, { page: 1, limit: 50 }, token),
+      ]);
 
-		return () => {
-			socket.emit("leave:conversation", conversationId);
-			socket.off("message:new");
-			socket.off("typing:start");
-			socket.off("typing:stop");
-			socket.off("messages:read");
-		};
-	}, [conversationId, token, userId]);
+      setConversation(convoData);
+      setMessages(messagesData.messages || []);
+      setHasMore(messagesData.pagination?.hasMore || false);
+      setPage(1);
 
-	const loadConversation = async () => {
-		try {
-			const [convoData, messagesData] = await Promise.all([
-				getConversation(conversationId, token),
-				getMessages(conversationId, { page: 1, limit: 50 }, token),
-			]);
+      // Mark as read on load
+      markAsRead(conversationId, token);
 
-			setConversation(convoData);
-			setMessages(messagesData.messages || []);
-			setHasMore(messagesData.pagination?.hasMore || false);
-			setPage(1);
+      // Scroll to bottom after messages load
+      setTimeout(scrollToBottom, 100);
+    } catch (error) {
+      if (error.response?.status === 404) {
+        router.push('/messages');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-			// Mark as read on load
-			markAsRead(conversationId, token);
+  const loadMoreMessages = async () => {
+    if (loadingMore || !hasMore) return;
 
-			// Scroll to bottom after messages load
-			setTimeout(scrollToBottom, 100);
-		} catch (error) {
-			console.error("Error loading conversation:", error);
-			if (error.response?.status === 404) {
-				router.push("/messages");
-			}
-		} finally {
-			setLoading(false);
-		}
-	};
+    setLoadingMore(true);
+    try {
+      const nextPage = page + 1;
+      const data = await getMessages(conversationId, { page: nextPage, limit: 50 }, token);
 
-	const loadMoreMessages = async () => {
-		if (loadingMore || !hasMore) return;
+      // Prepend older messages
+      setMessages((prev) => [...(data.messages || []), ...prev]);
+      setHasMore(data.pagination?.hasMore || false);
+      setPage(nextPage);
+    } catch (_error) {
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
-		setLoadingMore(true);
-		try {
-			const nextPage = page + 1;
-			const data = await getMessages(
-				conversationId,
-				{ page: nextPage, limit: 50 },
-				token
-			);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-			// Prepend older messages
-			setMessages((prev) => [...(data.messages || []), ...prev]);
-			setHasMore(data.pagination?.hasMore || false);
-			setPage(nextPage);
-		} catch (error) {
-			console.error("Error loading more messages:", error);
-		} finally {
-			setLoadingMore(false);
-		}
-	};
+  const handleTyping = (e) => {
+    setNewMessage(e.target.value);
 
-	const scrollToBottom = () => {
-		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	};
+    // Send typing indicator
+    if (!isTypingRef.current && socketRef.current) {
+      isTypingRef.current = true;
+      socketRef.current.emit('typing:start', { conversationId });
+    }
 
-	const handleTyping = (e) => {
-		setNewMessage(e.target.value);
+    // Clear previous timeout
+    clearTimeout(typingTimeoutRef.current);
 
-		// Send typing indicator
-		if (!isTypingRef.current && socketRef.current) {
-			isTypingRef.current = true;
-			socketRef.current.emit("typing:start", { conversationId });
-		}
+    // Stop typing after 2 seconds of inactivity
+    typingTimeoutRef.current = setTimeout(() => {
+      isTypingRef.current = false;
+      socketRef.current?.emit('typing:stop', { conversationId });
+    }, 2000);
+  };
 
-		// Clear previous timeout
-		clearTimeout(typingTimeoutRef.current);
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!newMessage.trim() || sending) return;
 
-		// Stop typing after 2 seconds of inactivity
-		typingTimeoutRef.current = setTimeout(() => {
-			isTypingRef.current = false;
-			socketRef.current?.emit("typing:stop", { conversationId });
-		}, 2000);
-	};
+    // Stop typing indicator
+    isTypingRef.current = false;
+    clearTimeout(typingTimeoutRef.current);
+    socketRef.current?.emit('typing:stop', { conversationId });
 
-	const handleSend = async (e) => {
-		e.preventDefault();
-		if (!newMessage.trim() || sending) return;
+    const content = newMessage.trim();
+    setNewMessage('');
+    setSending(true);
 
-		// Stop typing indicator
-		isTypingRef.current = false;
-		clearTimeout(typingTimeoutRef.current);
-		socketRef.current?.emit("typing:stop", { conversationId });
+    // Optimistic update
+    const optimisticMsg = {
+      _id: `temp-${Date.now()}`,
+      conversationId,
+      senderId: userId,
+      content,
+      status: 'sending',
+      createdAt: new Date().toISOString(),
+    };
 
-		const content = newMessage.trim();
-		setNewMessage("");
-		setSending(true);
+    setMessages((prev) => [...prev, optimisticMsg]);
+    scrollToBottom();
 
-		// Optimistic update
-		const optimisticMsg = {
-			_id: `temp-${Date.now()}`,
-			conversationId,
-			senderId: userId,
-			content,
-			status: "sending",
-			createdAt: new Date().toISOString(),
-		};
+    try {
+      const message = await sendMessage(conversationId, content, token);
+      // Replace optimistic message with real one
+      setMessages((prev) => prev.map((m) => (m._id === optimisticMsg._id ? message : m)));
+    } catch (_error) {
+      // Remove failed message and restore input
+      setMessages((prev) => prev.filter((m) => m._id !== optimisticMsg._id));
+      setNewMessage(content);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setSending(false);
+    }
+  };
 
-		setMessages((prev) => [...prev, optimisticMsg]);
-		scrollToBottom();
+  const formatTime = (date) => {
+    return new Date(date).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
 
-		try {
-			const message = await sendMessage(conversationId, content, token);
-			// Replace optimistic message with real one
-			setMessages((prev) =>
-				prev.map((m) => (m._id === optimisticMsg._id ? message : m))
-			);
-		} catch (error) {
-			console.error("Error sending message:", error);
-			// Remove failed message and restore input
-			setMessages((prev) => prev.filter((m) => m._id !== optimisticMsg._id));
-			setNewMessage(content);
-			alert("Failed to send message. Please try again.");
-		} finally {
-			setSending(false);
-		}
-	};
+  const formatDate = (date) => {
+    const msgDate = new Date(date);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
 
-	const formatTime = (date) => {
-		return new Date(date).toLocaleTimeString([], {
-			hour: "2-digit",
-			minute: "2-digit",
-		});
-	};
+    if (msgDate.toDateString() === today.toDateString()) {
+      return 'Today';
+    } else if (msgDate.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday';
+    } else {
+      return msgDate.toLocaleDateString([], {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric',
+      });
+    }
+  };
 
-	const formatDate = (date) => {
-		const msgDate = new Date(date);
-		const today = new Date();
-		const yesterday = new Date(today);
-		yesterday.setDate(yesterday.getDate() - 1);
+  // Group messages by date
+  const groupedMessages = messages.reduce((groups, message) => {
+    const date = new Date(message.createdAt).toDateString();
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+    groups[date].push(message);
+    return groups;
+  }, {});
 
-		if (msgDate.toDateString() === today.toDateString()) {
-			return "Today";
-		} else if (msgDate.toDateString() === yesterday.toDateString()) {
-			return "Yesterday";
-		} else {
-			return msgDate.toLocaleDateString([], {
-				weekday: "long",
-				month: "short",
-				day: "numeric",
-			});
-		}
-	};
+  const otherUser = conversation?.otherUser;
 
-	// Group messages by date
-	const groupedMessages = messages.reduce((groups, message) => {
-		const date = new Date(message.createdAt).toDateString();
-		if (!groups[date]) {
-			groups[date] = [];
-		}
-		groups[date].push(message);
-		return groups;
-	}, {});
+  // Loading state
+  if (loading || loggedIn === undefined) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
+      </div>
+    );
+  }
 
-	const otherUser = conversation?.otherUser;
+  return (
+    <>
+      <Head>
+        <title>{otherUser?.name || 'Chat'} | Messages | The Trick Book</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
 
-	// Loading state
-	if (loading || loggedIn === undefined) {
-		return (
-			<div className="min-h-screen bg-background flex items-center justify-center">
-				<Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
-			</div>
-		);
-	}
+      <div className="flex flex-col h-screen bg-background">
+        {/* Header */}
+        <div className="flex items-center gap-3 p-4 border-b border-border bg-card sticky top-0 z-10">
+          <Link
+            href="/messages"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
 
-	return (
-		<>
-			<Head>
-				<title>
-					{otherUser?.name || "Chat"} | Messages | The Trick Book
-				</title>
-				<link rel="icon" href="/favicon.png" />
-			</Head>
+          <Link
+            href={`/profile/${otherUser?._id}`}
+            className="flex items-center gap-3 flex-1 hover:opacity-80 transition-opacity"
+          >
+            <UserAvatar user={otherUser} size={40} />
+            <div>
+              <p className="font-medium text-foreground">{otherUser?.name || 'Unknown'}</p>
+              {otherTyping && <p className="text-xs text-yellow-500">typing...</p>}
+            </div>
+          </Link>
+        </div>
 
-			<div className="flex flex-col h-screen bg-background">
-				{/* Header */}
-				<div className="flex items-center gap-3 p-4 border-b border-border bg-card sticky top-0 z-10">
-					<Link
-						href="/messages"
-						className="text-muted-foreground hover:text-foreground transition-colors"
-					>
-						<ArrowLeft className="h-5 w-5" />
-					</Link>
+        {/* Messages */}
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* Load More Button */}
+          {hasMore && (
+            <div className="text-center py-2">
+              <button
+                onClick={loadMoreMessages}
+                disabled={loadingMore}
+                className="text-sm text-yellow-500 hover:underline"
+              >
+                {loadingMore ? (
+                  <Loader2 className="h-4 w-4 animate-spin inline" />
+                ) : (
+                  'Load earlier messages'
+                )}
+              </button>
+            </div>
+          )}
 
-					<Link
-						href={`/profile/${otherUser?._id}`}
-						className="flex items-center gap-3 flex-1 hover:opacity-80 transition-opacity"
-					>
-						<UserAvatar user={otherUser} size={40} />
-						<div>
-							<p className="font-medium text-foreground">
-								{otherUser?.name || "Unknown"}
-							</p>
-							{otherTyping && (
-								<p className="text-xs text-yellow-500">typing...</p>
-							)}
-						</div>
-					</Link>
-				</div>
+          {/* Messages grouped by date */}
+          {Object.entries(groupedMessages).map(([date, dateMessages]) => (
+            <div key={date}>
+              {/* Date Divider */}
+              <div className="flex items-center justify-center my-4">
+                <span className="text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
+                  {formatDate(dateMessages[0].createdAt)}
+                </span>
+              </div>
 
-				{/* Messages */}
-				<div
-					ref={messagesContainerRef}
-					className="flex-1 overflow-y-auto p-4 space-y-4"
-				>
-					{/* Load More Button */}
-					{hasMore && (
-						<div className="text-center py-2">
-							<button
-								onClick={loadMoreMessages}
-								disabled={loadingMore}
-								className="text-sm text-yellow-500 hover:underline"
-							>
-								{loadingMore ? (
-									<Loader2 className="h-4 w-4 animate-spin inline" />
-								) : (
-									"Load earlier messages"
-								)}
-							</button>
-						</div>
-					)}
+              {/* Messages for this date */}
+              <div className="space-y-2">
+                {dateMessages.map((msg) => {
+                  const isMine = msg.senderId === userId;
+                  return (
+                    <div
+                      key={msg._id}
+                      className={`flex ${isMine ? 'justify-start' : 'justify-end'}`}
+                    >
+                      <div className="max-w-[75%]">
+                        <div
+                          className={`px-4 py-2 rounded-2xl ${
+                            isMine
+                              ? 'bg-yellow-500 text-black rounded-bl-sm'
+                              : 'bg-secondary text-foreground rounded-br-sm'
+                          }`}
+                        >
+                          <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+                        </div>
+                        <div
+                          className={`flex items-center gap-1 mt-1 ${
+                            isMine ? 'justify-start' : 'justify-end'
+                          }`}
+                        >
+                          <span className="text-xs text-muted-foreground">
+                            {formatTime(msg.createdAt)}
+                          </span>
+                          {isMine && (
+                            <span className="text-xs">
+                              {msg.status === 'sending' && (
+                                <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+                              )}
+                              {msg.status === 'sent' && (
+                                <Check className="h-3 w-3 text-muted-foreground" />
+                              )}
+                              {msg.status === 'read' && (
+                                <CheckCheck className="h-3 w-3 text-yellow-500" />
+                              )}
+                              {!msg.status && <Check className="h-3 w-3 text-muted-foreground" />}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
 
-					{/* Messages grouped by date */}
-					{Object.entries(groupedMessages).map(([date, dateMessages]) => (
-						<div key={date}>
-							{/* Date Divider */}
-							<div className="flex items-center justify-center my-4">
-								<span className="text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
-									{formatDate(dateMessages[0].createdAt)}
-								</span>
-							</div>
+          {/* Typing Indicator */}
+          {otherTyping && (
+            <div className="flex justify-end">
+              <div className="bg-secondary rounded-2xl rounded-br-sm px-4 py-2">
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
+                  <span
+                    className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                    style={{ animationDelay: '0.1s' }}
+                  />
+                  <span
+                    className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                    style={{ animationDelay: '0.2s' }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
 
-							{/* Messages for this date */}
-							<div className="space-y-2">
-								{dateMessages.map((msg) => {
-									const isMine = msg.senderId === userId;
-									return (
-										<div
-											key={msg._id}
-											className={`flex ${isMine ? "justify-start" : "justify-end"}`}
-										>
-											<div className="max-w-[75%]">
-												<div
-													className={`px-4 py-2 rounded-2xl ${
-														isMine
-															? "bg-yellow-500 text-black rounded-bl-sm"
-															: "bg-secondary text-foreground rounded-br-sm"
-													}`}
-												>
-													<p className="text-sm whitespace-pre-wrap break-words">
-														{msg.content}
-													</p>
-												</div>
-												<div
-													className={`flex items-center gap-1 mt-1 ${
-														isMine ? "justify-start" : "justify-end"
-													}`}
-												>
-													<span className="text-xs text-muted-foreground">
-														{formatTime(msg.createdAt)}
-													</span>
-													{isMine && (
-														<span className="text-xs">
-															{msg.status === "sending" && (
-																<Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
-															)}
-															{msg.status === "sent" && (
-																<Check className="h-3 w-3 text-muted-foreground" />
-															)}
-															{msg.status === "read" && (
-																<CheckCheck className="h-3 w-3 text-yellow-500" />
-															)}
-															{!msg.status && (
-																<Check className="h-3 w-3 text-muted-foreground" />
-															)}
-														</span>
-													)}
-												</div>
-											</div>
-										</div>
-									);
-								})}
-							</div>
-						</div>
-					))}
+          <div ref={messagesEndRef} />
+        </div>
 
-					{/* Typing Indicator */}
-					{otherTyping && (
-						<div className="flex justify-end">
-							<div className="bg-secondary rounded-2xl rounded-br-sm px-4 py-2">
-								<div className="flex gap-1">
-									<span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
-									<span
-										className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-										style={{ animationDelay: "0.1s" }}
-									/>
-									<span
-										className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-										style={{ animationDelay: "0.2s" }}
-									/>
-								</div>
-							</div>
-						</div>
-					)}
-
-					<div ref={messagesEndRef} />
-				</div>
-
-				{/* Message Input */}
-				<form
-					onSubmit={handleSend}
-					className="p-4 border-t border-border bg-card"
-				>
-					<div className="flex gap-2">
-						<Input
-							value={newMessage}
-							onChange={handleTyping}
-							placeholder="Type a message..."
-							className="flex-1"
-							disabled={sending}
-							onKeyDown={(e) => {
-								if (e.key === "Enter" && !e.shiftKey) {
-									e.preventDefault();
-									handleSend(e);
-								}
-							}}
-						/>
-						<Button
-							type="submit"
-							disabled={!newMessage.trim() || sending}
-							className="bg-yellow-500 hover:bg-yellow-600 text-black px-4"
-						>
-							{sending ? (
-								<Loader2 className="h-4 w-4 animate-spin" />
-							) : (
-								<Send className="h-4 w-4" />
-							)}
-						</Button>
-					</div>
-				</form>
-			</div>
-		</>
-	);
+        {/* Message Input */}
+        <form onSubmit={handleSend} className="p-4 border-t border-border bg-card">
+          <div className="flex gap-2">
+            <Input
+              value={newMessage}
+              onChange={handleTyping}
+              placeholder="Type a message..."
+              className="flex-1"
+              disabled={sending}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend(e);
+                }
+              }}
+            />
+            <Button
+              type="submit"
+              disabled={!newMessage.trim() || sending}
+              className="bg-yellow-500 hover:bg-yellow-600 text-black px-4"
+            >
+              {sending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 }
