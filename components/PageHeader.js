@@ -3,28 +3,24 @@ import PropTypes from 'prop-types';
 import styles from '../styles/blog.module.css'; // Assuming the styles file is in the same location
 
 const PageHeader = ({ title, className, sx, col, heroImage, author, date }) => {
+  const imageSrc = heroImage || '/defaultBlogBG.png';
+
   return (
     <div className={`row ${className}`}>
       <div className={`${col} p-0`}>
-        {heroImage && (
-          <div className={`position-relative ${styles.heroImageContainer}`}>
-            <img src={heroImage} alt={`${title} Hero Image`} className={styles.heroImage} />
-            <div className={styles.overlay}>
-              <Typography
-                variant="h2"
-                className={`header-text ${styles.headerText}`}
-                sx={{ ...sx }}
-              >
-                {title}
+        <div className={`position-relative ${styles.heroImageContainer}`}>
+          <img src={imageSrc} alt={`${title} Hero Image`} className={styles.heroImage} />
+          <div className={styles.overlay}>
+            <Typography variant="h2" className={`header-text ${styles.headerText}`} sx={{ ...sx }}>
+              {title}
+            </Typography>
+            {author && date && (
+              <Typography variant="subtitle1" className={styles.authorDate}>
+                By {author} on {new Date(date).toLocaleDateString()}
               </Typography>
-              {author && date && (
-                <Typography variant="subtitle1" className={styles.authorDate}>
-                  By {author} on {new Date(date).toLocaleDateString()}
-                </Typography>
-              )}
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
