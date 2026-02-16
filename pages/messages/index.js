@@ -85,7 +85,7 @@ export default function Messages() {
       loadConversations();
       setupSocket();
     }
-  }, [token, loggedIn, loadConversations, router.push, setupSocket]);
+  }, [token, loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Load homies when modal opens
   const loadHomies = async () => {

@@ -72,7 +72,7 @@ export default function Conversation() {
   useEffect(() => {
     if (!conversationId || !token) return;
     loadConversation();
-  }, [conversationId, token, loadConversation]);
+  }, [conversationId, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Socket setup
   useEffect(() => {
@@ -139,7 +139,7 @@ export default function Conversation() {
       socket.off('typing:stop');
       socket.off('messages:read');
     };
-  }, [conversationId, token, userId, scrollToBottom]);
+  }, [conversationId, token, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadMoreMessages = async () => {
     if (loadingMore || !hasMore) return;
@@ -272,7 +272,7 @@ export default function Conversation() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <div className="flex flex-col h-screen bg-background">
+      <div className="flex flex-col bg-background" style={{ height: 'calc(100vh - 64px)' }}>
         {/* Header */}
         <div className="flex items-center gap-3 p-4 border-b border-border bg-card sticky top-0 z-10">
           <Link
