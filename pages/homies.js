@@ -107,7 +107,7 @@ export default function Homies() {
       fetchRequests();
       fetchConversations();
     }
-  }, [token, fetchConversations, fetchDiscoverableUsers, fetchHomies, fetchRequests]);
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleStartConversation = async (userId) => {
     setActionLoading(`msg-${userId}`);
