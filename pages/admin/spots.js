@@ -16,7 +16,7 @@ import {
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import AdminNav from '../../components/AdminNav';
 import { deleteSpot, searchSpots } from '../../lib/apiSpots';
@@ -89,38 +89,35 @@ export default function SpotsAdmin() {
   });
   const router = useRouter();
 
-  const fetchSpots = async () => {
+  const fetchSpots = useCallback(async (term, page) => {
     setLoading(true);
     try {
-      const data = await searchSpots(searchTerm, '', '', '', pagination.page, 20);
+      const data = await searchSpots(term, '', '', '', page, 20);
       setSpots(data.spots || []);
       setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
     } catch (_error) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
+  // Auth guard
   useEffect(() => {
-    if (loggedIn === null) {
-      return;
-    }
-
-    if (loggedIn && role === 'admin') {
-      fetchSpots();
-    } else {
+    if (loggedIn === null) return;
+    if (!loggedIn || role !== 'admin') {
       router.push('/login');
     }
-  }, [loggedIn, role, router, fetchSpots]);
+  }, [loggedIn, role, router]);
 
+  // Fetch spots with debounce on search/page changes
   useEffect(() => {
-    if (loggedIn && role === 'admin') {
-      const debounceTimer = setTimeout(() => {
-        fetchSpots();
-      }, 300);
-      return () => clearTimeout(debounceTimer);
-    }
-  }, [fetchSpots, loggedIn, role]);
+    if (!loggedIn || role !== 'admin') return;
+
+    const debounceTimer = setTimeout(() => {
+      fetchSpots(searchTerm, pagination.page);
+    }, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [searchTerm, pagination.page, loggedIn, role, fetchSpots]);
 
   const handleEdit = (spotId) => {
     router.push({

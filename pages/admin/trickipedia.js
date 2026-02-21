@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import AdminNav from '../../components/AdminNav';
 import { deleteTrick, getSortedTricksData } from '../../lib/apiTrickipedia';
@@ -26,7 +26,7 @@ export default function TrickipediaAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
-  const fetchTricks = async () => {
+  const fetchTricks = useCallback(async () => {
     try {
       const fetchedTricks = await getSortedTricksData();
       // Filter out sample data
@@ -37,7 +37,7 @@ export default function TrickipediaAdmin() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (loggedIn === null) {

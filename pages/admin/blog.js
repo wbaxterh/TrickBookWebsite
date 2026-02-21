@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button, CircularProgress, IconButton, Typography } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import BlogCard from '../../components/BlogCard';
 import { deleteBlogPost, getSortedPostsData } from '../../lib/api';
@@ -15,7 +15,7 @@ export default function BlogAdmin() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       const fetchedPosts = await getSortedPostsData();
       setPosts(fetchedPosts);
@@ -23,7 +23,7 @@ export default function BlogAdmin() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (loggedIn === null) {

@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import {
   createBlogPost,
@@ -33,7 +33,7 @@ export default function CreateBlogPost() {
   const router = useRouter();
   const { isEdit, postId } = router.query; // Accessing query parameters
 
-  const fetchPostData = async (id) => {
+  const fetchPostData = useCallback(async (id) => {
     try {
       const postData = await getBlogPostById(id);
       setTitle(postData.title);
@@ -46,7 +46,7 @@ export default function CreateBlogPost() {
       setHeroImageIndex(heroIndex !== -1 ? heroIndex : null);
       setLoading(false);
     } catch (_error) {}
-  };
+  }, []);
 
   useEffect(() => {
     if (isEdit && postId) {

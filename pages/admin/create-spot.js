@@ -13,7 +13,7 @@ import {
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import { createSpot, getSpotData, updateSpot } from '../../lib/apiSpots';
 import styles from '../../styles/admin.module.css';
@@ -91,7 +91,7 @@ export default function CreateSpot() {
   const router = useRouter();
   const { isEdit, spotId } = router.query;
 
-  const fetchSpotData = async (id) => {
+  const fetchSpotData = useCallback(async (id) => {
     try {
       const spotData = await getSpotData(id);
       if (spotData) {
@@ -120,7 +120,7 @@ export default function CreateSpot() {
     } catch (_error) {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (loggedIn === null) return;

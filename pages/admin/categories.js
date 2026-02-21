@@ -19,7 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../lib/api';
 
@@ -35,16 +35,16 @@ export default function AdminCategories() {
     color: '',
   });
 
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
-
-  async function fetchCategories() {
+  const fetchCategories = useCallback(async () => {
     setLoading(true);
     const cats = await getCategories();
     setCategories(cats);
     setLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   function handleOpenDialog(category = null) {
     setEditCategory(category);

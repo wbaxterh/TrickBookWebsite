@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import { getCategories } from '../../lib/api';
 import { createTrick, getTrickData, updateTrick, uploadTrickImage } from '../../lib/apiTrickipedia';
@@ -36,7 +36,7 @@ export default function CreateTrick() {
   const router = useRouter();
   const { isEdit, trickId } = router.query;
 
-  const fetchTrickData = async (id) => {
+  const fetchTrickData = useCallback(async (id) => {
     try {
       const trickData = await getTrickData(id);
       setName(trickData.name);
@@ -50,14 +50,14 @@ export default function CreateTrick() {
       setExistingImages(trickData.images || []);
       setLoading(false);
     } catch (_error) {}
-  };
+  }, []);
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const cats = await getCategories();
       setCategories(cats);
     } catch (_error) {}
-  };
+  }, []);
 
   useEffect(() => {
     if (isEdit && trickId) {

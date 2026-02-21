@@ -20,7 +20,7 @@ import {
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import AdminNav from '../../components/AdminNav';
 import { approveSpot, deleteSpot, getPendingSpots, rejectSpot } from '../../lib/apiSpots';
@@ -96,17 +96,20 @@ export default function PendingSpotsAdmin() {
   const [processing, setProcessing] = useState(false);
   const router = useRouter();
 
-  const fetchPendingSpots = async () => {
-    setLoading(true);
-    try {
-      const data = await getPendingSpots(token, pagination.page, 20);
-      setSpots(data.spots || []);
-      setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
-    } catch (_error) {
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchPendingSpots = useCallback(
+    async (page) => {
+      setLoading(true);
+      try {
+        const data = await getPendingSpots(token, page, 20);
+        setSpots(data.spots || []);
+        setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
+      } catch (_error) {
+      } finally {
+        setLoading(false);
+      }
+    },
+    [token],
+  );
 
   useEffect(() => {
     if (loggedIn === null) {
@@ -114,17 +117,11 @@ export default function PendingSpotsAdmin() {
     }
 
     if (loggedIn && role === 'admin') {
-      fetchPendingSpots();
+      fetchPendingSpots(pagination.page);
     } else {
       router.push('/login');
     }
-  }, [loggedIn, role, router, fetchPendingSpots]);
-
-  useEffect(() => {
-    if (loggedIn && role === 'admin') {
-      fetchPendingSpots();
-    }
-  }, [fetchPendingSpots, loggedIn, role]);
+  }, [loggedIn, role, router, fetchPendingSpots, pagination.page]);
 
   const handleApprove = async (spotId) => {
     if (!confirm('Are you sure you want to approve this spot for public listing?')) {
