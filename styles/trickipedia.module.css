@@ -1,63 +1,63 @@
 .trickipediaContainer {
-	min-height: 100vh;
-	background-color: var(--app-background);
-	padding-bottom: 2rem;
+  min-height: 100vh;
+  background-color: var(--app-background);
+  padding-bottom: 2rem;
 }
 
 .missionStatement {
-	border: 1px solid #1f1f1f;
-	border-radius: 10px;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
 }
 
 .trickCard {
-	height: 100%;
-	transition: transform 0.2s ease-in-out;
-	background-color: var(--app-secondary-bg);
-	border: none;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+  background-color: var(--app-secondary-bg);
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .trickCard:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .trickImageContainer {
-	position: relative;
-	height: 200px;
-	overflow: hidden;
+  position: relative;
+  height: 200px;
+  overflow: hidden;
 }
 
 .trickImageContainer img {
-	transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .trickCard:hover .trickImageContainer img {
-	transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* Difficulty level colors */
 .difficultyBeginner {
-	color: #4caf50;
+  color: #4caf50;
 }
 
 .difficultyIntermediate {
-	color: #ff9800;
+  color: #ff9800;
 }
 
 .difficultyAdvanced {
-	color: #f44336;
+  color: #f44336;
 }
 
 .difficultyExpert {
-	color: #9c27b0;
+  color: #9c27b0;
 }
 
 /* Category buttons - ensure yellow text is visible */
 .trickipediaContainer :global(.MuiButton-contained) {
-	color: #fff000 !important;
+  color: #fff000;
 }
 
 .trickipediaContainer :global(.MuiButton-contained):hover {
-	color: #fff000 !important;
+  color: #fff000;
 }

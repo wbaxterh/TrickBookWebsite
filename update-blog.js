@@ -1,6 +1,7 @@
 const https = require('https');
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M1ZmQzNWE4NmM4NGUzNDc3N2YxNGEiLCJuYW1lIjoiV2VzbGV5IEh1YmVyIiwiZW1haWwiOiJ3ZXNsZXliYXh0ZXJodWJlckBnbWFpbC5jb20iLCJpbWFnZVVyaSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xyQTZkaG9qRmM0ZHd5bmNtQllsMWZhWXhsSTBoWFNjTUVYa1doN2NUMUFCek12a3pqPXM5Ni1jIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY5MDUwMjYyfQ.27It_LOyvmd9pEMEY9qFC2XOHk3KOtxIUyeEMmjCI00";
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M1ZmQzNWE4NmM4NGUzNDc3N2YxNGEiLCJuYW1lIjoiV2VzbGV5IEh1YmVyIiwiZW1haWwiOiJ3ZXNsZXliYXh0ZXJodWJlckBnbWFpbC5jb20iLCJpbWFnZVVyaSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xyQTZkaG9qRmM0ZHd5bmNtQllsMWZhWXhsSTBoWFNjTUVYa1doN2NUMUFCek12a3pqPXM5Ni1jIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY5MDUwMjYyfQ.27It_LOyvmd9pEMEY9qFC2XOHk3KOtxIUyeEMmjCI00';
 
 const htmlContent = `<p><em>By Riders. For Riders.</em></p>
 
@@ -75,19 +76,16 @@ const options = {
   headers: {
     'Content-Type': 'application/json',
     'x-auth-token': token,
-    'Content-Length': Buffer.byteLength(data)
-  }
+    'Content-Length': Buffer.byteLength(data),
+  },
 };
 
 const req = https.request(options, (res) => {
   let body = '';
-  res.on('data', chunk => body += chunk);
-  res.on('end', () => {
-    console.log('Status:', res.statusCode);
-    console.log('Response:', body);
-  });
+  res.on('data', (chunk) => (body += chunk));
+  res.on('end', () => {});
 });
 
-req.on('error', (e) => console.error('Error:', e.message));
+req.on('error', (_e) => {});
 req.write(data);
 req.end();
