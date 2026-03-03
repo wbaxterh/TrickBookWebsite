@@ -74,14 +74,12 @@ export default function Spots() {
 
 	useEffect(() => {
 		const fetchSpots = async () => {
+			setLoading(true);
 			try {
-				const data = await getSpotsByState();
+				const countryFilter = selectedCountry === "all" ? null : selectedCountry;
+				const data = await getSpotsByState(countryFilter);
 				setAllSpots(data);
 				setSpotsByState(data);
-
-				// Group by country (for now, assume all are US unless specified)
-				const byCountry = { US: data };
-				setSpotsByCountry(byCountry);
 			} catch (error) {
 				console.error("Error fetching spots:", error);
 			} finally {
@@ -89,7 +87,7 @@ export default function Spots() {
 			}
 		};
 		fetchSpots();
-	}, []);
+	}, [selectedCountry]);
 
 	// Filter spots by category
 	useEffect(() => {
