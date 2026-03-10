@@ -14,7 +14,7 @@ export default function TrickCard({ id, name, category, difficulty, description,
   return (
     <Link href={url} passHref style={{ textDecoration: 'none' }}>
       <div className={`card ${styles.trickCard}`}>
-        {images?.[0] && (
+        {images?.[0] && images[0].length > 0 && (
           <div className={styles.trickImageContainer}>
             <Image
               className="rounded-top"
