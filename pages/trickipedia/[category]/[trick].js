@@ -166,14 +166,57 @@ export default function TrickDetailPage() {
               ))}
             </ol>
           </Box>
-          {trickData.videoUrl && (
+          {trickData.videos && trickData.videos.length > 0 ? (
+            <Box className="mb-4">
+              <Typography variant="h6" className="mb-2">Tutorials & Videos</Typography>
+              {trickData.videos.map((video, idx) => (
+                <Box
+                  key={idx}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    py: 1,
+                    px: 2,
+                    mb: 1,
+                    borderRadius: 1,
+                    backgroundColor: 'rgba(255,255,255,0.05)',
+                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
+                  }}
+                >
+                  <a
+                    href={video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#FFD700', textDecoration: 'none', flex: 1 }}
+                  >
+                    {video.title || video.url}
+                  </a>
+                  <Chip
+                    label={video.platform || 'link'}
+                    size="small"
+                    sx={{
+                      ml: 2,
+                      textTransform: 'capitalize',
+                      backgroundColor:
+                        video.platform === 'youtube' ? '#FF0000' :
+                        video.platform === 'instagram' ? '#E1306C' :
+                        video.platform === 'tiktok' ? '#000' : '#555',
+                      color: '#fff',
+                      fontSize: '0.7rem',
+                    }}
+                  />
+                </Box>
+              ))}
+            </Box>
+          ) : trickData.videoUrl ? (
             <Box className="mb-4">
               <Typography variant="h6">Video Tutorial:</Typography>
               <a href={trickData.videoUrl} target="_blank" rel="noopener noreferrer">
                 {trickData.videoUrl}
               </a>
             </Box>
-          )}
+          ) : null}
           {trickData.source && (
             <Typography variant="body2" color="textSecondary">
               Source: {trickData.source}
