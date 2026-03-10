@@ -115,7 +115,7 @@ export default function TrickDetailPage() {
       </Head>
       <Container maxWidth="md" sx={{ maxWidth: 700, px: { xs: 2, md: 4 }, py: 4 }}>
         <div className={styles.trickipediaContainer} style={{ padding: 0 }}>
-          <PageHeader title={trickData.name} col="col-sm-4" heroImage={trickData.images?.[0]} />
+          <PageHeader title={trickData.name} heroImage={trickData.images?.[0]} />
           <Box
             className="my-4"
             display="flex"
