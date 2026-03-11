@@ -133,10 +133,11 @@ export default function TrickDetailPage() {
               startIcon={<PlaylistAdd />}
               onClick={handleOpenAddModal}
               sx={{
-                backgroundColor: '#FFD700',
-                color: '#000',
-                '&:hover': { backgroundColor: '#FFC700' },
-                fontWeight: 600,
+                backgroundColor: '#FFD700 !important',
+                color: '#000 !important',
+                '&:hover': { backgroundColor: '#FFC700 !important' },
+                fontWeight: 700,
+                letterSpacing: '0.5px',
               }}
             >
               Add to TrickList
