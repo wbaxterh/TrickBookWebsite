@@ -37,6 +37,24 @@ import {
   PaginationPrevious,
 } from '../components/ui/pagination';
 import { getSortedTricksData } from '../lib/apiTrickipedia';
+
+// Map URL slugs / sidebar values to exact DB category names
+const CATEGORY_MAP = {
+  skateboarding: 'Skateboarding',
+  snowboarding: 'Snowboarding',
+  surfing: 'Surfing',
+  bmx: 'BMX',
+  scooter: 'Scooter',
+  'inline-skating': 'Inline Skating',
+  'inline skating': 'Inline Skating',
+  rollerblading: 'Inline Skating',
+  longboarding: 'Longboarding',
+};
+
+function getCategoryName(slug) {
+  if (!slug) return null;
+  return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+}
 import {
   createTrickList,
   deleteTrickList,
@@ -50,7 +68,7 @@ const ITEMS_PER_PAGE = 20;
 
 export default function TrickBook() {
   const router = useRouter();
-  const { loggedIn, token, userId } = useContext(AuthContext);
+  const { loggedIn, token, userId, email } = useContext(AuthContext);
 
   // Sidebar state
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -63,6 +81,9 @@ export default function TrickBook() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  // User preferred sports
+  const [userSports, setUserSports] = useState([]);
 
   // My Trick Lists state
   const [myLists, setMyLists] = useState([]);
@@ -86,22 +107,56 @@ export default function TrickBook() {
   const [editingListId, setEditingListId] = useState(null);
   const [editingName, setEditingName] = useState('');
 
+  // Fetch user preferred sports from profile
+  useEffect(() => {
+    if (!loggedIn || !email) return;
+    const fetchUserSports = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.thetrickbook.com/api/users?email=${encodeURIComponent(email)}`,
+        );
+        if (res.data?.sports) {
+          setUserSports(res.data.sports);
+        }
+      } catch (_error) {}
+    };
+    fetchUserSports();
+  }, [loggedIn, email]);
+
+  // Sort tricks: user's preferred sports first, then alphabetical
+  const sortTricksByPreference = useCallback(
+    (tricksData) => {
+      if (!userSports || userSports.length === 0) return tricksData;
+      // Map user sport IDs to DB category names
+      const preferredCategories = userSports
+        .map((s) => CATEGORY_MAP[s.toLowerCase()])
+        .filter(Boolean);
+      return [...tricksData].sort((a, b) => {
+        const aPreferred = preferredCategories.includes(a.category);
+        const bPreferred = preferredCategories.includes(b.category);
+        if (aPreferred && !bPreferred) return -1;
+        if (!aPreferred && bPreferred) return 1;
+        return a.name.localeCompare(b.name);
+      });
+    },
+    [userSports],
+  );
+
   // Fetch tricks for Trickipedia
   const fetchTricks = useCallback(async () => {
     setLoading(true);
     try {
       const category =
-        selectedCategory === 'all'
-          ? null
-          : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1);
+        selectedCategory === 'all' ? null : getCategoryName(selectedCategory);
       const tricksData = await getSortedTricksData(category);
-      setTricks(tricksData);
-      setFilteredTricks(tricksData);
+      const sorted = selectedCategory === 'all' ? sortTricksByPreference(tricksData) : tricksData;
+      setTricks(sorted);
+      setFilteredTricks(sorted);
     } catch (_error) {
     } finally {
       setLoading(false);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, sortTricksByPreference]);
 
   // Fetch user's trick lists
   const fetchMyLists = useCallback(async () => {

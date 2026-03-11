@@ -26,6 +26,22 @@ import { getSortedTricksData } from '../../../lib/apiTrickipedia';
 import { addTrickFromTrickipedia, getUserTrickLists } from '../../../lib/apiTrickLists';
 import styles from '../../../styles/trickipedia.module.css';
 
+// Map URL slugs to exact DB category names
+const CATEGORY_MAP = {
+  skateboarding: 'Skateboarding',
+  snowboarding: 'Snowboarding',
+  surfing: 'Surfing',
+  bmx: 'BMX',
+  scooter: 'Scooter',
+  'inline-skating': 'Inline Skating',
+  longboarding: 'Longboarding',
+};
+
+function getCategoryName(slug) {
+  if (!slug) return '';
+  return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
 export default function TrickDetailPage() {
   const router = useRouter();
   const { category, trick } = router.query;
@@ -44,9 +60,8 @@ export default function TrickDetailPage() {
   useEffect(() => {
     if (!category || !trick) return;
     const fetchTrick = async () => {
-      const tricks = await getSortedTricksData(
-        category.charAt(0).toUpperCase() + category.slice(1),
-      );
+      const categoryName = getCategoryName(category);
+      const tricks = await getSortedTricksData(categoryName);
       const found = tricks.find((t) => t.url === trick || t.id === trick);
       setTrickData(found || null);
       setLoading(false);

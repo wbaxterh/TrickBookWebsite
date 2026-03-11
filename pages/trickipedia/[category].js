@@ -10,6 +10,22 @@ import TrickCard from '../../components/TrickCard';
 import { getSortedTricksData } from '../../lib/apiTrickipedia';
 import styles from '../../styles/trickipedia.module.css';
 
+// Map URL slugs to exact DB category names
+const CATEGORY_MAP = {
+  skateboarding: 'Skateboarding',
+  snowboarding: 'Snowboarding',
+  surfing: 'Surfing',
+  bmx: 'BMX',
+  scooter: 'Scooter',
+  'inline-skating': 'Inline Skating',
+  longboarding: 'Longboarding',
+};
+
+function getCategoryName(slug) {
+  if (!slug) return '';
+  return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
 export default function CategoryPage() {
   const router = useRouter();
   const { category } = router.query;
@@ -20,9 +36,8 @@ export default function CategoryPage() {
   useEffect(() => {
     if (!category) return;
     const fetchTricks = async () => {
-      const tricksData = await getSortedTricksData(
-        category.charAt(0).toUpperCase() + category.slice(1),
-      );
+      const categoryName = getCategoryName(category);
+      const tricksData = await getSortedTricksData(categoryName);
       setTricks(tricksData);
       setFilteredTricks(tricksData);
     };
@@ -44,13 +59,13 @@ export default function CategoryPage() {
       <Head>
         <title>
           The Trick Book -{' '}
-          {category ? `${category.charAt(0).toUpperCase() + category.slice(1)}` : 'Tricks'}
+          {category ? getCategoryName(category) : 'Tricks'}
         </title>
         <link rel="icon" href="/favicon.png" />
         <meta
           name="description"
           content={`The Trick Book - ${
-            category ? `${category.charAt(0).toUpperCase() + category.slice(1)}` : 'Tricks'
+            category ? getCategoryName(category) : 'Tricks'
           } Encyclopedia`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,9 +79,7 @@ export default function CategoryPage() {
       </Head>
       <div className={`container-fluid ${styles.trickipediaContainer}`}>
         <PageHeader
-          title={`${
-            category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Tricks'
-          } Tricks`}
+          title={`${category ? getCategoryName(category) : 'Tricks'} Tricks`}
           col="col-sm-4"
         />
 
