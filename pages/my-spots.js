@@ -64,7 +64,8 @@ export default function MySpots() {
     }
 
     fetchData();
-  }, [loggedIn, router, fetchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   const handleOpenCreateDialog = () => {
     setDialogMode('create');
