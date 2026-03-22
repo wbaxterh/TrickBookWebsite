@@ -237,7 +237,7 @@ export default function Media() {
             {featured ? (
               <div className="relative h-[60vh] overflow-hidden">
                 <Image
-                  src={featured.thumbnails?.backdrop || '/hero-placeholder.jpg'}
+                  src={featured.thumbnails?.backdrop || featured.thumbnails?.poster || featured.driveThumbnail || '/hero-placeholder.jpg'}
                   alt={featured.title}
                   fill
                   className="object-cover"
