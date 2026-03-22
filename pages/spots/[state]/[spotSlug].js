@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink, Loader2, MapPin, Plus } from 'lucide-react';
+import { ArrowLeft, ChevronUp, ExternalLink, Loader2, MapPin, Plus, Trophy, Video } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +9,17 @@ import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Separator } from '../../../components/ui/separator';
+import { Input } from '../../../components/ui/input';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '../../../components/ui/dialog';
 import { getSpotData } from '../../../lib/apiSpots';
+import axios from 'axios';
 
 // US State names mapping
 const STATE_NAMES = {
@@ -74,7 +84,18 @@ export default function SpotDetail() {
   const [spot, setSpot] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { token } = useContext(AuthContext);
 
+  // Trick history
+  const [trickHistory, setTrickHistory] = useState([]);
+  const [trickHistoryLoading, setTrickHistoryLoading] = useState(false);
+
+  // Submit trick dialog
+  const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
+  const [submitForm, setSubmitForm] = useState({ trickName: '', skaterName: '', videoUrl: '', year: '' });
+  const [submitting, setSubmitting] = useState(false);
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.thetrickbook.com';
   const stateName = STATE_NAMES[state?.toLowerCase()] || state?.toUpperCase();
 
   useEffect(() => {
@@ -98,6 +119,60 @@ export default function SpotDetail() {
 
     fetchSpot();
   }, [id]);
+
+  // Fetch trick history when spot loads
+  useEffect(() => {
+    if (!spot?._id) return;
+    const fetchTrickHistory = async () => {
+      setTrickHistoryLoading(true);
+      try {
+        const res = await axios.get(`${baseUrl}/api/spot-tricks/${spot._id}`);
+        setTrickHistory(res.data.tricks || []);
+      } catch (_e) {
+        setTrickHistory([]);
+      } finally {
+        setTrickHistoryLoading(false);
+      }
+    };
+    fetchTrickHistory();
+  }, [spot?._id, baseUrl]);
+
+  // Submit a trick
+  const handleSubmitTrick = async () => {
+    if (!submitForm.trickName.trim() || !submitForm.skaterName.trim()) return;
+    setSubmitting(true);
+    try {
+      await axios.post(`${baseUrl}/api/spot-tricks`, {
+        spotId: spot._id,
+        trickName: submitForm.trickName,
+        skaterName: submitForm.skaterName,
+        videoUrl: submitForm.videoUrl || null,
+        year: submitForm.year ? parseInt(submitForm.year) : null,
+      }, { headers: { 'x-auth-token': token } });
+      // Refresh trick history
+      const res = await axios.get(`${baseUrl}/api/spot-tricks/${spot._id}`);
+      setTrickHistory(res.data.tricks || []);
+      setSubmitDialogOpen(false);
+      setSubmitForm({ trickName: '', skaterName: '', videoUrl: '', year: '' });
+    } catch (_e) {
+      alert('Failed to submit trick');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Upvote a trick
+  const handleUpvote = async (trickId) => {
+    if (!token) return;
+    try {
+      const res = await axios.post(`${baseUrl}/api/spot-tricks/${trickId}/upvote`, {}, {
+        headers: { 'x-auth-token': token },
+      });
+      setTrickHistory(prev => prev.map(t =>
+        t._id === trickId ? { ...t, upvotes: res.data.upvotes, upvoted: res.data.upvoted } : t
+      ));
+    } catch (_e) {}
+  };
 
   // Parse tags
   const tagList = spot?.tags
@@ -267,8 +342,147 @@ export default function SpotDetail() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Trick History Section */}
+          <div className="mt-8">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-yellow-500" />
+                    Trick History
+                  </h2>
+                  {loggedIn && (
+                    <Button
+                      onClick={() => setSubmitDialogOpen(true)}
+                      className="bg-yellow-500 text-black hover:bg-yellow-400"
+                      size="sm"
+                    >
+                      <Plus className="h-4 w-4 mr-1" />
+                      Submit a Trick
+                    </Button>
+                  )}
+                </div>
+
+                {trickHistoryLoading ? (
+                  <div className="flex justify-center py-8">
+                    <Loader2 className="h-6 w-6 animate-spin text-yellow-500" />
+                  </div>
+                ) : trickHistory.length === 0 ? (
+                  <div className="text-center py-8">
+                    <Trophy className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+                    <p className="text-muted-foreground">No tricks submitted for this spot yet.</p>
+                    {loggedIn && (
+                      <p className="text-sm text-muted-foreground mt-1">Be the first to submit one!</p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {trickHistory.map((trick) => (
+                      <div
+                        key={trick._id}
+                        className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-foreground">{trick.trickName}</span>
+                            {trick.verified && (
+                              <Badge variant="secondary" className="bg-green-500/20 text-green-500 text-xs">Verified</Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3 mt-1 text-sm text-muted-foreground">
+                            <span>{trick.skaterName}</span>
+                            {trick.year && <span>• {trick.year}</span>}
+                            {trick.videoUrl && (
+                              <a
+                                href={trick.videoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300"
+                              >
+                                <Video className="h-3 w-3" />
+                                Watch
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        {loggedIn && (
+                          <button
+                            onClick={() => handleUpvote(trick._id)}
+                            className={`flex flex-col items-center px-3 py-1 rounded-lg transition-colors ${
+                              trick.upvoted
+                                ? 'bg-yellow-500/20 text-yellow-500'
+                                : 'hover:bg-secondary text-muted-foreground hover:text-yellow-500'
+                            }`}
+                          >
+                            <ChevronUp className="h-4 w-4" />
+                            <span className="text-xs font-medium">{trick.upvotes || 0}</span>
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
+
+      {/* Submit Trick Dialog */}
+      <Dialog open={submitDialogOpen} onOpenChange={setSubmitDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Submit a Trick at {spot?.name}</DialogTitle>
+            <DialogDescription>Add a famous or personal trick done at this spot.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <label className="text-sm font-medium mb-1 block">Trick Name *</label>
+              <Input
+                placeholder="e.g., Kickflip 50-50"
+                value={submitForm.trickName}
+                onChange={(e) => setSubmitForm({ ...submitForm, trickName: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-1 block">Skater Name *</label>
+              <Input
+                placeholder="e.g., Andrew Reynolds"
+                value={submitForm.skaterName}
+                onChange={(e) => setSubmitForm({ ...submitForm, skaterName: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-1 block">Video URL (optional)</label>
+              <Input
+                placeholder="https://youtube.com/..."
+                value={submitForm.videoUrl}
+                onChange={(e) => setSubmitForm({ ...submitForm, videoUrl: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-1 block">Year (optional)</label>
+              <Input
+                type="number"
+                placeholder="2024"
+                value={submitForm.year}
+                onChange={(e) => setSubmitForm({ ...submitForm, year: e.target.value })}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setSubmitDialogOpen(false)}>Cancel</Button>
+            <Button
+              onClick={handleSubmitTrick}
+              disabled={submitting || !submitForm.trickName.trim() || !submitForm.skaterName.trim()}
+              className="bg-yellow-500 text-black hover:bg-yellow-400"
+            >
+              {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Submit'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

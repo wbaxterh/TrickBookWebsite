@@ -7,7 +7,9 @@ import {
   ImageIcon,
   Loader2,
   Lock,
+  MapPin,
   Plus,
+  Search,
   Upload,
   Users,
   Video,
@@ -28,6 +30,8 @@ import {
   uploadVideoTUS,
   waitForVideoProcessing,
 } from '../../../lib/apiUpload';
+import { searchSpots } from '../../../lib/apiSpots';
+import { Input } from '../../../components/ui/input';
 
 export default function UploadPost() {
   const router = useRouter();
@@ -43,6 +47,13 @@ export default function UploadPost() {
   const [tricks, setTricks] = useState([]);
   const [trickInput, setTrickInput] = useState('');
   const [visibility, setVisibility] = useState('public');
+
+  // Spot tagging
+  const [selectedSpot, setSelectedSpot] = useState(null);
+  const [spotSearchQuery, setSpotSearchQuery] = useState('');
+  const [spotSearchResults, setSpotSearchResults] = useState([]);
+  const [spotSearching, setSpotSearching] = useState(false);
+  const [showSpotSearch, setShowSpotSearch] = useState(false);
 
   // Upload state
   const [uploadStep, setUploadStep] = useState('idle'); // idle, uploading, processing, creating, done, error
@@ -118,6 +129,27 @@ export default function UploadPost() {
       e.preventDefault();
       handleAddTrick();
     }
+  };
+
+  const handleSpotSearch = async (query) => {
+    setSpotSearchQuery(query);
+    if (query.length < 2) { setSpotSearchResults([]); return; }
+    setSpotSearching(true);
+    try {
+      const data = await searchSpots(query, '', '', '', 1, 8);
+      setSpotSearchResults(data.spots || []);
+    } catch (_e) {
+      setSpotSearchResults([]);
+    } finally {
+      setSpotSearching(false);
+    }
+  };
+
+  const selectSpot = (spot) => {
+    setSelectedSpot(spot);
+    setShowSpotSearch(false);
+    setSpotSearchQuery('');
+    setSpotSearchResults([]);
   };
 
   const toggleSport = (sportValue) => {
@@ -203,6 +235,7 @@ export default function UploadPost() {
         visibility,
         duration: processedVideo.duration,
         aspectRatio: processedVideo.width > processedVideo.height ? '16:9' : '9:16',
+        spotId: selectedSpot?._id || null,
       },
       token,
     );
@@ -239,6 +272,7 @@ export default function UploadPost() {
         sportTypes: selectedSports,
         tricks,
         visibility,
+        spotId: selectedSpot?._id || null,
       },
       token,
     );

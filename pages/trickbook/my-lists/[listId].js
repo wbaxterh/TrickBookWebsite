@@ -8,9 +8,13 @@ import {
   ExternalLink,
   Link as LinkIcon,
   Loader2,
+  MapPin,
+  Play,
   Plus,
+  Search,
   StickyNote,
   Trash2,
+  Video,
   X,
 } from 'lucide-react';
 import Head from 'next/head';
@@ -37,9 +41,12 @@ import {
   editTrick,
   getTricksInList,
   getUserTrickLists,
+  linkSpotToTrick,
+  linkVideoToTrick,
   updateTrickList,
   updateTrickStatus,
 } from '../../../lib/apiTrickLists';
+import { searchSpots } from '../../../lib/apiSpots';
 
 export default function TrickListDetail() {
   const router = useRouter();
@@ -69,6 +76,20 @@ export default function TrickListDetail() {
   // Delete list confirmation
   const [deleteListDialogOpen, setDeleteListDialogOpen] = useState(false);
   const [deletingList, setDeletingList] = useState(false);
+
+  // Spot search modal
+  const [spotDialogOpen, setSpotDialogOpen] = useState(false);
+  const [spotSearchQuery, setSpotSearchQuery] = useState('');
+  const [spotSearchResults, setSpotSearchResults] = useState([]);
+  const [spotSearching, setSpotSearching] = useState(false);
+  const [spotTrickTarget, setSpotTrickTarget] = useState(null);
+  const [linkingSpot, setLinkingSpot] = useState(false);
+
+  // Video link modal
+  const [videoDialogOpen, setVideoDialogOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [videoTrickTarget, setVideoTrickTarget] = useState(null);
+  const [linkingVideo, setLinkingVideo] = useState(false);
 
   // Edit list name
   const [isEditingListName, setIsEditingListName] = useState(false);
@@ -219,6 +240,72 @@ export default function TrickListDetail() {
   const cancelEditingListName = () => {
     setIsEditingListName(false);
     setEditedListName('');
+  };
+
+  // Spot search handler
+  const handleSpotSearch = async (query) => {
+    setSpotSearchQuery(query);
+    if (query.length < 2) { setSpotSearchResults([]); return; }
+    setSpotSearching(true);
+    try {
+      const data = await searchSpots(query, '', '', '', 1, 10);
+      setSpotSearchResults(data.spots || []);
+    } catch (_e) {
+      setSpotSearchResults([]);
+    } finally {
+      setSpotSearching(false);
+    }
+  };
+
+  // Link spot to trick
+  const handleLinkSpot = async (spot) => {
+    if (!spotTrickTarget) return;
+    setLinkingSpot(true);
+    try {
+      await linkSpotToTrick(spotTrickTarget._id, spot._id, token);
+      setTricks(prev => prev.map(t =>
+        t._id === spotTrickTarget._id
+          ? { ...t, spotId: spot._id, spot: { name: spot.name, city: spot.city, state: spot.state } }
+          : t
+      ));
+      setSpotDialogOpen(false);
+      setSpotTrickTarget(null);
+      setSpotSearchQuery('');
+      setSpotSearchResults([]);
+    } catch (_e) {
+      alert('Failed to link spot');
+    } finally {
+      setLinkingSpot(false);
+    }
+  };
+
+  // Unlink spot from trick
+  const handleUnlinkSpot = async (trick) => {
+    try {
+      await linkSpotToTrick(trick._id, null, token);
+      setTricks(prev => prev.map(t =>
+        t._id === trick._id ? { ...t, spotId: null, spot: null } : t
+      ));
+    } catch (_e) {}
+  };
+
+  // Link video to trick
+  const handleLinkVideo = async () => {
+    if (!videoTrickTarget || !videoUrl.trim()) return;
+    setLinkingVideo(true);
+    try {
+      await linkVideoToTrick(videoTrickTarget._id, videoUrl.trim(), null, token);
+      setTricks(prev => prev.map(t =>
+        t._id === videoTrickTarget._id ? { ...t, videoUrl: videoUrl.trim() } : t
+      ));
+      setVideoDialogOpen(false);
+      setVideoTrickTarget(null);
+      setVideoUrl('');
+    } catch (_e) {
+      alert('Failed to link video');
+    } finally {
+      setLinkingVideo(false);
+    }
   };
 
   // Helper function to check if trick is completed (checked is a string, "To Do" means incomplete)
@@ -466,6 +553,59 @@ export default function TrickListDetail() {
                               </Link>
                             </div>
                           )}
+
+                          {/* Spot + Video badges */}
+                          <div className="mt-2 flex flex-wrap items-center gap-2">
+                            {trick.spot ? (
+                              <span
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full text-xs cursor-pointer hover:bg-green-500/30"
+                                onClick={(e) => { e.stopPropagation(); handleUnlinkSpot(trick); }}
+                                title="Click to unlink spot"
+                              >
+                                <MapPin className="h-3 w-3" />
+                                {trick.spot.name}{trick.spot.city ? `, ${trick.spot.state || ''}` : ''}
+                                <X className="h-3 w-3 ml-0.5" />
+                              </span>
+                            ) : (
+                              <button
+                                onClick={(e) => { e.stopPropagation(); setSpotTrickTarget(trick); setSpotDialogOpen(true); }}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-secondary text-muted-foreground rounded-full text-xs hover:bg-secondary/80 hover:text-yellow-500 transition-colors"
+                              >
+                                <MapPin className="h-3 w-3" />
+                                Add Spot
+                              </button>
+                            )}
+
+                            {trick.videoUrl ? (
+                              <a
+                                href={trick.videoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded-full text-xs hover:bg-purple-500/30"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Play className="h-3 w-3" />
+                                Video
+                              </a>
+                            ) : trick.feedPostId ? (
+                              <Link
+                                href={`/media/feed/${trick.feedPostId}`}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded-full text-xs hover:bg-purple-500/30 no-underline"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Video className="h-3 w-3" />
+                                Clip
+                              </Link>
+                            ) : (
+                              <button
+                                onClick={(e) => { e.stopPropagation(); setVideoTrickTarget(trick); setVideoDialogOpen(true); }}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-secondary text-muted-foreground rounded-full text-xs hover:bg-secondary/80 hover:text-yellow-500 transition-colors"
+                              >
+                                <Video className="h-3 w-3" />
+                                Add Video
+                              </button>
+                            )}
+                          </div>
                         </div>
 
                         {/* Actions - Always visible on mobile, hover on desktop */}
@@ -653,6 +793,86 @@ export default function TrickListDetail() {
             </Button>
             <Button variant="destructive" onClick={handleDeleteList} disabled={deletingList}>
               {deletingList ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Delete List'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Spot Search Dialog */}
+      <Dialog open={spotDialogOpen} onOpenChange={(open) => { setSpotDialogOpen(open); if (!open) { setSpotSearchQuery(''); setSpotSearchResults([]); setSpotTrickTarget(null); } }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Link a Spot to &quot;{spotTrickTarget?.name}&quot;</DialogTitle>
+            <DialogDescription>Search for a skate spot to tag this trick.</DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search spots..."
+                value={spotSearchQuery}
+                onChange={(e) => handleSpotSearch(e.target.value)}
+                className="pl-10"
+                autoFocus
+              />
+            </div>
+            {spotSearching && (
+              <div className="flex justify-center py-4">
+                <Loader2 className="h-5 w-5 animate-spin text-yellow-500" />
+              </div>
+            )}
+            {spotSearchResults.length > 0 && (
+              <div className="mt-3 max-h-60 overflow-y-auto space-y-1">
+                {spotSearchResults.map((spot) => (
+                  <button
+                    key={spot._id}
+                    onClick={() => handleLinkSpot(spot)}
+                    disabled={linkingSpot}
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-secondary transition-colors flex items-center gap-3"
+                  >
+                    <MapPin className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium">{spot.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {spot.city}{spot.state ? `, ${spot.state}` : ''}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+            {spotSearchQuery.length >= 2 && !spotSearching && spotSearchResults.length === 0 && (
+              <p className="text-sm text-muted-foreground text-center py-4">No spots found</p>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Video Link Dialog */}
+      <Dialog open={videoDialogOpen} onOpenChange={(open) => { setVideoDialogOpen(open); if (!open) { setVideoUrl(''); setVideoTrickTarget(null); } }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Link a Video to &quot;{videoTrickTarget?.name}&quot;</DialogTitle>
+            <DialogDescription>Paste a video URL (YouTube, Instagram, etc.)</DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <Input
+              placeholder="https://youtube.com/watch?v=..."
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+              autoFocus
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setVideoDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleLinkVideo}
+              disabled={linkingVideo || !videoUrl.trim()}
+              className="bg-yellow-500 text-black hover:bg-yellow-400"
+            >
+              {linkingVideo ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Link Video'}
             </Button>
           </DialogFooter>
         </DialogContent>
