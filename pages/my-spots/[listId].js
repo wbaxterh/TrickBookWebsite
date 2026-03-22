@@ -54,7 +54,8 @@ export default function SpotListDetail() {
     if (!listId) return;
 
     fetchData();
-  }, [loggedIn, listId, router, fetchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn, listId]);
 
   const handleRemoveClick = (spot, e) => {
     e.preventDefault();
