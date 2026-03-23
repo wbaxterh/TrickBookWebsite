@@ -293,6 +293,30 @@ export default function PublicProfile() {
                   </p>
                 )}
 
+                {/* AI Companion badge */}
+                {profile.isBot && (
+                  <div className="flex justify-center sm:justify-start mb-3">
+                    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black text-sm px-3 py-1">
+                      🤖 AI Companion
+                    </Badge>
+                  </div>
+                )}
+
+                {/* Bio */}
+                {profile.bio && (
+                  <p className="text-muted-foreground text-sm mb-3 max-w-lg text-center sm:text-left">
+                    {profile.bio}
+                  </p>
+                )}
+
+                {/* Location */}
+                {profile.location && (
+                  <p className="text-muted-foreground text-sm flex items-center justify-center sm:justify-start gap-1 mb-3">
+                    <MapPin className="w-3.5 h-3.5" />
+                    {profile.location}
+                  </p>
+                )}
+
                 {/* Sports badges */}
                 {profile.sports && profile.sports.length > 0 && (
                   <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4">
