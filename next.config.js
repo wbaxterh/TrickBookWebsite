@@ -19,6 +19,11 @@ module.exports = {
       },
       {
         protocol: 'https',
+        hostname: 'api.thetrickbook.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
         pathname: '/**',
       },
