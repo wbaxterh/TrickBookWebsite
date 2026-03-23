@@ -339,21 +339,21 @@ export default function Conversation() {
                   return (
                     <div
                       key={msg._id}
-                      className={`flex ${isMine ? 'justify-start' : 'justify-end'}`}
+                      className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}
                     >
                       <div className="max-w-[75%]">
                         <div
                           className={`px-4 py-2 rounded-2xl ${
                             isMine
-                              ? 'bg-yellow-500 text-black rounded-bl-sm'
-                              : 'bg-secondary text-foreground rounded-br-sm'
+                              ? 'bg-yellow-500 text-black rounded-br-sm'
+                              : 'bg-secondary text-foreground rounded-bl-sm'
                           }`}
                         >
                           <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
                         </div>
                         <div
                           className={`flex items-center gap-1 mt-1 ${
-                            isMine ? 'justify-start' : 'justify-end'
+                            isMine ? 'justify-end' : 'justify-start'
                           }`}
                         >
                           <span className="text-xs text-muted-foreground">
@@ -384,7 +384,7 @@ export default function Conversation() {
 
           {/* Typing Indicator */}
           {otherTyping && (
-            <div className="flex justify-end">
+            <div className="flex justify-start">
               <div className="bg-secondary rounded-2xl rounded-br-sm px-4 py-2">
                 <div className="flex gap-1">
                   <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
