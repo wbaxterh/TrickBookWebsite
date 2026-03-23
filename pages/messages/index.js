@@ -1,4 +1,4 @@
-import { Loader2, MessageCircle, Plus, Search, User, X } from 'lucide-react';
+import { Bot, Loader2, MessageCircle, Plus, Search, Sparkles, User, X } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import { getMyHomies } from '../../lib/apiHomies';
-import { getConversations, startConversation } from '../../lib/apiMessages';
+import { getBotCompanions, getConversations, startBotConversation, startConversation } from '../../lib/apiMessages';
 import { connectMessagesSocket } from '../../lib/socket';
 
 export default function Messages() {
@@ -25,6 +25,29 @@ export default function Messages() {
   const [loadingHomies, setLoadingHomies] = useState(false);
   const [startingConversation, setStartingConversation] = useState(null);
   const [homiesSearchQuery, setHomiesSearchQuery] = useState('');
+
+  // Bot companions state
+  const [bots, setBots] = useState([]);
+  const [startingBotConvo, setStartingBotConvo] = useState(null);
+
+  const loadBots = async () => {
+    try {
+      const data = await getBotCompanions(token);
+      setBots(data || []);
+    } catch (_error) {}
+  };
+
+  const handleStartBotConversation = async (botId) => {
+    setStartingBotConvo(botId);
+    try {
+      const conversation = await startBotConversation(botId, token);
+      router.push(`/messages/${conversation._id}`);
+    } catch (_error) {
+      alert('Failed to start conversation. Please try again.');
+    } finally {
+      setStartingBotConvo(null);
+    }
+  };
 
   const loadConversations = async () => {
     try {
@@ -83,6 +106,7 @@ export default function Messages() {
 
     if (token) {
       loadConversations();
+      loadBots();
       setupSocket();
     }
   }, [token, loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -221,6 +245,58 @@ export default function Messages() {
             />
           </div>
 
+          {/* AI Companions */}
+          {bots.length > 0 && !searchQuery && (
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="h-4 w-4 text-yellow-500" />
+                <span className="text-sm font-medium text-muted-foreground">AI Companions</span>
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {bots.map((bot) => (
+                  <button
+                    key={bot._id}
+                    onClick={() => {
+                      if (bot.existingConversationId) {
+                        router.push(`/messages/${bot.existingConversationId}`);
+                      } else {
+                        handleStartBotConversation(bot._id);
+                      }
+                    }}
+                    disabled={startingBotConvo === bot._id}
+                    className="flex flex-col items-center gap-2 min-w-[72px] group"
+                  >
+                    <div className="relative">
+                      {bot.imageUri ? (
+                        <Image
+                          src={bot.imageUri}
+                          alt={bot.name}
+                          width={56}
+                          height={56}
+                          className="rounded-full object-cover ring-2 ring-yellow-500/50 group-hover:ring-yellow-500 transition-all"
+                          style={{ width: 56, height: 56 }}
+                        />
+                      ) : (
+                        <div className="w-[56px] h-[56px] rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center ring-2 ring-yellow-500/50 group-hover:ring-yellow-500 transition-all">
+                          <Bot className="h-6 w-6 text-black" />
+                        </div>
+                      )}
+                      <div className="absolute -bottom-0.5 -right-0.5 bg-green-500 w-3.5 h-3.5 rounded-full border-2 border-background" />
+                      {startingBotConvo === bot._id && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full">
+                          <Loader2 className="h-5 w-5 animate-spin text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors truncate max-w-[72px]">
+                      {bot.name?.replace(' ❄️', '')}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Conversations List */}
           {loading ? (
             <div className="flex justify-center py-12">
@@ -275,11 +351,17 @@ export default function Messages() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <p
-                        className={`font-medium truncate ${
+                        className={`font-medium truncate flex items-center gap-1.5 ${
                           convo.unreadCount > 0 ? 'text-foreground' : 'text-foreground'
                         }`}
                       >
                         {convo.otherUser?.name || 'Unknown'}
+                        {convo.otherUser?.isBot && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded-full">
+                            <Bot className="h-2.5 w-2.5" />
+                            AI
+                          </span>
+                        )}
                       </p>
                       <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">
                         {formatTime(convo.lastMessage?.createdAt)}

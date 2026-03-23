@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, CheckCheck, Loader2, Send } from 'lucide-react';
+import { ArrowLeft, Bot, Check, CheckCheck, Loader2, Send, Sparkles } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -288,8 +288,17 @@ export default function Conversation() {
           >
             <UserAvatar user={otherUser} size={40} />
             <div>
-              <p className="font-medium text-foreground">{otherUser?.name || 'Unknown'}</p>
+              <p className="font-medium text-foreground flex items-center gap-1.5">
+                {otherUser?.name || 'Unknown'}
+                {otherUser?.isBot && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded-full">
+                    <Bot className="h-2.5 w-2.5" />
+                    AI
+                  </span>
+                )}
+              </p>
               {otherTyping && <p className="text-xs text-yellow-500">typing...</p>}
+              {otherUser?.isBot && !otherTyping && <p className="text-xs text-green-500">Online</p>}
             </div>
           </Link>
         </div>
