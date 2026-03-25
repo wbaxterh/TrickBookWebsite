@@ -10,6 +10,7 @@ import {
   Users,
   X,
 } from 'lucide-react';
+import { Input } from '../components/ui/input';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -44,6 +45,13 @@ export default function Homies() {
   const [sentRequestIds, setSentRequestIds] = useState(new Set()); // Track locally sent requests
   const [conversations, setConversations] = useState([]);
 
+  // Search + pagination states
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
+
   // Loading states
   const [loadingHomies, setLoadingHomies] = useState(true);
   const [loadingDiscoverable, setLoadingDiscoverable] = useState(true);
@@ -62,14 +70,23 @@ export default function Homies() {
     }
   };
 
-  const fetchDiscoverableUsers = async () => {
-    setLoadingDiscoverable(true);
+  const fetchDiscoverableUsers = async (query = '', page = 1, append = false) => {
+    if (page === 1) {
+      setLoadingDiscoverable(true);
+    } else {
+      setLoadingMore(true);
+    }
     try {
-      const data = await getDiscoverableUsers(token);
-      setDiscoverableUsers(data);
+      const data = await getDiscoverableUsers(token, { q: query || undefined, page, limit: 20 });
+      const { users: newUsers, pagination } = data;
+      setDiscoverableUsers((prev) => (append ? [...prev, ...newUsers] : newUsers));
+      setHasMore(pagination.hasMore);
+      setTotalUsers(pagination.total);
+      setCurrentPage(pagination.page);
     } catch (_error) {
     } finally {
       setLoadingDiscoverable(false);
+      setLoadingMore(false);
     }
   };
 
@@ -103,11 +120,27 @@ export default function Homies() {
   useEffect(() => {
     if (token) {
       fetchHomies();
-      fetchDiscoverableUsers();
+      fetchDiscoverableUsers('', 1, false);
       fetchRequests();
       fetchConversations();
     }
   }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Debounced search
+  useEffect(() => {
+    if (!token) return;
+    const timeout = setTimeout(() => {
+      setCurrentPage(1);
+      fetchDiscoverableUsers(searchQuery, 1, false);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [searchQuery]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      fetchDiscoverableUsers(searchQuery, currentPage + 1, true);
+    }
+  };
 
   const handleStartConversation = async (userId) => {
     setActionLoading(`msg-${userId}`);
@@ -209,7 +242,9 @@ export default function Homies() {
           <Link href={`/profile/${user._id}`} className="hover:text-yellow-500 transition-colors">
             <p className="font-medium text-foreground">{user.name || 'Unknown'}</p>
           </Link>
-          <p className="text-sm text-muted-foreground">{user.email}</p>
+          {user.bio && (
+            <p className="text-sm text-muted-foreground truncate max-w-[200px]">{user.bio}</p>
+          )}
         </div>
       </div>
       <div className="flex gap-2">{actions}</div>
@@ -564,10 +599,36 @@ export default function Homies() {
           <TabsContent value="find">
             <Card>
               <CardHeader>
-                <CardTitle>Find Homies</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Find Homies</span>
+                  {totalUsers > 0 && (
+                    <Badge variant="secondary" className="text-xs font-normal">
+                      {totalUsers} riders
+                    </Badge>
+                  )}
+                </CardTitle>
                 <CardDescription>
-                  Discover riders who have enabled network discovery
+                  Search for riders by name
                 </CardDescription>
+                {/* Search Bar */}
+                <div className="relative mt-3">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search by name..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 pr-10"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
               </CardHeader>
               <CardContent>
                 {loadingDiscoverable ? (
@@ -577,62 +638,85 @@ export default function Homies() {
                 ) : discoverableUsers.length === 0 ? (
                   <div className="text-center py-12">
                     <Search className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground mb-2">
-                      No discoverable riders found right now.
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Make sure you&apos;ve enabled network discovery in your profile to be found by
-                      others!
-                    </p>
-                    <Button
-                      onClick={() => router.push('/profile')}
-                      variant="outline"
-                      className="mt-4"
-                    >
-                      Go to Profile Settings
-                    </Button>
+                    {searchQuery ? (
+                      <p className="text-muted-foreground">
+                        No one found for &ldquo;{searchQuery}&rdquo;. Try a different name.
+                      </p>
+                    ) : (
+                      <>
+                        <p className="text-muted-foreground mb-2">
+                          No discoverable riders found right now.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Check back later as more riders join!
+                        </p>
+                      </>
+                    )}
                   </div>
                 ) : (
-                  <div className="space-y-3">
-                    {discoverableUsers.map((user) => {
-                      const isRequested = sentRequestIds.has(user._id);
-                      return (
-                        <UserCard
-                          key={user._id}
-                          user={user}
-                          actions={
-                            isRequested ? (
-                              <Button
-                                size="sm"
-                                disabled
-                                variant="outline"
-                                className="cursor-not-allowed"
-                              >
-                                <Check className="h-4 w-4 mr-1" />
-                                Requested
-                              </Button>
-                            ) : (
-                              <Button
-                                size="sm"
-                                onClick={() => handleSendRequest(user._id)}
-                                disabled={actionLoading === user._id}
-                                className="bg-yellow-500 hover:bg-yellow-600 text-black"
-                              >
-                                {actionLoading === user._id ? (
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                ) : (
-                                  <>
-                                    <UserPlus className="h-4 w-4 mr-1" />
-                                    Add Homie
-                                  </>
-                                )}
-                              </Button>
-                            )
-                          }
-                        />
-                      );
-                    })}
-                  </div>
+                  <>
+                    <div className="space-y-3">
+                      {discoverableUsers.map((user) => {
+                        const isRequested = sentRequestIds.has(user._id);
+                        return (
+                          <UserCard
+                            key={user._id}
+                            user={user}
+                            actions={
+                              isRequested ? (
+                                <Button
+                                  size="sm"
+                                  disabled
+                                  variant="outline"
+                                  className="cursor-not-allowed"
+                                >
+                                  <Check className="h-4 w-4 mr-1" />
+                                  Requested
+                                </Button>
+                              ) : (
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleSendRequest(user._id)}
+                                  disabled={actionLoading === user._id}
+                                  className="bg-yellow-500 hover:bg-yellow-600 text-black"
+                                >
+                                  {actionLoading === user._id ? (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                  ) : (
+                                    <>
+                                      <UserPlus className="h-4 w-4 mr-1" />
+                                      Add Homie
+                                    </>
+                                  )}
+                                </Button>
+                              )
+                            }
+                          />
+                        );
+                      })}
+                    </div>
+                    {/* Load More */}
+                    {hasMore && (
+                      <div className="text-center mt-6">
+                        <Button
+                          variant="outline"
+                          onClick={handleLoadMore}
+                          disabled={loadingMore}
+                          className="w-full"
+                        >
+                          {loadingMore ? (
+                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                          ) : null}
+                          {loadingMore ? 'Loading...' : 'Load More'}
+                        </Button>
+                      </div>
+                    )}
+                    {!hasMore && discoverableUsers.length > 0 && (
+                      <p className="text-center text-sm text-muted-foreground mt-6">
+                        That&apos;s everyone! 🛹
+                      </p>
+                    )}
+                  </>
                 )}
               </CardContent>
             </Card>
