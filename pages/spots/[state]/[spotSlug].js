@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../../../components/ui/dialog';
+import ResortInfo from '../../../components/ResortInfo';
 import { getSpotData } from '../../../lib/apiSpots';
 import axios from 'axios';
 
@@ -342,6 +343,11 @@ export default function SpotDetail() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Resort Info Section */}
+          {spot.category === 'resort' && spot.resortInfo && (
+            <ResortInfo resortInfo={spot.resortInfo} />
+          )}
 
           {/* Trick History Section */}
           <div className="mt-8">

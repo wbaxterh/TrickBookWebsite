@@ -16,8 +16,14 @@ export default function SpotCard({
   rating,
   approvalStatus,
   showStatus = false,
+  category,
+  sportTypes,
+  resortInfo,
 }) {
   const [imageError, setImageError] = useState(false);
+  const isResort = category === 'resort' ||
+    (sportTypes && (sportTypes.includes('skiing') || sportTypes.includes('snowboarding')));
+
   // Parse tags if it's a string
   const tagList = tags
     ? typeof tags === 'string'
@@ -91,9 +97,12 @@ export default function SpotCard({
 
         {/* Content */}
         <CardContent className="p-4 flex-1 flex flex-col">
-          <h3 className="font-semibold text-foreground group-hover:text-yellow-500 transition-colors line-clamp-1">
-            {name}
-          </h3>
+          <div className="flex items-center gap-1.5">
+            <h3 className="font-semibold text-foreground group-hover:text-yellow-500 transition-colors line-clamp-1">
+              {name}
+            </h3>
+            {isResort && <span className="text-sm flex-shrink-0" title="Resort">⛷️</span>}
+          </div>
 
           {/* Location */}
           <div className="flex items-center gap-1 mt-1 text-muted-foreground">
@@ -126,6 +135,33 @@ export default function SpotCard({
           {/* Description */}
           {description && (
             <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{description}</p>
+          )}
+
+          {/* Resort Compact Ratings */}
+          {isResort && resortInfo?.ratings && (
+            <div className="flex gap-3 mt-2 text-xs text-muted-foreground">
+              {resortInfo.ratings.groomers != null && (
+                <span className="flex items-center gap-1">
+                  🟢 {[...Array(5)].map((_, i) => (
+                    <span key={i} className={`inline-block w-1.5 h-1.5 rounded-full ${i < resortInfo.ratings.groomers ? 'bg-yellow-500' : 'bg-gray-600'}`} />
+                  ))}
+                </span>
+              )}
+              {resortInfo.ratings.park != null && (
+                <span className="flex items-center gap-1">
+                  🏗️ {[...Array(5)].map((_, i) => (
+                    <span key={i} className={`inline-block w-1.5 h-1.5 rounded-full ${i < resortInfo.ratings.park ? 'bg-yellow-500' : 'bg-gray-600'}`} />
+                  ))}
+                </span>
+              )}
+              {resortInfo.ratings.backcountry != null && (
+                <span className="flex items-center gap-1">
+                  🌲 {[...Array(5)].map((_, i) => (
+                    <span key={i} className={`inline-block w-1.5 h-1.5 rounded-full ${i < resortInfo.ratings.backcountry ? 'bg-yellow-500' : 'bg-gray-600'}`} />
+                  ))}
+                </span>
+              )}
+            </div>
           )}
         </CardContent>
       </Card>
