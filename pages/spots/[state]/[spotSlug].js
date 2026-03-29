@@ -20,6 +20,8 @@ import {
 } from '../../../components/ui/dialog';
 import ResortInfo from '../../../components/ResortInfo';
 import { getSpotData } from '../../../lib/apiSpots';
+import PhotoCarousel from '../../../components/PhotoCarousel';
+import LodgingSection from '../../../components/LodgingSection';
 import axios from 'axios';
 
 // US State names mapping
@@ -250,21 +252,11 @@ export default function SpotDetail() {
         <div className="container py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Image Section */}
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
-              {spot.imageURL ? (
-                <Image
-                  src={spot.imageURL}
-                  alt={spot.name}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-secondary">
-                  <MapPin className="h-24 w-24 text-yellow-500" />
-                </div>
-              )}
-            </div>
+            <PhotoCarousel
+              images={spot.images}
+              imageURL={spot.imageURL}
+              name={spot.name}
+            />
 
             {/* Details Section */}
             <Card>
@@ -348,6 +340,9 @@ export default function SpotDetail() {
           {spot.category === 'resort' && spot.resortInfo && (
             <ResortInfo resortInfo={spot.resortInfo} />
           )}
+
+          {/* Lodging Section */}
+          <LodgingSection lodging={spot.lodging} />
 
           {/* Trick History Section */}
           <div className="mt-8">
