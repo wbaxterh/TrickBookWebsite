@@ -1,4 +1,4 @@
-import { ArrowLeft, ChevronUp, ExternalLink, Loader2, MapPin, Plus, Trophy, Video } from 'lucide-react';
+import { ArrowLeft, ChevronUp, ExternalLink, FileText, Loader2, MapPin, Play, Plus, Trophy, Video } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -294,13 +294,36 @@ export default function SpotDetail() {
 
                 <Separator />
 
-                {/* Coordinates */}
-                <div>
-                  <h3 className="text-sm font-medium text-muted-foreground mb-1">Coordinates</h3>
-                  <p className="text-foreground font-mono text-sm">
-                    {spot.latitude?.toFixed(6)}, {spot.longitude?.toFixed(6)}
-                  </p>
-                </div>
+                {/* Pass Affiliation Badge */}
+                {spot.passAffiliation && spot.passAffiliation !== 'independent' && (
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      className={`text-sm px-3 py-1 ${
+                        spot.passAffiliation === 'ikon'
+                          ? 'bg-orange-500/20 text-orange-400 border-orange-500/50'
+                          : spot.passAffiliation === 'epic'
+                            ? 'bg-blue-500/20 text-blue-400 border-blue-500/50'
+                            : spot.passAffiliation === 'mountain-collective'
+                              ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
+                              : 'bg-purple-500/20 text-purple-400 border-purple-500/50'
+                      }`}
+                      variant="outline"
+                    >
+                      {spot.passAffiliation === 'ikon' && 'Ikon Pass'}
+                      {spot.passAffiliation === 'epic' && 'Epic Pass'}
+                      {spot.passAffiliation === 'mountain-collective' && 'Mountain Collective'}
+                      {spot.passAffiliation === 'both' && 'Ikon & Epic Pass'}
+                    </Badge>
+                    {spot.popularityTier && (
+                      <Badge variant="outline" className="text-sm px-3 py-1 border-yellow-500/50 text-yellow-400">
+                        {spot.popularityTier === 'legendary' && 'Legendary'}
+                        {spot.popularityTier === 'major' && 'Major Resort'}
+                        {spot.popularityTier === 'regional' && 'Regional'}
+                        {spot.popularityTier === 'local' && 'Local Gem'}
+                      </Badge>
+                    )}
+                  </div>
+                )}
 
                 {/* Description */}
                 {spot.description && (
@@ -343,6 +366,107 @@ export default function SpotDetail() {
 
           {/* Lodging Section */}
           <LodgingSection lodging={spot.lodging} />
+
+          {/* Videos Section */}
+          {spot.videos && spot.videos.length > 0 && (
+            <div className="mt-8">
+              <Card>
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                    <Play className="h-5 w-5 text-yellow-500" />
+                    Videos
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {spot.videos.map((video, index) => {
+                      // Extract YouTube video ID for embed
+                      const ytMatch = video.url?.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+                      const ytId = ytMatch ? ytMatch[1] : null;
+
+                      return (
+                        <div key={index} className="rounded-lg overflow-hidden bg-secondary/50">
+                          {ytId ? (
+                            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                              <iframe
+                                className="absolute top-0 left-0 w-full h-full"
+                                src={`https://www.youtube.com/embed/${ytId}`}
+                                title={video.title || `Video ${index + 1}`}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            </div>
+                          ) : (
+                            <a
+                              href={video.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center h-40 bg-secondary hover:bg-secondary/80 transition-colors"
+                            >
+                              <Play className="h-12 w-12 text-yellow-500" />
+                            </a>
+                          )}
+                          <div className="p-3">
+                            <p className="text-sm font-medium text-foreground line-clamp-2">
+                              {video.title || 'Watch Video'}
+                            </p>
+                            {video.channel && (
+                              <p className="text-xs text-muted-foreground mt-1">{video.channel}</p>
+                            )}
+                            {video.type && (
+                              <Badge variant="outline" className="mt-2 text-xs border-yellow-500/30 text-yellow-500">
+                                {video.type}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Articles & Press Section */}
+          {spot.articles && spot.articles.length > 0 && (
+            <div className="mt-8">
+              <Card>
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                    <FileText className="h-5 w-5 text-yellow-500" />
+                    In the Press
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {spot.articles.map((article, index) => (
+                      <a
+                        key={index}
+                        href={article.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start gap-3 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group"
+                      >
+                        <FileText className="h-5 w-5 text-yellow-500 mt-0.5 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-foreground group-hover:text-yellow-500 transition-colors line-clamp-2">
+                            {article.title}
+                          </p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs text-muted-foreground">{article.source}</span>
+                            {article.type && (
+                              <Badge variant="outline" className="text-xs border-muted-foreground/30">
+                                {article.type}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <ExternalLink className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
           {/* Trick History Section */}
           <div className="mt-8">

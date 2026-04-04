@@ -1,4 +1,4 @@
-import { ExternalLink, Instagram, Mountain, Snowflake, TreePine } from 'lucide-react';
+import { ArrowUpDown, CableCar, ExternalLink, Instagram, Mountain, Route, Snowflake, TreePine } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
@@ -65,21 +65,21 @@ export default function ResortInfo({ resortInfo }) {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {verticalDrop && (
                 <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                  <div className="text-2xl mb-1">🏔️</div>
+                  <ArrowUpDown className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
                   <div className="text-xl font-bold text-foreground">{verticalDrop.toLocaleString()}ft</div>
                   <div className="text-xs text-muted-foreground">Vertical Drop</div>
                 </div>
               )}
               {trailCount && (
                 <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                  <div className="text-2xl mb-1">🎿</div>
+                  <Route className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
                   <div className="text-xl font-bold text-foreground">{trailCount}</div>
                   <div className="text-xs text-muted-foreground">Trails</div>
                 </div>
               )}
               {liftCount && (
                 <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                  <div className="text-2xl mb-1">🚡</div>
+                  <CableCar className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
                   <div className="text-xl font-bold text-foreground">{liftCount}</div>
                   <div className="text-xs text-muted-foreground">Lifts</div>
                 </div>
@@ -93,14 +93,26 @@ export default function ResortInfo({ resortInfo }) {
           {hasRatings ? (
             <div className="space-y-3">
               <h3 className="text-sm font-medium text-muted-foreground">Ratings</h3>
+              {ratings.overall != null && (
+                <RatingRow label="Overall" icon={<Mountain className="h-4 w-4 text-yellow-500" />} value={ratings.overall} />
+              )}
               {ratings.groomers != null && (
-                <RatingRow label="Groomers" icon="🟢" value={ratings.groomers} />
+                <RatingRow label="Groomers" icon={<Route className="h-4 w-4 text-green-500" />} value={ratings.groomers} />
+              )}
+              {ratings.terrain != null && (
+                <RatingRow label="Terrain" icon={<Mountain className="h-4 w-4 text-blue-500" />} value={ratings.terrain} />
               )}
               {ratings.park != null && (
-                <RatingRow label="Terrain Park" icon="🏗️" value={ratings.park} />
+                <RatingRow label="Terrain Park" icon={<Snowflake className="h-4 w-4 text-purple-500" />} value={ratings.park} />
+              )}
+              {ratings.powder != null && (
+                <RatingRow label="Powder" icon={<Snowflake className="h-4 w-4 text-cyan-500" />} value={ratings.powder} />
               )}
               {ratings.backcountry != null && (
-                <RatingRow label="Backcountry" icon="🌲" value={ratings.backcountry} />
+                <RatingRow label="Backcountry" icon={<TreePine className="h-4 w-4 text-emerald-500" />} value={ratings.backcountry} />
+              )}
+              {ratings.value != null && (
+                <RatingRow label="Value" icon={<Mountain className="h-4 w-4 text-orange-500" />} value={ratings.value} />
               )}
             </div>
           ) : (
