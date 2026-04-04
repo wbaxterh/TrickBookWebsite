@@ -1,4 +1,4 @@
-import { ChevronDown, Filter, Globe, Loader2, MapPin, Plus } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Filter, Globe, Loader2, MapPin, Plus } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
@@ -112,6 +112,28 @@ export default function Spots() {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
 
+  // All US state codes (uppercase) for identifying US spots
+  const US_STATE_CODES = new Set(Object.keys(STATE_NAMES));
+
+  // Known country names that appear in the state field
+  const COUNTRY_NAMES_IN_STATE = new Set([
+    'France', 'Japan', 'Canada', 'Austria', 'Spain', 'Switzerland', 'Italy',
+    'New Zealand', 'Slovenia', 'Germany', 'Australia', 'Sweden', 'Norway',
+    'Russia', 'South Korea', 'Poland', 'Finland', 'Chile', 'United Kingdom',
+    'Bulgaria', 'Iran', 'Slovakia', 'Turkey', 'Pakistan', 'Morocco',
+    'North Macedonia', 'Belgium', 'Greece', 'Croatia', 'Belarus', 'Andorra',
+    'Serbia', 'Kazakhstan', 'Ukraine', 'Romania', 'Lebanon', 'Armenia',
+    'Iceland', 'Czech Republic', 'South Africa', 'Algeria', 'Mongolia',
+    'Portugal', 'Mexico', 'Liechtenstein', 'Hungary', 'Georgia', 'Bosnia',
+    'Argentina', 'International', 'United States',
+  ]);
+
+  // Map country names to codes for flag display
+  const COUNTRY_NAME_TO_CODE = {};
+  Object.entries(COUNTRIES).forEach(([code, { name }]) => {
+    COUNTRY_NAME_TO_CODE[name] = code;
+  });
+
   useEffect(() => {
     const fetchSpots = async () => {
       setLoading(true);
@@ -147,17 +169,61 @@ export default function Spots() {
     }
   }, [selectedCategory, allSpots]);
 
-  // Get states sorted by number of spots
-  const sortedStates = Object.keys(spotsByState)
-    .filter((state) => state && state !== 'Unknown')
-    .sort((a, b) => spotsByState[b].length - spotsByState[a].length);
+  // Organize spots into country → state hierarchy
+  const organizeByCountry = () => {
+    const countries = {};
 
-  const totalSpots = Object.values(spotsByState).reduce((sum, spots) => sum + spots.length, 0);
+    Object.keys(spotsByState).forEach((stateKey) => {
+      if (!stateKey || stateKey === 'Unknown') return;
+      const spots = spotsByState[stateKey];
 
-  // Get countries that have spots
-  const _countriesWithSpots = Object.keys(spotsByCountry).filter(
-    (country) => Object.keys(spotsByCountry[country]).length > 0,
-  );
+      if (US_STATE_CODES.has(stateKey)) {
+        // US state code (CA, NY, etc.)
+        if (!countries['United States']) countries['United States'] = { total: 0, states: {} };
+        countries['United States'].states[stateKey] = spots;
+        countries['United States'].total += spots.length;
+      } else if (stateKey === 'United States') {
+        // Spots with state="United States" (missing proper state)
+        if (!countries['United States']) countries['United States'] = { total: 0, states: {} };
+        if (!countries['United States'].states['_unassigned']) countries['United States'].states['_unassigned'] = [];
+        countries['United States'].states['_unassigned'].push(...spots);
+        countries['United States'].total += spots.length;
+      } else if (COUNTRY_NAMES_IN_STATE.has(stateKey)) {
+        // International country in state field
+        if (!countries[stateKey]) countries[stateKey] = { total: 0, states: {} };
+        countries[stateKey].states['_all'] = spots;
+        countries[stateKey].total += spots.length;
+      } else if (stateKey === 'ON' || stateKey === 'NS') {
+        // Canadian provinces
+        if (!countries['Canada']) countries['Canada'] = { total: 0, states: {} };
+        countries['Canada'].states[stateKey] = spots;
+        countries['Canada'].total += spots.length;
+      } else if (stateKey === 'NSW') {
+        // Australian states
+        if (!countries['Australia']) countries['Australia'] = { total: 0, states: {} };
+        countries['Australia'].states[stateKey] = spots;
+        countries['Australia'].total += spots.length;
+      } else {
+        // Unknown — group under "Other"
+        if (!countries['Other']) countries['Other'] = { total: 0, states: {} };
+        countries['Other'].states[stateKey] = spots;
+        countries['Other'].total += spots.length;
+      }
+    });
+
+    return countries;
+  };
+
+  const organizedCountries = organizeByCountry();
+
+  // Sort countries by total spots
+  const sortedCountries = Object.keys(organizedCountries)
+    .sort((a, b) => organizedCountries[b].total - organizedCountries[a].total);
+
+  const totalSpots = Object.values(organizedCountries).reduce((sum, c) => sum + c.total, 0);
+
+  // Track which country is expanded to show states
+  const [expandedCountry, setExpandedCountry] = useState(null);
 
   const selectedCategoryData = SPORT_CATEGORIES.find((c) => c.id === selectedCategory);
 
@@ -187,7 +253,7 @@ export default function Spots() {
               <p className="text-xl text-muted-foreground max-w-2xl">
                 {loading
                   ? 'Loading spots...'
-                  : `Discover ${totalSpots} spots across ${sortedStates.length} regions worldwide`}
+                  : `Discover ${totalSpots} spots across ${sortedCountries.length} countries worldwide`}
               </p>
 
               {/* Filters Row */}
@@ -316,37 +382,145 @@ export default function Spots() {
               <Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
               <p className="mt-4 text-muted-foreground">Loading spots...</p>
             </div>
-          ) : sortedStates.length > 0 ? (
+          ) : sortedCountries.length > 0 ? (
             <>
+              {/* Back button when viewing a country's states */}
+              {expandedCountry && (
+                <button
+                  onClick={() => setExpandedCountry(null)}
+                  className="flex items-center gap-2 text-muted-foreground hover:text-yellow-500 transition-colors mb-6"
+                >
+                  <ArrowLeft className="h-5 w-5" />
+                  <span>Back to Countries</span>
+                </button>
+              )}
+
               <h2 className="text-2xl font-semibold text-foreground mb-8 text-center">
-                Browse by Region
+                {expandedCountry ? (
+                  <>
+                    {COUNTRIES[COUNTRY_NAME_TO_CODE[expandedCountry]]?.flag || '📍'}{' '}
+                    {expandedCountry}
+                  </>
+                ) : (
+                  'Browse by Country'
+                )}
                 {selectedCategory !== 'all' && (
                   <span className="text-yellow-500 ml-2">
                     • {selectedCategoryData?.emoji} {selectedCategoryData?.name}
                   </span>
                 )}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {sortedStates.map((state) => (
-                  <Link
-                    key={state}
-                    href={`/spots/${state.toLowerCase()}${selectedCategory !== 'all' ? `?category=${selectedCategory}` : ''}`}
-                    className="no-underline"
-                  >
-                    <Card className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full">
-                      <CardContent className="p-6 flex flex-col items-center text-center">
-                        <h3 className="font-semibold text-lg text-foreground group-hover:text-yellow-500 transition-colors">
-                          {STATE_NAMES[state] || state}
-                        </h3>
-                        <Badge variant="secondary" className="mt-2">
-                          {spotsByState[state].length} spot
-                          {spotsByState[state].length !== 1 ? 's' : ''}
-                        </Badge>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
+
+              {!expandedCountry ? (
+                /* Country-level view */
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {sortedCountries.map((countryName) => {
+                    const countryData = organizedCountries[countryName];
+                    const countryCode = COUNTRY_NAME_TO_CODE[countryName];
+                    const flag = COUNTRIES[countryCode]?.flag || '🌍';
+                    const stateCount = Object.keys(countryData.states).filter(s => s !== '_all' && s !== '_unassigned').length;
+                    const hasStates = stateCount > 1 || (stateCount === 1 && !countryData.states['_all']);
+
+                    return (
+                      <div key={countryName}>
+                        {hasStates ? (
+                          <Card
+                            className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full"
+                            onClick={() => setExpandedCountry(countryName)}
+                          >
+                            <CardContent className="p-6 flex flex-col items-center text-center">
+                              <span className="text-3xl mb-2">{flag}</span>
+                              <h3 className="font-semibold text-lg text-foreground group-hover:text-yellow-500 transition-colors">
+                                {countryName}
+                              </h3>
+                              <Badge variant="secondary" className="mt-2">
+                                {countryData.total} spot{countryData.total !== 1 ? 's' : ''}
+                              </Badge>
+                              <span className="text-xs text-muted-foreground mt-1">
+                                {stateCount} region{stateCount !== 1 ? 's' : ''}
+                              </span>
+                            </CardContent>
+                          </Card>
+                        ) : (
+                          <Link
+                            href={`/spots/${countryName.toLowerCase().replace(/\s+/g, '-')}${selectedCategory !== 'all' ? `?category=${selectedCategory}` : ''}`}
+                            className="no-underline"
+                          >
+                            <Card className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full">
+                              <CardContent className="p-6 flex flex-col items-center text-center">
+                                <span className="text-3xl mb-2">{flag}</span>
+                                <h3 className="font-semibold text-lg text-foreground group-hover:text-yellow-500 transition-colors">
+                                  {countryName}
+                                </h3>
+                                <Badge variant="secondary" className="mt-2">
+                                  {countryData.total} spot{countryData.total !== 1 ? 's' : ''}
+                                </Badge>
+                              </CardContent>
+                            </Card>
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                /* State-level view within a country */
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {Object.keys(organizedCountries[expandedCountry]?.states || {})
+                    .filter(s => s !== '_unassigned')
+                    .sort((a, b) => {
+                      const aCount = organizedCountries[expandedCountry].states[a].length;
+                      const bCount = organizedCountries[expandedCountry].states[b].length;
+                      return bCount - aCount;
+                    })
+                    .map((stateKey) => {
+                      const spots = organizedCountries[expandedCountry].states[stateKey];
+                      const displayName = stateKey === '_all'
+                        ? expandedCountry
+                        : (STATE_NAMES[stateKey] || stateKey);
+                      const linkSlug = stateKey === '_all'
+                        ? expandedCountry.toLowerCase().replace(/\s+/g, '-')
+                        : stateKey.toLowerCase();
+
+                      return (
+                        <Link
+                          key={stateKey}
+                          href={`/spots/${linkSlug}${selectedCategory !== 'all' ? `?category=${selectedCategory}` : ''}`}
+                          className="no-underline"
+                        >
+                          <Card className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full">
+                            <CardContent className="p-6 flex flex-col items-center text-center">
+                              <h3 className="font-semibold text-lg text-foreground group-hover:text-yellow-500 transition-colors">
+                                {displayName}
+                              </h3>
+                              <Badge variant="secondary" className="mt-2">
+                                {spots.length} spot{spots.length !== 1 ? 's' : ''}
+                              </Badge>
+                            </CardContent>
+                          </Card>
+                        </Link>
+                      );
+                    })}
+                  {/* Show unassigned spots count if any */}
+                  {organizedCountries[expandedCountry]?.states['_unassigned']?.length > 0 && (
+                    <Link
+                      href={`/spots/united-states${selectedCategory !== 'all' ? `?category=${selectedCategory}` : ''}`}
+                      className="no-underline"
+                    >
+                      <Card className="group hover:border-yellow-500 transition-all duration-200 cursor-pointer h-full border-dashed">
+                        <CardContent className="p-6 flex flex-col items-center text-center">
+                          <h3 className="font-semibold text-lg text-muted-foreground group-hover:text-yellow-500 transition-colors">
+                            Other / Unassigned
+                          </h3>
+                          <Badge variant="secondary" className="mt-2">
+                            {organizedCountries[expandedCountry].states['_unassigned'].length} spot{organizedCountries[expandedCountry].states['_unassigned'].length !== 1 ? 's' : ''}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  )}
+                </div>
+              )}
             </>
           ) : (
             <div className="flex flex-col items-center justify-center py-24 text-center">
