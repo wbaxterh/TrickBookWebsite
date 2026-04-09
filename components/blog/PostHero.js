@@ -11,11 +11,12 @@ export default function PostHero({
   imageAlt,
 }) {
   const hasMeta = author || date || readingTime;
+  const resolvedAlt = imageAlt || `${title} hero image`;
 
   return (
     <header className={styles.postHero}>
       <div className={styles.postHeroMedia}>
-        <img src={imageSrc} alt={imageAlt || title} className={styles.postHeroImage} />
+        <img src={imageSrc} alt={resolvedAlt} className={styles.postHeroImage} />
         <div className={styles.postHeroScrim} />
       </div>
       <div className={styles.postHeroContent}>

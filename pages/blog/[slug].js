@@ -42,6 +42,14 @@ function stripHtml(value = '') {
     .trim();
 }
 
+function escapeHtmlAttribute(value = '') {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function slugifyHeading(value, fallbackIndex) {
   const baseSlug = stripHtml(value)
     .toLowerCase()
@@ -52,13 +60,56 @@ function slugifyHeading(value, fallbackIndex) {
   return baseSlug || `section-${fallbackIndex}`;
 }
 
-function buildContentOutline(content) {
+function getImageAltFallback({ title, explicitAlt, src, index, isHero = false }) {
+  if (explicitAlt?.trim()) {
+    return explicitAlt.trim();
+  }
+
+  if (src) {
+    const fileName = src.split('/').pop()?.split('?')[0]?.replace(/\.[a-z0-9]+$/i, '');
+    const normalizedName = fileName
+      ?.replace(/[-_]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (normalizedName) {
+      return normalizedName.charAt(0).toUpperCase() + normalizedName.slice(1);
+    }
+  }
+
+  if (isHero) {
+    return `${title} hero image`;
+  }
+
+  return `${title} image ${index}`;
+}
+
+function normalizeArticleContent(content, title) {
   const headingCounts = new Map();
   const headings = [];
+  let imageIndex = 0;
 
   const contentWithAnchors = content.replace(
-    /<h([23])([^>]*)>(.*?)<\/h\1>/gi,
-    (match, level, rawAttributes, innerHtml) => {
+    /<h([1-6])([^>]*)>(.*?)<\/h\1>|<img([^>]*)>/gi,
+    (match, headingLevel, rawHeadingAttributes, innerHeadingHtml, rawImageAttributes) => {
+      if (match.startsWith('<img')) {
+        imageIndex += 1;
+        const sourceMatch = rawImageAttributes.match(/\ssrc=["']([^"']+)["']/i);
+        const altMatch = rawImageAttributes.match(/\salt=["']([^"']*)["']/i);
+        const resolvedAlt = getImageAltFallback({
+          title,
+          explicitAlt: altMatch?.[1],
+          src: sourceMatch?.[1],
+          index: imageIndex,
+        });
+        const attributesWithoutAlt = rawImageAttributes.replace(/\salt=["'][^"']*["']/i, '');
+
+        return `<img${attributesWithoutAlt} alt="${escapeHtmlAttribute(resolvedAlt)}" />`;
+      }
+
+      const normalizedLevel = Math.min(3, Math.max(2, Number(headingLevel)));
+      const rawAttributes = rawHeadingAttributes || '';
+      const innerHtml = innerHeadingHtml || '';
       const headingText = stripHtml(innerHtml);
       if (!headingText) {
         return match;
@@ -73,13 +124,13 @@ function buildContentOutline(content) {
       headingCounts.set(baseId, instanceCount + 1);
       headings.push({
         id,
-        level: Number(level),
+        level: normalizedLevel,
         text: headingText,
       });
 
       const attributesWithoutId = rawAttributes.replace(/\sid=["'][^"']+["']/i, '');
 
-      return `<h${level}${attributesWithoutId} id="${id}">${innerHtml}</h${level}>`;
+      return `<h${normalizedLevel}${attributesWithoutId} id="${id}">${innerHtml}</h${normalizedLevel}>`;
     },
   );
 
@@ -179,13 +230,31 @@ export default function BlogPost({ postData, adjacentPosts }) {
         return match;
       }
 
-      return `<img src="${images[index]}" alt="${title} image ${index + 1}" class="blog-image" />`;
+      const src = images[index];
+      const alt = getImageAltFallback({
+        title,
+        src,
+        index: index + 1,
+      });
+
+      return `<img src="${src}" alt="${escapeHtmlAttribute(alt)}" class="blog-image" />`;
     });
   };
 
   const contentWithImages = replaceShortcodes(content, images);
-  const { contentWithAnchors, headings } = buildContentOutline(contentWithImages);
-  const heroImage = images?.find((image) => image.includes('?hero=true'));
+  const { contentWithAnchors, headings } = normalizeArticleContent(contentWithImages, title);
+  const heroImage = images?.find((image) => image.includes('?hero=true')) || images?.[0];
+  const heroImageAlt = getImageAltFallback({
+    title,
+    explicitAlt:
+      postData.heroImageAlt ||
+      postData.coverImageAlt ||
+      postData.coverAlt ||
+      postData.imageAlt,
+    src: heroImage,
+    index: 1,
+    isHero: true,
+  });
   const deck = getDeck(contentWithAnchors, storedDeck || excerpt || description);
   const insightCallout = normalizeInsightCallout(postData);
   const dataBlock = normalizeDataBlock(postData, readingTime);
@@ -235,6 +304,7 @@ export default function BlogPost({ postData, adjacentPosts }) {
           title={title}
           deck={deck}
           imageSrc={heroImage}
+          imageAlt={heroImageAlt}
           author={author}
           date={date}
           readingTime={readingTime}
@@ -243,7 +313,7 @@ export default function BlogPost({ postData, adjacentPosts }) {
       <div className={styles.blogContent}>
         <div className={styles.postLayout}>
           <div className={styles.postLayoutMain}>
-            <PostBody html={contentWithAnchors} measure="body" />
+            <PostBody html={contentWithAnchors} measure="body" className={styles.postArticle} />
 
             {insightCallout ? (
               <div className={styles.editorialBlock}>
@@ -316,7 +386,7 @@ export default function BlogPost({ postData, adjacentPosts }) {
               </div>
 
               {adjacentPosts && (adjacentPosts.prev || adjacentPosts.next) && (
-                <nav className={styles.postNav}>
+                <nav className={styles.postNav} aria-label="Post navigation">
                   {adjacentPosts.prev ? (
                     <Link href={`/blog/${adjacentPosts.prev.url}`} className={styles.postNavLink}>
                       <div className={styles.postNavLabel}>Previous</div>
@@ -339,8 +409,8 @@ export default function BlogPost({ postData, adjacentPosts }) {
                 </nav>
               )}
 
-              <div style={{ marginTop: '2rem' }}>
-                <Link href="/blog">
+              <div className={styles.postBackLinkWrap}>
+                <Link href="/blog" className={styles.postBackLink}>
                   <Button variant="outlined" color={'secondary'}>
                     <span className="material-icons align-middle">arrow_back</span>
                     Back to blog

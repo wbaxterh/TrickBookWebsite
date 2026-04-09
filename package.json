@@ -11,6 +11,7 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "format:check": "biome format .",
+    "test:blog-smoke": "playwright test tests/blog-smoke.spec.js",
     "validate": "biome check . && npm run build",
     "prepare": "husky"
   },
@@ -61,6 +62,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.54.2",
     "@biomejs/biome": "^2.3.15",
     "autoprefixer": "^10.4.23",
     "husky": "^9.1.7",

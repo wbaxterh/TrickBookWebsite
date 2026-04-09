@@ -36,6 +36,8 @@
   --tb-border: #252c38;
   --tb-accent: #5ea1ff;
   --tb-accent-soft: rgba(94, 161, 255, 0.16);
+  --tb-focus-ring: #f4d35e;
+  --tb-focus-shadow: rgba(244, 211, 94, 0.28);
   --tb-success: #52c58b;
   --tb-warning: #e8b15c;
 }
@@ -53,4 +55,6 @@ body.light {
   --tb-border: #dbe2ee;
   --tb-accent: #2a6ef0;
   --tb-accent-soft: rgba(42, 110, 240, 0.1);
+  --tb-focus-ring: #c47d00;
+  --tb-focus-shadow: rgba(196, 125, 0, 0.22);
 }

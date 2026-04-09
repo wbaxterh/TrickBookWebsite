@@ -3,6 +3,10 @@
 .postContainer {
   padding-bottom: 2em;
 }
+
+.postArticle {
+  scroll-margin-top: 6rem;
+}
 .postHero {
   position: relative;
   overflow: hidden;
@@ -133,7 +137,7 @@
 .blogContent {
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: clamp(1.5rem, 1rem + 1.5vw, 3rem) 1rem 3rem;
   line-height: 1.8;
   font-size: 1.1rem;
 }
@@ -146,6 +150,7 @@
   font-size: var(--tb-fs-body);
   line-height: var(--tb-lh-body);
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .postBodyNarrow {
@@ -228,10 +233,17 @@
   font-size: 0.95rem;
   line-height: 1.45;
   text-decoration: none;
+  border-radius: 0.65rem;
+  padding: 0.2rem 0.4rem;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .postTocList a:hover {
   color: var(--tb-link);
+  background: var(--tb-accent-soft);
 }
 
 .postTocLevel3 a {
@@ -256,13 +268,15 @@
 .blogContent .postBody pre,
 .blogContent .postBody figure,
 .blogContent .postBody hr,
+.blogContent .postBody table,
 .blogContent .tbPostContent p,
 .blogContent .tbPostContent ul,
 .blogContent .tbPostContent ol,
 .blogContent .tbPostContent blockquote,
 .blogContent .tbPostContent pre,
 .blogContent .tbPostContent figure,
-.blogContent .tbPostContent hr {
+.blogContent .tbPostContent hr,
+.blogContent .tbPostContent table {
   margin-block: var(--tb-space-5);
 }
 
@@ -299,12 +313,14 @@
   margin-top: var(--tb-space-8);
   padding-bottom: var(--tb-space-2);
   border-bottom: 1px solid var(--tb-border);
+  scroll-margin-top: 7rem;
 }
 
 .blogContent .postBody h3,
 .blogContent .tbPostContent h3 {
   font-size: var(--tb-fs-h3);
   margin-top: var(--tb-space-7);
+  scroll-margin-top: 7rem;
 }
 
 .blogContent .postBody ul,
@@ -324,6 +340,10 @@
   color: var(--tb-link);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.15em;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .blogContent .postBody a:hover,
@@ -379,8 +399,12 @@
 .blogContent .tbPostContent :global(.blog-image) {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 1rem;
   margin: var(--tb-space-6) 0;
+}
+
+.blogContent .postBody > * {
+  max-width: 100%;
 }
 
 .figureWithCaption,
@@ -663,6 +687,12 @@
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .postFooterCtaPrimary {
@@ -673,6 +703,7 @@
 .postFooterCtaPrimary:hover {
   color: white;
   filter: brightness(1.05);
+  transform: translateY(-1px);
 }
 
 .postFooterCtaSecondary {
@@ -686,76 +717,8 @@
   margin-inline: auto;
 }
 
-.blogContent h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid #fcf150;
-}
-
-.blogContent h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-}
-
-.blogContent p {
-  margin-bottom: 1.25rem;
-}
-
-.blogContent ul,
-.blogContent ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
-}
-
-.blogContent li {
-  margin-bottom: 0.5rem;
-}
-
-.blogContent blockquote {
-  border-left: 4px solid #fcf150;
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  border-radius: 0 8px 8px 0;
-}
-
-:global(.dark) .blogContent blockquote {
-  background: rgba(252, 241, 80, 0.08);
-  color: #e0e0e0;
-}
-
-.blogContent blockquote {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.blogContent a {
-  color: #fcf150;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.blogContent a:hover {
-  color: #ffd700;
-}
-
-.blogContent img,
-.blogContent :global(.blog-image) {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 1.5rem 0;
-}
-
-.blogContent strong {
-  font-weight: 700;
-}
-
-.blogContent em {
+.blogContent .postBody em,
+.blogContent .tbPostContent em {
   font-style: italic;
 }
 
@@ -838,11 +801,15 @@
   padding: 1rem;
   border-radius: 8px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .postNavLink:hover {
   background: rgba(252, 241, 80, 0.1);
+  transform: translateY(-1px);
 }
 
 .postNavLabel {
@@ -911,7 +878,8 @@
   cursor: pointer;
   transition:
     background 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 :global(.dark) .shareBtn {
@@ -928,6 +896,51 @@
   background: #fcf150;
   color: #1a1a1a;
   transform: scale(1.1);
+}
+
+.postBackLinkWrap {
+  margin-top: 2rem;
+}
+
+.postBackLink {
+  display: inline-flex;
+  border-radius: 999px;
+}
+
+.blogContent :is(a, button, [role='button'], [tabindex='0']):focus {
+  outline: none;
+}
+
+.blogContent :is(a, button, [role='button'], [tabindex='0']):focus-visible,
+.postContainer :is(a, button, [role='button'], [tabindex='0']):focus-visible {
+  outline: 3px solid var(--tb-focus-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--tb-focus-shadow);
+}
+
+.blogContent .postBody a:focus-visible,
+.blogContent .tbPostContent a:focus-visible,
+.postTocList a:focus-visible,
+.postFooterCtaPrimary:focus-visible,
+.postFooterCtaSecondary:focus-visible,
+.postNavLink:focus-visible,
+.postBackLink:focus-visible {
+  border-radius: 0.65rem;
+}
+
+.shareBtn:focus-visible {
+  border-radius: 999px;
+}
+
+.postFooterCtaPrimary:focus-visible,
+.postFooterCtaSecondary:focus-visible,
+.postNavLink:focus-visible,
+.postTocList a:focus-visible {
+  text-decoration: none;
+}
+
+.postFooterCtaSecondary:hover {
+  background: var(--tb-bg-soft);
 }
 
 /* Blog listing header */
@@ -970,18 +983,35 @@
     padding: 10px;
   }
   .blogContent {
-    padding: 1.5rem 0.5rem;
+    padding: 1.25rem 0.75rem 2.5rem;
     font-size: 1rem;
+  }
+  .postLayout {
+    width: min(100% - 1rem, 80rem);
+  }
+  .blogContent .postBody p,
+  .blogContent .postBody ul,
+  .blogContent .postBody ol,
+  .blogContent .postBody blockquote,
+  .blogContent .postBody pre,
+  .blogContent .postBody figure,
+  .blogContent .tbPostContent p,
+  .blogContent .tbPostContent ul,
+  .blogContent .tbPostContent ol,
+  .blogContent .tbPostContent blockquote,
+  .blogContent .tbPostContent pre,
+  .blogContent .tbPostContent figure {
+    margin-block: var(--tb-space-4);
   }
   .blogContent .tbPostContent h1 {
     margin-top: var(--tb-space-6);
   }
   .blogContent .postBody h2,
-  .blogContent h2 {
+  .blogContent .tbPostContent h2 {
     font-size: 1.5rem;
   }
   .blogContent .postBody h3,
-  .blogContent h3 {
+  .blogContent .tbPostContent h3 {
     font-size: 1.2rem;
   }
   .blogContent .postBody h2,
@@ -1013,6 +1043,10 @@
   .postFooterCtaSecondary {
     width: 100%;
   }
+
+  .shareSection {
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (min-width: 1100px) {
@@ -1025,5 +1059,35 @@
 
   .postSidebar {
     display: block;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .postLayout {
+    width: min(100% - 4rem, 84rem);
+  }
+
+  .postBodyBody {
+    max-width: min(100%, 68ch);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blogContent .postBody a,
+  .blogContent .tbPostContent a,
+  .postTocList a,
+  .postFooterCtaPrimary,
+  .postFooterCtaSecondary,
+  .featuredPost,
+  .postNavLink,
+  .shareBtn {
+    transition: none;
+  }
+
+  .featuredPost:hover,
+  .postNavLink:hover,
+  .shareBtn:hover,
+  .postFooterCtaPrimary:hover {
+    transform: none;
   }
 }

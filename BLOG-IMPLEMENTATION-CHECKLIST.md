@@ -43,16 +43,19 @@ Acceptance checks
 - [x] Editorial support components use the same token system as the article body.
 
 ## 4. Phase 4 - Accessibility and Polish
-- [ ] Add explicit visible focus states for blog interactions.
-- [ ] Verify heading hierarchy and single `h1` semantics on blog pages.
-- [ ] Verify image `alt` handling for hero and inline figures.
-- [ ] Tune spacing, line length, and block styles across key breakpoints.
-- [ ] Respect `prefers-reduced-motion` for any added transitions.
+- [x] Add explicit visible focus states for blog interactions.
+- [x] Verify heading hierarchy and single `h1` semantics on blog pages.
+- [x] Verify image `alt` handling for hero and inline figures.
+- [x] Tune spacing, line length, and block styles across key breakpoints.
+- [x] Respect `prefers-reduced-motion` for any added transitions.
 
 Acceptance checks
 - [ ] WCAG AA contrast passes for blog text and links.
 - [ ] Keyboard-only navigation works for article interactions and footer CTA.
 - [ ] 200% zoom remains readable without horizontal scrolling in the article column.
+
+Validation note
+- [ ] Playwright/browser smoke test run against local dev server.
 
 ## 5. Phase 5 - Instrumentation and Launch
 - [ ] Emit `blog_post_view`.

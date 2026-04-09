@@ -9,7 +9,9 @@ export default function Blog({ allPostsData }) {
   const featuredPost = allPostsData[0];
   const remainingPosts = allPostsData.slice(1);
   const featuredHero =
-    featuredPost?.images?.find((img) => img.includes('?hero=true')) || '/defaultBlogBG.png';
+    featuredPost?.images?.find((img) => img.includes('?hero=true')) ||
+    featuredPost?.images?.[0] ||
+    '/defaultBlogBG.png';
 
   return (
     <>
@@ -80,7 +82,7 @@ export default function Blog({ allPostsData }) {
               <div className="col-md-4 col-sm-12 mb-4" key={id}>
                 <BlogCard
                   id={url}
-                  firstImage={images?.find((image) => image.includes('?hero=true'))}
+                  firstImage={images?.find((image) => image.includes('?hero=true')) || images?.[0]}
                   title={title}
                   date={date}
                   author={author}
