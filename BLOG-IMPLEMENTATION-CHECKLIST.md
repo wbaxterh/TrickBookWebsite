@@ -30,17 +30,17 @@ Acceptance checks
 - [x] Code and figure blocks are reusable across posts.
 
 ## 3. Phase 3 - Editorial Enhancers
-- [ ] Implement `SectionHeader`.
-- [ ] Implement `InsightCallout`.
-- [ ] Implement `DataBlock`.
-- [ ] Implement `ResearchReferences`.
-- [ ] Implement `PostFooterCTA`.
-- [ ] Add desktop-only sticky table of contents behavior.
+- [x] Implement `SectionHeader`.
+- [x] Implement `InsightCallout`.
+- [x] Implement `DataBlock`.
+- [x] Implement `ResearchReferences`.
+- [x] Implement `PostFooterCTA`.
+- [x] Add desktop-only sticky table of contents behavior.
 
 Acceptance checks
-- [ ] Enhanced components render from post content without breaking reading flow.
-- [ ] TOC remains non-sticky on mobile and does not overpower the article.
-- [ ] Editorial support components use the same token system as the article body.
+- [x] Enhanced components render from post content without breaking reading flow.
+- [x] TOC remains non-sticky on mobile and does not overpower the article.
+- [x] Editorial support components use the same token system as the article body.
 
 ## 4. Phase 4 - Accessibility and Polish
 - [ ] Add explicit visible focus states for blog interactions.
