@@ -1,6 +1,7 @@
 // pages/_app.js
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/global.css';
+import '../styles/tokens/blog.css';
 import 'material-icons/iconfont/material-icons.css';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { SessionProvider } from 'next-auth/react';

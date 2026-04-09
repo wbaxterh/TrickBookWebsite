@@ -69,6 +69,131 @@
   font-size: 1.1rem;
 }
 
+.blogContent .tbPostContent {
+  max-width: min(100%, var(--tb-measure-body));
+  margin-inline: auto;
+  color: var(--tb-text);
+  font-family: var(--tb-font-body);
+  font-size: var(--tb-fs-body);
+  line-height: var(--tb-lh-body);
+  overflow-wrap: anywhere;
+}
+
+.blogContent .tbPostContent > :first-child {
+  margin-top: 0;
+}
+
+.blogContent .tbPostContent > :last-child {
+  margin-bottom: 0;
+}
+
+.blogContent .tbPostContent p,
+.blogContent .tbPostContent ul,
+.blogContent .tbPostContent ol,
+.blogContent .tbPostContent blockquote,
+.blogContent .tbPostContent pre,
+.blogContent .tbPostContent figure,
+.blogContent .tbPostContent hr {
+  margin-block: var(--tb-space-5);
+}
+
+.blogContent .tbPostContent h1,
+.blogContent .tbPostContent h2,
+.blogContent .tbPostContent h3 {
+  font-family: var(--tb-font-display);
+  color: var(--tb-text);
+  letter-spacing: -0.01em;
+}
+
+.blogContent .tbPostContent h1 {
+  font-size: var(--tb-fs-h1);
+  line-height: var(--tb-lh-tight);
+  margin-top: var(--tb-space-7);
+  margin-bottom: var(--tb-space-5);
+}
+
+.blogContent .tbPostContent h2,
+.blogContent .tbPostContent h3 {
+  line-height: var(--tb-lh-heading);
+  margin-bottom: var(--tb-space-4);
+}
+
+.blogContent .tbPostContent h2 {
+  font-size: var(--tb-fs-h2);
+  margin-top: var(--tb-space-8);
+  padding-bottom: var(--tb-space-2);
+  border-bottom: 1px solid var(--tb-border);
+}
+
+.blogContent .tbPostContent h3 {
+  font-size: var(--tb-fs-h3);
+  margin-top: var(--tb-space-7);
+}
+
+.blogContent .tbPostContent ul,
+.blogContent .tbPostContent ol {
+  padding-left: 1.5rem;
+}
+
+.blogContent .tbPostContent li + li {
+  margin-top: var(--tb-space-2);
+}
+
+.blogContent .tbPostContent a {
+  color: var(--tb-link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+}
+
+.blogContent .tbPostContent a:hover {
+  color: var(--tb-link-hover);
+}
+
+.blogContent .tbPostContent strong {
+  color: var(--tb-text);
+  font-weight: 700;
+}
+
+.blogContent .tbPostContent blockquote {
+  padding: var(--tb-space-5);
+  border-left: 4px solid var(--tb-accent);
+  border-radius: 0 var(--tb-space-4) var(--tb-space-4) 0;
+  background: var(--tb-bg-elev);
+  color: var(--tb-text-muted);
+}
+
+.blogContent .tbPostContent code {
+  font-family: var(--tb-font-mono);
+  font-size: 0.9em;
+  padding: 0.12em 0.35em;
+  border: 1px solid var(--tb-border);
+  border-radius: 0.4rem;
+  background: var(--tb-bg-elev);
+}
+
+.blogContent .tbPostContent pre {
+  padding: var(--tb-space-5);
+  border: 1px solid var(--tb-border);
+  border-radius: 1rem;
+  background: var(--tb-bg-elev);
+  overflow-x: auto;
+}
+
+.blogContent .tbPostContent pre code {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.blogContent .tbPostContent img,
+.blogContent .tbPostContent :global(.blog-image) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: var(--tb-space-6) 0;
+}
+
 .blogContent h2 {
   font-size: 1.8rem;
   font-weight: 700;
@@ -345,11 +470,20 @@
     padding: 1.5rem 0.5rem;
     font-size: 1rem;
   }
+  .blogContent .tbPostContent h1 {
+    margin-top: var(--tb-space-6);
+  }
   .blogContent h2 {
     font-size: 1.5rem;
   }
   .blogContent h3 {
     font-size: 1.2rem;
+  }
+  .blogContent .tbPostContent h2 {
+    margin-top: var(--tb-space-7);
+  }
+  .blogContent .tbPostContent h3 {
+    margin-top: var(--tb-space-6);
   }
   .featuredPost {
     height: 280px;

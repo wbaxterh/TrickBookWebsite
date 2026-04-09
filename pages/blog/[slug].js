@@ -80,7 +80,10 @@ export default function BlogPost({ postData, adjacentPosts }) {
         />
       </div>
       <div className={styles.blogContent}>
-        <div dangerouslySetInnerHTML={{ __html: contentWithImages }} />
+        <article
+          className={styles.tbPostContent}
+          dangerouslySetInnerHTML={{ __html: contentWithImages }}
+        />
 
         {/* Share section */}
         <div className={styles.shareSection}>

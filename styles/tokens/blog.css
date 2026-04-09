@@ -1,0 +1,52 @@
+:root {
+  --tb-font-body: "Inter", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --tb-font-display: "Manrope", "Inter", "Avenir Next", sans-serif;
+  --tb-font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+
+  --tb-fs-body: clamp(1rem, 0.94rem + 0.18vw, 1.125rem);
+  --tb-fs-small: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+  --tb-fs-h1: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  --tb-fs-h2: clamp(1.5rem, 1.2rem + 1.2vw, 2.5rem);
+  --tb-fs-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.875rem);
+
+  --tb-lh-body: 1.72;
+  --tb-lh-tight: 1.2;
+  --tb-lh-heading: 1.18;
+
+  --tb-measure-body: 66ch;
+  --tb-measure-wide: 72ch;
+  --tb-measure-narrow: 58ch;
+
+  --tb-space-1: 0.25rem;
+  --tb-space-2: 0.5rem;
+  --tb-space-3: 0.75rem;
+  --tb-space-4: 1rem;
+  --tb-space-5: 1.5rem;
+  --tb-space-6: 2rem;
+  --tb-space-7: 3rem;
+  --tb-space-8: 4rem;
+
+  --tb-bg: #0b0d12;
+  --tb-bg-elev: #11141c;
+  --tb-text: #edf2f7;
+  --tb-text-muted: #a7b1c2;
+  --tb-link: #8bb8ff;
+  --tb-link-hover: #b8d3ff;
+  --tb-border: #252c38;
+  --tb-accent: #5ea1ff;
+  --tb-success: #52c58b;
+  --tb-warning: #e8b15c;
+}
+
+[data-theme='light'],
+html.light,
+body.light {
+  --tb-bg: #ffffff;
+  --tb-bg-elev: #f6f8fb;
+  --tb-text: #121826;
+  --tb-text-muted: #5d6679;
+  --tb-link: #1c5fd4;
+  --tb-link-hover: #174db0;
+  --tb-border: #dbe2ee;
+  --tb-accent: #2a6ef0;
+}
