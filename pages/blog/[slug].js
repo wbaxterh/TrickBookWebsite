@@ -2,7 +2,8 @@ import { Button } from '@mui/material';
 import { Copy, Facebook, Twitter } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
-import PageHeader from '../../components/PageHeader';
+import PostBody from '../../components/blog/PostBody';
+import PostHero from '../../components/blog/PostHero';
 import { getAdjacentPosts, getAllPostIds, getPostData } from '../../lib/api';
 import styles from '../../styles/blog.module.css';
 
@@ -13,23 +14,37 @@ function getReadingTime(content) {
   return minutes;
 }
 
+function getDeck(content, fallbackDeck) {
+  if (fallbackDeck) {
+    return fallbackDeck;
+  }
+
+  const firstParagraphMatch = content.match(/<p>(.*?)<\/p>/i);
+  if (!firstParagraphMatch?.[1]) {
+    return null;
+  }
+
+  return firstParagraphMatch[1].replace(/<[^>]*>/g, '').trim() || null;
+}
+
 export default function BlogPost({ postData, adjacentPosts }) {
-  const { title, author, date, content, images } = postData;
+  const { title, author, date, content, images, deck: storedDeck, excerpt, description } = postData;
   const readingTime = getReadingTime(content);
 
   const replaceShortcodes = (content, images) => {
-    return content.replace(/\[image(\d+)\]/g, (match, p1) => {
-      const index = parseInt(p1, 10) - 1;
-      if (images?.[index]) {
-        return `<img src="${images[index]}" alt="Image ${index + 1}" class="blog-image" />`;
+    return content.replace(/\[image(\d+)\]/g, (match, imageNumber) => {
+      const index = Number.parseInt(imageNumber, 10) - 1;
+      if (!images?.[index]) {
+        return match;
       }
-      return match;
+
+      return `<img src="${images[index]}" alt="${title} image ${index + 1}" class="blog-image" />`;
     });
   };
 
   const contentWithImages = replaceShortcodes(content, images);
-
   const heroImage = images?.find((image) => image.includes('?hero=true'));
+  const deck = getDeck(contentWithImages, storedDeck || excerpt || description);
 
   const pageUrl = `https://thetrickbook.com/blog/${postData.slug}`;
   const ogImage = heroImage || '/defaultBlogBG.png';
@@ -70,79 +85,77 @@ export default function BlogPost({ postData, adjacentPosts }) {
         <meta name="twitter:image" content={ogImage} />
       </Head>
       <div className={`container-fluid ${styles.postContainer}`}>
-        <PageHeader
+        <PostHero
           title={title}
-          col="col-sm"
-          heroImage={heroImage}
+          deck={deck}
+          imageSrc={heroImage}
           author={author}
           date={date}
           readingTime={readingTime}
         />
       </div>
       <div className={styles.blogContent}>
-        <article
-          className={styles.tbPostContent}
-          dangerouslySetInnerHTML={{ __html: contentWithImages }}
-        />
+        <PostBody html={contentWithImages} measure="body" />
+        <div className={styles.postChrome}>
+          {/* Share section */}
+          <div className={styles.shareSection}>
+            <span className={styles.shareLabel}>Share:</span>
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(title)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.shareBtn}
+              aria-label="Share on X"
+            >
+              <Twitter size={16} />
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.shareBtn}
+              aria-label="Share on Facebook"
+            >
+              <Facebook size={16} />
+            </a>
+            <button onClick={handleCopyLink} className={styles.shareBtn} aria-label="Copy link">
+              <Copy size={16} />
+            </button>
+          </div>
 
-        {/* Share section */}
-        <div className={styles.shareSection}>
-          <span className={styles.shareLabel}>Share:</span>
-          <a
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(title)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.shareBtn}
-            aria-label="Share on X"
-          >
-            <Twitter size={16} />
-          </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.shareBtn}
-            aria-label="Share on Facebook"
-          >
-            <Facebook size={16} />
-          </a>
-          <button onClick={handleCopyLink} className={styles.shareBtn} aria-label="Copy link">
-            <Copy size={16} />
-          </button>
-        </div>
+          {/* Previous / Next navigation */}
+          {adjacentPosts && (adjacentPosts.prev || adjacentPosts.next) && (
+            <nav className={styles.postNav}>
+              {adjacentPosts.prev ? (
+                <Link href={`/blog/${adjacentPosts.prev.url}`} className={styles.postNavLink}>
+                  <div className={styles.postNavLabel}>Previous</div>
+                  <div className={styles.postNavTitle}>{adjacentPosts.prev.title}</div>
+                </Link>
+              ) : (
+                <div />
+              )}
+              {adjacentPosts.next ? (
+                <Link
+                  href={`/blog/${adjacentPosts.next.url}`}
+                  className={`${styles.postNavLink} ${styles.postNavNext}`}
+                >
+                  <div className={styles.postNavLabel}>Next</div>
+                  <div className={styles.postNavTitle}>{adjacentPosts.next.title}</div>
+                </Link>
+              ) : (
+                <div />
+              )}
+            </nav>
+          )}
 
-        {/* Previous / Next navigation */}
-        {adjacentPosts && (adjacentPosts.prev || adjacentPosts.next) && (
-          <nav className={styles.postNav}>
-            {adjacentPosts.prev ? (
-              <Link href={`/blog/${adjacentPosts.prev.url}`} className={styles.postNavLink}>
-                <div className={styles.postNavLabel}>Previous</div>
-                <div className={styles.postNavTitle}>{adjacentPosts.prev.title}</div>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {adjacentPosts.next ? (
-              <Link
-                href={`/blog/${adjacentPosts.next.url}`}
-                className={`${styles.postNavLink} ${styles.postNavNext}`}
-              >
-                <div className={styles.postNavLabel}>Next</div>
-                <div className={styles.postNavTitle}>{adjacentPosts.next.title}</div>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </nav>
-        )}
-
-        <div style={{ marginTop: '2rem' }}>
-          <Link href="/blog">
-            <Button variant="outlined" color={'secondary'}>
-              <span className="material-icons align-middle">arrow_back</span>
-              Back to blog
-            </Button>
-          </Link>
+          <div style={{ marginTop: '2rem' }}>
+            <Link href="/blog">
+              <Button variant="outlined" color={'secondary'}>
+                <span className="material-icons align-middle">arrow_back</span>
+                Back to blog
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

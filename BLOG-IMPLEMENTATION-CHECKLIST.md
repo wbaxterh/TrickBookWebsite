@@ -18,16 +18,16 @@ Acceptance checks
 - [x] Existing blog page structure still renders with no required template rewrite.
 
 ## 2. Phase 2 - Core Components
-- [ ] Implement `PostHero`.
-- [ ] Implement `PostBody` with `narrow`, `body`, and `wide` measure options.
-- [ ] Implement `CodeBlock`.
-- [ ] Implement `FigureWithCaption`.
-- [ ] Replace current hero/body markup on one live blog template with the reusable components.
+- [x] Implement `PostHero`.
+- [x] Implement `PostBody` with `narrow`, `body`, and `wide` measure options.
+- [x] Implement `CodeBlock`.
+- [x] Implement `FigureWithCaption`.
+- [x] Replace current hero/body markup on one live blog template with the reusable components.
 
 Acceptance checks
-- [ ] Hero title, deck, metadata, and cover image align with component contract.
-- [ ] Content width tokens are controlled by component props instead of ad hoc CSS.
-- [ ] Code and figure blocks are reusable across posts.
+- [x] Hero title, deck, metadata, and cover image align with component contract.
+- [x] Content width tokens are controlled by component props instead of ad hoc CSS.
+- [x] Code and figure blocks are reusable across posts.
 
 ## 3. Phase 3 - Editorial Enhancers
 - [ ] Implement `SectionHeader`.
