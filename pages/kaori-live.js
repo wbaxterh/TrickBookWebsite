@@ -11,6 +11,7 @@ import {
   sendMessage,
   startBotConversation,
 } from '../lib/apiMessages';
+import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
 const THREE_CDN = 'https://unpkg.com/three@0.160.0/build/three.min.js';
@@ -30,10 +31,12 @@ export default function KaoriLivePage() {
   const mountRef = useRef(null);
   const threeRef = useRef({});
   const recognitionRef = useRef(null);
+  const socketRef = useRef(null);
   const audioRef = useRef(null);
   const audioAnalyserRef = useRef(null);
   const audioDataRef = useRef(null);
   const audioRafRef = useRef(null);
+  const lastPlayedVoiceRef = useRef('');
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -76,6 +79,38 @@ export default function KaoriLivePage() {
       }
     })();
   }, [token, loggedIn]);
+
+  useEffect(() => {
+    if (!token || !conversationId || !userId) return;
+
+    const socket = connectMessagesSocket(token);
+    socketRef.current = socket;
+
+    socket.emit('join:conversation', conversationId);
+
+    const onNewMessage = ({ message }) => {
+      if (!message || message.conversationId !== conversationId) return;
+
+      setMessages((prev) => {
+        if (prev.some((m) => m._id === message._id)) return prev;
+        return [...prev, message];
+      });
+
+      if (message.senderId?.toString() !== userId?.toString()) {
+        const voiceUrl = extractVoiceUrl(message.content || '');
+        if (voiceUrl) {
+          playElevenLabsVoice(voiceUrl);
+        }
+      }
+    };
+
+    socket.on('message:new', onNewMessage);
+
+    return () => {
+      socket.emit('leave:conversation', conversationId);
+      socket.off('message:new', onNewMessage);
+    };
+  }, [token, conversationId, userId]);
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -308,6 +343,8 @@ export default function KaoriLivePage() {
 
   const playElevenLabsVoice = (url) => {
     if (typeof window === 'undefined' || !url) return;
+    if (lastPlayedVoiceRef.current === url) return;
+    lastPlayedVoiceRef.current = url;
 
     stopCurrentAudio();
 
@@ -384,7 +421,7 @@ export default function KaoriLivePage() {
 
     const optimistic = {
       _id: `temp-${Date.now()}`,
-      senderId: 'me',
+      senderId: userId || 'me',
       content,
       createdAt: new Date().toISOString(),
     };
