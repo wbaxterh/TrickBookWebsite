@@ -16,7 +16,7 @@ import styles from '../styles/kaori-live.module.css';
 const THREE_CDN = 'https://unpkg.com/three@0.160.0/build/three.min.js';
 
 export default function KaoriLivePage() {
-  const { loggedIn, token } = useContext(AuthContext);
+  const { loggedIn, token, userId } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   const [bootError, setBootError] = useState('');
@@ -126,14 +126,35 @@ export default function KaoriLivePage() {
 
       const headGeometry = new THREE.SphereGeometry(1.05, 64, 64);
       const headMaterial = new THREE.MeshStandardMaterial({
-        color: '#d2e5ff',
+        color: '#e9f2ff',
         emissive: '#0e1d3a',
         emissiveIntensity: 0.45,
-        metalness: 0.1,
-        roughness: 0.35,
+        metalness: 0.08,
+        roughness: 0.28,
       });
       const head = new THREE.Mesh(headGeometry, headMaterial);
       scene.add(head);
+
+      const hairGeometry = new THREE.SphereGeometry(1.08, 64, 64, 0, Math.PI * 2, 0, Math.PI / 1.9);
+      const hairMaterial = new THREE.MeshStandardMaterial({ color: '#1b295a', roughness: 0.4, metalness: 0.05 });
+      const hair = new THREE.Mesh(hairGeometry, hairMaterial);
+      hair.position.y = 0.18;
+      scene.add(hair);
+
+      const eyeGeo = new THREE.SphereGeometry(0.09, 24, 24);
+      const eyeMat = new THREE.MeshBasicMaterial({ color: '#0e1222' });
+      const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+      const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+      leftEye.position.set(-0.28, 0.11, 0.94);
+      rightEye.position.set(0.28, 0.11, 0.94);
+      scene.add(leftEye);
+      scene.add(rightEye);
+
+      const mouthGeo = new THREE.SphereGeometry(0.08, 20, 20);
+      const mouthMat = new THREE.MeshBasicMaterial({ color: '#f06595' });
+      const mouth = new THREE.Mesh(mouthGeo, mouthMat);
+      mouth.position.set(0, -0.22, 0.95);
+      scene.add(mouth);
 
       const ringGeo = new THREE.TorusGeometry(1.45, 0.05, 24, 120);
       const ringMat = new THREE.MeshBasicMaterial({ color: '#ffe16f' });
@@ -157,30 +178,41 @@ export default function KaoriLivePage() {
 
         head.rotation.y = Math.sin(t * 0.55) * 0.25;
         head.rotation.x = Math.sin(t * 0.35) * 0.08;
+        hair.rotation.y = head.rotation.y * 0.9;
+        hair.rotation.x = head.rotation.x * 0.9;
 
         ring.rotation.z += 0.003;
         pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04);
+
+        // tiny blink loop
+        const blink = Math.max(0.12, Math.abs(Math.sin(t * 0.85)) > 0.985 ? 0.05 : 1);
+        leftEye.scale.y = blink;
+        rightEye.scale.y = blink;
 
         const state = threeRef.current.charState || 'idle';
         if (state === 'listening') {
           headMaterial.emissive.set('#176b8a');
           headMaterial.emissiveIntensity = 0.85;
           pulseMat.opacity = 0.55;
+          mouth.scale.set(1.1, 0.75, 1);
         } else if (state === 'thinking') {
           headMaterial.emissive.set('#4d2d8f');
           headMaterial.emissiveIntensity = 0.9;
           pulseMat.opacity = 0.4;
+          mouth.scale.set(0.9, 0.7, 1);
         } else if (state === 'speaking') {
           headMaterial.emissive.set('#8a2f66');
           headMaterial.emissiveIntensity = 1.0;
           const voiceLevel = threeRef.current.voiceLevel || 0;
           pulseMat.opacity = 0.5 + voiceLevel * 0.5;
           head.scale.setScalar(1 + Math.max(voiceLevel * 0.09, Math.abs(Math.sin(t * 8)) * 0.02));
+          mouth.scale.set(1 + voiceLevel * 0.8, 0.5 + voiceLevel * 1.2, 1);
         } else {
           headMaterial.emissive.set('#0e1d3a');
           headMaterial.emissiveIntensity = 0.45;
           pulseMat.opacity = 0.25;
           head.scale.setScalar(1);
+          mouth.scale.set(1, 0.6, 1);
         }
 
         renderer.render(scene, camera);
@@ -204,6 +236,10 @@ export default function KaoriLivePage() {
         camera,
         renderer,
         head,
+        hair,
+        leftEye,
+        rightEye,
+        mouth,
         charState: 'idle',
         cleanup: () => {
           window.removeEventListener('resize', onResize);
@@ -211,6 +247,12 @@ export default function KaoriLivePage() {
           renderer.dispose();
           headGeometry.dispose();
           headMaterial.dispose();
+          hairGeometry.dispose();
+          hairMaterial.dispose();
+          eyeGeo.dispose();
+          eyeMat.dispose();
+          mouthGeo.dispose();
+          mouthMat.dispose();
           ringGeo.dispose();
           ringMat.dispose();
           pulseGeo.dispose();
@@ -361,7 +403,10 @@ export default function KaoriLivePage() {
         playElevenLabsVoice(voiceUrl);
       } else {
         const lastBot = reversed.find(
-          (m) => m.senderId !== optimistic.senderId && m.content && !m.content.startsWith('🔊 Kaori voice:'),
+          (m) =>
+            m.senderId?.toString() !== userId?.toString() &&
+            m.content &&
+            !m.content.startsWith('🔊 Kaori voice:'),
         );
         if (lastBot?.content) {
           speakBrowserTTS(lastBot.content);
@@ -489,7 +534,10 @@ export default function KaoriLivePage() {
             <section className={styles.chatPanel}>
               <div className={styles.messages}>
                 {messages.map((msg) => {
-                  const mine = msg.senderId === 'me' || msg.senderId === null || msg.senderId === undefined;
+                  const mine =
+                    msg.senderId === 'me' ||
+                    (userId && msg.senderId?.toString() === userId?.toString()) ||
+                    `${msg._id || ''}`.startsWith('temp-');
                   const isVoiceLink = (msg.content || '').startsWith('🔊 Kaori voice:');
                   return (
                     <div key={msg._id || `${msg.createdAt}-${msg.content}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
