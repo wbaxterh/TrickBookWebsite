@@ -39,6 +39,8 @@ export default function KaoriLivePage() {
   const audioDataRef = useRef(null);
   const audioRafRef = useRef(null);
   const lastPlayedVoiceRef = useRef('');
+  const currentVoiceUrlRef = useRef('');
+  const voicePlayTokenRef = useRef(0);
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -341,8 +343,8 @@ export default function KaoriLivePage() {
         const voiceLevel = threeRef.current.voiceLevel || 0;
         smoothedVoice += (voiceLevel - smoothedVoice) * 0.15;
 
-        const mouthTarget = state === 'speaking' ? Math.min(1, 0.08 + smoothedVoice * 0.9) : 0;
-        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, 12, dt);
+        const mouthTarget = state === 'speaking' ? Math.min(0.6, Math.max(0, smoothedVoice - 0.06) * 0.95) : 0;
+        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, state === 'speaking' ? 14 : 10, dt);
 
         if (vrm) {
           vrm.update(dt);
@@ -375,21 +377,21 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          const armTalk = state === 'speaking' ? Math.sin(t * (4.2 + smoothedVoice * 2.5)) * (0.004 + smoothedVoice * 0.01) : 0;
-          const leftTargetZ = -1.48 + armTalk;
-          const rightTargetZ = 1.48 - armTalk;
-          const leftTargetY = 0.03;
-          const rightTargetY = -0.03;
+          const armTalk = state === 'speaking' ? Math.sin(t * (3.6 + smoothedVoice * 1.8)) * (0.01 + smoothedVoice * 0.016) : 0;
+          const leftTargetZ = -1.2 + armTalk;
+          const rightTargetZ = 1.2 - armTalk;
+          const leftTargetY = 0.05;
+          const rightTargetY = -0.05;
 
           if (leftUpperArm) {
-            leftUpperArm.rotation.z = THREE.MathUtils.damp(leftUpperArm.rotation.z, leftTargetZ, 10, dt);
-            leftUpperArm.rotation.y = THREE.MathUtils.damp(leftUpperArm.rotation.y, leftTargetY, 10, dt);
-            leftUpperArm.rotation.x = THREE.MathUtils.damp(leftUpperArm.rotation.x, -0.03, 10, dt);
+            leftUpperArm.rotation.z = THREE.MathUtils.damp(leftUpperArm.rotation.z, leftTargetZ, 7, dt);
+            leftUpperArm.rotation.y = THREE.MathUtils.damp(leftUpperArm.rotation.y, leftTargetY, 7, dt);
+            leftUpperArm.rotation.x = THREE.MathUtils.damp(leftUpperArm.rotation.x, -0.02, 7, dt);
           }
           if (rightUpperArm) {
-            rightUpperArm.rotation.z = THREE.MathUtils.damp(rightUpperArm.rotation.z, rightTargetZ, 10, dt);
-            rightUpperArm.rotation.y = THREE.MathUtils.damp(rightUpperArm.rotation.y, rightTargetY, 10, dt);
-            rightUpperArm.rotation.x = THREE.MathUtils.damp(rightUpperArm.rotation.x, -0.03, 10, dt);
+            rightUpperArm.rotation.z = THREE.MathUtils.damp(rightUpperArm.rotation.z, rightTargetZ, 7, dt);
+            rightUpperArm.rotation.y = THREE.MathUtils.damp(rightUpperArm.rotation.y, rightTargetY, 7, dt);
+            rightUpperArm.rotation.x = THREE.MathUtils.damp(rightUpperArm.rotation.x, -0.02, 7, dt);
           }
 
           if (state === 'speaking' && neck) neck.rotation.x += 0.02;
@@ -399,9 +401,9 @@ export default function KaoriLivePage() {
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
-        expr('aa', Math.min(0.85, smoothedMouth));
-        expr('oh', Math.min(0.45, smoothedMouth * 0.55));
-        expr('ih', state === 'thinking' ? 0.16 : 0);
+        expr('aa', Math.min(0.62, smoothedMouth));
+        expr('oh', 0);
+        expr('ih', state === 'thinking' ? 0.12 : 0);
         expr('happy', state === 'listening' ? 0.16 : state === 'speaking' ? 0.24 : 0.08);
 
         if (state === 'listening') {
@@ -510,6 +512,9 @@ export default function KaoriLivePage() {
   };
 
   const stopCurrentAudio = () => {
+    voicePlayTokenRef.current += 1;
+    currentVoiceUrlRef.current = '';
+
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
@@ -531,10 +536,13 @@ export default function KaoriLivePage() {
 
   const playElevenLabsVoice = (url) => {
     if (typeof window === 'undefined' || !url) return;
-    if (lastPlayedVoiceRef.current === url) return;
-    lastPlayedVoiceRef.current = url;
+    if (currentVoiceUrlRef.current === url && audioRef.current && !audioRef.current.paused) return;
 
     stopCurrentAudio();
+
+    const token = ++voicePlayTokenRef.current;
+    currentVoiceUrlRef.current = url;
+    lastPlayedVoiceRef.current = url;
 
     try {
       const audio = new Audio(url);
@@ -543,16 +551,22 @@ export default function KaoriLivePage() {
       audio.preload = 'auto';
       audio.playsInline = true;
 
-      audio.onplay = () => setCharState('speaking');
+      audio.onplay = () => {
+        if (token !== voicePlayTokenRef.current) return;
+        setCharState('speaking');
+      };
       audio.onpause = () => {
+        if (token !== voicePlayTokenRef.current) return;
         threeRef.current.voiceLevel = 0;
         setCharState('idle');
       };
       audio.onended = () => {
+        if (token !== voicePlayTokenRef.current) return;
         threeRef.current.voiceLevel = 0;
         setCharState('idle');
       };
       audio.onerror = () => {
+        if (token !== voicePlayTokenRef.current) return;
         threeRef.current.voiceLevel = 0;
         setCharState('idle');
       };
@@ -570,6 +584,7 @@ export default function KaoriLivePage() {
         audioDataRef.current = new Uint8Array(analyser.frequencyBinCount);
 
         const tick = () => {
+          if (token !== voicePlayTokenRef.current) return;
           if (!audioAnalyserRef.current || !audioDataRef.current) return;
           audioAnalyserRef.current.getByteFrequencyData(audioDataRef.current);
           const total = audioDataRef.current.reduce((sum, n) => sum + n, 0);
@@ -582,9 +597,11 @@ export default function KaoriLivePage() {
       }
 
       audio.play().catch(() => {
+        if (token !== voicePlayTokenRef.current) return;
         setCharState('idle');
       });
     } catch (_err) {
+      if (token !== voicePlayTokenRef.current) return;
       setCharState('idle');
     }
   };
@@ -593,18 +610,7 @@ export default function KaoriLivePage() {
     // Disabled intentionally: Kaori Live should use ElevenLabs audio only.
   };
 
-  useEffect(() => {
-    if (!messages?.length || !userId) return;
 
-    const newestVoice = [...messages]
-      .reverse()
-      .find((m) => m.senderId?.toString() !== userId?.toString() && extractVoiceUrl(m.content || ''));
-
-    const voiceUrl = extractVoiceUrl(newestVoice?.content || '');
-    if (voiceUrl && voiceUrl !== lastPlayedVoiceRef.current) {
-      playElevenLabsVoice(voiceUrl);
-    }
-  }, [messages, userId]);
 
   const submitText = async (text) => {
     if (!text?.trim() || !conversationId || sending) return;
@@ -841,3 +847,4 @@ export default function KaoriLivePage() {
     </>
   );
 }
+
