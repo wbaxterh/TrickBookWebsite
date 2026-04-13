@@ -672,17 +672,10 @@ export default function KaoriLivePage() {
                     (userId && msg.senderId?.toString() === userId?.toString()) ||
                     `${msg._id || ''}`.startsWith('temp-');
                   const isVoiceLink = Boolean(extractVoiceUrl(msg.content || ''));
+                  if (isVoiceLink) return null;
                   return (
                     <div key={msg._id || `${msg.createdAt}-${msg.content}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
-                      <div className={styles.messageBubble}>
-                        {isVoiceLink ? (
-                          <a href={extractVoiceUrl(msg.content)} target="_blank" rel="noreferrer">
-                            {msg.content}
-                          </a>
-                        ) : (
-                          msg.content
-                        )}
-                      </div>
+                      <div className={styles.messageBubble}>{msg.content}</div>
                     </div>
                   );
                 })}
