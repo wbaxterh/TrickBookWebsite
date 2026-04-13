@@ -114,6 +114,7 @@ export default function KaoriLivePage() {
   }, [token, conversationId, userId]);
 
   useEffect(() => {
+    if (loading) return;
     if (!mountRef.current) return;
 
     let mounted = true;
@@ -381,7 +382,7 @@ export default function KaoriLivePage() {
       mounted = false;
       threeRef.current.cleanup?.();
     };
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     threeRef.current.charState = charState;
