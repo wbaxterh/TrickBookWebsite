@@ -47,9 +47,7 @@ export default function KaoriLivePage() {
 
   const scrollRef = useRef(null);
 
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // Intentionally disabled auto-scroll for Kaori Live chat.
 
   useEffect(() => {
     if (!token || loggedIn !== true) return;
@@ -443,11 +441,33 @@ export default function KaoriLivePage() {
 
   const extractVoiceUrl = (text = '') => {
     if (!text) return '';
+
     const explicit = text.match(/Kaori voice:\s*(https?:\/\/\S+)/i)?.[1];
     if (explicit) return explicit.trim();
 
-    const generic = text.match(/https?:\/\/[^\s)]+kaori-voice[^\s)]+\.mp3/i)?.[0];
-    return generic?.trim() || '';
+    const kaoriPath = text.match(/https?:\/\/[^\s)]+kaori-voice[^\s)]*\.mp3/i)?.[0];
+    if (kaoriPath) return kaoriPath.trim();
+
+    const anyMp3 = text.match(/https?:\/\/[^\s)]+\.mp3/i)?.[0];
+    return anyMp3?.trim() || '';
+  };
+
+  const unlockAudioPlayback = async () => {
+    if (typeof window === 'undefined') return;
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+
+    if (!window.__kaoriAudioCtx) {
+      window.__kaoriAudioCtx = new Ctx();
+    }
+
+    if (window.__kaoriAudioCtx.state === 'suspended') {
+      try {
+        await window.__kaoriAudioCtx.resume();
+      } catch (_err) {
+        // ignore
+      }
+    }
   };
 
   const stopCurrentAudio = () => {
@@ -481,6 +501,8 @@ export default function KaoriLivePage() {
       const audio = new Audio(url);
       audioRef.current = audio;
       audio.crossOrigin = 'anonymous';
+      audio.preload = 'auto';
+      audio.playsInline = true;
 
       audio.onplay = () => setCharState('speaking');
       audio.onpause = () => {
@@ -497,8 +519,8 @@ export default function KaoriLivePage() {
       };
 
       if (window.AudioContext || window.webkitAudioContext) {
-        const Ctx = window.AudioContext || window.webkitAudioContext;
-        const ctx = new Ctx();
+        const ctx = window.__kaoriAudioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        window.__kaoriAudioCtx = ctx;
         const analyser = ctx.createAnalyser();
         analyser.fftSize = 128;
         const source = ctx.createMediaElementSource(audio);
@@ -631,12 +653,14 @@ export default function KaoriLivePage() {
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
+    await unlockAudioPlayback();
     const payload = input;
     setInput('');
     await submitText(payload);
   };
 
-  const toggleVoiceInput = () => {
+  const toggleVoiceInput = async () => {
+    await unlockAudioPlayback();
     if (!SpeechRecognition) {
       alert('Voice input is not supported in this browser yet.');
       return;
