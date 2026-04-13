@@ -174,22 +174,44 @@ export default function KaoriLivePage() {
       loader.register((parser) => new VRMLoaderPlugin(parser));
 
       let vrm = null;
+      let gltf = null;
       try {
-        const gltf = await loader.loadAsync(KAORI_VRM_PATH);
-        vrm = gltf.userData.vrm;
+        gltf = await loader.loadAsync(KAORI_VRM_PATH);
+        vrm = gltf.userData?.vrm || null;
       } catch (_err) {
         throw new Error('Could not load Kaori VRM model');
       }
 
-      if (!vrm || !mounted) return;
+      if (!mounted || !gltf?.scene) return;
 
-      VRMUtils.removeUnnecessaryVertices(vrm.scene);
-      VRMUtils.removeUnnecessaryJoints(vrm.scene);
+      const modelRoot = vrm?.scene || gltf.scene;
 
-      vrm.scene.rotation.y = Math.PI;
-      vrm.scene.position.set(0, -1.25, 0);
-      vrm.scene.scale.setScalar(1.08);
-      scene.add(vrm.scene);
+      if (vrm?.scene) {
+        VRMUtils.removeUnnecessaryVertices(vrm.scene);
+        VRMUtils.removeUnnecessaryJoints(vrm.scene);
+      }
+
+      // Auto-fit model into frame (prevents blank screen due to bad scale/offset)
+      const box = new THREE.Box3().setFromObject(modelRoot);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const safeHeight = Math.max(size.y || 0, 0.001);
+      const targetHeight = 2.6;
+      const fitScale = targetHeight / safeHeight;
+
+      modelRoot.scale.multiplyScalar(fitScale);
+
+      // recalc after scaling
+      const box2 = new THREE.Box3().setFromObject(modelRoot);
+      const center2 = box2.getCenter(new THREE.Vector3());
+      const min2 = box2.min.clone();
+
+      modelRoot.position.x -= center2.x;
+      modelRoot.position.z -= center2.z;
+      modelRoot.position.y -= min2.y + 1.28;
+      modelRoot.rotation.y = Math.PI;
+
+      scene.add(modelRoot);
 
       const lookTarget = new THREE.Object3D();
       lookTarget.position.set(0, 1.35, 2.8);
@@ -201,7 +223,7 @@ export default function KaoriLivePage() {
       const clock = new THREE.Clock();
 
       const expr = (name, value) => {
-        const em = vrm.expressionManager;
+        const em = vrm?.expressionManager;
         if (!em) return;
         try {
           em.setValue(name, value);
@@ -218,13 +240,17 @@ export default function KaoriLivePage() {
         const state = threeRef.current.charState || 'idle';
         const voiceLevel = threeRef.current.voiceLevel || 0;
 
-        vrm.update(dt);
+        if (vrm) {
+          vrm.update(dt);
+        }
 
-        if (vrm.humanoid) {
+        if (vrm?.humanoid) {
           const neck = vrm.humanoid.getNormalizedBoneNode('neck');
           const spine = vrm.humanoid.getNormalizedBoneNode('spine');
           if (neck) neck.rotation.y = Math.sin(t * 0.8) * 0.08;
           if (spine) spine.rotation.z = Math.sin(t * 0.5) * 0.025;
+        } else {
+          modelRoot.rotation.y = Math.PI + Math.sin(t * 0.35) * 0.06;
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
@@ -270,7 +296,7 @@ export default function KaoriLivePage() {
         cleanup: () => {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
-          scene.remove(vrm.scene);
+          scene.remove(modelRoot);
           ringGeo.dispose();
           ringMat.dispose();
           pulseGeo.dispose();
