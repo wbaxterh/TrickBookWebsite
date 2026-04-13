@@ -27,6 +27,7 @@ export default function KaoriLivePage() {
   const [sending, setSending] = useState(false);
   const [listening, setListening] = useState(false);
   const [charState, setCharState] = useState('idle'); // idle | listening | thinking | speaking
+  const [stageDebug, setStageDebug] = useState('init');
 
   const mountRef = useRef(null);
   const threeRef = useRef({});
@@ -158,6 +159,12 @@ export default function KaoriLivePage() {
       ring.position.y = -1.35;
       scene.add(ring);
 
+      const fallbackGeo = new THREE.SphereGeometry(0.55, 32, 32);
+      const fallbackMat = new THREE.MeshStandardMaterial({ color: '#8bb6ff', emissive: '#2a3d77', emissiveIntensity: 0.7 });
+      const fallbackMesh = new THREE.Mesh(fallbackGeo, fallbackMat);
+      fallbackMesh.position.set(0, 0.2, 0);
+      scene.add(fallbackMesh);
+
       const pulseGeo = new THREE.RingGeometry(1.6, 1.65, 120);
       const pulseMat = new THREE.MeshBasicMaterial({
         color: '#7ce5ff',
@@ -173,16 +180,63 @@ export default function KaoriLivePage() {
       const loader = new GLTFLoader();
       loader.register((parser) => new VRMLoaderPlugin(parser));
 
+      setStageDebug('loading_vrm');
       let vrm = null;
       let gltf = null;
       try {
         gltf = await loader.loadAsync(KAORI_VRM_PATH);
         vrm = gltf.userData?.vrm || null;
       } catch (_err) {
-        throw new Error('Could not load Kaori VRM model');
+        setStageDebug('vrm_failed_fallback');
       }
 
-      if (!mounted || !gltf?.scene) return;
+      if (!mounted) return;
+      if (!gltf?.scene) {
+        setStageDebug('vrm_missing_scene_fallback');
+      }
+
+      if (!gltf?.scene) {
+        const clock = new THREE.Clock();
+        const animateFallback = () => {
+          if (!mounted) return;
+          const t = clock.getElapsedTime();
+          fallbackMesh.rotation.y += 0.01;
+          fallbackMesh.position.y = 0.2 + Math.sin(t * 1.6) * 0.08;
+          ring.rotation.z += 0.003;
+          pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04);
+          renderer.render(scene, camera);
+          threeRef.current.raf = requestAnimationFrame(animateFallback);
+        };
+        animateFallback();
+
+        const onResize = () => {
+          if (!mountRef.current) return;
+          camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+        };
+        window.addEventListener('resize', onResize);
+
+        threeRef.current = {
+          ...threeRef.current,
+          scene,
+          camera,
+          renderer,
+          charState: 'idle',
+          cleanup: () => {
+            window.removeEventListener('resize', onResize);
+            if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
+            fallbackGeo.dispose();
+            fallbackMat.dispose();
+            ringGeo.dispose();
+            ringMat.dispose();
+            pulseGeo.dispose();
+            pulseMat.dispose();
+            renderer.dispose();
+          },
+        };
+        return;
+      }
 
       const modelRoot = vrm?.scene || gltf.scene;
 
@@ -221,6 +275,8 @@ export default function KaoriLivePage() {
       modelRoot.rotation.y = Math.PI;
 
       scene.add(modelRoot);
+      fallbackMesh.visible = false;
+      setStageDebug(vrm ? 'vrm_loaded' : 'gltf_loaded_no_vrm');
 
       const lookTarget = new THREE.Object3D();
       lookTarget.position.set(0, 1.35, 2.8);
@@ -306,6 +362,8 @@ export default function KaoriLivePage() {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
           scene.remove(modelRoot);
+          fallbackGeo.dispose();
+          fallbackMat.dispose();
           ringGeo.dispose();
           ringMat.dispose();
           pulseGeo.dispose();
@@ -601,7 +659,7 @@ export default function KaoriLivePage() {
           <div className={styles.layout}>
             <section className={styles.stagePanel}>
               <div ref={mountRef} className={styles.stage} />
-              <p className={styles.caption}>Kaori VRM loaded with Three.js + basic emote states (idle/listening/thinking/speaking).</p>
+              <p className={styles.caption}>Kaori stage status: {stageDebug} · Three.js + VRM emotes (idle/listening/thinking/speaking).</p>
             </section>
 
             <section className={styles.chatPanel}>
