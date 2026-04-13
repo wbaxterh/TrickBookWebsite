@@ -285,8 +285,9 @@ export default function KaoriLivePage() {
   }, []);
 
   const extractVoiceUrl = (text = '') => {
-    if (!text.startsWith('🔊 Kaori voice:')) return '';
-    return text.replace('🔊 Kaori voice: ', '').trim();
+    if (!text) return '';
+    const match = text.match(/Kaori voice:\s*(https?:\/\/\S+)/i);
+    return match?.[1]?.trim() || '';
   };
 
   const stopCurrentAudio = () => {
@@ -390,26 +391,42 @@ export default function KaoriLivePage() {
     setMessages((prev) => [...prev, optimistic]);
 
     try {
+      const sendStartedAt = Date.now();
       await sendMessage(conversationId, content, token);
-      // Pull latest messages so we include both user + bot responses + voice links
-      const latest = await getMessages(conversationId, { page: 1, limit: 30 }, token);
-      setMessages(latest?.messages || []);
 
-      const reversed = [...(latest?.messages || [])].reverse();
-      const voiceMsg = reversed.find((m) => extractVoiceUrl(m.content));
-      const voiceUrl = extractVoiceUrl(voiceMsg?.content || '');
+      // Poll briefly for the *new* Kaori reply (text + optional voice url)
+      let latestMessages = [];
+      for (let attempt = 0; attempt < 8; attempt += 1) {
+        const latest = await getMessages(conversationId, { page: 1, limit: 40 }, token);
+        latestMessages = latest?.messages || [];
 
-      if (voiceUrl) {
-        playElevenLabsVoice(voiceUrl);
+        const hasNewKaori = latestMessages.some((m) => {
+          const ts = new Date(m.createdAt || 0).getTime();
+          return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000;
+        });
+
+        if (hasNewKaori) break;
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+
+      setMessages(latestMessages);
+
+      const freshKaori = latestMessages
+        .filter((m) => {
+          const ts = new Date(m.createdAt || 0).getTime();
+          return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000;
+        })
+        .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+
+      const freshVoice = freshKaori.find((m) => extractVoiceUrl(m.content));
+      const freshVoiceUrl = extractVoiceUrl(freshVoice?.content || '');
+
+      if (freshVoiceUrl) {
+        playElevenLabsVoice(freshVoiceUrl);
       } else {
-        const lastBot = reversed.find(
-          (m) =>
-            m.senderId?.toString() !== userId?.toString() &&
-            m.content &&
-            !m.content.startsWith('🔊 Kaori voice:'),
-        );
-        if (lastBot?.content) {
-          speakBrowserTTS(lastBot.content);
+        const freshText = freshKaori.find((m) => m.content && !extractVoiceUrl(m.content));
+        if (freshText?.content) {
+          speakBrowserTTS(freshText.content);
         } else {
           setCharState('idle');
         }
@@ -538,12 +555,12 @@ export default function KaoriLivePage() {
                     msg.senderId === 'me' ||
                     (userId && msg.senderId?.toString() === userId?.toString()) ||
                     `${msg._id || ''}`.startsWith('temp-');
-                  const isVoiceLink = (msg.content || '').startsWith('🔊 Kaori voice:');
+                  const isVoiceLink = Boolean(extractVoiceUrl(msg.content || ''));
                   return (
                     <div key={msg._id || `${msg.createdAt}-${msg.content}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
                       <div className={styles.messageBubble}>
                         {isVoiceLink ? (
-                          <a href={msg.content.replace('🔊 Kaori voice: ', '').trim()} target="_blank" rel="noreferrer">
+                          <a href={extractVoiceUrl(msg.content)} target="_blank" rel="noreferrer">
                             {msg.content}
                           </a>
                         ) : (
