@@ -14,7 +14,7 @@ import {
 import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
-const THREE_CDN = 'https://unpkg.com/three@0.160.0/build/three.min.js';
+const KAORI_VRM_PATH = '/kaori/kaori_sample.vrm';
 
 export default function KaoriLivePage() {
   const { loggedIn, token, userId } = useContext(AuthContext);
@@ -120,76 +120,36 @@ export default function KaoriLivePage() {
     const loadThree = async () => {
       if (typeof window === 'undefined') return;
 
-      if (!window.THREE) {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = THREE_CDN;
-          script.async = true;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.head.appendChild(script);
-        });
-      }
+      const THREE = await import('three');
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const { VRMLoaderPlugin, VRMUtils } = await import('@pixiv/three-vrm');
 
-      if (!mounted || !window.THREE) return;
-      const THREE = window.THREE;
+      if (!mounted || !mountRef.current) return;
 
       const mount = mountRef.current;
       const scene = new THREE.Scene();
       scene.background = new THREE.Color('#0b1020');
 
-      const camera = new THREE.PerspectiveCamera(50, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-      camera.position.z = 5.2;
-      camera.position.y = 0.6;
+      const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+      camera.position.set(0, 1.35, 2.6);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(mount.clientWidth, mount.clientHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
       mount.innerHTML = '';
       mount.appendChild(renderer.domElement);
 
-      const ambient = new THREE.AmbientLight('#c3d7ff', 0.9);
+      const ambient = new THREE.AmbientLight('#d8e6ff', 1.1);
       scene.add(ambient);
 
-      const keyLight = new THREE.DirectionalLight('#7cc7ff', 1.4);
-      keyLight.position.set(2.8, 3, 3);
+      const keyLight = new THREE.DirectionalLight('#9fd5ff', 1.45);
+      keyLight.position.set(2.6, 3.2, 3.4);
       scene.add(keyLight);
 
-      const fillLight = new THREE.DirectionalLight('#ff9ad5', 0.8);
-      fillLight.position.set(-3, -1, 2);
-      scene.add(fillLight);
-
-      const headGeometry = new THREE.SphereGeometry(1.05, 64, 64);
-      const headMaterial = new THREE.MeshStandardMaterial({
-        color: '#e9f2ff',
-        emissive: '#0e1d3a',
-        emissiveIntensity: 0.45,
-        metalness: 0.08,
-        roughness: 0.28,
-      });
-      const head = new THREE.Mesh(headGeometry, headMaterial);
-      scene.add(head);
-
-      const hairGeometry = new THREE.SphereGeometry(1.08, 64, 64, 0, Math.PI * 2, 0, Math.PI / 1.9);
-      const hairMaterial = new THREE.MeshStandardMaterial({ color: '#1b295a', roughness: 0.4, metalness: 0.05 });
-      const hair = new THREE.Mesh(hairGeometry, hairMaterial);
-      hair.position.y = 0.18;
-      scene.add(hair);
-
-      const eyeGeo = new THREE.SphereGeometry(0.09, 24, 24);
-      const eyeMat = new THREE.MeshBasicMaterial({ color: '#0e1222' });
-      const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
-      const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
-      leftEye.position.set(-0.28, 0.11, 0.94);
-      rightEye.position.set(0.28, 0.11, 0.94);
-      scene.add(leftEye);
-      scene.add(rightEye);
-
-      const mouthGeo = new THREE.SphereGeometry(0.08, 20, 20);
-      const mouthMat = new THREE.MeshBasicMaterial({ color: '#f06595' });
-      const mouth = new THREE.Mesh(mouthGeo, mouthMat);
-      mouth.position.set(0, -0.22, 0.95);
-      scene.add(mouth);
+      const rimLight = new THREE.DirectionalLight('#ff9ad5', 0.9);
+      rimLight.position.set(-2.5, 1.2, -1.8);
+      scene.add(rimLight);
 
       const ringGeo = new THREE.TorusGeometry(1.45, 0.05, 24, 120);
       const ringMat = new THREE.MeshBasicMaterial({ color: '#ffe16f' });
@@ -199,56 +159,91 @@ export default function KaoriLivePage() {
       scene.add(ring);
 
       const pulseGeo = new THREE.RingGeometry(1.6, 1.65, 120);
-      const pulseMat = new THREE.MeshBasicMaterial({ color: '#7ce5ff', transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+      const pulseMat = new THREE.MeshBasicMaterial({
+        color: '#7ce5ff',
+        transparent: true,
+        opacity: 0.3,
+        side: THREE.DoubleSide,
+      });
       const pulse = new THREE.Mesh(pulseGeo, pulseMat);
       pulse.rotation.x = -Math.PI / 2;
       pulse.position.y = -1.45;
       scene.add(pulse);
 
+      const loader = new GLTFLoader();
+      loader.register((parser) => new VRMLoaderPlugin(parser));
+
+      let vrm = null;
+      try {
+        const gltf = await loader.loadAsync(KAORI_VRM_PATH);
+        vrm = gltf.userData.vrm;
+      } catch (_err) {
+        throw new Error('Could not load Kaori VRM model');
+      }
+
+      if (!vrm || !mounted) return;
+
+      VRMUtils.removeUnnecessaryVertices(vrm.scene);
+      VRMUtils.removeUnnecessaryJoints(vrm.scene);
+
+      vrm.scene.rotation.y = Math.PI;
+      vrm.scene.position.set(0, -1.25, 0);
+      vrm.scene.scale.setScalar(1.08);
+      scene.add(vrm.scene);
+
+      const lookTarget = new THREE.Object3D();
+      lookTarget.position.set(0, 1.35, 2.8);
+      scene.add(lookTarget);
+      if (vrm.lookAt) {
+        vrm.lookAt.target = lookTarget;
+      }
+
       const clock = new THREE.Clock();
+
+      const expr = (name, value) => {
+        const em = vrm.expressionManager;
+        if (!em) return;
+        try {
+          em.setValue(name, value);
+        } catch (_err) {
+          // no-op for unsupported expressions
+        }
+      };
 
       const animate = () => {
         if (!mounted) return;
-        const t = clock.getElapsedTime();
-
-        head.rotation.y = Math.sin(t * 0.55) * 0.25;
-        head.rotation.x = Math.sin(t * 0.35) * 0.08;
-        hair.rotation.y = head.rotation.y * 0.9;
-        hair.rotation.x = head.rotation.x * 0.9;
-
-        ring.rotation.z += 0.003;
-        pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04);
-
-        // tiny blink loop
-        const blink = Math.max(0.12, Math.abs(Math.sin(t * 0.85)) > 0.985 ? 0.05 : 1);
-        leftEye.scale.y = blink;
-        rightEye.scale.y = blink;
+        const dt = clock.getDelta();
+        const t = clock.elapsedTime;
 
         const state = threeRef.current.charState || 'idle';
-        if (state === 'listening') {
-          headMaterial.emissive.set('#176b8a');
-          headMaterial.emissiveIntensity = 0.85;
-          pulseMat.opacity = 0.55;
-          mouth.scale.set(1.1, 0.75, 1);
-        } else if (state === 'thinking') {
-          headMaterial.emissive.set('#4d2d8f');
-          headMaterial.emissiveIntensity = 0.9;
-          pulseMat.opacity = 0.4;
-          mouth.scale.set(0.9, 0.7, 1);
-        } else if (state === 'speaking') {
-          headMaterial.emissive.set('#8a2f66');
-          headMaterial.emissiveIntensity = 1.0;
-          const voiceLevel = threeRef.current.voiceLevel || 0;
-          pulseMat.opacity = 0.5 + voiceLevel * 0.5;
-          head.scale.setScalar(1 + Math.max(voiceLevel * 0.09, Math.abs(Math.sin(t * 8)) * 0.02));
-          mouth.scale.set(1 + voiceLevel * 0.8, 0.5 + voiceLevel * 1.2, 1);
-        } else {
-          headMaterial.emissive.set('#0e1d3a');
-          headMaterial.emissiveIntensity = 0.45;
-          pulseMat.opacity = 0.25;
-          head.scale.setScalar(1);
-          mouth.scale.set(1, 0.6, 1);
+        const voiceLevel = threeRef.current.voiceLevel || 0;
+
+        vrm.update(dt);
+
+        if (vrm.humanoid) {
+          const neck = vrm.humanoid.getNormalizedBoneNode('neck');
+          const spine = vrm.humanoid.getNormalizedBoneNode('spine');
+          if (neck) neck.rotation.y = Math.sin(t * 0.8) * 0.08;
+          if (spine) spine.rotation.z = Math.sin(t * 0.5) * 0.025;
         }
+
+        expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
+        expr('aa', state === 'speaking' ? Math.min(1, 0.25 + voiceLevel * 0.95) : 0);
+        expr('ih', state === 'thinking' ? 0.15 : 0);
+        expr('happy', state === 'listening' ? 0.2 : state === 'speaking' ? 0.35 : 0.08);
+
+        if (state === 'listening') {
+          pulseMat.opacity = 0.55;
+        } else if (state === 'thinking') {
+          pulseMat.opacity = 0.4;
+        } else if (state === 'speaking') {
+          pulseMat.opacity = 0.5 + voiceLevel * 0.5;
+        } else {
+          pulseMat.opacity = 0.25;
+        }
+
+        ring.rotation.z += 0.003;
+        pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + voiceLevel * 0.05);
 
         renderer.render(scene, camera);
         threeRef.current.raf = requestAnimationFrame(animate);
@@ -270,34 +265,23 @@ export default function KaoriLivePage() {
         scene,
         camera,
         renderer,
-        head,
-        hair,
-        leftEye,
-        rightEye,
-        mouth,
+        vrm,
         charState: 'idle',
         cleanup: () => {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
-          renderer.dispose();
-          headGeometry.dispose();
-          headMaterial.dispose();
-          hairGeometry.dispose();
-          hairMaterial.dispose();
-          eyeGeo.dispose();
-          eyeMat.dispose();
-          mouthGeo.dispose();
-          mouthMat.dispose();
+          scene.remove(vrm.scene);
           ringGeo.dispose();
           ringMat.dispose();
           pulseGeo.dispose();
           pulseMat.dispose();
+          renderer.dispose();
         },
       };
     };
 
-    loadThree().catch(() => {
-      setBootError('3D renderer failed to load in this browser.');
+    loadThree().catch((err) => {
+      setBootError(err?.message || '3D renderer failed to load in this browser.');
     });
 
     return () => {
@@ -582,7 +566,7 @@ export default function KaoriLivePage() {
           <div className={styles.layout}>
             <section className={styles.stagePanel}>
               <div ref={mountRef} className={styles.stage} />
-              <p className={styles.caption}>Phase A avatar placeholder (Three.js scene). Real Kaori model + emotes next.</p>
+              <p className={styles.caption}>Kaori VRM loaded with Three.js + basic emote states (idle/listening/thinking/speaking).</p>
             </section>
 
             <section className={styles.chatPanel}>
