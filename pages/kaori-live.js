@@ -15,6 +15,7 @@ import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
 const KAORI_VRM_PATH = '/kaori/kaori_sample.vrm';
+const KAORI_STAGE_BUILD_TAG = 'build-187-force';
 
 export default function KaoriLivePage() {
   const { loggedIn, token, userId } = useContext(AuthContext);
@@ -660,7 +661,7 @@ export default function KaoriLivePage() {
           <div className={styles.layout}>
             <section className={styles.stagePanel}>
               <div ref={mountRef} className={styles.stage} />
-              <p className={styles.caption}>Kaori stage status: {stageDebug} · Three.js + VRM emotes (idle/listening/thinking/speaking).</p>
+              <p className={styles.caption}>Kaori stage status: {stageDebug} · {KAORI_STAGE_BUILD_TAG} · Three.js + VRM emotes (idle/listening/thinking/speaking).</p>
             </section>
 
             <section className={styles.chatPanel}>
