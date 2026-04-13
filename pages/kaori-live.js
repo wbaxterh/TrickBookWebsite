@@ -41,6 +41,8 @@ export default function KaoriLivePage() {
   const lastPlayedVoiceRef = useRef('');
   const currentVoiceUrlRef = useRef('');
   const voicePlayTokenRef = useRef(0);
+  const sendLockRef = useRef(false);
+  const lastSubmitRef = useRef({ text: '', ts: 0 });
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -609,9 +611,15 @@ export default function KaoriLivePage() {
 
 
   const submitText = async (text) => {
-    if (!text?.trim() || !conversationId || sending) return;
+    if (!text?.trim() || !conversationId || sending || sendLockRef.current) return;
 
     const content = text.trim();
+    const now = Date.now();
+    const last = lastSubmitRef.current;
+    if (last.text === content && now - last.ts < 2500) return;
+
+    sendLockRef.current = true;
+    lastSubmitRef.current = { text: content, ts: now };
     setSending(true);
     setCharState('thinking');
 
@@ -688,6 +696,7 @@ export default function KaoriLivePage() {
       alert('Failed to send message to Kaori.');
     } finally {
       setSending(false);
+      sendLockRef.current = false;
     }
   };
 
