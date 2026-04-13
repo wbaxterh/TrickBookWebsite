@@ -30,6 +30,10 @@ export default function KaoriLivePage() {
   const mountRef = useRef(null);
   const threeRef = useRef({});
   const recognitionRef = useRef(null);
+  const audioRef = useRef(null);
+  const audioAnalyserRef = useRef(null);
+  const audioDataRef = useRef(null);
+  const audioRafRef = useRef(null);
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -169,8 +173,9 @@ export default function KaoriLivePage() {
         } else if (state === 'speaking') {
           headMaterial.emissive.set('#8a2f66');
           headMaterial.emissiveIntensity = 1.0;
-          pulseMat.opacity = 0.7;
-          head.scale.setScalar(1 + Math.abs(Math.sin(t * 8)) * 0.04);
+          const voiceLevel = threeRef.current.voiceLevel || 0;
+          pulseMat.opacity = 0.5 + voiceLevel * 0.5;
+          head.scale.setScalar(1 + Math.max(voiceLevel * 0.09, Math.abs(Math.sin(t * 8)) * 0.02));
         } else {
           headMaterial.emissive.set('#0e1d3a');
           headMaterial.emissiveIntensity = 0.45;
@@ -228,6 +233,88 @@ export default function KaoriLivePage() {
     threeRef.current.charState = charState;
   }, [charState]);
 
+  useEffect(() => {
+    return () => {
+      stopCurrentAudio();
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const extractVoiceUrl = (text = '') => {
+    if (!text.startsWith('🔊 Kaori voice:')) return '';
+    return text.replace('🔊 Kaori voice: ', '').trim();
+  };
+
+  const stopCurrentAudio = () => {
+    if (audioRafRef.current) cancelAnimationFrame(audioRafRef.current);
+    audioRafRef.current = null;
+
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+      } catch (_err) {
+        // no-op
+      }
+      audioRef.current = null;
+    }
+
+    threeRef.current.voiceLevel = 0;
+  };
+
+  const playElevenLabsVoice = (url) => {
+    if (typeof window === 'undefined' || !url) return;
+
+    stopCurrentAudio();
+
+    try {
+      const audio = new Audio(url);
+      audioRef.current = audio;
+      audio.crossOrigin = 'anonymous';
+
+      audio.onplay = () => setCharState('speaking');
+      audio.onended = () => {
+        threeRef.current.voiceLevel = 0;
+        setCharState('idle');
+      };
+      audio.onerror = () => {
+        threeRef.current.voiceLevel = 0;
+        setCharState('idle');
+      };
+
+      if (window.AudioContext || window.webkitAudioContext) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new Ctx();
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 128;
+        const source = ctx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(ctx.destination);
+
+        audioAnalyserRef.current = analyser;
+        audioDataRef.current = new Uint8Array(analyser.frequencyBinCount);
+
+        const tick = () => {
+          if (!audioAnalyserRef.current || !audioDataRef.current) return;
+          audioAnalyserRef.current.getByteFrequencyData(audioDataRef.current);
+          const total = audioDataRef.current.reduce((sum, n) => sum + n, 0);
+          const avg = total / audioDataRef.current.length;
+          threeRef.current.voiceLevel = Math.min(1, avg / 120);
+          audioRafRef.current = requestAnimationFrame(tick);
+        };
+
+        tick();
+      }
+
+      audio.play().catch(() => {
+        setCharState('idle');
+      });
+    } catch (_err) {
+      setCharState('idle');
+    }
+  };
+
   const speakBrowserTTS = (text) => {
     if (typeof window === 'undefined' || !window.speechSynthesis || !text) return;
 
@@ -266,11 +353,21 @@ export default function KaoriLivePage() {
       const latest = await getMessages(conversationId, { page: 1, limit: 30 }, token);
       setMessages(latest?.messages || []);
 
-      const lastBot = [...(latest?.messages || [])].reverse().find((m) => m.senderId !== optimistic.senderId && m.content && !m.content.startsWith('🔊 Kaori voice:'));
-      if (lastBot?.content) {
-        speakBrowserTTS(lastBot.content);
+      const reversed = [...(latest?.messages || [])].reverse();
+      const voiceMsg = reversed.find((m) => extractVoiceUrl(m.content));
+      const voiceUrl = extractVoiceUrl(voiceMsg?.content || '');
+
+      if (voiceUrl) {
+        playElevenLabsVoice(voiceUrl);
       } else {
-        setCharState('idle');
+        const lastBot = reversed.find(
+          (m) => m.senderId !== optimistic.senderId && m.content && !m.content.startsWith('🔊 Kaori voice:'),
+        );
+        if (lastBot?.content) {
+          speakBrowserTTS(lastBot.content);
+        } else {
+          setCharState('idle');
+        }
       }
     } catch (_error) {
       setMessages((prev) => prev.filter((m) => m._id !== optimistic._id));
