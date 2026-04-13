@@ -192,23 +192,32 @@ export default function KaoriLivePage() {
       }
 
       // Auto-fit model into frame (prevents blank screen due to bad scale/offset)
+      modelRoot.updateWorldMatrix(true, true);
       const box = new THREE.Box3().setFromObject(modelRoot);
-      const size = box.getSize(new THREE.Vector3());
-      const center = box.getCenter(new THREE.Vector3());
-      const safeHeight = Math.max(size.y || 0, 0.001);
-      const targetHeight = 2.6;
-      const fitScale = targetHeight / safeHeight;
 
-      modelRoot.scale.multiplyScalar(fitScale);
+      if (!box.isEmpty()) {
+        const size = box.getSize(new THREE.Vector3());
+        const safeHeight = Math.max(size.y || 0, 0.001);
+        const targetHeight = 2.2;
+        const rawScale = targetHeight / safeHeight;
+        const fitScale = Math.min(4, Math.max(0.2, rawScale));
 
-      // recalc after scaling
-      const box2 = new THREE.Box3().setFromObject(modelRoot);
-      const center2 = box2.getCenter(new THREE.Vector3());
-      const min2 = box2.min.clone();
+        modelRoot.scale.multiplyScalar(fitScale);
+        modelRoot.updateWorldMatrix(true, true);
 
-      modelRoot.position.x -= center2.x;
-      modelRoot.position.z -= center2.z;
-      modelRoot.position.y -= min2.y + 1.28;
+        const box2 = new THREE.Box3().setFromObject(modelRoot);
+        const center2 = box2.getCenter(new THREE.Vector3());
+        const min2 = box2.min.clone();
+
+        modelRoot.position.x -= center2.x;
+        modelRoot.position.z -= center2.z;
+        modelRoot.position.y -= min2.y + 1.15;
+      } else {
+        // Fallback transform if bounds are invalid on first load
+        modelRoot.position.set(0, -1.05, 0);
+        modelRoot.scale.setScalar(1.0);
+      }
+
       modelRoot.rotation.y = Math.PI;
 
       scene.add(modelRoot);
