@@ -267,7 +267,7 @@ export default function KaoriLivePage() {
 
         modelRoot.position.x -= center2.x;
         modelRoot.position.z -= center2.z;
-        modelRoot.position.y -= min2.y + 0.72;
+        modelRoot.position.y -= min2.y + 0.34;
       } else {
         // Fallback transform if bounds are invalid on first load
         modelRoot.position.set(0, -1.05, 0);
@@ -339,13 +339,25 @@ export default function KaoriLivePage() {
           }
 
           if (state === 'speaking') {
-            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.05 + voiceLevel * 0.06);
-            if (leftUpperArm) leftUpperArm.rotation.z = -0.95 + talk;
-            if (rightUpperArm) rightUpperArm.rotation.z = 0.95 - talk;
+            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.03 + voiceLevel * 0.04);
+            if (leftUpperArm) {
+              leftUpperArm.rotation.z = -1.3 + talk;
+              leftUpperArm.rotation.y = 0.08;
+            }
+            if (rightUpperArm) {
+              rightUpperArm.rotation.z = 1.3 - talk;
+              rightUpperArm.rotation.y = -0.08;
+            }
             if (neck) neck.rotation.x += 0.03;
           } else {
-            if (leftUpperArm) leftUpperArm.rotation.z = -0.95;
-            if (rightUpperArm) rightUpperArm.rotation.z = 0.95;
+            if (leftUpperArm) {
+              leftUpperArm.rotation.z = -1.3;
+              leftUpperArm.rotation.y = 0.08;
+            }
+            if (rightUpperArm) {
+              rightUpperArm.rotation.z = 1.3;
+              rightUpperArm.rotation.y = -0.08;
+            }
           }
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
