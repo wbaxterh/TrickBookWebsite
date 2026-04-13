@@ -129,7 +129,8 @@ export default function KaoriLivePage() {
 
       const mount = mountRef.current;
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color('#0b1020');
+      scene.background = new THREE.Color('#07122a');
+      scene.fog = new THREE.Fog('#0a1732', 4.5, 12);
 
       const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 1000);
       camera.position.set(0, 1.45, 2.15);
@@ -151,6 +152,38 @@ export default function KaoriLivePage() {
       const rimLight = new THREE.DirectionalLight('#ff9ad5', 0.9);
       rimLight.position.set(-2.5, 1.2, -1.8);
       scene.add(rimLight);
+
+      // Snowy mountain backdrop (Phase A art direction)
+      const groundGeo = new THREE.PlaneGeometry(16, 8);
+      const groundMat = new THREE.MeshStandardMaterial({ color: '#a8c5de', roughness: 0.95, metalness: 0.02 });
+      const ground = new THREE.Mesh(groundGeo, groundMat);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.set(0, -1.45, -1.2);
+      scene.add(ground);
+
+      const mountainGroup = new THREE.Group();
+      const makeMountain = (x, y, z, s, color = '#38557a') => {
+        const geo = new THREE.ConeGeometry(1, 2, 4);
+        const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.9, metalness: 0.02 });
+        const m = new THREE.Mesh(geo, mat);
+        m.position.set(x, y, z);
+        m.scale.setScalar(s);
+        m.rotation.y = Math.PI * 0.25;
+
+        const capGeo = new THREE.ConeGeometry(0.42, 0.45, 4);
+        const capMat = new THREE.MeshStandardMaterial({ color: '#eef6ff', roughness: 0.95 });
+        const cap = new THREE.Mesh(capGeo, capMat);
+        cap.position.y = 0.95;
+        m.add(cap);
+
+        mountainGroup.add(m);
+      };
+
+      makeMountain(-2.9, -0.3, -5.5, 1.45);
+      makeMountain(-0.8, -0.35, -5.2, 1.7, '#2e4968');
+      makeMountain(1.5, -0.25, -5.4, 1.55);
+      makeMountain(3.2, -0.4, -5.8, 1.25, '#2b4564');
+      scene.add(mountainGroup);
 
       const ringGeo = new THREE.TorusGeometry(1.45, 0.05, 24, 120);
       const ringMat = new THREE.MeshBasicMaterial({ color: '#ffe16f' });
@@ -298,6 +331,7 @@ export default function KaoriLivePage() {
       };
 
       let smoothedVoice = 0;
+      let smoothedMouth = 0;
       const animate = () => {
         if (!mounted) return;
         const dt = clock.getDelta();
@@ -305,7 +339,10 @@ export default function KaoriLivePage() {
 
         const state = threeRef.current.charState || 'idle';
         const voiceLevel = threeRef.current.voiceLevel || 0;
-        smoothedVoice += (voiceLevel - smoothedVoice) * 0.18;
+        smoothedVoice += (voiceLevel - smoothedVoice) * 0.15;
+
+        const mouthTarget = state === 'speaking' ? Math.min(1, 0.08 + smoothedVoice * 0.9) : 0;
+        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, 12, dt);
 
         if (vrm) {
           vrm.update(dt);
@@ -338,19 +375,21 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          const armTalk = state === 'speaking' ? Math.sin(t * (5.2 + smoothedVoice * 4)) * (0.01 + smoothedVoice * 0.02) : 0;
-          const leftTargetZ = -1.35 + armTalk;
-          const rightTargetZ = 1.35 - armTalk;
-          const leftTargetY = 0.06;
-          const rightTargetY = -0.06;
+          const armTalk = state === 'speaking' ? Math.sin(t * (4.2 + smoothedVoice * 2.5)) * (0.004 + smoothedVoice * 0.01) : 0;
+          const leftTargetZ = -1.48 + armTalk;
+          const rightTargetZ = 1.48 - armTalk;
+          const leftTargetY = 0.03;
+          const rightTargetY = -0.03;
 
           if (leftUpperArm) {
-            leftUpperArm.rotation.z = THREE.MathUtils.lerp(leftUpperArm.rotation.z, leftTargetZ, 0.12);
-            leftUpperArm.rotation.y = THREE.MathUtils.lerp(leftUpperArm.rotation.y, leftTargetY, 0.12);
+            leftUpperArm.rotation.z = THREE.MathUtils.damp(leftUpperArm.rotation.z, leftTargetZ, 10, dt);
+            leftUpperArm.rotation.y = THREE.MathUtils.damp(leftUpperArm.rotation.y, leftTargetY, 10, dt);
+            leftUpperArm.rotation.x = THREE.MathUtils.damp(leftUpperArm.rotation.x, -0.03, 10, dt);
           }
           if (rightUpperArm) {
-            rightUpperArm.rotation.z = THREE.MathUtils.lerp(rightUpperArm.rotation.z, rightTargetZ, 0.12);
-            rightUpperArm.rotation.y = THREE.MathUtils.lerp(rightUpperArm.rotation.y, rightTargetY, 0.12);
+            rightUpperArm.rotation.z = THREE.MathUtils.damp(rightUpperArm.rotation.z, rightTargetZ, 10, dt);
+            rightUpperArm.rotation.y = THREE.MathUtils.damp(rightUpperArm.rotation.y, rightTargetY, 10, dt);
+            rightUpperArm.rotation.x = THREE.MathUtils.damp(rightUpperArm.rotation.x, -0.03, 10, dt);
           }
 
           if (state === 'speaking' && neck) neck.rotation.x += 0.02;
@@ -360,10 +399,10 @@ export default function KaoriLivePage() {
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
-        expr('aa', state === 'speaking' ? Math.min(1, 0.25 + smoothedVoice * 0.85) : 0);
-        expr('ih', state === 'thinking' ? 0.24 : 0);
-        expr('oh', state === 'speaking' ? Math.min(0.45, smoothedVoice * 0.5) : 0);
-        expr('happy', state === 'listening' ? 0.2 : state === 'speaking' ? 0.35 : 0.1);
+        expr('aa', Math.min(0.85, smoothedMouth));
+        expr('oh', Math.min(0.45, smoothedMouth * 0.55));
+        expr('ih', state === 'thinking' ? 0.16 : 0);
+        expr('happy', state === 'listening' ? 0.16 : state === 'speaking' ? 0.24 : 0.08);
 
         if (state === 'listening') {
           pulseMat.opacity = 0.55;
