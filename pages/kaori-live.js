@@ -267,7 +267,7 @@ export default function KaoriLivePage() {
 
         modelRoot.position.x -= center2.x;
         modelRoot.position.z -= center2.z;
-        modelRoot.position.y -= min2.y + 1.15;
+        modelRoot.position.y -= min2.y + 0.72;
       } else {
         // Fallback transform if bounds are invalid on first load
         modelRoot.position.set(0, -1.05, 0);
@@ -339,13 +339,13 @@ export default function KaoriLivePage() {
           }
 
           if (state === 'speaking') {
-            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.06 + voiceLevel * 0.08);
-            if (leftUpperArm) leftUpperArm.rotation.z = -0.12 + talk;
-            if (rightUpperArm) rightUpperArm.rotation.z = 0.12 - talk;
+            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.05 + voiceLevel * 0.06);
+            if (leftUpperArm) leftUpperArm.rotation.z = -0.95 + talk;
+            if (rightUpperArm) rightUpperArm.rotation.z = 0.95 - talk;
             if (neck) neck.rotation.x += 0.03;
           } else {
-            if (leftUpperArm) leftUpperArm.rotation.z = -0.04;
-            if (rightUpperArm) rightUpperArm.rotation.z = 0.04;
+            if (leftUpperArm) leftUpperArm.rotation.z = -0.95;
+            if (rightUpperArm) rightUpperArm.rotation.z = 0.95;
           }
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
@@ -438,6 +438,10 @@ export default function KaoriLivePage() {
   };
 
   const stopCurrentAudio = () => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+
     if (audioRafRef.current) cancelAnimationFrame(audioRafRef.current);
     audioRafRef.current = null;
 
@@ -507,21 +511,8 @@ export default function KaoriLivePage() {
     }
   };
 
-  const speakBrowserTTS = (text) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis || !text) return;
-
-    try {
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text.slice(0, 220));
-      utter.rate = 1.06;
-      utter.pitch = 1.15;
-      utter.onstart = () => setCharState('speaking');
-      utter.onend = () => setCharState('idle');
-      utter.onerror = () => setCharState('idle');
-      window.speechSynthesis.speak(utter);
-    } catch (_err) {
-      setCharState('idle');
-    }
+  const speakBrowserTTS = (_text) => {
+    // Disabled intentionally: Kaori Live should use ElevenLabs audio only.
   };
 
   const submitText = async (text) => {
