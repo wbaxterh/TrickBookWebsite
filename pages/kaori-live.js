@@ -98,12 +98,8 @@ export default function KaoriLivePage() {
         return [...prev, message];
       });
 
-      if (message.senderId?.toString() !== userId?.toString()) {
-        const voiceUrl = extractVoiceUrl(message.content || '');
-        if (voiceUrl) {
-          playElevenLabsVoice(voiceUrl);
-        }
-      }
+      // Do not autoplay voice from socket here; playback is handled in submit flow
+      // to avoid duplicate triggers (socket + polling) and overlapping audio.
     };
 
     socket.on('message:new', onNewMessage);
