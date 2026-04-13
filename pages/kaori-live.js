@@ -443,8 +443,11 @@ export default function KaoriLivePage() {
 
   const extractVoiceUrl = (text = '') => {
     if (!text) return '';
-    const match = text.match(/Kaori voice:\s*(https?:\/\/\S+)/i);
-    return match?.[1]?.trim() || '';
+    const explicit = text.match(/Kaori voice:\s*(https?:\/\/\S+)/i)?.[1];
+    if (explicit) return explicit.trim();
+
+    const generic = text.match(/https?:\/\/[^\s)]+kaori-voice[^\s)]+\.mp3/i)?.[0];
+    return generic?.trim() || '';
   };
 
   const stopCurrentAudio = () => {
@@ -480,6 +483,10 @@ export default function KaoriLivePage() {
       audio.crossOrigin = 'anonymous';
 
       audio.onplay = () => setCharState('speaking');
+      audio.onpause = () => {
+        threeRef.current.voiceLevel = 0;
+        setCharState('idle');
+      };
       audio.onended = () => {
         threeRef.current.voiceLevel = 0;
         setCharState('idle');
@@ -524,6 +531,19 @@ export default function KaoriLivePage() {
   const speakBrowserTTS = (_text) => {
     // Disabled intentionally: Kaori Live should use ElevenLabs audio only.
   };
+
+  useEffect(() => {
+    if (!messages?.length || !userId) return;
+
+    const newestVoice = [...messages]
+      .reverse()
+      .find((m) => m.senderId?.toString() !== userId?.toString() && extractVoiceUrl(m.content || ''));
+
+    const voiceUrl = extractVoiceUrl(newestVoice?.content || '');
+    if (voiceUrl && voiceUrl !== lastPlayedVoiceRef.current) {
+      playElevenLabsVoice(voiceUrl);
+    }
+  }, [messages, userId]);
 
   const submitText = async (text) => {
     if (!text?.trim() || !conversationId || sending) return;
