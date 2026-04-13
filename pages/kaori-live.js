@@ -134,7 +134,7 @@ export default function KaoriLivePage() {
       scene.background = new THREE.Color('#0b1020');
 
       const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-      camera.position.set(0, 1.35, 2.6);
+      camera.position.set(0, 1.45, 2.15);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(mount.clientWidth, mount.clientHeight);
@@ -274,7 +274,7 @@ export default function KaoriLivePage() {
         modelRoot.scale.setScalar(1.0);
       }
 
-      modelRoot.rotation.y = Math.PI;
+      modelRoot.rotation.y = 0;
 
       scene.add(modelRoot);
       fallbackMesh.visible = false;
@@ -314,16 +314,48 @@ export default function KaoriLivePage() {
         if (vrm?.humanoid) {
           const neck = vrm.humanoid.getNormalizedBoneNode('neck');
           const spine = vrm.humanoid.getNormalizedBoneNode('spine');
-          if (neck) neck.rotation.y = Math.sin(t * 0.8) * 0.08;
-          if (spine) spine.rotation.z = Math.sin(t * 0.5) * 0.025;
+          const chest = vrm.humanoid.getNormalizedBoneNode('chest');
+          const leftUpperArm = vrm.humanoid.getNormalizedBoneNode('leftUpperArm');
+          const rightUpperArm = vrm.humanoid.getNormalizedBoneNode('rightUpperArm');
+
+          const idleSway = Math.sin(t * 0.7) * 0.04;
+          const breathe = Math.sin(t * 1.5) * 0.02;
+
+          if (neck) {
+            neck.rotation.y = Math.sin(t * 0.9) * 0.06;
+            neck.rotation.x = breathe;
+          }
+          if (spine) spine.rotation.z = idleSway;
+          if (chest) chest.rotation.x = breathe * 0.7;
+
+          if (state === 'listening') {
+            if (neck) neck.rotation.x += 0.08;
+            if (spine) spine.rotation.x = 0.04;
+          }
+
+          if (state === 'thinking') {
+            if (neck) neck.rotation.y += Math.sin(t * 2.2) * 0.05;
+            if (spine) spine.rotation.x = 0.06;
+          }
+
+          if (state === 'speaking') {
+            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.06 + voiceLevel * 0.08);
+            if (leftUpperArm) leftUpperArm.rotation.z = -0.12 + talk;
+            if (rightUpperArm) rightUpperArm.rotation.z = 0.12 - talk;
+            if (neck) neck.rotation.x += 0.03;
+          } else {
+            if (leftUpperArm) leftUpperArm.rotation.z = -0.04;
+            if (rightUpperArm) rightUpperArm.rotation.z = 0.04;
+          }
         } else {
-          modelRoot.rotation.y = Math.PI + Math.sin(t * 0.35) * 0.06;
+          modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
+          modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
-        expr('aa', state === 'speaking' ? Math.min(1, 0.25 + voiceLevel * 0.95) : 0);
-        expr('ih', state === 'thinking' ? 0.15 : 0);
-        expr('happy', state === 'listening' ? 0.2 : state === 'speaking' ? 0.35 : 0.08);
+        expr('aa', state === 'speaking' ? Math.min(1, 0.35 + voiceLevel * 0.95) : 0);
+        expr('ih', state === 'thinking' ? 0.28 : 0);
+        expr('happy', state === 'listening' ? 0.25 : state === 'speaking' ? 0.45 : 0.12);
 
         if (state === 'listening') {
           pulseMat.opacity = 0.55;
@@ -338,6 +370,7 @@ export default function KaoriLivePage() {
         ring.rotation.z += 0.003;
         pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + voiceLevel * 0.05);
 
+        camera.lookAt(0, 1.35, 0);
         renderer.render(scene, camera);
         threeRef.current.raf = requestAnimationFrame(animate);
       };
