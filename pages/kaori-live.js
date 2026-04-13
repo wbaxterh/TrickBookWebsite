@@ -594,9 +594,27 @@ export default function KaoriLivePage() {
       if (freshVoiceUrl) {
         playElevenLabsVoice(freshVoiceUrl);
       } else {
-        const freshText = freshKaori.find((m) => m.content && !extractVoiceUrl(m.content));
-        if (freshText?.content) {
-          speakBrowserTTS(freshText.content);
+        // Voice message can arrive after text; keep polling briefly for ElevenLabs URL.
+        let delayedVoiceUrl = '';
+        for (let i = 0; i < 12; i += 1) {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          const polled = await getMessages(conversationId, { page: 1, limit: 50 }, token);
+          const polledMessages = polled?.messages || [];
+          setMessages(polledMessages);
+
+          const delayedVoice = [...polledMessages]
+            .reverse()
+            .find((m) => {
+              const ts = new Date(m.createdAt || 0).getTime();
+              return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000 && extractVoiceUrl(m.content || '');
+            });
+
+          delayedVoiceUrl = extractVoiceUrl(delayedVoice?.content || '');
+          if (delayedVoiceUrl) break;
+        }
+
+        if (delayedVoiceUrl) {
+          playElevenLabsVoice(delayedVoiceUrl);
         } else {
           setCharState('idle');
         }
