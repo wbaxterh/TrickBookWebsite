@@ -267,7 +267,7 @@ export default function KaoriLivePage() {
 
         modelRoot.position.x -= center2.x;
         modelRoot.position.z -= center2.z;
-        modelRoot.position.y -= min2.y + 0.34;
+        modelRoot.position.y -= min2.y + 0.1;
       } else {
         // Fallback transform if bounds are invalid on first load
         modelRoot.position.set(0, -1.05, 0);
@@ -299,6 +299,7 @@ export default function KaoriLivePage() {
         }
       };
 
+      let smoothedVoice = 0;
       const animate = () => {
         if (!mounted) return;
         const dt = clock.getDelta();
@@ -306,6 +307,7 @@ export default function KaoriLivePage() {
 
         const state = threeRef.current.charState || 'idle';
         const voiceLevel = threeRef.current.voiceLevel || 0;
+        smoothedVoice += (voiceLevel - smoothedVoice) * 0.18;
 
         if (vrm) {
           vrm.update(dt);
@@ -338,49 +340,45 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          if (state === 'speaking') {
-            const talk = Math.sin(t * (6 + voiceLevel * 8)) * (0.03 + voiceLevel * 0.04);
-            if (leftUpperArm) {
-              leftUpperArm.rotation.z = -1.3 + talk;
-              leftUpperArm.rotation.y = 0.08;
-            }
-            if (rightUpperArm) {
-              rightUpperArm.rotation.z = 1.3 - talk;
-              rightUpperArm.rotation.y = -0.08;
-            }
-            if (neck) neck.rotation.x += 0.03;
-          } else {
-            if (leftUpperArm) {
-              leftUpperArm.rotation.z = -1.3;
-              leftUpperArm.rotation.y = 0.08;
-            }
-            if (rightUpperArm) {
-              rightUpperArm.rotation.z = 1.3;
-              rightUpperArm.rotation.y = -0.08;
-            }
+          const armTalk = state === 'speaking' ? Math.sin(t * (5.2 + smoothedVoice * 4)) * (0.01 + smoothedVoice * 0.02) : 0;
+          const leftTargetZ = -1.35 + armTalk;
+          const rightTargetZ = 1.35 - armTalk;
+          const leftTargetY = 0.06;
+          const rightTargetY = -0.06;
+
+          if (leftUpperArm) {
+            leftUpperArm.rotation.z = THREE.MathUtils.lerp(leftUpperArm.rotation.z, leftTargetZ, 0.12);
+            leftUpperArm.rotation.y = THREE.MathUtils.lerp(leftUpperArm.rotation.y, leftTargetY, 0.12);
           }
+          if (rightUpperArm) {
+            rightUpperArm.rotation.z = THREE.MathUtils.lerp(rightUpperArm.rotation.z, rightTargetZ, 0.12);
+            rightUpperArm.rotation.y = THREE.MathUtils.lerp(rightUpperArm.rotation.y, rightTargetY, 0.12);
+          }
+
+          if (state === 'speaking' && neck) neck.rotation.x += 0.02;
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
           modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
-        expr('aa', state === 'speaking' ? Math.min(1, 0.35 + voiceLevel * 0.95) : 0);
-        expr('ih', state === 'thinking' ? 0.28 : 0);
-        expr('happy', state === 'listening' ? 0.25 : state === 'speaking' ? 0.45 : 0.12);
+        expr('aa', state === 'speaking' ? Math.min(1, 0.25 + smoothedVoice * 0.85) : 0);
+        expr('ih', state === 'thinking' ? 0.24 : 0);
+        expr('oh', state === 'speaking' ? Math.min(0.45, smoothedVoice * 0.5) : 0);
+        expr('happy', state === 'listening' ? 0.2 : state === 'speaking' ? 0.35 : 0.1);
 
         if (state === 'listening') {
           pulseMat.opacity = 0.55;
         } else if (state === 'thinking') {
           pulseMat.opacity = 0.4;
         } else if (state === 'speaking') {
-          pulseMat.opacity = 0.5 + voiceLevel * 0.5;
+          pulseMat.opacity = 0.45 + smoothedVoice * 0.45;
         } else {
           pulseMat.opacity = 0.25;
         }
 
         ring.rotation.z += 0.003;
-        pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + voiceLevel * 0.05);
+        pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + smoothedVoice * 0.04);
 
         camera.lookAt(0, 1.35, 0);
         renderer.render(scene, camera);
