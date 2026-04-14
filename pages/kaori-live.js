@@ -320,6 +320,19 @@ export default function KaoriLivePage() {
 
       const clock = new THREE.Clock();
 
+      let mixer = null;
+      const clipActions = {};
+      let activeClip = '';
+
+      const fadeToClip = (name) => {
+        if (!mixer || !clipActions[name] || activeClip === name) return;
+        const next = clipActions[name];
+        const prev = clipActions[activeClip];
+        if (prev) prev.fadeOut(0.35);
+        next.reset().fadeIn(0.35).play();
+        activeClip = name;
+      };
+
       const expr = (name, value) => {
         const em = vrm?.expressionManager;
         if (!em) return;
@@ -330,8 +343,48 @@ export default function KaoriLivePage() {
         }
       };
 
+      // Optional Mixamo-style clip blending (if clips exist)
+      (async () => {
+        try {
+          const { FBXLoader } = await import('three/examples/jsm/loaders/FBXLoader.js');
+          const loader = new FBXLoader();
+          const clipMap = {
+            idle: '/kaori/anims/idle.fbx',
+            speaking: '/kaori/anims/talking.fbx',
+            thinking: '/kaori/anims/excited.fbx',
+          };
+
+          mixer = new THREE.AnimationMixer(modelRoot);
+
+          for (const [key, url] of Object.entries(clipMap)) {
+            try {
+              const fbx = await loader.loadAsync(url);
+              const clip = fbx.animations?.[0];
+              if (!clip) continue;
+              const action = mixer.clipAction(clip);
+              action.enabled = true;
+              action.setEffectiveWeight(1);
+              action.setLoop(THREE.LoopRepeat, Infinity);
+              clipActions[key] = action;
+            } catch (_err) {
+              // Clip missing is acceptable in fallback mode.
+            }
+          }
+
+          if (clipActions.idle) {
+            clipActions.idle.play();
+            activeClip = 'idle';
+          }
+        } catch (_err) {
+          // If loader import fails, procedural animation still works.
+        }
+      })();
+
       let smoothedVoice = 0;
       let smoothedMouth = 0;
+      let smoothedLow = 0;
+      let smoothedMid = 0;
+      let smoothedHigh = 0;
       const animate = () => {
         if (!mounted) return;
         const dt = clock.getDelta();
@@ -339,13 +392,24 @@ export default function KaoriLivePage() {
 
         const state = threeRef.current.charState || 'idle';
         const voiceLevel = threeRef.current.voiceLevel || 0;
+        const bands = threeRef.current.voiceBands || { low: 0, mid: 0, high: 0 };
         smoothedVoice += (voiceLevel - smoothedVoice) * 0.15;
+        smoothedLow = THREE.MathUtils.damp(smoothedLow, bands.low, 12, dt);
+        smoothedMid = THREE.MathUtils.damp(smoothedMid, bands.mid, 12, dt);
+        smoothedHigh = THREE.MathUtils.damp(smoothedHigh, bands.high, 12, dt);
 
-        const mouthTarget = state === 'speaking' ? Math.min(0.6, Math.max(0, smoothedVoice - 0.06) * 0.95) : 0;
-        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, state === 'speaking' ? 14 : 10, dt);
+        const mouthTarget = state === 'speaking' ? Math.min(0.62, Math.max(0, smoothedVoice - 0.05) * 0.9) : 0;
+        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, state === 'speaking' ? 16 : 11, dt);
 
         if (vrm) {
           vrm.update(dt);
+        }
+
+        if (mixer) {
+          mixer.update(dt);
+          if (state === 'speaking') fadeToClip('speaking');
+          else if (state === 'thinking') fadeToClip('thinking');
+          else fadeToClip('idle');
         }
 
         if (vrm?.humanoid) {
@@ -399,10 +463,11 @@ export default function KaoriLivePage() {
         }
 
         expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
-        expr('aa', Math.min(0.62, smoothedMouth));
-        expr('oh', 0);
-        expr('ih', state === 'thinking' ? 0.12 : 0);
-        expr('happy', state === 'listening' ? 0.16 : state === 'speaking' ? 0.24 : 0.08);
+        expr('aa', Math.min(0.55, smoothedMouth * (0.65 + smoothedLow * 0.35)));
+        expr('oh', Math.min(0.35, smoothedMouth * (0.25 + smoothedMid * 0.75)));
+        expr('ee', Math.min(0.32, smoothedMouth * (0.2 + smoothedHigh * 0.8)));
+        expr('ih', state === 'thinking' ? 0.1 : 0);
+        expr('happy', state === 'listening' ? 0.16 : state === 'speaking' ? 0.22 : 0.08);
 
         if (state === 'listening') {
           pulseMat.opacity = 0.55;
@@ -444,6 +509,7 @@ export default function KaoriLivePage() {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
           scene.remove(modelRoot);
+          if (mixer) mixer.stopAllAction();
           fallbackGeo.dispose();
           fallbackMat.dispose();
           ringGeo.dispose();
@@ -530,6 +596,7 @@ export default function KaoriLivePage() {
     }
 
     threeRef.current.voiceLevel = 0;
+    threeRef.current.voiceBands = { low: 0, mid: 0, high: 0 };
   };
 
   const playElevenLabsVoice = (url) => {
@@ -585,9 +652,35 @@ export default function KaoriLivePage() {
           if (token !== voicePlayTokenRef.current) return;
           if (!audioAnalyserRef.current || !audioDataRef.current) return;
           audioAnalyserRef.current.getByteFrequencyData(audioDataRef.current);
-          const total = audioDataRef.current.reduce((sum, n) => sum + n, 0);
-          const avg = total / audioDataRef.current.length;
+
+          const bins = audioDataRef.current;
+          const n = bins.length;
+          const lowEnd = Math.max(1, Math.floor(n * 0.18));
+          const midEnd = Math.max(lowEnd + 1, Math.floor(n * 0.52));
+
+          let low = 0;
+          let mid = 0;
+          let high = 0;
+          for (let i = 0; i < n; i += 1) {
+            const v = bins[i];
+            if (i < lowEnd) low += v;
+            else if (i < midEnd) mid += v;
+            else high += v;
+          }
+
+          low /= lowEnd;
+          mid /= Math.max(1, midEnd - lowEnd);
+          high /= Math.max(1, n - midEnd);
+
+          const total = bins.reduce((sum, x) => sum + x, 0);
+          const avg = total / n;
           threeRef.current.voiceLevel = Math.min(1, avg / 120);
+          threeRef.current.voiceBands = {
+            low: Math.min(1, low / 145),
+            mid: Math.min(1, mid / 145),
+            high: Math.min(1, high / 145),
+          };
+
           audioRafRef.current = requestAnimationFrame(tick);
         };
 
