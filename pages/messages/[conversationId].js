@@ -10,6 +10,11 @@ import { Input } from '../../components/ui/input';
 import { getConversation, getMessages, markAsRead, sendMessage } from '../../lib/apiMessages';
 import { connectMessagesSocket } from '../../lib/socket';
 
+const isKaoriVoiceMessage = (text = '') => {
+  if (!text) return false;
+  return /Kaori\s+voice:/i.test(text) || /https?:\/\/[^\s)]+kaori-voice[^\s)]*\.mp3/i.test(text);
+};
+
 export default function Conversation() {
   const router = useRouter();
   const { conversationId } = router.query;
@@ -50,7 +55,7 @@ export default function Conversation() {
       ]);
 
       setConversation(convoData);
-      setMessages(messagesData.messages || []);
+      setMessages((messagesData.messages || []).filter((m) => !isKaoriVoiceMessage(m.content)));
       setHasMore(messagesData.pagination?.hasMore || false);
       setPage(1);
 
@@ -93,6 +98,10 @@ export default function Conversation() {
       }
 
       if (message.conversationId === conversationId) {
+        if (isKaoriVoiceMessage(message.content)) {
+          return;
+        }
+
         setMessages((prev) => {
           // Avoid duplicates
           if (prev.some((m) => m._id === message._id)) {
@@ -149,8 +158,11 @@ export default function Conversation() {
       const nextPage = page + 1;
       const data = await getMessages(conversationId, { page: nextPage, limit: 50 }, token);
 
-      // Prepend older messages
-      setMessages((prev) => [...(data.messages || []), ...prev]);
+      // Prepend older messages (excluding Kaori voice-link system messages)
+      setMessages((prev) => [
+        ...(data.messages || []).filter((m) => !isKaoriVoiceMessage(m.content)),
+        ...prev,
+      ]);
       setHasMore(data.pagination?.hasMore || false);
       setPage(nextPage);
     } catch (_error) {
