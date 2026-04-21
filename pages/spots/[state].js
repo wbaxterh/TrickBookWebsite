@@ -63,11 +63,18 @@ const STATE_NAMES = {
   dc: 'Washington D.C.',
 };
 
-const AVAILABLE_TAGS = ['bowl', 'street', 'lights', 'indoor', 'beginner', 'advanced'];
+const SPORT_TAGS = {
+  skateboarding: ['bowl', 'street', 'lights', 'indoor', 'beginner', 'advanced'],
+  snowboarding: ['terrain-park', 'powder', 'halfpipe', 'beginner', 'advanced', 'night'],
+  skiing: ['terrain-park', 'powder', 'moguls', 'beginner', 'advanced', 'night'],
+  bmx: ['park', 'street', 'dirt', 'indoor', 'beginner', 'advanced'],
+  surfing: ['beach-break', 'point-break', 'reef-break', 'beginner', 'advanced'],
+  all: ['beginner', 'advanced'],
+};
 
 export default function StateSpots() {
   const router = useRouter();
-  const { state } = router.query;
+  const { state, category } = router.query;
 
   const [spots, setSpots] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -82,6 +89,8 @@ export default function StateSpots() {
   });
 
   const stateName = STATE_NAMES[state?.toLowerCase()] || state?.toUpperCase();
+  const selectedCategory = (category || 'all').toString().toLowerCase();
+  const availableTags = SPORT_TAGS[selectedCategory] || SPORT_TAGS.all;
 
   useEffect(() => {
     if (!state) return;
@@ -97,9 +106,24 @@ export default function StateSpots() {
           tagsFilter,
           pagination.page,
           50,
+          selectedCategory,
         );
-        setSpots(data.spots || []);
-        setPagination(data.pagination || {});
+
+        const rawSpots = data.spots || [];
+        const filteredByCategory =
+          selectedCategory === 'all'
+            ? rawSpots
+            : rawSpots.filter(
+                (spot) =>
+                  spot?.sportTypes?.includes(selectedCategory) ||
+                  spot?.category?.toLowerCase() === selectedCategory,
+              );
+
+        setSpots(filteredByCategory);
+        setPagination({
+          ...(data.pagination || {}),
+          totalCount: filteredByCategory.length,
+        });
       } catch (_error) {
       } finally {
         setLoading(false);
@@ -108,7 +132,7 @@ export default function StateSpots() {
 
     const debounceTimer = setTimeout(fetchSpots, 300);
     return () => clearTimeout(debounceTimer);
-  }, [state, searchQuery, selectedTags, pagination.page]);
+  }, [state, selectedCategory, searchQuery, selectedTags, pagination.page]);
 
   const handleTagToggle = (tag) => {
     setSelectedTags((prev) =>
@@ -119,11 +143,11 @@ export default function StateSpots() {
   return (
     <>
       <Head>
-        <title>Skate Spots in {stateName} - The Trick Book</title>
+        <title>{selectedCategory === 'all' ? 'Spots' : `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Spots`} in {stateName} - The Trick Book</title>
         <link rel="icon" href="/favicon.png" />
         <meta
           name="description"
-          content={`Discover skate spots in ${stateName}. Find skateparks, street spots, and more.`}
+          content={`Discover ${selectedCategory === 'all' ? 'action sports' : selectedCategory} spots in ${stateName}.`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -185,7 +209,7 @@ export default function StateSpots() {
               {/* Tag Filters */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm text-muted-foreground">Filter:</span>
-                {AVAILABLE_TAGS.map((tag) => (
+                {availableTags.map((tag) => (
                   <Badge
                     key={tag}
                     variant={selectedTags.includes(tag) ? 'default' : 'outline'}
