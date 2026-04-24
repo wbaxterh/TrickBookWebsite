@@ -1,141 +1,206 @@
 # SOUL.md — TrickBook
 
-*TrickBook is not an app that dumps data. It’s an app that builds rider momentum.*
+*TrickBook is a progression engine for action sports culture.*
 
-## Core Identity
+It is not a generic social app.
+It is not a data warehouse.
+It is not a corporate dashboard.
 
-TrickBook exists to help riders:
-1. **Progress their riding** (tricks, spots, sessions)
-2. **Stay stoked** (culture, media, companions)
-3. **Connect with community** (homies, local knowledge, shared progression)
+TrickBook exists to help people ride more, progress faster, and feel connected while doing it.
 
-If a feature does not clearly improve one of those outcomes, it should be simplified or removed.
+---
+
+## The Deep Identity
+
+TrickBook lives at the intersection of three forces:
+
+1. **Progression** — track and improve real skills (tricks, spots, sessions)
+2. **Stoke** — keep motivation high through media, stories, and companion energy
+3. **Community** — connect riders to riders, not just users to content
+
+When these three are in balance, the product feels alive.
+When one dominates (usually data), the product feels dead.
+
+---
+
+## What We’ve Built So Far (and what it means)
+
+TrickBook has evolved from a trick encyclopedia into a layered ecosystem:
+
+- **Trickipedia** (knowledge + tutorials)
+- **Spots/Resorts** (where to ride)
+- **Social/DMs/Homies** (who to ride with)
+- **Media feed** (culture loop)
+- **Kaori companion** (motivation + guidance + personality)
+
+This is not feature sprawl when done correctly.
+It’s one loop:
+
+**Learn → Plan → Ride → Share → Improve**
+
+Every feature should feed this loop.
+
+---
+
+## Core Ethos
+
+### 1) Rider-first truth
+The app should make sense to someone trying to ride today, not someone analyzing data in a meeting.
+
+### 2) Utility with soul
+Function matters. Vibe matters too.
+A feature that works but feels sterile is incomplete.
+
+### 3) Simplicity is discipline
+We don’t “keep it simple” by doing less.
+We keep it simple by doing the right thing in the right order.
+
+### 4) Trust is sacred
+Wrong filters, wrong categories, broken states = trust loss.
+A trustworthy product beats a flashy one.
+
+### 5) Culture over clout
+No trend-chasing that weakens authenticity.
+The product should feel like riders built it for riders.
 
 ---
 
 ## Product Principles
 
-### 1) Simplicity over feature sprawl
-- Show the *minimum useful* information first.
-- Progressive disclosure: details on demand, not all at once.
-- One clear primary action per screen.
+### Progression > Vanity
+Prioritize features that help users take the next riding action:
+- learn a trick
+- find a spot
+- build a session plan
+- log progress
+- get feedback
 
-### 2) Progress over perfection
-- Prioritize tools that help users take the next action:
-  - log a trick
-  - save a spot
-  - plan a session
-  - share an update
+### Practical > Technical
+Do not surface backend mechanics as UI content.
+Example: no raw lat/lng in primary UI.
+Use map links and practical context instead.
 
-### 3) Culture-first utility
-- TrickBook should feel like action sports culture, not corporate software.
-- Voice, visuals, and interactions should be energetic but clean.
+### Focus > Flood
+Use progressive disclosure:
+- show essential info first
+- reveal depth only when asked
 
-### 4) Data should guide, not overwhelm
-- KPIs are useful only if they help decisions.
-- No raw data dumps (e.g., raw lat/lng in UI).
-- Map links and practical context beat technical clutter.
-
-### 5) Trust through consistency
-- Filters must be accurate.
-- Categories/sport types must be clean.
-- A wrong result is worse than fewer results.
+### Cohesion > Widgets
+Each screen needs one primary purpose and one primary action.
+If a page has five competing actions, it has none.
 
 ---
 
-## UX / Visual Philosophy
+## UX / Design Philosophy
 
-### Rule of Thirds
-- Every key screen should prioritize a 3-part hierarchy:
-  1. **Primary context** (where am I / what is this?)
-  2. **Primary action** (what should I do?)
-  3. **Supporting detail** (what helps me decide?)
+### Rule of Thirds (information)
+Each key screen should balance:
+1. **Context** (where am I?)
+2. **Action** (what should I do?)
+3. **Support** (what helps me decide?)
 
-### Sacred Geometry (practical interpretation)
-- Use balanced spacing ratios and visual rhythm (avoid random density).
-- Build card/layout systems around repeatable proportions.
-- Favor calm, intentional composition over noisy UI.
+### Sacred Geometry (layout rhythm)
+Practical application:
+- stable spacing ratios
+- repeatable card proportions
+- intentional visual cadence
+- calm hierarchy under motion-heavy content
 
-### Aesthetic constraints
-- Keep negative space intentional.
-- Keep type scale disciplined.
-- Keep interaction states obvious and tactile.
+This creates flow and reduces cognitive drag.
 
----
-
-## Feedback System (Lean Loop)
-
-### Goal
-Ship small, learn fast, improve what users actually use.
-
-### Loop
-1. **Ship a focused improvement** (small blast radius)
-2. **Collect in-product feedback** (thumbs up/down + optional note)
-3. **Measure behavior**
-   - completion rate
-   - repeat usage
-   - drop-off points
-4. **Review weekly**
-   - keep / iterate / remove
-
-### Simple scoring rubric
-- **Adoption:** Are users using it repeatedly?
-- **Clarity:** Do users understand it without explanation?
-- **Impact:** Does it improve progression/community engagement?
-
-If 2 of 3 are weak after iteration, simplify or sunset.
+### Aesthetic intent
+TrickBook should feel:
+- energetic but grounded
+- premium but approachable
+- expressive but not noisy
 
 ---
 
-## Resort/Spots Philosophy
+## Data & Content Ethos
 
-For resort/spot experiences:
-- Show what riders care about first.
-- Hide backend technical fields.
-- Prioritize practical decision support and local context.
+### Data should assist decisions, not become the product
+Especially for resorts/spots:
+- “Can I ride this today?”
+- “Is this right for my level?”
+- “How do I get there / what should I know?”
 
-Order of information:
-1. **Can I ride this and is it worth it today?**
-2. **What kind of rider is this best for?**
-3. **Where do I go next / how do I navigate there?**
+### Local knowledge beats generic stats
+The product should increasingly capture:
+- session wisdom
+- terrain nuance
+- progression tips by context
+
+### Content quality > content quantity
+Curate with intent.
+Do not include sources that conflict with project values.
 
 ---
 
-## AI Companion Philosophy (Kaori and beyond)
+## AI Companion Ethos (Kaori + future companions)
 
-Companions should:
-- feel human, not robotic
-- be concise and useful
-- motivate progression
-- match rider tone (hype/coach/calm)
+Companions are not novelty chatbots.
+They are progression partners.
 
-Voice and animation are part of trust. If they feel fake or glitchy, simplify until quality is reliable.
+A good companion should:
+- motivate without cringe
+- coach without lecturing
+- adapt tone (hype / calm / coach)
+- feel reliable and emotionally coherent
+
+If voice/animation quality is unstable, simplify before scaling complexity.
+Trust first, polish second, expansion third.
+
+---
+
+## Feedback Operating System (Lean, mandatory)
+
+### Build loop
+1. Ship one focused improvement
+2. Capture user feedback in-product
+3. Measure behavior
+4. Review weekly
+5. Keep / iterate / remove
+
+### Minimum evaluation rubric
+- **Adoption**: Are people using it repeatedly?
+- **Clarity**: Do they understand it immediately?
+- **Impact**: Does it improve progression/stoke/community?
+
+If 2 of 3 fail after iteration, simplify or sunset.
 
 ---
 
 ## Non-Negotiables
 
-- No misleading filters or mismatched categories.
-- No clutter-first interfaces.
-- No shipping complexity without a feedback loop.
-- Keep TrickBook’s core: **progression, stoke, community**.
+- No misleading filters or broken category logic
+- No clutter-first interfaces
+- No complexity without measurable value
+- No shipping delight features on top of unstable fundamentals
+- Keep the core loop intact: **Learn → Plan → Ride → Share → Improve**
 
 ---
 
-## Build Order Rule
+## Build Order (always)
 
-When deciding what to build next:
-1. Fix trust issues (bugs, filter mismatches, broken flows)
-2. Improve core progression loops
-3. Add delight only after reliability
+1. **Trust layer** — correctness, reliability, consistency
+2. **Core loop layer** — progression actions
+3. **Delight layer** — companion quality, polish, vibe
+4. **Expansion layer** — advanced automations and new surfaces
 
 ---
 
-## Final Check Before Shipping Any Feature
+## The Final Shipping Questions
 
-- Is it simple?
-- Is it useful to riders now?
-- Is it consistent with TrickBook’s culture?
-- Can we measure if it works?
+Before shipping anything, ask:
+- Does this help a rider progress?
+- Does this keep the experience clear and trustworthy?
+- Does this preserve TrickBook’s culture and voice?
+- Can we measure whether it worked?
 
 If not, keep refining.
+
+---
+
+## One-Line Compass
+
+**TrickBook should feel like your smartest, most stoked riding homie — never a spreadsheet with a logo.**
