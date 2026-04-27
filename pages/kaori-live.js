@@ -782,9 +782,9 @@ export default function KaoriLivePage() {
 
     try {
       // Pass x-kith-session header so the backend fires voice through Kith
-      const extraHeaders = kithSessionRef.current
-        ? { 'x-kith-session': kithSessionRef.current }
-        : undefined;
+      const kithSession = kithSessionRef.current;
+      console.log('[kaori-live] sending message, kithSession:', kithSession || '(none)');
+      const extraHeaders = kithSession ? { 'x-kith-session': kithSession } : undefined;
       await sendMessage(conversationId, content, token, extraHeaders);
 
       // Voice arrives via Kith WebSocket (tts_audio_chunk events).
@@ -920,6 +920,9 @@ export default function KaoriLivePage() {
                     msg.senderId === 'me' ||
                     (userId && msg.senderId?.toString() === userId?.toString()) ||
                     `${msg._id || ''}`.startsWith('temp-');
+                  // Hide voice-link messages (legacy MP3 URLs)
+                  if (/Kaori voice:\s*https?:\/\//i.test(msg.content || '')) return null;
+                  if (/https?:\/\/[^\s)]+\.mp3/i.test(msg.content || '')) return null;
                   return (
                     <div
                       key={msg._id || `${msg.createdAt}-${msg.content}`}
