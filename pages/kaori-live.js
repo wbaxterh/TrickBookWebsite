@@ -783,7 +783,6 @@ export default function KaoriLivePage() {
     try {
       // Pass x-kith-session header so the backend fires voice through Kith
       const kithSession = kithSessionRef.current;
-      console.log('[kaori-live] sending message, kithSession:', kithSession || '(none)');
       const extraHeaders = kithSession ? { 'x-kith-session': kithSession } : undefined;
       await sendMessage(conversationId, content, token, extraHeaders);
 
