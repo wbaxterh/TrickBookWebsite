@@ -128,6 +128,13 @@
   animation: pulse 1.1s ease-in-out infinite;
 }
 
+.stopBtn {
+  background: #eb5f73;
+  color: #fff;
+  min-width: 36px;
+  padding: 0 8px;
+}
+
 .sendBtn {
   background: #ffe06c;
   color: #161616;

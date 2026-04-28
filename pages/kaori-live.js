@@ -1,4 +1,4 @@
-import { Mic, MicOff, Loader2, Send, Sparkles } from 'lucide-react';
+import { Loader2, Mic, MicOff, Send, Sparkles, Square } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
@@ -15,7 +15,8 @@ import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
 const KAORI_VRM_PATH = '/kaori/kaori_sample.vrm';
-const KAORI_STAGE_BUILD_TAG = 'build-187-force';
+const KAORI_STAGE_BUILD_TAG = 'build-188-kith';
+const KITH_VOICE_WS_URL = process.env.NEXT_PUBLIC_KITH_VOICE_WS_URL || 'ws://localhost:3040/ws';
 
 export default function KaoriLivePage() {
   const { loggedIn, token, userId } = useContext(AuthContext);
@@ -34,15 +35,15 @@ export default function KaoriLivePage() {
   const threeRef = useRef({});
   const recognitionRef = useRef(null);
   const socketRef = useRef(null);
-  const audioRef = useRef(null);
-  const audioAnalyserRef = useRef(null);
-  const audioDataRef = useRef(null);
-  const audioRafRef = useRef(null);
-  const lastPlayedVoiceRef = useRef('');
-  const currentVoiceUrlRef = useRef('');
-  const voicePlayTokenRef = useRef(0);
   const sendLockRef = useRef(false);
   const lastSubmitRef = useRef({ text: '', ts: 0 });
+
+  // Kith voice WebSocket
+  const kithWsRef = useRef(null);
+  const kithSessionRef = useRef('');
+  const audioCtxRef = useRef(null);
+  const audioQueueRef = useRef([]);
+  const audioPlayingRef = useRef(false);
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -100,8 +101,7 @@ export default function KaoriLivePage() {
         return [...prev, message];
       });
 
-      // Do not autoplay voice from socket here; playback is handled in submit flow
-      // to avoid duplicate triggers (socket + polling) and overlapping audio.
+      // Voice playback is handled by Kith WebSocket, not from message content.
     };
 
     socket.on('message:new', onNewMessage);
@@ -111,6 +111,174 @@ export default function KaoriLivePage() {
       socket.off('message:new', onNewMessage);
     };
   }, [token, conversationId, userId]);
+
+  // --- Kith Voice WebSocket ---
+  // Connects to the Kith voice sidecar. Receives streaming TTS audio chunks,
+  // emotion state updates, and turn lifecycle events. Audio chunks are decoded
+  // and queued into Web Audio API for gapless playback.
+  useEffect(() => {
+    if (!conversationId) return;
+
+    let ws;
+    let closed = false;
+
+    const getAudioCtx = () => {
+      if (!audioCtxRef.current) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (Ctx) audioCtxRef.current = new Ctx();
+      }
+      if (audioCtxRef.current?.state === 'suspended') {
+        audioCtxRef.current.resume().catch(() => {});
+      }
+      return audioCtxRef.current;
+    };
+
+    const drainAudioQueue = async () => {
+      if (audioPlayingRef.current) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+
+      audioPlayingRef.current = true;
+      while (audioQueueRef.current.length > 0) {
+        const b64 = audioQueueRef.current.shift();
+        try {
+          const binary = atob(b64);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          const audioBuffer = await ctx.decodeAudioData(bytes.buffer.slice(0));
+          await new Promise((resolve) => {
+            const source = ctx.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(ctx.destination);
+            source.onended = resolve;
+            source.start();
+          });
+        } catch (err) {
+          console.warn('[kith] audio chunk decode/play error:', err);
+        }
+      }
+      audioPlayingRef.current = false;
+    };
+
+    const connect = () => {
+      if (closed) return;
+      ws = new WebSocket(KITH_VOICE_WS_URL);
+      kithWsRef.current = ws;
+
+      ws.onopen = () => {
+        console.log('[kith] ws connected');
+      };
+
+      ws.onmessage = (e) => {
+        let event;
+        try {
+          event = JSON.parse(e.data);
+        } catch {
+          return;
+        }
+
+        switch (event.type) {
+          case '_ready':
+            kithSessionRef.current = event.sessionId;
+            console.log('[kith] session ready:', event.sessionId);
+            break;
+
+          case 'tts_audio_chunk':
+            audioQueueRef.current.push(event.audioB64);
+            drainAudioQueue();
+            break;
+
+          case 'tts_start':
+            setCharState('speaking');
+            break;
+
+          case 'tts_end':
+            // Wait for queue to drain before going idle
+            if (audioQueueRef.current.length === 0 && !audioPlayingRef.current) {
+              setCharState('idle');
+            }
+            break;
+
+          case 'turn_start':
+            if (event.role === 'assistant') setCharState('speaking');
+            break;
+
+          case 'turn_end':
+            if (event.role === 'assistant') {
+              // Delay idle until audio queue drains
+              const checkIdle = () => {
+                if (audioQueueRef.current.length === 0 && !audioPlayingRef.current) {
+                  setCharState('idle');
+                } else {
+                  setTimeout(checkIdle, 100);
+                }
+              };
+              checkIdle();
+            }
+            break;
+
+          case 'emotion_state':
+            // Apply emotion tint to VRM materials
+            if (threeRef.current.vrm?.scene) {
+              const tints = {
+                excited: 0xffe5a0,
+                calm: 0xa0d8ff,
+                happy: 0xffc0e8,
+                sad: 0x8090cc,
+                neutral: 0xffffff,
+              };
+              const color = tints[event.state] ?? 0xffffff;
+              threeRef.current.vrm.scene.traverse((child) => {
+                if (child.isMesh && child.material?.emissive) {
+                  child.material.emissive.setHex(color);
+                  child.material.emissiveIntensity = event.intensity * 0.3;
+                }
+              });
+            }
+            break;
+
+          case 'barge_in_detected':
+            audioQueueRef.current.length = 0;
+            setCharState('listening');
+            break;
+
+          case 'error':
+            console.error('[kith] error:', event.message);
+            break;
+
+          default:
+            break;
+        }
+      };
+
+      ws.onclose = () => {
+        kithSessionRef.current = '';
+        kithWsRef.current = null;
+        if (!closed) {
+          console.log('[kith] ws closed, reconnecting in 3s...');
+          setTimeout(connect, 3000);
+        }
+      };
+
+      ws.onerror = (err) => {
+        console.error('[kith] ws error:', err);
+      };
+    };
+
+    connect();
+
+    return () => {
+      closed = true;
+      kithSessionRef.current = '';
+      if (ws) {
+        ws.onclose = null; // prevent reconnect
+        ws.close();
+      }
+      kithWsRef.current = null;
+      audioQueueRef.current.length = 0;
+      audioPlayingRef.current = false;
+    };
+  }, [conversationId]);
 
   useEffect(() => {
     if (loading) return;
@@ -132,7 +300,12 @@ export default function KaoriLivePage() {
       scene.background = new THREE.Color('#07122a');
       scene.fog = new THREE.Fog('#0a1732', 4.5, 12);
 
-      const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(
+        42,
+        mount.clientWidth / mount.clientHeight,
+        0.1,
+        1000,
+      );
       camera.position.set(0, 1.45, 2.15);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -155,7 +328,11 @@ export default function KaoriLivePage() {
 
       // Snowy mountain backdrop (Phase A art direction)
       const groundGeo = new THREE.PlaneGeometry(16, 8);
-      const groundMat = new THREE.MeshStandardMaterial({ color: '#a8c5de', roughness: 0.95, metalness: 0.02 });
+      const groundMat = new THREE.MeshStandardMaterial({
+        color: '#a8c5de',
+        roughness: 0.95,
+        metalness: 0.02,
+      });
       const ground = new THREE.Mesh(groundGeo, groundMat);
       ground.rotation.x = -Math.PI / 2;
       ground.position.set(0, -1.45, -1.2);
@@ -193,7 +370,11 @@ export default function KaoriLivePage() {
       scene.add(ring);
 
       const fallbackGeo = new THREE.SphereGeometry(0.55, 32, 32);
-      const fallbackMat = new THREE.MeshStandardMaterial({ color: '#8bb6ff', emissive: '#2a3d77', emissiveIntensity: 0.7 });
+      const fallbackMat = new THREE.MeshStandardMaterial({
+        color: '#8bb6ff',
+        emissive: '#2a3d77',
+        emissiveIntensity: 0.7,
+      });
       const fallbackMesh = new THREE.Mesh(fallbackGeo, fallbackMat);
       fallbackMesh.position.set(0, 0.2, 0);
       scene.add(fallbackMesh);
@@ -398,8 +579,14 @@ export default function KaoriLivePage() {
         smoothedMid = THREE.MathUtils.damp(smoothedMid, bands.mid, 12, dt);
         smoothedHigh = THREE.MathUtils.damp(smoothedHigh, bands.high, 12, dt);
 
-        const mouthTarget = state === 'speaking' ? Math.min(0.62, Math.max(0, smoothedVoice - 0.05) * 0.9) : 0;
-        smoothedMouth = THREE.MathUtils.damp(smoothedMouth, mouthTarget, state === 'speaking' ? 16 : 11, dt);
+        const mouthTarget =
+          state === 'speaking' ? Math.min(0.62, Math.max(0, smoothedVoice - 0.05) * 0.9) : 0;
+        smoothedMouth = THREE.MathUtils.damp(
+          smoothedMouth,
+          mouthTarget,
+          state === 'speaking' ? 16 : 11,
+          dt,
+        );
 
         if (vrm) {
           vrm.update(dt);
@@ -439,20 +626,43 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          const armTalk = state === 'speaking' ? Math.sin(t * (3.6 + smoothedVoice * 1.8)) * (0.01 + smoothedVoice * 0.016) : 0;
+          const armTalk =
+            state === 'speaking'
+              ? Math.sin(t * (3.6 + smoothedVoice * 1.8)) * (0.01 + smoothedVoice * 0.016)
+              : 0;
           const leftTargetZ = -1.2 + armTalk;
           const rightTargetZ = 1.2 - armTalk;
           const leftTargetY = 0.05;
           const rightTargetY = -0.05;
 
           if (leftUpperArm) {
-            leftUpperArm.rotation.z = THREE.MathUtils.damp(leftUpperArm.rotation.z, leftTargetZ, 7, dt);
-            leftUpperArm.rotation.y = THREE.MathUtils.damp(leftUpperArm.rotation.y, leftTargetY, 7, dt);
+            leftUpperArm.rotation.z = THREE.MathUtils.damp(
+              leftUpperArm.rotation.z,
+              leftTargetZ,
+              7,
+              dt,
+            );
+            leftUpperArm.rotation.y = THREE.MathUtils.damp(
+              leftUpperArm.rotation.y,
+              leftTargetY,
+              7,
+              dt,
+            );
             leftUpperArm.rotation.x = THREE.MathUtils.damp(leftUpperArm.rotation.x, -0.02, 7, dt);
           }
           if (rightUpperArm) {
-            rightUpperArm.rotation.z = THREE.MathUtils.damp(rightUpperArm.rotation.z, rightTargetZ, 7, dt);
-            rightUpperArm.rotation.y = THREE.MathUtils.damp(rightUpperArm.rotation.y, rightTargetY, 7, dt);
+            rightUpperArm.rotation.z = THREE.MathUtils.damp(
+              rightUpperArm.rotation.z,
+              rightTargetZ,
+              7,
+              dt,
+            );
+            rightUpperArm.rotation.y = THREE.MathUtils.damp(
+              rightUpperArm.rotation.y,
+              rightTargetY,
+              7,
+              dt,
+            );
             rightUpperArm.rotation.x = THREE.MathUtils.damp(rightUpperArm.rotation.x, -0.02, 7, dt);
           }
 
@@ -535,173 +745,19 @@ export default function KaoriLivePage() {
     threeRef.current.charState = charState;
   }, [charState]);
 
-  useEffect(() => {
-    return () => {
-      stopCurrentAudio();
-      if (typeof window !== 'undefined' && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, []);
-
-  const extractVoiceUrl = (text = '') => {
-    if (!text) return '';
-
-    const explicit = text.match(/Kaori voice:\s*(https?:\/\/\S+)/i)?.[1];
-    if (explicit) return explicit.trim();
-
-    const kaoriPath = text.match(/https?:\/\/[^\s)]+kaori-voice[^\s)]*\.mp3/i)?.[0];
-    if (kaoriPath) return kaoriPath.trim();
-
-    const anyMp3 = text.match(/https?:\/\/[^\s)]+\.mp3/i)?.[0];
-    return anyMp3?.trim() || '';
+  const stopKithAudio = () => {
+    audioQueueRef.current.length = 0;
+    if (kithWsRef.current?.readyState === WebSocket.OPEN) {
+      kithWsRef.current.send(JSON.stringify({ type: 'barge-in' }));
+    }
+    setCharState('idle');
   };
 
-  const unlockAudioPlayback = async () => {
-    if (typeof window === 'undefined') return;
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return;
-
-    if (!window.__kaoriAudioCtx) {
-      window.__kaoriAudioCtx = new Ctx();
-    }
-
-    if (window.__kaoriAudioCtx.state === 'suspended') {
-      try {
-        await window.__kaoriAudioCtx.resume();
-      } catch (_err) {
-        // ignore
-      }
+  const ensureAudioCtx = () => {
+    if (audioCtxRef.current?.state === 'suspended') {
+      audioCtxRef.current.resume().catch(() => {});
     }
   };
-
-  const stopCurrentAudio = () => {
-    voicePlayTokenRef.current += 1;
-    currentVoiceUrlRef.current = '';
-
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-
-    if (audioRafRef.current) cancelAnimationFrame(audioRafRef.current);
-    audioRafRef.current = null;
-
-    if (audioRef.current) {
-      try {
-        audioRef.current.pause();
-      } catch (_err) {
-        // no-op
-      }
-      audioRef.current = null;
-    }
-
-    threeRef.current.voiceLevel = 0;
-    threeRef.current.voiceBands = { low: 0, mid: 0, high: 0 };
-  };
-
-  const playElevenLabsVoice = (url) => {
-    if (typeof window === 'undefined' || !url) return;
-    if (currentVoiceUrlRef.current === url && audioRef.current && !audioRef.current.paused) return;
-
-    stopCurrentAudio();
-
-    const token = ++voicePlayTokenRef.current;
-    currentVoiceUrlRef.current = url;
-    lastPlayedVoiceRef.current = url;
-
-    try {
-      const audio = new Audio(url);
-      audioRef.current = audio;
-      audio.crossOrigin = 'anonymous';
-      audio.preload = 'auto';
-      audio.playsInline = true;
-
-      audio.onplay = () => {
-        if (token !== voicePlayTokenRef.current) return;
-        setCharState('speaking');
-      };
-      audio.onpause = () => {
-        if (token !== voicePlayTokenRef.current) return;
-        threeRef.current.voiceLevel = 0;
-        setCharState('idle');
-      };
-      audio.onended = () => {
-        if (token !== voicePlayTokenRef.current) return;
-        threeRef.current.voiceLevel = 0;
-        setCharState('idle');
-      };
-      audio.onerror = () => {
-        if (token !== voicePlayTokenRef.current) return;
-        threeRef.current.voiceLevel = 0;
-        setCharState('idle');
-      };
-
-      if (window.AudioContext || window.webkitAudioContext) {
-        const ctx = window.__kaoriAudioCtx || new (window.AudioContext || window.webkitAudioContext)();
-        window.__kaoriAudioCtx = ctx;
-        const analyser = ctx.createAnalyser();
-        analyser.fftSize = 128;
-        const source = ctx.createMediaElementSource(audio);
-        source.connect(analyser);
-        analyser.connect(ctx.destination);
-
-        audioAnalyserRef.current = analyser;
-        audioDataRef.current = new Uint8Array(analyser.frequencyBinCount);
-
-        const tick = () => {
-          if (token !== voicePlayTokenRef.current) return;
-          if (!audioAnalyserRef.current || !audioDataRef.current) return;
-          audioAnalyserRef.current.getByteFrequencyData(audioDataRef.current);
-
-          const bins = audioDataRef.current;
-          const n = bins.length;
-          const lowEnd = Math.max(1, Math.floor(n * 0.18));
-          const midEnd = Math.max(lowEnd + 1, Math.floor(n * 0.52));
-
-          let low = 0;
-          let mid = 0;
-          let high = 0;
-          for (let i = 0; i < n; i += 1) {
-            const v = bins[i];
-            if (i < lowEnd) low += v;
-            else if (i < midEnd) mid += v;
-            else high += v;
-          }
-
-          low /= lowEnd;
-          mid /= Math.max(1, midEnd - lowEnd);
-          high /= Math.max(1, n - midEnd);
-
-          const total = bins.reduce((sum, x) => sum + x, 0);
-          const avg = total / n;
-          threeRef.current.voiceLevel = Math.min(1, avg / 120);
-          threeRef.current.voiceBands = {
-            low: Math.min(1, low / 145),
-            mid: Math.min(1, mid / 145),
-            high: Math.min(1, high / 145),
-          };
-
-          audioRafRef.current = requestAnimationFrame(tick);
-        };
-
-        tick();
-      }
-
-      audio.play().catch(() => {
-        if (token !== voicePlayTokenRef.current) return;
-        setCharState('idle');
-      });
-    } catch (_err) {
-      if (token !== voicePlayTokenRef.current) return;
-      setCharState('idle');
-    }
-  };
-
-  const speakBrowserTTS = (_text) => {
-    // Disabled intentionally: Kaori Live should use ElevenLabs audio only.
-  };
-
-
 
   const submitText = async (text) => {
     if (!text?.trim() || !conversationId || sending || sendLockRef.current) return;
@@ -725,64 +781,14 @@ export default function KaoriLivePage() {
     setMessages((prev) => [...prev, optimistic]);
 
     try {
-      const sendStartedAt = Date.now();
-      await sendMessage(conversationId, content, token);
+      // Pass x-kith-session header so the backend fires voice through Kith
+      const kithSession = kithSessionRef.current;
+      const extraHeaders = kithSession ? { 'x-kith-session': kithSession } : undefined;
+      await sendMessage(conversationId, content, token, extraHeaders);
 
-      // Poll briefly for the *new* Kaori reply (text + optional voice url)
-      let latestMessages = [];
-      for (let attempt = 0; attempt < 8; attempt += 1) {
-        const latest = await getMessages(conversationId, { page: 1, limit: 40 }, token);
-        latestMessages = latest?.messages || [];
-
-        const hasNewKaori = latestMessages.some((m) => {
-          const ts = new Date(m.createdAt || 0).getTime();
-          return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000;
-        });
-
-        if (hasNewKaori) break;
-        await new Promise((resolve) => setTimeout(resolve, 500));
-      }
-
-      setMessages(latestMessages);
-
-      const freshKaori = latestMessages
-        .filter((m) => {
-          const ts = new Date(m.createdAt || 0).getTime();
-          return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000;
-        })
-        .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-
-      const freshVoice = freshKaori.find((m) => extractVoiceUrl(m.content));
-      const freshVoiceUrl = extractVoiceUrl(freshVoice?.content || '');
-
-      if (freshVoiceUrl) {
-        playElevenLabsVoice(freshVoiceUrl);
-      } else {
-        // Voice message can arrive after text; keep polling briefly for ElevenLabs URL.
-        let delayedVoiceUrl = '';
-        for (let i = 0; i < 12; i += 1) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          const polled = await getMessages(conversationId, { page: 1, limit: 50 }, token);
-          const polledMessages = polled?.messages || [];
-          setMessages(polledMessages);
-
-          const delayedVoice = [...polledMessages]
-            .reverse()
-            .find((m) => {
-              const ts = new Date(m.createdAt || 0).getTime();
-              return m.senderId?.toString() !== userId?.toString() && ts >= sendStartedAt - 1000 && extractVoiceUrl(m.content || '');
-            });
-
-          delayedVoiceUrl = extractVoiceUrl(delayedVoice?.content || '');
-          if (delayedVoiceUrl) break;
-        }
-
-        if (delayedVoiceUrl) {
-          playElevenLabsVoice(delayedVoiceUrl);
-        } else {
-          setCharState('idle');
-        }
-      }
+      // Voice arrives via Kith WebSocket (tts_audio_chunk events).
+      // Text reply arrives via socket.io (message:new event).
+      // No polling needed.
     } catch (_error) {
       setMessages((prev) => prev.filter((m) => m._id !== optimistic._id));
       setCharState('idle');
@@ -796,14 +802,14 @@ export default function KaoriLivePage() {
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
-    await unlockAudioPlayback();
+    ensureAudioCtx();
     const payload = input;
     setInput('');
     await submitText(payload);
   };
 
   const toggleVoiceInput = async () => {
-    await unlockAudioPlayback();
+    ensureAudioCtx();
     if (!SpeechRecognition) {
       alert('Voice input is not supported in this browser yet.');
       return;
@@ -900,7 +906,10 @@ export default function KaoriLivePage() {
           <div className={styles.layout}>
             <section className={styles.stagePanel}>
               <div ref={mountRef} className={styles.stage} />
-              <p className={styles.caption}>Kaori stage status: {stageDebug} · {KAORI_STAGE_BUILD_TAG} · Three.js + VRM emotes (idle/listening/thinking/speaking).</p>
+              <p className={styles.caption}>
+                Kaori stage status: {stageDebug} · {KAORI_STAGE_BUILD_TAG} · Three.js + VRM emotes
+                (idle/listening/thinking/speaking).
+              </p>
             </section>
 
             <section className={styles.chatPanel}>
@@ -910,10 +919,14 @@ export default function KaoriLivePage() {
                     msg.senderId === 'me' ||
                     (userId && msg.senderId?.toString() === userId?.toString()) ||
                     `${msg._id || ''}`.startsWith('temp-');
-                  const isVoiceLink = Boolean(extractVoiceUrl(msg.content || ''));
-                  if (isVoiceLink) return null;
+                  // Hide voice-link messages (legacy MP3 URLs)
+                  if (/Kaori voice:\s*https?:\/\//i.test(msg.content || '')) return null;
+                  if (/https?:\/\/[^\s)]+\.mp3/i.test(msg.content || '')) return null;
                   return (
-                    <div key={msg._id || `${msg.createdAt}-${msg.content}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
+                    <div
+                      key={msg._id || `${msg.createdAt}-${msg.content}`}
+                      className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}
+                    >
                       <div className={styles.messageBubble}>{msg.content}</div>
                     </div>
                   );
@@ -934,7 +947,16 @@ export default function KaoriLivePage() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={listening ? 'Listening… release mic when done' : 'Talk to Kaori…'}
                 />
-                <Button type="submit" disabled={!input.trim() || sending} className={styles.sendBtn}>
+                {charState === 'speaking' && (
+                  <Button type="button" onClick={stopKithAudio} className={styles.stopBtn}>
+                    <Square size={14} />
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  disabled={!input.trim() || sending}
+                  className={styles.sendBtn}
+                >
                   {sending ? <Loader2 className={styles.spinSmall} /> : <Send size={16} />}
                 </Button>
               </form>
@@ -945,4 +967,3 @@ export default function KaoriLivePage() {
     </>
   );
 }
-
