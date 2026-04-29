@@ -110,11 +110,36 @@
 }
 
 .inputRow {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  align-items: flex-end;
   gap: 8px;
   padding: 10px;
   border-top: 1px solid rgba(138, 162, 230, 0.2);
+}
+
+.chatInput {
+  flex: 1;
+  min-height: 36px;
+  max-height: 120px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 162, 230, 0.3);
+  background: rgba(20, 26, 50, 0.8);
+  color: #f4f6ff;
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: 1.4;
+  resize: none;
+  overflow-y: auto;
+}
+
+.chatInput:focus {
+  outline: none;
+  border-color: rgba(138, 162, 230, 0.6);
+}
+
+.chatInput::placeholder {
+  color: rgba(180, 195, 230, 0.5);
 }
 
 .micIdle {

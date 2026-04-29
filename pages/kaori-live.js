@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
 import {
   getBotCompanions,
   getMessages,
@@ -98,6 +97,18 @@ export default function KaoriLivePage() {
 
       setMessages((prev) => {
         if (prev.some((m) => m._id === message._id)) return prev;
+        // Replace optimistic message with the real one from the server
+        const isOwnMessage = message.senderId?.toString() === userId?.toString();
+        if (isOwnMessage) {
+          const hasOptimistic = prev.some(
+            (m) => `${m._id}`.startsWith('temp-') && m.content === message.content,
+          );
+          if (hasOptimistic) {
+            return prev.map((m) =>
+              `${m._id}`.startsWith('temp-') && m.content === message.content ? message : m,
+            );
+          }
+        }
         return [...prev, message];
       });
 
@@ -942,10 +953,22 @@ export default function KaoriLivePage() {
                 >
                   {listening ? <MicOff size={16} /> : <Mic size={16} />}
                 </Button>
-                <Input
+                <textarea
+                  className={styles.chatInput}
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    e.target.style.height = 'auto';
+                    e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend(e);
+                    }
+                  }}
                   placeholder={listening ? 'Listening… release mic when done' : 'Talk to Kaori…'}
+                  rows={1}
                 />
                 {charState === 'speaking' && (
                   <Button type="button" onClick={stopKithAudio} className={styles.stopBtn}>
