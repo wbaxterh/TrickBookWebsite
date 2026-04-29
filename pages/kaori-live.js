@@ -1,9 +1,8 @@
-import { Loader2, Mic, MicOff, Send, Sparkles, Square } from 'lucide-react';
+import { Loader2, Mic, MicOff, Send, Square } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
-import { Button } from '../components/ui/button';
 import {
   getBotCompanions,
   getMessages,
@@ -875,12 +874,21 @@ export default function KaoriLivePage() {
     recognition.start();
   };
 
+  const stateStyle =
+    charState === 'listening'
+      ? styles.stateListening
+      : charState === 'thinking'
+        ? styles.stateThinking
+        : charState === 'speaking'
+          ? styles.stateSpeaking
+          : styles.stateIdle;
+
   if (loggedIn === false) {
     return (
       <div className={styles.centerWrap}>
-        <p className={styles.dim}>Please log in to use Kaori Live.</p>
+        <p className={styles.dim}>Log in to talk with Kaori</p>
         <Link href="/login" className={styles.loginLink}>
-          Go to Login
+          Sign In
         </Link>
       </div>
     );
@@ -893,97 +901,101 @@ export default function KaoriLivePage() {
       </Head>
 
       <div className={styles.page}>
-        <div className={styles.topbar}>
-          <div>
-            <h1 className={styles.title}>Kaori Live</h1>
-            <p className={styles.subtitle}>3D + direct voice conversation MVP</p>
+        {/* Avatar fills entire viewport */}
+        <div ref={mountRef} className={styles.stage} />
+
+        {/* Top HUD — brand + state indicator */}
+        <div className={styles.hud}>
+          <div className={styles.brandMark}>
+            <div>
+              <h1 className={styles.brandName}>Kaori</h1>
+              <p className={styles.brandSub}>AI Companion</p>
+            </div>
           </div>
-          <div className={styles.stateBadge}>
-            <Sparkles size={14} />
+          <div className={`${styles.statePill} ${stateStyle}`}>
+            <span className={styles.stateDot} />
             {charState}
           </div>
         </div>
 
-        {loading ? (
+        {/* Loading / Error overlays */}
+        {loading && (
           <div className={styles.centerWrap}>
             <Loader2 className={styles.spin} />
-            <p className={styles.dim}>Booting Kaori Live...</p>
+            <p className={styles.dim}>Connecting to Kaori...</p>
           </div>
-        ) : bootError ? (
+        )}
+        {bootError && !loading && (
           <div className={styles.centerWrap}>
             <p className={styles.error}>{bootError}</p>
           </div>
-        ) : (
-          <div className={styles.layout}>
-            <section className={styles.stagePanel}>
-              <div ref={mountRef} className={styles.stage} />
-              <p className={styles.caption}>
-                Kaori stage status: {stageDebug} · {KAORI_STAGE_BUILD_TAG} · Three.js + VRM emotes
-                (idle/listening/thinking/speaking).
-              </p>
-            </section>
+        )}
 
-            <section className={styles.chatPanel}>
-              <div className={styles.messages}>
-                {messages.map((msg) => {
-                  const mine =
-                    msg.senderId === 'me' ||
-                    (userId && msg.senderId?.toString() === userId?.toString()) ||
-                    `${msg._id || ''}`.startsWith('temp-');
-                  // Hide voice-link messages (legacy MP3 URLs)
-                  if (/Kaori voice:\s*https?:\/\//i.test(msg.content || '')) return null;
-                  if (/https?:\/\/[^\s)]+\.mp3/i.test(msg.content || '')) return null;
-                  return (
-                    <div
-                      key={msg._id || `${msg.createdAt}-${msg.content}`}
-                      className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}
-                    >
-                      <div className={styles.messageBubble}>{msg.content}</div>
-                    </div>
-                  );
-                })}
-                <div ref={scrollRef} />
-              </div>
+        {/* Chat overlay — transparent, overlays bottom of avatar */}
+        {!loading && !bootError && (
+          <div className={styles.chatOverlay}>
+            <div className={styles.messages}>
+              {messages.map((msg) => {
+                const mine =
+                  msg.senderId === 'me' ||
+                  (userId && msg.senderId?.toString() === userId?.toString()) ||
+                  `${msg._id || ''}`.startsWith('temp-');
+                if (/Kaori voice:\s*https?:\/\//i.test(msg.content || '')) return null;
+                if (/https?:\/\/[^\s)]+\.mp3/i.test(msg.content || '')) return null;
+                return (
+                  <div
+                    key={msg._id || `${msg.createdAt}-${msg.content}`}
+                    className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}
+                  >
+                    <div className={styles.messageBubble}>{msg.content}</div>
+                  </div>
+                );
+              })}
+              <div ref={scrollRef} />
+            </div>
 
-              <form className={styles.inputRow} onSubmit={handleSend}>
-                <Button
+            <form className={styles.inputBar} onSubmit={handleSend}>
+              <button
+                type="button"
+                onClick={toggleVoiceInput}
+                className={`${styles.iconBtn} ${listening ? styles.micLive : styles.micIdle}`}
+              >
+                {listening ? <MicOff size={18} /> : <Mic size={18} />}
+              </button>
+              <textarea
+                className={styles.chatInput}
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  e.target.style.height = 'auto';
+                  e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend(e);
+                  }
+                }}
+                placeholder={listening ? 'Listening…' : 'Talk to Kaori…'}
+                rows={1}
+              />
+              {charState === 'speaking' && (
+                <button
                   type="button"
-                  onClick={toggleVoiceInput}
-                  className={listening ? styles.micLive : styles.micIdle}
+                  onClick={stopKithAudio}
+                  className={`${styles.iconBtn} ${styles.stopBtn}`}
                 >
-                  {listening ? <MicOff size={16} /> : <Mic size={16} />}
-                </Button>
-                <textarea
-                  className={styles.chatInput}
-                  value={input}
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                    e.target.style.height = 'auto';
-                    e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSend(e);
-                    }
-                  }}
-                  placeholder={listening ? 'Listening… release mic when done' : 'Talk to Kaori…'}
-                  rows={1}
-                />
-                {charState === 'speaking' && (
-                  <Button type="button" onClick={stopKithAudio} className={styles.stopBtn}>
-                    <Square size={14} />
-                  </Button>
-                )}
-                <Button
-                  type="submit"
-                  disabled={!input.trim() || sending}
-                  className={styles.sendBtn}
-                >
-                  {sending ? <Loader2 className={styles.spinSmall} /> : <Send size={16} />}
-                </Button>
-              </form>
-            </section>
+                  <Square size={14} />
+                </button>
+              )}
+              <button
+                type="submit"
+                disabled={!input.trim() || sending}
+                className={`${styles.iconBtn} ${styles.sendBtn}`}
+              >
+                {sending ? <Loader2 className={styles.spinSmall} /> : <Send size={18} />}
+              </button>
+            </form>
           </div>
         )}
       </div>
