@@ -5,6 +5,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import {
   getBotCompanions,
+  getCompanionGreeting,
   getMessages,
   sendMessage,
   startBotConversation,
@@ -35,6 +36,8 @@ export default function KaoriLivePage() {
   const socketRef = useRef(null);
   const sendLockRef = useRef(false);
   const lastSubmitRef = useRef({ text: '', ts: 0 });
+  const kaoriBotIdRef = useRef('');
+  const greetedRef = useRef(false);
 
   // Kith voice WebSocket
   const kithWsRef = useRef(null);
@@ -72,6 +75,7 @@ export default function KaoriLivePage() {
         if (!convoId) throw new Error('Could not start Kaori conversation');
 
         setConversationId(convoId);
+        kaoriBotIdRef.current = kaori._id;
 
         const messageData = await getMessages(convoId, { page: 1, limit: 30 }, token);
         setMessages(messageData?.messages || []);
@@ -190,7 +194,31 @@ export default function KaoriLivePage() {
         switch (event.type) {
           case '_ready':
             kithSessionRef.current = event.sessionId;
-            console.log('[kith] session ready:', event.sessionId);
+            // Auto-greet on first connect
+            if (!greetedRef.current && kaoriBotIdRef.current && token) {
+              greetedRef.current = true;
+              getCompanionGreeting(kaoriBotIdRef.current, token)
+                .then(({ greeting }) => {
+                  if (greeting && event.sessionId === kithSessionRef.current) {
+                    // Add greeting as a Kaori message in the chat
+                    setMessages((prev) => [
+                      ...prev,
+                      {
+                        _id: `greeting-${Date.now()}`,
+                        senderId: kaoriBotIdRef.current,
+                        content: greeting,
+                        createdAt: new Date().toISOString(),
+                      },
+                    ]);
+                    // Speak the greeting through Kith voice
+                    if (ws.readyState === WebSocket.OPEN) {
+                      ws.send(JSON.stringify({ type: 'speak', text: greeting }));
+                    }
+                    setCharState('speaking');
+                  }
+                })
+                .catch(() => {});
+            }
             break;
 
           case 'tts_audio_chunk':
