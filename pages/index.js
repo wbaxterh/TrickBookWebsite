@@ -1,424 +1,558 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import {
+  ChevronRight,
+  Download,
+  MapPin,
+  Smartphone,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext } from 'react';
-import Slider from 'react-slick';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
-import styles from '../styles/Home.module.css';
+import { useFeatureFlag } from '../lib/useFeatureFlag';
 
-const settings = {
-  dots: true,
-  infinite: true,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-  speed: 500,
-  autoplaySpeed: 7000,
-  cssEase: 'linear',
-  pauseOnHover: true,
-  // nextArrow: <NextArrow />,
-  // prevArrow: <PrevArrow />,
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || '';
+
+function formatNumber(num) {
+  if (num >= 1000) return `${(num / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+  return num.toLocaleString();
+}
+
+function useStats() {
+  const [stats, setStats] = useState(null);
+  useEffect(() => {
+    fetch(`${API_BASE}/stats`)
+      .then((res) => res.json())
+      .then(setStats)
+      .catch(() => {});
+  }, []);
+  return stats;
+}
+
+// Animated counter that counts up from 0
+function AnimatedStat({ value, label, icon: Icon }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!value) return;
+    let start = 0;
+    const end = value;
+    const duration = 1500;
+    const stepTime = 20;
+    const steps = duration / stepTime;
+    const increment = end / steps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <div className="flex flex-col items-center gap-1 px-4 py-2">
+      <Icon className="w-5 h-5 text-yellow-400 mb-1" />
+      <span className="text-2xl md:text-3xl font-bold text-white tabular-nums">
+        {formatNumber(count)}+
+      </span>
+      <span className="text-xs md:text-sm text-gray-400 uppercase tracking-wider">{label}</span>
+    </div>
+  );
+}
+
+function AppStoreBadges({ className = '' }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+      <a
+        href="https://apps.apple.com/us/app/the-trick-book/id6446022788"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="transition-transform hover:scale-105"
+        data-ph-capture="true"
+        data-ph-event="app_store_click"
+        data-ph-store="ios"
+      >
+        <Image
+          src="/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+          width={150}
+          height={50}
+          alt="Download on the App Store"
+        />
+      </a>
+      <a
+        href="https://play.google.com/store/apps/details?id=com.thetrickbook.trickbook"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="transition-transform hover:scale-105"
+        data-ph-capture="true"
+        data-ph-event="app_store_click"
+        data-ph-store="android"
+      >
+        <Image
+          src="/google-play-badge.svg"
+          width={168}
+          height={50}
+          alt="Get it on Google Play"
+          className="h-[50px] w-auto"
+        />
+      </a>
+    </div>
+  );
+}
+
+const FEATURES = [
+  {
+    icon: Target,
+    title: 'Track',
+    subtitle: 'Every trick you land',
+    description:
+      'Build custom trick lists for any sport. Check off tricks as you land them, track your sessions, and watch your skills grow over time.',
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-400/10',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Progress',
+    subtitle: "See how far you've come",
+    description:
+      'Visual progress tracking shows your journey from beginner to pro. Browse the Trickipedia to discover new tricks and set goals for your next session.',
+    color: 'text-emerald-400',
+    bgColor: 'bg-emerald-400/10',
+  },
+  {
+    icon: Users,
+    title: 'Connect',
+    subtitle: 'Ride with your crew',
+    description:
+      'Find and follow riders who share your stoke. Share clips, message your homies, and build a community around the sports you love.',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-400/10',
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Finally an app built by skaters, for skaters. I've been tracking my progress for months and it's actually motivating to see how many tricks I've landed.",
+    name: 'Jake M.',
+    role: 'Skateboarder',
+    rating: 5,
+  },
+  {
+    quote:
+      "The spot finder is incredible. I moved to a new city and found three parks I didn't know about within my first week.",
+    name: 'Sarah K.',
+    role: 'Snowboarder',
+    rating: 5,
+  },
+  {
+    quote:
+      "Love that this isn't just another social media app trying to sell my data. It's actually useful and respects my privacy.",
+    name: 'Marcus T.',
+    role: 'Skateboarder',
+    rating: 5,
+  },
+];
+
+const HOW_IT_WORKS = [
+  {
+    step: '1',
+    icon: Download,
+    title: 'Download free',
+    description: 'Get TrickBook on iOS or Android. No credit card, no catch.',
+  },
+  {
+    step: '2',
+    icon: Zap,
+    title: 'Start tracking',
+    description: 'Create trick lists, discover spots near you, and log your sessions.',
+  },
+  {
+    step: '3',
+    icon: TrendingUp,
+    title: 'Level up',
+    description: 'Watch your progress grow, connect with riders, and push your limits.',
+  },
+];
+
+// A/B test variants for the hero headline.
+// Create a feature flag called "hero-headline" in PostHog with these variant keys.
+const HERO_VARIANTS = {
+  control: { line1: 'Track every trick', line2: 'you land.' },
+  'variant-community': { line1: 'Your skateboarding journey,', line2: 'tracked.' },
+  'variant-action': { line1: 'Land more tricks.', line2: 'Find more spots.' },
 };
 
 export default function Home() {
   const { loggedIn } = useContext(AuthContext);
+  const stats = useStats();
+  const heroVariant = useFeatureFlag('hero-headline', 'control');
+  const heroText = HERO_VARIANTS[heroVariant] || HERO_VARIANTS.control;
 
   return (
     <>
       <Head>
-        <title>The Trick Book</title>
+        <title>TrickBook - Track Tricks. Find Spots. Ride Together.</title>
         <link rel="icon" href="/favicon.png" />
-        <meta name="description" content="The Trick Book - App Landing Page" />
+        <meta
+          name="description"
+          content="TrickBook is the free app for skaters, snowboarders, and action sports riders to track tricks, discover spots, and connect with the community. Download now on iOS and Android."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://thetrickbook.com/" />
-        <meta name="author" content="Wes Huber" />
+        <meta name="author" content="TrickBook" />
         <meta
           name="keywords"
-          content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App, The Trick Book, Action Sports App, Skateboarding App, Snowboarding App, Wakeboarding App, Trick Library, Trick Enyclopedia"
+          content="skateboarding app, trick tracker, skate spots, snowboarding app, action sports, trick list, skateboard progress, find skate spots"
         />
+        <meta property="og:title" content="TrickBook - Track Tricks. Find Spots. Ride Together." />
+        <meta
+          property="og:description"
+          content="The free app for action sports riders to track tricks, discover spots, and connect with the community."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://thetrickbook.com" />
       </Head>
-      <section className={styles.splashSection}>
-        <div className={`d-block justify-content-center ${styles.splashHeader}`}>
-          {/* <Image
-								className={styles.icon}
-								src='/adaptive-icon.png' // Route of the image file
-								height={250} // Desired size with correct aspect ratio
-								width={250} // Desired size with correct aspect ratio
-								alt='Trick Book'
-							/> */}
-          <h1>The platform dedicated to Action Sports</h1>
-          <div className="d-flex justify-content-center">
-            <a
-              className={styles.centerImage}
-              target="_blank"
-              href="https://apps.apple.com/us/app/the-trick-book/id6446022788"
-              rel="noopener"
-            >
-              <Image
-                src="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-                width={224}
-                height={76}
-                className={styles.badge}
-              />
-            </a>
-          </div>
-        </div>
 
-        {/* <p className={styles.description}>
-							<br />
-							View Our <Link href='/privacy-policy'>Privacy Policy</Link> <br />
-							<Link href='/questions-support'>Questions & Support</Link> 
-						</p> */}
-      </section>
-      {/* <section className={styles.missionSection}>
-						<div className='container'>
-							<div className='row'>
-								<div className='col'>
-									<h2>About Trick Book</h2>
-									<p>
-										<strong>Welcome to the World of Action Sports</strong>
-									</p>
-								</div>
-							</div>
-						</div>
-					</section> */}
-      <section className={styles.newsFeedSection}>
-        <Container>
-          <Slider {...settings}>
-            {/* Trickbook Slide */}
-            <Box className={`py-4 ${styles.slide}`}>
-              <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                📘 Trickipedia
-              </Typography>
-              <Typography className="mb-3 mt-2 px-1">
-                The ultimate trick encyclopedia for action sports. Browse thousands of tricks across
-                skateboarding, snowboarding, surfing, and more. Track your personal progress,
-                discover new tricks to learn, and get step-by-step tutorials to level up your
-                skills.
-              </Typography>
-              <Button
-                variant={'outlined'}
-                color={'primary'}
-                className={`btn ${styles.customPrimary} me-3`}
-              >
-                <Link href="/trickbook" className="text-dark">
+      {/* ============================================ */}
+      {/* SECTION 1: HERO                              */}
+      {/* ============================================ */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0a0a0a]">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#1a1a00] opacity-90" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+
+        <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            {/* Left: Copy */}
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-sm mb-6">
+                <Smartphone className="w-4 h-4" />
+                Free on iOS & Android
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                {heroText.line1}
+                <br />
+                <span className="text-yellow-400">{heroText.line2}</span>
+              </h1>
+
+              <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-md">
+                The app for skaters, snowboarders, and action sports riders to track progress,
+                discover spots, and ride with a real community.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors text-center no-underline"
+                >
+                  Get Started Free
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/trickbook"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 !text-gray-300 font-medium rounded-lg hover:border-yellow-400/50 hover:!text-yellow-400 transition-colors text-center no-underline"
+                >
                   Explore Tricks
                 </Link>
-              </Button>
-              {!loggedIn && (
-                <Button
-                  variant={'outlined'}
-                  color={'secondary'}
-                  disableRipple={true}
-                  sx={{
-                    borderColor: '#1E1E1E',
-                    color: '#1E1E1E',
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      borderColor: '#1E1E1E',
-                    },
-                  }}
-                >
-                  <Link href="/signup" className="text-dark">
-                    Become a Rider
-                  </Link>
-                </Button>
-              )}
-            </Box>
+              </div>
 
-            {/* Spots Slide */}
-            <Box className={`py-4 ${styles.slide}`}>
-              <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                📍 Spots
-              </Typography>
-              <Typography className="mb-3 mt-2 px-1">
-                Discover the best skate spots, snow parks, and surf breaks near you. Our
-                community-driven spot database helps you find new places to ride, complete with
-                photos, ratings, and directions. Share your favorite spots and help fellow riders
-                explore.
-              </Typography>
-              <Button
-                variant={'outlined'}
-                color={'primary'}
-                className={`btn ${styles.customPrimary} me-3`}
-              >
-                <Link href="/spots" className="text-dark">
-                  Find Spots
-                </Link>
-              </Button>
-              {!loggedIn && (
-                <Button
-                  variant={'outlined'}
-                  color={'secondary'}
-                  disableRipple={true}
-                  sx={{
-                    borderColor: '#1E1E1E',
-                    color: '#1E1E1E',
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      borderColor: '#1E1E1E',
-                    },
-                  }}
-                >
-                  <Link href="/signup" className="text-dark">
-                    Become a Rider
-                  </Link>
-                </Button>
-              )}
-            </Box>
+              <AppStoreBadges />
+            </div>
 
-            {/* Homies Slide */}
-            <Box className={`py-4 ${styles.slide}`}>
-              <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                🤝 Homies
-              </Typography>
-              <Typography className="mb-3 mt-2 px-1">
-                Connect with riders who share your passion. Build your crew, follow their progress,
-                and stay motivated together. Send direct messages, share clips, and plan sessions
-                with your homies. Action sports are better with friends.
-              </Typography>
-              {loggedIn ? (
-                <Button
-                  variant={'outlined'}
-                  color={'primary'}
-                  className={`btn ${styles.customPrimary} me-3`}
-                >
-                  <Link href="/homies" className="text-dark">
-                    Find Homies
-                  </Link>
-                </Button>
-              ) : (
-                <Button
-                  variant={'outlined'}
-                  color={'primary'}
-                  className={`btn ${styles.customPrimary} me-3`}
-                >
-                  <Link href="/signup" className="text-dark">
-                    Become a Rider
-                  </Link>
-                </Button>
-              )}
-            </Box>
-
-            {/* Media Slide */}
-            <Box className={`py-4 ${styles.slide}`}>
-              <Typography variant="h2" sx={{ fontWeight: 500 }}>
-                🎬 Media
-              </Typography>
-              <Typography className="mb-3 mt-2 px-1">
-                Watch and share action sports content. Browse The Couch for full-length films and
-                edits, or scroll the Feed to see clips from the community. Post your own footage,
-                react to your favorites, and get inspired by riders worldwide.
-              </Typography>
-              <Button
-                variant={'outlined'}
-                color={'primary'}
-                className={`btn ${styles.customPrimary} me-3`}
-              >
-                <Link href="/media" className="text-dark">
-                  Watch Now
-                </Link>
-              </Button>
-              {!loggedIn && (
-                <Button
-                  variant={'outlined'}
-                  color={'secondary'}
-                  disableRipple={true}
-                  sx={{
-                    borderColor: '#1E1E1E',
-                    color: '#1E1E1E',
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      borderColor: '#1E1E1E',
-                    },
-                  }}
-                >
-                  <Link href="/signup" className="text-dark">
-                    Become a Rider
-                  </Link>
-                </Button>
-              )}
-            </Box>
-          </Slider>
-        </Container>
-      </section>
-
-      {/* OLD SLIDER CONTENT - COMMENTED OUT
-			<section className={styles.newsFeedSection}>
-				<Container>
-					<Slider {...settings}>
-						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								We've created a new vision
-							</Typography>
-							<Typography className='mb-3 mt-2 px-1'>
-								And with that, big things are coming. We are going to create
-								something even more useful than our "Trick List" tool. You might
-								have noticed the website getting a makeover, new features are
-								coming to both the app and the website in the near future. Stay
-								tuned for updates by signing up for an account and checking the
-								box to join our mailing list. If you already have an account you
-								can opt-in to the mailing list in your profile
-							</Typography>
-							<Button
-								variant={"outlined"}
-								color={"primary"}
-								className={`btn ${styles.customPrimary} me-3`}
-								sx={{}}
-							>
-								<Link href='/signup' className='text-dark'>
-									Register an Account
-								</Link>
-							</Button>
-							<Button
-								variant={"outlined"}
-								color={"secondary"}
-								disableRipple={true}
-								sx={{
-									borderColor: "#1E1E1E",
-									color: "#1E1E1E",
-									"&:hover": {
-										backgroundColor: "transparent",
-										borderColor: "#1E1E1E",
-									},
-								}}
-							>
-								<Link href='about' className='text-dark'>
-									Read More
-								</Link>
-							</Button>
-						</Box>
-						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								Trick Book on Google Play
-							</Typography>
-							<Typography className='mb-3 mt-2 px-1'>
-								We've heard the requests for the app to get on google play and
-								we are putting in work to make it happen this week. Stay tuned
-								for a big update on all things "The Trick Book" by go skate day.
-							</Typography>
-						</Box>
-						<Box className={`py-4 ${styles.slide}`}>
-							<Typography variant='h2' sx={{ fontWeight: 500 }}>
-								We've launched on the App Store
-							</Typography>
-							<Typography className='mb-3 mt-2 px-1'>
-								The Trick Book app is available on the app store. It was a few
-								years in the making, a few different versions and codebases to
-								create the tricklist. We are happy with how we've architected
-								this app and it's only going to get better from here. Thanks
-								everyone whose tried the app, don't forget to give us some
-								feedback or kindly leave a review on the app store. We look
-								forward to shipping more useful features and helping you make
-								the most out of your time riding!
-							</Typography>
-							<Button
-								variant={"outlined"}
-								color={"primary"}
-								className={`btn ${styles.customPrimary} me-3`}
-								sx={{}}
-							>
-								<a
-									href='https://apps.apple.com/us/app/the-trick-book/id6446022788'
-									className='text-dark'
-									target='_blank'
-								>
-									Trick Book on the App Store
-								</a>
-							</Button>
-						</Box>
-					</Slider>
-				</Container>
-			</section>
-			*/}
-      <section className={`${styles.featuresSection} py-5 px-md-5`}>
-        <div className="row">
-          <Box className={`p-4 px-md-5 col-md-10`}>
-            <Typography variant="h2" sx={{ fontWeight: 700 }}>
-              By Riders. For Riders.
-            </Typography>
-            <Typography variant="h5" className="pt-3 px-1" sx={{ fontWeight: 400 }}>
-              The community is the product, not your data and attention. We're building something we
-              control, together.
-            </Typography>
-          </Box>
-        </div>
-        <div className="row p-0 m-0">
-          <Grid container className="p-0 m-0">
-            <Grid
-              item
-              xs={12}
-              md={6}
-              className="p-0 px-md-5"
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-            >
-              <Image
-                src="/trickBookScreenShotNoBg.png"
-                width={300}
-                height={600}
-                className={styles.homegraphic}
-                alt="TrickBook App Screenshot"
-                style={{
-                  minWidth: 200,
-                  width: '100%',
-                  maxWidth: 300,
-                  height: 'auto',
-                }}
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              justifyContent="center"
-              alignItems="center"
-              container
-              sx={{ alignItems: 'center', justifyContent: 'center', mt: { xs: 5, md: 0 } }}
-            >
-              <Box sx={{ mb: { xs: 5, md: 3 }, px: { xs: 3, md: 0 } }}>
-                <Typography variant="h4" sx={{ fontWeight: 500, alignSelf: 'center' }}>
-                  Take back your community
-                </Typography>
-                <Typography variant="body1" className="ms-1 mt-2">
-                  Big tech platforms don't have our best interests at heart, they have shareholders.
-                  Algorithms bury your content unless you pay, and your attention is sold to
-                  advertisers. We built TrickBook because action sports communities deserve better.
-                  Your data is encrypted, your privacy is protected, and you own your content.
-                </Typography>
-                <Button variant="outlined" color="secondary" className={'ms-1 mt-3'}>
-                  <Link href="/privacy-policy" className="text-dark">
-                    Our Privacy Promise
-                  </Link>
-                </Button>
-              </Box>
-              <Box sx={{ mt: { xs: 4, md: 2 }, px: { xs: 3, md: 0 } }}>
-                <Typography variant="h4" sx={{ fontWeight: 500, alignSelf: 'center' }}>
-                  Built to empower, not exploit
-                </Typography>
-                <Typography variant="body1" className={'mt-2 ms-1'}>
-                  It's never been easier for communities to build their own tools. Why continue to
-                  feed corporations when we have the power to create something great together?
-                  TrickBook is a platform where riders connect, progress, and share, without being
-                  the product. Join the movement and help shape the future of action sports.
-                </Typography>
-                <Button variant="outlined" color="secondary" className={'mt-3 ms-1'}>
-                  <Link href="/blog/trickbook-just-went-social" className="text-dark">
-                    Read the Manifesto
-                  </Link>
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
+            {/* Right: App mockup */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-yellow-400/10 rounded-3xl blur-2xl scale-95" />
+                <Image
+                  src="/trickBookScreenShotNoBg.png"
+                  width={300}
+                  height={600}
+                  alt="TrickBook App"
+                  className="relative z-10 drop-shadow-2xl w-[260px] md:w-[300px] h-auto"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section className={`${styles.appFeatureSection} py-5 px-md-2`}>
-        <div className={styles.rodneyQuoteSection}>
-          <blockquote className={styles.rodneyQuote}>
-            “There's an intrinsic value in creating something for the sake of creating it.”
-          </blockquote>
-          <div className={styles.rodneyAttribution}>– Rodney Mullen</div>
+
+      {/* ============================================ */}
+      {/* SECTION 2: STATS BAR                         */}
+      {/* ============================================ */}
+      <section className="bg-[#111] border-y border-white/5">
+        <div className="container mx-auto px-4 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <AnimatedStat value={stats?.spots || 4869} label="Spots Mapped" icon={MapPin} />
+            <AnimatedStat value={stats?.tricks || 1889} label="Tricks Tracked" icon={Target} />
+            <AnimatedStat value={stats?.trickLists || 464} label="Trick Lists" icon={Star} />
+            <AnimatedStat value={stats?.users || 224} label="Riders" icon={Users} />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 3: THREE-PILLAR FEATURES             */}
+      {/* ============================================ */}
+      <section className="bg-[#0a0a0a] py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Everything you need to progress
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Built by riders who wanted a better way to track their journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {FEATURES.map((feature) => (
+              <div
+                key={feature.title}
+                className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-400/20 transition-all duration-300"
+              >
+                <div
+                  className={`w-12 h-12 rounded-xl ${feature.bgColor} flex items-center justify-center mb-6`}
+                >
+                  <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">{feature.title}</h3>
+                <p className={`text-sm ${feature.color} mb-3`}>{feature.subtitle}</p>
+                <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 4: TESTIMONIALS                      */}
+      {/* ============================================ */}
+      <section className="bg-[#111] py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Riders are stoked</h2>
+            <p className="text-gray-400 text-lg">
+              Hear from the community that makes TrickBook what it is.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {TESTIMONIALS.map((testimonial) => (
+              <div
+                key={testimonial.name}
+                className="p-6 rounded-2xl bg-white/[0.02] border border-white/5"
+              >
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star
+                      key={`star-${testimonial.name}-${i}`}
+                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-6 leading-relaxed italic">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div>
+                  <p className="text-white font-medium">{testimonial.name}</p>
+                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 5: HOW IT WORKS                      */}
+      {/* ============================================ */}
+      <section className="bg-[#0a0a0a] py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Up and riding in minutes
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {HOW_IT_WORKS.map((step, index) => (
+              <div key={step.step} className="text-center relative">
+                {index < HOW_IT_WORKS.length - 1 && (
+                  <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-gradient-to-r from-yellow-400/30 to-transparent" />
+                )}
+                <div className="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mx-auto mb-6">
+                  <step.icon className="w-7 h-7 text-yellow-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-gray-400 text-sm max-w-xs mx-auto">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 6: COMMUNITY / CULTURE               */}
+      {/* ============================================ */}
+      <section className="bg-[#111] py-20 md:py-28 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                By Riders. <span className="text-yellow-400">For Riders.</span>
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                Big tech platforms don't have our best interests at heart. Algorithms bury your
+                content, and your attention is sold to advertisers. We built TrickBook because
+                action sports communities deserve better.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-4 h-4 text-yellow-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Your data stays yours</p>
+                    <p className="text-gray-500 text-sm">
+                      Encrypted, private, never sold to advertisers.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-4 h-4 text-yellow-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">No algorithm games</p>
+                    <p className="text-gray-500 text-sm">
+                      Your content reaches your crew, not just who pays.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-4 h-4 text-yellow-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Built by a small crew with big passion</p>
+                    <p className="text-gray-500 text-sm">
+                      Independent, rider-owned, community-driven.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quote card */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent rounded-3xl" />
+              <div className="relative p-8 md:p-12 rounded-3xl border border-white/5">
+                <svg
+                  className="w-10 h-10 text-yellow-400/30 mb-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                <blockquote className="text-xl md:text-2xl text-white font-light leading-relaxed mb-6">
+                  There's an intrinsic value in creating something for the sake of creating it.
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-px h-8 bg-yellow-400/30" />
+                  <div>
+                    <p className="text-white font-medium">Rodney Mullen</p>
+                    <p className="text-gray-500 text-sm">Godfather of Street Skateboarding</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 7: FINAL CTA                         */}
+      {/* ============================================ */}
+      <section className="bg-[#0a0a0a] py-20 md:py-28">
+        <div className="container mx-auto px-4">
+          <div className="relative max-w-3xl mx-auto text-center">
+            <div className="absolute inset-0 bg-yellow-400/5 rounded-3xl blur-3xl" />
+            <div className="relative p-8 md:p-16 rounded-3xl border border-white/5 bg-white/[0.01]">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to start tracking?
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
+                Join {stats ? formatNumber(stats.users) : '200'}+ riders already using TrickBook.
+                It's free, it's private, and it's built for you.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                {loggedIn ? (
+                  <Link
+                    href="/trickbook"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
+                  >
+                    Go to My TrickBook
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                ) : (
+                  <Link
+                    href="/signup"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
+                  >
+                    Create Free Account
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                )}
+              </div>
+
+              <AppStoreBadges className="justify-center" />
+            </div>
+          </div>
         </div>
       </section>
     </>
