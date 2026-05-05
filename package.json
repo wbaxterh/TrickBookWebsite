@@ -57,6 +57,7 @@
     "react-dom": "18.2.0",
     "react-router-dom": "^6.23.1",
     "react-slick": "^0.30.2",
+    "recharts": "^3.8.1",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "slick-carousel": "^1.8.1",

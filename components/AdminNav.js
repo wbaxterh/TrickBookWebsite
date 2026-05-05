@@ -12,6 +12,7 @@ export default function AdminNav() {
     { label: 'Spots', path: '/admin/spots' },
     { label: 'Pending Spots', path: '/admin/pending-spots' },
     { label: 'Blog', path: '/admin/blog' },
+    { label: 'Analytics', path: '/admin/analytics' },
   ];
 
   return (
