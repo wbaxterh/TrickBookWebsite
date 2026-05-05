@@ -97,6 +97,7 @@ export default function AnalyticsDashboard() {
   useEffect(() => {
     if (!token) return;
     setLoading(true);
+    setData({});
 
     Promise.all([
       fetchOverview(token, days).catch(() => null),
@@ -108,22 +109,27 @@ export default function AnalyticsDashboard() {
       fetchAppStores(token, days).catch(() => []),
       fetchFunnel(token, days).catch(() => ({ steps: [] })),
       fetchReferrers(token, days).catch(() => []),
-    ]).then(
-      ([overview, traffic, pages, sections, scrollDepth, ctas, appStores, funnel, referrers]) => {
-        setData({
-          overview,
-          traffic,
-          pages,
-          sections,
-          scrollDepth,
-          ctas,
-          appStores,
-          funnel,
-          referrers,
-        });
+    ])
+      .then(
+        ([overview, traffic, pages, sections, scrollDepth, ctas, appStores, funnel, referrers]) => {
+          setData({
+            overview: overview || {},
+            traffic: traffic || [],
+            pages: pages || [],
+            sections: sections || [],
+            scrollDepth: scrollDepth || [],
+            ctas: ctas || [],
+            appStores: appStores || [],
+            funnel: funnel || { steps: [] },
+            referrers: referrers || [],
+          });
+          setLoading(false);
+        },
+      )
+      .catch(() => {
+        setData({});
         setLoading(false);
-      },
-    );
+      });
   }, [token, days]);
 
   if (loggedIn === null || !loggedIn || role !== 'admin') return null;

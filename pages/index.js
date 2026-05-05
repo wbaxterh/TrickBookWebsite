@@ -415,9 +415,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {HOW_IT_WORKS.map((step, index) => (
               <div key={step.step} className="text-center relative">
-                {index < HOW_IT_WORKS.length - 1 && (
-                  <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-gradient-to-r from-yellow-400/30 to-transparent" />
-                )}
                 <div className="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mx-auto mb-6">
                   <step.icon className="w-7 h-7 text-yellow-400" />
                 </div>
