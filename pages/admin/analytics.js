@@ -1,7 +1,7 @@
-import { ArrowDown, Download, Eye, MousePointer, Users } from 'lucide-react';
+import { ArrowDown, Download, Eye, MousePointer, RefreshCw, Users } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { Component, useContext, useEffect, useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -29,6 +29,33 @@ import {
   fetchSections,
   fetchTraffic,
 } from '../../lib/apiAnalytics';
+
+class ChartErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <p className="text-muted-foreground mb-2">Chart failed to render</p>
+          <button
+            type="button"
+            onClick={() => this.setState({ hasError: false })}
+            className="text-sm text-yellow-500 flex items-center gap-1 hover:underline"
+          >
+            <RefreshCw className="w-3 h-3" /> Retry
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const COLORS = ['#fcf150', '#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
 
@@ -183,7 +210,7 @@ export default function AnalyticsDashboard() {
               <span className="ml-3 text-muted-foreground">Loading analytics...</span>
             </div>
           ) : (
-            <>
+            <ChartErrorBoundary key={days}>
               {/* Overview Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <StatCard label="Pageviews" value={data.overview?.pageviews || 0} icon={Eye} />
@@ -463,7 +490,7 @@ export default function AnalyticsDashboard() {
                   )}
                 </ChartCard>
               </div>
-            </>
+            </ChartErrorBoundary>
           )}
         </div>
       </div>
