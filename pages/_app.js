@@ -18,9 +18,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <MuiThemeProvider theme={muiTheme}>
-        <PostHogProvider>
-          <SessionProvider session={session}>
-            <AuthProvider>
+        <SessionProvider session={session}>
+          <AuthProvider>
+            <PostHogProvider>
               <CategoryProvider>
                 <ToastProvider>
                   <Layout>
@@ -28,12 +28,12 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
                   </Layout>
                 </ToastProvider>
               </CategoryProvider>
-            </AuthProvider>
-          </SessionProvider>
-          {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-          )}
-        </PostHogProvider>
+              {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+              )}
+            </PostHogProvider>
+          </AuthProvider>
+        </SessionProvider>
       </MuiThemeProvider>
     </ThemeProvider>
   );

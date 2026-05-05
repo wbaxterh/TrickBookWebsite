@@ -14,7 +14,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
+import { trackAppStoreClick, trackCtaClick, trackHeroVariant } from '../lib/analytics';
 import { useFeatureFlag } from '../lib/useFeatureFlag';
+import { useScrollDepthTracking, useSectionViewTracking } from '../lib/useScrollTracking';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || '';
 
@@ -71,7 +73,7 @@ function AnimatedStat({ value, label, icon: Icon }) {
   );
 }
 
-function AppStoreBadges({ className = '' }) {
+function AppStoreBadges({ className = '', location = 'unknown' }) {
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <a
@@ -79,9 +81,7 @@ function AppStoreBadges({ className = '' }) {
         target="_blank"
         rel="noopener noreferrer"
         className="transition-transform hover:scale-105"
-        data-ph-capture="true"
-        data-ph-event="app_store_click"
-        data-ph-store="ios"
+        onClick={() => trackAppStoreClick('ios', location)}
       >
         <Image
           src="/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
@@ -95,9 +95,7 @@ function AppStoreBadges({ className = '' }) {
         target="_blank"
         rel="noopener noreferrer"
         className="transition-transform hover:scale-105"
-        data-ph-capture="true"
-        data-ph-event="app_store_click"
-        data-ph-store="android"
+        onClick={() => trackAppStoreClick('android', location)}
       >
         <Image
           src="/google-play-badge.svg"
@@ -200,6 +198,25 @@ export default function Home() {
   const heroVariant = useFeatureFlag('hero-headline', 'control');
   const heroText = HERO_VARIANTS[heroVariant] || HERO_VARIANTS.control;
 
+  // Scroll depth tracking (25/50/75/100% milestones)
+  useScrollDepthTracking();
+
+  // Section visibility tracking
+  const heroRef = useSectionViewTracking('hero');
+  const statsRef = useSectionViewTracking('stats_bar');
+  const featuresRef = useSectionViewTracking('features');
+  const testimonialsRef = useSectionViewTracking('testimonials');
+  const howItWorksRef = useSectionViewTracking('how_it_works');
+  const communityRef = useSectionViewTracking('community');
+  const finalCtaRef = useSectionViewTracking('final_cta');
+
+  // Track which hero A/B variant was shown
+  useEffect(() => {
+    if (heroVariant) {
+      trackHeroVariant(heroVariant);
+    }
+  }, [heroVariant]);
+
   return (
     <>
       <Head>
@@ -229,7 +246,10 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 1: HERO                              */}
       {/* ============================================ */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0a0a0a]">
+      <section
+        ref={heroRef}
+        className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0a0a0a]"
+      >
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#1a1a00] opacity-90" />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
@@ -259,6 +279,7 @@ export default function Home() {
                 <Link
                   href="/signup"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors text-center no-underline"
+                  onClick={() => trackCtaClick('get_started_free', 'hero')}
                 >
                   Get Started Free
                   <ChevronRight className="w-4 h-4" />
@@ -266,12 +287,13 @@ export default function Home() {
                 <Link
                   href="/trickbook"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 !text-gray-300 font-medium rounded-lg hover:border-yellow-400/50 hover:!text-yellow-400 transition-colors text-center no-underline"
+                  onClick={() => trackCtaClick('explore_tricks', 'hero')}
                 >
                   Explore Tricks
                 </Link>
               </div>
 
-              <AppStoreBadges />
+              <AppStoreBadges location="hero" />
             </div>
 
             {/* Right: App mockup */}
@@ -295,7 +317,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 2: STATS BAR                         */}
       {/* ============================================ */}
-      <section className="bg-[#111] border-y border-white/5">
+      <section ref={statsRef} className="bg-[#111] border-y border-white/5">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <AnimatedStat value={stats?.spots || 4869} label="Spots Mapped" icon={MapPin} />
@@ -309,7 +331,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 3: THREE-PILLAR FEATURES             */}
       {/* ============================================ */}
-      <section className="bg-[#0a0a0a] py-20 md:py-28">
+      <section ref={featuresRef} className="bg-[#0a0a0a] py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -343,7 +365,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 4: TESTIMONIALS                      */}
       {/* ============================================ */}
-      <section className="bg-[#111] py-20 md:py-28">
+      <section ref={testimonialsRef} className="bg-[#111] py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Riders are stoked</h2>
@@ -382,7 +404,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 5: HOW IT WORKS                      */}
       {/* ============================================ */}
-      <section className="bg-[#0a0a0a] py-20 md:py-28">
+      <section ref={howItWorksRef} className="bg-[#0a0a0a] py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -410,7 +432,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 6: COMMUNITY / CULTURE               */}
       {/* ============================================ */}
-      <section className="bg-[#111] py-20 md:py-28 overflow-hidden">
+      <section ref={communityRef} className="bg-[#111] py-20 md:py-28 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -517,7 +539,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 7: FINAL CTA                         */}
       {/* ============================================ */}
-      <section className="bg-[#0a0a0a] py-20 md:py-28">
+      <section ref={finalCtaRef} className="bg-[#0a0a0a] py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="relative max-w-3xl mx-auto text-center">
             <div className="absolute inset-0 bg-yellow-400/5 rounded-3xl blur-3xl" />
@@ -535,6 +557,7 @@ export default function Home() {
                   <Link
                     href="/trickbook"
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
+                    onClick={() => trackCtaClick('go_to_trickbook', 'final_cta')}
                   >
                     Go to My TrickBook
                     <ChevronRight className="w-4 h-4" />
@@ -543,6 +566,7 @@ export default function Home() {
                   <Link
                     href="/signup"
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
+                    onClick={() => trackCtaClick('create_free_account', 'final_cta')}
                   >
                     Create Free Account
                     <ChevronRight className="w-4 h-4" />
@@ -550,7 +574,7 @@ export default function Home() {
                 )}
               </div>
 
-              <AppStoreBadges className="justify-center" />
+              <AppStoreBadges className="justify-center" location="final_cta" />
             </div>
           </div>
         </div>
