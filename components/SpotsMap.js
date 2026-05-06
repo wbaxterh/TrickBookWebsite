@@ -120,25 +120,24 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
   ) : null;
 }
 
-export default function SpotsMap() {
-  const [pins, setPins] = useState([]);
+export default function SpotsMap({ selectedCategory = 'all', selectedCountry = 'all' }) {
+  const [allPins, setAllPins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPin, setSelectedPin] = useState(null);
   const [error, setError] = useState(null);
 
+  // Fetch all spots once
   useEffect(() => {
-    // Try the lightweight map-pins endpoint first, fall back to paginated spots
     fetch(`${API_BASE}/spots/map-pins`)
       .then((res) => {
         if (!res.ok) throw new Error('map-pins not available');
         return res.json();
       })
       .then((data) => {
-        setPins(Array.isArray(data) ? data : []);
+        setAllPins(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => {
-        // Fallback: use the standard spots endpoint with high limit
         fetch(`${API_BASE}/spots?limit=5000`)
           .then((res) => res.json())
           .then((data) => {
@@ -148,10 +147,11 @@ export default function SpotsMap() {
               latitude: s.latitude,
               longitude: s.longitude,
               category: s.category,
+              sportTypes: s.sportTypes,
               state: s.state,
               country: s.country,
             }));
-            setPins(spots);
+            setAllPins(spots);
             setLoading(false);
           })
           .catch((err) => {
@@ -161,6 +161,20 @@ export default function SpotsMap() {
           });
       });
   }, []);
+
+  // Filter pins based on selected category and country
+  const pins = allPins.filter((pin) => {
+    if (selectedCategory !== 'all') {
+      const matchesCategory = pin.category === selectedCategory;
+      const matchesSport =
+        Array.isArray(pin.sportTypes) && pin.sportTypes.includes(selectedCategory);
+      if (!matchesCategory && !matchesSport) return false;
+    }
+    if (selectedCountry !== 'all') {
+      if (pin.country !== selectedCountry) return false;
+    }
+    return true;
+  });
 
   const handleMarkerClick = useCallback((pin) => {
     setSelectedPin(pin);

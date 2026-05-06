@@ -463,7 +463,7 @@ export default function Spots() {
         {/* Map View */}
         {viewMode === 'map' && (
           <section className="container py-8">
-            <SpotsMap />
+            <SpotsMap selectedCategory={selectedCategory} selectedCountry={selectedCountry} />
           </section>
         )}
 
