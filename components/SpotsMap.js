@@ -94,30 +94,95 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
     };
   }, [map, pins, onMarkerClick]);
 
-  return selectedPin ? (
+  if (!selectedPin) return null;
+
+  const spotSlug = selectedPin.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  const stateSlug = (selectedPin.state || 'unknown').toLowerCase().replace(/\s+/g, '-');
+  const detailUrl = `/spots/${stateSlug}/${spotSlug}`;
+  const rating = selectedPin.rating;
+  const desc = selectedPin.description;
+
+  return (
     <InfoWindow
       position={{ lat: selectedPin.latitude, lng: selectedPin.longitude }}
       onCloseClick={() => onMarkerClick(null)}
       pixelOffset={[0, -32]}
     >
-      <div className="p-1 max-w-[200px]">
-        <h3 className="font-semibold text-sm text-gray-900 mb-1">{selectedPin.name}</h3>
-        <p className="text-xs text-gray-600 mb-2">
+      <div style={{ maxWidth: 240, padding: 4, fontFamily: 'system-ui, sans-serif' }}>
+        <a href={detailUrl} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <h3 style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#111' }}>
+            {selectedPin.name}
+          </h3>
+        </a>
+        <p style={{ margin: '0 0 6px', fontSize: 12, color: '#666' }}>
           {[selectedPin.state, selectedPin.country].filter(Boolean).join(', ')}
         </p>
-        {selectedPin.category && (
-          <span
-            className="inline-block px-2 py-0.5 rounded-full text-xs font-medium text-white mb-2"
+        {rating > 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg
+                key={`s${i}`}
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill={i < Math.round(rating) ? '#f59e0b' : '#d1d5db'}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            ))}
+            <span style={{ fontSize: 12, color: '#666', marginLeft: 2 }}>{rating.toFixed(1)}</span>
+          </div>
+        )}
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: desc ? 6 : 0 }}>
+          {selectedPin.category && (
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '2px 8px',
+                borderRadius: 99,
+                fontSize: 11,
+                fontWeight: 500,
+                color: '#fff',
+                backgroundColor: CATEGORY_COLORS[selectedPin.category] || CATEGORY_COLORS.default,
+              }}
+            >
+              {selectedPin.category}
+            </span>
+          )}
+          {selectedPin.sportTypes?.length > 0 && (
+            <span style={{ fontSize: 11, color: '#888' }}>{selectedPin.sportTypes.join(', ')}</span>
+          )}
+        </div>
+        {desc && (
+          <p
             style={{
-              backgroundColor: CATEGORY_COLORS[selectedPin.category] || CATEGORY_COLORS.default,
+              margin: '0 0 6px',
+              fontSize: 12,
+              color: '#555',
+              lineHeight: 1.4,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
             }}
           >
-            {selectedPin.category}
-          </span>
+            {desc}
+          </p>
         )}
+        <a
+          href={detailUrl}
+          style={{ fontSize: 12, color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}
+        >
+          View Details →
+        </a>
       </div>
     </InfoWindow>
-  ) : null;
+  );
 }
 
 export default function SpotsMap({ selectedCategory = 'all', selectedCountry = 'all' }) {
@@ -150,6 +215,9 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
               sportTypes: s.sportTypes,
               state: s.state,
               country: s.country,
+              rating: s.rating,
+              description: s.description,
+              imageURL: s.imageURL,
             }));
             setAllPins(spots);
             setLoading(false);
