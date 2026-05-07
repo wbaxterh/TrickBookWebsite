@@ -101,7 +101,7 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
   const stateSlug = (selectedPin.state || 'unknown').toLowerCase().replace(/\s+/g, '-');
-  const detailUrl = `/spots/${stateSlug}/${spotSlug}`;
+  const detailUrl = `/spots/${stateSlug}/${spotSlug}?id=${selectedPin._id}`;
   const rating = selectedPin.rating;
   const desc = selectedPin.description;
 
