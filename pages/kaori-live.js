@@ -194,30 +194,32 @@ export default function KaoriLivePage() {
         switch (event.type) {
           case '_ready':
             kithSessionRef.current = event.sessionId;
-            // Auto-greet on first connect
+            // Auto-greet after a short delay so avatar loads first
             if (!greetedRef.current && kaoriBotIdRef.current && token) {
               greetedRef.current = true;
-              getCompanionGreeting(kaoriBotIdRef.current, token)
-                .then(({ greeting }) => {
-                  if (greeting && event.sessionId === kithSessionRef.current) {
-                    // Add greeting as a Kaori message in the chat
-                    setMessages((prev) => [
-                      ...prev,
-                      {
-                        _id: `greeting-${Date.now()}`,
-                        senderId: kaoriBotIdRef.current,
-                        content: greeting,
-                        createdAt: new Date().toISOString(),
-                      },
-                    ]);
-                    // Speak the greeting through Kith voice
-                    if (ws.readyState === WebSocket.OPEN) {
-                      ws.send(JSON.stringify({ type: 'speak', text: greeting }));
+              setTimeout(() => {
+                getCompanionGreeting(kaoriBotIdRef.current, token)
+                  .then(({ greeting }) => {
+                    if (greeting && event.sessionId === kithSessionRef.current) {
+                      // Add greeting as a Kaori message in the chat
+                      setMessages((prev) => [
+                        ...prev,
+                        {
+                          _id: `greeting-${Date.now()}`,
+                          senderId: kaoriBotIdRef.current,
+                          content: greeting,
+                          createdAt: new Date().toISOString(),
+                        },
+                      ]);
+                      // Speak the greeting through Kith voice
+                      if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ type: 'speak', text: greeting }));
+                      }
+                      setCharState('speaking');
                     }
-                    setCharState('speaking');
-                  }
-                })
-                .catch(() => {});
+                  })
+                  .catch(() => {});
+              }, 2000); // 2s delay for avatar to load
             }
             break;
 
@@ -617,14 +619,21 @@ export default function KaoriLivePage() {
           const leftHand = vrm.humanoid.getNormalizedBoneNode('leftHand');
           const rightHand = vrm.humanoid.getNormalizedBoneNode('rightHand');
 
-          // Relax hands — curl fingers slightly inward (not stiff straight)
-          if (leftHand) {
-            leftHand.rotation.z = THREE.MathUtils.damp(leftHand.rotation.z, 0.15, 3, dt);
-            leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, 0.2, 3, dt);
+          // Get finger bones for natural curl
+          const fingerBones = [];
+          for (const side of ['left', 'right']) {
+            for (const finger of ['Thumb', 'Index', 'Middle', 'Ring', 'Little']) {
+              for (const joint of ['Proximal', 'Intermediate', 'Distal']) {
+                const bone = vrm.humanoid.getNormalizedBoneNode(`${side}${finger}${joint}`);
+                if (bone) fingerBones.push({ bone, side, finger, joint });
+              }
+            }
           }
-          if (rightHand) {
-            rightHand.rotation.z = THREE.MathUtils.damp(rightHand.rotation.z, -0.15, 3, dt);
-            rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, 0.2, 3, dt);
+
+          // Curl all fingers slightly for relaxed hand pose
+          for (const { bone, joint } of fingerBones) {
+            const curl = joint === 'Proximal' ? 0.3 : joint === 'Intermediate' ? 0.35 : 0.25;
+            bone.rotation.z = THREE.MathUtils.damp(bone.rotation.z, curl, 2, dt);
           }
 
           // Breathing and idle motion — slow, gentle, alive
@@ -675,11 +684,13 @@ export default function KaoriLivePage() {
           const g2 = Math.sin(t * 2.9 + 0.8);
           const g3 = Math.cos(t * 2.2 + 1.5);
 
-          // UPPER ARMS: mostly pinned at sides. Tiny shift when speaking.
-          const lUpZ = -1.15 + breathSway + (isSpeaking ? 0.12 : 0);
-          const rUpZ = 1.2 - breathSway - (isSpeaking ? 0.15 : 0);
-          const lUpX = 0.08 + (isSpeaking ? 0.08 : 0);
-          const rUpX = 0.05 + (isSpeaking ? 0.06 : 0);
+          // UPPER ARMS: mostly at sides, moderate lift when speaking
+          // Speaking: arms come forward + slightly out to gesture toward user
+          const lUpZ = -1.15 + breathSway + (isSpeaking ? 0.3 + g1 * 0.08 : 0);
+          const rUpZ = 1.2 - breathSway - (isSpeaking ? 0.35 + g2 * 0.08 : 0);
+          // X = forward toward user/screen
+          const lUpX = 0.08 + (isSpeaking ? 0.35 + g3 * 0.06 : 0);
+          const rUpX = 0.05 + (isSpeaking ? 0.3 - g1 * 0.06 : 0);
 
           const easeDamp = 2; // slow easing for all transitions
           if (leftUpperArm) {
@@ -746,18 +757,22 @@ export default function KaoriLivePage() {
             );
           }
 
-          // HANDS/WRISTS: rotate with gestures for emphasis
+          // HANDS/WRISTS: wrist tilt + palm presentation when speaking
           if (leftHand) {
-            const lhz = 0.15 + (isSpeaking ? g1 * 0.2 : 0);
-            const lhx = 0.2 + (isSpeaking ? g3 * 0.15 : 0);
+            const lhz = 0.1 + (isSpeaking ? g1 * 0.25 : 0);
+            const lhx = isSpeaking ? -0.2 + g3 * 0.2 : 0.15; // palm up when speaking
+            const lhy = isSpeaking ? g2 * 0.15 : 0;
             leftHand.rotation.z = THREE.MathUtils.damp(leftHand.rotation.z, lhz, gestDamp, dt);
             leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, lhx, gestDamp, dt);
+            leftHand.rotation.y = THREE.MathUtils.damp(leftHand.rotation.y, lhy, gestDamp, dt);
           }
           if (rightHand) {
-            const rhz = -0.15 + (isSpeaking ? -g2 * 0.2 : 0);
-            const rhx = 0.2 + (isSpeaking ? -g1 * 0.15 : 0);
+            const rhz = -0.1 + (isSpeaking ? -g2 * 0.25 : 0);
+            const rhx = isSpeaking ? -0.2 - g1 * 0.2 : 0.15; // palm up when speaking
+            const rhy = isSpeaking ? -g3 * 0.15 : 0;
             rightHand.rotation.z = THREE.MathUtils.damp(rightHand.rotation.z, rhz, gestDamp, dt);
             rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, rhx, gestDamp, dt);
+            rightHand.rotation.y = THREE.MathUtils.damp(rightHand.rotation.y, rhy, gestDamp, dt);
           }
 
           // HEAD: gentle nods when speaking
