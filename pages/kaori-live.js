@@ -506,7 +506,7 @@ export default function KaoriLivePage() {
       if (!box.isEmpty()) {
         const size = box.getSize(new THREE.Vector3());
         const safeHeight = Math.max(size.y || 0, 0.001);
-        const targetHeight = 2.2;
+        const targetHeight = 1.8;
         const rawScale = targetHeight / safeHeight;
         const fitScale = Math.min(4, Math.max(0.2, rawScale));
 
@@ -675,122 +675,171 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          // === ARM + BODY ANIMATION ===
-          // Shoulders/biceps stay mostly still. Forearms + wrists + hands gesture.
-          // All damping is slow (2) for smooth easing — no snapping.
+          // === GESTURE POSE SYSTEM ===
+          // Natural talking uses discrete poses held 1.5-2.5s with smooth blending.
+          // Each pose defines target rotations for arms, forearms, hands, head, spine.
           const isSpeaking = state === 'speaking';
           const breathSway = Math.sin(t * 0.5) * 0.015;
 
-          // Gesture waves at natural conversational speeds
-          const g1 = Math.sin(t * 1.8);
-          const g2 = Math.sin(t * 2.9 + 0.8);
-          const g3 = Math.cos(t * 2.2 + 1.5);
+          // Predefined conversational gesture poses (held, not continuous sine)
+          // lUZ/rUZ = upper arm Z, lUX/rUX = upper arm X (forward)
+          // lFZ/rFZ = forearm Z, lHX/rHX = hand X (wrist tilt)
+          // nX/nY = neck nod/turn, sX = spine lean
+          const gesturePoses = [
+            // Resting — both arms at sides, neutral
+            {
+              lUZ: -1.15,
+              rUZ: 1.2,
+              lUX: 0.08,
+              rUX: 0.05,
+              lFZ: -0.15,
+              rFZ: 0.15,
+              lHX: 0.1,
+              rHX: 0.1,
+              nX: 0,
+              nY: 0,
+              sX: 0,
+            },
+            // Right hand out — explaining, palm up
+            {
+              lUZ: -1.1,
+              rUZ: 0.7,
+              lUX: 0.1,
+              rUX: 0.4,
+              lFZ: -0.15,
+              rFZ: -0.3,
+              lHX: 0.1,
+              rHX: -0.3,
+              nX: 0.03,
+              nY: -0.04,
+              sX: 0.02,
+            },
+            // Left hand out — presenting, palm open
+            {
+              lUZ: -0.7,
+              rUZ: 1.15,
+              lUX: 0.4,
+              rUX: 0.08,
+              lFZ: 0.3,
+              rFZ: 0.15,
+              lHX: -0.3,
+              rHX: 0.1,
+              nX: 0.02,
+              nY: 0.05,
+              sX: 0.01,
+            },
+            // Both hands forward — emphasis, open palms
+            {
+              lUZ: -0.85,
+              rUZ: 0.85,
+              lUX: 0.35,
+              rUX: 0.35,
+              lFZ: 0.1,
+              rFZ: -0.1,
+              lHX: -0.2,
+              rHX: -0.2,
+              nX: 0.04,
+              nY: 0,
+              sX: 0.02,
+            },
+            // Right hand gesture — counting/listing
+            {
+              lUZ: -1.1,
+              rUZ: 0.6,
+              lUX: 0.1,
+              rUX: 0.5,
+              lFZ: -0.15,
+              rFZ: -0.45,
+              lHX: 0.1,
+              rHX: -0.15,
+              nX: 0.02,
+              nY: -0.06,
+              sX: 0.015,
+            },
+            // Nodding emphasis — both arms subtly forward
+            {
+              lUZ: -1.0,
+              rUZ: 1.0,
+              lUX: 0.2,
+              rUX: 0.2,
+              lFZ: -0.1,
+              rFZ: 0.1,
+              lHX: 0,
+              rHX: 0,
+              nX: 0.05,
+              nY: 0.02,
+              sX: 0.015,
+            },
+          ];
 
-          // UPPER ARMS: mostly at sides, moderate lift when speaking
-          // Speaking: arms come forward + slightly out to gesture toward user
-          const lUpZ = -1.15 + breathSway + (isSpeaking ? 0.3 + g1 * 0.08 : 0);
-          const rUpZ = 1.2 - breathSway - (isSpeaking ? 0.35 + g2 * 0.08 : 0);
-          // X = forward toward user/screen
-          const lUpX = 0.08 + (isSpeaking ? 0.35 + g3 * 0.06 : 0);
-          const rUpX = 0.05 + (isSpeaking ? 0.3 - g1 * 0.06 : 0);
+          // Idle pose (arms at sides)
+          const idlePose = gesturePoses[0];
 
-          const easeDamp = 2; // slow easing for all transitions
+          // Pick which gesture pose to use based on time (cycle every ~2s)
+          const poseInterval = 2.0;
+          const poseIdx = isSpeaking
+            ? 1 + (Math.floor(t / poseInterval) % (gesturePoses.length - 1))
+            : 0;
+          const pose = isSpeaking ? gesturePoses[poseIdx] : idlePose;
+
+          // Smooth damping — everything blends slowly (no snapping)
+          const d = 2.5;
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
-              lUpZ,
-              easeDamp,
+              pose.lUZ + breathSway,
+              d,
               dt,
             );
             leftUpperArm.rotation.x = THREE.MathUtils.damp(
               leftUpperArm.rotation.x,
-              lUpX,
-              easeDamp,
+              pose.lUX,
+              d,
               dt,
             );
           }
           if (rightUpperArm) {
             rightUpperArm.rotation.z = THREE.MathUtils.damp(
               rightUpperArm.rotation.z,
-              rUpZ,
-              easeDamp,
+              pose.rUZ - breathSway,
+              d,
               dt,
             );
             rightUpperArm.rotation.x = THREE.MathUtils.damp(
               rightUpperArm.rotation.x,
-              rUpX,
-              easeDamp,
+              pose.rUX,
+              d,
               dt,
             );
           }
-
-          // FOREARMS: where the gesture expression lives
-          const gestDamp = isSpeaking ? 3 : 2;
-          const lForeZ = isSpeaking ? -0.4 + g1 * 0.2 + g3 * 0.1 : -0.15;
-          const lForeX = isSpeaking ? g2 * 0.15 : 0;
-          const rForeZ = isSpeaking ? 0.4 - g2 * 0.2 - g1 * 0.1 : 0.15;
-          const rForeX = isSpeaking ? -g3 * 0.15 : 0;
           if (leftForeArm) {
-            leftForeArm.rotation.z = THREE.MathUtils.damp(
-              leftForeArm.rotation.z,
-              lForeZ,
-              gestDamp,
-              dt,
-            );
-            leftForeArm.rotation.x = THREE.MathUtils.damp(
-              leftForeArm.rotation.x,
-              lForeX,
-              gestDamp,
-              dt,
-            );
+            leftForeArm.rotation.z = THREE.MathUtils.damp(leftForeArm.rotation.z, pose.lFZ, d, dt);
           }
           if (rightForeArm) {
             rightForeArm.rotation.z = THREE.MathUtils.damp(
               rightForeArm.rotation.z,
-              rForeZ,
-              gestDamp,
-              dt,
-            );
-            rightForeArm.rotation.x = THREE.MathUtils.damp(
-              rightForeArm.rotation.x,
-              rForeX,
-              gestDamp,
+              pose.rFZ,
+              d,
               dt,
             );
           }
-
-          // HANDS/WRISTS: wrist tilt + palm presentation when speaking
           if (leftHand) {
-            const lhz = 0.1 + (isSpeaking ? g1 * 0.25 : 0);
-            const lhx = isSpeaking ? -0.2 + g3 * 0.2 : 0.15; // palm up when speaking
-            const lhy = isSpeaking ? g2 * 0.15 : 0;
-            leftHand.rotation.z = THREE.MathUtils.damp(leftHand.rotation.z, lhz, gestDamp, dt);
-            leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, lhx, gestDamp, dt);
-            leftHand.rotation.y = THREE.MathUtils.damp(leftHand.rotation.y, lhy, gestDamp, dt);
+            leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, pose.lHX, d, dt);
           }
           if (rightHand) {
-            const rhz = -0.1 + (isSpeaking ? -g2 * 0.25 : 0);
-            const rhx = isSpeaking ? -0.2 - g1 * 0.2 : 0.15; // palm up when speaking
-            const rhy = isSpeaking ? -g3 * 0.15 : 0;
-            rightHand.rotation.z = THREE.MathUtils.damp(rightHand.rotation.z, rhz, gestDamp, dt);
-            rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, rhx, gestDamp, dt);
-            rightHand.rotation.y = THREE.MathUtils.damp(rightHand.rotation.y, rhy, gestDamp, dt);
+            rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, pose.rHX, d, dt);
           }
 
-          // HEAD: gentle nods when speaking
-          if (isSpeaking && neck) {
-            neck.rotation.x += Math.sin(t * 2.2) * 0.025;
-            neck.rotation.y += Math.sin(t * 1.4) * 0.04;
-            neck.rotation.z += Math.sin(t * 1.0) * 0.015;
+          // HEAD: target from pose + subtle continuous drift
+          if (neck) {
+            neck.rotation.x += pose.nX;
+            neck.rotation.y += pose.nY;
           }
 
-          // SPINE: very subtle lean when speaking
+          // SPINE: subtle lean from pose
           if (isSpeaking) {
-            if (spine) {
-              spine.rotation.z += Math.sin(t * 0.8) * 0.015;
-              spine.rotation.x += 0.02;
-            }
-            if (chest) chest.rotation.x += Math.sin(t * 1.8) * 0.012;
+            if (spine) spine.rotation.x += pose.sX;
+            if (chest) chest.rotation.x += pose.sX * 0.5;
           }
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
