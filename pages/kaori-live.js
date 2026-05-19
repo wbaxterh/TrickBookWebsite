@@ -614,6 +614,18 @@ export default function KaoriLivePage() {
           const hips = vrm.humanoid.getNormalizedBoneNode('hips');
           const leftForeArm = vrm.humanoid.getNormalizedBoneNode('leftLowerArm');
           const rightForeArm = vrm.humanoid.getNormalizedBoneNode('rightLowerArm');
+          const leftHand = vrm.humanoid.getNormalizedBoneNode('leftHand');
+          const rightHand = vrm.humanoid.getNormalizedBoneNode('rightHand');
+
+          // Relax hands — curl fingers slightly inward (not stiff straight)
+          if (leftHand) {
+            leftHand.rotation.z = THREE.MathUtils.damp(leftHand.rotation.z, 0.15, 3, dt);
+            leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, 0.2, 3, dt);
+          }
+          if (rightHand) {
+            rightHand.rotation.z = THREE.MathUtils.damp(rightHand.rotation.z, -0.15, 3, dt);
+            rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, 0.2, 3, dt);
+          }
 
           // Breathing and idle motion — slow, gentle, alive
           const breathe = Math.sin(t * 1.2) * 0.015;
@@ -652,26 +664,31 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          // Relaxed arms at sides — VRM T-pose fix
-          // VRM rest pose = T-pose (Z=0 = arms horizontal)
-          // To bring arms DOWN to sides:
-          //   Left arm Z: POSITIVE values rotate downward (~1.2 rad = at sides)
-          //   Right arm Z: NEGATIVE values rotate downward (~-1.2 rad = at sides)
+          // === ARM + BODY ANIMATION ===
+          // VRM: left arm -Z = down, right arm +Z = down
           const isSpeaking = state === 'speaking';
           const breathSway = Math.sin(t * 0.5) * 0.02;
-          const talkGesture = isSpeaking
-            ? Math.sin(t * (2.8 + smoothedVoice * 1.5)) * (0.05 + smoothedVoice * 0.12)
-            : 0;
 
-          // Left upper arm: -Z rotates DOWN for this VRM
-          const lUpZ = -1.15 - breathSway + (isSpeaking ? 0.15 : 0) - talkGesture;
-          const lUpX = 0.1;
+          // Speaking gesture — multiple frequencies for organic movement
+          const gesture1 = isSpeaking ? Math.sin(t * 2.4) * 0.15 : 0;
+          const gesture2 = isSpeaking ? Math.sin(t * 3.7) * 0.08 : 0;
+          const gesture3 = isSpeaking ? Math.cos(t * 1.8) * 0.1 : 0;
 
-          // Right upper arm: +Z rotates DOWN for this VRM
-          const rUpZ = 1.2 + breathSway - (isSpeaking ? 0.15 : 0) + talkGesture;
-          const rUpX = 0.05;
+          // Upper arms: relaxed at sides, lift and gesture when speaking
+          // Idle: arms down (-1.15 / +1.2)
+          // Speaking: arms come up and move expressively
+          const lUpZ = isSpeaking
+            ? -0.7 + gesture1 + gesture3 // lifts up from -1.15, gestures
+            : -1.15 - breathSway;
+          const rUpZ = isSpeaking
+            ? 0.75 - gesture2 - gesture3 // lifts up from +1.2, gestures
+            : 1.2 + breathSway;
 
-          const armDamp = 4;
+          // Forward/back motion when speaking
+          const lUpX = isSpeaking ? 0.25 + gesture2 : 0.1;
+          const rUpX = isSpeaking ? 0.2 - gesture1 * 0.3 : 0.05;
+
+          const armDamp = isSpeaking ? 6 : 3; // faster response when talking
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
@@ -701,9 +718,9 @@ export default function KaoriLivePage() {
             );
           }
 
-          // Forearms: slight inward bend at elbow
-          const lForeZ = isSpeaking ? -0.3 : -0.15;
-          const rForeZ = isSpeaking ? 0.3 : 0.15;
+          // Forearms: more bend when speaking (animated gesticulation)
+          const lForeZ = isSpeaking ? -0.5 + gesture2 * 0.4 : -0.15;
+          const rForeZ = isSpeaking ? 0.5 - gesture1 * 0.4 : 0.15;
           if (leftForeArm) {
             leftForeArm.rotation.z = THREE.MathUtils.damp(
               leftForeArm.rotation.z,
@@ -721,7 +738,23 @@ export default function KaoriLivePage() {
             );
           }
 
-          if (state === 'speaking' && neck) neck.rotation.x += 0.02;
+          // Head nods and tilts more when speaking
+          if (isSpeaking && neck) {
+            neck.rotation.x += Math.sin(t * 3.0) * 0.04; // nodding
+            neck.rotation.y += Math.sin(t * 2.0) * 0.06; // turning
+            neck.rotation.z += Math.sin(t * 1.5) * 0.03; // tilting
+          }
+
+          // Spine/chest movement when speaking — leaning into conversation
+          if (isSpeaking) {
+            if (spine) {
+              spine.rotation.z += Math.sin(t * 1.2) * 0.03;
+              spine.rotation.x += 0.03; // lean slightly forward
+            }
+            if (chest) {
+              chest.rotation.x += Math.sin(t * 2.5) * 0.02;
+            }
+          }
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
           modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
@@ -735,10 +768,20 @@ export default function KaoriLivePage() {
           blinkT < blinkDuration ? Math.sin((blinkT / blinkDuration) * Math.PI) : 0;
         expr('blink', blinkValue);
 
-        // Mouth shapes for speech
-        expr('aa', Math.min(0.55, smoothedMouth * (0.65 + smoothedLow * 0.35)));
-        expr('oh', Math.min(0.35, smoothedMouth * (0.25 + smoothedMid * 0.75)));
-        expr('ee', Math.min(0.32, smoothedMouth * (0.2 + smoothedHigh * 0.8)));
+        // Mouth shapes — simulated when speaking (no audio analyser in WS mode)
+        if (state === 'speaking') {
+          // Multiple frequencies simulate natural mouth shapes cycling
+          const mouthAa = Math.max(0, Math.sin(t * 5.5)) * 0.5;
+          const mouthOh = Math.max(0, Math.sin(t * 4.2 + 1.2)) * 0.35;
+          const mouthEe = Math.max(0, Math.sin(t * 6.8 + 2.5)) * 0.3;
+          expr('aa', mouthAa);
+          expr('oh', mouthOh);
+          expr('ee', mouthEe);
+        } else {
+          expr('aa', 0);
+          expr('oh', 0);
+          expr('ee', 0);
+        }
         expr('ih', state === 'thinking' ? 0.1 : 0);
 
         // Subtle resting expression — slight smile that increases with relationship
