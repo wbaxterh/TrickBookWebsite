@@ -539,18 +539,7 @@ export default function KaoriLivePage() {
 
       const clock = new THREE.Clock();
 
-      let mixer = null;
-      const clipActions = {};
-      let activeClip = '';
-
-      const fadeToClip = (name) => {
-        if (!mixer || !clipActions[name] || activeClip === name) return;
-        const next = clipActions[name];
-        const prev = clipActions[activeClip];
-        if (prev) prev.fadeOut(0.35);
-        next.reset().fadeIn(0.35).play();
-        activeClip = name;
-      };
+      // Procedural animation — no mixer or FBX clips needed
 
       // VRoid VRM 1.0 expression name mapping
       const exprMap = {
@@ -578,42 +567,9 @@ export default function KaoriLivePage() {
         }
       };
 
-      // Optional Mixamo-style clip blending (if clips exist)
-      (async () => {
-        try {
-          const { FBXLoader } = await import('three/examples/jsm/loaders/FBXLoader.js');
-          const loader = new FBXLoader();
-          const clipMap = {
-            idle: '/kaori/anims/idle.fbx',
-            speaking: '/kaori/anims/talking.fbx',
-            thinking: '/kaori/anims/excited.fbx',
-          };
-
-          mixer = new THREE.AnimationMixer(modelRoot);
-
-          for (const [key, url] of Object.entries(clipMap)) {
-            try {
-              const fbx = await loader.loadAsync(url);
-              const clip = fbx.animations?.[0];
-              if (!clip) continue;
-              const action = mixer.clipAction(clip);
-              action.enabled = true;
-              action.setEffectiveWeight(1);
-              action.setLoop(THREE.LoopRepeat, Infinity);
-              clipActions[key] = action;
-            } catch (_err) {
-              // Clip missing is acceptable in fallback mode.
-            }
-          }
-
-          if (clipActions.idle) {
-            clipActions.idle.play();
-            activeClip = 'idle';
-          }
-        } catch (_err) {
-          // If loader import fails, procedural animation still works.
-        }
-      })();
+      // Fully procedural animation — no FBX clips.
+      // FBX Mixamo animations override bone rotations and cause T-pose issues
+      // with VRM models. Procedural animation gives us full control.
 
       let smoothedVoice = 0;
       let smoothedMouth = 0;
@@ -646,12 +602,7 @@ export default function KaoriLivePage() {
           vrm.update(dt);
         }
 
-        if (mixer) {
-          mixer.update(dt);
-          if (state === 'speaking') fadeToClip('speaking');
-          else if (state === 'thinking') fadeToClip('thinking');
-          else fadeToClip('idle');
-        }
+        // No mixer — fully procedural animation for reliable bone control
 
         if (vrm?.humanoid) {
           const neck = vrm.humanoid.getNormalizedBoneNode('neck');
@@ -660,21 +611,36 @@ export default function KaoriLivePage() {
           const leftUpperArm = vrm.humanoid.getNormalizedBoneNode('leftUpperArm');
           const rightUpperArm = vrm.humanoid.getNormalizedBoneNode('rightUpperArm');
 
-          const idleSway = Math.sin(t * 0.7) * 0.04;
-          const breathe = Math.sin(t * 1.5) * 0.02;
+          const hips = vrm.humanoid.getNormalizedBoneNode('hips');
           const leftForeArm = vrm.humanoid.getNormalizedBoneNode('leftLowerArm');
           const rightForeArm = vrm.humanoid.getNormalizedBoneNode('rightLowerArm');
 
-          if (neck) {
-            neck.rotation.y = Math.sin(t * 0.9) * 0.06;
-            neck.rotation.x = breathe;
+          // Breathing and idle motion — slow, gentle, alive
+          const breathe = Math.sin(t * 1.2) * 0.015;
+          const idleSway = Math.sin(t * 0.4) * 0.02;
+          const headDrift = Math.sin(t * 0.55) * 0.04;
+
+          // Hips: very subtle weight shift side to side
+          if (hips) {
+            hips.rotation.z = Math.sin(t * 0.3) * 0.015;
+            hips.rotation.y = Math.sin(t * 0.2) * 0.01;
           }
-          // Subtle weight shift — natural standing sway
+
+          // Neck: slow gentle look around + breathing nod
+          if (neck) {
+            neck.rotation.y = headDrift;
+            neck.rotation.x = breathe * 0.8;
+            neck.rotation.z = Math.sin(t * 0.35) * 0.02; // slight tilt
+          }
+
+          // Spine: subtle breathing rise + sway
           if (spine) {
             spine.rotation.z = idleSway;
-            spine.rotation.x = breathe * 0.5;
+            spine.rotation.x = breathe * 0.4;
           }
-          if (chest) chest.rotation.x = breathe * 0.7;
+
+          // Chest: breathing expansion
+          if (chest) chest.rotation.x = breathe * 0.6;
 
           if (state === 'listening') {
             if (neck) neck.rotation.x += 0.08;
@@ -785,10 +751,13 @@ export default function KaoriLivePage() {
           modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
         }
 
-        // Natural blinking — random intervals (2-5 seconds), quick close/open
-        const blinkCycle = t % (2.5 + Math.sin(t * 0.37) * 1.5); // varies 1-4s
-        const blinkPhase = blinkCycle < 0.12 ? Math.sin((blinkCycle / 0.12) * Math.PI) : 0;
-        expr('blink', blinkPhase);
+        // Natural blinking — every ~3.5 seconds, quick 150ms close/open
+        const blinkInterval = 3.5;
+        const blinkDuration = 0.15;
+        const blinkT = t % blinkInterval;
+        const blinkValue =
+          blinkT < blinkDuration ? Math.sin((blinkT / blinkDuration) * Math.PI) : 0;
+        expr('blink', blinkValue);
 
         // Mouth shapes for speech
         expr('aa', Math.min(0.55, smoothedMouth * (0.65 + smoothedLow * 0.35)));
@@ -840,7 +809,7 @@ export default function KaoriLivePage() {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
           scene.remove(modelRoot);
-          if (mixer) mixer.stopAllAction();
+          // no mixer to clean up — fully procedural
           fallbackGeo.dispose();
           fallbackMat.dispose();
           ringGeo.dispose();
