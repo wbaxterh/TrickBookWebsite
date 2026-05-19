@@ -13,7 +13,7 @@ import {
 import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
-const KAORI_VRM_PATH = '/kaori/Kaori_V2.vrm';
+const KAORI_VRM_PATH = '/kaori/Kaori_V3.vrm';
 const KAORI_STAGE_BUILD_TAG = 'build-188-kith';
 const KITH_VOICE_WS_URL = process.env.NEXT_PUBLIC_KITH_VOICE_WS_URL || 'ws://localhost:3040/ws';
 
