@@ -665,41 +665,34 @@ export default function KaoriLivePage() {
           }
 
           // === ARM + BODY ANIMATION ===
-          // VRM: left arm -Z = down, right arm +Z = down
+          // Shoulders/biceps stay mostly still. Forearms + wrists + hands gesture.
+          // All damping is slow (2) for smooth easing — no snapping.
           const isSpeaking = state === 'speaking';
-          const breathSway = Math.sin(t * 0.5) * 0.02;
+          const breathSway = Math.sin(t * 0.5) * 0.015;
 
-          // Speaking gesture — multiple frequencies for organic movement
-          const gesture1 = isSpeaking ? Math.sin(t * 2.4) * 0.15 : 0;
-          const gesture2 = isSpeaking ? Math.sin(t * 3.7) * 0.08 : 0;
-          const gesture3 = isSpeaking ? Math.cos(t * 1.8) * 0.1 : 0;
+          // Gesture waves at natural conversational speeds
+          const g1 = Math.sin(t * 1.8);
+          const g2 = Math.sin(t * 2.9 + 0.8);
+          const g3 = Math.cos(t * 2.2 + 1.5);
 
-          // Upper arms: relaxed at sides, lift and gesture when speaking
-          // Idle: arms down (-1.15 / +1.2)
-          // Speaking: arms come up and move expressively
-          const lUpZ = isSpeaking
-            ? -0.7 + gesture1 + gesture3 // lifts up from -1.15, gestures
-            : -1.15 - breathSway;
-          const rUpZ = isSpeaking
-            ? 0.75 - gesture2 - gesture3 // lifts up from +1.2, gestures
-            : 1.2 + breathSway;
+          // UPPER ARMS: mostly pinned at sides. Tiny shift when speaking.
+          const lUpZ = -1.15 + breathSway + (isSpeaking ? 0.12 : 0);
+          const rUpZ = 1.2 - breathSway - (isSpeaking ? 0.15 : 0);
+          const lUpX = 0.08 + (isSpeaking ? 0.08 : 0);
+          const rUpX = 0.05 + (isSpeaking ? 0.06 : 0);
 
-          // Forward/back motion when speaking
-          const lUpX = isSpeaking ? 0.25 + gesture2 : 0.1;
-          const rUpX = isSpeaking ? 0.2 - gesture1 * 0.3 : 0.05;
-
-          const armDamp = isSpeaking ? 6 : 3; // faster response when talking
+          const easeDamp = 2; // slow easing for all transitions
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
               lUpZ,
-              armDamp,
+              easeDamp,
               dt,
             );
             leftUpperArm.rotation.x = THREE.MathUtils.damp(
               leftUpperArm.rotation.x,
               lUpX,
-              armDamp,
+              easeDamp,
               dt,
             );
           }
@@ -707,25 +700,34 @@ export default function KaoriLivePage() {
             rightUpperArm.rotation.z = THREE.MathUtils.damp(
               rightUpperArm.rotation.z,
               rUpZ,
-              armDamp,
+              easeDamp,
               dt,
             );
             rightUpperArm.rotation.x = THREE.MathUtils.damp(
               rightUpperArm.rotation.x,
               rUpX,
-              armDamp,
+              easeDamp,
               dt,
             );
           }
 
-          // Forearms: more bend when speaking (animated gesticulation)
-          const lForeZ = isSpeaking ? -0.5 + gesture2 * 0.4 : -0.15;
-          const rForeZ = isSpeaking ? 0.5 - gesture1 * 0.4 : 0.15;
+          // FOREARMS: where the gesture expression lives
+          const gestDamp = isSpeaking ? 3 : 2;
+          const lForeZ = isSpeaking ? -0.4 + g1 * 0.2 + g3 * 0.1 : -0.15;
+          const lForeX = isSpeaking ? g2 * 0.15 : 0;
+          const rForeZ = isSpeaking ? 0.4 - g2 * 0.2 - g1 * 0.1 : 0.15;
+          const rForeX = isSpeaking ? -g3 * 0.15 : 0;
           if (leftForeArm) {
             leftForeArm.rotation.z = THREE.MathUtils.damp(
               leftForeArm.rotation.z,
               lForeZ,
-              armDamp,
+              gestDamp,
+              dt,
+            );
+            leftForeArm.rotation.x = THREE.MathUtils.damp(
+              leftForeArm.rotation.x,
+              lForeX,
+              gestDamp,
               dt,
             );
           }
@@ -733,27 +735,45 @@ export default function KaoriLivePage() {
             rightForeArm.rotation.z = THREE.MathUtils.damp(
               rightForeArm.rotation.z,
               rForeZ,
-              armDamp,
+              gestDamp,
+              dt,
+            );
+            rightForeArm.rotation.x = THREE.MathUtils.damp(
+              rightForeArm.rotation.x,
+              rForeX,
+              gestDamp,
               dt,
             );
           }
 
-          // Head nods and tilts more when speaking
-          if (isSpeaking && neck) {
-            neck.rotation.x += Math.sin(t * 3.0) * 0.04; // nodding
-            neck.rotation.y += Math.sin(t * 2.0) * 0.06; // turning
-            neck.rotation.z += Math.sin(t * 1.5) * 0.03; // tilting
+          // HANDS/WRISTS: rotate with gestures for emphasis
+          if (leftHand) {
+            const lhz = 0.15 + (isSpeaking ? g1 * 0.2 : 0);
+            const lhx = 0.2 + (isSpeaking ? g3 * 0.15 : 0);
+            leftHand.rotation.z = THREE.MathUtils.damp(leftHand.rotation.z, lhz, gestDamp, dt);
+            leftHand.rotation.x = THREE.MathUtils.damp(leftHand.rotation.x, lhx, gestDamp, dt);
+          }
+          if (rightHand) {
+            const rhz = -0.15 + (isSpeaking ? -g2 * 0.2 : 0);
+            const rhx = 0.2 + (isSpeaking ? -g1 * 0.15 : 0);
+            rightHand.rotation.z = THREE.MathUtils.damp(rightHand.rotation.z, rhz, gestDamp, dt);
+            rightHand.rotation.x = THREE.MathUtils.damp(rightHand.rotation.x, rhx, gestDamp, dt);
           }
 
-          // Spine/chest movement when speaking — leaning into conversation
+          // HEAD: gentle nods when speaking
+          if (isSpeaking && neck) {
+            neck.rotation.x += Math.sin(t * 2.2) * 0.025;
+            neck.rotation.y += Math.sin(t * 1.4) * 0.04;
+            neck.rotation.z += Math.sin(t * 1.0) * 0.015;
+          }
+
+          // SPINE: very subtle lean when speaking
           if (isSpeaking) {
             if (spine) {
-              spine.rotation.z += Math.sin(t * 1.2) * 0.03;
-              spine.rotation.x += 0.03; // lean slightly forward
+              spine.rotation.z += Math.sin(t * 0.8) * 0.015;
+              spine.rotation.x += 0.02;
             }
-            if (chest) {
-              chest.rotation.x += Math.sin(t * 2.5) * 0.02;
-            }
+            if (chest) chest.rotation.x += Math.sin(t * 1.8) * 0.012;
           }
         } else {
           modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
