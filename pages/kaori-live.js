@@ -663,12 +663,12 @@ export default function KaoriLivePage() {
             ? Math.sin(t * (2.8 + smoothedVoice * 1.5)) * (0.05 + smoothedVoice * 0.12)
             : 0;
 
-          // Left upper arm: +Z rotates DOWN. 1.15 = relaxed at side
-          const lUpZ = 1.15 + breathSway - (isSpeaking ? 0.15 : 0) + talkGesture;
+          // Left upper arm: -Z rotates DOWN for this VRM
+          const lUpZ = -1.15 - breathSway + (isSpeaking ? 0.15 : 0) - talkGesture;
           const lUpX = 0.1;
 
-          // Right upper arm: -Z rotates DOWN. -1.2 = relaxed at side (slight asymmetry)
-          const rUpZ = -1.2 - breathSway + (isSpeaking ? 0.15 : 0) - talkGesture;
+          // Right upper arm: +Z rotates DOWN for this VRM
+          const rUpZ = 1.2 + breathSway - (isSpeaking ? 0.15 : 0) + talkGesture;
           const rUpX = 0.05;
 
           const armDamp = 4;
