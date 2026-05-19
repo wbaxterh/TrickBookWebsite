@@ -669,9 +669,9 @@ export default function KaoriLivePage() {
             neck.rotation.y = Math.sin(t * 0.9) * 0.06;
             neck.rotation.x = breathe;
           }
-          // Slight hip tilt for casual hand-on-hip pose
+          // Subtle weight shift — natural standing sway
           if (spine) {
-            spine.rotation.z = idleSway + 0.03; // slight lean toward hip-hand side
+            spine.rotation.z = idleSway;
             spine.rotation.x = breathe * 0.5;
           }
           if (chest) chest.rotation.x = breathe * 0.7;
@@ -686,79 +686,97 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          // Casual idle pose: left hand on hip, right arm relaxed at side
+          // Relaxed natural pose — arms hanging at sides like Grok's Ani
+          // Arms close to body, slight elbow bend, hands near thighs
+          // Gentle asymmetry + breathing motion for life
           const isSpeaking = state === 'speaking';
+          const breathSway = Math.sin(t * 0.5) * 0.008;
           const talkGesture = isSpeaking
-            ? Math.sin(t * (3.2 + smoothedVoice * 2)) * (0.03 + smoothedVoice * 0.05)
+            ? Math.sin(t * (2.8 + smoothedVoice * 1.5)) * (0.02 + smoothedVoice * 0.04)
             : 0;
-          const idleBreath = Math.sin(t * 0.6) * 0.01;
 
-          // Left arm: hand on hip (bent, angled outward)
-          const leftArmZ = isSpeaking ? -0.35 + talkGesture : -0.45 + idleBreath;
-          const leftArmX = isSpeaking ? -0.1 : 0.15;
-          const leftArmY = 0.2;
+          // Upper arms: hanging down with very slight outward angle
+          // VRM Z-axis: negative = left arm out, positive = right arm out
+          // Values near 0 = arms straight down (hanging)
+          // Left arm: very slightly in front, tiny outward
+          const lUpZ = -0.08 + breathSway + talkGesture;
+          const lUpX = 0.03; // very slightly forward
+          const lUpY = 0.05; // tiny rotation
 
-          // Right arm: relaxed at side (hanging naturally)
-          const rightArmZ = isSpeaking ? 0.3 - talkGesture : 0.2 - idleBreath;
-          const rightArmX = isSpeaking ? -0.12 : -0.05;
-          const rightArmY = -0.05;
+          // Right arm: mirror but slightly different for asymmetry
+          const rUpZ = 0.1 - breathSway - talkGesture;
+          const rUpX = 0.01;
+          const rUpY = -0.03;
 
+          const armDamp = 3;
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
-              leftArmZ,
-              4,
+              lUpZ,
+              armDamp,
               dt,
             );
             leftUpperArm.rotation.x = THREE.MathUtils.damp(
               leftUpperArm.rotation.x,
-              leftArmX,
-              4,
+              lUpX,
+              armDamp,
               dt,
             );
             leftUpperArm.rotation.y = THREE.MathUtils.damp(
               leftUpperArm.rotation.y,
-              leftArmY,
-              4,
+              lUpY,
+              armDamp,
               dt,
             );
           }
           if (rightUpperArm) {
             rightUpperArm.rotation.z = THREE.MathUtils.damp(
               rightUpperArm.rotation.z,
-              rightArmZ,
-              4,
+              rUpZ,
+              armDamp,
               dt,
             );
             rightUpperArm.rotation.x = THREE.MathUtils.damp(
               rightUpperArm.rotation.x,
-              rightArmX,
-              4,
+              rUpX,
+              armDamp,
               dt,
             );
             rightUpperArm.rotation.y = THREE.MathUtils.damp(
               rightUpperArm.rotation.y,
-              rightArmY,
-              4,
+              rUpY,
+              armDamp,
               dt,
             );
           }
 
-          // Forearms: left bent for hand-on-hip, right relaxed
+          // Forearms: natural bend at elbow (hands resting near thighs)
+          // Y-axis controls the elbow bend for VRM
+          const lForeY = isSpeaking ? -0.25 - smoothedVoice * 0.15 : -0.15;
+          const rForeY = isSpeaking ? 0.25 + smoothedVoice * 0.15 : 0.15;
+
           if (leftForeArm) {
-            const leftForeY = isSpeaking ? -0.6 : -0.85;
-            leftForeArm.rotation.y = THREE.MathUtils.damp(leftForeArm.rotation.y, leftForeY, 4, dt);
-            leftForeArm.rotation.z = THREE.MathUtils.damp(leftForeArm.rotation.z, -0.1, 4, dt);
-          }
-          if (rightForeArm) {
-            const rightForeY = isSpeaking ? 0.4 : 0.2;
-            rightForeArm.rotation.y = THREE.MathUtils.damp(
-              rightForeArm.rotation.y,
-              rightForeY,
-              4,
+            leftForeArm.rotation.y = THREE.MathUtils.damp(
+              leftForeArm.rotation.y,
+              lForeY,
+              armDamp,
               dt,
             );
-            rightForeArm.rotation.z = THREE.MathUtils.damp(rightForeArm.rotation.z, 0.05, 4, dt);
+            leftForeArm.rotation.z = THREE.MathUtils.damp(leftForeArm.rotation.z, 0.0, armDamp, dt);
+          }
+          if (rightForeArm) {
+            rightForeArm.rotation.y = THREE.MathUtils.damp(
+              rightForeArm.rotation.y,
+              rForeY,
+              armDamp,
+              dt,
+            );
+            rightForeArm.rotation.z = THREE.MathUtils.damp(
+              rightForeArm.rotation.z,
+              0.0,
+              armDamp,
+              dt,
+            );
           }
 
           if (state === 'speaking' && neck) neck.rotation.x += 0.02;
@@ -767,12 +785,20 @@ export default function KaoriLivePage() {
           modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
         }
 
-        expr('blink', Math.abs(Math.sin(t * 0.75)) > 0.985 ? 1 : 0);
+        // Natural blinking — random intervals (2-5 seconds), quick close/open
+        const blinkCycle = t % (2.5 + Math.sin(t * 0.37) * 1.5); // varies 1-4s
+        const blinkPhase = blinkCycle < 0.12 ? Math.sin((blinkCycle / 0.12) * Math.PI) : 0;
+        expr('blink', blinkPhase);
+
+        // Mouth shapes for speech
         expr('aa', Math.min(0.55, smoothedMouth * (0.65 + smoothedLow * 0.35)));
         expr('oh', Math.min(0.35, smoothedMouth * (0.25 + smoothedMid * 0.75)));
         expr('ee', Math.min(0.32, smoothedMouth * (0.2 + smoothedHigh * 0.8)));
         expr('ih', state === 'thinking' ? 0.1 : 0);
-        expr('happy', state === 'listening' ? 0.16 : state === 'speaking' ? 0.22 : 0.08);
+
+        // Subtle resting expression — slight smile that increases with relationship
+        const restSmile = state === 'listening' ? 0.18 : state === 'speaking' ? 0.25 : 0.12;
+        expr('happy', restSmile);
 
         if (state === 'listening') {
           pulseMat.opacity = 0.55;
