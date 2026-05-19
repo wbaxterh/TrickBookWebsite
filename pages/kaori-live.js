@@ -652,29 +652,26 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          // Relaxed natural pose — arms hanging at sides like Grok's Ani
-          // Arms close to body, slight elbow bend, hands near thighs
-          // Gentle asymmetry + breathing motion for life
+          // Relaxed arms at sides — VRM T-pose fix
+          // VRM rest pose = T-pose (Z=0 = arms horizontal)
+          // To bring arms DOWN to sides:
+          //   Left arm Z: POSITIVE values rotate downward (~1.2 rad = at sides)
+          //   Right arm Z: NEGATIVE values rotate downward (~-1.2 rad = at sides)
           const isSpeaking = state === 'speaking';
-          const breathSway = Math.sin(t * 0.5) * 0.008;
+          const breathSway = Math.sin(t * 0.5) * 0.02;
           const talkGesture = isSpeaking
-            ? Math.sin(t * (2.8 + smoothedVoice * 1.5)) * (0.02 + smoothedVoice * 0.04)
+            ? Math.sin(t * (2.8 + smoothedVoice * 1.5)) * (0.05 + smoothedVoice * 0.12)
             : 0;
 
-          // Upper arms: hanging down with very slight outward angle
-          // VRM Z-axis: negative = left arm out, positive = right arm out
-          // Values near 0 = arms straight down (hanging)
-          // Left arm: very slightly in front, tiny outward
-          const lUpZ = -0.08 + breathSway + talkGesture;
-          const lUpX = 0.03; // very slightly forward
-          const lUpY = 0.05; // tiny rotation
+          // Left upper arm: +Z rotates DOWN. 1.15 = relaxed at side
+          const lUpZ = 1.15 + breathSway - (isSpeaking ? 0.15 : 0) + talkGesture;
+          const lUpX = 0.1;
 
-          // Right arm: mirror but slightly different for asymmetry
-          const rUpZ = 0.1 - breathSway - talkGesture;
-          const rUpX = 0.01;
-          const rUpY = -0.03;
+          // Right upper arm: -Z rotates DOWN. -1.2 = relaxed at side (slight asymmetry)
+          const rUpZ = -1.2 - breathSway + (isSpeaking ? 0.15 : 0) - talkGesture;
+          const rUpX = 0.05;
 
-          const armDamp = 3;
+          const armDamp = 4;
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
@@ -685,12 +682,6 @@ export default function KaoriLivePage() {
             leftUpperArm.rotation.x = THREE.MathUtils.damp(
               leftUpperArm.rotation.x,
               lUpX,
-              armDamp,
-              dt,
-            );
-            leftUpperArm.rotation.y = THREE.MathUtils.damp(
-              leftUpperArm.rotation.y,
-              lUpY,
               armDamp,
               dt,
             );
@@ -708,38 +699,23 @@ export default function KaoriLivePage() {
               armDamp,
               dt,
             );
-            rightUpperArm.rotation.y = THREE.MathUtils.damp(
-              rightUpperArm.rotation.y,
-              rUpY,
-              armDamp,
-              dt,
-            );
           }
 
-          // Forearms: natural bend at elbow (hands resting near thighs)
-          // Y-axis controls the elbow bend for VRM
-          const lForeY = isSpeaking ? -0.25 - smoothedVoice * 0.15 : -0.15;
-          const rForeY = isSpeaking ? 0.25 + smoothedVoice * 0.15 : 0.15;
-
+          // Forearms: slight inward bend at elbow
+          const lForeZ = isSpeaking ? -0.3 : -0.15;
+          const rForeZ = isSpeaking ? 0.3 : 0.15;
           if (leftForeArm) {
-            leftForeArm.rotation.y = THREE.MathUtils.damp(
-              leftForeArm.rotation.y,
-              lForeY,
+            leftForeArm.rotation.z = THREE.MathUtils.damp(
+              leftForeArm.rotation.z,
+              lForeZ,
               armDamp,
               dt,
             );
-            leftForeArm.rotation.z = THREE.MathUtils.damp(leftForeArm.rotation.z, 0.0, armDamp, dt);
           }
           if (rightForeArm) {
-            rightForeArm.rotation.y = THREE.MathUtils.damp(
-              rightForeArm.rotation.y,
-              rForeY,
-              armDamp,
-              dt,
-            );
             rightForeArm.rotation.z = THREE.MathUtils.damp(
               rightForeArm.rotation.z,
-              0.0,
+              rForeZ,
               armDamp,
               dt,
             );
