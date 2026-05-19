@@ -1,14 +1,4 @@
-import {
-  ChevronRight,
-  Download,
-  MapPin,
-  Smartphone,
-  Star,
-  Target,
-  TrendingUp,
-  Users,
-  Zap,
-} from 'lucide-react';
+import { ChevronRight, Download, MapPin, Star, Target, TrendingUp, Users, Zap } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -116,8 +106,6 @@ const FEATURES = [
     subtitle: 'Every trick you land',
     description:
       'Build custom trick lists for any sport. Check off tricks as you land them, track your sessions, and watch your skills grow over time.',
-    color: 'text-yellow-400',
-    bgColor: 'bg-yellow-400/10',
   },
   {
     icon: TrendingUp,
@@ -125,8 +113,6 @@ const FEATURES = [
     subtitle: "See how far you've come",
     description:
       'Visual progress tracking shows your journey from beginner to pro. Browse the Trickipedia to discover new tricks and set goals for your next session.',
-    color: 'text-emerald-400',
-    bgColor: 'bg-emerald-400/10',
   },
   {
     icon: Users,
@@ -134,8 +120,6 @@ const FEATURES = [
     subtitle: 'Ride with your crew',
     description:
       'Find and follow riders who share your stoke. Share clips, message your homies, and build a community around the sports you love.',
-    color: 'text-blue-400',
-    bgColor: 'bg-blue-400/10',
   },
 ];
 
@@ -187,9 +171,9 @@ const HOW_IT_WORKS = [
 // A/B test variants for the hero headline.
 // Create a feature flag called "hero-headline" in PostHog with these variant keys.
 const HERO_VARIANTS = {
-  control: { line1: 'Track every trick', line2: 'you land.' },
-  'variant-community': { line1: 'Your skateboarding journey,', line2: 'tracked.' },
-  'variant-action': { line1: 'Land more tricks.', line2: 'Find more spots.' },
+  control: { line1: 'YOUR BOARD.', line2: 'YOUR DATA.', line3: 'YOUR CREW.' },
+  'variant-community': { line1: 'LAND IT.', line2: 'LOG IT.', line3: 'OWN IT.' },
+  'variant-action': { line1: 'EVERY TRICK.', line2: 'EVERY SPOT.', line3: 'EVERY SESSION.' },
 };
 
 export default function Home() {
@@ -248,68 +232,46 @@ export default function Home() {
       {/* ============================================ */}
       <section
         ref={heroRef}
-        className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0a0a0a]"
+        className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#0a0a0a]"
       >
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#1a1a00] opacity-90" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(252,241,80,0.04),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(252,241,80,0.03),transparent_50%)]" />
 
-        <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            {/* Left: Copy */}
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-sm mb-6">
-                <Smartphone className="w-4 h-4" />
-                Free on iOS & Android
-              </div>
+        <div className="relative z-10 container mx-auto px-4 pt-16 md:pt-24 text-center">
+          {/* Massive headline */}
+          <h1 className="font-black tracking-tighter leading-[0.85] mb-8">
+            <span className="block text-[clamp(2.8rem,10vw,8rem)] text-white">
+              {heroText.line1}
+            </span>
+            <span className="block text-[clamp(2.8rem,10vw,8rem)] text-yellow-400">
+              {heroText.line2}
+            </span>
+            <span className="block text-[clamp(2.8rem,10vw,8rem)] text-white">
+              {heroText.line3}
+            </span>
+          </h1>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                {heroText.line1}
-                <br />
-                <span className="text-yellow-400">{heroText.line2}</span>
-              </h1>
+          {/* Subline */}
+          <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-lg mx-auto leading-relaxed">
+            The action sports platform that doesn't sell you out.
+            <br className="hidden md:block" />
+            Track tricks. Find spots. Ride with real ones.
+          </p>
 
-              <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-md">
-                The app for skaters, snowboarders, and action sports riders to track progress,
-                discover spots, and ride with a real community.
-              </p>
+          {/* App Store Badges first */}
+          <AppStoreBadges location="hero" className="justify-center mb-6" />
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Link
-                  href="/signup"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors text-center no-underline"
-                  onClick={() => trackCtaClick('get_started_free', 'hero')}
-                >
-                  Get Started Free
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/trickbook"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 !text-gray-300 font-medium rounded-lg hover:border-yellow-400/50 hover:!text-yellow-400 transition-colors text-center no-underline"
-                  onClick={() => trackCtaClick('explore_tricks', 'hero')}
-                >
-                  Explore Tricks
-                </Link>
-              </div>
-
-              <AppStoreBadges location="hero" />
-            </div>
-
-            {/* Right: App mockup */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute inset-0 bg-yellow-400/10 rounded-3xl blur-2xl scale-95" />
-                <Image
-                  src="/trickBookScreenShotNoBg.png"
-                  width={300}
-                  height={600}
-                  alt="TrickBook App"
-                  className="relative z-10 drop-shadow-2xl w-[260px] md:w-[300px] h-auto"
-                  priority
-                />
-              </div>
-            </div>
+          {/* CTA */}
+          <div className="mb-12">
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 bg-yellow-400 !text-[#0a0a0a] font-bold rounded-lg hover:bg-yellow-300 hover:!text-[#0a0a0a] transition-colors text-center no-underline uppercase tracking-wide text-sm"
+              onClick={() => trackCtaClick('join_the_movement', 'hero')}
+            >
+              Join the movement
+              <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -346,15 +308,13 @@ export default function Home() {
             {FEATURES.map((feature) => (
               <div
                 key={feature.title}
-                className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-400/20 transition-all duration-300"
+                className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all duration-300"
               >
-                <div
-                  className={`w-12 h-12 rounded-xl ${feature.bgColor} flex items-center justify-center mb-6`}
-                >
-                  <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-1">{feature.title}</h3>
-                <p className={`text-sm ${feature.color} mb-3`}>{feature.subtitle}</p>
+                <p className="text-sm text-gray-500 mb-3">{feature.subtitle}</p>
                 <p className="text-gray-400 leading-relaxed">{feature.description}</p>
               </div>
             ))}
@@ -541,12 +501,12 @@ export default function Home() {
           <div className="relative max-w-3xl mx-auto text-center">
             <div className="absolute inset-0 bg-yellow-400/5 rounded-3xl blur-3xl" />
             <div className="relative p-8 md:p-16 rounded-3xl border border-white/5 bg-white/[0.01]">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Ready to start tracking?
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
+                Stop scrolling. Start riding.
               </h2>
               <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
-                Join {stats ? formatNumber(stats.users) : '200'}+ riders already using TrickBook.
-                It's free, it's private, and it's built for you.
+                {stats ? formatNumber(stats.users) : '200'}+ riders are already in. Free forever. No
+                ads. No algorithm.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -556,7 +516,7 @@ export default function Home() {
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
                     onClick={() => trackCtaClick('go_to_trickbook', 'final_cta')}
                   >
-                    Go to My TrickBook
+                    Go to my TrickBook
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 ) : (
@@ -565,7 +525,7 @@ export default function Home() {
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
                     onClick={() => trackCtaClick('create_free_account', 'final_cta')}
                   >
-                    Create Free Account
+                    I'm in
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 )}
