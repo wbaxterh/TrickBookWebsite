@@ -1011,6 +1011,7 @@ export default function KaoriLivePage() {
     }
 
     if (listening && recognitionRef.current) {
+      // User clicked stop — submit what we have
       recognitionRef.current.stop();
       return;
     }
@@ -1019,13 +1020,31 @@ export default function KaoriLivePage() {
     recognitionRef.current = recognition;
     recognition.lang = 'en-US';
     recognition.interimResults = true;
+    recognition.continuous = true; // Keep listening — don't stop on first pause
     recognition.maxAlternatives = 1;
 
     let finalText = '';
+    let silenceTimer = null;
+    let manualStop = false;
+    const SILENCE_TIMEOUT = 2000; // 2 seconds of silence before submitting
+
+    const resetSilenceTimer = () => {
+      if (silenceTimer) clearTimeout(silenceTimer);
+      silenceTimer = setTimeout(() => {
+        // User has been silent for 2s — they're done talking
+        manualStop = true;
+        recognition.stop();
+      }, SILENCE_TIMEOUT);
+    };
 
     recognition.onstart = () => {
       setListening(true);
       setCharState('listening');
+      // If Kaori is currently speaking, barge-in — stop her so user can talk
+      if (kithWsRef.current?.readyState === WebSocket.OPEN) {
+        kithWsRef.current.send(JSON.stringify({ type: 'barge-in' }));
+      }
+      audioQueueRef.current.length = 0;
     };
 
     recognition.onresult = (event) => {
@@ -1039,17 +1058,25 @@ export default function KaoriLivePage() {
         }
       }
       setInput((finalText + interim).trim());
+      // User is still talking — reset the silence timer
+      resetSilenceTimer();
     };
 
-    recognition.onerror = () => {
+    recognition.onerror = (e) => {
+      // 'no-speech' is normal — user hasn't said anything yet, keep listening
+      if (e.error === 'no-speech') return;
+      if (silenceTimer) clearTimeout(silenceTimer);
       setListening(false);
       setCharState('idle');
     };
 
     recognition.onend = async () => {
+      if (silenceTimer) clearTimeout(silenceTimer);
       setListening(false);
-      if ((finalText || input).trim()) {
-        await submitText((finalText || input).trim());
+
+      const text = (finalText || input).trim();
+      if (text) {
+        await submitText(text);
         setInput('');
       } else {
         setCharState('idle');
@@ -1057,6 +1084,13 @@ export default function KaoriLivePage() {
     };
 
     recognition.start();
+    // Start the initial silence timer — if user doesn't speak in 5s, stop
+    silenceTimer = setTimeout(() => {
+      if (!finalText.trim()) {
+        manualStop = true;
+        recognition.stop();
+      }
+    }, 5000);
   };
 
   const stateStyle =
