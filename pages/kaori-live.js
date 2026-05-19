@@ -13,7 +13,7 @@ import {
 import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
-const KAORI_VRM_PATH = '/kaori/kaori_sample.vrm';
+const KAORI_VRM_PATH = '/kaori/Kaori_V2.vrm';
 const KAORI_STAGE_BUILD_TAG = 'build-188-kith';
 const KITH_VOICE_WS_URL = process.env.NEXT_PUBLIC_KITH_VOICE_WS_URL || 'ws://localhost:3040/ws';
 
@@ -552,13 +552,29 @@ export default function KaoriLivePage() {
         activeClip = name;
       };
 
+      // VRoid VRM 1.0 expression name mapping
+      const exprMap = {
+        blink: ['blink', 'Blink', 'blinkLeft'],
+        aa: ['aa', 'Aa', 'a', 'A', 'vowelA'],
+        oh: ['oh', 'Oh', 'o', 'O', 'vowelO'],
+        ee: ['ee', 'Ee', 'e', 'E', 'vowelE'],
+        ih: ['ih', 'Ih', 'i', 'I', 'vowelI'],
+        happy: ['happy', 'Happy', 'joy', 'Joy', 'relaxed', 'Relaxed'],
+        angry: ['angry', 'Angry'],
+        sad: ['sad', 'Sad', 'sorrow', 'Sorrow'],
+        surprised: ['surprised', 'Surprised'],
+      };
       const expr = (name, value) => {
         const em = vrm?.expressionManager;
         if (!em) return;
-        try {
-          em.setValue(name, value);
-        } catch (_err) {
-          // no-op for unsupported expressions
+        const candidates = exprMap[name] || [name];
+        for (const n of candidates) {
+          try {
+            em.setValue(n, value);
+            return;
+          } catch (_err) {
+            // try next name
+          }
         }
       };
 
@@ -646,12 +662,18 @@ export default function KaoriLivePage() {
 
           const idleSway = Math.sin(t * 0.7) * 0.04;
           const breathe = Math.sin(t * 1.5) * 0.02;
+          const leftForeArm = vrm.humanoid.getNormalizedBoneNode('leftLowerArm');
+          const rightForeArm = vrm.humanoid.getNormalizedBoneNode('rightLowerArm');
 
           if (neck) {
             neck.rotation.y = Math.sin(t * 0.9) * 0.06;
             neck.rotation.x = breathe;
           }
-          if (spine) spine.rotation.z = idleSway;
+          // Slight hip tilt for casual hand-on-hip pose
+          if (spine) {
+            spine.rotation.z = idleSway + 0.03; // slight lean toward hip-hand side
+            spine.rotation.x = breathe * 0.5;
+          }
           if (chest) chest.rotation.x = breathe * 0.7;
 
           if (state === 'listening') {
@@ -664,44 +686,79 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x = 0.06;
           }
 
-          const armTalk =
-            state === 'speaking'
-              ? Math.sin(t * (3.6 + smoothedVoice * 1.8)) * (0.01 + smoothedVoice * 0.016)
-              : 0;
-          const leftTargetZ = -1.2 + armTalk;
-          const rightTargetZ = 1.2 - armTalk;
-          const leftTargetY = 0.05;
-          const rightTargetY = -0.05;
+          // Casual idle pose: left hand on hip, right arm relaxed at side
+          const isSpeaking = state === 'speaking';
+          const talkGesture = isSpeaking
+            ? Math.sin(t * (3.2 + smoothedVoice * 2)) * (0.03 + smoothedVoice * 0.05)
+            : 0;
+          const idleBreath = Math.sin(t * 0.6) * 0.01;
+
+          // Left arm: hand on hip (bent, angled outward)
+          const leftArmZ = isSpeaking ? -0.35 + talkGesture : -0.45 + idleBreath;
+          const leftArmX = isSpeaking ? -0.1 : 0.15;
+          const leftArmY = 0.2;
+
+          // Right arm: relaxed at side (hanging naturally)
+          const rightArmZ = isSpeaking ? 0.3 - talkGesture : 0.2 - idleBreath;
+          const rightArmX = isSpeaking ? -0.12 : -0.05;
+          const rightArmY = -0.05;
 
           if (leftUpperArm) {
             leftUpperArm.rotation.z = THREE.MathUtils.damp(
               leftUpperArm.rotation.z,
-              leftTargetZ,
-              7,
+              leftArmZ,
+              4,
+              dt,
+            );
+            leftUpperArm.rotation.x = THREE.MathUtils.damp(
+              leftUpperArm.rotation.x,
+              leftArmX,
+              4,
               dt,
             );
             leftUpperArm.rotation.y = THREE.MathUtils.damp(
               leftUpperArm.rotation.y,
-              leftTargetY,
-              7,
+              leftArmY,
+              4,
               dt,
             );
-            leftUpperArm.rotation.x = THREE.MathUtils.damp(leftUpperArm.rotation.x, -0.02, 7, dt);
           }
           if (rightUpperArm) {
             rightUpperArm.rotation.z = THREE.MathUtils.damp(
               rightUpperArm.rotation.z,
-              rightTargetZ,
-              7,
+              rightArmZ,
+              4,
+              dt,
+            );
+            rightUpperArm.rotation.x = THREE.MathUtils.damp(
+              rightUpperArm.rotation.x,
+              rightArmX,
+              4,
               dt,
             );
             rightUpperArm.rotation.y = THREE.MathUtils.damp(
               rightUpperArm.rotation.y,
-              rightTargetY,
-              7,
+              rightArmY,
+              4,
               dt,
             );
-            rightUpperArm.rotation.x = THREE.MathUtils.damp(rightUpperArm.rotation.x, -0.02, 7, dt);
+          }
+
+          // Forearms: left bent for hand-on-hip, right relaxed
+          if (leftForeArm) {
+            const leftForeY = isSpeaking ? -0.6 : -0.85;
+            leftForeArm.rotation.y = THREE.MathUtils.damp(leftForeArm.rotation.y, leftForeY, 4, dt);
+            leftForeArm.rotation.z = THREE.MathUtils.damp(leftForeArm.rotation.z, -0.1, 4, dt);
+          }
+          if (rightForeArm) {
+            const rightForeY = isSpeaking ? 0.4 : 0.2;
+            rightForeArm.rotation.y = THREE.MathUtils.damp(
+              rightForeArm.rotation.y,
+              rightForeY,
+              4,
+              dt,
+            );
+            rightForeArm.rotation.z = THREE.MathUtils.damp(rightForeArm.rotation.z, 0.05, 4, dt);
           }
 
           if (state === 'speaking' && neck) neck.rotation.x += 0.02;
