@@ -634,7 +634,7 @@ export default function KaoriLivePage() {
           // Left fingers curl positive Z, right fingers curl negative Z
           for (const { bone, side, joint } of fingerBones) {
             const amount = joint === 'Proximal' ? 0.3 : joint === 'Intermediate' ? 0.35 : 0.25;
-            const curl = side === 'left' ? amount : -amount;
+            const curl = side === 'left' ? -amount : amount;
             bone.rotation.z = THREE.MathUtils.damp(bone.rotation.z, curl, 2, dt);
           }
 
