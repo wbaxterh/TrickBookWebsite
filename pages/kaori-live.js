@@ -346,7 +346,7 @@ export default function KaoriLivePage() {
         0.1,
         1000,
       );
-      camera.position.set(0, 1.15, 2.15);
+      camera.position.set(0, 1.25, 2.15);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(mount.clientWidth, mount.clientHeight);
@@ -887,7 +887,7 @@ export default function KaoriLivePage() {
         ring.rotation.z += 0.003;
         pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + smoothedVoice * 0.04);
 
-        camera.lookAt(0, 1.1, 0);
+        camera.lookAt(0, 1.2, 0);
         renderer.render(scene, camera);
         threeRef.current.raf = requestAnimationFrame(animate);
       };
