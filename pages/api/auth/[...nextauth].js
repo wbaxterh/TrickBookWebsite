@@ -139,6 +139,17 @@ export default NextAuth({
       return session;
     },
   },
+  cookies: {
+    state: {
+      name: '__Secure-next-auth.state',
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+      },
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/login',
