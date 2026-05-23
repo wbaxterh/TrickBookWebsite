@@ -1,3 +1,4 @@
+import AppleIcon from '@mui/icons-material/Apple';
 import GoogleIcon from '@mui/icons-material/Google';
 import axios from 'axios';
 import { Camera, Check, ChevronLeft, ChevronRight, Sparkles, User } from 'lucide-react';
@@ -143,6 +144,10 @@ export default function Signup() {
     signIn('google', { callbackUrl: '/profile' });
   };
 
+  const handleAppleSignIn = async () => {
+    signIn('apple', { callbackUrl: '/profile' });
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
@@ -286,6 +291,10 @@ export default function Signup() {
         <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} type="button">
           <GoogleIcon className="mr-2 h-4 w-4" />
           Sign up with Google
+        </Button>
+        <Button variant="outline" className="w-full mt-2" onClick={handleAppleSignIn} type="button">
+          <AppleIcon className="mr-2 h-4 w-4" />
+          Sign up with Apple
         </Button>
       </div>
     </div>

@@ -2,11 +2,25 @@
 
 import axios from 'axios';
 import Cookies from 'js-cookie'; // Importing js-cookie to manage cookies
+import jwt from 'jsonwebtoken';
 import NextAuth from 'next-auth';
+import AppleProvider from 'next-auth/providers/apple';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000'; // || process.env.NEXT_PUBLIC_BASE_URL
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000';
+
+function generateAppleClientSecret() {
+  const privateKey = process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+  return jwt.sign({}, privateKey, {
+    algorithm: 'ES256',
+    expiresIn: '180d',
+    audience: 'https://appleid.apple.com',
+    issuer: process.env.APPLE_TEAM_ID,
+    subject: process.env.APPLE_WEB_SERVICE_ID,
+    keyid: process.env.APPLE_KEY_ID,
+  });
+}
 
 export default NextAuth({
   providers: [
@@ -19,7 +33,6 @@ export default NextAuth({
         },
       },
       profile: async (profile, tokens) => {
-        // Log tokens to confirm presence of id_token
         console.log('Tokens:', tokens);
 
         try {
@@ -31,7 +44,7 @@ export default NextAuth({
           console.log('JWT Token from backend:', jwtToken);
 
           return {
-            id: profile.sub, // Ensure you have a unique identifier
+            id: profile.sub,
             email: profile.email,
             name: profile.name,
             image: profile.picture,
@@ -40,6 +53,35 @@ export default NextAuth({
         } catch (error) {
           console.error('Error during Google authentication:', error);
           throw new Error('Failed to authenticate with Google.');
+        }
+      },
+    }),
+    AppleProvider({
+      clientId: process.env.APPLE_WEB_SERVICE_ID,
+      clientSecret: generateAppleClientSecret(),
+      profile: async (profile, tokens) => {
+        try {
+          const response = await axios.post(`${baseUrl}/api/auth/apple-auth`, {
+            identityToken: tokens.id_token,
+            email: profile.email || null,
+            fullName: profile.name
+              ? `${profile.name.firstName || ''} ${profile.name.lastName || ''}`.trim()
+              : null,
+          });
+
+          const jwtToken = response.data;
+
+          return {
+            id: profile.sub,
+            email: profile.email,
+            name: profile.name
+              ? `${profile.name.firstName || ''} ${profile.name.lastName || ''}`.trim()
+              : null,
+            jwtToken: jwtToken,
+          };
+        } catch (error) {
+          console.error('Error during Apple authentication:', error);
+          throw new Error('Failed to authenticate with Apple.');
         }
       },
     }),
