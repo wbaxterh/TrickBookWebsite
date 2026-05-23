@@ -11,6 +11,7 @@ import GoogleProvider from 'next-auth/providers/google';
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000';
 
 function generateAppleClientSecret() {
+  if (!process.env.APPLE_PRIVATE_KEY) return '';
   const privateKey = process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, '\n');
   return jwt.sign({}, privateKey, {
     algorithm: 'ES256',
