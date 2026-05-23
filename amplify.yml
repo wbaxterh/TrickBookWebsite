@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - env | grep -e NEXT_PUBLIC_ -e GOOGLE_CLIENT -e NEXTAUTH_ >> .env.production || true
+        - env | grep -e NEXT_PUBLIC_ -e GOOGLE_CLIENT -e NEXTAUTH_ -e APPLE_ -e JWT_SECRET >> .env.production || true
         - npm install --legacy-peer-deps --ignore-scripts
     build:
       commands:
