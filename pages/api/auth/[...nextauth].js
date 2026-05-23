@@ -60,6 +60,7 @@ export default NextAuth({
     AppleProvider({
       clientId: process.env.APPLE_WEB_SERVICE_ID,
       clientSecret: generateAppleClientSecret(),
+      checks: ['state'],
       profile: async (profile, tokens) => {
         try {
           const response = await axios.post(`${baseUrl}/api/auth/apple-auth`, {
