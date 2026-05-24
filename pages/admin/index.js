@@ -2,8 +2,9 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { getToken } from 'next-auth/jwt';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../auth/AuthContext'; // Adjust the path accordingly
+import { AuthContext } from '../../auth/AuthContext';
 import Header from '../../components/Header';
 import styles from '../../styles/admin.module.css';
 
@@ -154,14 +155,24 @@ function admin({ isLoggedIn, users, tricklists }) {
   );
 }
 
-export async function getServerSideProps(_context) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000'; // Default to localhost if BASE_URL is not set
+export async function getServerSideProps(context) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000';
+
+  // Get the backend JWT from the next-auth session
+  const sessionToken = await getToken({ req: context.req, secret: process.env.NEXTAUTH_SECRET });
+  const backendToken = sessionToken?.jwtToken?.token;
+
+  if (!backendToken) {
+    return { redirect: { destination: '/login', permanent: false } };
+  }
+
+  const headers = { 'x-auth-token': backendToken };
 
   try {
-    // Fetch all data using axios
+    // Fetch all data using axios with admin auth
     const [usersResponse, listingsResponse, allDataResponse] = await Promise.all([
-      axios.get(`${baseUrl}/api/users/all`),
-      axios.get(`${baseUrl}/api/listings/all`),
+      axios.get(`${baseUrl}/api/users/all`, { headers }),
+      axios.get(`${baseUrl}/api/listings/all`, { headers }),
       axios.get(`${baseUrl}/api/listing/allData`),
     ]);
 
@@ -218,8 +229,10 @@ export async function getServerSideProps(_context) {
         tricklists,
       },
     };
-  } catch (_error) {
-    // Handle error or redirect
+  } catch (error) {
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      return { redirect: { destination: '/login', permanent: false } };
+    }
     return {
       props: {
         error: 'Failed to load data.',
