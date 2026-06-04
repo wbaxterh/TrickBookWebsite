@@ -7,23 +7,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import TrickCard from '../../components/TrickCard';
-import { getSortedTricksData } from '../../lib/apiTrickipedia';
+import { buildCategoryMap, getCategories, getSortedTricksData } from '../../lib/apiTrickipedia';
 import styles from '../../styles/trickipedia.module.css';
 
-// Map URL slugs to exact DB category names
-const CATEGORY_MAP = {
-  skateboarding: 'Skateboarding',
-  snowboarding: 'Snowboarding',
-  surfing: 'Surfing',
-  bmx: 'BMX',
-  scooter: 'Scooter',
-  'inline-skating': 'Inline Skating',
-  longboarding: 'Longboarding',
-};
-
-function getCategoryName(slug) {
+function getCategoryName(slug, categoryMap) {
   if (!slug) return '';
-  return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+  return categoryMap[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
 }
 
 export default function CategoryPage() {
@@ -32,17 +21,22 @@ export default function CategoryPage() {
   const [tricks, setTricks] = useState([]);
   const [filteredTricks, setFilteredTricks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [categoryMap, setCategoryMap] = useState({});
 
   useEffect(() => {
-    if (!category) return;
+    getCategories().then((cats) => setCategoryMap(buildCategoryMap(cats)));
+  }, []);
+
+  useEffect(() => {
+    if (!category || Object.keys(categoryMap).length === 0) return;
     const fetchTricks = async () => {
-      const categoryName = getCategoryName(category);
+      const categoryName = getCategoryName(category, categoryMap);
       const tricksData = await getSortedTricksData(categoryName);
       setTricks(tricksData);
       setFilteredTricks(tricksData);
     };
     fetchTricks();
-  }, [category]);
+  }, [category, categoryMap]);
 
   useEffect(() => {
     const filtered = tricks.filter(
@@ -58,14 +52,13 @@ export default function CategoryPage() {
     <>
       <Head>
         <title>
-          The Trick Book -{' '}
-          {category ? getCategoryName(category) : 'Tricks'}
+          The Trick Book - {category ? getCategoryName(category, categoryMap) : 'Tricks'}
         </title>
         <link rel="icon" href="/favicon.png" />
         <meta
           name="description"
           content={`The Trick Book - ${
-            category ? getCategoryName(category) : 'Tricks'
+            category ? getCategoryName(category, categoryMap) : 'Tricks'
           } Encyclopedia`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,7 +72,7 @@ export default function CategoryPage() {
       </Head>
       <div className={`container-fluid ${styles.trickipediaContainer}`}>
         <PageHeader
-          title={`${category ? getCategoryName(category) : 'Tricks'} Tricks`}
+          title={`${category ? getCategoryName(category, categoryMap) : 'Tricks'} Tricks`}
           col="col-sm-4"
         />
 

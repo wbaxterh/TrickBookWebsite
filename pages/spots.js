@@ -207,16 +207,15 @@ export default function Spots() {
     fetchSpots();
   }, [selectedCountry]);
 
-  // Filter spots by category
+  // Filter spots by sport type
   useEffect(() => {
     if (selectedCategory === 'all') {
       setSpotsByState(allSpots);
     } else {
       const filtered = {};
       Object.keys(allSpots).forEach((state) => {
-        const filteredSpots = allSpots[state].filter(
-          (spot) =>
-            spot.sportTypes?.includes(selectedCategory) || spot.category === selectedCategory,
+        const filteredSpots = allSpots[state].filter((spot) =>
+          spot.sportTypes?.includes(selectedCategory),
         );
         if (filteredSpots.length > 0) {
           filtered[state] = filteredSpots;
