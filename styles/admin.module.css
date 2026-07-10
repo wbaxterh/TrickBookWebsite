@@ -1,26 +1,71 @@
+/* Admin dashboard — dark theme, consistent with the site
+   (site dark bg ~#0b0d12/#121212, elevated surfaces, brand yellow accent).
+   The .table/.tableCell/.tableRow classes are used by the admin dashboard;
+   .container/.form are referenced by other admin pages and left as no-ops so
+   they keep relying on the global/bootstrap layout. */
+
 .table {
   width: 100%;
   border-collapse: collapse;
+  color: #edf2f7;
+  background: #171c26;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.95rem;
 }
 
-.tableHead,
-.tableCell {
-  padding: 8px;
-}
-
-.tableHead {
-  text-align: left;
-  background-color: #eee;
-}
-
-.tableRow:nth-child(even) {
-  background-color: #f2f2f2;
-}
 .tableRow {
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  border-bottom: 1px solid #232a36;
 }
+
+.table tbody .tableRow:last-child {
+  border-bottom: none;
+}
+
+.table tbody .tableRow:hover {
+  background: rgba(255, 240, 0, 0.06);
+}
+
 .tableCell {
-  width: 150px;
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+  color: #edf2f7;
+}
+
+.table thead .tableRow {
+  background: #1f2632;
+  border-bottom: 1px solid #2a2f3a;
+}
+
+.table thead .tableCell {
+  color: #a7b1c2;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Dashboard stat cards */
+.statCard {
+  background: #171c26;
+  border: 1px solid #2a2f3a;
+  border-radius: 12px;
+  padding: 18px 24px;
+  min-width: 180px;
+}
+
+.statNumber {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff000;
+}
+
+.statLabel {
+  color: #a7b1c2;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
 }

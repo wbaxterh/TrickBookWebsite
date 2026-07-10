@@ -59,7 +59,11 @@ const TrickListsTable = ({ tricklists }) => (
             <Chip
               label={tricklist.isPublic ? 'Public' : 'Private'}
               size="small"
-              color={tricklist.isPublic ? 'primary' : 'default'}
+              sx={
+                tricklist.isPublic
+                  ? { backgroundColor: '#fff000', color: '#1f1f1f', fontWeight: 600 }
+                  : { backgroundColor: '#232a36', color: '#a7b1c2', border: '1px solid #2a2f3a' }
+              }
             />
           </td>
         </tr>
@@ -69,8 +73,8 @@ const TrickListsTable = ({ tricklists }) => (
 );
 
 const PAGINATION_SX = {
-  '& .MuiPaginationItem-root': { color: '#1f1f1f' },
-  '& .Mui-selected': { backgroundColor: '#fff000 !important' },
+  '& .MuiPaginationItem-root': { color: '#edf2f7' },
+  '& .Mui-selected': { backgroundColor: '#fff000 !important', color: '#1f1f1f' },
 };
 
 // Encapsulates the loading / error+retry / empty / data+pagination states for a
@@ -107,7 +111,7 @@ const PagedSection = ({
     );
   } else if (isEmpty) {
     body = (
-      <Typography variant="h6" color="textSecondary">
+      <Typography variant="h6" sx={{ color: '#a7b1c2' }}>
         {emptyLabel}
       </Typography>
     );
@@ -268,7 +272,7 @@ function Admin() {
         />
       </Head>
       <div className={`container ${styles.container}`}>
-        <div className="container m-4 mt-5 pt-3">
+        <div className="container m-4 mt-5 pt-3" style={{ color: '#edf2f7' }}>
           <AdminNav />
 
           <Button variant="contained" color="primary" sx={{ mb: 2 }} href="/admin/categories">
@@ -279,39 +283,21 @@ function Admin() {
             Admin Dashboard
           </Typography>
           {email && (
-            <Typography variant="body2" color="textSecondary" gutterBottom>
+            <Typography variant="body2" gutterBottom sx={{ color: '#a7b1c2' }}>
               Signed in as {email}
             </Typography>
           )}
 
           {/* Stats / overview header */}
           <Box display="flex" gap={2} flexWrap="wrap" my={3}>
-            <Box
-              sx={{
-                border: '1px solid #eee',
-                borderRadius: 2,
-                p: 2,
-                minWidth: 160,
-              }}
-            >
-              <Typography variant="h4">{usersLoaded ? usersTotal : '—'}</Typography>
-              <Typography variant="body2" color="textSecondary">
-                Total Users
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                border: '1px solid #eee',
-                borderRadius: 2,
-                p: 2,
-                minWidth: 160,
-              }}
-            >
-              <Typography variant="h4">{tricklistsLoaded ? tricklistsTotal : '—'}</Typography>
-              <Typography variant="body2" color="textSecondary">
-                Total Trick Lists
-              </Typography>
-            </Box>
+            <div className={styles.statCard}>
+              <div className={styles.statNumber}>{usersLoaded ? usersTotal : '—'}</div>
+              <div className={styles.statLabel}>Total Users</div>
+            </div>
+            <div className={styles.statCard}>
+              <div className={styles.statNumber}>{tricklistsLoaded ? tricklistsTotal : '—'}</div>
+              <div className={styles.statLabel}>Total Trick Lists</div>
+            </div>
           </Box>
 
           {/* Users */}
