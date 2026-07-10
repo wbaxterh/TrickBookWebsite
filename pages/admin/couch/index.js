@@ -13,7 +13,7 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
 import Header from '../../../components/Header';
 import { Button } from '../../../components/ui/button';
@@ -26,17 +26,20 @@ export default function AdminCouch() {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState('');
 
-  const fetchVideos = async () => {
+  const fetchVideos = useCallback(async () => {
     setLoading(true);
+    setError('');
     try {
       const data = await getAdminVideos(token);
       setVideos(data);
     } catch (_error) {
+      setError('Failed to load videos. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     if (loggedIn === false || (loggedIn && role !== 'admin')) {
@@ -91,7 +94,7 @@ export default function AdminCouch() {
 
   const filteredVideos = videos.filter(
     (video) =>
-      video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (video.title?.toLowerCase() ?? '').includes(searchQuery.toLowerCase()) ||
       video.sportTypes?.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())),
   );
 
@@ -194,8 +197,23 @@ export default function AdminCouch() {
             </div>
           </div>
 
+          {/* Error banner */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <p className="text-red-500">{error}</p>
+              <Button
+                variant="outline"
+                onClick={fetchVideos}
+                className="border-red-500 text-red-500 hover:bg-red-500/10"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Retry
+              </Button>
+            </div>
+          )}
+
           {/* Video List */}
-          {filteredVideos.length === 0 ? (
+          {error ? null : filteredVideos.length === 0 ? (
             <div className="text-center py-16">
               <Film className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
               <h2 className="text-xl font-bold text-foreground mb-2">No videos yet</h2>

@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import AdminNav from '../../components/AdminNav';
-import { deleteTrick, getSortedTricksData } from '../../lib/apiTrickipedia';
+import { deleteTrick, getSortedTricksDataOrThrow } from '../../lib/apiTrickipedia';
 import styles from '../../styles/admin.module.css';
 
 export default function TrickipediaAdmin() {
@@ -23,21 +23,30 @@ export default function TrickipediaAdmin() {
   const [tricks, setTricks] = useState([]);
   const [filteredTricks, setFilteredTricks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
   const fetchTricks = useCallback(async () => {
+    setLoading(true);
+    setError(false);
     try {
-      const fetchedTricks = await getSortedTricksData();
+      const fetchedTricks = await getSortedTricksDataOrThrow();
       // Filter out sample data
       const realTricks = fetchedTricks.filter((trick) => !trick.sampleData);
       setTricks(realTricks);
       setFilteredTricks(realTricks);
-    } catch (_error) {
+    } catch (err) {
+      const status = err?.response?.status;
+      if (status === 401 || status === 403) {
+        router.push('/login');
+        return;
+      }
+      setError(true);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (loggedIn === null) {
@@ -52,11 +61,12 @@ export default function TrickipediaAdmin() {
   }, [loggedIn, role, router, fetchTricks]);
 
   useEffect(() => {
+    const term = searchTerm.toLowerCase();
     const filtered = tricks.filter(
       (trick) =>
-        trick.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        trick.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        trick.difficulty.toLowerCase().includes(searchTerm.toLowerCase()),
+        (trick.name || '').toLowerCase().includes(term) ||
+        (trick.category || '').toLowerCase().includes(term) ||
+        (trick.difficulty || '').toLowerCase().includes(term),
     );
     setFilteredTricks(filtered);
   }, [searchTerm, tricks]);
@@ -140,7 +150,16 @@ export default function TrickipediaAdmin() {
           className="mb-4"
         />
 
-        {filteredTricks.length > 0 ? (
+        {error ? (
+          <div>
+            <Typography variant="h6" color="error" gutterBottom>
+              Failed to load tricks. Please try again.
+            </Typography>
+            <Button variant="contained" color="primary" onClick={fetchTricks}>
+              Retry
+            </Button>
+          </div>
+        ) : filteredTricks.length > 0 ? (
           <div className="row">
             {filteredTricks.map((trick) => (
               <div className="col-md-6 col-lg-4 mb-4" key={trick.id}>

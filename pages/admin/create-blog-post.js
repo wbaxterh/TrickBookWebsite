@@ -49,12 +49,19 @@ export default function CreateBlogPost() {
   }, []);
 
   useEffect(() => {
+    if (loggedIn === null) return;
+
+    if (!loggedIn || role !== 'admin') {
+      router.push('/login');
+      return;
+    }
+
     if (isEdit && postId) {
       fetchPostData(postId);
     } else {
       setLoading(false);
     }
-  }, [isEdit, postId, fetchPostData]);
+  }, [isEdit, postId, loggedIn, role, router, fetchPostData]);
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles, ...event.target.files]);
@@ -92,8 +99,8 @@ export default function CreateBlogPost() {
 
       // If it's an edit, update the post data
       if (isEdit === 'true') {
-        await updateBlogPost(postId, postData, token);
-        postResponse = { _id: postId, url: title }; // Assuming title is used to generate the blogUrl
+        // Use the server response for the canonical _id/url instead of fabricating one
+        postResponse = await updateBlogPost(postId, postData, token);
         alert('Blog post updated successfully!');
       } else {
         // Create a new post without images
@@ -105,9 +112,15 @@ export default function CreateBlogPost() {
       const blogUrl = postResponse.url;
       const imageUrls = [];
 
-      // Upload images and collect their URLs
+      // Upload images and collect their URLs.
+      // On edit, selectedFiles may contain existing image URL strings (keep as-is)
+      // alongside newly selected File instances (must be uploaded).
       for (let i = 0; i < selectedFiles.length; i++) {
-        const imageUrl = await uploadImage(selectedFiles[i], blogUrl, token);
+        const entry = selectedFiles[i];
+        const imageUrl =
+          typeof entry === 'string'
+            ? entry.replace('?hero=true', '')
+            : await uploadImage(entry, blogUrl, token);
         // Mark the hero image with ?hero=true
         if (i === heroImageIndex) {
           imageUrls.push(`${imageUrl}?hero=true`);

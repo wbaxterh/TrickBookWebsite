@@ -156,8 +156,13 @@ export default function CreateSpot() {
       description,
       imageURL: imageURL || null,
       tags: selectedTags.join(', '),
-      rating: rating ? parseFloat(rating) : null,
+      isPublic: true,
     };
+
+    // Omit the rating key entirely when empty; sending null triggers a Joi 400.
+    if (rating) {
+      spotData.rating = parseFloat(rating);
+    }
 
     try {
       if (isEdit === 'true') {

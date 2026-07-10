@@ -14,7 +14,7 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../auth/AuthContext';
 import Header from '../../../../components/Header';
 import { Button } from '../../../../components/ui/button';
@@ -98,7 +98,10 @@ export default function EditVideo() {
     }
   }, [loggedIn, role, router]);
 
-  const fetchVideo = async () => {
+  // NOTE: getVideoDetails hits the PUBLIC video endpoint, which 404s on unpublished
+  // drafts. Loading a draft here fails until a backend admin-only detail route exists.
+  // Do not swap the endpoint without that route (out of scope for this fix).
+  const fetchVideo = useCallback(async () => {
     setLoading(true);
     try {
       const video = await getVideoDetails(id);
@@ -127,7 +130,7 @@ export default function EditVideo() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, token]);
 
   useEffect(() => {
     if (id && token) {

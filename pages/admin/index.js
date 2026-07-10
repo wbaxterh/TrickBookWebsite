@@ -1,61 +1,66 @@
-import { Button, CircularProgress, Typography } from '@mui/material';
+import { Box, Button, Chip, CircularProgress, Pagination, Typography } from '@mui/material';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getToken } from 'next-auth/jwt';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import Header from '../../components/Header';
+import AdminNav from '../../components/AdminNav';
 import styles from '../../styles/admin.module.css';
+
+const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.thetrickbook.com';
+const PAGE_LIMIT = 25;
+
+function formatDate(value) {
+  if (!value) return '—';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleDateString();
+}
 
 const UsersTable = ({ users }) => (
   <table className={styles.table}>
     <thead>
-      <tr className={[styles.tableRow, 'p-1']}>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Password</th>
+      <tr className={styles.tableRow}>
+        <th className={styles.tableCell}>Name</th>
+        <th className={styles.tableCell}>Email</th>
+        <th className={styles.tableCell}>Role</th>
+        <th className={styles.tableCell}>Created</th>
       </tr>
     </thead>
     <tbody>
       {users.map((user) => (
-        <tr className={[styles.tableRow, 'p-1']} key={user._id}>
-          <td>{user.name}</td>
-          <td>{user.email}</td>
-          <td>{user.password}</td>
+        <tr className={styles.tableRow} key={user._id}>
+          <td className={styles.tableCell}>{user.name || '—'}</td>
+          <td className={styles.tableCell}>{user.email || '—'}</td>
+          <td className={styles.tableCell}>{user.role || 'user'}</td>
+          <td className={styles.tableCell}>{formatDate(user.createdAt)}</td>
         </tr>
       ))}
     </tbody>
   </table>
 );
+
 const TrickListsTable = ({ tricklists }) => (
   <table className={styles.table}>
     <thead>
       <tr className={styles.tableRow}>
         <th className={styles.tableCell}>Name</th>
-        <th className={styles.tableCell}>User Name</th>
-        <th className={styles.tableCell}>Tricks Count</th>
         <th className={styles.tableCell}>Tricks</th>
+        <th className={styles.tableCell}>Visibility</th>
       </tr>
     </thead>
     <tbody>
       {tricklists.map((tricklist) => (
         <tr className={styles.tableRow} key={tricklist._id}>
-          <td className={styles.tableCell}>{tricklist.name}</td>
-          <td className={styles.tableCell}>{tricklist.user.name}</td>
-          <td className={styles.tableCell}>{tricklist.tricks.length}</td>
+          <td className={styles.tableCell}>{tricklist.name || '—'}</td>
+          <td className={styles.tableCell}>{tricklist.tricksCount ?? 0}</td>
           <td className={styles.tableCell}>
-            <table className={styles.table}>
-              <tbody>
-                <tr className={styles.tableRow}>
-                  {tricklist.tricks.map((trick) => (
-                    <td className={styles.tableCell} key={trick._id}>
-                      {trick.name}, <br />{' '}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+            <Chip
+              label={tricklist.isPublic ? 'Public' : 'Private'}
+              size="small"
+              color={tricklist.isPublic ? 'primary' : 'default'}
+            />
           </td>
         </tr>
       ))}
@@ -63,35 +68,182 @@ const TrickListsTable = ({ tricklists }) => (
   </table>
 );
 
-function admin({ isLoggedIn, users, tricklists }) {
-  const { email, loggedIn, role } = useContext(AuthContext);
+const PAGINATION_SX = {
+  '& .MuiPaginationItem-root': { color: '#1f1f1f' },
+  '& .Mui-selected': { backgroundColor: '#fff000 !important' },
+};
+
+// Encapsulates the loading / error+retry / empty / data+pagination states for a
+// single paginated admin section (mirrors the state handling in spots.js).
+const PagedSection = ({
+  title,
+  loading,
+  error,
+  onRetry,
+  isEmpty,
+  page,
+  totalPages,
+  onPageChange,
+  emptyLabel,
+  children,
+}) => {
+  let body;
+  if (loading) {
+    body = (
+      <Box display="flex" justifyContent="center" py={4}>
+        <CircularProgress />
+      </Box>
+    );
+  } else if (error) {
+    body = (
+      <Box py={2}>
+        <Typography variant="body1" color="error" gutterBottom>
+          {error}
+        </Typography>
+        <Button variant="outlined" onClick={onRetry}>
+          Retry
+        </Button>
+      </Box>
+    );
+  } else if (isEmpty) {
+    body = (
+      <Typography variant="h6" color="textSecondary">
+        {emptyLabel}
+      </Typography>
+    );
+  } else {
+    body = (
+      <>
+        {children}
+        {totalPages > 1 && (
+          <Box display="flex" justifyContent="center" mt={3}>
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={onPageChange}
+              color="primary"
+              sx={PAGINATION_SX}
+            />
+          </Box>
+        )}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Typography variant="h4" gutterBottom sx={{ mt: 4 }}>
+        {title}
+      </Typography>
+      {body}
+    </>
+  );
+};
+
+function Admin() {
+  const { email, loggedIn, role, token } = useContext(AuthContext);
   const router = useRouter();
-  const [loading, setLoading] = useState(true); // Add loading state
 
+  const [users, setUsers] = useState([]);
+  const [usersTotal, setUsersTotal] = useState(0);
+  const [usersPage, setUsersPage] = useState(1);
+  const [usersTotalPages, setUsersTotalPages] = useState(0);
+  const [usersLoading, setUsersLoading] = useState(true);
+  const [usersLoaded, setUsersLoaded] = useState(false);
+  const [usersError, setUsersError] = useState('');
+
+  const [tricklists, setTricklists] = useState([]);
+  const [tricklistsTotal, setTricklistsTotal] = useState(0);
+  const [tricklistsPage, setTricklistsPage] = useState(1);
+  const [tricklistsTotalPages, setTricklistsTotalPages] = useState(0);
+  const [tricklistsLoading, setTricklistsLoading] = useState(true);
+  const [tricklistsLoaded, setTricklistsLoaded] = useState(false);
+  const [tricklistsError, setTricklistsError] = useState('');
+
+  // Auth guard
   useEffect(() => {
-    if (loggedIn === null) {
-      // Still checking login status
-      return;
-    }
-
-    if (loggedIn && role === 'admin') {
-      setLoading(false); // User is authenticated and has admin role
-    } else {
+    if (loggedIn === null) return;
+    if (!loggedIn || role !== 'admin') {
       router.push('/login');
     }
   }, [loggedIn, role, router]);
 
-  const [showTable, setShowTable] = useState(false);
-  const [showTrickLists, setShowTrickLists] = useState(false);
-  const _baseUrl = process.env.BASE_URL || 'http://localhost:9000'; // Default to localhost if BASE_URL is not set
+  const handleAuthError = useCallback(
+    (error) => {
+      const status = error?.response?.status;
+      if (status === 401 || status === 403) {
+        router.push('/login');
+        return true;
+      }
+      return false;
+    },
+    [router],
+  );
 
-  const toggleTable = () => {
-    setShowTable((prevState) => !prevState);
-  };
-  const toggleTrickLists = () => {
-    setShowTrickLists((prevState) => !prevState);
-  };
-  if (loading) {
+  const fetchUsers = useCallback(
+    async (page) => {
+      if (!token) return;
+      setUsersLoading(true);
+      setUsersError('');
+      try {
+        const response = await axios.get(`${API_BASE}/api/users/all`, {
+          headers: { 'x-auth-token': token },
+          params: { page, limit: PAGE_LIMIT },
+        });
+        const data = response.data || {};
+        setUsers(data.items || []);
+        setUsersTotal(data.total || 0);
+        setUsersTotalPages(data.totalPages || 0);
+        setUsersLoaded(true);
+      } catch (error) {
+        if (!handleAuthError(error)) {
+          setUsersError('Failed to load users.');
+        }
+      } finally {
+        setUsersLoading(false);
+      }
+    },
+    [token, handleAuthError],
+  );
+
+  const fetchTricklists = useCallback(
+    async (page) => {
+      if (!token) return;
+      setTricklistsLoading(true);
+      setTricklistsError('');
+      try {
+        const response = await axios.get(`${API_BASE}/api/listings/all`, {
+          headers: { 'x-auth-token': token },
+          params: { page, limit: PAGE_LIMIT },
+        });
+        const data = response.data || {};
+        setTricklists(data.items || []);
+        setTricklistsTotal(data.total || 0);
+        setTricklistsTotalPages(data.totalPages || 0);
+        setTricklistsLoaded(true);
+      } catch (error) {
+        if (!handleAuthError(error)) {
+          setTricklistsError('Failed to load trick lists.');
+        }
+      } finally {
+        setTricklistsLoading(false);
+      }
+    },
+    [token, handleAuthError],
+  );
+
+  useEffect(() => {
+    if (!loggedIn || role !== 'admin' || !token) return;
+    fetchUsers(usersPage);
+  }, [loggedIn, role, token, usersPage, fetchUsers]);
+
+  useEffect(() => {
+    if (!loggedIn || role !== 'admin' || !token) return;
+    fetchTricklists(tricklistsPage);
+  }, [loggedIn, role, token, tricklistsPage, fetchTricklists]);
+
+  // Still checking auth or not authorized
+  if (loggedIn === null || !loggedIn || role !== 'admin') {
     return (
       <div className="loading">
         <CircularProgress />
@@ -115,50 +267,90 @@ function admin({ isLoggedIn, users, tricklists }) {
           content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
         />
       </Head>
-      <Header />
-      <div className="container-fluid m-2 mt-5">
-        <Button variant="contained" color="primary" sx={{ mb: 2 }} href="/admin/categories">
-          Manage Categories
-        </Button>
-        <h1 className="pt-3" style={{ textAlign: 'center' }}>
-          Current Data {email}
-        </h1>
-        <button className="btn btn-light container-fluid my-1" onClick={toggleTable}>
-          {' '}
-          {!showTable ? (
-            <i className="material-icons" style={{ fontSize: '12px' }}>
-              add
-            </i>
-          ) : (
-            <i className="material-icons" style={{ fontSize: '12px' }}>
-              remove
-            </i>
-          )}{' '}
-          Users
-        </button>
-        {showTable && <UsersTable users={users} />}
-        <button className="btn btn-light container-fluid my-1" onClick={toggleTrickLists}>
-          {!showTrickLists ? (
-            <i className="material-icons" style={{ fontSize: '12px' }}>
-              add
-            </i>
-          ) : (
-            <i className="material-icons" style={{ fontSize: '12px' }}>
-              remove
-            </i>
+      <div className={`container ${styles.container}`}>
+        <div className="container m-4 mt-5 pt-3">
+          <AdminNav />
+
+          <Button variant="contained" color="primary" sx={{ mb: 2 }} href="/admin/categories">
+            Manage Categories
+          </Button>
+
+          <Typography variant="h2" gutterBottom>
+            Admin Dashboard
+          </Typography>
+          {email && (
+            <Typography variant="body2" color="textSecondary" gutterBottom>
+              Signed in as {email}
+            </Typography>
           )}
-          Trick Lists
-        </button>
-        {showTrickLists && <TrickListsTable tricklists={tricklists} />}
+
+          {/* Stats / overview header */}
+          <Box display="flex" gap={2} flexWrap="wrap" my={3}>
+            <Box
+              sx={{
+                border: '1px solid #eee',
+                borderRadius: 2,
+                p: 2,
+                minWidth: 160,
+              }}
+            >
+              <Typography variant="h4">{usersLoaded ? usersTotal : '—'}</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Total Users
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                border: '1px solid #eee',
+                borderRadius: 2,
+                p: 2,
+                minWidth: 160,
+              }}
+            >
+              <Typography variant="h4">{tricklistsLoaded ? tricklistsTotal : '—'}</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Total Trick Lists
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Users */}
+          <PagedSection
+            title="Users"
+            loading={usersLoading}
+            error={usersError}
+            onRetry={() => fetchUsers(usersPage)}
+            isEmpty={usersLoaded && users.length === 0}
+            page={usersPage}
+            totalPages={usersTotalPages}
+            onPageChange={(_event, value) => setUsersPage(value)}
+            emptyLabel="No users found."
+          >
+            <UsersTable users={users} />
+          </PagedSection>
+
+          {/* Trick Lists */}
+          <PagedSection
+            title="Trick Lists"
+            loading={tricklistsLoading}
+            error={tricklistsError}
+            onRetry={() => fetchTricklists(tricklistsPage)}
+            isEmpty={tricklistsLoaded && tricklists.length === 0}
+            page={tricklistsPage}
+            totalPages={tricklistsTotalPages}
+            onPageChange={(_event, value) => setTricklistsPage(value)}
+            emptyLabel="No trick lists found."
+          >
+            <TrickListsTable tricklists={tricklists} />
+          </PagedSection>
+        </div>
       </div>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000';
-
-  // Get the backend JWT from the next-auth session
+  // Cheap auth check only — no data fetching here (data is loaded client-side).
   const sessionToken = await getToken({ req: context.req, secret: process.env.NEXTAUTH_SECRET });
   const backendToken = sessionToken?.jwtToken?.token;
 
@@ -166,79 +358,7 @@ export async function getServerSideProps(context) {
     return { redirect: { destination: '/login', permanent: false } };
   }
 
-  const headers = { 'x-auth-token': backendToken };
-
-  try {
-    // Fetch all data using axios with admin auth
-    const [usersResponse, listingsResponse, allDataResponse] = await Promise.all([
-      axios.get(`${baseUrl}/api/users/all`, { headers }),
-      axios.get(`${baseUrl}/api/listings/all`, { headers }),
-      axios.get(`${baseUrl}/api/listing/allData`),
-    ]);
-
-    const users = usersResponse.data;
-    const tricklists = listingsResponse.data;
-    const tricks = allDataResponse.data;
-
-    // Join the tricklists and users data together
-    for (const user of users) {
-      for (const tricklist of tricklists) {
-        if (tricklist.user.$id === user._id) {
-          tricklist.user = user;
-        }
-        for (const trick of tricks) {
-          for (let i = 0; i < tricklist.tricks.length; i++) {
-            if (trick._id === tricklist.tricks[i]._id) {
-              // console.log(trick.name);
-              tricklist.tricks[i].name = trick.name;
-            }
-          }
-        }
-      }
-    }
-
-    // Check logged-in user
-    // const { req } = context;
-    // const token = req.cookies.token;
-
-    // if (!token) {
-    // 	return {
-    // 		redirect: {
-    // 			destination: "/login",
-    // 			permanent: false,
-    // 		},
-    // 	};
-    // }
-
-    // try {
-    // 	jwt.verify(token, "jwtPrivateKey"); // Replace with your actual secret key
-    // } catch (e) {
-    // 	console.log("Token verification failed:", e);
-    // 	return {
-    // 		redirect: {
-    // 			destination: "/login",
-    // 			permanent: false,
-    // 		},
-    // 	};
-    // }
-
-    return {
-      props: {
-        // isLoggedIn: "true",
-        users,
-        tricklists,
-      },
-    };
-  } catch (error) {
-    if (error.response?.status === 401 || error.response?.status === 403) {
-      return { redirect: { destination: '/login', permanent: false } };
-    }
-    return {
-      props: {
-        error: 'Failed to load data.',
-      },
-    };
-  }
+  return { props: {} };
 }
 
-export default admin;
+export default Admin;

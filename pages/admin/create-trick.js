@@ -33,6 +33,7 @@ export default function CreateTrick() {
   const [existingImages, setExistingImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
   const { isEdit, trickId } = router.query;
 
@@ -60,13 +61,20 @@ export default function CreateTrick() {
   }, []);
 
   useEffect(() => {
+    if (loggedIn === null) return;
+
+    if (!loggedIn || role !== 'admin') {
+      router.push('/login');
+      return;
+    }
+
     if (isEdit && trickId) {
       fetchTrickData(trickId);
     } else {
       setLoading(false);
     }
     fetchCategories();
-  }, [isEdit, trickId, fetchCategories, fetchTrickData]);
+  }, [isEdit, trickId, loggedIn, role, router, fetchCategories, fetchTrickData]);
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles, ...event.target.files]);
@@ -108,6 +116,7 @@ export default function CreateTrick() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     // Generate URL if not provided
     const finalUrl = url || generateUrl(name);
@@ -159,6 +168,8 @@ export default function CreateTrick() {
       router.push('/admin/trickipedia');
     } catch (_error) {
       alert('Failed to submit trick');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -338,8 +349,14 @@ export default function CreateTrick() {
           )}
 
           <div className="row mt-4">
-            <Button type="submit" className="col-6 mx-auto" variant="contained" color="primary">
-              {isEdit === 'true' ? 'Update Trick' : 'Create Trick'}
+            <Button
+              type="submit"
+              className="col-6 mx-auto"
+              variant="contained"
+              color="primary"
+              disabled={submitting}
+            >
+              {submitting ? 'Saving...' : isEdit === 'true' ? 'Update Trick' : 'Create Trick'}
             </Button>
           </div>
         </form>

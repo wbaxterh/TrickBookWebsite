@@ -19,11 +19,15 @@ import {
   Typography,
 } from '@mui/material';
 import Head from 'next/head';
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../auth/AuthContext';
 import Header from '../../components/Header';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../lib/api';
 
 export default function AdminCategories() {
+  const { loggedIn, role, token } = useContext(AuthContext);
+  const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [_loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
@@ -42,6 +46,14 @@ export default function AdminCategories() {
     setLoading(false);
   }, []);
 
+  // Auth guard
+  useEffect(() => {
+    if (loggedIn === null) return;
+    if (!loggedIn || role !== 'admin') {
+      router.push('/login');
+    }
+  }, [loggedIn, role, router]);
+
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
@@ -59,8 +71,6 @@ export default function AdminCategories() {
   }
 
   async function handleSave() {
-    // TODO: Replace with real token from auth
-    const token = 'demo-admin-token';
     try {
       if (editCategory) {
         await updateCategory(editCategory._id, form, token);
@@ -75,8 +85,6 @@ export default function AdminCategories() {
   }
 
   async function handleDelete(id) {
-    // TODO: Replace with real token from auth
-    const token = 'demo-admin-token';
     if (!window.confirm('Are you sure you want to delete this category?')) return;
     try {
       await deleteCategory(id, token);

@@ -12,30 +12,37 @@ export default function AdminNav() {
     { label: 'Spots', path: '/admin/spots' },
     { label: 'Pending Spots', path: '/admin/pending-spots' },
     { label: 'Blog', path: '/admin/blog' },
+    { label: 'The Couch', path: '/admin/couch' },
     { label: 'Analytics', path: '/admin/analytics' },
   ];
 
+  const isActive = (path) =>
+    path === '/admin' ? currentPath === '/admin' : currentPath.startsWith(path);
+
   return (
     <Box sx={{ mb: 3, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-      {navItems.map((item) => (
-        <Button
-          key={item.path}
-          variant={currentPath === item.path ? 'contained' : 'outlined'}
-          onClick={() => router.push(item.path)}
-          sx={{
-            minWidth: '120px',
-            backgroundColor: currentPath === item.path ? '#FFF000' : 'transparent',
-            color: currentPath === item.path ? '#1f1f1f' : '#1f1f1f',
-            borderColor: '#FFF000',
-            '&:hover': {
-              backgroundColor: '#FFF000',
+      {navItems.map((item) => {
+        const active = isActive(item.path);
+        return (
+          <Button
+            key={item.path}
+            variant={active ? 'contained' : 'outlined'}
+            onClick={() => router.push(item.path)}
+            sx={{
+              minWidth: '120px',
+              backgroundColor: active ? '#FCF150' : 'transparent',
               color: '#1f1f1f',
-            },
-          }}
-        >
-          {item.label}
-        </Button>
-      ))}
+              borderColor: '#FCF150',
+              '&:hover': {
+                backgroundColor: '#FCF150',
+                color: '#1f1f1f',
+              },
+            }}
+          >
+            {item.label}
+          </Button>
+        );
+      })}
     </Box>
   );
 }
