@@ -18,9 +18,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import AdminNav from '../../components/AdminNav';
+import AdminLayout from '../../components/AdminLayout';
 import { deleteSpot, searchSpots } from '../../lib/apiSpots';
-import styles from '../../styles/admin.module.css';
 
 // US State names mapping
 const STATE_NAMES = {
@@ -173,12 +172,11 @@ export default function SpotsAdmin() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>The Trick Book - Spots Administration</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
-        <AdminNav />
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           Manage Spots
         </Typography>
@@ -313,7 +311,7 @@ export default function SpotsAdmin() {
             No spots found.
           </Typography>
         )}
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }

@@ -14,9 +14,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import AdminNav from '../../components/AdminNav';
+import AdminLayout from '../../components/AdminLayout';
 import { deleteTrick, getSortedTricksDataOrThrow } from '../../lib/apiTrickipedia';
-import styles from '../../styles/admin.module.css';
 
 export default function TrickipediaAdmin() {
   const { loggedIn, role, token } = useContext(AuthContext);
@@ -121,12 +120,11 @@ export default function TrickipediaAdmin() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>The Trick Book - Trickipedia Administration</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
-        <AdminNav />
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           Manage Trickipedia
         </Typography>
@@ -205,7 +203,7 @@ export default function TrickipediaAdmin() {
             No tricks found.
           </Typography>
         )}
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }

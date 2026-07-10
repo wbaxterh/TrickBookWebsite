@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import AdminLayout from '../../components/AdminLayout';
 import { createSpot, getSpotData, updateSpot } from '../../lib/apiSpots';
 import styles from '../../styles/admin.module.css';
 
@@ -191,11 +192,11 @@ export default function CreateSpot() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>{isEdit === 'true' ? 'Edit' : 'Create'} Spot</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
+      <AdminLayout>
         <Button
           variant="text"
           onClick={() => router.push('/admin/spots')}
@@ -342,7 +343,7 @@ export default function CreateSpot() {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }

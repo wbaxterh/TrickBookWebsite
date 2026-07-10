@@ -5,9 +5,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import AdminLayout from '../../components/AdminLayout';
 import BlogCard from '../../components/BlogCard';
 import { deleteBlogPost, getSortedPostsData } from '../../lib/api';
-import styles from '../../styles/admin.module.css';
 
 export default function BlogAdmin() {
   const { loggedIn, role, token } = useContext(AuthContext);
@@ -72,11 +72,11 @@ export default function BlogAdmin() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>The Trick Book - Blog Administration</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           Manage Blog Posts
         </Typography>
@@ -110,7 +110,7 @@ export default function BlogAdmin() {
             No posts found.
           </Typography>
         )}
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }

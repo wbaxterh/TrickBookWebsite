@@ -22,9 +22,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import AdminNav from '../../components/AdminNav';
+import AdminLayout from '../../components/AdminLayout';
 import { approveSpot, deleteSpot, getPendingSpots, rejectSpot } from '../../lib/apiSpots';
-import styles from '../../styles/admin.module.css';
 
 // US State names mapping
 const STATE_NAMES = {
@@ -215,12 +214,11 @@ export default function PendingSpotsAdmin() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>The Trick Book - Pending Spots Review</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
-        <AdminNav />
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           Pending Spot Submissions
         </Typography>
@@ -385,35 +383,40 @@ export default function PendingSpotsAdmin() {
             </Typography>
           </Box>
         )}
-      </div>
 
-      {/* Reject Dialog */}
-      <Dialog open={rejectDialogOpen} onClose={() => setRejectDialogOpen(false)}>
-        <DialogTitle>Reject Spot Submission</DialogTitle>
-        <DialogContent>
-          <Typography variant="body2" color="textSecondary" className="mb-3">
-            Rejecting: {selectedSpot?.name}
-          </Typography>
-          <TextField
-            fullWidth
-            multiline
-            rows={3}
-            label="Rejection Reason (optional)"
-            value={rejectionReason}
-            onChange={(e) => setRejectionReason(e.target.value)}
-            placeholder="Provide feedback for the submitter..."
-            sx={{ mt: 2 }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setRejectDialogOpen(false)} disabled={processing}>
-            Cancel
-          </Button>
-          <Button onClick={handleReject} color="warning" variant="contained" disabled={processing}>
-            {processing ? <CircularProgress size={20} /> : 'Reject'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+        {/* Reject Dialog */}
+        <Dialog open={rejectDialogOpen} onClose={() => setRejectDialogOpen(false)}>
+          <DialogTitle>Reject Spot Submission</DialogTitle>
+          <DialogContent>
+            <Typography variant="body2" color="textSecondary" className="mb-3">
+              Rejecting: {selectedSpot?.name}
+            </Typography>
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              label="Rejection Reason (optional)"
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value)}
+              placeholder="Provide feedback for the submitter..."
+              sx={{ mt: 2 }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setRejectDialogOpen(false)} disabled={processing}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleReject}
+              color="warning"
+              variant="contained"
+              disabled={processing}
+            >
+              {processing ? <CircularProgress size={20} /> : 'Reject'}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </AdminLayout>
+    </>
   );
 }

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { getToken } from 'next-auth/jwt';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import AdminNav from '../../components/AdminNav';
+import AdminLayout from '../../components/AdminLayout';
 import styles from '../../styles/admin.module.css';
 
 const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.thetrickbook.com';
@@ -271,10 +271,8 @@ function Admin() {
           content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
         />
       </Head>
-      <div className={`container ${styles.container}`}>
-        <div className="container m-4 mt-5 pt-3" style={{ color: '#edf2f7' }}>
-          <AdminNav />
-
+      <AdminLayout>
+        <div>
           <Button variant="contained" color="primary" sx={{ mb: 2 }} href="/admin/categories">
             Manage Categories
           </Button>
@@ -330,7 +328,7 @@ function Admin() {
             <TrickListsTable tricklists={tricklists} />
           </PagedSection>
         </div>
-      </div>
+      </AdminLayout>
     </>
   );
 }

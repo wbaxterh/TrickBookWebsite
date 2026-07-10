@@ -1,7 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -22,7 +21,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
-import Header from '../../components/Header';
+import AdminLayout from '../../components/AdminLayout';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../lib/api';
 
 export default function AdminCategories() {
@@ -99,8 +98,7 @@ export default function AdminCategories() {
       <Head>
         <title>Admin - Manage Categories</title>
       </Head>
-      <Header />
-      <Box className="container my-5">
+      <AdminLayout>
         <Typography variant="h4" gutterBottom>
           Manage Categories
         </Typography>
@@ -193,7 +191,7 @@ export default function AdminCategories() {
             </Button>
           </DialogActions>
         </Dialog>
-      </Box>
+      </AdminLayout>
     </>
   );
 }

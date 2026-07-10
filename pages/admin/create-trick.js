@@ -15,6 +15,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import AdminLayout from '../../components/AdminLayout';
 import { getCategories } from '../../lib/api';
 import { createTrick, getTrickData, updateTrick, uploadTrickImage } from '../../lib/apiTrickipedia';
 import styles from '../../styles/admin.module.css';
@@ -183,11 +184,11 @@ export default function CreateTrick() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>{isEdit === 'true' ? 'Edit' : 'Create'} Trick</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           {isEdit === 'true' ? 'Edit' : 'Create'} Trick
         </Typography>
@@ -360,7 +361,7 @@ export default function CreateTrick() {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }

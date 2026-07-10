@@ -12,6 +12,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import AdminLayout from '../../components/AdminLayout';
 import {
   createBlogPost,
   getBlogPostById,
@@ -160,11 +161,11 @@ export default function CreateBlogPost() {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <>
       <Head>
         <title>{isEdit === 'true' ? 'Edit' : 'Create'} Blog Post</title>
       </Head>
-      <div className="container m-4 mt-5 pt-3">
+      <AdminLayout>
         <Typography variant="h2" gutterBottom>
           {isEdit === 'true' ? 'Edit' : 'Create'} Blog Post
         </Typography>
@@ -238,7 +239,7 @@ export default function CreateBlogPost() {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </AdminLayout>
+    </>
   );
 }
