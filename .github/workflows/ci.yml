@@ -30,7 +30,7 @@ jobs:
           EXT_PATTERN='\.(js|jsx|mjs|cjs|ts|tsx|mts|cts|json|jsonc|css)$'
           mapfile -t changed_files < <(git diff --name-only --diff-filter=ACMRT "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | grep -E "$EXT_PATTERN" || true)
 
-          if [ ${#changed_files[@]} -eq 0 ]; then
+          if [ ${#changed_files[@]} -eq 0 ] || [ -z "${changed_files[0]}" ]; then
             echo "Skipping Biome check: no files matching ${EXT_PATTERN} were modified in this PR."
             exit 0
           fi
