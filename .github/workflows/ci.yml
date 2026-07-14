@@ -24,6 +24,7 @@ jobs:
         run: npm ci
 
       - name: Lint & format check
+        shell: bash
         run: |
           # Keep this pattern in sync with file types checked by Biome in this repo.
           EXT_PATTERN='\.(js|jsx|mjs|cjs|ts|tsx|mts|cts|json|jsonc|css)$'
