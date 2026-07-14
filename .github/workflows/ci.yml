@@ -26,6 +26,7 @@ jobs:
       - name: Lint & format check
         run: |
           # Keep this extension list in sync with file types checked by Biome in this repo.
+          # This variable is documentation-only for the log message below.
           SUPPORTED_EXTENSIONS=".js, .jsx, .mjs, .cjs, .ts, .tsx, .mts, .cts, .json, .jsonc, .css"
           EXT_PATTERN='\.(js|jsx|mjs|cjs|ts|tsx|mts|cts|json|jsonc|css)$'
           mapfile -t changed_files < <(git diff --name-only --diff-filter=ACMRT "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | grep -E "$EXT_PATTERN" || true)
