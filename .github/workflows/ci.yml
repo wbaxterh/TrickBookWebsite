@@ -25,14 +25,12 @@ jobs:
 
       - name: Lint & format check
         run: |
-          # Keep this extension list in sync with file types checked by Biome in this repo.
-          # This variable is documentation-only for the log message below.
-          SUPPORTED_EXTENSIONS=".js, .jsx, .mjs, .cjs, .ts, .tsx, .mts, .cts, .json, .jsonc, .css"
+          # Keep this pattern in sync with file types checked by Biome in this repo.
           EXT_PATTERN='\.(js|jsx|mjs|cjs|ts|tsx|mts|cts|json|jsonc|css)$'
           mapfile -t changed_files < <(git diff --name-only --diff-filter=ACMRT "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | grep -E "$EXT_PATTERN" || true)
 
           if [ ${#changed_files[@]} -eq 0 ]; then
-            echo "Skipping Biome check: no supported files (${SUPPORTED_EXTENSIONS}) were modified in this PR."
+            echo "Skipping Biome check: no files matching ${EXT_PATTERN} were modified in this PR."
             exit 0
           fi
 
