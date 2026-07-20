@@ -1,99 +1,96 @@
-import Head from "next/head";
-import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import { marked } from "marked";
+import fs from 'fs';
+import { marked } from 'marked';
+import Head from 'next/head';
+import Link from 'next/link';
+import path from 'path';
 
 export async function getStaticPaths() {
-	const docsDirectory = path.join(process.cwd(), "docs");
-	const filenames = fs.readdirSync(docsDirectory);
+  const docsDirectory = path.join(process.cwd(), 'docs');
+  const filenames = fs.readdirSync(docsDirectory);
 
-	const paths = filenames
-		.filter((filename) => filename.endsWith(".md"))
-		.map((filename) => ({
-			params: {
-				slug: filename.replace(".md", ""),
-			},
-		}));
+  const paths = filenames
+    .filter((filename) => filename.endsWith('.md'))
+    .map((filename) => ({
+      params: {
+        slug: filename.replace('.md', ''),
+      },
+    }));
 
-	return {
-		paths,
-		fallback: false,
-	};
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
-	const docsDirectory = path.join(process.cwd(), "docs");
-	const filePath = path.join(docsDirectory, `${params.slug}.md`);
-	const content = fs.readFileSync(filePath, "utf8");
+  const docsDirectory = path.join(process.cwd(), 'docs');
+  const filePath = path.join(docsDirectory, `${params.slug}.md`);
+  const content = fs.readFileSync(filePath, 'utf8');
 
-	// Extract title from first # heading
-	const titleMatch = content.match(/^#\s+(.+)$/m);
-	const title = titleMatch ? titleMatch[1] : params.slug;
+  // Extract title from first # heading
+  const titleMatch = content.match(/^#\s+(.+)$/m);
+  const title = titleMatch ? titleMatch[1] : params.slug;
 
-	// Convert markdown to HTML
-	const htmlContent = marked(content);
+  // Convert markdown to HTML
+  const htmlContent = marked(content);
 
-	return {
-		props: {
-			title,
-			content: htmlContent,
-			slug: params.slug,
-		},
-	};
+  return {
+    props: {
+      title,
+      content: htmlContent,
+      slug: params.slug,
+    },
+  };
 }
 
 export default function DocPage({ title, content, slug }) {
-	return (
-		<>
-			<Head>
-				<title>{title} - TrickBook Docs</title>
-				<link rel="icon" href="/favicon.png" />
-				<meta name="description" content={`${title} - TrickBook Documentation`} />
-			</Head>
+  return (
+    <>
+      <Head>
+        <title>{title} - TrickBook Docs</title>
+        <link rel="icon" href="/favicon.png" />
+        <meta name="description" content={`${title} - TrickBook Documentation`} />
+      </Head>
 
-			<div
-				style={{
-					background: "#121212",
-					minHeight: "100vh",
-					color: "#FFFFFF",
-				}}
-			>
-				{/* Header */}
-				<div
-					style={{
-						background: "#1E1E1E",
-						borderBottom: "1px solid #333",
-						padding: "16px 0",
-					}}
-				>
-					<div className="container">
-						<Link
-							href="/docs"
-							style={{
-								color: "#FFD700",
-								textDecoration: "none",
-								display: "inline-flex",
-								alignItems: "center",
-								gap: "8px",
-								fontSize: "14px",
-							}}
-						>
-							← Back to Docs
-						</Link>
-					</div>
-				</div>
+      <div
+        style={{
+          background: '#121212',
+          minHeight: '100vh',
+          color: '#FFFFFF',
+        }}
+      >
+        {/* Header */}
+        <div
+          style={{
+            background: '#1E1E1E',
+            borderBottom: '1px solid #333',
+            padding: '16px 0',
+          }}
+        >
+          <div className="container">
+            <Link
+              href="/docs"
+              style={{
+                color: '#FFD700',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '14px',
+              }}
+            >
+              ← Back to Docs
+            </Link>
+          </div>
+        </div>
 
-				{/* Content */}
-				<div className="container py-5">
-					<article
-						className="markdown-content"
-						dangerouslySetInnerHTML={{ __html: content }}
-					/>
-				</div>
-			</div>
+        {/* Content */}
+        <div className="container py-5">
+          <article className="markdown-content" dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
+      </div>
 
-			<style jsx global>{`
+      <style jsx global>{`
 				.markdown-content {
 					max-width: 900px;
 					margin: 0 auto;
@@ -239,6 +236,6 @@ export default function DocPage({ title, content, slug }) {
 					margin-right: 8px;
 				}
 			`}</style>
-		</>
-	);
+    </>
+  );
 }

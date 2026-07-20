@@ -1,23 +1,23 @@
-import * as React from "react"
-import { cn } from "../../lib/utils"
-import { X, CheckCircle, XCircle } from "lucide-react"
+import { CheckCircle, X, XCircle } from 'lucide-react';
+import * as React from 'react';
+import { cn } from '../../lib/utils';
 
-const ToastContext = React.createContext(null)
+const ToastContext = React.createContext(null);
 
 export function ToastProvider({ children }) {
-  const [toasts, setToasts] = React.useState([])
+  const [toasts, setToasts] = React.useState([]);
 
-  const addToast = React.useCallback((message, type = "success") => {
-    const id = Date.now()
-    setToasts((prev) => [...prev, { id, message, type }])
+  const addToast = React.useCallback((message, type = 'success') => {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id))
-    }, 5000)
-  }, [])
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 5000);
+  }, []);
 
   const removeToast = React.useCallback((id) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id))
-  }, [])
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   return (
     <ToastContext.Provider value={{ addToast }}>
@@ -28,27 +28,27 @@ export function ToastProvider({ children }) {
         ))}
       </div>
     </ToastContext.Provider>
-  )
+  );
 }
 
 export function useToast() {
-  const context = React.useContext(ToastContext)
+  const context = React.useContext(ToastContext);
   if (!context) {
-    throw new Error("useToast must be used within a ToastProvider")
+    throw new Error('useToast must be used within a ToastProvider');
   }
-  return context
+  return context;
 }
 
 function Toast({ toast, onClose }) {
-  const isSuccess = toast.type === "success"
+  const isSuccess = toast.type === 'success';
 
   return (
     <div
       className={cn(
-        "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-[400px] animate-in slide-in-from-top-full",
+        'flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-[400px] animate-in slide-in-from-top-full',
         isSuccess
-          ? "bg-green-900/90 border border-green-700 text-green-100"
-          : "bg-red-900/90 border border-red-700 text-red-100"
+          ? 'bg-green-900/90 border border-green-700 text-green-100'
+          : 'bg-red-900/90 border border-red-700 text-red-100',
       )}
     >
       {isSuccess ? (
@@ -64,7 +64,7 @@ function Toast({ toast, onClose }) {
         <X className="h-4 w-4" />
       </button>
     </div>
-  )
+  );
 }
 
-export { Toast }
+export { Toast };
