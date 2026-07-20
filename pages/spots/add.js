@@ -86,6 +86,7 @@ export default function AddSpot() {
     city: '',
     state: '',
     description: '',
+    website: '',
     imageURL: '',
     tags: [],
     isPublic: false,
@@ -249,6 +250,15 @@ export default function AddSpot() {
       return;
     }
 
+    // Backend validates website as a URI (needs a scheme) — prepend https://
+    // when the user typed a bare domain so it doesn't get rejected.
+    const rawWebsite = formData.website.trim();
+    const website = rawWebsite
+      ? /^https?:\/\//i.test(rawWebsite)
+        ? rawWebsite
+        : `https://${rawWebsite}`
+      : '';
+
     try {
       const spotData = {
         name: formData.name.trim(),
@@ -257,6 +267,7 @@ export default function AddSpot() {
         city: formData.city.trim(),
         state: formData.state.trim().toUpperCase(),
         description: formData.description.trim(),
+        website,
         imageURL: formData.imageURL.trim() || null,
         tags: formData.tags.join(','),
         isPublic: formData.isPublic,
@@ -483,6 +494,22 @@ export default function AddSpot() {
                     rows={3}
                     className="w-full px-4 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500/50 resize-none"
                   />
+                </div>
+
+                {/* Website */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Website</label>
+                  <input
+                    type="url"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleInputChange}
+                    placeholder="https://example.com"
+                    className="w-full px-4 py-2 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Optional: official site for this spot (e.g. a skatepark or cable park)
+                  </p>
                 </div>
 
                 {/* Image URL */}

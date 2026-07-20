@@ -1,15 +1,28 @@
-import { ArrowLeft, ChevronUp, ExternalLink, FileText, Loader2, MapPin, Play, Plus, Trophy, Video } from 'lucide-react';
+import axios from 'axios';
+import {
+  ArrowLeft,
+  ChevronUp,
+  ExternalLink,
+  FileText,
+  Globe,
+  Loader2,
+  MapPin,
+  Play,
+  Plus,
+  Trophy,
+  Video,
+} from 'lucide-react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
+import LodgingSection from '../../../components/LodgingSection';
+import PhotoCarousel from '../../../components/PhotoCarousel';
+import ResortInfo from '../../../components/ResortInfo';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
-import { Separator } from '../../../components/ui/separator';
-import { Input } from '../../../components/ui/input';
 import {
   Dialog,
   DialogContent,
@@ -18,11 +31,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../../../components/ui/dialog';
-import ResortInfo from '../../../components/ResortInfo';
+import { Input } from '../../../components/ui/input';
+import { Separator } from '../../../components/ui/separator';
 import { getSpotData } from '../../../lib/apiSpots';
-import PhotoCarousel from '../../../components/PhotoCarousel';
-import LodgingSection from '../../../components/LodgingSection';
-import axios from 'axios';
 
 // US State names mapping
 const STATE_NAMES = {
@@ -95,7 +106,12 @@ export default function SpotDetail() {
 
   // Submit trick dialog
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
-  const [submitForm, setSubmitForm] = useState({ trickName: '', skaterName: '', videoUrl: '', year: '' });
+  const [submitForm, setSubmitForm] = useState({
+    trickName: '',
+    skaterName: '',
+    videoUrl: '',
+    year: '',
+  });
   const [submitting, setSubmitting] = useState(false);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.thetrickbook.com';
@@ -145,13 +161,17 @@ export default function SpotDetail() {
     if (!submitForm.trickName.trim() || !submitForm.skaterName.trim()) return;
     setSubmitting(true);
     try {
-      await axios.post(`${baseUrl}/api/spot-tricks`, {
-        spotId: spot._id,
-        trickName: submitForm.trickName,
-        skaterName: submitForm.skaterName,
-        videoUrl: submitForm.videoUrl || null,
-        year: submitForm.year ? parseInt(submitForm.year) : null,
-      }, { headers: { 'x-auth-token': token } });
+      await axios.post(
+        `${baseUrl}/api/spot-tricks`,
+        {
+          spotId: spot._id,
+          trickName: submitForm.trickName,
+          skaterName: submitForm.skaterName,
+          videoUrl: submitForm.videoUrl || null,
+          year: submitForm.year ? parseInt(submitForm.year) : null,
+        },
+        { headers: { 'x-auth-token': token } },
+      );
       // Refresh trick history
       const res = await axios.get(`${baseUrl}/api/spot-tricks/${spot._id}`);
       setTrickHistory(res.data.tricks || []);
@@ -168,12 +188,18 @@ export default function SpotDetail() {
   const handleUpvote = async (trickId) => {
     if (!token) return;
     try {
-      const res = await axios.post(`${baseUrl}/api/spot-tricks/${trickId}/upvote`, {}, {
-        headers: { 'x-auth-token': token },
-      });
-      setTrickHistory(prev => prev.map(t =>
-        t._id === trickId ? { ...t, upvotes: res.data.upvotes, upvoted: res.data.upvoted } : t
-      ));
+      const res = await axios.post(
+        `${baseUrl}/api/spot-tricks/${trickId}/upvote`,
+        {},
+        {
+          headers: { 'x-auth-token': token },
+        },
+      );
+      setTrickHistory((prev) =>
+        prev.map((t) =>
+          t._id === trickId ? { ...t, upvotes: res.data.upvotes, upvoted: res.data.upvoted } : t,
+        ),
+      );
     } catch (_e) {}
   };
 
@@ -186,6 +212,12 @@ export default function SpotDetail() {
           .filter(Boolean)
       : spot.tags
     : [];
+
+  // Human-readable park sub-type (e.g. "skatepark" -> "Skatepark"), parks only
+  const parkTypeLabel =
+    spot?.category === 'park' && spot?.parkType
+      ? spot.parkType.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+      : null;
 
   // Generate Google Maps URL
   const googleMapsUrl = spot
@@ -252,11 +284,7 @@ export default function SpotDetail() {
         <div className="container py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Image Section */}
-            <PhotoCarousel
-              images={spot.images}
-              imageURL={spot.imageURL}
-              name={spot.name}
-            />
+            <PhotoCarousel images={spot.images} imageURL={spot.imageURL} name={spot.name} />
 
             {/* Details Section */}
             <Card>
@@ -277,9 +305,15 @@ export default function SpotDetail() {
                   </div>
                 </div>
 
-                {/* Tags */}
-                {tagList.length > 0 && (
+                {/* Park type + tags */}
+                {(parkTypeLabel || tagList.length > 0) && (
                   <div className="flex flex-wrap gap-2">
+                    {/* Structured park sub-type leads the row, filled to stand out from freeform tags */}
+                    {parkTypeLabel && (
+                      <Badge className="bg-yellow-500 text-black hover:bg-yellow-400">
+                        {parkTypeLabel}
+                      </Badge>
+                    )}
                     {tagList.map((tag, index) => (
                       <Badge
                         key={index}
@@ -315,7 +349,10 @@ export default function SpotDetail() {
                       {spot.passAffiliation === 'both' && 'Ikon & Epic Pass'}
                     </Badge>
                     {spot.popularityTier && (
-                      <Badge variant="outline" className="text-sm px-3 py-1 border-yellow-500/50 text-yellow-400">
+                      <Badge
+                        variant="outline"
+                        className="text-sm px-3 py-1 border-yellow-500/50 text-yellow-400"
+                      >
                         {spot.popularityTier === 'legendary' && 'Legendary'}
                         {spot.popularityTier === 'major' && 'Major Resort'}
                         {spot.popularityTier === 'regional' && 'Regional'}
@@ -345,6 +382,15 @@ export default function SpotDetail() {
                       Open in Google Maps
                     </a>
                   </Button>
+
+                  {spot.website && (
+                    <Button variant="outline" asChild>
+                      <a href={spot.website} target="_blank" rel="noopener noreferrer">
+                        <Globe className="h-4 w-4 mr-2" />
+                        Website
+                      </a>
+                    </Button>
+                  )}
 
                   {loggedIn && (
                     <Button variant="outline" asChild>
@@ -379,7 +425,9 @@ export default function SpotDetail() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {spot.videos.map((video, index) => {
                       // Extract YouTube video ID for embed
-                      const ytMatch = video.url?.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+                      const ytMatch = video.url?.match(
+                        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+                      );
                       const ytId = ytMatch ? ytMatch[1] : null;
 
                       return (
@@ -413,7 +461,10 @@ export default function SpotDetail() {
                               <p className="text-xs text-muted-foreground mt-1">{video.channel}</p>
                             )}
                             {video.type && (
-                              <Badge variant="outline" className="mt-2 text-xs border-yellow-500/30 text-yellow-500">
+                              <Badge
+                                variant="outline"
+                                className="mt-2 text-xs border-yellow-500/30 text-yellow-500"
+                              >
                                 {video.type}
                               </Badge>
                             )}
@@ -453,7 +504,10 @@ export default function SpotDetail() {
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-muted-foreground">{article.source}</span>
                             {article.type && (
-                              <Badge variant="outline" className="text-xs border-muted-foreground/30">
+                              <Badge
+                                variant="outline"
+                                className="text-xs border-muted-foreground/30"
+                              >
                                 {article.type}
                               </Badge>
                             )}
@@ -498,7 +552,9 @@ export default function SpotDetail() {
                     <Trophy className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
                     <p className="text-muted-foreground">No tricks submitted for this spot yet.</p>
                     {loggedIn && (
-                      <p className="text-sm text-muted-foreground mt-1">Be the first to submit one!</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Be the first to submit one!
+                      </p>
                     )}
                   </div>
                 ) : (
@@ -512,7 +568,12 @@ export default function SpotDetail() {
                           <div className="flex items-center gap-2">
                             <span className="font-semibold text-foreground">{trick.trickName}</span>
                             {trick.verified && (
-                              <Badge variant="secondary" className="bg-green-500/20 text-green-500 text-xs">Verified</Badge>
+                              <Badge
+                                variant="secondary"
+                                className="bg-green-500/20 text-green-500 text-xs"
+                              >
+                                Verified
+                              </Badge>
                             )}
                           </div>
                           <div className="flex items-center gap-3 mt-1 text-sm text-muted-foreground">
@@ -597,7 +658,9 @@ export default function SpotDetail() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setSubmitDialogOpen(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => setSubmitDialogOpen(false)}>
+              Cancel
+            </Button>
             <Button
               onClick={handleSubmitTrick}
               disabled={submitting || !submitForm.trickName.trim() || !submitForm.skaterName.trim()}

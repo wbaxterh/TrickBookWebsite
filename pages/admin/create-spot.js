@@ -84,6 +84,7 @@ export default function CreateSpot() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [description, setDescription] = useState('');
+  const [website, setWebsite] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
   const [rating, setRating] = useState('');
@@ -102,6 +103,7 @@ export default function CreateSpot() {
         setCity(spotData.city || '');
         setState(spotData.state || '');
         setDescription(spotData.description || '');
+        setWebsite(spotData.website || '');
         setImageURL(spotData.imageURL || '');
         setRating(spotData.rating?.toString() || '');
 
@@ -148,6 +150,15 @@ export default function CreateSpot() {
     e.preventDefault();
     setSubmitting(true);
 
+    // Backend validates website as a URI (needs a scheme) — prepend https://
+    // for bare domains so it isn't rejected.
+    const rawWebsite = (website || '').trim();
+    const normalizedWebsite = rawWebsite
+      ? /^https?:\/\//i.test(rawWebsite)
+        ? rawWebsite
+        : `https://${rawWebsite}`
+      : '';
+
     const spotData = {
       name,
       latitude: parseFloat(latitude),
@@ -155,6 +166,7 @@ export default function CreateSpot() {
       city,
       state,
       description,
+      website: normalizedWebsite,
       imageURL: imageURL || null,
       tags: selectedTags.join(', '),
       isPublic: true,
@@ -271,6 +283,15 @@ export default function CreateSpot() {
             margin="normal"
             multiline
             rows={3}
+          />
+
+          <TextField
+            label="Website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            fullWidth
+            margin="normal"
+            placeholder="https://example.com"
           />
 
           <TextField
