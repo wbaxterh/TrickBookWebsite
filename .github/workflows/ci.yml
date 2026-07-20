@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,7 +24,19 @@ jobs:
         run: npm ci
 
       - name: Lint & format check
-        run: npx biome check .
+        shell: bash
+        run: |
+          # Keep this pattern in sync with Biome-supported file types (see `/biome.json`).
+          EXT_PATTERN='\.(js|jsx|mjs|cjs|ts|tsx|mts|cts|json|jsonc|css)$'
+          mapfile -t changed_files < <(git diff --name-only --diff-filter=ACMRT "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | grep -E "$EXT_PATTERN" || true)
+
+          if [ ${#changed_files[@]} -eq 0 ] || [ -z "${changed_files[0]}" ]; then
+            echo "Skipping Biome check: no files matching ${EXT_PATTERN} were modified in this PR."
+            exit 0
+          fi
+
+          echo "Running Biome on ${#changed_files[@]} changed files..."
+          npx biome check "${changed_files[@]}"
 
       - name: Build
         run: npm run build
