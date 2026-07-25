@@ -1,5 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -35,6 +36,7 @@ export default function CreateTrick() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [loadError, setLoadError] = useState('');
   const router = useRouter();
   const { isEdit, trickId } = router.query;
 
@@ -50,15 +52,20 @@ export default function CreateTrick() {
       setSource(trickData.source || '');
       setUrl(trickData.url || '');
       setExistingImages(trickData.images || []);
+    } catch (_error) {
+      setLoadError('Failed to load trick data. Editing may overwrite existing fields.');
+    } finally {
       setLoading(false);
-    } catch (_error) {}
+    }
   }, []);
 
   const fetchCategories = useCallback(async () => {
     try {
       const cats = await getCategories();
       setCategories(cats);
-    } catch (_error) {}
+    } catch (_error) {
+      setLoadError('Failed to load categories. The category dropdown will be empty.');
+    }
   }, []);
 
   useEffect(() => {
@@ -192,6 +199,11 @@ export default function CreateTrick() {
         <Typography variant="h2" gutterBottom>
           {isEdit === 'true' ? 'Edit' : 'Create'} Trick
         </Typography>
+        {loadError && (
+          <Alert severity="error" sx={{ mb: 2 }} onClose={() => setLoadError('')}>
+            {loadError}
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextField
             label="Trick Name"

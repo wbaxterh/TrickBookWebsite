@@ -4,6 +4,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
+  Alert,
   Box,
   Button,
   Chip,
@@ -89,6 +90,7 @@ export default function PendingSpotsAdmin() {
     totalCount: 0,
     totalPages: 0,
   });
+  const [loadError, setLoadError] = useState('');
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
   const [selectedSpot, setSelectedSpot] = useState(null);
   const [rejectionReason, setRejectionReason] = useState('');
@@ -98,11 +100,13 @@ export default function PendingSpotsAdmin() {
   const fetchPendingSpots = useCallback(
     async (page) => {
       setLoading(true);
+      setLoadError('');
       try {
         const data = await getPendingSpots(token, page, 20);
         setSpots(data.spots || []);
         setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
       } catch (_error) {
+        setLoadError('Failed to load pending spots.');
       } finally {
         setLoading(false);
       }
@@ -225,6 +229,24 @@ export default function PendingSpotsAdmin() {
         <Typography variant="body1" color="textSecondary" className="mb-4">
           {pagination.totalCount} spots awaiting review
         </Typography>
+
+        {loadError && (
+          <Alert
+            severity="error"
+            sx={{ mb: 2 }}
+            action={
+              <Button
+                color="inherit"
+                size="small"
+                onClick={() => fetchPendingSpots(pagination.page)}
+              >
+                Retry
+              </Button>
+            }
+          >
+            {loadError}
+          </Alert>
+        )}
 
         {loading ? (
           <Box display="flex" justifyContent="center" py={4}>

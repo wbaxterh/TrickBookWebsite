@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Chip,
@@ -90,6 +91,7 @@ export default function CreateSpot() {
   const [rating, setRating] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [loadError, setLoadError] = useState('');
   const router = useRouter();
   const { isEdit, spotId } = router.query;
 
@@ -121,6 +123,7 @@ export default function CreateSpot() {
       }
       setLoading(false);
     } catch (_error) {
+      setLoadError('Failed to load spot data. Saving now would create a new spot from scratch.');
       setLoading(false);
     }
   }, []);
@@ -220,6 +223,11 @@ export default function CreateSpot() {
         <Typography variant="h2" gutterBottom>
           {isEdit === 'true' ? 'Edit' : 'Create'} Spot
         </Typography>
+        {loadError && (
+          <Alert severity="error" sx={{ mb: 2 }} onClose={() => setLoadError('')}>
+            {loadError}
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextField
             label="Spot Name"

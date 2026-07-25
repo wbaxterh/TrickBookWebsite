@@ -3,6 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchIcon from '@mui/icons-material/Search';
 import {
+  Alert,
   Box,
   Button,
   Chip,
@@ -80,6 +81,7 @@ export default function SpotsAdmin() {
   const { loggedIn, role, token } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [pagination, setPagination] = useState({
     page: 1,
@@ -90,11 +92,13 @@ export default function SpotsAdmin() {
 
   const fetchSpots = useCallback(async (term, page) => {
     setLoading(true);
+    setLoadError('');
     try {
       const data = await searchSpots(term, '', '', '', page, 20);
       setSpots(data.spots || []);
       setPagination(data.pagination || { page: 1, totalCount: 0, totalPages: 0 });
     } catch (_error) {
+      setLoadError('Failed to load spots.');
     } finally {
       setLoading(false);
     }
@@ -186,6 +190,23 @@ export default function SpotsAdmin() {
         <Button variant="contained" color="primary" onClick={handleCreateNewSpot} className="mb-4">
           Create a New Spot
         </Button>
+        {loadError && (
+          <Alert
+            severity="error"
+            sx={{ mb: 2 }}
+            action={
+              <Button
+                color="inherit"
+                size="small"
+                onClick={() => fetchSpots(searchTerm, pagination.page)}
+              >
+                Retry
+              </Button>
+            }
+          >
+            {loadError}
+          </Alert>
+        )}
 
         <TextField
           fullWidth

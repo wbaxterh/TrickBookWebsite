@@ -23,7 +23,7 @@ import {
   createBunnyVideo,
   deleteVideo,
   fetchYouTubeMetadata,
-  getVideoDetails,
+  getAdminVideo,
   SPORT_TYPES,
   updateVideo,
 } from '../../../../lib/apiMedia';
@@ -98,13 +98,10 @@ export default function EditVideo() {
     }
   }, [loggedIn, role, router]);
 
-  // NOTE: getVideoDetails hits the PUBLIC video endpoint, which 404s on unpublished
-  // drafts. Loading a draft here fails until a backend admin-only detail route exists.
-  // Do not swap the endpoint without that route (out of scope for this fix).
   const fetchVideo = useCallback(async () => {
     setLoading(true);
     try {
-      const video = await getVideoDetails(id);
+      const video = await getAdminVideo(id, token);
       setFormData({
         title: video.title || '',
         description: video.description || '',

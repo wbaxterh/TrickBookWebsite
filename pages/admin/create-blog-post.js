@@ -1,5 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
+  Alert,
   Button,
   Checkbox,
   CircularProgress,
@@ -31,6 +32,7 @@ export default function CreateBlogPost() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [heroImageIndex, setHeroImageIndex] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const router = useRouter();
   const { isEdit, postId } = router.query; // Accessing query parameters
 
@@ -45,8 +47,11 @@ export default function CreateBlogPost() {
       // If the post has a hero image, find its index
       const heroIndex = postData.images.findIndex((image) => image.includes('?hero=true'));
       setHeroImageIndex(heroIndex !== -1 ? heroIndex : null);
+    } catch (_error) {
+      setLoadError('Failed to load the post. Saving now would overwrite it with an empty form.');
+    } finally {
       setLoading(false);
-    } catch (_error) {}
+    }
   }, []);
 
   useEffect(() => {
@@ -169,6 +174,11 @@ export default function CreateBlogPost() {
         <Typography variant="h2" gutterBottom>
           {isEdit === 'true' ? 'Edit' : 'Create'} Blog Post
         </Typography>
+        {loadError && (
+          <Alert severity="error" sx={{ mb: 2 }} onClose={() => setLoadError('')}>
+            {loadError}
+          </Alert>
+        )}
         <Typography variant="p">
           Add images with a shortcode format in the order you upload them like this: [image1]
           [image2]

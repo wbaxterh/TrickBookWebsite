@@ -27,6 +27,7 @@ export default function AdminCouch() {
   const [syncing, setSyncing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState('');
+  const [actionError, setActionError] = useState('');
 
   const fetchVideos = useCallback(async () => {
     setLoading(true);
@@ -66,30 +67,39 @@ export default function AdminCouch() {
   };
 
   const handleTogglePublish = async (video) => {
+    setActionError('');
     try {
       await updateVideo(video._id, { isPublished: !video.isPublished }, token);
       setVideos((prev) =>
         prev.map((v) => (v._id === video._id ? { ...v, isPublished: !v.isPublished } : v)),
       );
-    } catch (_error) {}
+    } catch (_error) {
+      setActionError(`Failed to ${video.isPublished ? 'unpublish' : 'publish'} "${video.title}".`);
+    }
   };
 
   const handleToggleFeatured = async (video) => {
+    setActionError('');
     try {
       await updateVideo(video._id, { isFeatured: !video.isFeatured }, token);
       setVideos((prev) =>
         prev.map((v) => (v._id === video._id ? { ...v, isFeatured: !v.isFeatured } : v)),
       );
-    } catch (_error) {}
+    } catch (_error) {
+      setActionError(`Failed to update featured status for "${video.title}".`);
+    }
   };
 
   const handleDelete = async (video) => {
     if (!confirm(`Are you sure you want to delete "${video.title}"?`)) return;
 
+    setActionError('');
     try {
       await deleteVideo(video._id, token);
       setVideos((prev) => prev.filter((v) => v._id !== video._id));
-    } catch (_error) {}
+    } catch (_error) {
+      setActionError(`Failed to delete "${video.title}".`);
+    }
   };
 
   const filteredVideos = videos.filter(
@@ -205,6 +215,20 @@ export default function AdminCouch() {
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Retry
                 </Button>
+              </div>
+            )}
+
+            {/* Action error banner (non-blocking — table stays visible) */}
+            {actionError && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center justify-between gap-3">
+                <p className="text-red-500">{actionError}</p>
+                <button
+                  type="button"
+                  onClick={() => setActionError('')}
+                  className="text-red-500 text-sm hover:underline shrink-0"
+                >
+                  Dismiss
+                </button>
               </div>
             )}
 

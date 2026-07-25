@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, IconButton, Typography } from '@mui/material';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -13,13 +13,17 @@ export default function BlogAdmin() {
   const { loggedIn, role, token } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const router = useRouter();
 
   const fetchPosts = useCallback(async () => {
+    setLoading(true);
+    setLoadError('');
     try {
       const fetchedPosts = await getSortedPostsData();
       setPosts(fetchedPosts);
     } catch (_error) {
+      setLoadError('Failed to load blog posts.');
     } finally {
       setLoading(false);
     }
@@ -83,7 +87,18 @@ export default function BlogAdmin() {
         <Button variant="contained" color="primary" onClick={handleCreateNewPost} className="mb-4">
           Create a New Post
         </Button>
-        {posts.length > 0 ? (
+        {loadError ? (
+          <Alert
+            severity="error"
+            action={
+              <Button color="inherit" size="small" onClick={fetchPosts}>
+                Retry
+              </Button>
+            }
+          >
+            {loadError}
+          </Alert>
+        ) : posts.length > 0 ? (
           <div className="row">
             {posts.map((post) => (
               <div className="col-md-4 col-sm-12 mb-4" key={post.id}>

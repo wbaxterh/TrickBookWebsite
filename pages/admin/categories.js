@@ -1,6 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -29,6 +30,7 @@ export default function AdminCategories() {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [_loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
   const [form, setForm] = useState({
@@ -40,9 +42,15 @@ export default function AdminCategories() {
 
   const fetchCategories = useCallback(async () => {
     setLoading(true);
-    const cats = await getCategories();
-    setCategories(cats);
-    setLoading(false);
+    setLoadError('');
+    try {
+      const cats = await getCategories();
+      setCategories(cats);
+    } catch (_e) {
+      setLoadError('Failed to load categories.');
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   // Auth guard
@@ -110,6 +118,19 @@ export default function AdminCategories() {
         >
           Add Category
         </Button>
+        {loadError && (
+          <Alert
+            severity="error"
+            sx={{ mb: 2 }}
+            action={
+              <Button color="inherit" size="small" onClick={fetchCategories}>
+                Retry
+              </Button>
+            }
+          >
+            {loadError}
+          </Alert>
+        )}
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
