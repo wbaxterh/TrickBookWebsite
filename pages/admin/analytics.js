@@ -161,7 +161,10 @@ export default function AnalyticsDashboard() {
 
   if (loggedIn === null || !loggedIn || role !== 'admin') return null;
 
-  const sortedSections = (data.sections || []).sort(
+  // Copy before sorting: recharts 3 stores chart data in an immer-based store
+  // that freezes the array in place, so an in-place sort of state crashes on
+  // the next re-render (e.g. when switching the day range).
+  const sortedSections = [...(data.sections || [])].sort(
     (a, b) => SECTION_ORDER.indexOf(a.section) - SECTION_ORDER.indexOf(b.section),
   );
 
