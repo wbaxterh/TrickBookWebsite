@@ -1,4 +1,14 @@
-import { ArrowDown, Download, Eye, MousePointer, RefreshCw, Users } from 'lucide-react';
+import {
+  Activity,
+  ArrowDown,
+  Download,
+  Eye,
+  MousePointer,
+  RefreshCw,
+  Smartphone,
+  UserPlus,
+  Users,
+} from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Component, useContext, useEffect, useState } from 'react';
@@ -20,7 +30,9 @@ import { AuthContext } from '../../auth/AuthContext';
 import AdminLayout from '../../components/AdminLayout';
 import {
   fetchAppStores,
+  fetchAppUsers,
   fetchCtas,
+  fetchDownloads,
   fetchFunnel,
   fetchOverview,
   fetchPages,
@@ -93,6 +105,19 @@ function ChartCard({ title, children, className = '' }) {
   );
 }
 
+function timeAgo(dateStr) {
+  if (!dateStr) return '—';
+  const s = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+  if (s < 60) return 'just now';
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 30) return `${d}d ago`;
+  return new Date(dateStr).toLocaleDateString();
+}
+
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
@@ -136,9 +161,23 @@ export default function AnalyticsDashboard() {
       fetchAppStores(token, days).catch(() => []),
       fetchFunnel(token, days).catch(() => ({ steps: [] })),
       fetchReferrers(token, days).catch(() => []),
+      fetchAppUsers(token, days).catch(() => null),
+      fetchDownloads(token, days).catch(() => null),
     ])
       .then(
-        ([overview, traffic, pages, sections, scrollDepth, ctas, appStores, funnel, referrers]) => {
+        ([
+          overview,
+          traffic,
+          pages,
+          sections,
+          scrollDepth,
+          ctas,
+          appStores,
+          funnel,
+          referrers,
+          appUsers,
+          downloads,
+        ]) => {
           setData({
             overview: overview || {},
             traffic: traffic || [],
@@ -149,6 +188,8 @@ export default function AnalyticsDashboard() {
             appStores: appStores || [],
             funnel: funnel || { steps: [] },
             referrers: referrers || [],
+            appUsers: appUsers || null,
+            downloads: downloads || null,
           });
           setLoading(false);
         },
@@ -170,6 +211,20 @@ export default function AnalyticsDashboard() {
 
   const funnelSteps = data.funnel?.steps || [];
   const funnelMax = funnelSteps[0]?.count || 1;
+
+  // Merge per-store daily downloads into one chart-friendly series
+  const downloadsDaily = (() => {
+    const byDate = {};
+    for (const d of data.downloads?.ios?.daily || []) {
+      byDate[d.date] = { ...byDate[d.date], date: d.date, ios: d.downloads };
+    }
+    for (const d of data.downloads?.android?.daily || []) {
+      byDate[d.date] = { ...byDate[d.date], date: d.date, android: d.installs };
+    }
+    return Object.values(byDate).sort((a, b) => a.date.localeCompare(b.date));
+  })();
+
+  const appUsers = data.appUsers;
 
   return (
     <>
@@ -211,7 +266,147 @@ export default function AnalyticsDashboard() {
           </div>
         ) : (
           <ChartErrorBoundary key={days}>
-            {/* Overview Cards */}
+            {/* TrickBook App */}
+            <h2 className="text-lg font-semibold text-foreground mb-4">TrickBook App</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+              <StatCard
+                label="Daily Active"
+                value={appUsers?.dau ?? '—'}
+                icon={Activity}
+                sub="last 24h"
+              />
+              <StatCard
+                label="Weekly Active"
+                value={appUsers?.wau ?? '—'}
+                icon={Activity}
+                sub="last 7 days"
+              />
+              <StatCard
+                label="Monthly Active"
+                value={appUsers?.mau ?? '—'}
+                icon={Activity}
+                sub="last 30 days"
+              />
+              <StatCard label="Total Users" value={appUsers?.totalUsers ?? '—'} icon={Users} />
+              <StatCard
+                label="New Signups"
+                value={appUsers?.newUsers30d ?? '—'}
+                icon={UserPlus}
+                sub={`${appUsers?.newUsers7d ?? 0} in last 7 days`}
+              />
+              <StatCard
+                label="Last Signup"
+                value={appUsers?.lastSignup?.name || '—'}
+                icon={Smartphone}
+                sub={timeAgo(appUsers?.lastSignup?.createdAt)}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              {/* Store Downloads */}
+              <ChartCard title="App Downloads (store data)">
+                {data.downloads ? (
+                  <div>
+                    <div className="space-y-3 mb-4">
+                      {[
+                        {
+                          name: 'iOS App Store',
+                          store: data.downloads.ios,
+                          total: data.downloads.ios?.totalDownloads,
+                          unit: 'downloads',
+                        },
+                        {
+                          name: 'Google Play',
+                          store: data.downloads.android,
+                          total: data.downloads.android?.totalInstalls,
+                          unit: 'installs',
+                        },
+                      ].map(({ name, store, total, unit }) => (
+                        <div key={name} className="flex justify-between items-start text-sm gap-4">
+                          <span className="text-foreground font-medium shrink-0">{name}</span>
+                          {store?.configured && !store?.error ? (
+                            <div className="text-right">
+                              <span className="font-semibold text-foreground">
+                                {(total ?? 0).toLocaleString()}
+                              </span>
+                              <span className="text-muted-foreground text-xs ml-1">
+                                {unit} / {days}d
+                              </span>
+                              {store.activeDevices != null && (
+                                <p className="text-xs text-muted-foreground">
+                                  {store.activeDevices.toLocaleString()} active devices
+                                </p>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-xs text-muted-foreground text-right">
+                              {store?.error
+                                ? `Error: ${store.error}`
+                                : store?.note || 'Not configured'}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    {downloadsDaily.length > 0 && (
+                      <ResponsiveContainer width="100%" height={160}>
+                        <LineChart data={downloadsDaily}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                          <XAxis
+                            dataKey="date"
+                            stroke="#666"
+                            tick={{ fontSize: 11 }}
+                            tickFormatter={(d) => d.slice(5)}
+                          />
+                          <YAxis stroke="#666" tick={{ fontSize: 11 }} allowDecimals={false} />
+                          <Tooltip content={<CustomTooltip />} />
+                          <Line
+                            type="monotone"
+                            dataKey="ios"
+                            stroke="#3b82f6"
+                            strokeWidth={2}
+                            name="iOS"
+                            dot={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="android"
+                            stroke="#22c55e"
+                            strokeWidth={2}
+                            name="Android"
+                            dot={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center py-12">No download data yet</p>
+                )}
+              </ChartCard>
+
+              {/* Latest App Activity */}
+              <ChartCard title="Latest App Activity">
+                {(appUsers?.latestActivity || []).length > 0 ? (
+                  <div className="space-y-2">
+                    {appUsers.latestActivity.map((a) => (
+                      <div
+                        key={a.type}
+                        className="flex justify-between items-center text-sm py-1 border-b border-border"
+                      >
+                        <span className="text-foreground">{a.type}</span>
+                        <span className="text-muted-foreground shrink-0">{timeAgo(a.when)}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center py-12">No activity data yet</p>
+                )}
+              </ChartCard>
+            </div>
+
+            {/* Website */}
+            <h2 className="text-lg font-semibold text-foreground mb-4">Website</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <StatCard label="Pageviews" value={data.overview?.pageviews || 0} icon={Eye} />
               <StatCard
