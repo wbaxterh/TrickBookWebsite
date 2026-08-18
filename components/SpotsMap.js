@@ -1,7 +1,7 @@
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { MarkerClusterer, SuperClusterViewportAlgorithm } from '@googlemaps/markerclusterer';
 import { APIProvider, Map as GoogleMap, InfoWindow, useMap } from '@vis.gl/react-google-maps';
 import { Loader2 } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.thetrickbook.com/api';
 const MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
@@ -25,8 +25,9 @@ function createClusterRenderer() {
           path: google.maps.SymbolPath.CIRCLE,
           scale: size / 2,
           fillColor: '#fcf150',
-          fillOpacity: 1,
+          fillOpacity: 0.5,
           strokeColor: '#1a1a1a',
+          strokeOpacity: 0.6,
           strokeWeight: 3,
         },
         label: {
@@ -39,6 +40,25 @@ function createClusterRenderer() {
       });
     },
   };
+}
+
+// One icon descriptor per category color, shared across all markers.
+// Built lazily because google.maps.Size/Point need the Maps API loaded.
+const iconCache = {};
+function getCategoryIcon(color) {
+  if (!iconCache[color]) {
+    iconCache[color] = {
+      url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20C24 5.373 18.627 0 12 0z" fill="${color}"/>
+          <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
+        </svg>`,
+      )}`,
+      scaledSize: new google.maps.Size(24, 32),
+      anchor: new google.maps.Point(12, 32),
+    };
+  }
+  return iconCache[color];
 }
 
 function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
@@ -61,16 +81,7 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
       const marker = new google.maps.Marker({
         position: { lat: pin.latitude, lng: pin.longitude },
         title: pin.name,
-        icon: {
-          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
-            `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20C24 5.373 18.627 0 12 0z" fill="${color}"/>
-              <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
-            </svg>`,
-          )}`,
-          scaledSize: new google.maps.Size(24, 32),
-          anchor: new google.maps.Point(12, 32),
-        },
+        icon: getCategoryIcon(color),
       });
 
       marker.addListener('click', () => {
@@ -83,6 +94,7 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
     clustererRef.current = new MarkerClusterer({
       map,
       markers,
+      algorithm: new SuperClusterViewportAlgorithm({ maxZoom: 16 }),
       renderer: createClusterRenderer(),
     });
 
@@ -185,6 +197,16 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
   );
 }
 
+function pinMatchesFilters(pin, selectedCategory, selectedCountry) {
+  if (selectedCategory !== 'all') {
+    const matchesCategory = pin.category === selectedCategory;
+    const matchesSport = Array.isArray(pin.sportTypes) && pin.sportTypes.includes(selectedCategory);
+    if (!matchesCategory && !matchesSport) return false;
+  }
+  if (selectedCountry !== 'all' && pin.country !== selectedCountry) return false;
+  return true;
+}
+
 export default function SpotsMap({ selectedCategory = 'all', selectedCountry = 'all' }) {
   const [allPins, setAllPins] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -230,19 +252,13 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
       });
   }, []);
 
-  // Filter pins based on selected category and country
-  const pins = allPins.filter((pin) => {
-    if (selectedCategory !== 'all') {
-      const matchesCategory = pin.category === selectedCategory;
-      const matchesSport =
-        Array.isArray(pin.sportTypes) && pin.sportTypes.includes(selectedCategory);
-      if (!matchesCategory && !matchesSport) return false;
-    }
-    if (selectedCountry !== 'all') {
-      if (pin.country !== selectedCountry) return false;
-    }
-    return true;
-  });
+  // Filter pins based on selected category and country.
+  // Memoized so the array identity is stable across unrelated re-renders
+  // (e.g., selecting a pin) — otherwise ClusteredMarkers rebuilds every marker.
+  const pins = useMemo(
+    () => allPins.filter((pin) => pinMatchesFilters(pin, selectedCategory, selectedCountry)),
+    [allPins, selectedCategory, selectedCountry],
+  );
 
   const handleMarkerClick = useCallback((pin) => {
     setSelectedPin(pin);
@@ -261,15 +277,6 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
     );
   }
 
-  if (loading) {
-    return (
-      <div className="w-full h-[70vh] bg-card border border-border rounded-xl flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
-        <span className="ml-3 text-muted-foreground">Loading spots...</span>
-      </div>
-    );
-  }
-
   if (error) {
     return (
       <div className="w-full h-[70vh] bg-card border border-border rounded-xl flex items-center justify-center">
@@ -279,7 +286,7 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
   }
 
   return (
-    <div className="w-full h-[70vh] rounded-xl overflow-hidden border border-border">
+    <div className="w-full h-[70vh] rounded-xl overflow-hidden border border-border relative">
       <APIProvider apiKey={MAPS_KEY}>
         <GoogleMap
           defaultCenter={{ lat: 35, lng: -30 }}
@@ -295,9 +302,15 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
           />
         </GoogleMap>
       </APIProvider>
+      {loading && (
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-card border border-border rounded-full px-4 py-1.5 flex items-center shadow-md">
+          <Loader2 className="h-4 w-4 animate-spin text-yellow-500" />
+          <span className="ml-2 text-sm text-muted-foreground">Loading spots...</span>
+        </div>
+      )}
       <div className="bg-card border-t border-border px-4 py-2 flex items-center justify-between text-sm">
         <span className="text-muted-foreground">
-          {pins.length.toLocaleString()} spots worldwide
+          {loading ? 'Loading spots...' : `${pins.length.toLocaleString()} spots worldwide`}
         </span>
         <div className="flex gap-3">
           {Object.entries(CATEGORY_COLORS)
