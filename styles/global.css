@@ -763,6 +763,7 @@ textarea::placeholder {
     visibility: visible;
   }
 
+
   .dark .navbar-collapse.show,
   .dark .navbar-collapse.collapsing {
     background-color: #1a1a1a;
