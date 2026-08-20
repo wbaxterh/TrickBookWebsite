@@ -68,13 +68,20 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
   useEffect(() => {
     if (!map) return;
 
-    // Clean up previous clusterer
+    // Clean up previous clusterer. noDraw=true: rendering with zero markers
+    // crashes SuperClusterViewportAlgorithm (see below).
     if (clustererRef.current) {
-      clustererRef.current.clearMarkers();
+      clustererRef.current.clearMarkers(true);
       clustererRef.current.setMap(null);
+      clustererRef.current = null;
     }
 
     const validPins = pins.filter((p) => p.latitude && p.longitude);
+
+    // SuperClusterViewportAlgorithm never load()s an empty marker set (deepEqual
+    // sees no change from its initial []), then clusters against the unloaded
+    // index and throws "reading 'range'". Skip the clusterer until pins exist.
+    if (validPins.length === 0) return;
 
     const markers = validPins.map((pin) => {
       const color = CATEGORY_COLORS[pin.category] || CATEGORY_COLORS.default;
@@ -100,8 +107,9 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
 
     return () => {
       if (clustererRef.current) {
-        clustererRef.current.clearMarkers();
+        clustererRef.current.clearMarkers(true);
         clustererRef.current.setMap(null);
+        clustererRef.current = null;
       }
     };
   }, [map, pins, onMarkerClick]);
