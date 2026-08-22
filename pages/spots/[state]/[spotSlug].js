@@ -274,7 +274,7 @@ export default function SpotDetail() {
           <Button
             variant="ghost"
             onClick={() => router.back()}
-            className="text-muted-foreground hover:text-yellow-500"
+            className="text-muted-foreground hover:text-black"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to {stateName} Spots
