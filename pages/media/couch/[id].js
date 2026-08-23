@@ -1,247 +1,290 @@
-import { ArrowLeft, Heart, Loader2, MessageCircle, Play, Share2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Heart, MapPin, MessageCircle, Play, Share2 } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
-import { Button } from '../../../components/ui/button';
+import VideoPlayer from '../../../components/media/VideoPlayer';
 import {
   addVideoReaction,
-  getVideoDetails,
   getVideoReaction,
   getVideoStreamUrl,
   removeVideoReaction,
 } from '../../../lib/apiMedia';
 
-export default function VideoPage() {
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.thetrickbook.com/api';
+const SITE_URL = 'https://thetrickbook.com';
+
+const safeJsonLd = (value) => JSON.stringify(value).replace(/</g, '\\u003c');
+
+export default function CouchVideoPage({ initialVideo }) {
   const router = useRouter();
-  const { id } = router.query;
-  const { loggedIn, token } = useContext(AuthContext);
-
-  const [video, setVideo] = useState(null);
-  const [streamUrl, setStreamUrl] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { token } = useContext(AuthContext);
+  const [video, setVideo] = useState(initialVideo);
+  const [stream, setStream] = useState(null);
   const [userReaction, setUserReaction] = useState({ love: false, respect: false });
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [showComments, setShowComments] = useState(false);
-  const videoRef = useRef(null);
 
-  // Auto-play video when isPlaying becomes true
-  useEffect(() => {
-    if (isPlaying && videoRef.current) {
-      videoRef.current.play().catch((_err) => {});
-    }
-  }, [isPlaying]);
+  const videoId = video?._id;
+  const externalWatch =
+    video?.watchOptions?.find((option) => option.access === 'free') || video?.watchOptions?.[0];
+  const poster = video?.thumbnails?.backdrop || video?.thumbnails?.poster || video?.driveThumbnail;
+  const canonical = `${SITE_URL}/media/couch/${video.slug || video._id}`;
 
   useEffect(() => {
-    if (!id) return;
-
-    const fetchVideo = async () => {
-      setLoading(true);
-      try {
-        const [videoData, streamData] = await Promise.all([
-          getVideoDetails(id),
-          getVideoStreamUrl(id),
-        ]);
-        setVideo(videoData);
-        setStreamUrl(streamData);
-
-        if (token) {
-          const reaction = await getVideoReaction(id, token);
-          setUserReaction(reaction);
-        }
-      } catch (_err) {
-        setError('Failed to load video');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideo();
-  }, [id, token]);
+    if (!videoId) return;
+    getVideoStreamUrl(videoId)
+      .then(setStream)
+      .catch(() => setStream(null));
+    if (token) getVideoReaction(videoId, token).then(setUserReaction);
+  }, [token, videoId]);
 
   const handleReaction = async (type) => {
     if (!token) {
       router.push('/login');
       return;
     }
-
-    try {
-      const isAdding = !userReaction[type];
-      if (isAdding) {
-        await addVideoReaction(id, type, token);
-      } else {
-        await removeVideoReaction(id, type, token);
-      }
-      setUserReaction((prev) => ({ ...prev, [type]: isAdding }));
-
-      // Update local stats
-      setVideo((prev) => ({
-        ...prev,
-        stats: {
-          ...prev.stats,
-          [`${type}Count`]: prev.stats[`${type}Count`] + (isAdding ? 1 : -1),
-        },
-      }));
-    } catch (_err) {}
+    const isAdding = !userReaction[type];
+    if (isAdding) await addVideoReaction(videoId, type, token);
+    else await removeVideoReaction(videoId, type, token);
+    setUserReaction((current) => ({ ...current, [type]: isAdding }));
+    setVideo((current) => ({
+      ...current,
+      stats: {
+        ...current.stats,
+        [`${type}Count`]: Math.max(0, (current.stats?.[`${type}Count`] || 0) + (isAdding ? 1 : -1)),
+      },
+    }));
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
-      </div>
-    );
-  }
+  const movieSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Movie',
+    name: video.title,
+    description: video.description,
+    dateCreated: video.releaseYear ? String(video.releaseYear) : undefined,
+    image: poster ? [poster] : undefined,
+    genre: ['Action sports', ...(video.sportTypes || [])],
+    actor: video.riders?.map((name) => ({ '@type': 'Person', name })),
+    director: video.directors?.map((name) => ({ '@type': 'Person', name })),
+    productionCompany: video.producedBy
+      ? { '@type': 'Organization', name: video.producedBy }
+      : undefined,
+    url: canonical,
+    sameAs: [
+      ...(video.sourceRecords || []).map((source) => source.url),
+      ...(video.watchOptions || []).map((option) => option.url),
+    ],
+  };
 
-  if (error || !video) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center">
-        <p className="text-muted-foreground mb-4">{error || 'Video not found'}</p>
-        <Link href="/media">
-          <Button variant="outline">Back to Media</Button>
-        </Link>
-      </div>
-    );
-  }
+  const videoSchema = externalWatch?.embedUrl
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: video.title,
+        description: video.description,
+        thumbnailUrl: poster ? [poster] : undefined,
+        uploadDate: video.releaseYear ? `${video.releaseYear}-01-01` : undefined,
+        embedUrl: externalWatch.embedUrl,
+        url: externalWatch.url,
+      }
+    : null;
 
   return (
     <>
       <Head>
-        <title>{video.title} | The Couch | Trick Book</title>
+        <title>{video.seo?.title || video.title} | The Couch | TrickBook</title>
         <meta
           name="description"
-          content={video.description || `Watch ${video.title} on The Couch`}
+          content={
+            video.seo?.description || video.description?.slice(0, 155) || `Watch ${video.title}`
+          }
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="video.movie" />
+        <meta property="og:title" content={video.title} />
+        <meta property="og:description" content={video.description?.slice(0, 200)} />
+        <meta property="og:url" content={canonical} />
+        {poster && <meta property="og:image" content={poster} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(movieSchema) }}
+        />
+        {videoSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: safeJsonLd(videoSchema) }}
+          />
+        )}
       </Head>
 
-      <div className="min-h-screen bg-black">
-        {/* Video Player */}
-        <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-          {!isPlaying ? (
-            <div
-              className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black"
-              onClick={() => setIsPlaying(true)}
-            >
-              {video.driveThumbnail ? (
-                <img
-                  src={video.driveThumbnail}
-                  alt={video.title}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-black" />
-              )}
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="relative z-10 w-20 h-20 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                <Play className="h-10 w-10 text-black ml-1" fill="currentColor" />
+      <main className="min-h-screen bg-background text-foreground">
+        <div className="container mx-auto max-w-7xl px-4 py-8">
+          <Link
+            href="/media?tab=couch"
+            className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to The Couch
+          </Link>
+
+          <article className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(300px,1fr)]">
+            <div>
+              <div className="aspect-video overflow-hidden rounded-xl bg-black shadow-2xl">
+                {externalWatch?.embedUrl ? (
+                  <iframe
+                    src={externalWatch.embedUrl}
+                    title={`Watch ${video.title}`}
+                    className="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : stream?.hlsUrl || stream?.mp4Url || stream?.streamUrl ? (
+                  <VideoPlayer
+                    src={stream.hlsUrl || stream.mp4Url || stream.streamUrl}
+                    poster={poster}
+                    aspectRatio="16:9"
+                  />
+                ) : poster ? (
+                  <img
+                    src={poster}
+                    alt={`${video.title} cover art`}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-yellow-500/20 to-black">
+                    <Play className="h-16 w-16 text-white/50" />
+                  </div>
+                )}
               </div>
-            </div>
-          ) : streamUrl?.embedUrl ? (
-            <iframe
-              src={`${streamUrl.embedUrl}${streamUrl.embedUrl.includes('?') ? '&' : '?'}autoplay=true`}
-              className="absolute inset-0 w-full h-full"
-              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <video
-              ref={videoRef}
-              src={streamUrl?.mp4Url || streamUrl?.hlsUrl || streamUrl?.streamUrl}
-              className="absolute inset-0 w-full h-full"
-              controls
-              autoPlay
-              playsInline
-            />
-          )}
-        </div>
 
-        {/* Video Info */}
-        <div className="bg-background">
-          <div className="container mx-auto px-4 py-6">
-            {/* Back Button */}
-            <Link
-              href="/media"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to The Couch
-            </Link>
+              <p className="mt-7 text-sm font-bold uppercase tracking-[0.2em] text-sky-400">
+                {video.releaseYear || 'Action Sports'} {video.sportTypes?.[0] || ''}{' '}
+                {video.type || 'Video'}
+              </p>
+              <h1 className="mt-2 text-4xl font-black tracking-tight md:text-6xl">{video.title}</h1>
 
-            {/* Title and Meta */}
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{video.title}</h1>
-
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-4">
-              {video.releaseYear && <span>{video.releaseYear}</span>}
-              {video.sportTypes?.length > 0 && (
-                <span className="capitalize">{video.sportTypes.join(', ')}</span>
-              )}
-              {video.stats?.viewCount > 0 && <span>{video.stats.viewCount} views</span>}
-            </div>
-
-            {/* Reaction Buttons - matching feed style */}
-            <div className="flex items-center gap-6 mb-6">
-              {/* Love Button */}
-              <button
-                onClick={() => handleReaction('love')}
-                className={`flex items-center gap-2 transition-colors ${
-                  userReaction.love ? 'text-red-500' : 'text-foreground hover:text-red-500'
-                }`}
-              >
-                <Heart className={`h-7 w-7 ${userReaction.love ? 'fill-current' : ''}`} />
-                <span className="text-base font-medium">{video.stats?.loveCount || 0}</span>
-              </button>
-
-              {/* Respect Button */}
-              <button
-                onClick={() => handleReaction('respect')}
-                className={`flex items-center gap-2 transition-colors ${
-                  userReaction.respect ? 'text-yellow-500' : 'text-foreground hover:text-yellow-500'
-                }`}
-              >
-                <span className={`text-2xl ${userReaction.respect ? '' : 'grayscale opacity-70'}`}>
-                  🙏
+              <div className="mt-5 flex items-center gap-6">
+                <button
+                  type="button"
+                  onClick={() => handleReaction('love')}
+                  className={`flex items-center gap-2 ${userReaction.love ? 'text-red-500' : 'hover:text-red-500'}`}
+                  aria-label="Love this video"
+                >
+                  <Heart className={`h-7 w-7 ${userReaction.love ? 'fill-current' : ''}`} />
+                  {video.stats?.loveCount || 0}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReaction('respect')}
+                  className={`flex items-center gap-2 ${userReaction.respect ? 'text-yellow-500' : 'hover:text-yellow-500'}`}
+                  aria-label="Respect this video"
+                >
+                  <span className="text-2xl">🙏</span> {video.stats?.respectCount || 0}
+                </button>
+                <span className="flex items-center gap-2 text-muted-foreground">
+                  <MessageCircle className="h-6 w-6" /> {video.stats?.commentCount || 0}
                 </span>
-                <span className="text-base font-medium">{video.stats?.respectCount || 0}</span>
-              </button>
-
-              {/* Comments Button */}
-              <button
-                onClick={() => setShowComments(!showComments)}
-                className="flex items-center gap-2 text-foreground hover:text-yellow-500 transition-colors"
-              >
-                <MessageCircle className="h-7 w-7" />
-                <span className="text-base font-medium">{video.stats?.commentCount || 0}</span>
-              </button>
-
-              {/* Share Button */}
-              <button
-                onClick={() => {
-                  if (navigator.share) {
-                    navigator.share({
-                      title: video.title,
-                      url: window.location.href,
-                    });
-                  } else {
-                    navigator.clipboard?.writeText(window.location.href);
+                <button
+                  type="button"
+                  onClick={() =>
+                    navigator.share?.({ title: video.title, url: canonical }) ||
+                    navigator.clipboard?.writeText(canonical)
                   }
-                }}
-                className="text-foreground hover:text-yellow-500 transition-colors"
-              >
-                <Share2 className="h-6 w-6" />
-              </button>
+                  className="hover:text-yellow-500"
+                  aria-label="Share this video"
+                >
+                  <Share2 className="h-6 w-6" />
+                </button>
+              </div>
+
+              {video.description && (
+                <p className="mt-7 max-w-4xl text-lg leading-8 text-muted-foreground">
+                  {video.description}
+                </p>
+              )}
+              {externalWatch && (
+                <a
+                  href={externalWatch.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-7 inline-flex items-center gap-2 rounded-md bg-yellow-500 px-5 py-3 font-bold text-black hover:bg-yellow-400"
+                >
+                  <Play className="h-5 w-5 fill-current" />
+                  {externalWatch.access === 'free'
+                    ? 'Watch the full film'
+                    : externalWatch.label || 'View watch option'}
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              )}
             </div>
 
-            {/* Description */}
-            {video.description && (
-              <div className="prose prose-invert max-w-none">
-                <p className="text-muted-foreground">{video.description}</p>
-              </div>
-            )}
-          </div>
+            <aside className="space-y-7 rounded-xl border border-border bg-card p-6 lg:self-start">
+              {video.producedBy && (
+                <div>
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                    Produced by
+                  </h2>
+                  <p className="mt-2 text-2xl font-black">{video.producedBy}</p>
+                </div>
+              )}
+              {video.directors?.length > 0 && (
+                <div>
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                    Filmed / Directed by
+                  </h2>
+                  <p className="mt-2">{video.directors.join(', ')}</p>
+                </div>
+              )}
+              {video.riders?.length > 0 && (
+                <div>
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                    Featured riders
+                  </h2>
+                  <ul className="mt-3 grid grid-cols-2 gap-x-5 gap-y-2 text-sm">
+                    {video.riders.map((rider) => (
+                      <li key={rider}>{rider}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {video.locations?.length > 0 && (
+                <div>
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                    Film locations
+                  </h2>
+                  <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                    {video.locations.map((location) => (
+                      <li key={location} className="flex gap-2">
+                        <MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {location}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {video.rights?.hostingStatus === 'external_only' && (
+                <p className="border-t border-border pt-5 text-xs leading-5 text-muted-foreground">
+                  The Couch catalogs this film and links to its authorized viewing source. TrickBook
+                  does not rehost this film.
+                </p>
+              )}
+            </aside>
+          </article>
         </div>
-      </div>
+      </main>
     </>
   );
+}
+
+export async function getServerSideProps({ params, res }) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/couch/videos/${encodeURIComponent(params.id)}`);
+    if (response.status === 404) return { notFound: true };
+    if (!response.ok) throw new Error(`Couch returned ${response.status}`);
+    const initialVideo = await response.json();
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
+    return { props: { initialVideo } };
+  } catch {
+    return { notFound: true };
+  }
 }

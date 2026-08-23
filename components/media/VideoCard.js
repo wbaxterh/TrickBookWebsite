@@ -34,7 +34,7 @@ export default function VideoCard({
 
   return (
     <Link
-      href={`/media/couch/${video._id}`}
+      href={`/media/couch/${video.slug || video._id}`}
       className={`group relative block rounded-lg overflow-hidden bg-muted ${imageSize} ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -47,7 +47,9 @@ export default function VideoCard({
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           onError={() => setImageError(true)}
-          unoptimized={!!video.driveThumbnail}
+          unoptimized={Boolean(
+            video.driveThumbnail || video.thumbnails?.poster?.includes('ytimg.com'),
+          )}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-black/50 flex items-center justify-center">

@@ -15,7 +15,7 @@ export async function getServerSideProps({ res }) {
     '> TrickBook is an action-sports knowledge and progression platform covering tricks, spots, resorts, riders, and full-length films.',
     '',
     '## Snowboard Film Database',
-    '- Human catalog: https://thetrickbook.com/snowboard-films',
+    '- Human catalog: https://thetrickbook.com/media?tab=couch&sport=snowboarding',
     '- Public JSON catalog: https://api.thetrickbook.com/api/couch/films?sport=snowboarding',
     '- Film JSON: https://api.thetrickbook.com/api/couch/films/{slug}',
     '- Entries identify producers, featured riders, release year, locations, artwork provenance, verified watch options, and hosting-rights status.',
@@ -24,7 +24,7 @@ export async function getServerSideProps({ res }) {
     '## Catalog entries',
     ...films.map(
       (film) =>
-        `- [${film.title} (${film.releaseYear || 'year unknown'})](https://thetrickbook.com/snowboard-films/${film.slug}) — ${film.producedBy || 'producer unknown'}`,
+        `- [${film.title} (${film.releaseYear || 'year unknown'})](https://thetrickbook.com/media/couch/${film.slug}) — ${film.producedBy || 'producer unknown'}`,
     ),
     '',
     '## Usage',

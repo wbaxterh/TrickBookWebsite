@@ -19,6 +19,16 @@ export default function Media() {
   const [feedFilter, setFeedFilter] = useState('for-you');
   const [sportFilter, setSportFilter] = useState('all');
 
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (router.query.tab === 'feed' || router.query.tab === 'couch') {
+      setActiveTab(router.query.tab);
+    }
+    if (typeof router.query.sport === 'string') {
+      setSportFilter(router.query.sport);
+    }
+  }, [router.isReady, router.query.sport, router.query.tab]);
+
   // Data states
   const [featured, setFeatured] = useState(null);
   const [collections, setCollections] = useState([]);
@@ -237,7 +247,12 @@ export default function Media() {
             {featured ? (
               <div className="relative h-[60vh] overflow-hidden">
                 <Image
-                  src={featured.thumbnails?.backdrop || featured.thumbnails?.poster || featured.driveThumbnail || '/hero-placeholder.jpg'}
+                  src={
+                    featured.thumbnails?.backdrop ||
+                    featured.thumbnails?.poster ||
+                    featured.driveThumbnail ||
+                    '/hero-placeholder.jpg'
+                  }
                   alt={featured.title}
                   fill
                   className="object-cover"
@@ -251,7 +266,7 @@ export default function Media() {
                     {featured.description}
                   </p>
                   <div className="flex gap-4">
-                    <Link href={`/media/couch/${featured._id}`}>
+                    <Link href={`/media/couch/${featured.slug || featured._id}`}>
                       <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
                         <Play className="h-5 w-5 mr-2" fill="currentColor" />
                         Watch Now
@@ -280,6 +295,7 @@ export default function Media() {
               <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                 {SPORT_TYPES.map((sport) => (
                   <button
+                    type="button"
                     key={sport.value}
                     onClick={() => setSportFilter(sport.value)}
                     className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
@@ -372,6 +388,7 @@ export default function Media() {
             {/* Feed Filters */}
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-6">
               <button
+                type="button"
                 onClick={() => setFeedFilter('for-you')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                   feedFilter === 'for-you'
@@ -384,6 +401,7 @@ export default function Media() {
               </button>
               {loggedIn && (
                 <button
+                  type="button"
                   onClick={() => setFeedFilter('homies')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                     feedFilter === 'homies'
@@ -396,6 +414,7 @@ export default function Media() {
                 </button>
               )}
               <button
+                type="button"
                 onClick={() => setFeedFilter('trending')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                   feedFilter === 'trending'

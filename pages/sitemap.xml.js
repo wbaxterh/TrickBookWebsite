@@ -18,9 +18,9 @@ export async function getServerSideProps({ res }) {
   } catch {}
   const urls = [
     { loc: 'https://thetrickbook.com/', priority: '1.0' },
-    { loc: 'https://thetrickbook.com/snowboard-films', priority: '0.9' },
+    { loc: 'https://thetrickbook.com/media', priority: '0.9' },
     ...films.map((film) => ({
-      loc: `https://thetrickbook.com/snowboard-films/${film.slug}`,
+      loc: `https://thetrickbook.com/media/couch/${film.slug}`,
       priority: '0.8',
       lastmod: film.updatedAt,
     })),

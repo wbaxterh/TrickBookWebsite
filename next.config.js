@@ -44,6 +44,11 @@ module.exports = {
       },
       {
         protocol: 'https',
+        hostname: 'i.ytimg.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'live.staticflickr.com',
         pathname: '/**',
       },
