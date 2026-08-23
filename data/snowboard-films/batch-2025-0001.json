@@ -1,0 +1,651 @@
+{
+  "source": "https://www.snowboardingfilms.net",
+  "season": 2025,
+  "offset": 0,
+  "limit": 10,
+  "scrapedAt": "2026-08-23T22:14:50.409Z",
+  "films": [
+    {
+      "slug": "and-then-we-ll-live-in-that-time-2025",
+      "type": "film",
+      "title": "And Then We’ll Live In That Time",
+      "description": "Time is an experimental short snowboarding video by Ashcroft CB. It was filmed over a half season in Crested Butte, Colorado. It was shot by Shaffer Nickel, Ari Lightsey, and Luke Hedman. The video was directed, edited, and produced by Shaffer Nickel and was shot on 16mm Kodak Vision 3 film.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "shredbots"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Shredbots",
+      "directors": [],
+      "riders": [
+        "Andrew Arnold",
+        "Dan Oswald",
+        "Josh Gallen",
+        "Tuck Andrews"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/NYnRNCF7iwc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/NYnRNCF7iwc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=NYnRNCF7iwc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=NYnRNCF7iwc",
+          "embedUrl": "https://www.youtube.com/embed/NYnRNCF7iwc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "SHREDBOTS OFFICIAL",
+          "channelUrl": "https://www.youtube.com/@ShredbotsOFFICIAL",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:30.271Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/and-then-we'll-live-in-that-time",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:30.272Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "And Then We’ll Live In That Time (2025) Snowboard Film",
+        "description": "Time is an experimental short snowboarding video by Ashcroft CB. It was filmed over a half season in Crested Butte, Colorado. It was shot by Shaffer Nickel"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "atlas-2-2025",
+      "type": "film",
+      "title": "Atlas 2",
+      "description": "Sequel to 2023's Atlas . \"686 presents ATLAS 2, a continuation of worldwide exploration in the digital age. It’s an era when one can roam avenues on far ends of the planet, or in cities close to home, in search for spots via their smartphone.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "686"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "686",
+      "directors": [],
+      "riders": [
+        "Cooper Whittier",
+        "Forest Bailey",
+        "Riley Nickerson",
+        "Robby Meehan",
+        "Savannah Shinske",
+        "Tommy Gesme"
+      ],
+      "locations": [
+        "Bosnia",
+        "Finland",
+        "Japan",
+        "Boston / USA",
+        "Pittsburgh / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/3xIfBxKwDEQ/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/3xIfBxKwDEQ/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=3xIfBxKwDEQ",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=3xIfBxKwDEQ",
+          "embedUrl": "https://www.youtube.com/embed/3xIfBxKwDEQ",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "686 TECHNICAL APPAREL",
+          "channelUrl": "https://www.youtube.com/@686",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:33.057Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/atlas-2",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:33.057Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Atlas 2 (2025) Snowboard Film",
+        "description": "Sequel to 2023's Atlas . \"686 presents ATLAS 2, a continuation of worldwide exploration in the digital age. It’s an era when one can roam avenues on far en"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "austen-sweetin-s-blur-2025",
+      "type": "film",
+      "title": "Austen Sweetin's Blur",
+      "description": "Austen Sweetin' : \"This film, to me, is like improv jazz. It's spontaneous snowboarding that was composed on the spot.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "austen-sweetin"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Austen Sweetin",
+      "directors": [],
+      "riders": [
+        "Austen Sweetin'",
+        "Austen Sweetin",
+        "Blake Paul",
+        "Chris Rasman",
+        "Jamie Lynn",
+        "Jared Elston",
+        "Jody Wachniak",
+        "Mason Lemery",
+        "Matt Belzile",
+        "Phil Hansen"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/2-ifep62V0w/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/2-ifep62V0w/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=2-ifep62V0w",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=2-ifep62V0w",
+          "embedUrl": "https://www.youtube.com/embed/2-ifep62V0w",
+          "access": "parts_or_trailer",
+          "label": "Watch Parts",
+          "channel": "Austen Sweetin",
+          "channelUrl": "https://www.youtube.com/@AustenSweetin",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:35.623Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/austen-sweetins-blur",
+          "sourceDetails": "4K / HD /Full actor parts",
+          "retrievedAt": "2026-08-23T22:14:35.623Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Austen Sweetin's Blur (2025) Snowboard Film",
+        "description": "Austen Sweetin' : \"This film, to me, is like improv jazz. It's spontaneous snowboarding that was composed on the spot."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "between-days-2025",
+      "type": "film",
+      "title": "Between Days",
+      "description": "What happens when nine riders from four countries touch down in the Japanese Alps in the midst of a season-defining storm cycle? The universal language of ‘dig yourself out, lap until your legs give out, and do it all again’ removes any barriers that may have existed, and a silent bond is forged through the immersive experience that storm riding brings",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "arc-teryx"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Arc'teryx",
+      "directors": [],
+      "riders": [
+        "Elena Hight",
+        "Jared Elston",
+        "Joe Lax",
+        "Robin Van Gyn",
+        "Sean Miskiman",
+        "Severin Van Der Meer",
+        "Spencer O' Brien",
+        "Tadashi Fuse",
+        "Victor Daviet"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/NFJzsPJK_-c/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/NFJzsPJK_-c/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=NFJzsPJK_-c",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=NFJzsPJK_-c",
+          "embedUrl": "https://www.youtube.com/embed/NFJzsPJK_-c",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "Arc'teryx",
+          "channelUrl": "https://www.youtube.com/@arcteryx",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:37.504Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/between-days",
+          "sourceDetails": "4K / Teaser trailer",
+          "retrievedAt": "2026-08-23T22:14:37.504Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Between Days (2025) Snowboard Film",
+        "description": "What happens when nine riders from four countries touch down in the Japanese Alps in the midst of a season-defining storm cycle? The universal language of "
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "book-of-john-j-2025",
+      "type": "film",
+      "title": "Book of John J",
+      "description": "Book of John J is a snowboarding film from Maebe Wood, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "maebe-wood"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Maebe Wood",
+      "directors": [],
+      "riders": [],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/U-R8_R1a9TI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/U-R8_R1a9TI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=U-R8_R1a9TI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=U-R8_R1a9TI",
+          "embedUrl": "https://www.youtube.com/embed/U-R8_R1a9TI",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "Maebe Wood",
+          "channelUrl": "https://www.youtube.com/@maebewood",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:39.908Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/book-of-john-j",
+          "sourceDetails": "HD / Teaser trailer",
+          "retrievedAt": "2026-08-23T22:14:39.908Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Book of John J (2025) Snowboard Film",
+        "description": "Book of John J is a snowboarding film from Maebe Wood, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "burazazu-2025",
+      "type": "film",
+      "title": "Burazazu",
+      "description": "Kaishu Hirano and Ayumu Hirano didn’t follow the trajectory of snowboarding—they bent it to their will. Burazazu is a raw, unfiltered look at two brothers who turned obsession into dominance, and discipline into something bordering on myth.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "monster-energy"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Monster Energy",
+      "directors": [],
+      "riders": [
+        "Kaishu Hirano",
+        "Ayumu Hirano"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/cralKd5VEwI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/cralKd5VEwI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=cralKd5VEwI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=cralKd5VEwI",
+          "embedUrl": "https://www.youtube.com/embed/cralKd5VEwI",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Monster Energy",
+          "channelUrl": "https://www.youtube.com/@MonsterEnergy",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:41.899Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/burazazu",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:41.899Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Burazazu (2025) Snowboard Film",
+        "description": "Kaishu Hirano and Ayumu Hirano didn’t follow the trajectory of snowboarding—they bent it to their will. Burazazu is a raw, unfiltered look at two brothers "
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "carpe-diem-2025",
+      "type": "film",
+      "title": "Carpe Diem",
+      "description": "Used to urge someone to make the most of the present time and give little thought to the future",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "rockstar-energy-drink"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Rockstar Energy Drink",
+      "directors": [],
+      "riders": [
+        "Brandon Davis.",
+        "Gabe Ferguson",
+        "Mikey Ciccarelli",
+        "Raibu Katayama"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/xnv0XmQRcv0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/xnv0XmQRcv0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=xnv0XmQRcv0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=xnv0XmQRcv0",
+          "embedUrl": "https://www.youtube.com/embed/xnv0XmQRcv0",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Rockstar Energy",
+          "channelUrl": "https://www.youtube.com/@RockstarEnergy",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:43.661Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/carpe-diem",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:43.662Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Carpe Diem (2025) Snowboard Film",
+        "description": "Used to urge someone to make the most of the present time and give little thought to the future"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "cease-and-desist-2025",
+      "type": "film",
+      "title": "Cease and Desist",
+      "description": "Cease and Desist is a snowboarding film from Beyond Medals, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "beyond-medals"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Beyond Medals",
+      "directors": [],
+      "riders": [
+        "David Djite",
+        "Kevin Backstrom",
+        "Lolo Derminio",
+        "Ludvig Billtoft",
+        "Nick Puenter",
+        "Sebbe De Buck",
+        "Severin Van Der Meer",
+        "Tor Lundstrom",
+        "Ulrik Badertscher"
+      ],
+      "locations": [
+        "Canada",
+        "Japan",
+        "LAAX / Switzerland",
+        "USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/1qmqcbOX5tU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/1qmqcbOX5tU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=1qmqcbOX5tU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=1qmqcbOX5tU",
+          "embedUrl": "https://www.youtube.com/embed/1qmqcbOX5tU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Beyond Medals",
+          "channelUrl": "https://www.youtube.com/@beyondmedals",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:45.693Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/cease-and-desist",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:45.693Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Cease and Desist (2025) Snowboard Film",
+        "description": "Cease and Desist is a snowboarding film from Beyond Medals, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "chingados-2025",
+      "type": "film",
+      "title": "Chingados",
+      "description": "March 2025, Mason headed to Anchorage to meet up with John Jackson and head out to the glacier for 13 days. No plan, hiking, splitting and a small window with a helicopter. We rounded out the season down in Chile. Finishing the piece off with a 25 day trip and an all time southern hemisphere storm. Enjoy the piece.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "gimbal-god"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Gimbal God",
+      "directors": [],
+      "riders": [
+        "John Jackson"
+      ],
+      "locations": [
+        "Chile",
+        "Anchorage,Alaska / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/UEgpiIP7chA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/UEgpiIP7chA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=UEgpiIP7chA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=UEgpiIP7chA",
+          "embedUrl": "https://www.youtube.com/embed/UEgpiIP7chA",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "GimbalGod",
+          "channelUrl": "https://www.youtube.com/@gimbalgod",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-23T22:14:47.593Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/chingados",
+          "sourceDetails": "4K / HD / Teaser trailer",
+          "retrievedAt": "2026-08-23T22:14:47.593Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Chingados (2025) Snowboard Film",
+        "description": "March 2025, Mason headed to Anchorage to meet up with John Jackson and head out to the glacier for 13 days. No plan, hiking, splitting and a small window w"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "cinders-2025",
+      "type": "film",
+      "title": "Cinders",
+      "description": "Ben Ferguson goes wild in the backcountry",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "red-bull"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Red Bull",
+      "directors": [],
+      "riders": [
+        "Ben Ferguson"
+      ],
+      "locations": [
+        "British Columbia / Canada",
+        "Alaska / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/QuEQUU1RtKM/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/QuEQUU1RtKM/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=QuEQUU1RtKM",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=QuEQUU1RtKM",
+          "embedUrl": "https://www.youtube.com/embed/QuEQUU1RtKM",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Red Bull Snow",
+          "channelUrl": "https://www.youtube.com/@RedBullSnow",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-23T22:14:49.398Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/cinders",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-23T22:14:49.398Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Cinders (2025) Snowboard Film",
+        "description": "Ben Ferguson goes wild in the backcountry"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    }
+  ]
+}
