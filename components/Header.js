@@ -1,6 +1,6 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Skeleton } from '@mui/material';
-import { LogOut, MessageCircle, Moon, Sun, User } from 'lucide-react';
+import { CalendarDays, LogOut, MessageCircle, Moon, Sun, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
@@ -115,6 +115,16 @@ const Header = () => {
                   📍
                 </span>{' '}
                 Spots
+              </Nav.Link>
+            </Link>
+            <Link href="/events" passHref legacyBehavior>
+              <Nav.Link
+                className="mobile-nav-link"
+                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
+                onClick={() => setExpanded(false)}
+              >
+                <CalendarDays size={17} style={{ marginRight: 5, verticalAlign: 'text-bottom' }} />
+                Events
               </Nav.Link>
             </Link>
             <Link href="/homies" passHref legacyBehavior>
