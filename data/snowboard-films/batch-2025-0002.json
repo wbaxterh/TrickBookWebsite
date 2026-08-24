@@ -1,0 +1,622 @@
+{
+  "source": "https://www.snowboardingfilms.net",
+  "season": 2025,
+  "offset": 10,
+  "limit": 10,
+  "scrapedAt": "2026-08-24T00:53:19.736Z",
+  "films": [
+    {
+      "slug": "cold-storage-2025",
+      "type": "film",
+      "title": "Cold Storage",
+      "description": "Shot over two weeks road-tripping through Northern Hokkaido, this snowboard film follows a tight crew of riders chasing powder, convenience store snacks, and the thrill of riding remote zones. With just a van and no set plan, we explored quiet corners where the turns were deep and the ramen bowls were deeper. It’s the kind of trip that leaves your legs sore, your camera full, and booking a return before your boots are even dry.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "yes-snowboard"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "YES. Snowboard",
+      "directors": [],
+      "riders": [
+        "David Carrier Porcheron",
+        "Fridtjof Saether Tischendorf",
+        "Toby Nagorcka"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/UHNeSTYfArA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/UHNeSTYfArA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=UHNeSTYfArA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=UHNeSTYfArA",
+          "embedUrl": "https://www.youtube.com/embed/UHNeSTYfArA",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "Cream TV",
+          "channelUrl": "https://www.youtube.com/@CreamTVsnowboarding",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T00:52:58.834Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/cold-storage",
+          "sourceDetails": "4K / HD / Teaser trailer",
+          "retrievedAt": "2026-08-24T00:52:58.836Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Cold Storage (2025) Snowboard Film",
+        "description": "Shot over two weeks road-tripping through Northern Hokkaido, this snowboard film follows a tight crew of riders chasing powder, convenience store snacks, a"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "company-trip-2025",
+      "type": "film",
+      "title": "Company Trip",
+      "description": "Company Trip follows a group of friends who set out to capture moments of exploration and friendship in Japan .",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "dinosaurs-will-die"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Dinosaurs Will Die",
+      "directors": [],
+      "riders": [
+        "Justus Hines",
+        "Sam Baaken"
+      ],
+      "locations": [
+        "Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/JbpsRirCXx4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/JbpsRirCXx4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=JbpsRirCXx4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=JbpsRirCXx4",
+          "embedUrl": "https://www.youtube.com/embed/JbpsRirCXx4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Dinosaurs Will Die",
+          "channelUrl": "https://www.youtube.com/@dinosaurs_will_die",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:01.398Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/company-trip",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:01.398Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Company Trip (2025) Snowboard Film",
+        "description": "Company Trip follows a group of friends who set out to capture moments of exploration and friendship in Japan ."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "curveball-2025",
+      "type": "film",
+      "title": "Curveball",
+      "description": "Curveball covers two winters of searching for landings and lines, both in and out of bounds, throughout Canada and the United States.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "686"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "686",
+      "directors": [],
+      "riders": [
+        "Blake Moller",
+        "Darrah Reid-McLean",
+        "Keegan Hosefros",
+        "Mason Lemery",
+        "Matt Belzile"
+      ],
+      "locations": [
+        "Canada",
+        "USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/p5S89N3MK-o/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/p5S89N3MK-o/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=p5S89N3MK-o",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=p5S89N3MK-o",
+          "embedUrl": "https://www.youtube.com/embed/p5S89N3MK-o",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "686 TECHNICAL APPAREL",
+          "channelUrl": "https://www.youtube.com/@686",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:04.377Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/curveball",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:04.378Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Curveball (2025) Snowboard Film",
+        "description": "Curveball covers two winters of searching for landings and lines, both in and out of bounds, throughout Canada and the United States."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "dig-2025",
+      "type": "film",
+      "title": "Dig",
+      "description": "An Alaskan snowboard film \" Ryland Bell has always been a dark horse. Born in Alaska and based year-round in Haines, the notoriously hardcore snowboarder and lifelong commercial fisherman spends his winters quietly hiking world-class spines from his backyard. In April of 2025, he headed deep into his home mountains in search of the biggest line of his life.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "patagonia"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Patagonia",
+      "directors": [],
+      "riders": [
+        "Ryland Bell"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/imx06LtDpQQ/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/imx06LtDpQQ/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=imx06LtDpQQ",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=imx06LtDpQQ",
+          "embedUrl": "https://www.youtube.com/embed/imx06LtDpQQ",
+          "access": "parts_or_trailer",
+          "label": "Watch Parts",
+          "channel": "Patagonia",
+          "channelUrl": "https://www.youtube.com/@patagonia",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:06.445Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/dig",
+          "sourceDetails": "4K / HD /Full actor parts",
+          "retrievedAt": "2026-08-24T00:53:06.446Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Dig (2025) Snowboard Film",
+        "description": "An Alaskan snowboard film \" Ryland Bell has always been a dark horse. Born in Alaska and based year-round in Haines, the notoriously hardcore snowboarder a"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "echos-of-impact-2025",
+      "type": "film",
+      "title": "Echos of Impact",
+      "description": "Echos of Impact is a snowboarding film from Nitro Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "nitro-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Nitro Snowboards",
+      "directors": [],
+      "riders": [
+        "Marcus Kleveland"
+      ],
+      "locations": [],
+      "thumbnails": {},
+      "youtubeUrl": null,
+      "watchOptions": [],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/echos-of-impact",
+          "sourceDetails": "",
+          "retrievedAt": "2026-08-24T00:53:08.302Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "needs_review",
+      "seo": {
+        "title": "Echos of Impact (2025) Snowboard Film",
+        "description": "Echos of Impact is a snowboarding film from Nitro Snowboards, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "eternal-descent-2025",
+      "type": "film",
+      "title": "Eternal Descent",
+      "description": "Follow Sage Kotsenburg and crew ... in search of deep snow in Hokkaido, 100 ft jumps in Jackson Hole & the spines of Alaska. This crew does it all balancing progression and style within the backcountry in this full-length snowboard film. Pick your character and tune in.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "monster-energy"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Monster Energy",
+      "directors": [],
+      "riders": [
+        "Sage Kotsenburg",
+        "Dustin Craven",
+        "Judd Henkes",
+        "Nils Mindnich",
+        "Rene Rinnekangas",
+        "Sebbe De Buck",
+        "Zak Hale"
+      ],
+      "locations": [
+        "Hokkaido / Japan",
+        "Alaska / USA",
+        "Jackson Hole,Wyoming / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/HKT_fVNwbWk/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/HKT_fVNwbWk/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=HKT_fVNwbWk",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=HKT_fVNwbWk",
+          "embedUrl": "https://www.youtube.com/embed/HKT_fVNwbWk",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Monster Energy",
+          "channelUrl": "https://www.youtube.com/@MonsterEnergy",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:10.319Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/eternal-descent",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:10.319Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Eternal Descent (2025) Snowboard Film",
+        "description": "Follow Sage Kotsenburg and crew ... in search of deep snow in Hokkaido, 100 ft jumps in Jackson Hole & the spines of Alaska. This crew does it all balancin"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "etrange-melange-2025",
+      "type": "film",
+      "title": "Étrange Mélange",
+      "description": "Étrange Mélange is a snowboarding film from GNU Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "gnu-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "GNU Snowboards",
+      "directors": [],
+      "riders": [
+        "Alex Kirkland",
+        "Austen Sweetin",
+        "Brayden Charette",
+        "Cannon Cummins",
+        "Eric Jackson",
+        "Jadyn Chomlack",
+        "Markus Sandgren",
+        "Matteo Gatti",
+        "Mitchy Davern",
+        "Temple Cummins"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/8mVSZLgPfvg/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/8mVSZLgPfvg/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=8mVSZLgPfvg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=8mVSZLgPfvg",
+          "embedUrl": "https://www.youtube.com/embed/8mVSZLgPfvg",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "GNU",
+          "channelUrl": "https://www.youtube.com/@gnuSnowboards",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:12.429Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/etrange-melange",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:12.429Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Étrange Mélange (2025) Snowboard Film",
+        "description": "Étrange Mélange is a snowboarding film from GNU Snowboards, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "float-2025",
+      "type": "film",
+      "title": "Float",
+      "description": "Float is a snowboarding film from Capita Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "capita-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Capita Snowboards",
+      "directors": [],
+      "riders": [
+        "Arthur Longo",
+        "Brandon Cocard",
+        "Jess Kimura",
+        "Miles Fallon"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/wzWWmxq0_18/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/wzWWmxq0_18/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=wzWWmxq0_18",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=wzWWmxq0_18",
+          "embedUrl": "https://www.youtube.com/embed/wzWWmxq0_18",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "CAPiTAcinema",
+          "channelUrl": "https://www.youtube.com/@capitacinema",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T00:53:14.551Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/float",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:14.551Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Float (2025) Snowboard Film",
+        "description": "Float is a snowboarding film from Capita Snowboards, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "gypsy-ii-2025",
+      "type": "film",
+      "title": "Gypsy II",
+      "description": "Gypsy II is a snowboarding film from Nomadik, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "nomadik"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Nomadik",
+      "directors": [],
+      "riders": [],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/R2P03m2kltU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/R2P03m2kltU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=R2P03m2kltU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=R2P03m2kltU",
+          "embedUrl": "https://www.youtube.com/embed/R2P03m2kltU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "NOMADIK",
+          "channelUrl": "https://www.youtube.com/@NOMADIKSUPPLY",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T00:53:16.721Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/gypsy-ii",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:16.721Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Gypsy II (2025) Snowboard Film",
+        "description": "Gypsy II is a snowboarding film from Nomadik, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "head-under-water-2025",
+      "type": "film",
+      "title": "Head Under Water",
+      "description": "Head Under Water is a snowboarding film from Sinister Films, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "sinister-films"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Sinister Films",
+      "directors": [],
+      "riders": [
+        "Blake Lamb",
+        "Bobby Stitt",
+        "Chris Church",
+        "Colton Carroll",
+        "Gibson Corcoran",
+        "Jackson Brown",
+        "Sam Anderson"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/m-le4cs5uzc/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/m-le4cs5uzc/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=m-le4cs5uzc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=m-le4cs5uzc",
+          "embedUrl": "https://www.youtube.com/embed/m-le4cs5uzc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Torment Magazine",
+          "channelUrl": "https://www.youtube.com/@TormentMag",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T00:53:18.755Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/head-under-water",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T00:53:18.755Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Head Under Water (2025) Snowboard Film",
+        "description": "Head Under Water is a snowboarding film from Sinister Films, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    }
+  ]
+}
