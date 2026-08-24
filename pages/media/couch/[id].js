@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
+import CouchComments from '../../../components/media/CouchComments';
 import VideoPlayer from '../../../components/media/VideoPlayer';
 import {
   addVideoReaction,
@@ -158,7 +159,7 @@ export default function CouchVideoPage({ initialVideo }) {
                 )}
               </div>
 
-              <p className="mt-7 text-sm font-bold uppercase tracking-[0.2em] text-sky-400">
+              <p className="mt-7 text-sm font-bold uppercase tracking-[0.2em] text-yellow-500">
                 {video.releaseYear || 'Action Sports'} {video.sportTypes?.[0] || ''}{' '}
                 {video.type || 'Video'}
               </p>
@@ -182,9 +183,12 @@ export default function CouchVideoPage({ initialVideo }) {
                 >
                   <span className="text-2xl">🙏</span> {video.stats?.respectCount || 0}
                 </button>
-                <span className="flex items-center gap-2 text-muted-foreground">
+                <a
+                  href="#comments"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-yellow-500"
+                >
                   <MessageCircle className="h-6 w-6" /> {video.stats?.commentCount || 0}
-                </span>
+                </a>
                 <button
                   type="button"
                   onClick={() =>
@@ -270,6 +274,16 @@ export default function CouchVideoPage({ initialVideo }) {
               )}
             </aside>
           </article>
+          <CouchComments
+            videoId={videoId}
+            initialCount={video.stats?.commentCount || 0}
+            onCountChange={(commentCount) =>
+              setVideo((current) => ({
+                ...current,
+                stats: { ...current.stats, commentCount },
+              }))
+            }
+          />
         </div>
       </main>
     </>
