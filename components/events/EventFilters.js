@@ -1,8 +1,19 @@
 import { CalendarDays, LocateFixed, Search, SlidersHorizontal, X } from 'lucide-react';
 import { DATE_OPTIONS, INTENT_OPTIONS, SPORT_OPTIONS } from '../../lib/eventFormatters';
 
-const fieldClass =
-  'h-11 rounded-xl border border-border bg-card px-3 text-sm text-foreground outline-none transition-colors focus:border-yellow-500';
+// Base field styling WITHOUT horizontal padding, so per-field padding (icon vs
+// plain) can't be clobbered by a shorthand `px-*` on the same element.
+const fieldBase =
+  'h-11 rounded-xl border border-border bg-card text-sm text-foreground outline-none transition-colors focus:border-yellow-500';
+const fieldPlain = `${fieldBase} px-3`; // no leading icon
+// A global `input:not(...)` reset (specificity 0,4,1) beats the plain `.pl-10`
+// class, so icon inputs need the important modifier to clear the leading icon.
+const fieldIcon = `${fieldBase} !pl-10 pr-3`; // leading icon (inputs)
+const selectIcon = `${fieldBase} !pl-10 pr-8`; // leading icon + native arrow (selects)
+
+// Leading icon: pinned left, perfectly centered, non-interactive.
+const iconClass =
+  'absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none';
 
 export default function EventFilters({ filters, onChange, onReset }) {
   const hasFilters = Object.entries(filters).some(
@@ -28,23 +39,23 @@ export default function EventFilters({ filters, onChange, onReset }) {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-        <label className="relative xl:col-span-2">
+        <label className="relative block xl:col-span-2">
           <span className="sr-only">Search events</span>
-          <Search className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
+          <Search className={iconClass} />
           <input
             value={filters.q}
             onChange={(event) => onChange('q', event.target.value)}
             placeholder="Search events or organizers"
-            className={`${fieldClass} w-full pl-9`}
+            className={`${fieldIcon} w-full`}
           />
         </label>
 
-        <label>
+        <label className="block">
           <span className="sr-only">Sport</span>
           <select
             value={filters.sport}
             onChange={(event) => onChange('sport', event.target.value)}
-            className={`${fieldClass} w-full`}
+            className={`${fieldPlain} w-full`}
           >
             {SPORT_OPTIONS.map((option) => (
               <option key={option.id} value={option.id}>
@@ -54,23 +65,23 @@ export default function EventFilters({ filters, onChange, onReset }) {
           </select>
         </label>
 
-        <label className="relative">
+        <label className="relative block">
           <span className="sr-only">Location</span>
-          <LocateFixed className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
+          <LocateFixed className={iconClass} />
           <input
             value={filters.location}
             onChange={(event) => onChange('location', event.target.value)}
             placeholder="City or ZIP"
-            className={`${fieldClass} w-full pl-9`}
+            className={`${fieldIcon} w-full`}
           />
         </label>
 
-        <label>
+        <label className="block">
           <span className="sr-only">Distance</span>
           <select
             value={filters.radius}
             onChange={(event) => onChange('radius', event.target.value)}
-            className={`${fieldClass} w-full`}
+            className={`${fieldPlain} w-full`}
           >
             <option value="25">Within 25 miles</option>
             <option value="50">Within 50 miles</option>
@@ -83,11 +94,11 @@ export default function EventFilters({ filters, onChange, onReset }) {
 
       <div className="flex flex-wrap gap-2 mt-3">
         <div className="relative">
-          <CalendarDays className="absolute left-3 top-3 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <CalendarDays className={iconClass} />
           <select
             value={filters.date}
             onChange={(event) => onChange('date', event.target.value)}
-            className={`${fieldClass} pl-9 pr-8`}
+            className={selectIcon}
           >
             {DATE_OPTIONS.map((option) => (
               <option key={option.id} value={option.id}>
@@ -100,7 +111,7 @@ export default function EventFilters({ filters, onChange, onReset }) {
         <select
           value={filters.intent}
           onChange={(event) => onChange('intent', event.target.value)}
-          className={fieldClass}
+          className={fieldPlain}
           aria-label="Event intent"
         >
           {INTENT_OPTIONS.map((option) => (
