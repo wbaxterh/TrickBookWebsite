@@ -1,6 +1,17 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Skeleton } from '@mui/material';
-import { CalendarDays, LogOut, MessageCircle, Moon, Sun, User } from 'lucide-react';
+import {
+  BookOpen,
+  CalendarDays,
+  Clapperboard,
+  LogOut,
+  MapPin,
+  MessageCircle,
+  Moon,
+  Sun,
+  User,
+  Users,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
@@ -93,64 +104,30 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mobile-nav-section">
-            <Link href="/trickbook" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="book">
-                  📖
-                </span>{' '}
-                TrickBook
-              </Nav.Link>
-            </Link>
-            <Link href="/spots" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="pin">
-                  📍
-                </span>{' '}
-                Spots
-              </Nav.Link>
-            </Link>
-            <Link href="/events" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <CalendarDays size={17} style={{ marginRight: 5, verticalAlign: 'text-bottom' }} />
-                Events
-              </Nav.Link>
-            </Link>
-            <Link href="/homies" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="homies">
-                  🤝
-                </span>{' '}
-                Homies
-              </Nav.Link>
-            </Link>
-            <Link href="/media" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="media">
-                  🎬
-                </span>{' '}
-                Media
-              </Nav.Link>
-            </Link>
+            {[
+              { href: '/trickbook', label: 'TrickBook', Icon: BookOpen },
+              { href: '/spots', label: 'Spots', Icon: MapPin },
+              { href: '/events', label: 'Events', Icon: CalendarDays },
+              { href: '/homies', label: 'Homies', Icon: Users },
+              { href: '/media', label: 'Media', Icon: Clapperboard },
+            ].map(({ href, label, Icon }) => (
+              <Link key={href} href={href} passHref legacyBehavior>
+                <Nav.Link
+                  className="mobile-nav-link"
+                  style={{
+                    color: isDark ? '#f0f0f0' : '#1a1a1a',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onClick={() => setExpanded(false)}
+                >
+                  <Icon size={17} aria-hidden="true" />
+                  {label}
+                </Nav.Link>
+              </Link>
+            ))}
           </Nav>
 
           {/* Mobile divider */}
