@@ -1,7 +1,16 @@
 import AppleIcon from '@mui/icons-material/Apple';
 import GoogleIcon from '@mui/icons-material/Google';
 import axios from 'axios';
-import { Camera, Check, ChevronLeft, ChevronRight, Sparkles, User } from 'lucide-react';
+import {
+  Camera,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  EyeOff,
+  Sparkles,
+  User,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -69,7 +78,7 @@ export default function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Step 2: Avatar
   const [avatarType, setAvatarType] = useState('icon'); // "icon" or "upload"
@@ -108,7 +117,6 @@ export default function Signup() {
     else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid email';
     if (!password) newErrors.password = 'Password is required';
     else if (password.length < 8) newErrors.password = 'Must be 8+ characters';
-    if (password !== confirmPassword) newErrors.confirmPassword = "Passwords don't match";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -140,12 +148,13 @@ export default function Signup() {
     );
   };
 
+  // Land new users on an activation moment (the spots map), not an empty profile.
   const handleGoogleSignIn = async () => {
-    signIn('google', { callbackUrl: '/profile' });
+    signIn('google', { callbackUrl: '/spots' });
   };
 
   const handleAppleSignIn = async () => {
-    signIn('apple', { callbackUrl: '/profile' });
+    signIn('apple', { callbackUrl: '/spots' });
   };
 
   const handleSubmit = async () => {
@@ -186,8 +195,10 @@ export default function Signup() {
         return;
       }
 
-      logIn(loginResult.token, email);
-      router.push('/profile');
+      // signIn('credentials') sets the next-auth session cookie on success; the
+      // AuthContext reads it. Land on an activation moment, not an empty profile.
+      logIn(null, email);
+      router.push('/spots');
     } catch (error) {
       setErrors({
         submit: error.response?.data?.message || 'Registration failed. Please try again.',
@@ -229,7 +240,23 @@ export default function Signup() {
     <div className="space-y-4">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">Create Your Account</h2>
-        <p className="text-muted-foreground mt-1">Let's get you started on your journey</p>
+        <p className="text-muted-foreground mt-1">Join the action sports community</p>
+      </div>
+
+      {/* Social-first: one tap, no password to create, verified email. */}
+      <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} type="button">
+        <GoogleIcon className="mr-2 h-4 w-4" />
+        Continue with Google
+      </Button>
+      <Button variant="outline" className="w-full" onClick={handleAppleSignIn} type="button">
+        <AppleIcon className="mr-2 h-4 w-4" />
+        Continue with Apple
+      </Button>
+
+      <div className="flex items-center gap-4 py-2">
+        <div className="flex-1 h-px bg-border" />
+        <span className="text-muted-foreground text-sm">or sign up with email</span>
+        <div className="flex-1 h-px bg-border" />
       </div>
 
       <div>
@@ -258,44 +285,24 @@ export default function Signup() {
 
       <div>
         <label className="block text-sm font-medium mb-1">Password</label>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="8+ characters"
-          className={errors.password ? 'border-destructive' : ''}
-        />
-        {errors.password && <p className="text-destructive text-sm mt-1">{errors.password}</p>}
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Confirm Password</label>
-        <Input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm your password"
-          className={errors.confirmPassword ? 'border-destructive' : ''}
-        />
-        {errors.confirmPassword && (
-          <p className="text-destructive text-sm mt-1">{errors.confirmPassword}</p>
-        )}
-      </div>
-
-      <div className="pt-4">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex-1 h-px bg-border" />
-          <span className="text-muted-foreground text-sm">or</span>
-          <div className="flex-1 h-px bg-border" />
+        <div className="relative">
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="8+ characters"
+            className={`pr-10 ${errors.password ? 'border-destructive' : ''}`}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
         </div>
-        <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} type="button">
-          <GoogleIcon className="mr-2 h-4 w-4" />
-          Sign up with Google
-        </Button>
-        <Button variant="outline" className="w-full mt-2" onClick={handleAppleSignIn} type="button">
-          <AppleIcon className="mr-2 h-4 w-4" />
-          Sign up with Apple
-        </Button>
+        {errors.password && <p className="text-destructive text-sm mt-1">{errors.password}</p>}
       </div>
     </div>
   );
