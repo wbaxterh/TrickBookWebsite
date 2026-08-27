@@ -15,7 +15,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
@@ -79,6 +79,12 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  // The account is created at step 1 (so a drop-off still leaves a real account
+  // we can re-engage). Steps 2-4 then just enrich the profile.
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [authToken, setAuthToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   // Step 2: Avatar
   const [avatarType, setAvatarType] = useState('icon'); // "icon" or "upload"
@@ -157,61 +163,68 @@ export default function Signup() {
     signIn('apple', { callbackUrl: '/spots' });
   };
 
-  const handleSubmit = async () => {
+  // Step 1: create the account up front + log in, then move into profile setup.
+  const handleCreateAccount = async () => {
+    if (!validateStep1()) return;
     setIsSubmitting(true);
+    setErrors({});
     try {
-      // Build user data
-      const userData = {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, {
         name,
         email,
         password,
-        sports: selectedSports,
-        riderProfile: {
-          ...riderProfile,
-          avatarType,
-          avatarIcon: selectedIcon,
-        },
-      };
-
-      // Register user
-      const _response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, userData);
-
-      // Upload profile image if provided
-      if (uploadedImage) {
-        const formData = new FormData();
-        formData.append('profileImage', uploadedImage);
-        // This would need a separate endpoint - for now we'll handle it later
-      }
-
-      // Auto-login after registration
-      const loginResult = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
       });
 
-      if (loginResult.error) {
-        setErrors({ submit: 'Account created but login failed. Please try logging in.' });
+      const loginResult = await signIn('credentials', { redirect: false, email, password });
+      if (loginResult?.error) {
+        setErrors({ submit: 'Account created — please log in to finish setup.' });
         return;
       }
 
-      // signIn('credentials') sets the next-auth session cookie on success; the
-      // AuthContext reads it. Land on an activation moment, not an empty profile.
-      logIn(null, email);
-      router.push('/spots');
+      // Grab the backend JWT from the freshly-established session for the
+      // profile-update calls in the next steps.
+      const session = await getSession();
+      const token = session?.user?.jwtToken?.token || null;
+      setAuthToken(token);
+      setUserId(res.data?._id || null);
+      setAccountCreated(true);
+      logIn(token, email);
+      setStep(2);
     } catch (error) {
-      setErrors({
-        submit: error.response?.data?.message || 'Registration failed. Please try again.',
-      });
+      const msg =
+        error.response?.status === 400
+          ? error.response?.data?.error || 'That email is already registered.'
+          : 'Could not create your account. Please try again.';
+      setErrors({ submit: msg });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const nextStep = () => {
-    if (step === 1 && !validateStep1()) return;
-    setStep((s) => Math.min(s + 1, 4));
+  // Finish/skip: save the optional profile details and head to the app. The
+  // account already exists, so this is best-effort — never block on a failure.
+  const handleSaveProfile = async () => {
+    setIsSubmitting(true);
+    try {
+      if (userId && authToken) {
+        await axios
+          .put(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userId}`,
+            {
+              sports: selectedSports,
+              riderProfile: { ...riderProfile, avatarType, avatarIcon: selectedIcon },
+            },
+            { headers: { 'x-auth-token': authToken } },
+          )
+          .catch(() => {});
+      }
+    } finally {
+      setIsSubmitting(false);
+      router.push('/spots');
+    }
   };
+
+  const nextStep = () => setStep((s) => Math.min(s + 1, 4));
 
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
@@ -643,14 +656,23 @@ export default function Signup() {
                   <div />
                 )}
 
-                {step < 4 ? (
+                {step === 1 ? (
+                  <Button
+                    onClick={accountCreated ? nextStep : handleCreateAccount}
+                    disabled={isSubmitting}
+                    type="button"
+                  >
+                    {isSubmitting ? 'Creating…' : accountCreated ? 'Continue' : 'Create Account'}
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+                ) : step < 4 ? (
                   <Button onClick={nextStep} type="button">
-                    {step === 1 ? 'Get Started' : 'Continue'}
+                    Continue
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </Button>
                 ) : (
-                  <Button onClick={handleSubmit} disabled={isSubmitting}>
-                    {isSubmitting ? 'Creating Account...' : 'Create My Account'}
+                  <Button onClick={handleSaveProfile} disabled={isSubmitting}>
+                    {isSubmitting ? 'Saving…' : 'Finish'}
                   </Button>
                 )}
               </div>
@@ -664,13 +686,16 @@ export default function Signup() {
                 </p>
               )}
 
+              {/* Account already exists after step 1 — skipping still lands a real,
+                  re-engageable account in the app. */}
               {step > 1 && step < 4 && (
                 <button
                   type="button"
-                  onClick={() => setStep(4)}
+                  onClick={handleSaveProfile}
+                  disabled={isSubmitting}
                   className="w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground"
                 >
-                  Skip to finish →
+                  Skip for now →
                 </button>
               )}
             </CardContent>
