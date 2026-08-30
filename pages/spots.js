@@ -46,6 +46,29 @@ const SPOT_TYPES = [
   { id: 'other', name: 'Other' },
 ];
 
+// Which venue types make sense for each sport. Snow concepts (backcountry,
+// resort) don't apply to skate-style sports, and street/diy don't apply to
+// surfing, etc. A sport not listed here (and 'all') shows every type; 'All
+// Types' is always available.
+const SPORT_TYPE_APPLICABILITY = {
+  skateboarding: ['park', 'street', 'indoor', 'diy', 'other'],
+  bmx: ['park', 'street', 'indoor', 'diy', 'other'],
+  scooter: ['park', 'street', 'indoor', 'diy', 'other'],
+  rollerblading: ['park', 'street', 'indoor', 'diy', 'other'],
+  snowboarding: ['park', 'street', 'backcountry', 'resort', 'indoor', 'other'],
+  skiing: ['park', 'street', 'backcountry', 'resort', 'indoor', 'other'],
+  mtb: ['park', 'backcountry', 'resort', 'other'],
+  wakeboarding: ['park', 'other'],
+  surfing: ['other'],
+};
+
+// The venue types to show for a given sport (always includes 'all').
+function typesForSport(sportId) {
+  const applicable = SPORT_TYPE_APPLICABILITY[sportId];
+  if (!applicable) return SPOT_TYPES;
+  return SPOT_TYPES.filter((t) => t.id === 'all' || applicable.includes(t.id));
+}
+
 // Country codes and names with flag emojis
 const COUNTRIES = {
   US: { name: 'United States', flag: '🇺🇸' },
@@ -136,6 +159,18 @@ export default function Spots() {
   const [selectedCountry, setSelectedCountry] = useState('all');
   const [viewMode, setViewMode] = useState('map'); // 'map' or 'list'
   const [selectedSpot, setSelectedSpot] = useState(null); // pin clicked on the map
+
+  // Venue types available for the selected sport (hides e.g. Backcountry for skateboarding)
+  const availableTypes = typesForSport(selectedCategory);
+
+  // Switch sport, and clear the type filter if it no longer applies to that sport
+  const handleSportChange = (sportId) => {
+    setSelectedCategory(sportId);
+    const applicable = SPORT_TYPE_APPLICABILITY[sportId];
+    if (applicable && selectedType !== 'all' && !applicable.includes(selectedType)) {
+      setSelectedType('all');
+    }
+  };
 
   // All US state codes (uppercase) for identifying US spots
   const US_STATE_CODES = new Set(Object.keys(STATE_NAMES));
@@ -326,7 +361,7 @@ export default function Spots() {
 
             <div className="flex items-center gap-2 flex-wrap">
               {/* Sport filter */}
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select value={selectedCategory} onValueChange={handleSportChange}>
                 <SelectTrigger className="h-9 w-[150px]">
                   <SelectValue />
                 </SelectTrigger>
@@ -339,13 +374,13 @@ export default function Spots() {
                 </SelectContent>
               </Select>
 
-              {/* Venue type filter (park / street / …) */}
+              {/* Venue type filter (park / street / …) — scoped to the selected sport */}
               <Select value={selectedType} onValueChange={setSelectedType}>
                 <SelectTrigger className="h-9 w-[140px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {SPOT_TYPES.map((t) => (
+                  {availableTypes.map((t) => (
                     <SelectItem key={t.id} value={t.id}>
                       {t.name}
                     </SelectItem>
