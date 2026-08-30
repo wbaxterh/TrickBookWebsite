@@ -436,7 +436,9 @@ export default function Signup() {
           <h2 className="text-2xl font-bold">Rider Profile</h2>
           <Sparkles className="w-6 h-6 text-yellow-500" />
         </div>
-        <p className="text-muted-foreground mt-1">Optional but fun! Build your rider card</p>
+        <p className="text-muted-foreground mt-1">
+          Just the good stuff — add the rest of your rider card anytime from your profile.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -467,36 +469,6 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Age</label>
-          <Input
-            type="number"
-            placeholder="19"
-            value={riderProfile.age}
-            onChange={(e) => setRiderProfile({ ...riderProfile, age: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Nationality</label>
-          <Input
-            type="text"
-            placeholder="American"
-            value={riderProfile.nationality}
-            onChange={(e) => setRiderProfile({ ...riderProfile, nationality: e.target.value })}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label className="block text-sm font-medium mb-1">Motto</label>
-          <Input
-            type="text"
-            placeholder='"Try anything once"'
-            value={riderProfile.motto}
-            onChange={(e) => setRiderProfile({ ...riderProfile, motto: e.target.value })}
-          />
-        </div>
-
-        <div>
           <label className="block text-sm font-medium mb-1">Sickest Trick</label>
           <Input
             type="text"
@@ -507,77 +479,7 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Alternate Sport</label>
-          <Input
-            type="text"
-            placeholder="Street Luge"
-            value={riderProfile.alternateSport}
-            onChange={(e) => setRiderProfile({ ...riderProfile, alternateSport: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Greatest Strength</label>
-          <Input
-            type="text"
-            placeholder="Speed"
-            value={riderProfile.greatestStrength}
-            onChange={(e) => setRiderProfile({ ...riderProfile, greatestStrength: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Greatest Weakness</label>
-          <Input
-            type="text"
-            placeholder="Gear"
-            value={riderProfile.greatestWeakness}
-            onChange={(e) => setRiderProfile({ ...riderProfile, greatestWeakness: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Dream Date</label>
-          <Input
-            type="text"
-            placeholder="Pamela Zoolalian"
-            value={riderProfile.dreamDate}
-            onChange={(e) => setRiderProfile({ ...riderProfile, dreamDate: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Movie</label>
-          <Input
-            type="text"
-            placeholder="Enter the Dragon"
-            value={riderProfile.favoriteMovie}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteMovie: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Music</label>
-          <Input
-            type="text"
-            placeholder="70's Rock"
-            value={riderProfile.favoriteMusic}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteMusic: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Reading</label>
-          <Input
-            type="text"
-            placeholder="Thrasher Magazine"
-            value={riderProfile.favoriteReading}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteReading: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Spot</label>
+          <label className="block text-sm font-medium mb-1">Home Spot</label>
           <Input
             type="text"
             placeholder="Merqury City"
@@ -585,20 +487,11 @@ export default function Signup() {
             onChange={(e) => setRiderProfile({ ...riderProfile, favoriteCourse: e.target.value })}
           />
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Other Hobbies</label>
-          <Input
-            type="text"
-            placeholder="Computer hacking, photography..."
-            value={riderProfile.otherHobbies}
-            onChange={(e) => setRiderProfile({ ...riderProfile, otherHobbies: e.target.value })}
-          />
-        </div>
       </div>
 
       <p className="text-center text-sm text-muted-foreground">
-        Don't worry, you can fill these out or edit them anytime!
+        The full rider card (age, motto, favorites &amp; more) lives in your profile — fill it out
+        whenever.
       </p>
     </div>
   );

@@ -152,12 +152,26 @@ const Header = () => {
             {loggedIn === null ? (
               <Skeleton variant="rectangular" width={120} height={36} />
             ) : !loggedIn ? (
-              <Link href="/login" passHref legacyBehavior>
-                <a className="login-btn">
-                  <PersonIcon style={{ fontSize: 18 }} />
-                  <span>Login / Register</span>
-                </a>
-              </Link>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14 }}>
+                <Link href="/login" passHref legacyBehavior>
+                  <a
+                    style={{
+                      color: isDark ? '#f0f0f0' : '#1a1a1a',
+                      fontWeight: 500,
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Log in
+                  </a>
+                </Link>
+                <Link href="/signup" passHref legacyBehavior>
+                  <a className="login-btn">
+                    <PersonIcon style={{ fontSize: 18 }} />
+                    <span>Sign up free</span>
+                  </a>
+                </Link>
+              </div>
             ) : (
               <NavDropdown
                 align="end"
