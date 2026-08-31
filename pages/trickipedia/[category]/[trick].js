@@ -22,7 +22,8 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
 import PageHeader from '../../../components/PageHeader';
-import { getSortedTricksData } from '../../../lib/apiTrickipedia';
+import TrickProgressionSection from '../../../components/TrickProgressionSection';
+import { getSortedTricksData, getTrickNetwork } from '../../../lib/apiTrickipedia';
 import { addTrickFromTrickipedia, getUserTrickLists } from '../../../lib/apiTrickLists';
 import styles from '../../../styles/trickipedia.module.css';
 
@@ -49,6 +50,7 @@ export default function TrickDetailPage() {
 
   const [trickData, setTrickData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [network, setNetwork] = useState(null);
 
   // Add to TrickList modal state
   const [addModalOpen, setAddModalOpen] = useState(false);
@@ -64,6 +66,7 @@ export default function TrickDetailPage() {
       const tricks = await getSortedTricksData(categoryName);
       const found = tricks.find((t) => t.url === trick || t.id === trick);
       setTrickData(found || null);
+      setNetwork(found ? await getTrickNetwork(found.id) : null);
       setLoading(false);
     };
     fetchTrick();
@@ -122,13 +125,18 @@ export default function TrickDetailPage() {
     );
   }
 
+  const featuredTutorial = network?.featuredTutorial;
+  const youtubeId = featuredTutorial?.canonicalUrl?.match(
+    /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^&?/]+)/,
+  )?.[1];
+
   return (
     <>
       <Head>
         <title>{trickData.name} - The Trick Book</title>
         <meta name="description" content={trickData.description} />
       </Head>
-      <Container maxWidth="md" sx={{ maxWidth: 700, px: { xs: 2, md: 4 }, py: 4 }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 }, py: 4 }}>
         <div className={styles.trickipediaContainer} style={{ padding: 0 }}>
           <PageHeader title={trickData.name} heroImage={trickData.images?.[0]} />
           <Box
@@ -158,86 +166,167 @@ export default function TrickDetailPage() {
               Add to TrickList
             </Button>
           </Box>
-          <Typography variant="h5" className="mb-3">
-            {trickData.description}
-          </Typography>
-          {trickData.images && trickData.images.length > 0 && (
-            <img
-              src={trickData.images[0]}
-              alt={trickData.name}
-              style={{
-                display: 'block',
-                maxWidth: 400,
-                width: '100%',
-                borderRadius: 8,
-                margin: '24px auto',
-              }}
-            />
-          )}
-          <Box className="mb-4">
-            <Typography variant="h6">Steps:</Typography>
-            <ol>
-              {trickData.steps?.map((step, idx) => (
-                <li key={idx}>{step}</li>
-              ))}
-            </ol>
-          </Box>
-          {trickData.videos && trickData.videos.length > 0 ? (
-            <Box className="mb-4">
-              <Typography variant="h6" className="mb-2">Tutorials & Videos</Typography>
-              {trickData.videos.map((video, idx) => (
-                <Box
-                  key={idx}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    py: 1,
-                    px: 2,
-                    mb: 1,
-                    borderRadius: 1,
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
-                  }}
-                >
+          <Box className={styles.detailLayout}>
+            <Box className={styles.lessonColumn}>
+              <Typography variant="h5" className="mb-3">
+                {trickData.description}
+              </Typography>
+              {featuredTutorial && (
+                <Box component="section" className={styles.featuredTutorial}>
+                  <Typography variant="overline">Featured lesson</Typography>
+                  <Typography variant="h5" component="h2">
+                    {featuredTutorial.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {featuredTutorial.instructor?.name || featuredTutorial.publisher?.name}
+                    {featuredTutorial.instructor?.credential
+                      ? ` · ${featuredTutorial.instructor.credential}`
+                      : ''}
+                  </Typography>
+                  {youtubeId ? (
+                    <Box className={styles.videoFrame}>
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                        title={featuredTutorial.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </Box>
+                  ) : (
+                    <Button
+                      component="a"
+                      href={featuredTutorial.canonicalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Watch on source
+                    </Button>
+                  )}
                   <a
-                    href={video.url}
+                    href={featuredTutorial.canonicalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: '#FFD700', textDecoration: 'none', flex: 1 }}
+                    className={styles.sourceLink}
                   >
-                    {video.title || video.url}
+                    {featuredTutorial.attributionText || 'View and credit the original source'}
                   </a>
-                  <Chip
-                    label={video.platform || 'link'}
-                    size="small"
-                    sx={{
-                      ml: 2,
-                      textTransform: 'capitalize',
-                      backgroundColor:
-                        video.platform === 'youtube' ? '#FF0000' :
-                        video.platform === 'instagram' ? '#E1306C' :
-                        video.platform === 'tiktok' ? '#000' : '#555',
-                      color: '#fff',
-                      fontSize: '0.7rem',
-                    }}
-                  />
                 </Box>
-              ))}
+              )}
+              {trickData.images && trickData.images.length > 0 && (
+                <img
+                  src={trickData.images[0]}
+                  alt={trickData.name}
+                  style={{
+                    display: 'block',
+                    maxWidth: 400,
+                    width: '100%',
+                    borderRadius: 8,
+                    margin: '24px auto',
+                  }}
+                />
+              )}
+              <Box className="mb-4">
+                <Typography variant="h6">Steps:</Typography>
+                <ol>
+                  {trickData.steps?.map((step, idx) => (
+                    <li key={idx}>{step}</li>
+                  ))}
+                </ol>
+              </Box>
+              {trickData.commonMistakes?.length > 0 && (
+                <Box component="section" className="mb-4">
+                  <Typography variant="h6">Common mistakes and fixes</Typography>
+                  <List>
+                    {trickData.commonMistakes.map((mistake) => (
+                      <ListItem key={`${mistake.mistake}-${mistake.fix}`}>
+                        <ListItemText primary={mistake.mistake} secondary={mistake.fix} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              )}
+              {trickData.safety?.length > 0 && (
+                <Alert severity="warning" className="mb-4">
+                  {trickData.safety.join(' ')}
+                </Alert>
+              )}
+              {trickData.videos && trickData.videos.length > 0 ? (
+                <Box className="mb-4">
+                  <Typography variant="h6" className="mb-2">
+                    Tutorials & Videos
+                  </Typography>
+                  {trickData.videos.map((video, idx) => (
+                    <Box
+                      key={idx}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        py: 1,
+                        px: 2,
+                        mb: 1,
+                        borderRadius: 1,
+                        backgroundColor: 'rgba(255,255,255,0.05)',
+                        '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
+                      }}
+                    >
+                      <a
+                        href={video.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#FFD700', textDecoration: 'none', flex: 1 }}
+                      >
+                        {video.title || video.url}
+                      </a>
+                      <Chip
+                        label={video.platform || 'link'}
+                        size="small"
+                        sx={{
+                          ml: 2,
+                          textTransform: 'capitalize',
+                          backgroundColor:
+                            video.platform === 'youtube'
+                              ? '#FF0000'
+                              : video.platform === 'instagram'
+                                ? '#E1306C'
+                                : video.platform === 'tiktok'
+                                  ? '#000'
+                                  : '#555',
+                          color: '#fff',
+                          fontSize: '0.7rem',
+                        }}
+                      />
+                    </Box>
+                  ))}
+                </Box>
+              ) : trickData.videoUrl ? (
+                <Box className="mb-4">
+                  <Typography variant="h6">Video Tutorial:</Typography>
+                  <a href={trickData.videoUrl} target="_blank" rel="noopener noreferrer">
+                    {trickData.videoUrl}
+                  </a>
+                </Box>
+              ) : null}
+              {trickData.source && (
+                <Typography variant="body2" color="textSecondary">
+                  Source: {trickData.source}
+                </Typography>
+              )}
             </Box>
-          ) : trickData.videoUrl ? (
-            <Box className="mb-4">
-              <Typography variant="h6">Video Tutorial:</Typography>
-              <a href={trickData.videoUrl} target="_blank" rel="noopener noreferrer">
-                {trickData.videoUrl}
-              </a>
+            <Box component="aside" className={styles.pathRail} aria-label="Your progression path">
+              <TrickProgressionSection
+                title="Learn these first"
+                kind="foundations"
+                edges={network?.foundations}
+              />
+              <TrickProgressionSection title="Try next" kind="next" edges={network?.nextSteps} />
+              <TrickProgressionSection
+                title="Related variations"
+                kind="related"
+                edges={network?.related}
+              />
             </Box>
-          ) : null}
-          {trickData.source && (
-            <Typography variant="body2" color="textSecondary">
-              Source: {trickData.source}
-            </Typography>
-          )}
+          </Box>
         </div>
       </Container>
 

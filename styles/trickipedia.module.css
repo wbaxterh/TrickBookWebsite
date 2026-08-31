@@ -53,6 +53,95 @@
   color: #9c27b0;
 }
 
+.detailLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(260px, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.lessonColumn {
+  min-width: 0;
+}
+
+.pathRail {
+  position: sticky;
+  top: 84px;
+}
+
+.featuredTutorial {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.03));
+}
+
+.videoFrame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 1rem 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+}
+
+.videoFrame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.sourceLink {
+  display: inline-block;
+  color: #ffd700;
+}
+
+.progressionSection {
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.progressionGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.progressionCard {
+  background: var(--app-secondary-bg);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+@media (max-width: 900px) {
+  .detailLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .pathRail {
+    position: static;
+  }
+
+  .progressionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .progressionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredTutorial {
+    padding: 1rem;
+  }
+}
+
 /* Category buttons - ensure yellow text is visible */
 .trickipediaContainer :global(.MuiButton-contained) {
   color: #fff000;
