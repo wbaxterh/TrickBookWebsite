@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "스팟",
+    "events": "이벤트",
+    "homies": "친구들",
+    "media": "미디어",
+    "login": "로그인",
+    "signupFree": "무료 가입",
+    "myProfile": "내 프로필",
+    "messages": "메시지",
+    "logout": "로그아웃"
+  },
+  "theme": {
+    "toggle": "테마 전환",
+    "light": "라이트 모드",
+    "dark": "다크 모드"
+  },
+  "language": {
+    "select": "언어"
+  },
+  "footer": {
+    "tagline": "트릭을 기록하고, 스팟을 발견하고, 라이더들과 소통하세요.",
+    "explore": "둘러보기",
+    "resources": "리소스",
+    "connect": "팔로우",
+    "blog": "블로그",
+    "about": "소개",
+    "contact": "문의 및 피드백",
+    "privacyPolicy": "개인정보 처리방침",
+    "termsConditions": "이용약관",
+    "followUs": "최신 소식과 액션 스포츠 콘텐츠를 팔로우하세요.",
+    "copyright": "© {{year}} The Trick Book. All rights reserved.",
+    "privacy": "개인정보",
+    "terms": "약관"
+  }
+}

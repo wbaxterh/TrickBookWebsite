@@ -1,6 +1,7 @@
 import { Instagram, Youtube } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { Separator } from './ui/separator';
 
 // X (formerly Twitter) icon component
@@ -11,6 +12,8 @@ const XIcon = ({ className }) => (
 );
 
 function Footer() {
+  const { t } = useTranslation('common');
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-12">
@@ -19,24 +22,32 @@ function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image src="/adaptive-icon.png" height={40} width={40} alt="Trick Book" />
+              <Image
+                src="/adaptive-icon.png"
+                height={40}
+                width={40}
+                alt={t('brand.logoAlt', 'Trick Book')}
+              />
               <span className="font-bold text-xl text-foreground">Trick Book</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Track your tricks, discover spots, and connect with fellow riders.
+              {t(
+                'footer.tagline',
+                'Track your tricks, discover spots, and connect with fellow riders.',
+              )}
             </p>
           </div>
 
           {/* Explore Links */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Explore</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.explore', 'Explore')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/trickbook"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  TrickBook
+                  {t('nav.trickbook', 'TrickBook')}
                 </Link>
               </li>
               <li>
@@ -44,7 +55,7 @@ function Footer() {
                   href="/spots"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Spots
+                  {t('nav.spots', 'Spots')}
                 </Link>
               </li>
               <li>
@@ -52,7 +63,7 @@ function Footer() {
                   href="/homies"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Homies
+                  {t('nav.homies', 'Homies')}
                 </Link>
               </li>
               <li>
@@ -60,7 +71,7 @@ function Footer() {
                   href="/media"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Media
+                  {t('nav.media', 'Media')}
                 </Link>
               </li>
             </ul>
@@ -68,14 +79,16 @@ function Footer() {
 
           {/* Resources Links */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Resources</h3>
+            <h3 className="font-semibold text-foreground mb-4">
+              {t('footer.resources', 'Resources')}
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/blog"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Blog
+                  {t('footer.blog', 'Blog')}
                 </Link>
               </li>
               <li>
@@ -83,7 +96,7 @@ function Footer() {
                   href="/about"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  About
+                  {t('footer.about', 'About')}
                 </Link>
               </li>
               <li>
@@ -91,7 +104,7 @@ function Footer() {
                   href="/contact"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Contact & Feedback
+                  {t('footer.contact', 'Contact & Feedback')}
                 </Link>
               </li>
               <li>
@@ -99,7 +112,7 @@ function Footer() {
                   href="/privacy-policy"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Privacy Policy
+                  {t('footer.privacyPolicy', 'Privacy Policy')}
                 </Link>
               </li>
               <li>
@@ -107,7 +120,7 @@ function Footer() {
                   href="/terms-conditions"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  Terms & Conditions
+                  {t('footer.termsConditions', 'Terms & Conditions')}
                 </Link>
               </li>
             </ul>
@@ -115,7 +128,7 @@ function Footer() {
 
           {/* Social Links */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Connect</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.connect', 'Connect')}</h3>
             <div className="flex gap-4">
               <Link
                 href="https://instagram.com"
@@ -146,7 +159,7 @@ function Footer() {
               </Link>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              Follow us for the latest updates and action sports content.
+              {t('footer.followUs', 'Follow us for the latest updates and action sports content.')}
             </p>
           </div>
         </div>
@@ -155,20 +168,23 @@ function Footer() {
         <Separator className="my-8" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 The Trick Book. All rights reserved.
+            {t('footer.copyright', {
+              defaultValue: '© {{year}} The Trick Book. All rights reserved.',
+              year: 2026,
+            })}
           </p>
           <div className="flex gap-6">
             <Link
               href="/privacy-policy"
               className="text-xs text-muted-foreground hover:text-yellow-500 transition-colors"
             >
-              Privacy
+              {t('footer.privacy', 'Privacy')}
             </Link>
             <Link
               href="/terms-conditions"
               className="text-xs text-muted-foreground hover:text-yellow-500 transition-colors"
             >
-              Terms
+              {t('footer.terms', 'Terms')}
             </Link>
           </div>
         </div>

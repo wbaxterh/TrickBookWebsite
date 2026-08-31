@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "Picos",
+    "events": "Eventos",
+    "homies": "Parceiros",
+    "media": "Mídia",
+    "login": "Entrar",
+    "signupFree": "Cadastre-se grátis",
+    "myProfile": "Meu perfil",
+    "messages": "Mensagens",
+    "logout": "Sair"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "light": "Modo claro",
+    "dark": "Modo escuro"
+  },
+  "language": {
+    "select": "Idioma"
+  },
+  "footer": {
+    "tagline": "Registre suas manobras, descubra picos e conecte-se com outros riders.",
+    "explore": "Explorar",
+    "resources": "Recursos",
+    "connect": "Conecte-se",
+    "blog": "Blog",
+    "about": "Sobre",
+    "contact": "Contato e feedback",
+    "privacyPolicy": "Política de privacidade",
+    "termsConditions": "Termos e condições",
+    "followUs": "Siga a gente para as últimas novidades e conteúdo de esportes radicais.",
+    "copyright": "© {{year}} The Trick Book. Todos os direitos reservados.",
+    "privacy": "Privacidade",
+    "terms": "Termos"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "الأماكن",
+    "events": "الفعاليات",
+    "homies": "الأصدقاء",
+    "media": "الوسائط",
+    "login": "تسجيل الدخول",
+    "signupFree": "سجّل مجانًا",
+    "myProfile": "ملفي الشخصي",
+    "messages": "الرسائل",
+    "logout": "تسجيل الخروج"
+  },
+  "theme": {
+    "toggle": "تبديل المظهر",
+    "light": "الوضع الفاتح",
+    "dark": "الوضع الداكن"
+  },
+  "language": {
+    "select": "اللغة"
+  },
+  "footer": {
+    "tagline": "سجّل حركاتك، واكتشف الأماكن، وتواصل مع المتزلجين الآخرين.",
+    "explore": "استكشف",
+    "resources": "الموارد",
+    "connect": "تواصل",
+    "blog": "المدونة",
+    "about": "من نحن",
+    "contact": "تواصل معنا وأرسل ملاحظاتك",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsConditions": "الشروط والأحكام",
+    "followUs": "تابعنا لأحدث الأخبار ومحتوى الرياضات الحركية.",
+    "copyright": "© {{year}} The Trick Book. جميع الحقوق محفوظة.",
+    "privacy": "الخصوصية",
+    "terms": "الشروط"
+  }
+}
