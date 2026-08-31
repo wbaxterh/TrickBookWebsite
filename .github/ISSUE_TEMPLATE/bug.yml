@@ -1,0 +1,22 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include reproduction steps, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, device, operating system, and app version if relevant.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove credentials and personal data before posting.

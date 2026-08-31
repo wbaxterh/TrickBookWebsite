@@ -1,0 +1,632 @@
+{
+  "source": "https://www.snowboardingfilms.net",
+  "season": 2025,
+  "offset": 30,
+  "limit": 10,
+  "scrapedAt": "2026-08-24T01:38:03.145Z",
+  "films": [
+    {
+      "slug": "piss-missile-2025",
+      "type": "film",
+      "title": "Piss Missile",
+      "description": "A Wasted Youth backcountry snowboard movie filmed in interior BC.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "wasted-youth"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Wasted Youth",
+      "directors": [],
+      "riders": [
+        "Antwan Tremblay",
+        "Benoit Pageau",
+        "Charles White",
+        "Chris\"Blood\"Curran",
+        "Darcy Keller",
+        "James \"Dozer\" Coombs",
+        "Jesse Smith",
+        "Keith Martin",
+        "Sean Barrett",
+        "Seb Grondin",
+        "Taylor \"TR\" Roberts"
+      ],
+      "locations": [
+        "British Columbia / Canada"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/lq_miZt8I6k/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/lq_miZt8I6k/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=lq_miZt8I6k",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=lq_miZt8I6k",
+          "embedUrl": "https://www.youtube.com/embed/lq_miZt8I6k",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "WASTED YOUTH",
+          "channelUrl": "https://www.youtube.com/@WASTEDYOUTHvideo",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:42.608Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/piss-missile",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:42.608Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Piss Missile (2025) Snowboard Film",
+        "description": "A Wasted Youth backcountry snowboard movie filmed in interior BC."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "qivitoq-2025",
+      "type": "film",
+      "title": "Qivitoq",
+      "description": "Thirty years after a life-changing shoot in Greenland, former snowboarding champion Mathieu Crépel returns to Ammassalik. There, he reconnects with his childhood memories and discovers a young Inuit generation torn between ancestral traditions and modern life.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "10-barrel-brewing-co"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "10 Barrel Brewing Co",
+      "directors": [],
+      "riders": [
+        "Mathieu Crépel",
+        "Mathieu Crepel"
+      ],
+      "locations": [
+        "Greenland"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/h9EOYVAjFQU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/h9EOYVAjFQU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=h9EOYVAjFQU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=h9EOYVAjFQU",
+          "embedUrl": "https://www.youtube.com/embed/h9EOYVAjFQU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Mathieu Crepel",
+          "channelUrl": "https://www.youtube.com/@matcrepel",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:37:45.226Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/qivitoq",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:45.226Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Qivitoq (2025) Snowboard Film",
+        "description": "Thirty years after a life-changing shoot in Greenland, former snowboarding champion Mathieu Crépel returns to Ammassalik. There, he reconnects with his chi"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "red-seal-2025",
+      "type": "film",
+      "title": "Red Seal",
+      "description": "A Red Seal is a national standard of excellence for skilled trades in Canada.\"",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "shredbots"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Shredbots",
+      "directors": [],
+      "riders": [
+        "Adam Franks",
+        "Craig McMorris",
+        "Seb Judge",
+        "Tanner Davidson"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/nFX-mMVURBU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/nFX-mMVURBU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=nFX-mMVURBU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=nFX-mMVURBU",
+          "embedUrl": "https://www.youtube.com/embed/nFX-mMVURBU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "SHREDBOTS OFFICIAL",
+          "channelUrl": "https://www.youtube.com/@ShredbotsOFFICIAL",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:47.476Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/red-seal",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:47.476Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Red Seal (2025) Snowboard Film",
+        "description": "A Red Seal is a national standard of excellence for skilled trades in Canada.\""
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "roadside-attractions-2025",
+      "type": "film",
+      "title": "Roadside Attractions",
+      "description": "Few places in the snowboarding universe hold the lore that Japan in January does. Countless clips, full projects and careers have been launched from these bottomless forests.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "rome-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Rome Snowboards",
+      "directors": [],
+      "riders": [
+        "Kaishi Obata",
+        "Keegan Hosefros",
+        "Martin Lässer",
+        "Rene Rinnekangas",
+        "Ståle Sandbech",
+        "Yuri Okubo"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/QuGzT33ay8g/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/QuGzT33ay8g/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=QuGzT33ay8g",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=QuGzT33ay8g",
+          "embedUrl": "https://www.youtube.com/embed/QuGzT33ay8g",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Rome Snowboards",
+          "channelUrl": "https://www.youtube.com/@romesnowboards",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:49.431Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/roadside-attractions",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:49.431Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Roadside Attractions (2025) Snowboard Film",
+        "description": "Few places in the snowboarding universe hold the lore that Japan in January does. Countless clips, full projects and careers have been launched from these "
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "sounds-of-japan-2025",
+      "type": "film",
+      "title": "Sounds Of Japan",
+      "description": "Captured in the mountains and cities of Japan, Sounds of Japan blends immersive visuals with an original soundtrack, composed of sounds recorded on location by musician Jackson Fester and brought to life by an elite team of international snowboarders.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "the-north-face"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "The North Face",
+      "directors": [],
+      "riders": [],
+      "locations": [
+        "Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/GrulnSdr2DI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/GrulnSdr2DI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=GrulnSdr2DI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=GrulnSdr2DI",
+          "embedUrl": "https://www.youtube.com/embed/GrulnSdr2DI",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "The North Face",
+          "channelUrl": "https://www.youtube.com/@TheNorthFace",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:51.437Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/sounds-of-japan",
+          "sourceDetails": "4K / HD / Teaser trailer",
+          "retrievedAt": "2026-08-24T01:37:51.437Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Sounds Of Japan (2025) Snowboard Film",
+        "description": "Captured in the mountains and cities of Japan, Sounds of Japan blends immersive visuals with an original soundtrack, composed of sounds recorded on locatio"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "spike-2025",
+      "type": "film",
+      "title": "Spike",
+      "description": "Spike is a snowboarding film from Nitro Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "nitro-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Nitro Snowboards",
+      "directors": [],
+      "riders": [
+        "Bryan Fox",
+        "Dominik Wagner",
+        "Griffin Sieber",
+        "Hunter Goulet",
+        "Iris Pham",
+        "Jordan Morse",
+        "Mateo Massitti",
+        "Nick Miller",
+        "Nils Arvidsson",
+        "Sam Taxwood",
+        "Tom Tramnitz"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/SP-klR-I078/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/SP-klR-I078/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=SP-klR-I078",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=SP-klR-I078",
+          "embedUrl": "https://www.youtube.com/embed/SP-klR-I078",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Nitro Snowboards",
+          "channelUrl": "https://www.youtube.com/@NitroSnowboardsOfficial",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:53.431Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/spike",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:53.431Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Spike (2025) Snowboard Film",
+        "description": "Spike is a snowboarding film from Nitro Snowboards, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "stay-alive-2025",
+      "type": "film",
+      "title": "Stay Alive",
+      "description": "Jean Louis St Arneault snowboarding in La Grave",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "oxbow"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Oxbow",
+      "directors": [],
+      "riders": [
+        "Jean-Louis St. Arneault"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/KTp-kEARkGo/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/KTp-kEARkGo/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=KTp-kEARkGo",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=KTp-kEARkGo",
+          "embedUrl": "https://www.youtube.com/embed/KTp-kEARkGo",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "OXBOW",
+          "channelUrl": "https://www.youtube.com/@OXBOW1985",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:55.518Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/stay-alive",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:55.518Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Stay Alive (2025) Snowboard Film",
+        "description": "Jean Louis St Arneault snowboarding in La Grave"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "swarm-2025",
+      "type": "film",
+      "title": "Swarm",
+      "description": "Swarm is a snowboarding film from Rome Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "rome-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Rome Snowboards",
+      "directors": [],
+      "riders": [],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/CA5RPItqIJM/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/CA5RPItqIJM/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=CA5RPItqIJM",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=CA5RPItqIJM",
+          "embedUrl": "https://www.youtube.com/embed/CA5RPItqIJM",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Torment Magazine",
+          "channelUrl": "https://www.youtube.com/@TormentMag",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:37:57.454Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/swarm",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:57.454Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Swarm (2025) Snowboard Film",
+        "description": "Swarm is a snowboarding film from Rome Snowboards, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "syrup-2025",
+      "type": "film",
+      "title": "Syrup",
+      "description": "Through a steady drip of smooth style, the eye of a forester and the tenacity of a lumberjack Brendan Sullivan presents a bucket full of delicious log and log adjacent footage. Here's a woodsy cornucopia of reasons to go hit that tree ride you've been eyeing at the local hill.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "gnu-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "GNU Snowboards",
+      "directors": [],
+      "riders": [
+        "Brendan Sullivan"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/m5uZqJI-4bA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/m5uZqJI-4bA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=m5uZqJI-4bA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=m5uZqJI-4bA",
+          "embedUrl": "https://www.youtube.com/embed/m5uZqJI-4bA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "GNU",
+          "channelUrl": "https://www.youtube.com/@gnuSnowboards",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:37:59.555Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/syrup",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:37:59.555Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Syrup (2025) Snowboard Film",
+        "description": "Through a steady drip of smooth style, the eye of a forester and the tenacity of a lumberjack Brendan Sullivan presents a bucket full of delicious log and "
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "tapped-in-2025",
+      "type": "film",
+      "title": "Tapped In",
+      "description": "Tapped In is a snowboarding film from Jones Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "jones-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Jones Snowboards",
+      "directors": [],
+      "riders": [
+        "Timmy Taussig"
+      ],
+      "locations": [
+        "Vermont,New England / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/73NnHn5yRJs/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/73NnHn5yRJs/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=73NnHn5yRJs",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=73NnHn5yRJs",
+          "embedUrl": "https://www.youtube.com/embed/73NnHn5yRJs",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Jones Snowboards",
+          "channelUrl": "https://www.youtube.com/@JonesSnowboardsVideos",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:38:02.048Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/tapped-in",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:38:02.048Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Tapped In (2025) Snowboard Film",
+        "description": "Tapped In is a snowboarding film from Jones Snowboards, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    }
+  ]
+}

@@ -1,0 +1,663 @@
+{
+  "source": "https://www.snowboardingfilms.net",
+  "season": 2025,
+  "offset": 20,
+  "limit": 10,
+  "scrapedAt": "2026-08-24T01:36:45.146Z",
+  "films": [
+    {
+      "slug": "hokkaido-2025",
+      "type": "film",
+      "title": "Hokkaido",
+      "description": "Hokkaido is a snowboarding film from Nidecker, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "nidecker"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Nidecker",
+      "directors": [],
+      "riders": [
+        "Cooper Branham",
+        "Mela Stalker",
+        "Seb Konijnenberg",
+        "Taylor Gold"
+      ],
+      "locations": [
+        "Hokkaido / Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/eq4ZMEmrbOA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/eq4ZMEmrbOA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=eq4ZMEmrbOA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=eq4ZMEmrbOA",
+          "embedUrl": "https://www.youtube.com/embed/eq4ZMEmrbOA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Nidecker Snowboards",
+          "channelUrl": "https://www.youtube.com/@NideckerSnowboards",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:36:26.112Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/hokkaido",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:26.113Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Hokkaido (2025) Snowboard Film",
+        "description": "Hokkaido is a snowboarding film from Nidecker, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "ignite-2025",
+      "type": "film",
+      "title": "Ignite",
+      "description": "Japan doesn’t just get snow—it gets THE snow. Out of that landscape comes Sketchy Sunca—a crew whose name says it all. Sunca translates to “mountain person,” and when you’ve spent enough time around Raibu to hear his hilarious (and constant) use of the word sketchy, you know it’s a perfect fit.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "sketchy-sunca"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Sketchy Sunca",
+      "directors": [],
+      "riders": [
+        "Ikumi Imai",
+        "Kurumi Imai",
+        "Raibu Katayama",
+        "Ryusei Takahashi",
+        "Takeru Otsuka",
+        "Yutaro Miyazawa"
+      ],
+      "locations": [
+        "Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/bQLDXw90sLE/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/bQLDXw90sLE/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=bQLDXw90sLE",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=bQLDXw90sLE",
+          "embedUrl": "https://www.youtube.com/embed/bQLDXw90sLE",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Slush the Magazine",
+          "channelUrl": "https://www.youtube.com/@SlushtheMagazine",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:36:28.347Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/ignite",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:28.347Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Ignite (2025) Snowboard Film",
+        "description": "Japan doesn’t just get snow—it gets THE snow. Out of that landscape comes Sketchy Sunca—a crew whose name says it all. Sunca translates to “mountain person"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "in-cold-blood-2025",
+      "type": "film",
+      "title": "In Cold Blood",
+      "description": "...an intimate mountain film told through the inner voice of a rider torn between fear and obsession. As he moves between high-stakes competitions and raw backcountry adventures, we witness a search for balance between adrenaline and family, ambition and peace. No interviews, no showboating—just one man’s honest dialogue with the mountains. A visual and emotional journey into what truly drives us. In the end, it’s not about the best ride—it’s about feeling fully alive.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "alex-heitler"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Alex Heitler",
+      "directors": [],
+      "riders": [
+        "Victor De Le Rue"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/TIGCvOY6hvY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/TIGCvOY6hvY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=TIGCvOY6hvY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=TIGCvOY6hvY",
+          "embedUrl": "https://www.youtube.com/embed/TIGCvOY6hvY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Victor De Le Rue",
+          "channelUrl": "https://www.youtube.com/@VICTOR-DELERUE",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:36:30.369Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/in-cold-blood",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:30.369Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "In Cold Blood (2025) Snowboard Film",
+        "description": "...an intimate mountain film told through the inner voice of a rider torn between fear and obsession. As he moves between high-stakes competitions and raw "
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "in-the-shadow-of-the-diable-2025",
+      "type": "film",
+      "title": "In the Shadow of the Diable",
+      "description": "In the Shadow of the Diable – A Shralpinism* Story From Chamonix Deep in Chamonix’s backcountry, an imposing series of granite pinnacles rises to the southeast of Mont Blanc du Tacul. Named the Aiguilles du Diable – the Devil’s Needles – they were once considered impossible to climb, let alone ride.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "jones-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Jones Snowboards",
+      "directors": [],
+      "riders": [
+        "Gaspard Ravanel",
+        "Jakob Weger",
+        "Jerry Mark",
+        "Laurent Bibollet",
+        "Manu Gross",
+        "Pica Herry",
+        "Victor De Le Rue"
+      ],
+      "locations": [
+        "Chamonix / France"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/AIG4eePPHE4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/AIG4eePPHE4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=AIG4eePPHE4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=AIG4eePPHE4",
+          "embedUrl": "https://www.youtube.com/embed/AIG4eePPHE4",
+          "access": "parts_or_trailer",
+          "label": "Watch Parts",
+          "channel": "Jones Snowboards",
+          "channelUrl": "https://www.youtube.com/@JonesSnowboardsVideos",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:36:32.209Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/in-the-shadow-of-the-diable",
+          "sourceDetails": "4K / HD /Full actor parts",
+          "retrievedAt": "2026-08-24T01:36:32.209Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "In the Shadow of the Diable (2025) Snowboard Film",
+        "description": "In the Shadow of the Diable – A Shralpinism* Story From Chamonix Deep in Chamonix’s backcountry, an imposing series of granite pinnacles rises to the south"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "into-altai-2025",
+      "type": "film",
+      "title": "Into Altai",
+      "description": "Into Altai is a snowboarding film from Process Films, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "process-films"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Process Films",
+      "directors": [],
+      "riders": [
+        "Camille Armand",
+        "Pierre Hourticq",
+        "Victor Daviet",
+        "Brin Alexander",
+        "Chris Rasman",
+        "Jody Wachniak",
+        "Mikey Ciccarelli"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/0b-jQj3rL9U/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/0b-jQj3rL9U/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=0b-jQj3rL9U",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=0b-jQj3rL9U",
+          "embedUrl": "https://www.youtube.com/embed/0b-jQj3rL9U",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "FREERIDE FILM FESTIVAL",
+          "channelUrl": "https://www.youtube.com/@FREERIDEFILMFESTIVAL",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:36:34.092Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/into-altai",
+          "sourceDetails": "4K / HD / Teaser trailer",
+          "retrievedAt": "2026-08-24T01:36:34.093Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Into Altai (2025) Snowboard Film",
+        "description": "Into Altai is a snowboarding film from Process Films, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "northbound-and-around-2025",
+      "type": "film",
+      "title": "Northbound and Around",
+      "description": "Hungry for clips and greedy for turns, Johan Rosen, Garrett “Worm” Warnick and friends spent the season leaving no line unridden and no pillow unsmashed. Driven by the most unsatisfiable of desires, finding good snow, the crew spent the season running from warm temperatures and chasing down a dream. To get to the promise land, they found themselves travelling… Northbound and Around .",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "johan-rosen"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Johan Rosen",
+      "directors": [],
+      "riders": [
+        "Ben Bilocq",
+        "Bode Merrill",
+        "Brandon Davis.",
+        "Garrett Warnick",
+        "Jess Kimura",
+        "Johan Rosen",
+        "Kareem El Rafie",
+        "Keenan Filmer",
+        "Kyle Mack",
+        "Nick Khattar",
+        "Nils Arvidsson",
+        "Nils Mindnich",
+        "Ryan Paterson"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/7olWKaz02RY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/7olWKaz02RY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=7olWKaz02RY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=7olWKaz02RY",
+          "embedUrl": "https://www.youtube.com/embed/7olWKaz02RY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Johan Rosen",
+          "channelUrl": "https://www.youtube.com/@Johan_rosen",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:36:36.184Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/northbound-and-around",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:36.184Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Northbound and Around (2025) Snowboard Film",
+        "description": "Hungry for clips and greedy for turns, Johan Rosen, Garrett “Worm” Warnick and friends spent the season leaving no line unridden and no pillow unsmashed. D"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "nowthen-2025",
+      "type": "film",
+      "title": "Nowthen",
+      "description": "Nowthen is a snowboarding film from Trevor Slattery, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "trevor-slattery"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Trevor Slattery",
+      "directors": [],
+      "riders": [
+        "Adam Hohmeyer",
+        "Andre Hall",
+        "Antonio Astillero",
+        "Black Lamb",
+        "Ethan Gervais",
+        "Gavin Matson",
+        "J. DeForge",
+        "Jake Antisdel",
+        "Mike Michenfelder",
+        "Milo Rice",
+        "Noah Genzink"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/JvJ1ukX6RpU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/JvJ1ukX6RpU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=JvJ1ukX6RpU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=JvJ1ukX6RpU",
+          "embedUrl": "https://www.youtube.com/embed/JvJ1ukX6RpU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Meliora",
+          "channelUrl": "https://www.youtube.com/@meliora4062",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:36:38.005Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/nowthen",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:38.005Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Nowthen (2025) Snowboard Film",
+        "description": "Nowthen is a snowboarding film from Trevor Slattery, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "outlier-2025",
+      "type": "film",
+      "title": "Outlier",
+      "description": "Outlier is a snowboarding film from Pangea Collective, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "pangea-collective"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Pangea Collective",
+      "directors": [],
+      "riders": [
+        "Holden Samuels"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/pKZvo9A_8Ms/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/pKZvo9A_8Ms/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=pKZvo9A_8Ms",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=pKZvo9A_8Ms",
+          "embedUrl": "https://www.youtube.com/embed/pKZvo9A_8Ms",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Pangea Collective",
+          "channelUrl": "https://www.youtube.com/@pangea-co",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:36:40.132Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/outlier",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:40.132Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Outlier (2025) Snowboard Film",
+        "description": "Outlier is a snowboarding film from Pangea Collective, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "paved-2025",
+      "type": "film",
+      "title": "Paved",
+      "description": "Part history lesson, part hangout, part backcountry odyssey",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "burton"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Burton",
+      "directors": [],
+      "riders": [
+        "Anna Gasser",
+        "Ben Ferguson",
+        "Brock Crouch",
+        "Danny Davis",
+        "Mark McMorris‬",
+        "Mikkel Bang",
+        "Takeru Otsuka",
+        "Ylfa Runarsdottir",
+        "‪Zeb Powell‬",
+        "‪Zoi Synnott"
+      ],
+      "locations": [
+        "British Columbia / Canada",
+        "Hokkaido / Japan",
+        "Alaska / USA",
+        "Tahoe / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/r4N3CAJj0RY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/r4N3CAJj0RY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=r4N3CAJj0RY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=r4N3CAJj0RY",
+          "embedUrl": "https://www.youtube.com/embed/r4N3CAJj0RY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Red Bull Snow",
+          "channelUrl": "https://www.youtube.com/@RedBullSnow",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:36:42.097Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/paved",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:42.097Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Paved (2025) Snowboard Film",
+        "description": "Part history lesson, part hangout, part backcountry odyssey"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "pinned-2025",
+      "type": "film",
+      "title": "Pinned",
+      "description": "Pinned is a snowboarding film from Holeshot, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "holeshot"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Holeshot",
+      "directors": [],
+      "riders": [
+        "Brett Stamper",
+        "Jake McPherson",
+        "Nate Bujarski"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/FDkJn2Ivlrw/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/FDkJn2Ivlrw/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=FDkJn2Ivlrw",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=FDkJn2Ivlrw",
+          "embedUrl": "https://www.youtube.com/embed/FDkJn2Ivlrw",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "HoleShot",
+          "channelUrl": "https://www.youtube.com/@HoleShot888-l2f",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:36:44.106Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/pinned",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:36:44.106Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Pinned (2025) Snowboard Film",
+        "description": "Pinned is a snowboarding film from Holeshot, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    }
+  ]
+}

@@ -1,0 +1,634 @@
+{
+  "source": "https://www.snowboardingfilms.net",
+  "season": 2025,
+  "offset": 40,
+  "limit": 10,
+  "scrapedAt": "2026-08-24T01:40:25.795Z",
+  "films": [
+    {
+      "slug": "the-devil-s-playground-2025",
+      "type": "film",
+      "title": "The Devil's Playground",
+      "description": "Coming soon",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "jones-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Jones Snowboards",
+      "directors": [],
+      "riders": [
+        "Gaspard Ravanel",
+        "Jakob Wegerk",
+        "Jerry Marks",
+        "Laurent Bibollet",
+        "Manu Gross",
+        "Pica Herry",
+        "Victor De Le Rue"
+      ],
+      "locations": [],
+      "thumbnails": {},
+      "youtubeUrl": null,
+      "watchOptions": [],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/the-devils-playground",
+          "sourceDetails": "4K",
+          "retrievedAt": "2026-08-24T01:40:06.139Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "needs_review",
+      "seo": {
+        "title": "The Devil's Playground (2025) Snowboard Film",
+        "description": "Coming soon"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "the-realm-2025",
+      "type": "film",
+      "title": "The Realm",
+      "description": "Premieres Nov 5, 2025",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "megafauna-films-inc"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Megafauna Films Inc.",
+      "directors": [],
+      "riders": [
+        "Brin Alexander",
+        "Torgeir Bergrem",
+        "Jody Wachniak",
+        "Chris Rasman",
+        "Mark Sollors",
+        "Mikey Ciccarelli",
+        "Stale Sandbech",
+        "Darcy Sharpe",
+        "Sean Miskiman",
+        "Ståle Sandbech"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/F7Y3_W0TYwY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/F7Y3_W0TYwY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=F7Y3_W0TYwY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=F7Y3_W0TYwY",
+          "embedUrl": "https://www.youtube.com/embed/F7Y3_W0TYwY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "SHREDBOTS OFFICIAL",
+          "channelUrl": "https://www.youtube.com/@ShredbotsOFFICIAL",
+          "isOfficialPublisher": false,
+          "lastVerifiedAt": "2026-08-24T01:40:08.652Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/the-realm",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:08.652Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Realm (2025) Snowboard Film",
+        "description": "Premieres Nov 5, 2025"
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "the-shmovie-2025",
+      "type": "film",
+      "title": "The Shmovie",
+      "description": "The Shmovie is a snowboarding film from Shmobb, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "shmobb"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Shmobb",
+      "directors": [],
+      "riders": [],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/FQjqrvbdhH4/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/FQjqrvbdhH4/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=FQjqrvbdhH4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=FQjqrvbdhH4",
+          "embedUrl": "https://www.youtube.com/embed/FQjqrvbdhH4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Shmobb",
+          "channelUrl": "https://www.youtube.com/@shmobb4309",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:10.549Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/the-shmovie",
+          "sourceDetails": "HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:10.549Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Shmovie (2025) Snowboard Film",
+        "description": "The Shmovie is a snowboarding film from Shmobb, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "the-snow-country-2025",
+      "type": "film",
+      "title": "The Snow Country",
+      "description": "...a story from Japan’s Hidden Freeride Gem, Minamiuonuma. Just a 1.5-hour train ride from Tokyo, this region blends untouched terrain, rich culture, and a strong local spirit.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "antti-autti"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Antti Autti",
+      "directors": [],
+      "riders": [
+        "Antti Autti"
+      ],
+      "locations": [
+        "Minamiuonuma / Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/I673S4LNyPA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/I673S4LNyPA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=I673S4LNyPA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=I673S4LNyPA",
+          "embedUrl": "https://www.youtube.com/embed/I673S4LNyPA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Antti Autti",
+          "channelUrl": "https://www.youtube.com/@AnttiAuttiChannel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:12.390Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/the-snow-country",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:12.390Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Snow Country (2025) Snowboard Film",
+        "description": "...a story from Japan’s Hidden Freeride Gem, Minamiuonuma. Just a 1.5-hour train ride from Tokyo, this region blends untouched terrain, rich culture, and a"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "the-underdogs-2025",
+      "type": "film",
+      "title": "The Underdogs",
+      "description": "The Underdogs is a snowboarding film from Mammut, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "mammut"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Mammut",
+      "directors": [],
+      "riders": [
+        "Antonia Galmez",
+        "Celina Weber",
+        "Kate Ediger",
+        "Shawna Paoli"
+      ],
+      "locations": [],
+      "thumbnails": {},
+      "youtubeUrl": null,
+      "watchOptions": [],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/the-underdogs",
+          "sourceDetails": "",
+          "retrievedAt": "2026-08-24T01:40:14.070Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "needs_review",
+      "seo": {
+        "title": "The Underdogs (2025) Snowboard Film",
+        "description": "The Underdogs is a snowboarding film from Mammut, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    },
+    {
+      "slug": "thermal-2025",
+      "type": "film",
+      "title": "Thermal",
+      "description": "The crew chased fresh snowfalls through the European Alps, explored the icy forests of Pyhä, Finland, and through a lucky coincidence they visited our French rider Mathis Bozzolo , who spent his winter working as a guide in Japan.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "k2-snowboarding"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "K2 Snowboarding",
+      "directors": [],
+      "riders": [
+        "Mathis Bozzolo",
+        "Antti Jussila",
+        "Botond Fricz",
+        "Hennes Dollenberg",
+        "Jesper Landmark",
+        "Leon Gütl",
+        "Marc Schumy",
+        "Moritz Amsuss",
+        "Moritz Thönen",
+        "Petr Ershov"
+      ],
+      "locations": [
+        "Austria",
+        "Finland",
+        "France",
+        "Japan"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/34DMvyuREP4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/34DMvyuREP4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=34DMvyuREP4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=34DMvyuREP4",
+          "embedUrl": "https://www.youtube.com/embed/34DMvyuREP4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "K2 Snowboarding",
+          "channelUrl": "https://www.youtube.com/@K2SN0WB0ARDING",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:15.887Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/thermal",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:15.887Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Thermal (2025) Snowboard Film",
+        "description": "The crew chased fresh snowfalls through the European Alps, explored the icy forests of Pyhä, Finland, and through a lucky coincidence they visited our Fren"
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "tr3-d2uce-2025",
+      "type": "film",
+      "title": "TR3 D2UCE",
+      "description": "TR3 D2UCE is a snowboarding film from ThirtyTwo, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "thirtytwo"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "ThirtyTwo",
+      "directors": [],
+      "riders": [
+        "Austen Sweetin",
+        "Austin Vizz",
+        "Bode Merrill",
+        "Chris Grenier",
+        "Gabby Maiden",
+        "Jaylen Hanson",
+        "Joey Fava",
+        "Mike Liddle",
+        "Pat Fava",
+        "Patrick Hofmann",
+        "Phil Hansen",
+        "Scott Blum",
+        "Scott Stevens",
+        "Stefi Luxton",
+        "Toni Kerkela",
+        "Veda Hallen"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/xf5RbfceRk4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/xf5RbfceRk4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=xf5RbfceRk4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=xf5RbfceRk4",
+          "embedUrl": "https://www.youtube.com/embed/xf5RbfceRk4",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "thirtytwo",
+          "channelUrl": "https://www.youtube.com/@thirtytwoSnowboarding",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:18.203Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/tr3-d2uce",
+          "sourceDetails": "HD / Teaser trailer",
+          "retrievedAt": "2026-08-24T01:40:18.203Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "TR3 D2UCE (2025) Snowboard Film",
+        "description": "TR3 D2UCE is a snowboarding film from ThirtyTwo, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "tumbleweed-2025",
+      "type": "film",
+      "title": "Tumbleweed",
+      "description": "Tumbleweed is a snowboarding film from K2 Snowboarding, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "k2-snowboarding"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "K2 Snowboarding",
+      "directors": [],
+      "riders": [
+        "Aya Sato",
+        "Caley Vanular",
+        "Charles Cliff White",
+        "Curtis Ciszek",
+        "Gabe Ferguson",
+        "Iikka Backstrom",
+        "Jake Kuzyk",
+        "Kennedi Deck",
+        "Noah Peterson",
+        "Parker Szumowski"
+      ],
+      "locations": [
+        "British Columbia / Canada",
+        "Idaho / USA",
+        "Utah / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/yrO_4iOvKMg/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/yrO_4iOvKMg/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=yrO_4iOvKMg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=yrO_4iOvKMg",
+          "embedUrl": "https://www.youtube.com/embed/yrO_4iOvKMg",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "K2 Snowboarding",
+          "channelUrl": "https://www.youtube.com/@K2SN0WB0ARDING",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:20.480Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/tumbleweed",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:20.480Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Tumbleweed (2025) Snowboard Film",
+        "description": "Tumbleweed is a snowboarding film from K2 Snowboarding, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "vantage-2025",
+      "type": "film",
+      "title": "Vantage",
+      "description": "Vantage is a snowboarding film from Salomon Snowboards, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "salomon-snowboards"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Salomon Snowboards",
+      "directors": [],
+      "riders": [
+        "Blake Moller",
+        "Liva Tanno",
+        "Luke Lund",
+        "Nils Mindnich",
+        "Simon Gschaider",
+        "Victor Daviet"
+      ],
+      "locations": [],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/kOB2y7tJFSg/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/kOB2y7tJFSg/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=kOB2y7tJFSg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=kOB2y7tJFSg",
+          "embedUrl": "https://www.youtube.com/embed/kOB2y7tJFSg",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Salomon Snowboards",
+          "channelUrl": "https://www.youtube.com/@Salomonsnowboarding",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:22.761Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/vantage",
+          "sourceDetails": "4K / HD / FREE FILM",
+          "retrievedAt": "2026-08-24T01:40:22.761Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Vantage (2025) Snowboard Film",
+        "description": "Vantage is a snowboarding film from Salomon Snowboards, released in 2025."
+      },
+      "isPublished": true,
+      "researchStatus": "ready"
+    },
+    {
+      "slug": "wayfinder-2025",
+      "type": "film",
+      "title": "Wayfinder",
+      "description": "Wayfinder is a snowboarding film from Curtis Woodman, released in 2025.",
+      "sportTypes": [
+        "snowboarding"
+      ],
+      "tags": [
+        "snowboarding",
+        "full-length-film",
+        "curtis-woodman"
+      ],
+      "releaseYear": 2025,
+      "releaseSeason": "2025/2026",
+      "producedBy": "Curtis Woodman",
+      "directors": [],
+      "riders": [],
+      "locations": [
+        "Lake Tahoe,Sierra Nevada / USA"
+      ],
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/vKiH0jF2YXA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/vKiH0jF2YXA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=vKiH0jF2YXA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=vKiH0jF2YXA",
+          "embedUrl": "https://www.youtube.com/embed/vKiH0jF2YXA",
+          "access": "parts_or_trailer",
+          "label": "Watch Teaser",
+          "channel": "Curtis Woodman ",
+          "channelUrl": "https://www.youtube.com/@curtiseaofcurtis",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-08-24T01:40:24.899Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "snowboardingfilms.net",
+          "url": "https://www.snowboardingfilms.net/film/wayfinder",
+          "sourceDetails": "4K / HD / Teaser trailer",
+          "retrievedAt": "2026-08-24T01:40:24.899Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata with outbound viewing link; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Wayfinder (2025) Snowboard Film",
+        "description": "Wayfinder is a snowboarding film from Curtis Woodman, released in 2025."
+      },
+      "isPublished": false,
+      "researchStatus": "needs_editorial_review"
+    }
+  ]
+}

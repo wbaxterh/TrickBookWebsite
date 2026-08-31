@@ -1,12 +1,21 @@
 import AppleIcon from '@mui/icons-material/Apple';
 import GoogleIcon from '@mui/icons-material/Google';
 import axios from 'axios';
-import { Camera, Check, ChevronLeft, ChevronRight, Sparkles, User } from 'lucide-react';
+import {
+  Camera,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  EyeOff,
+  Sparkles,
+  User,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
@@ -69,7 +78,13 @@ export default function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // The account is created at step 1 (so a drop-off still leaves a real account
+  // we can re-engage). Steps 2-4 then just enrich the profile.
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [authToken, setAuthToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   // Step 2: Avatar
   const [avatarType, setAvatarType] = useState('icon'); // "icon" or "upload"
@@ -108,7 +123,6 @@ export default function Signup() {
     else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid email';
     if (!password) newErrors.password = 'Password is required';
     else if (password.length < 8) newErrors.password = 'Must be 8+ characters';
-    if (password !== confirmPassword) newErrors.confirmPassword = "Passwords don't match";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -140,67 +154,77 @@ export default function Signup() {
     );
   };
 
+  // Land new users on an activation moment (the spots map), not an empty profile.
   const handleGoogleSignIn = async () => {
-    signIn('google', { callbackUrl: '/profile' });
+    signIn('google', { callbackUrl: '/spots' });
   };
 
   const handleAppleSignIn = async () => {
-    signIn('apple', { callbackUrl: '/profile' });
+    signIn('apple', { callbackUrl: '/spots' });
   };
 
-  const handleSubmit = async () => {
+  // Step 1: create the account up front + log in, then move into profile setup.
+  const handleCreateAccount = async () => {
+    if (!validateStep1()) return;
     setIsSubmitting(true);
+    setErrors({});
     try {
-      // Build user data
-      const userData = {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, {
         name,
         email,
         password,
-        sports: selectedSports,
-        riderProfile: {
-          ...riderProfile,
-          avatarType,
-          avatarIcon: selectedIcon,
-        },
-      };
-
-      // Register user
-      const _response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, userData);
-
-      // Upload profile image if provided
-      if (uploadedImage) {
-        const formData = new FormData();
-        formData.append('profileImage', uploadedImage);
-        // This would need a separate endpoint - for now we'll handle it later
-      }
-
-      // Auto-login after registration
-      const loginResult = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
       });
 
-      if (loginResult.error) {
-        setErrors({ submit: 'Account created but login failed. Please try logging in.' });
+      const loginResult = await signIn('credentials', { redirect: false, email, password });
+      if (loginResult?.error) {
+        setErrors({ submit: 'Account created — please log in to finish setup.' });
         return;
       }
 
-      logIn(loginResult.token, email);
-      router.push('/profile');
+      // Grab the backend JWT from the freshly-established session for the
+      // profile-update calls in the next steps.
+      const session = await getSession();
+      const token = session?.user?.jwtToken?.token || null;
+      setAuthToken(token);
+      setUserId(res.data?._id || null);
+      setAccountCreated(true);
+      logIn(token, email);
+      setStep(2);
     } catch (error) {
-      setErrors({
-        submit: error.response?.data?.message || 'Registration failed. Please try again.',
-      });
+      const msg =
+        error.response?.status === 400
+          ? error.response?.data?.error || 'That email is already registered.'
+          : 'Could not create your account. Please try again.';
+      setErrors({ submit: msg });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const nextStep = () => {
-    if (step === 1 && !validateStep1()) return;
-    setStep((s) => Math.min(s + 1, 4));
+  // Finish/skip: save the optional profile details and head to the app. The
+  // account already exists, so this is best-effort — never block on a failure.
+  const handleSaveProfile = async () => {
+    setIsSubmitting(true);
+    try {
+      if (userId && authToken) {
+        await axios
+          .put(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userId}`,
+            {
+              sports: selectedSports,
+              riderProfile: { ...riderProfile, avatarType, avatarIcon: selectedIcon },
+            },
+            { headers: { 'x-auth-token': authToken } },
+          )
+          .catch(() => {});
+      }
+    } finally {
+      setIsSubmitting(false);
+      router.push('/spots');
+    }
   };
+
+  const nextStep = () => setStep((s) => Math.min(s + 1, 4));
 
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
@@ -229,7 +253,23 @@ export default function Signup() {
     <div className="space-y-4">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">Create Your Account</h2>
-        <p className="text-muted-foreground mt-1">Let's get you started on your journey</p>
+        <p className="text-muted-foreground mt-1">Join the action sports community</p>
+      </div>
+
+      {/* Social-first: one tap, no password to create, verified email. */}
+      <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} type="button">
+        <GoogleIcon className="mr-2 h-4 w-4" />
+        Continue with Google
+      </Button>
+      <Button variant="outline" className="w-full" onClick={handleAppleSignIn} type="button">
+        <AppleIcon className="mr-2 h-4 w-4" />
+        Continue with Apple
+      </Button>
+
+      <div className="flex items-center gap-4 py-2">
+        <div className="flex-1 h-px bg-border" />
+        <span className="text-muted-foreground text-sm">or sign up with email</span>
+        <div className="flex-1 h-px bg-border" />
       </div>
 
       <div>
@@ -258,44 +298,24 @@ export default function Signup() {
 
       <div>
         <label className="block text-sm font-medium mb-1">Password</label>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="8+ characters"
-          className={errors.password ? 'border-destructive' : ''}
-        />
-        {errors.password && <p className="text-destructive text-sm mt-1">{errors.password}</p>}
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Confirm Password</label>
-        <Input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm your password"
-          className={errors.confirmPassword ? 'border-destructive' : ''}
-        />
-        {errors.confirmPassword && (
-          <p className="text-destructive text-sm mt-1">{errors.confirmPassword}</p>
-        )}
-      </div>
-
-      <div className="pt-4">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex-1 h-px bg-border" />
-          <span className="text-muted-foreground text-sm">or</span>
-          <div className="flex-1 h-px bg-border" />
+        <div className="relative">
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="8+ characters"
+            className={`pr-10 ${errors.password ? 'border-destructive' : ''}`}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
         </div>
-        <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} type="button">
-          <GoogleIcon className="mr-2 h-4 w-4" />
-          Sign up with Google
-        </Button>
-        <Button variant="outline" className="w-full mt-2" onClick={handleAppleSignIn} type="button">
-          <AppleIcon className="mr-2 h-4 w-4" />
-          Sign up with Apple
-        </Button>
+        {errors.password && <p className="text-destructive text-sm mt-1">{errors.password}</p>}
       </div>
     </div>
   );
@@ -416,7 +436,9 @@ export default function Signup() {
           <h2 className="text-2xl font-bold">Rider Profile</h2>
           <Sparkles className="w-6 h-6 text-yellow-500" />
         </div>
-        <p className="text-muted-foreground mt-1">Optional but fun! Build your rider card</p>
+        <p className="text-muted-foreground mt-1">
+          Just the good stuff — add the rest of your rider card anytime from your profile.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -447,36 +469,6 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Age</label>
-          <Input
-            type="number"
-            placeholder="19"
-            value={riderProfile.age}
-            onChange={(e) => setRiderProfile({ ...riderProfile, age: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Nationality</label>
-          <Input
-            type="text"
-            placeholder="American"
-            value={riderProfile.nationality}
-            onChange={(e) => setRiderProfile({ ...riderProfile, nationality: e.target.value })}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label className="block text-sm font-medium mb-1">Motto</label>
-          <Input
-            type="text"
-            placeholder='"Try anything once"'
-            value={riderProfile.motto}
-            onChange={(e) => setRiderProfile({ ...riderProfile, motto: e.target.value })}
-          />
-        </div>
-
-        <div>
           <label className="block text-sm font-medium mb-1">Sickest Trick</label>
           <Input
             type="text"
@@ -487,77 +479,7 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Alternate Sport</label>
-          <Input
-            type="text"
-            placeholder="Street Luge"
-            value={riderProfile.alternateSport}
-            onChange={(e) => setRiderProfile({ ...riderProfile, alternateSport: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Greatest Strength</label>
-          <Input
-            type="text"
-            placeholder="Speed"
-            value={riderProfile.greatestStrength}
-            onChange={(e) => setRiderProfile({ ...riderProfile, greatestStrength: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Greatest Weakness</label>
-          <Input
-            type="text"
-            placeholder="Gear"
-            value={riderProfile.greatestWeakness}
-            onChange={(e) => setRiderProfile({ ...riderProfile, greatestWeakness: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Dream Date</label>
-          <Input
-            type="text"
-            placeholder="Pamela Zoolalian"
-            value={riderProfile.dreamDate}
-            onChange={(e) => setRiderProfile({ ...riderProfile, dreamDate: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Movie</label>
-          <Input
-            type="text"
-            placeholder="Enter the Dragon"
-            value={riderProfile.favoriteMovie}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteMovie: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Music</label>
-          <Input
-            type="text"
-            placeholder="70's Rock"
-            value={riderProfile.favoriteMusic}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteMusic: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Reading</label>
-          <Input
-            type="text"
-            placeholder="Thrasher Magazine"
-            value={riderProfile.favoriteReading}
-            onChange={(e) => setRiderProfile({ ...riderProfile, favoriteReading: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Favorite Spot</label>
+          <label className="block text-sm font-medium mb-1">Home Spot</label>
           <Input
             type="text"
             placeholder="Merqury City"
@@ -565,20 +487,11 @@ export default function Signup() {
             onChange={(e) => setRiderProfile({ ...riderProfile, favoriteCourse: e.target.value })}
           />
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Other Hobbies</label>
-          <Input
-            type="text"
-            placeholder="Computer hacking, photography..."
-            value={riderProfile.otherHobbies}
-            onChange={(e) => setRiderProfile({ ...riderProfile, otherHobbies: e.target.value })}
-          />
-        </div>
       </div>
 
       <p className="text-center text-sm text-muted-foreground">
-        Don't worry, you can fill these out or edit them anytime!
+        The full rider card (age, motto, favorites &amp; more) lives in your profile — fill it out
+        whenever.
       </p>
     </div>
   );
@@ -636,14 +549,23 @@ export default function Signup() {
                   <div />
                 )}
 
-                {step < 4 ? (
+                {step === 1 ? (
+                  <Button
+                    onClick={accountCreated ? nextStep : handleCreateAccount}
+                    disabled={isSubmitting}
+                    type="button"
+                  >
+                    {isSubmitting ? 'Creating…' : accountCreated ? 'Continue' : 'Create Account'}
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+                ) : step < 4 ? (
                   <Button onClick={nextStep} type="button">
-                    {step === 1 ? 'Get Started' : 'Continue'}
+                    Continue
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </Button>
                 ) : (
-                  <Button onClick={handleSubmit} disabled={isSubmitting}>
-                    {isSubmitting ? 'Creating Account...' : 'Create My Account'}
+                  <Button onClick={handleSaveProfile} disabled={isSubmitting}>
+                    {isSubmitting ? 'Saving…' : 'Finish'}
                   </Button>
                 )}
               </div>
@@ -657,13 +579,16 @@ export default function Signup() {
                 </p>
               )}
 
+              {/* Account already exists after step 1 — skipping still lands a real,
+                  re-engageable account in the app. */}
               {step > 1 && step < 4 && (
                 <button
                   type="button"
-                  onClick={() => setStep(4)}
+                  onClick={handleSaveProfile}
+                  disabled={isSubmitting}
                   className="w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground"
                 >
-                  Skip to finish →
+                  Skip for now →
                 </button>
               )}
             </CardContent>
