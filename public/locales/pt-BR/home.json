@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "TrickBook - Registre manobras. Encontre picos. Ande junto.",
+    "description": "TrickBook é o app gratuito para skatistas, snowboarders e riders de esportes radicais: registre manobras, descubra picos e conecte-se com a comunidade. Baixe agora para iOS e Android.",
+    "keywords": "app de skate, registro de manobras, picos de skate, app de snowboard, esportes radicais, lista de manobras, progresso no skate, encontrar picos de skate",
+    "ogDescription": "O app gratuito para riders de esportes radicais: registre manobras, descubra picos e conecte-se com a comunidade."
+  },
+  "hero": {
+    "variants": {
+      "control": {
+        "line1": "SEU SHAPE.",
+        "line2": "SEUS DADOS.",
+        "line3": "SUA CREW."
+      },
+      "community": {
+        "line1": "ACERTE.",
+        "line2": "REGISTRE.",
+        "line3": "SEJA DONO."
+      },
+      "action": {
+        "line1": "CADA MANOBRA.",
+        "line2": "CADA PICO.",
+        "line3": "CADA SESSÃO."
+      }
+    },
+    "subline1": "A plataforma de esportes radicais que não te vende.",
+    "subline2": "Registre manobras. Encontre picos. Ande com gente de verdade.",
+    "cta": "Entre para o movimento"
+  },
+  "badges": {
+    "appStoreAlt": "Baixar na App Store",
+    "googlePlayAlt": "Disponível no Google Play"
+  },
+  "kaori": {
+    "badge": "Conheça sua companheira de snowboard com IA",
+    "title": "Ande melhor com a <highlight>Kaori.</highlight>",
+    "description": "Sua parceira de snowboard sempre disponível: coaching de verdade, ideias de manobras novas e aquele empurrão para continuar evoluindo. Fale naturalmente, pergunte o que quiser ou peça para ela explicar uma manobra na hora.",
+    "capabilities": {
+      "talk": {
+        "title": "Converse",
+        "text": "Conversas de voz ao vivo"
+      },
+      "demo": {
+        "title": "Veja o movimento",
+        "text": "Demonstrações faladas de manobras"
+      },
+      "memory": {
+        "title": "Feita para você",
+        "text": "Coaching que lembra de você"
+      }
+    },
+    "cta": "Conheça a Kaori",
+    "conversationCaption": "Uma conversa com a Kaori",
+    "avatarAlt": "Kaori, a companheira de snowboard com IA do TrickBook",
+    "aiCompanion": "Companheira IA",
+    "status": "Pronta para a próxima descida",
+    "userMessage": "Finalmente acertei o frontside 360. O que devo aprender agora?",
+    "reply": "Que demais! Como seu front 3 já está sólido, vamos construir rumo ao frontside 540. Vou detalhar a preparação, a decolagem e a aterrissagem — e podemos começar a primeira progressão agora.",
+    "voiceHint": "A Kaori pode te guiar por voz"
+  },
+  "stats": {
+    "spots": "Picos mapeados",
+    "tricks": "Manobras registradas",
+    "trickLists": "Listas de manobras",
+    "riders": "Riders"
+  },
+  "features": {
+    "title": "Tudo o que você precisa para evoluir",
+    "subtitle": "Feito por riders que queriam um jeito melhor de registrar sua jornada.",
+    "track": {
+      "title": "Registre",
+      "subtitle": "Cada manobra que você acerta",
+      "description": "Crie listas de manobras personalizadas para qualquer esporte. Marque as manobras conforme acerta, registre suas sessões e veja suas habilidades crescerem com o tempo."
+    },
+    "progress": {
+      "title": "Evolua",
+      "subtitle": "Veja o quanto você já avançou",
+      "description": "O acompanhamento visual mostra sua jornada de iniciante a profissional. Navegue pela Trickipedia para descobrir manobras novas e definir metas para a próxima sessão."
+    },
+    "connect": {
+      "title": "Conecte-se",
+      "subtitle": "Ande com sua crew",
+      "description": "Encontre e siga riders que compartilham sua paixão. Compartilhe clipes, mande mensagens para os parceiros e construa uma comunidade em torno dos esportes que você ama."
+    }
+  },
+  "testimonials": {
+    "title": "Os riders estão animados",
+    "subtitle": "Ouça a comunidade que faz o TrickBook ser o que é.",
+    "roles": {
+      "skateboarder": "Skatista",
+      "snowboarder": "Snowboarder"
+    },
+    "quotes": {
+      "jake": "Finalmente um app feito por skatistas, para skatistas. Estou registrando meu progresso há meses e é realmente motivador ver quantas manobras já acertei.",
+      "sarah": "O localizador de picos é incrível. Me mudei para uma cidade nova e encontrei três pistas que eu não conhecia já na primeira semana.",
+      "marcus": "Adoro que não é mais uma rede social tentando vender meus dados. É realmente útil e respeita minha privacidade."
+    }
+  },
+  "howItWorks": {
+    "title": "Pronto para andar em minutos",
+    "step1": {
+      "title": "Baixe grátis",
+      "description": "Baixe o TrickBook para iOS ou Android. Sem cartão de crédito, sem pegadinhas."
+    },
+    "step2": {
+      "title": "Comece a registrar",
+      "description": "Crie listas de manobras, descubra picos perto de você e registre suas sessões."
+    },
+    "step3": {
+      "title": "Suba de nível",
+      "description": "Veja seu progresso crescer, conecte-se com riders e supere seus limites."
+    }
+  },
+  "community": {
+    "title": "Por riders. <highlight>Para riders.</highlight>",
+    "description": "As grandes plataformas de tecnologia não se importam com a gente. Os algoritmos enterram seu conteúdo e sua atenção é vendida para anunciantes. Criamos o TrickBook porque as comunidades de esportes radicais merecem coisa melhor.",
+    "point1": {
+      "title": "Seus dados continuam seus",
+      "text": "Criptografados, privados, nunca vendidos a anunciantes."
+    },
+    "point2": {
+      "title": "Sem joguinhos de algoritmo",
+      "text": "Seu conteúdo chega à sua crew, não só a quem paga."
+    },
+    "point3": {
+      "title": "Feito por uma equipe pequena com muita paixão",
+      "text": "Independente, dos riders, movido pela comunidade."
+    },
+    "quote": "Há um valor intrínseco em criar algo pelo simples prazer de criar.",
+    "quoteRole": "Padrinho do street skate"
+  },
+  "finalCta": {
+    "title": "Pare de rolar a tela. Comece a andar.",
+    "subtitle": "{{riders}}+ riders já estão dentro. Grátis para sempre. Sem anúncios. Sem algoritmo.",
+    "goToTrickbook": "Ir para meu TrickBook",
+    "signup": "Estou dentro"
+  }
+}

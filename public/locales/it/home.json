@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "TrickBook - Registra i trick. Trova gli spot. Ridate insieme.",
+    "description": "TrickBook è l'app gratuita per skater, snowboarder e rider di action sport: registra i trick, scopri gli spot e connettiti con la community. Scaricala ora su iOS e Android.",
+    "keywords": "app skateboard, tracker di trick, spot skate, app snowboard, action sport, lista trick, progressi skateboard, trovare spot skate",
+    "ogDescription": "L'app gratuita per i rider di action sport: registra i trick, scopri gli spot e connettiti con la community."
+  },
+  "hero": {
+    "variants": {
+      "control": {
+        "line1": "LA TUA TAVOLA.",
+        "line2": "I TUOI DATI.",
+        "line3": "LA TUA CREW."
+      },
+      "community": {
+        "line1": "CHIUDILO.",
+        "line2": "REGISTRALO.",
+        "line3": "FALLO TUO."
+      },
+      "action": {
+        "line1": "OGNI TRICK.",
+        "line2": "OGNI SPOT.",
+        "line3": "OGNI SESSION."
+      }
+    },
+    "subline1": "La piattaforma di action sport che non ti vende.",
+    "subline2": "Registra i trick. Trova gli spot. Rida con gente vera.",
+    "cta": "Unisciti al movimento"
+  },
+  "badges": {
+    "appStoreAlt": "Scarica su App Store",
+    "googlePlayAlt": "Disponibile su Google Play"
+  },
+  "kaori": {
+    "badge": "Conosci la tua compagna di snowboard IA",
+    "title": "Rida più smart con <highlight>Kaori.</highlight>",
+    "description": "La tua compagna di snowboard sempre disponibile: coaching vero, nuove idee di trick e la spinta per continuare a migliorare. Parla in modo naturale, chiedi qualsiasi cosa o fatti spiegare un trick al volo.",
+    "capabilities": {
+      "talk": {
+        "title": "Parlane",
+        "text": "Conversazioni vocali dal vivo"
+      },
+      "demo": {
+        "title": "Guarda la mossa",
+        "text": "Demo di trick a voce"
+      },
+      "memory": {
+        "title": "Costruita intorno a te",
+        "text": "Un coaching che ricorda"
+      }
+    },
+    "cta": "Conosci Kaori",
+    "conversationCaption": "Una conversazione con Kaori",
+    "avatarAlt": "Kaori, la compagna di snowboard IA di TrickBook",
+    "aiCompanion": "Compagna IA",
+    "status": "Pronta per la tua prossima discesa",
+    "userMessage": "Finalmente ho chiuso il frontside 360. Cosa dovrei imparare adesso?",
+    "reply": "Grandissimo! Visto che il tuo front 3 è solido, costruiamo verso un frontside 540. Ti spiego preparazione, stacco e atterraggio — e possiamo iniziare subito con la prima progressione.",
+    "voiceHint": "Kaori può guidarti a voce"
+  },
+  "stats": {
+    "spots": "Spot mappati",
+    "tricks": "Trick registrati",
+    "trickLists": "Liste di trick",
+    "riders": "Rider"
+  },
+  "features": {
+    "title": "Tutto quello che ti serve per migliorare",
+    "subtitle": "Creata da rider che volevano un modo migliore per seguire il proprio percorso.",
+    "track": {
+      "title": "Registra",
+      "subtitle": "Ogni trick che chiudi",
+      "description": "Crea liste di trick personalizzate per qualsiasi sport. Spunta i trick man mano che li chiudi, registra le tue session e guarda le tue abilità crescere nel tempo."
+    },
+    "progress": {
+      "title": "Migliora",
+      "subtitle": "Guarda quanta strada hai fatto",
+      "description": "Il tracciamento visivo dei progressi mostra il tuo percorso da principiante a pro. Sfoglia la Trickipedia per scoprire nuovi trick e fissare obiettivi per la prossima session."
+    },
+    "connect": {
+      "title": "Connettiti",
+      "subtitle": "Rida con la tua crew",
+      "description": "Trova e segui rider che condividono la tua passione. Condividi clip, scrivi ai tuoi amici e costruisci una community intorno agli sport che ami."
+    }
+  },
+  "testimonials": {
+    "title": "I rider sono entusiasti",
+    "subtitle": "Ascolta la community che rende TrickBook quello che è.",
+    "roles": {
+      "skateboarder": "Skater",
+      "snowboarder": "Snowboarder"
+    },
+    "quotes": {
+      "jake": "Finalmente un'app fatta da skater, per skater. Registro i miei progressi da mesi ed è davvero motivante vedere quanti trick ho chiuso.",
+      "sarah": "Il cercatore di spot è incredibile. Mi sono trasferita in una nuova città e ho trovato tre park che non conoscevo nella prima settimana.",
+      "marcus": "Adoro che non sia l'ennesimo social che cerca di vendere i miei dati. È davvero utile e rispetta la mia privacy."
+    }
+  },
+  "howItWorks": {
+    "title": "Pronto a ridare in pochi minuti",
+    "step1": {
+      "title": "Scarica gratis",
+      "description": "Scarica TrickBook per iOS o Android. Niente carta di credito, nessun inganno."
+    },
+    "step2": {
+      "title": "Inizia a registrare",
+      "description": "Crea liste di trick, scopri gli spot vicino a te e registra le tue session."
+    },
+    "step3": {
+      "title": "Sali di livello",
+      "description": "Guarda crescere i tuoi progressi, connettiti con altri rider e supera i tuoi limiti."
+    }
+  },
+  "community": {
+    "title": "Dai rider. <highlight>Per i rider.</highlight>",
+    "description": "Alle grandi piattaforme tech non interessano i nostri interessi. Gli algoritmi seppelliscono i tuoi contenuti e la tua attenzione viene venduta agli inserzionisti. Abbiamo creato TrickBook perché le community di action sport meritano di meglio.",
+    "point1": {
+      "title": "I tuoi dati restano tuoi",
+      "text": "Cifrati, privati, mai venduti agli inserzionisti."
+    },
+    "point2": {
+      "title": "Niente giochi di algoritmi",
+      "text": "I tuoi contenuti raggiungono la tua crew, non solo chi paga."
+    },
+    "point3": {
+      "title": "Creata da una piccola crew con grande passione",
+      "text": "Indipendente, dei rider, guidata dalla community."
+    },
+    "quote": "C'è un valore intrinseco nel creare qualcosa per il puro gusto di crearlo.",
+    "quoteRole": "Padrino dello street skateboarding"
+  },
+  "finalCta": {
+    "title": "Smetti di scrollare. Inizia a ridare.",
+    "subtitle": "{{riders}}+ rider sono già dentro. Gratis per sempre. Niente pubblicità. Niente algoritmo.",
+    "goToTrickbook": "Vai al mio TrickBook",
+    "signup": "Ci sto"
+  }
+}

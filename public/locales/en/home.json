@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "TrickBook - Track Tricks. Find Spots. Ride Together.",
+    "description": "TrickBook is the free app for skaters, snowboarders, and action sports riders to track tricks, discover spots, and connect with the community. Download now on iOS and Android.",
+    "keywords": "skateboarding app, trick tracker, skate spots, snowboarding app, action sports, trick list, skateboard progress, find skate spots",
+    "ogDescription": "The free app for action sports riders to track tricks, discover spots, and connect with the community."
+  },
+  "hero": {
+    "variants": {
+      "control": {
+        "line1": "YOUR BOARD.",
+        "line2": "YOUR DATA.",
+        "line3": "YOUR CREW."
+      },
+      "community": {
+        "line1": "LAND IT.",
+        "line2": "LOG IT.",
+        "line3": "OWN IT."
+      },
+      "action": {
+        "line1": "EVERY TRICK.",
+        "line2": "EVERY SPOT.",
+        "line3": "EVERY SESSION."
+      }
+    },
+    "subline1": "The action sports platform that doesn't sell you out.",
+    "subline2": "Track tricks. Find spots. Ride with real ones.",
+    "cta": "Join the movement"
+  },
+  "badges": {
+    "appStoreAlt": "Download on the App Store",
+    "googlePlayAlt": "Get it on Google Play"
+  },
+  "kaori": {
+    "badge": "Meet your AI snowboard companion",
+    "title": "Ride smarter with <highlight>Kaori.</highlight>",
+    "description": "Your always-on snowboard homie for real coaching, fresh trick ideas, and the push to keep progressing. Talk naturally, ask anything, or have her walk you through a trick on the spot.",
+    "capabilities": {
+      "talk": {
+        "title": "Talk it out",
+        "text": "Live voice conversations"
+      },
+      "demo": {
+        "title": "See the move",
+        "text": "Spoken trick demos"
+      },
+      "memory": {
+        "title": "Built around you",
+        "text": "Coaching that remembers"
+      }
+    },
+    "cta": "Meet Kaori",
+    "conversationCaption": "A conversation with Kaori",
+    "avatarAlt": "Kaori, TrickBook's AI snowboard companion",
+    "aiCompanion": "AI Companion",
+    "status": "Ready for your next lap",
+    "userMessage": "I finally landed frontside 360s. What should I learn next?",
+    "reply": "That's huge. Since your front 3 is solid, let's build toward a frontside 540. I'll break down the setup, takeoff, and landing—and we can start with the first progression now.",
+    "voiceHint": "Kaori can talk you through it"
+  },
+  "stats": {
+    "spots": "Spots Mapped",
+    "tricks": "Tricks Tracked",
+    "trickLists": "Trick Lists",
+    "riders": "Riders"
+  },
+  "features": {
+    "title": "Everything you need to progress",
+    "subtitle": "Built by riders who wanted a better way to track their journey.",
+    "track": {
+      "title": "Track",
+      "subtitle": "Every trick you land",
+      "description": "Build custom trick lists for any sport. Check off tricks as you land them, track your sessions, and watch your skills grow over time."
+    },
+    "progress": {
+      "title": "Progress",
+      "subtitle": "See how far you've come",
+      "description": "Visual progress tracking shows your journey from beginner to pro. Browse the Trickipedia to discover new tricks and set goals for your next session."
+    },
+    "connect": {
+      "title": "Connect",
+      "subtitle": "Ride with your crew",
+      "description": "Find and follow riders who share your stoke. Share clips, message your homies, and build a community around the sports you love."
+    }
+  },
+  "testimonials": {
+    "title": "Riders are stoked",
+    "subtitle": "Hear from the community that makes TrickBook what it is.",
+    "roles": {
+      "skateboarder": "Skateboarder",
+      "snowboarder": "Snowboarder"
+    },
+    "quotes": {
+      "jake": "Finally an app built by skaters, for skaters. I've been tracking my progress for months and it's actually motivating to see how many tricks I've landed.",
+      "sarah": "The spot finder is incredible. I moved to a new city and found three parks I didn't know about within my first week.",
+      "marcus": "Love that this isn't just another social media app trying to sell my data. It's actually useful and respects my privacy."
+    }
+  },
+  "howItWorks": {
+    "title": "Up and riding in minutes",
+    "step1": {
+      "title": "Download free",
+      "description": "Get TrickBook on iOS or Android. No credit card, no catch."
+    },
+    "step2": {
+      "title": "Start tracking",
+      "description": "Create trick lists, discover spots near you, and log your sessions."
+    },
+    "step3": {
+      "title": "Level up",
+      "description": "Watch your progress grow, connect with riders, and push your limits."
+    }
+  },
+  "community": {
+    "title": "By Riders. <highlight>For Riders.</highlight>",
+    "description": "Big tech platforms don't have our best interests at heart. Algorithms bury your content, and your attention is sold to advertisers. We built TrickBook because action sports communities deserve better.",
+    "point1": {
+      "title": "Your data stays yours",
+      "text": "Encrypted, private, never sold to advertisers."
+    },
+    "point2": {
+      "title": "No algorithm games",
+      "text": "Your content reaches your crew, not just who pays."
+    },
+    "point3": {
+      "title": "Built by a small crew with big passion",
+      "text": "Independent, rider-owned, community-driven."
+    },
+    "quote": "There's an intrinsic value in creating something for the sake of creating it.",
+    "quoteRole": "Godfather of Street Skateboarding"
+  },
+  "finalCta": {
+    "title": "Stop scrolling. Start riding.",
+    "subtitle": "{{riders}}+ riders are already in. Free forever. No ads. No algorithm.",
+    "goToTrickbook": "Go to my TrickBook",
+    "signup": "I'm in"
+  }
+}
