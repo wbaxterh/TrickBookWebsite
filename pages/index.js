@@ -1,4 +1,18 @@
-import { ChevronRight, Download, MapPin, Star, Target, TrendingUp, Users, Zap } from 'lucide-react';
+import {
+  Brain,
+  ChevronRight,
+  Download,
+  MapPin,
+  MessageCircle,
+  Mic2,
+  Play,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -187,6 +201,7 @@ export default function Home() {
 
   // Section visibility tracking
   const heroRef = useSectionViewTracking('hero');
+  const kaoriRef = useSectionViewTracking('kaori_companion');
   const statsRef = useSectionViewTracking('stats_bar');
   const featuresRef = useSectionViewTracking('features');
   const testimonialsRef = useSectionViewTracking('testimonials');
@@ -277,7 +292,109 @@ export default function Home() {
       </section>
 
       {/* ============================================ */}
-      {/* SECTION 2: STATS BAR                         */}
+      {/* SECTION 2: KAORI AI COMPANION                */}
+      {/* ============================================ */}
+      <section
+        ref={kaoriRef}
+        className="relative overflow-hidden bg-[#0d0f14] border-y border-white/5 py-20 md:py-28"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_45%,rgba(96,165,250,0.14),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(252,211,77,0.06),transparent_28%)]" />
+
+        <div className="relative container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/20 bg-sky-300/10 px-3 py-1.5 mb-6">
+                <Sparkles className="h-4 w-4 text-sky-300" />
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">
+                  Meet your AI snowboard companion
+                </span>
+              </div>
+
+              <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[0.95] text-white mb-6">
+                Ride smarter with <span className="text-sky-300">Kaori.</span>
+              </h2>
+              <p className="max-w-xl text-lg md:text-xl leading-relaxed text-gray-400 mb-8">
+                Your always-on snowboard homie for real coaching, fresh trick ideas, and the push to
+                keep progressing. Talk naturally, ask anything, or have her walk you through a trick
+                on the spot.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-9">
+                {[
+                  { icon: Mic2, title: 'Talk it out', text: 'Live voice conversations' },
+                  { icon: Play, title: 'See the move', text: 'Spoken trick demos' },
+                  { icon: Brain, title: 'Built around you', text: 'Coaching that remembers' },
+                ].map((capability) => (
+                  <div
+                    key={capability.title}
+                    className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"
+                  >
+                    <capability.icon className="h-5 w-5 text-sky-300 mb-3" />
+                    <h3 className="text-sm font-bold text-white mb-1">{capability.title}</h3>
+                    <p className="text-xs leading-relaxed text-gray-500">{capability.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={loggedIn ? '/kaori-live' : '/signup'}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-300 px-7 py-3.5 text-sm font-bold uppercase tracking-wide !text-[#071018] no-underline transition-all hover:bg-sky-200 hover:!text-[#071018] hover:-translate-y-0.5"
+                onClick={() => trackCtaClick('meet_kaori', 'kaori_companion')}
+              >
+                <MessageCircle className="h-4 w-4" />
+                Meet Kaori
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <figure className="relative max-w-lg mx-auto w-full">
+              <figcaption className="sr-only">A conversation with Kaori</figcaption>
+              <div className="absolute -inset-6 rounded-[3rem] bg-sky-400/10 blur-3xl" />
+              <div className="relative rounded-[2rem] border border-white/10 bg-[#121720]/95 p-5 md:p-7 shadow-2xl shadow-black/40">
+                <div className="flex items-center gap-4 border-b border-white/10 pb-5 mb-6">
+                  <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-sky-300/60 bg-gradient-to-br from-sky-200 to-indigo-400">
+                    <img
+                      src="https://api.thetrickbook.com/assets/kaori-avatar.jpg"
+                      alt="Kaori, TrickBook's AI snowboard companion"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="font-bold text-white mb-0">Kaori</p>
+                      <span className="rounded-full bg-sky-300/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-sky-300">
+                        AI Companion
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 mb-0">Ready for your next lap</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="ml-auto max-w-[82%] rounded-2xl rounded-br-md bg-white/10 px-4 py-3 text-sm leading-relaxed text-gray-200">
+                    I finally landed frontside 360s. What should I learn next?
+                  </div>
+                  <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-sky-300/10 bg-sky-300/10 px-4 py-3 text-sm leading-relaxed text-sky-50">
+                    That’s huge. Since your front 3 is solid, let’s build toward a frontside 540.
+                    I’ll break down the setup, takeoff, and landing—and we can start with the first
+                    progression now.
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-medium text-sky-300">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-300/10">
+                      <Mic2 className="h-3.5 w-3.5" />
+                    </span>
+                    Kaori can talk you through it
+                  </div>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 3: STATS BAR                         */}
       {/* ============================================ */}
       <section ref={statsRef} className="bg-[#111] border-y border-white/5">
         <div className="container mx-auto px-4 py-6">
