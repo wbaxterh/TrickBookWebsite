@@ -354,10 +354,12 @@ export default function Home() {
               <div className="relative rounded-[2rem] border border-white/10 bg-[#121720]/95 p-5 md:p-7 shadow-2xl shadow-black/40">
                 <div className="flex items-center gap-4 border-b border-white/10 pb-5 mb-6">
                   <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-sky-300/60 bg-gradient-to-br from-sky-200 to-indigo-400">
-                    <img
+                    <Image
                       src="https://api.thetrickbook.com/assets/kaori-avatar.jpg"
                       alt="Kaori, TrickBook's AI snowboard companion"
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="56px"
+                      className="object-cover"
                     />
                   </div>
                   <div>
