@@ -4,6 +4,11 @@ module.exports = {
   // core-js modules when the package is externalized. Bundle it with the app so
   // server-side page/data requests do not crash at runtime.
   transpilePackages: ['next-i18next'],
+  experimental: {
+    outputFileTracingIncludes: {
+      '/*': ['./node_modules/core-js/**/*'],
+    },
+  },
   images: {
     remotePatterns: [
       {
