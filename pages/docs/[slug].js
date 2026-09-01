@@ -2,19 +2,25 @@ import fs from 'fs';
 import { marked } from 'marked';
 import Head from 'next/head';
 import Link from 'next/link';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import path from 'path';
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const docsDirectory = path.join(process.cwd(), 'docs');
   const filenames = fs.readdirSync(docsDirectory);
 
+  // Generate every doc for every locale so locale-prefixed URLs don't 404
+  // (docs content itself is English-only for now).
   const paths = filenames
     .filter((filename) => filename.endsWith('.md'))
-    .map((filename) => ({
-      params: {
-        slug: filename.replace('.md', ''),
-      },
-    }));
+    .flatMap((filename) =>
+      (locales ?? ['en']).map((locale) => ({
+        params: {
+          slug: filename.replace('.md', ''),
+        },
+        locale,
+      })),
+    );
 
   return {
     paths,
@@ -22,7 +28,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const docsDirectory = path.join(process.cwd(), 'docs');
   const filePath = path.join(docsDirectory, `${params.slug}.md`);
   const content = fs.readFileSync(filePath, 'utf8');
@@ -39,6 +45,7 @@ export async function getStaticProps({ params }) {
       title,
       content: htmlContent,
       slug: params.slug,
+      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
     },
   };
 }

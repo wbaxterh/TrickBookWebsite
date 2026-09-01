@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "TrickBook - 记录招式，发现地点，一起去滑。",
+    "description": "TrickBook 是为滑板、单板滑雪和极限运动玩家打造的免费应用：记录招式、发现地点、结识社区伙伴。现已登陆 iOS 和 Android。",
+    "keywords": "滑板应用, 招式记录, 滑板地点, 单板滑雪应用, 极限运动, 招式清单, 滑板进步, 寻找滑板地点",
+    "ogDescription": "为极限运动玩家打造的免费应用：记录招式、发现地点、结识社区伙伴。"
+  },
+  "hero": {
+    "variants": {
+      "control": {
+        "line1": "你的板。",
+        "line2": "你的数据。",
+        "line3": "你的伙伴。"
+      },
+      "community": {
+        "line1": "落地它。",
+        "line2": "记下它。",
+        "line3": "拥有它。"
+      },
+      "action": {
+        "line1": "每个招式。",
+        "line2": "每个地点。",
+        "line3": "每次练习。"
+      }
+    },
+    "subline1": "不出卖你的极限运动平台。",
+    "subline2": "记录招式，发现地点，和真正的玩家一起滑。",
+    "cta": "加入我们"
+  },
+  "badges": {
+    "appStoreAlt": "在 App Store 下载",
+    "googlePlayAlt": "在 Google Play 获取"
+  },
+  "kaori": {
+    "badge": "认识你的 AI 单板滑雪伙伴",
+    "title": "和 <highlight>Kaori</highlight> 一起滑得更聪明。",
+    "description": "你的全天候单板伙伴：真正的教学指导、新招式灵感，以及不断进步的动力。自然对话，随时提问，或让她当场为你讲解一个招式。",
+    "capabilities": {
+      "talk": {
+        "title": "畅所欲言",
+        "text": "实时语音对话"
+      },
+      "demo": {
+        "title": "看懂动作",
+        "text": "语音招式讲解"
+      },
+      "memory": {
+        "title": "为你量身定制",
+        "text": "记得你的教学"
+      }
+    },
+    "cta": "认识 Kaori",
+    "conversationCaption": "与 Kaori 的对话",
+    "avatarAlt": "Kaori，TrickBook 的 AI 单板滑雪伙伴",
+    "aiCompanion": "AI 伙伴",
+    "status": "随时准备陪你下一趟",
+    "userMessage": "我终于落地了正面 360。接下来该学什么？",
+    "reply": "太棒了！既然你的正面 360 已经稳了，我们就朝正面 540 努力。我会拆解起跳准备、腾空和落地——现在就可以开始第一步练习。",
+    "voiceHint": "Kaori 可以用语音指导你"
+  },
+  "stats": {
+    "spots": "已标记地点",
+    "tricks": "已记录招式",
+    "trickLists": "招式清单",
+    "riders": "玩家"
+  },
+  "features": {
+    "title": "进步所需的一切",
+    "subtitle": "由想要更好记录成长历程的玩家打造。",
+    "track": {
+      "title": "记录",
+      "subtitle": "你落地的每个招式",
+      "description": "为任何运动创建自定义招式清单。落地一个就勾掉一个，记录你的练习，看着自己的技术随时间不断提升。"
+    },
+    "progress": {
+      "title": "进步",
+      "subtitle": "看看你走了多远",
+      "description": "可视化进度记录展示你从新手到高手的历程。浏览 Trickipedia 发现新招式，为下次练习设定目标。"
+    },
+    "connect": {
+      "title": "连接",
+      "subtitle": "和你的伙伴一起滑",
+      "description": "找到并关注和你一样热爱的玩家。分享视频片段，给伙伴发消息，围绕你热爱的运动建立社区。"
+    }
+  },
+  "testimonials": {
+    "title": "玩家们都很兴奋",
+    "subtitle": "听听让 TrickBook 成为现在模样的社区怎么说。",
+    "roles": {
+      "skateboarder": "滑板玩家",
+      "snowboarder": "单板滑雪玩家"
+    },
+    "quotes": {
+      "jake": "终于有一款由滑手为滑手打造的应用了。我记录进度好几个月了，看到自己落地了多少招式真的很有动力。",
+      "sarah": "地点搜索功能太强了。我搬到新城市后，第一周就发现了三个之前不知道的滑板场。",
+      "marcus": "我喜欢它不是又一个想卖我数据的社交应用。它真的有用，而且尊重我的隐私。"
+    }
+  },
+  "howItWorks": {
+    "title": "几分钟即可上手",
+    "step1": {
+      "title": "免费下载",
+      "description": "在 iOS 或 Android 上获取 TrickBook。无需信用卡，没有套路。"
+    },
+    "step2": {
+      "title": "开始记录",
+      "description": "创建招式清单，发现附近的地点，记录你的练习。"
+    },
+    "step3": {
+      "title": "不断升级",
+      "description": "见证进步，结识玩家，突破自己的极限。"
+    }
+  },
+  "community": {
+    "title": "玩家打造。<highlight>为玩家服务。</highlight>",
+    "description": "大型科技平台并不真正关心我们。算法埋没你的内容，你的注意力被卖给广告商。我们打造 TrickBook，因为极限运动社区值得更好的。",
+    "point1": {
+      "title": "你的数据永远属于你",
+      "text": "加密、私密，绝不卖给广告商。"
+    },
+    "point2": {
+      "title": "没有算法把戏",
+      "text": "你的内容触达你的伙伴，而不是只给付费者。"
+    },
+    "point3": {
+      "title": "由充满热情的小团队打造",
+      "text": "独立运营，玩家所有，社区驱动。"
+    },
+    "quote": "为了创造本身而去创造，这件事本身就有价值。",
+    "quoteRole": "街式滑板教父"
+  },
+  "finalCta": {
+    "title": "别再刷了，去滑吧。",
+    "subtitle": "{{riders}}+ 位玩家已经加入。永久免费。没有广告。没有算法。",
+    "goToTrickbook": "进入我的 TrickBook",
+    "signup": "算我一个"
+  }
+}

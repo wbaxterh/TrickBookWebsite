@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "スポット",
+    "events": "イベント",
+    "homies": "仲間",
+    "media": "メディア",
+    "login": "ログイン",
+    "signupFree": "無料登録",
+    "myProfile": "マイプロフィール",
+    "messages": "メッセージ",
+    "logout": "ログアウト"
+  },
+  "theme": {
+    "toggle": "テーマを切り替え",
+    "light": "ライトモード",
+    "dark": "ダークモード"
+  },
+  "language": {
+    "select": "言語"
+  },
+  "footer": {
+    "tagline": "トリックを記録し、スポットを見つけ、仲間のライダーとつながろう。",
+    "explore": "見る",
+    "resources": "リソース",
+    "connect": "フォローする",
+    "blog": "ブログ",
+    "about": "TrickBookについて",
+    "contact": "お問い合わせ・フィードバック",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsConditions": "利用規約",
+    "followUs": "最新情報やアクションスポーツのコンテンツをフォローしてチェック。",
+    "copyright": "© {{year}} The Trick Book. All rights reserved.",
+    "privacy": "プライバシー",
+    "terms": "規約"
+  }
+}

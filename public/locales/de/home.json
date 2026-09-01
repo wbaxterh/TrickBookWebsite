@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "TrickBook - Tricks tracken. Spots finden. Zusammen fahren.",
+    "description": "TrickBook ist die kostenlose App für Skater, Snowboarder und Actionsport-Rider: Tricks tracken, Spots entdecken und dich mit der Community vernetzen. Jetzt für iOS und Android herunterladen.",
+    "keywords": "Skateboard-App, Trick-Tracker, Skate-Spots, Snowboard-App, Actionsport, Trickliste, Skateboard-Fortschritt, Skate-Spots finden",
+    "ogDescription": "Die kostenlose App für Actionsport-Rider: Tricks tracken, Spots entdecken und dich mit der Community vernetzen."
+  },
+  "hero": {
+    "variants": {
+      "control": {
+        "line1": "DEIN BOARD.",
+        "line2": "DEINE DATEN.",
+        "line3": "DEINE CREW."
+      },
+      "community": {
+        "line1": "STEH ES.",
+        "line2": "TRACK ES.",
+        "line3": "MACH ES ZU DEINEM."
+      },
+      "action": {
+        "line1": "JEDER TRICK.",
+        "line2": "JEDER SPOT.",
+        "line3": "JEDE SESSION."
+      }
+    },
+    "subline1": "Die Actionsport-Plattform, die dich nicht verkauft.",
+    "subline2": "Tricks tracken. Spots finden. Mit echten Leuten fahren.",
+    "cta": "Mach mit"
+  },
+  "badges": {
+    "appStoreAlt": "Im App Store laden",
+    "googlePlayAlt": "Jetzt bei Google Play"
+  },
+  "kaori": {
+    "badge": "Lern deine KI-Snowboard-Begleiterin kennen",
+    "title": "Fahr smarter mit <highlight>Kaori.</highlight>",
+    "description": "Deine immer verfügbare Snowboard-Begleiterin für echtes Coaching, frische Trick-Ideen und den Extra-Schub, um weiter besser zu werden. Sprich ganz natürlich, frag alles oder lass dir einen Trick direkt vor Ort erklären.",
+    "capabilities": {
+      "talk": {
+        "title": "Sprich es durch",
+        "text": "Live-Sprachgespräche"
+      },
+      "demo": {
+        "title": "Sieh den Move",
+        "text": "Gesprochene Trick-Demos"
+      },
+      "memory": {
+        "title": "Auf dich zugeschnitten",
+        "text": "Coaching mit Gedächtnis"
+      }
+    },
+    "cta": "Lern Kaori kennen",
+    "conversationCaption": "Ein Gespräch mit Kaori",
+    "avatarAlt": "Kaori, die KI-Snowboard-Begleiterin von TrickBook",
+    "aiCompanion": "KI-Begleiterin",
+    "status": "Bereit für deine nächste Abfahrt",
+    "userMessage": "Ich habe endlich Frontside 360 gestanden. Was sollte ich als Nächstes lernen?",
+    "reply": "Stark! Dein Front 3 sitzt, also bauen wir jetzt auf einen Frontside 540 hin. Ich erkläre dir Anlauf, Absprung und Landung — und wir können sofort mit dem ersten Schritt loslegen.",
+    "voiceHint": "Kaori kann es dir per Stimme erklären"
+  },
+  "stats": {
+    "spots": "Spots kartiert",
+    "tricks": "Tricks getrackt",
+    "trickLists": "Tricklisten",
+    "riders": "Rider"
+  },
+  "features": {
+    "title": "Alles, was du zum Weiterkommen brauchst",
+    "subtitle": "Gebaut von Ridern, die einen besseren Weg suchten, ihre Reise festzuhalten.",
+    "track": {
+      "title": "Tracken",
+      "subtitle": "Jeder Trick, den du stehst",
+      "description": "Erstelle eigene Tricklisten für jede Sportart. Hake Tricks ab, sobald du sie stehst, tracke deine Sessions und sieh zu, wie deine Skills mit der Zeit wachsen."
+    },
+    "progress": {
+      "title": "Fortschritt",
+      "subtitle": "Sieh, wie weit du gekommen bist",
+      "description": "Visuelles Fortschritts-Tracking zeigt deinen Weg vom Anfänger zum Profi. Stöbere in der Trickipedia, entdecke neue Tricks und setz dir Ziele für die nächste Session."
+    },
+    "connect": {
+      "title": "Vernetzen",
+      "subtitle": "Fahr mit deiner Crew",
+      "description": "Finde und folge Ridern, die deine Leidenschaft teilen. Teile Clips, schreib deinen Homies und baue eine Community rund um die Sportarten auf, die du liebst."
+    }
+  },
+  "testimonials": {
+    "title": "Rider sind begeistert",
+    "subtitle": "Hör auf die Community, die TrickBook zu dem macht, was es ist.",
+    "roles": {
+      "skateboarder": "Skateboarder",
+      "snowboarder": "Snowboarder"
+    },
+    "quotes": {
+      "jake": "Endlich eine App von Skatern für Skater. Ich tracke meinen Fortschritt seit Monaten und es motiviert wirklich zu sehen, wie viele Tricks ich schon gestanden habe.",
+      "sarah": "Die Spot-Suche ist unglaublich. Ich bin in eine neue Stadt gezogen und habe in der ersten Woche drei Parks gefunden, die ich nicht kannte.",
+      "marcus": "Ich liebe, dass das nicht noch eine Social-Media-App ist, die meine Daten verkaufen will. Sie ist wirklich nützlich und respektiert meine Privatsphäre."
+    }
+  },
+  "howItWorks": {
+    "title": "In Minuten startklar",
+    "step1": {
+      "title": "Kostenlos laden",
+      "description": "Hol dir TrickBook für iOS oder Android. Keine Kreditkarte, kein Haken."
+    },
+    "step2": {
+      "title": "Mit dem Tracken loslegen",
+      "description": "Erstelle Tricklisten, entdecke Spots in deiner Nähe und halte deine Sessions fest."
+    },
+    "step3": {
+      "title": "Level aufsteigen",
+      "description": "Sieh deinen Fortschritt wachsen, vernetze dich mit Ridern und verschieb deine Grenzen."
+    }
+  },
+  "community": {
+    "title": "Von Ridern. <highlight>Für Rider.</highlight>",
+    "description": "Big-Tech-Plattformen haben nicht unsere Interessen im Blick. Algorithmen begraben deinen Content und deine Aufmerksamkeit wird an Werbetreibende verkauft. Wir haben TrickBook gebaut, weil Actionsport-Communities Besseres verdienen.",
+    "point1": {
+      "title": "Deine Daten bleiben deine",
+      "text": "Verschlüsselt, privat, niemals an Werbetreibende verkauft."
+    },
+    "point2": {
+      "title": "Keine Algorithmus-Spielchen",
+      "text": "Dein Content erreicht deine Crew, nicht nur die, die zahlen."
+    },
+    "point3": {
+      "title": "Gebaut von einer kleinen Crew mit großer Leidenschaft",
+      "text": "Unabhängig, in Rider-Hand, von der Community getragen."
+    },
+    "quote": "Es liegt ein innerer Wert darin, etwas nur um des Erschaffens willen zu erschaffen.",
+    "quoteRole": "Pate des Street-Skateboardings"
+  },
+  "finalCta": {
+    "title": "Hör auf zu scrollen. Fang an zu fahren.",
+    "subtitle": "{{riders}}+ Rider sind schon dabei. Für immer kostenlos. Keine Werbung. Kein Algorithmus.",
+    "goToTrickbook": "Zu meinem TrickBook",
+    "signup": "Ich bin dabei"
+  }
+}

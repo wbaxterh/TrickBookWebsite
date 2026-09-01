@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "Spots",
+    "events": "Événements",
+    "homies": "Potes",
+    "media": "Médias",
+    "login": "Se connecter",
+    "signupFree": "Inscription gratuite",
+    "myProfile": "Mon profil",
+    "messages": "Messages",
+    "logout": "Se déconnecter"
+  },
+  "theme": {
+    "toggle": "Changer de thème",
+    "light": "Mode clair",
+    "dark": "Mode sombre"
+  },
+  "language": {
+    "select": "Langue"
+  },
+  "footer": {
+    "tagline": "Suivez vos tricks, découvrez des spots et connectez-vous avec d'autres riders.",
+    "explore": "Explorer",
+    "resources": "Ressources",
+    "connect": "Se connecter",
+    "blog": "Blog",
+    "about": "À propos",
+    "contact": "Contact et retours",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsConditions": "Conditions générales",
+    "followUs": "Suivez-nous pour les dernières nouveautés et du contenu sports d'action.",
+    "copyright": "© {{year}} The Trick Book. Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  }
+}
