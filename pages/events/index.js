@@ -19,6 +19,7 @@ import { getEvents } from '../../lib/apiEvents';
 const DEFAULT_FILTERS = {
   q: '',
   sport: 'all',
+  discipline: 'all',
   location: '',
   radius: '100',
   date: 'all',
@@ -43,6 +44,9 @@ function filterFixtures(events, filters) {
       if (!haystack.includes(query)) return false;
     }
     if (filters.sport !== 'all' && !event.sports?.includes(filters.sport)) return false;
+    if (filters.discipline !== 'all' && !event.disciplines?.includes(filters.discipline)) {
+      return false;
+    }
     if (filters.intent !== 'all' && !event.intents?.includes(filters.intent)) return false;
     if (filters.registration === 'open' && event.participation?.registrationStatus !== 'open') {
       return false;
@@ -83,6 +87,7 @@ export default function EventsPage() {
             const data = await getEvents({
               q: filters.q,
               sport: filters.sport,
+              discipline: filters.discipline,
               location: filters.location,
               radius: filters.radius === 'any' ? '' : filters.radius,
               date: filters.date,

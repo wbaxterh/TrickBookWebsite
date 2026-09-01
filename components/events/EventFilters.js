@@ -1,5 +1,10 @@
 import { CalendarDays, LocateFixed, Search, SlidersHorizontal, X } from 'lucide-react';
-import { DATE_OPTIONS, INTENT_OPTIONS, SPORT_OPTIONS } from '../../lib/eventFormatters';
+import {
+  DATE_OPTIONS,
+  DISCIPLINE_OPTIONS,
+  INTENT_OPTIONS,
+  SPORT_OPTIONS,
+} from '../../lib/eventFormatters';
 
 // Base field styling WITHOUT horizontal padding, so per-field padding (icon vs
 // plain) can't be clobbered by a shorthand `px-*` on the same element.
@@ -38,7 +43,7 @@ export default function EventFilters({ filters, onChange, onReset }) {
         )}
       </div>
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
         <label className="relative block xl:col-span-2">
           <span className="sr-only">Search events</span>
           <Search className={iconClass} />
@@ -48,6 +53,21 @@ export default function EventFilters({ filters, onChange, onReset }) {
             placeholder="Search events or organizers"
             className={`${fieldIcon} w-full`}
           />
+        </label>
+
+        <label className="block">
+          <span className="sr-only">Discipline</span>
+          <select
+            value={filters.discipline}
+            onChange={(event) => onChange('discipline', event.target.value)}
+            className={`${fieldPlain} w-full`}
+          >
+            {DISCIPLINE_OPTIONS.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label className="block">

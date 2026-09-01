@@ -3,8 +3,10 @@ import {
   Bell,
   CalendarDays,
   ExternalLink,
+  Instagram,
   Loader2,
   MapPin,
+  PlayCircle,
   Radio,
   ShieldCheck,
   Ticket,
@@ -20,6 +22,7 @@ import { Card, CardContent } from '../../components/ui/card';
 import { getFixtureEvent } from '../../data/eventFixtures';
 import { getEvent } from '../../lib/apiEvents';
 import {
+  formatDiscipline,
   formatEventRange,
   getEventAction,
   getEventLocation,
@@ -97,6 +100,16 @@ export default function EventDetailPage() {
       </Head>
 
       <main className="min-h-screen bg-background">
+        {event.image && (
+          <div className="relative h-[34vh] min-h-[260px] max-h-[520px] overflow-hidden bg-black">
+            <img
+              src={event.image}
+              alt={`${event.title} event`}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent" />
+          </div>
+        )}
         <section className="border-b border-border bg-card/40">
           <div className="container py-8 md:py-12">
             <Link
@@ -114,7 +127,7 @@ export default function EventDetailPage() {
                   </Badge>
                   {event.disciplines?.map((discipline) => (
                     <Badge key={discipline} variant="secondary" className="capitalize">
-                      {discipline.replace(/_/g, ' ')}
+                      {formatDiscipline(discipline)}
                     </Badge>
                   ))}
                   {status && <Badge>{status.label}</Badge>}
@@ -212,6 +225,27 @@ export default function EventDetailPage() {
                   />
                 </div>
               </div>
+
+              {event.media?.videos?.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground">Watch past action</h2>
+                  <div className="grid sm:grid-cols-2 gap-3 mt-4">
+                    {event.media.videos.map((video) => (
+                      <a
+                        key={video.url}
+                        href={video.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-xl border border-border bg-card p-4 flex items-center gap-3 text-foreground hover:border-yellow-500 no-underline"
+                      >
+                        <PlayCircle className="h-8 w-8 text-yellow-500" />
+                        <span className="font-semibold">{video.label || 'Watch event video'}</span>
+                        <ExternalLink className="h-4 w-4 ml-auto text-muted-foreground" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <aside>
@@ -233,6 +267,27 @@ export default function EventDetailPage() {
                     <p className="text-xs text-muted-foreground mt-4">
                       Last checked {sourceChecked}
                     </p>
+                  )}
+                  {event.socialLinks?.length > 0 && (
+                    <div className="border-t border-border mt-5 pt-4 space-y-2">
+                      {event.socialLinks.map((social) => (
+                        <a
+                          key={`${social.platform}-${social.url}`}
+                          href={social.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-2 text-sm text-foreground hover:text-yellow-500 no-underline"
+                        >
+                          {social.platform === 'instagram' ? (
+                            <Instagram className="h-4 w-4" />
+                          ) : (
+                            <PlayCircle className="h-4 w-4" />
+                          )}
+                          {social.label || `Official ${social.platform}`}
+                          <ExternalLink className="h-3.5 w-3.5 ml-auto" />
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </CardContent>
               </Card>

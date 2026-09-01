@@ -1,6 +1,7 @@
 import { Bell, CalendarDays, ExternalLink, MapPin, Radio, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import {
+  formatDiscipline,
   formatEventDate,
   getEventAction,
   getEventLocation,
@@ -30,6 +31,17 @@ export default function EventCard({ event, saved = false, onToggleSave }) {
   return (
     <Card className="group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
       <CardContent className="p-0">
+        {event.image && (
+          <Link href={detailUrl} className="block relative aspect-[16/7] overflow-hidden bg-muted">
+            <img
+              src={event.image}
+              alt={`${event.title} event`}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+          </Link>
+        )}
         <div className="flex">
           <div className="w-20 sm:w-24 flex-shrink-0 bg-yellow-400 text-black flex flex-col items-center justify-center px-2 py-5">
             <span className="text-xs font-black tracking-[0.18em]">{date.month}</span>
@@ -50,6 +62,11 @@ export default function EventCard({ event, saved = false, onToggleSave }) {
                       {status.label}
                     </Badge>
                   )}
+                  {event.disciplines?.slice(0, 2).map((discipline) => (
+                    <Badge key={discipline} variant="secondary">
+                      {formatDiscipline(discipline)}
+                    </Badge>
+                  ))}
                 </div>
 
                 <Link href={detailUrl} className="no-underline">
