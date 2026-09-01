@@ -11,16 +11,21 @@ export async function getStaticPaths({ locales }) {
 
   // Generate every doc for every locale so locale-prefixed URLs don't 404
   // (docs content itself is English-only for now).
-  const paths = filenames
-    .filter((filename) => filename.endsWith('.md'))
-    .flatMap((filename) =>
-      (locales ?? ['en']).map((locale) => ({
+  const docFilenames = filenames.filter((filename) => filename.endsWith('.md'));
+  const paths = locales
+    ? docFilenames.flatMap((filename) =>
+        locales.map((locale) => ({
+          params: {
+            slug: filename.replace('.md', ''),
+          },
+          locale,
+        })),
+      )
+    : docFilenames.map((filename) => ({
         params: {
           slug: filename.replace('.md', ''),
         },
-        locale,
-      })),
-    );
+      }));
 
   return {
     paths,
