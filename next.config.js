@@ -1,5 +1,9 @@
 // next.config.js
 module.exports = {
+  // Amplify's WEB_COMPUTE packager can omit next-i18next's dynamically loaded
+  // core-js modules when the package is externalized. Bundle it with the app so
+  // server-side page/data requests do not crash at runtime.
+  transpilePackages: ['next-i18next'],
   images: {
     remotePatterns: [
       {

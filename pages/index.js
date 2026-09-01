@@ -23,6 +23,7 @@ import { AuthContext } from '../auth/AuthContext';
 import { trackAppStoreClick, trackCtaClick, trackHeroVariant } from '../lib/analytics';
 import { useFeatureFlag } from '../lib/useFeatureFlag';
 import { useScrollDepthTracking, useSectionViewTracking } from '../lib/useScrollTracking';
+import nextI18NextConfig from '../next-i18next.config';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || '';
 
@@ -621,7 +622,7 @@ export default function Home() {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['common', 'home'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['common', 'home'], nextI18NextConfig)),
     },
   };
 }

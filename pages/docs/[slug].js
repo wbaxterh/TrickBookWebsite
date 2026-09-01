@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import Head from 'next/head';
 import Link from 'next/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import nextI18NextConfig from '../../next-i18next.config';
 import path from 'path';
 
 export async function getStaticPaths({ locales }) {
@@ -50,7 +51,7 @@ export async function getStaticProps({ params, locale }) {
       title,
       content: htmlContent,
       slug: params.slug,
-      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['common'], nextI18NextConfig)),
     },
   };
 }
