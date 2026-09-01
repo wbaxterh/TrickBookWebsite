@@ -1,5 +1,5 @@
 import { MarkerClusterer, SuperClusterViewportAlgorithm } from '@googlemaps/markerclusterer';
-import { APIProvider, Map as GoogleMap, InfoWindow, useMap } from '@vis.gl/react-google-maps';
+import { APIProvider, Map as GoogleMap, useMap } from '@vis.gl/react-google-maps';
 import { Loader2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -61,7 +61,7 @@ function getCategoryIcon(color) {
   return iconCache[color];
 }
 
-function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
+function ClusteredMarkers({ pins, onMarkerClick }) {
   const map = useMap();
   const clustererRef = useRef(null);
 
@@ -114,111 +114,33 @@ function ClusteredMarkers({ pins, onMarkerClick, selectedPin }) {
     };
   }, [map, pins, onMarkerClick]);
 
-  if (!selectedPin) return null;
-
-  const spotSlug = selectedPin.name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-  const stateSlug = (selectedPin.state || 'unknown').toLowerCase().replace(/\s+/g, '-');
-  const detailUrl = `/spots/${stateSlug}/${spotSlug}?id=${selectedPin._id}`;
-  const rating = selectedPin.rating;
-  const desc = selectedPin.description;
-
-  return (
-    <InfoWindow
-      position={{ lat: selectedPin.latitude, lng: selectedPin.longitude }}
-      onCloseClick={() => onMarkerClick(null)}
-      pixelOffset={[0, -32]}
-    >
-      <div style={{ maxWidth: 240, padding: 4, fontFamily: 'system-ui, sans-serif' }}>
-        <a href={detailUrl} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <h3 style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#111' }}>
-            {selectedPin.name}
-          </h3>
-        </a>
-        <p style={{ margin: '0 0 6px', fontSize: 12, color: '#666' }}>
-          {[selectedPin.state, selectedPin.country].filter(Boolean).join(', ')}
-        </p>
-        {rating > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 3, marginBottom: 6 }}>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <svg
-                key={`s${i}`}
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill={i < Math.round(rating) ? '#f59e0b' : '#d1d5db'}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-            ))}
-            <span style={{ fontSize: 12, color: '#666', marginLeft: 2 }}>{rating.toFixed(1)}</span>
-          </div>
-        )}
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: desc ? 6 : 0 }}>
-          {selectedPin.category && (
-            <span
-              style={{
-                display: 'inline-block',
-                padding: '2px 8px',
-                borderRadius: 99,
-                fontSize: 11,
-                fontWeight: 500,
-                color: '#fff',
-                backgroundColor: CATEGORY_COLORS[selectedPin.category] || CATEGORY_COLORS.default,
-              }}
-            >
-              {selectedPin.category}
-            </span>
-          )}
-          {selectedPin.sportTypes?.length > 0 && (
-            <span style={{ fontSize: 11, color: '#888' }}>{selectedPin.sportTypes.join(', ')}</span>
-          )}
-        </div>
-        {desc && (
-          <p
-            style={{
-              margin: '0 0 6px',
-              fontSize: 12,
-              color: '#555',
-              lineHeight: 1.4,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-            }}
-          >
-            {desc}
-          </p>
-        )}
-        <a
-          href={detailUrl}
-          style={{ fontSize: 12, color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}
-        >
-          View Details →
-        </a>
-      </div>
-    </InfoWindow>
-  );
+  // Markers only — the selected spot renders in a panel below the map (handled
+  // by the parent via onMarkerClick), not in an on-map InfoWindow.
+  return null;
 }
 
-function pinMatchesFilters(pin, selectedCategory, selectedCountry) {
+function pinMatchesFilters(pin, selectedCategory, selectedType, selectedCountry) {
+  // Sport filter matches against the pin's sportTypes.
   if (selectedCategory !== 'all') {
-    const matchesCategory = pin.category === selectedCategory;
     const matchesSport = Array.isArray(pin.sportTypes) && pin.sportTypes.includes(selectedCategory);
-    if (!matchesCategory && !matchesSport) return false;
+    if (!matchesSport) return false;
   }
+  // Venue-type filter matches the pin's category (park/street/backcountry/…).
+  if (selectedType !== 'all' && pin.category !== selectedType) return false;
   if (selectedCountry !== 'all' && pin.country !== selectedCountry) return false;
   return true;
 }
 
-export default function SpotsMap({ selectedCategory = 'all', selectedCountry = 'all' }) {
+export default function SpotsMap({
+  selectedCategory = 'all',
+  selectedType = 'all',
+  selectedCountry = 'all',
+  onSelectSpot,
+  heightClass = 'h-[70vh]',
+  rounded = true,
+}) {
   const [allPins, setAllPins] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedPin, setSelectedPin] = useState(null);
   const [error, setError] = useState(null);
 
   // Fetch all spots once
@@ -264,17 +186,27 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
   // Memoized so the array identity is stable across unrelated re-renders
   // (e.g., selecting a pin) — otherwise ClusteredMarkers rebuilds every marker.
   const pins = useMemo(
-    () => allPins.filter((pin) => pinMatchesFilters(pin, selectedCategory, selectedCountry)),
-    [allPins, selectedCategory, selectedCountry],
+    () =>
+      allPins.filter((pin) =>
+        pinMatchesFilters(pin, selectedCategory, selectedType, selectedCountry),
+      ),
+    [allPins, selectedCategory, selectedType, selectedCountry],
   );
 
-  const handleMarkerClick = useCallback((pin) => {
-    setSelectedPin(pin);
-  }, []);
+  const handleMarkerClick = useCallback(
+    (pin) => {
+      if (onSelectSpot) onSelectSpot(pin);
+    },
+    [onSelectSpot],
+  );
+
+  const roundClass = rounded ? 'rounded-xl border' : 'border-y';
 
   if (!MAPS_KEY) {
     return (
-      <div className="w-full h-[70vh] bg-card border border-border rounded-xl flex items-center justify-center">
+      <div
+        className={`w-full ${heightClass} bg-card border-border ${roundClass} flex items-center justify-center`}
+      >
         <div className="text-center">
           <p className="text-muted-foreground mb-2">Google Maps API key not configured</p>
           <p className="text-xs text-muted-foreground">
@@ -287,14 +219,16 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
 
   if (error) {
     return (
-      <div className="w-full h-[70vh] bg-card border border-border rounded-xl flex items-center justify-center">
+      <div
+        className={`w-full ${heightClass} bg-card border-border ${roundClass} flex items-center justify-center`}
+      >
         <p className="text-muted-foreground">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-[70vh] rounded-xl overflow-hidden border border-border relative">
+    <div className={`w-full ${heightClass} overflow-hidden border-border ${roundClass} relative`}>
       <APIProvider apiKey={MAPS_KEY}>
         <GoogleMap
           defaultCenter={{ lat: 35, lng: -30 }}
@@ -303,11 +237,7 @@ export default function SpotsMap({ selectedCategory = 'all', selectedCountry = '
           disableDefaultUI={false}
           style={{ width: '100%', height: '100%' }}
         >
-          <ClusteredMarkers
-            pins={pins}
-            onMarkerClick={handleMarkerClick}
-            selectedPin={selectedPin}
-          />
+          <ClusteredMarkers pins={pins} onMarkerClick={handleMarkerClick} />
         </GoogleMap>
       </APIProvider>
       {loading && (

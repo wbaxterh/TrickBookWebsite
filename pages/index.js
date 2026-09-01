@@ -1,7 +1,23 @@
-import { ChevronRight, Download, MapPin, Star, Target, TrendingUp, Users, Zap } from 'lucide-react';
+import {
+  Brain,
+  ChevronRight,
+  Download,
+  MapPin,
+  MessageCircle,
+  Mic2,
+  Play,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
+  Users,
+  Zap,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Trans, useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { trackAppStoreClick, trackCtaClick, trackHeroVariant } from '../lib/analytics';
@@ -64,6 +80,7 @@ function AnimatedStat({ value, label, icon: Icon }) {
 }
 
 function AppStoreBadges({ className = '', location = 'unknown' }) {
+  const { t } = useTranslation('home');
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <a
@@ -77,7 +94,7 @@ function AppStoreBadges({ className = '', location = 'unknown' }) {
           src="/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
           width={150}
           height={50}
-          alt="Download on the App Store"
+          alt={t('badges.appStoreAlt')}
         />
       </a>
       <a
@@ -91,7 +108,7 @@ function AppStoreBadges({ className = '', location = 'unknown' }) {
           src="/google-play-badge.svg"
           width={168}
           height={50}
-          alt="Get it on Google Play"
+          alt={t('badges.googlePlayAlt')}
           className="h-[50px] w-auto"
         />
       </a>
@@ -99,94 +116,47 @@ function AppStoreBadges({ className = '', location = 'unknown' }) {
   );
 }
 
+// Copy for these sections lives in public/locales/<locale>/home.json.
 const FEATURES = [
-  {
-    icon: Target,
-    title: 'Track',
-    subtitle: 'Every trick you land',
-    description:
-      'Build custom trick lists for any sport. Check off tricks as you land them, track your sessions, and watch your skills grow over time.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Progress',
-    subtitle: "See how far you've come",
-    description:
-      'Visual progress tracking shows your journey from beginner to pro. Browse the Trickipedia to discover new tricks and set goals for your next session.',
-  },
-  {
-    icon: Users,
-    title: 'Connect',
-    subtitle: 'Ride with your crew',
-    description:
-      'Find and follow riders who share your stoke. Share clips, message your homies, and build a community around the sports you love.',
-  },
+  { icon: Target, key: 'track' },
+  { icon: TrendingUp, key: 'progress' },
+  { icon: Users, key: 'connect' },
 ];
 
 const TESTIMONIALS = [
-  {
-    quote:
-      "Finally an app built by skaters, for skaters. I've been tracking my progress for months and it's actually motivating to see how many tricks I've landed.",
-    name: 'Jake M.',
-    role: 'Skateboarder',
-    rating: 5,
-  },
-  {
-    quote:
-      "The spot finder is incredible. I moved to a new city and found three parks I didn't know about within my first week.",
-    name: 'Sarah K.',
-    role: 'Snowboarder',
-    rating: 5,
-  },
-  {
-    quote:
-      "Love that this isn't just another social media app trying to sell my data. It's actually useful and respects my privacy.",
-    name: 'Marcus T.',
-    role: 'Skateboarder',
-    rating: 5,
-  },
+  { key: 'jake', name: 'Jake M.', roleKey: 'skateboarder', rating: 5 },
+  { key: 'sarah', name: 'Sarah K.', roleKey: 'snowboarder', rating: 5 },
+  { key: 'marcus', name: 'Marcus T.', roleKey: 'skateboarder', rating: 5 },
 ];
 
 const HOW_IT_WORKS = [
-  {
-    step: '1',
-    icon: Download,
-    title: 'Download free',
-    description: 'Get TrickBook on iOS or Android. No credit card, no catch.',
-  },
-  {
-    step: '2',
-    icon: Zap,
-    title: 'Start tracking',
-    description: 'Create trick lists, discover spots near you, and log your sessions.',
-  },
-  {
-    step: '3',
-    icon: TrendingUp,
-    title: 'Level up',
-    description: 'Watch your progress grow, connect with riders, and push your limits.',
-  },
+  { step: '1', icon: Download, key: 'step1' },
+  { step: '2', icon: Zap, key: 'step2' },
+  { step: '3', icon: TrendingUp, key: 'step3' },
 ];
 
 // A/B test variants for the hero headline.
 // Create a feature flag called "hero-headline" in PostHog with these variant keys.
-const HERO_VARIANTS = {
-  control: { line1: 'YOUR BOARD.', line2: 'YOUR DATA.', line3: 'YOUR CREW.' },
-  'variant-community': { line1: 'LAND IT.', line2: 'LOG IT.', line3: 'OWN IT.' },
-  'variant-action': { line1: 'EVERY TRICK.', line2: 'EVERY SPOT.', line3: 'EVERY SESSION.' },
+// Maps PostHog variant keys to hero.variants.* keys in home.json.
+const HERO_VARIANT_KEYS = {
+  control: 'control',
+  'variant-community': 'community',
+  'variant-action': 'action',
 };
 
 export default function Home() {
+  const { t } = useTranslation('home');
   const { loggedIn } = useContext(AuthContext);
   const stats = useStats();
   const heroVariant = useFeatureFlag('hero-headline', 'control');
-  const heroText = HERO_VARIANTS[heroVariant] || HERO_VARIANTS.control;
+  const heroKey = `hero.variants.${HERO_VARIANT_KEYS[heroVariant] || 'control'}`;
 
   // Scroll depth tracking (25/50/75/100% milestones)
   useScrollDepthTracking();
 
   // Section visibility tracking
   const heroRef = useSectionViewTracking('hero');
+  const kaoriRef = useSectionViewTracking('kaori_companion');
   const statsRef = useSectionViewTracking('stats_bar');
   const featuresRef = useSectionViewTracking('features');
   const testimonialsRef = useSectionViewTracking('testimonials');
@@ -204,25 +174,16 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TrickBook - Track Tricks. Find Spots. Ride Together.</title>
+        <title>{t('meta.title')}</title>
         <link rel="icon" href="/favicon.png" />
-        <meta
-          name="description"
-          content="TrickBook is the free app for skaters, snowboarders, and action sports riders to track tricks, discover spots, and connect with the community. Download now on iOS and Android."
-        />
+        <meta name="description" content={t('meta.description')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://thetrickbook.com/" />
         <meta name="author" content="TrickBook" />
-        <meta
-          name="keywords"
-          content="skateboarding app, trick tracker, skate spots, snowboarding app, action sports, trick list, skateboard progress, find skate spots"
-        />
-        <meta property="og:title" content="TrickBook - Track Tricks. Find Spots. Ride Together." />
-        <meta
-          property="og:description"
-          content="The free app for action sports riders to track tricks, discover spots, and connect with the community."
-        />
+        <meta name="keywords" content={t('meta.keywords')} />
+        <meta property="og:title" content={t('meta.title')} />
+        <meta property="og:description" content={t('meta.ogDescription')} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://thetrickbook.com" />
       </Head>
@@ -242,21 +203,21 @@ export default function Home() {
           {/* Massive headline */}
           <h1 className="font-black tracking-tighter leading-[0.85] mb-8">
             <span className="block text-[clamp(2.8rem,10vw,8rem)] text-white">
-              {heroText.line1}
+              {t(`${heroKey}.line1`)}
             </span>
             <span className="block text-[clamp(2.8rem,10vw,8rem)] text-yellow-400">
-              {heroText.line2}
+              {t(`${heroKey}.line2`)}
             </span>
             <span className="block text-[clamp(2.8rem,10vw,8rem)] text-white">
-              {heroText.line3}
+              {t(`${heroKey}.line3`)}
             </span>
           </h1>
 
           {/* Subline */}
           <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-lg mx-auto leading-relaxed">
-            The action sports platform that doesn't sell you out.
+            {t('hero.subline1')}
             <br className="hidden md:block" />
-            Track tricks. Find spots. Ride with real ones.
+            {t('hero.subline2')}
           </p>
 
           {/* App Store Badges first */}
@@ -269,7 +230,7 @@ export default function Home() {
               className="inline-flex items-center justify-center gap-2 px-7 py-3 bg-yellow-400 !text-[#0a0a0a] font-bold rounded-lg hover:bg-yellow-300 hover:!text-[#0a0a0a] transition-colors text-center no-underline uppercase tracking-wide text-sm"
               onClick={() => trackCtaClick('join_the_movement', 'hero')}
             >
-              Join the movement
+              {t('hero.cta')}
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -277,15 +238,127 @@ export default function Home() {
       </section>
 
       {/* ============================================ */}
-      {/* SECTION 2: STATS BAR                         */}
+      {/* SECTION 2: KAORI AI COMPANION                */}
+      {/* ============================================ */}
+      <section
+        ref={kaoriRef}
+        className="relative overflow-hidden bg-[#0d0f14] border-y border-white/5 py-20 md:py-28"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_45%,rgba(96,165,250,0.14),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(252,211,77,0.06),transparent_28%)]" />
+
+        <div className="relative container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/20 bg-sky-300/10 px-3 py-1.5 mb-6">
+                <Sparkles className="h-4 w-4 text-sky-300" />
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">
+                  {t('kaori.badge')}
+                </span>
+              </div>
+
+              <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[0.95] text-white mb-6">
+                <Trans
+                  t={t}
+                  i18nKey="kaori.title"
+                  components={{ highlight: <span className="text-sky-300" /> }}
+                />
+              </h2>
+              <p className="max-w-xl text-lg md:text-xl leading-relaxed text-gray-400 mb-8">
+                {t('kaori.description')}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-9">
+                {[
+                  { icon: Mic2, key: 'talk' },
+                  { icon: Play, key: 'demo' },
+                  { icon: Brain, key: 'memory' },
+                ].map((capability) => (
+                  <div
+                    key={capability.key}
+                    className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"
+                  >
+                    <capability.icon className="h-5 w-5 text-sky-300 mb-3" />
+                    <h3 className="text-sm font-bold text-white mb-1">
+                      {t(`kaori.capabilities.${capability.key}.title`)}
+                    </h3>
+                    <p className="text-xs leading-relaxed text-gray-500">
+                      {t(`kaori.capabilities.${capability.key}.text`)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={loggedIn ? '/kaori-live' : '/signup'}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-300 px-7 py-3.5 text-sm font-bold uppercase tracking-wide !text-[#071018] no-underline transition-all hover:bg-sky-200 hover:!text-[#071018] hover:-translate-y-0.5"
+                onClick={() => trackCtaClick('meet_kaori', 'kaori_companion')}
+              >
+                <MessageCircle className="h-4 w-4" />
+                {t('kaori.cta')}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <figure className="relative max-w-lg mx-auto w-full">
+              <figcaption className="sr-only">{t('kaori.conversationCaption')}</figcaption>
+              <div className="absolute -inset-6 rounded-[3rem] bg-sky-400/10 blur-3xl" />
+              <div className="relative rounded-[2rem] border border-white/10 bg-[#121720]/95 p-5 md:p-7 shadow-2xl shadow-black/40">
+                <div className="flex items-center gap-4 border-b border-white/10 pb-5 mb-6">
+                  <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-sky-300/60 bg-gradient-to-br from-sky-200 to-indigo-400">
+                    <Image
+                      src="https://api.thetrickbook.com/assets/kaori-avatar.jpg"
+                      alt={t('kaori.avatarAlt')}
+                      fill
+                      sizes="56px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="font-bold text-white mb-0">Kaori</p>
+                      <span className="rounded-full bg-sky-300/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-sky-300">
+                        {t('kaori.aiCompanion')}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 mb-0">{t('kaori.status')}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="ml-auto max-w-[82%] rounded-2xl rounded-br-md bg-white/10 px-4 py-3 text-sm leading-relaxed text-gray-200">
+                    {t('kaori.userMessage')}
+                  </div>
+                  <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-sky-300/10 bg-sky-300/10 px-4 py-3 text-sm leading-relaxed text-sky-50">
+                    {t('kaori.reply')}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-medium text-sky-300">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-300/10">
+                      <Mic2 className="h-3.5 w-3.5" />
+                    </span>
+                    {t('kaori.voiceHint')}
+                  </div>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 3: STATS BAR                         */}
       {/* ============================================ */}
       <section ref={statsRef} className="bg-[#111] border-y border-white/5">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <AnimatedStat value={stats?.spots || 4869} label="Spots Mapped" icon={MapPin} />
-            <AnimatedStat value={stats?.tricks || 1889} label="Tricks Tracked" icon={Target} />
-            <AnimatedStat value={stats?.trickLists || 464} label="Trick Lists" icon={Star} />
-            <AnimatedStat value={stats?.users || 224} label="Riders" icon={Users} />
+            <AnimatedStat value={stats?.spots || 4869} label={t('stats.spots')} icon={MapPin} />
+            <AnimatedStat value={stats?.tricks || 1889} label={t('stats.tricks')} icon={Target} />
+            <AnimatedStat
+              value={stats?.trickLists || 464}
+              label={t('stats.trickLists')}
+              icon={Star}
+            />
+            <AnimatedStat value={stats?.users || 224} label={t('stats.riders')} icon={Users} />
           </div>
         </div>
       </section>
@@ -297,25 +370,29 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Everything you need to progress
+              {t('features.title')}
             </h2>
-            <p className="text-gray-400 text-lg">
-              Built by riders who wanted a better way to track their journey.
-            </p>
+            <p className="text-gray-400 text-lg">{t('features.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {FEATURES.map((feature) => (
               <div
-                key={feature.title}
+                key={feature.key}
                 className="group relative p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">{feature.title}</h3>
-                <p className="text-sm text-gray-500 mb-3">{feature.subtitle}</p>
-                <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-white mb-1">
+                  {t(`features.${feature.key}.title`)}
+                </h3>
+                <p className="text-sm text-gray-500 mb-3">
+                  {t(`features.${feature.key}.subtitle`)}
+                </p>
+                <p className="text-gray-400 leading-relaxed">
+                  {t(`features.${feature.key}.description`)}
+                </p>
               </div>
             ))}
           </div>
@@ -328,32 +405,34 @@ export default function Home() {
       <section ref={testimonialsRef} className="bg-[#111] py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Riders are stoked</h2>
-            <p className="text-gray-400 text-lg">
-              Hear from the community that makes TrickBook what it is.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              {t('testimonials.title')}
+            </h2>
+            <p className="text-gray-400 text-lg">{t('testimonials.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((testimonial) => (
               <div
-                key={testimonial.name}
+                key={testimonial.key}
                 className="p-6 rounded-2xl bg-white/[0.02] border border-white/5"
               >
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
-                      key={`star-${testimonial.name}-${i}`}
+                      key={`star-${testimonial.key}-${i}`}
                       className="w-4 h-4 fill-yellow-400 text-yellow-400"
                     />
                   ))}
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed italic">
-                  &ldquo;{testimonial.quote}&rdquo;
+                  &ldquo;{t(`testimonials.quotes.${testimonial.key}`)}&rdquo;
                 </p>
                 <div>
                   <p className="text-white font-medium">{testimonial.name}</p>
-                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                  <p className="text-gray-500 text-sm">
+                    {t(`testimonials.roles.${testimonial.roleKey}`)}
+                  </p>
                 </div>
               </div>
             ))}
@@ -368,7 +447,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Up and riding in minutes
+              {t('howItWorks.title')}
             </h2>
           </div>
 
@@ -378,8 +457,12 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mx-auto mb-6">
                   <step.icon className="w-7 h-7 text-yellow-400" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                <p className="text-gray-400 text-sm max-w-xs mx-auto">{step.description}</p>
+                <h3 className="text-lg font-bold text-white mb-2">
+                  {t(`howItWorks.${step.key}.title`)}
+                </h3>
+                <p className="text-gray-400 text-sm max-w-xs mx-auto">
+                  {t(`howItWorks.${step.key}.description`)}
+                </p>
               </div>
             ))}
           </div>
@@ -394,12 +477,14 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                By Riders. <span className="text-yellow-400">For Riders.</span>
+                <Trans
+                  t={t}
+                  i18nKey="community.title"
+                  components={{ highlight: <span className="text-yellow-400" /> }}
+                />
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                Big tech platforms don't have our best interests at heart. Algorithms bury your
-                content, and your attention is sold to advertisers. We built TrickBook because
-                action sports communities deserve better.
+                {t('community.description')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -416,10 +501,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white font-medium">Your data stays yours</p>
-                    <p className="text-gray-500 text-sm">
-                      Encrypted, private, never sold to advertisers.
-                    </p>
+                    <p className="text-white font-medium">{t('community.point1.title')}</p>
+                    <p className="text-gray-500 text-sm">{t('community.point1.text')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -436,10 +519,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white font-medium">No algorithm games</p>
-                    <p className="text-gray-500 text-sm">
-                      Your content reaches your crew, not just who pays.
-                    </p>
+                    <p className="text-white font-medium">{t('community.point2.title')}</p>
+                    <p className="text-gray-500 text-sm">{t('community.point2.text')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -456,10 +537,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white font-medium">Built by a small crew with big passion</p>
-                    <p className="text-gray-500 text-sm">
-                      Independent, rider-owned, community-driven.
-                    </p>
+                    <p className="text-white font-medium">{t('community.point3.title')}</p>
+                    <p className="text-gray-500 text-sm">{t('community.point3.text')}</p>
                   </div>
                 </div>
               </div>
@@ -478,13 +557,13 @@ export default function Home() {
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
                 <blockquote className="text-xl md:text-2xl text-white font-light leading-relaxed mb-6">
-                  There's an intrinsic value in creating something for the sake of creating it.
+                  {t('community.quote')}
                 </blockquote>
                 <div className="flex items-center gap-3">
                   <div className="w-px h-8 bg-yellow-400/30" />
                   <div>
                     <p className="text-white font-medium">Rodney Mullen</p>
-                    <p className="text-gray-500 text-sm">Godfather of Street Skateboarding</p>
+                    <p className="text-gray-500 text-sm">{t('community.quoteRole')}</p>
                   </div>
                 </div>
               </div>
@@ -502,11 +581,10 @@ export default function Home() {
             <div className="absolute inset-0 bg-yellow-400/5 rounded-3xl blur-3xl" />
             <div className="relative p-8 md:p-16 rounded-3xl border border-white/5 bg-white/[0.01]">
               <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
-                Stop scrolling. Start riding.
+                {t('finalCta.title')}
               </h2>
               <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
-                {stats ? formatNumber(stats.users) : '200'}+ riders are already in. Free forever. No
-                ads. No algorithm.
+                {t('finalCta.subtitle', { riders: stats ? formatNumber(stats.users) : '200' })}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -516,7 +594,7 @@ export default function Home() {
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
                     onClick={() => trackCtaClick('go_to_trickbook', 'final_cta')}
                   >
-                    Go to my TrickBook
+                    {t('finalCta.goToTrickbook')}
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 ) : (
@@ -525,7 +603,7 @@ export default function Home() {
                     className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-400 !text-[#1a1a1a] font-semibold rounded-lg hover:bg-yellow-300 hover:!text-[#1a1a1a] transition-colors no-underline"
                     onClick={() => trackCtaClick('create_free_account', 'final_cta')}
                   >
-                    I'm in
+                    {t('finalCta.signup')}
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 )}
@@ -538,4 +616,12 @@ export default function Home() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['common', 'home'])),
+    },
+  };
 }

@@ -37,3 +37,7 @@ yarn-error.log*
 .env.production
 secrets.json
 credentials.json
+
+# Local resumable film-backfill runtime state
+/data/snowboard-films/backfill-state.json
+/data/snowboard-films/backfill.log

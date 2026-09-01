@@ -1,8 +1,20 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Skeleton } from '@mui/material';
-import { CalendarDays, LogOut, MessageCircle, Moon, Sun, User } from 'lucide-react';
+import {
+  BookOpen,
+  CalendarDays,
+  Clapperboard,
+  LogOut,
+  MapPin,
+  MessageCircle,
+  Moon,
+  Sun,
+  User,
+  Users,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Container from 'react-bootstrap/Container';
@@ -13,8 +25,10 @@ import { AuthContext } from '../auth/AuthContext';
 import { getUnreadCount } from '../lib/apiMessages';
 import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/Home.module.css';
+import LanguageSelector from './LanguageSelector';
 
 const Header = () => {
+  const { t } = useTranslation('common');
   const { email, loggedIn, token, logOut } = useContext(AuthContext);
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -85,7 +99,7 @@ const Header = () => {
                 style={{ margin: '0 auto', textAlign: 'center' }}
                 height={55}
                 width={55}
-                alt="Trick Book"
+                alt={t('brand.logoAlt', 'Trick Book')}
               />
             </a>
           </Navbar.Brand>
@@ -93,79 +107,50 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mobile-nav-section">
-            <Link href="/trickbook" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="book">
-                  📖
-                </span>{' '}
-                TrickBook
-              </Nav.Link>
-            </Link>
-            <Link href="/spots" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="pin">
-                  📍
-                </span>{' '}
-                Spots
-              </Nav.Link>
-            </Link>
-            <Link href="/events" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <CalendarDays size={17} style={{ marginRight: 5, verticalAlign: 'text-bottom' }} />
-                Events
-              </Nav.Link>
-            </Link>
-            <Link href="/homies" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="homies">
-                  🤝
-                </span>{' '}
-                Homies
-              </Nav.Link>
-            </Link>
-            <Link href="/media" passHref legacyBehavior>
-              <Nav.Link
-                className="mobile-nav-link"
-                style={{ color: isDark ? '#f0f0f0' : '#1a1a1a' }}
-                onClick={() => setExpanded(false)}
-              >
-                <span role="img" aria-label="media">
-                  🎬
-                </span>{' '}
-                Media
-              </Nav.Link>
-            </Link>
+            {[
+              { href: '/trickbook', label: t('nav.trickbook', 'TrickBook'), Icon: BookOpen },
+              { href: '/spots', label: t('nav.spots', 'Spots'), Icon: MapPin },
+              { href: '/events', label: t('nav.events', 'Events'), Icon: CalendarDays },
+              { href: '/homies', label: t('nav.homies', 'Homies'), Icon: Users },
+              { href: '/media', label: t('nav.media', 'Media'), Icon: Clapperboard },
+            ].map(({ href, label, Icon }) => (
+              <Link key={href} href={href} passHref legacyBehavior>
+                <Nav.Link
+                  className="mobile-nav-link"
+                  style={{
+                    color: isDark ? '#f0f0f0' : '#1a1a1a',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onClick={() => setExpanded(false)}
+                >
+                  <Icon size={17} aria-hidden="true" />
+                  {label}
+                </Nav.Link>
+              </Link>
+            ))}
           </Nav>
 
           {/* Mobile divider */}
           <hr className="mobile-nav-divider d-lg-none" />
 
           <Nav className={`ms-auto align-items-lg-center mobile-utility-section`}>
+            {/* Language Selector */}
+            <LanguageSelector onSelect={() => setExpanded(false)} />
+
             {/* Theme Toggle */}
             {mounted && (
               <button
                 onClick={() => setTheme(isDark ? 'light' : 'dark')}
                 className="theme-toggle-btn"
-                aria-label="Toggle theme"
+                aria-label={t('theme.toggle', 'Toggle theme')}
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                <span className="theme-toggle-label">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+                <span className="theme-toggle-label">
+                  {isDark ? t('theme.light', 'Light Mode') : t('theme.dark', 'Dark Mode')}
+                </span>
               </button>
             )}
 
@@ -175,12 +160,26 @@ const Header = () => {
             {loggedIn === null ? (
               <Skeleton variant="rectangular" width={120} height={36} />
             ) : !loggedIn ? (
-              <Link href="/login" passHref legacyBehavior>
-                <a className="login-btn">
-                  <PersonIcon style={{ fontSize: 18 }} />
-                  <span>Login / Register</span>
-                </a>
-              </Link>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14 }}>
+                <Link href="/login" passHref legacyBehavior>
+                  <a
+                    style={{
+                      color: isDark ? '#f0f0f0' : '#1a1a1a',
+                      fontWeight: 500,
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {t('nav.login', 'Log in')}
+                  </a>
+                </Link>
+                <Link href="/signup" passHref legacyBehavior>
+                  <a className="login-btn">
+                    <PersonIcon style={{ fontSize: 18 }} />
+                    <span>{t('nav.signupFree', 'Sign up free')}</span>
+                  </a>
+                </Link>
+              </div>
             ) : (
               <NavDropdown
                 align="end"
@@ -232,13 +231,13 @@ const Header = () => {
                 <Link href="/profile" passHref legacyBehavior>
                   <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <User size={18} />
-                    My Profile
+                    {t('nav.myProfile', 'My Profile')}
                   </NavDropdown.Item>
                 </Link>
                 <Link href="/messages" passHref legacyBehavior>
                   <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <MessageCircle size={18} />
-                    Messages
+                    {t('nav.messages', 'Messages')}
                     {unreadCount > 0 && (
                       <span
                         style={{
@@ -273,7 +272,7 @@ const Header = () => {
                   }}
                 >
                   <LogOut size={18} />
-                  Logout
+                  {t('nav.logout', 'Logout')}
                 </NavDropdown.Item>
               </NavDropdown>
             )}

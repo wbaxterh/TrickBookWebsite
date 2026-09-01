@@ -21,7 +21,7 @@ const DEFAULT_FILTERS = {
   sport: 'all',
   location: '',
   radius: '100',
-  date: 'month',
+  date: 'all',
   intent: 'all',
   registration: 'all',
 };

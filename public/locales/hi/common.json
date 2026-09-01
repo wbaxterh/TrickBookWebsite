@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "स्पॉट्स",
+    "events": "इवेंट्स",
+    "homies": "साथी",
+    "media": "मीडिया",
+    "login": "लॉग इन",
+    "signupFree": "मुफ़्त साइन अप करें",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "messages": "संदेश",
+    "logout": "लॉग आउट"
+  },
+  "theme": {
+    "toggle": "थीम बदलें",
+    "light": "लाइट मोड",
+    "dark": "डार्क मोड"
+  },
+  "language": {
+    "select": "भाषा"
+  },
+  "footer": {
+    "tagline": "अपनी ट्रिक्स रिकॉर्ड करें, स्पॉट्स खोजें और साथी राइडर्स से जुड़ें।",
+    "explore": "एक्सप्लोर करें",
+    "resources": "संसाधन",
+    "connect": "जुड़ें",
+    "blog": "ब्लॉग",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क और फ़ीडबैक",
+    "privacyPolicy": "गोपनीयता नीति",
+    "termsConditions": "नियम और शर्तें",
+    "followUs": "नवीनतम अपडेट और एक्शन स्पोर्ट्स कंटेंट के लिए हमें फ़ॉलो करें।",
+    "copyright": "© {{year}} The Trick Book. सर्वाधिकार सुरक्षित।",
+    "privacy": "गोपनीयता",
+    "terms": "शर्तें"
+  }
+}

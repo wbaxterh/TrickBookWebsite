@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "logoAlt": "Trick Book"
+  },
+  "nav": {
+    "trickbook": "TrickBook",
+    "spots": "地點",
+    "events": "活動",
+    "homies": "夥伴",
+    "media": "媒體",
+    "login": "登入",
+    "signupFree": "免費註冊",
+    "myProfile": "我的個人檔案",
+    "messages": "訊息",
+    "logout": "登出"
+  },
+  "theme": {
+    "toggle": "切換主題",
+    "light": "淺色模式",
+    "dark": "深色模式"
+  },
+  "language": {
+    "select": "語言"
+  },
+  "footer": {
+    "tagline": "記錄你的招式，探索滑板地點，結識志同道合的玩家。",
+    "explore": "探索",
+    "resources": "資源",
+    "connect": "關注我們",
+    "blog": "部落格",
+    "about": "關於我們",
+    "contact": "聯絡與回饋",
+    "privacyPolicy": "隱私權政策",
+    "termsConditions": "條款與細則",
+    "followUs": "追蹤我們，掌握最新消息和極限運動內容。",
+    "copyright": "© {{year}} The Trick Book。保留所有權利。",
+    "privacy": "隱私權",
+    "terms": "條款"
+  }
+}
