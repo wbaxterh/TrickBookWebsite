@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import FeedPost from '../components/media/FeedPost';
 import VideoCard from '../components/media/VideoCard';
@@ -11,6 +11,14 @@ import { Button } from '../components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { addReaction, getFeed, getTrendingFeed, removeReaction } from '../lib/apiFeed';
 import { getCollections, getCouchVideos, getFeatured, SPORT_TYPES } from '../lib/apiMedia';
+
+const getHeroImage = (video) =>
+  video?.thumbnails?.backdrop ||
+  video?.thumbnails?.poster ||
+  video?.driveThumbnail ||
+  video?.artwork?.backdrop ||
+  video?.artwork?.poster ||
+  video?.artwork?.thumbnail;
 
 export default function Media() {
   const router = useRouter();
@@ -33,6 +41,7 @@ export default function Media() {
   const [featured, setFeatured] = useState(null);
   const [collections, setCollections] = useState([]);
   const [recentVideos, setRecentVideos] = useState([]);
+  const [heroIndex, setHeroIndex] = useState(0);
   const [feedPosts, setFeedPosts] = useState([]);
   const [_trendingPosts, setTrendingPosts] = useState([]);
 
@@ -63,6 +72,30 @@ export default function Media() {
       fetchCouchData();
     }
   }, [activeTab, sportFilter]);
+
+  const heroVideos = useMemo(() => {
+    const seen = new Set();
+
+    return [featured, ...recentVideos].filter((video) => {
+      if (!video || !getHeroImage(video)) return false;
+      const id = video._id || video.slug || video.title;
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }, [featured, recentVideos]);
+
+  useEffect(() => {
+    if (heroVideos.length < 2) return undefined;
+
+    const timer = window.setInterval(() => {
+      setHeroIndex((current) => (current + 1) % heroVideos.length);
+    }, 8000);
+
+    return () => window.clearInterval(timer);
+  }, [heroVideos.length]);
+
+  const heroVideo = heroVideos[heroIndex % Math.max(heroVideos.length, 1)];
 
   // Fetch Feed data
   useEffect(() => {
@@ -244,37 +277,38 @@ export default function Media() {
         {activeTab === 'couch' && (
           <div>
             {/* Hero Section */}
-            {featured ? (
+            {heroVideo ? (
               <div className="relative h-[60vh] overflow-hidden">
                 <Image
-                  src={
-                    featured.thumbnails?.backdrop ||
-                    featured.thumbnails?.poster ||
-                    featured.driveThumbnail ||
-                    '/hero-placeholder.jpg'
-                  }
-                  alt={featured.title}
+                  key={heroVideo._id || heroVideo.slug}
+                  src={getHeroImage(heroVideo)}
+                  alt={heroVideo.title}
                   fill
-                  className="object-cover"
+                  className="object-cover animate-in fade-in duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 container mx-auto">
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    {featured.title}
+                    {heroVideo.title}
                   </h1>
                   <p className="text-lg text-white/80 max-w-2xl mb-6 line-clamp-2">
-                    {featured.description}
+                    {heroVideo.description}
                   </p>
                   <div className="flex gap-4">
-                    <Link href={`/media/couch/${featured.slug || featured._id}`}>
+                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
                       <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
                         <Play className="h-5 w-5 mr-2" fill="currentColor" />
                         Watch Now
                       </Button>
                     </Link>
-                    <Button variant="outline" className="text-white border-white hover:bg-white/10">
-                      More Info
-                    </Button>
+                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
+                      <Button
+                        variant="outline"
+                        className="text-white border-white hover:bg-white/10"
+                      >
+                        More Info
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
