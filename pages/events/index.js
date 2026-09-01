@@ -30,12 +30,14 @@ const DEFAULT_FILTERS = {
 const SAVED_STORAGE_KEY = 'trickbook:saved-events';
 const useFixtures = process.env.NEXT_PUBLIC_EVENTS_USE_FIXTURES === 'true';
 
-function filterFixtures(events, filters) {
+function filterFixtures(events, filters, feedType) {
   const query = filters.q.trim().toLowerCase();
   const now = new Date();
   const monthEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
   return events.filter((event) => {
+    const eventEnd = new Date(event.endAt || event.startAt);
+    if (feedType === 'archive' ? eventEnd >= now : eventEnd < now) return false;
     if (query) {
       const haystack = [event.title, event.description, event.organizer?.name]
         .filter(Boolean)
@@ -66,6 +68,7 @@ export default function EventsPage() {
   const [unavailable, setUnavailable] = useState(false);
   const [savedIds, setSavedIds] = useState(new Set());
   const [view, setView] = useState('list');
+  const [feedType, setFeedType] = useState('upcoming');
 
   useEffect(() => {
     try {
@@ -82,7 +85,7 @@ export default function EventsPage() {
         setUnavailable(false);
         try {
           if (useFixtures) {
-            if (active) setEvents(filterFixtures(EVENT_FIXTURES, filters));
+            if (active) setEvents(filterFixtures(EVENT_FIXTURES, filters, feedType));
           } else {
             const data = await getEvents({
               q: filters.q,
@@ -93,6 +96,7 @@ export default function EventsPage() {
               date: filters.date,
               intent: filters.intent,
               registration: filters.registration,
+              view: feedType === 'archive' ? 'archive' : '',
             });
             if (active) setEvents(data.events);
           }
@@ -112,7 +116,7 @@ export default function EventsPage() {
       active = false;
       clearTimeout(timer);
     };
-  }, [filters]);
+  }, [filters, feedType]);
 
   const savedCount = useMemo(
     () => events.filter((event) => savedIds.has(event._id)).length,
@@ -171,6 +175,22 @@ export default function EventsPage() {
         </section>
 
         <section className="container py-8 md:py-12">
+          <div className="inline-flex rounded-xl border border-border bg-card p-1 mb-5">
+            <button
+              type="button"
+              onClick={() => setFeedType('upcoming')}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold ${feedType === 'upcoming' ? 'bg-yellow-400 text-black' : 'text-muted-foreground'}`}
+            >
+              Upcoming events
+            </button>
+            <button
+              type="button"
+              onClick={() => setFeedType('archive')}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold ${feedType === 'archive' ? 'bg-yellow-400 text-black' : 'text-muted-foreground'}`}
+            >
+              Event archive
+            </button>
+          </div>
           <EventFilters
             filters={filters}
             onChange={updateFilter}
@@ -181,16 +201,20 @@ export default function EventsPage() {
             <div>
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-yellow-500" />
-                <h2 className="text-xl font-bold text-foreground">For you</h2>
+                <h2 className="text-xl font-bold text-foreground">
+                  {feedType === 'archive' ? 'Past events' : 'For you'}
+                </h2>
               </div>
               <p className="text-sm text-muted-foreground mt-1">
                 {loading
                   ? 'Checking event sources…'
                   : events.length > 0
-                    ? `${events.length} upcoming event${events.length === 1 ? '' : 's'}`
+                    ? `${events.length} ${feedType === 'archive' ? 'archived' : 'upcoming'} event${events.length === 1 ? '' : 's'}`
                     : unavailable
                       ? 'The Events API is not connected yet'
-                      : 'No upcoming events found'}
+                      : feedType === 'archive'
+                        ? 'No archived events found'
+                        : 'No upcoming events found'}
               </p>
             </div>
 

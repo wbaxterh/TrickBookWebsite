@@ -246,6 +246,26 @@ export default function EventDetailPage() {
                   </div>
                 </div>
               )}
+
+              {event.externalLinks?.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground">Official links</h2>
+                  <div className="grid sm:grid-cols-2 gap-3 mt-4">
+                    {event.externalLinks.map((link) => (
+                      <a
+                        key={`${link.kind}-${link.url}`}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-xl border border-border bg-card p-4 flex items-center gap-3 text-foreground hover:border-yellow-500 no-underline"
+                      >
+                        <ExternalLink className="h-5 w-5 text-yellow-500" />
+                        <span className="font-semibold">{link.label || 'Official event link'}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <aside>
