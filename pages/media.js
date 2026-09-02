@@ -1,16 +1,52 @@
-import { Compass, Film, Loader2, Play, Plus, Search, TrendingUp, Tv, Users } from 'lucide-react';
+import {
+  ArrowDownUp,
+  Compass,
+  Film,
+  Filter,
+  Loader2,
+  Play,
+  Plus,
+  Search,
+  TrendingUp,
+  Tv,
+  Users,
+} from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import FeedPost from '../components/media/FeedPost';
 import VideoCard from '../components/media/VideoCard';
 import { Button } from '../components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { addReaction, getFeed, getTrendingFeed, removeReaction } from '../lib/apiFeed';
-import { getCollections, getCouchVideos, getFeatured, SPORT_TYPES } from '../lib/apiMedia';
+import {
+  CONTENT_TYPES,
+  COUCH_SORT_OPTIONS,
+  getCollections,
+  getCouchVideos,
+  getFeatured,
+  SPORT_TYPES,
+} from '../lib/apiMedia';
+
+const COUCH_PAGE_SIZE = 50;
+
+const getHeroImage = (video) =>
+  video?.thumbnails?.backdrop ||
+  video?.thumbnails?.poster ||
+  video?.driveThumbnail ||
+  video?.artwork?.backdrop ||
+  video?.artwork?.poster ||
+  video?.artwork?.thumbnail;
 
 export default function Media() {
   const router = useRouter();
@@ -18,6 +54,8 @@ export default function Media() {
   const [activeTab, setActiveTab] = useState('couch');
   const [feedFilter, setFeedFilter] = useState('for-you');
   const [sportFilter, setSportFilter] = useState('all');
+  const [contentTypeFilter, setContentTypeFilter] = useState('all');
+  const [sortFilter, setSortFilter] = useState('createdAt');
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -27,12 +65,22 @@ export default function Media() {
     if (typeof router.query.sport === 'string') {
       setSportFilter(router.query.sport);
     }
-  }, [router.isReady, router.query.sport, router.query.tab]);
+    if (typeof router.query.type === 'string') {
+      setContentTypeFilter(router.query.type);
+    }
+    if (typeof router.query.sort === 'string') {
+      setSortFilter(router.query.sort);
+    }
+  }, [router.isReady, router.query.sort, router.query.sport, router.query.tab, router.query.type]);
 
   // Data states
   const [featured, setFeatured] = useState(null);
   const [collections, setCollections] = useState([]);
   const [recentVideos, setRecentVideos] = useState([]);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [couchPage, setCouchPage] = useState(1);
+  const [hasMoreCouchVideos, setHasMoreCouchVideos] = useState(false);
+  const [loadingMoreCouch, setLoadingMoreCouch] = useState(false);
   const [feedPosts, setFeedPosts] = useState([]);
   const [_trendingPosts, setTrendingPosts] = useState([]);
 
@@ -48,11 +96,19 @@ export default function Media() {
         const [featuredData, collectionsData, videosData] = await Promise.all([
           getFeatured().catch(() => null),
           getCollections({ sport: sportFilter }).catch(() => []),
-          getCouchVideos({ sport: sportFilter, limit: 20 }).catch(() => []),
+          getCouchVideos({
+            sport: sportFilter,
+            type: contentTypeFilter,
+            sort: sortFilter,
+            limit: COUCH_PAGE_SIZE,
+            page: 1,
+          }).catch(() => []),
         ]);
         setFeatured(featuredData);
         setCollections(collectionsData);
         setRecentVideos(videosData || []);
+        setCouchPage(1);
+        setHasMoreCouchVideos((videosData || []).length === COUCH_PAGE_SIZE);
       } catch (_error) {
       } finally {
         setLoadingCouch(false);
@@ -62,7 +118,59 @@ export default function Media() {
     if (activeTab === 'couch') {
       fetchCouchData();
     }
-  }, [activeTab, sportFilter]);
+  }, [activeTab, contentTypeFilter, sortFilter, sportFilter]);
+
+  const updateCouchFilter = (key, value) => {
+    const nextQuery = { ...router.query, tab: 'couch' };
+    if (value === 'all' || (key === 'sort' && value === 'createdAt')) delete nextQuery[key];
+    else nextQuery[key] = value;
+    router.replace({ pathname: router.pathname, query: nextQuery }, undefined, { shallow: true });
+  };
+
+  const loadMoreCouchVideos = async () => {
+    const nextPage = couchPage + 1;
+    setLoadingMoreCouch(true);
+    try {
+      const videos = await getCouchVideos({
+        sport: sportFilter,
+        type: contentTypeFilter,
+        sort: sortFilter,
+        limit: COUCH_PAGE_SIZE,
+        page: nextPage,
+      });
+      setRecentVideos((current) => [...current, ...(videos || [])]);
+      setCouchPage(nextPage);
+      setHasMoreCouchVideos((videos || []).length === COUCH_PAGE_SIZE);
+    } finally {
+      setLoadingMoreCouch(false);
+    }
+  };
+
+  const heroVideos = useMemo(() => {
+    const seen = new Set();
+
+    return [featured, ...recentVideos].filter((video) => {
+      if (!video || !getHeroImage(video)) return false;
+      if (sportFilter !== 'all' && !video.sportTypes?.includes(sportFilter)) return false;
+      if (contentTypeFilter !== 'all' && video.type !== contentTypeFilter) return false;
+      const id = video._id || video.slug || video.title;
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }, [contentTypeFilter, featured, recentVideos, sportFilter]);
+
+  useEffect(() => {
+    if (heroVideos.length < 2) return undefined;
+
+    const timer = window.setInterval(() => {
+      setHeroIndex((current) => (current + 1) % heroVideos.length);
+    }, 8000);
+
+    return () => window.clearInterval(timer);
+  }, [heroVideos.length]);
+
+  const heroVideo = heroVideos[heroIndex % Math.max(heroVideos.length, 1)];
 
   // Fetch Feed data
   useEffect(() => {
@@ -244,37 +352,38 @@ export default function Media() {
         {activeTab === 'couch' && (
           <div>
             {/* Hero Section */}
-            {featured ? (
+            {heroVideo ? (
               <div className="relative h-[60vh] overflow-hidden">
                 <Image
-                  src={
-                    featured.thumbnails?.backdrop ||
-                    featured.thumbnails?.poster ||
-                    featured.driveThumbnail ||
-                    '/hero-placeholder.jpg'
-                  }
-                  alt={featured.title}
+                  key={heroVideo._id || heroVideo.slug}
+                  src={getHeroImage(heroVideo)}
+                  alt={heroVideo.title}
                   fill
-                  className="object-cover"
+                  className="object-cover animate-in fade-in duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 container mx-auto">
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    {featured.title}
+                    {heroVideo.title}
                   </h1>
                   <p className="text-lg text-white/80 max-w-2xl mb-6 line-clamp-2">
-                    {featured.description}
+                    {heroVideo.description}
                   </p>
                   <div className="flex gap-4">
-                    <Link href={`/media/couch/${featured.slug || featured._id}`}>
+                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
                       <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
                         <Play className="h-5 w-5 mr-2" fill="currentColor" />
                         Watch Now
                       </Button>
                     </Link>
-                    <Button variant="outline" className="text-white border-white hover:bg-white/10">
-                      More Info
-                    </Button>
+                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
+                      <Button
+                        variant="outline"
+                        className="text-white border-white hover:bg-white/10"
+                      >
+                        More Info
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -290,14 +399,14 @@ export default function Media() {
               </div>
             )}
 
-            {/* Sport Filter */}
+            {/* Browse filters */}
             <div className="container mx-auto px-4 py-6">
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide">
                 {SPORT_TYPES.map((sport) => (
                   <button
                     type="button"
                     key={sport.value}
-                    onClick={() => setSportFilter(sport.value)}
+                    onClick={() => updateCouchFilter('sport', sport.value)}
                     className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                       sportFilter === sport.value
                         ? 'bg-yellow-500 text-black'
@@ -307,6 +416,47 @@ export default function Media() {
                     {sport.label}
                   </button>
                 ))}
+              </div>
+              <div className="flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Filter className="h-4 w-4" />
+                  <span>{recentVideos.length} videos</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:w-auto">
+                  <Select
+                    value={contentTypeFilter}
+                    onValueChange={(value) => updateCouchFilter('type', value)}
+                  >
+                    <SelectTrigger className="w-full sm:w-44" aria-label="Filter by content type">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONTENT_TYPES.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Select
+                    value={sortFilter}
+                    onValueChange={(value) => updateCouchFilter('sort', value)}
+                  >
+                    <SelectTrigger className="w-full sm:w-48" aria-label="Sort videos">
+                      <span className="flex min-w-0 items-center gap-2">
+                        <ArrowDownUp className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <SelectValue />
+                      </span>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {COUCH_SORT_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
 
@@ -351,9 +501,12 @@ export default function Media() {
                     <div>
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h2 className="text-xl font-bold text-foreground">Recent Videos</h2>
+                          <h2 className="text-xl font-bold text-foreground">Browse The Couch</h2>
                           <p className="text-sm text-muted-foreground">
-                            Latest additions to The Couch
+                            {
+                              COUCH_SORT_OPTIONS.find((option) => option.value === sortFilter)
+                                ?.label
+                            }
                           </p>
                         </div>
                       </div>
@@ -363,6 +516,19 @@ export default function Media() {
                           <VideoCard key={video._id} video={video} size="medium" />
                         ))}
                       </div>
+                      {hasMoreCouchVideos && (
+                        <div className="flex justify-center pt-8">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={loadMoreCouchVideos}
+                            disabled={loadingMoreCouch}
+                          >
+                            {loadingMoreCouch && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            Load More
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   )}
 
