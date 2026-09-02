@@ -1,0 +1,245 @@
+{
+  "source": "Official publisher YouTube channels and publisher film pages",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-02T22:47:00.000Z",
+  "films": [
+    {
+      "slug": "deathwish-uncrossed-2020",
+      "type": "film",
+      "title": "UNCROSSED",
+      "description": "Deathwish Skateboards' 2020 full-length packs 28 minutes of high-speed street skating, heavy rails and hill bombs into a team video featuring Neen Williams, Jon Dickson, Julian Davidson, Taylor Kirby, Jake Hayes, Pedro Delfino, Jamie Foy and Victoria Ruesga.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "deathwish-skateboards", "team-video"],
+      "releaseYear": 2020,
+      "producedBy": "Deathwish Skateboards",
+      "directors": ["Rye Beres", "Kaylanne Diaz"],
+      "riders": [
+        "Neen Williams",
+        "Jon Dickson",
+        "Julian Davidson",
+        "Taylor Kirby",
+        "Jake Hayes",
+        "Pedro Delfino",
+        "Jamie Foy",
+        "Victoria Ruesga"
+      ],
+      "locations": [],
+      "duration": 1728,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/gqNYHpUzLw4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/gqNYHpUzLw4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=gqNYHpUzLw4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=gqNYHpUzLw4",
+          "embedUrl": "https://www.youtube.com/embed/gqNYHpUzLw4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=gqNYHpUzLw4",
+          "sourceDetails": "Public, embeddable full-length upload on Thrasher Magazine's verified channel; exact runtime 28:48.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/deathwish-uncrossed",
+          "sourceDetails": "Independent filmography reference confirming the 2020 release, full-length format, filmmakers and eight rider credits.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of the authorized Thrasher upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "UNCROSSED (2020) Skate Film",
+        "description": "Watch Deathwish Skateboards' 2020 full-length UNCROSSED from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "primitive-define-2022",
+      "type": "film",
+      "title": "DEFINE.",
+      "description": "Primitive Skateboarding's third full-length is a 69-minute team showcase directed by Alan Hannon. Released in 2022, DEFINE. moves from Paul Rodriguez and Wade Desarmo through Tiago Lemos, Miles Silvas, Dylan Jaeb, Kyonosuke Yamashita, Franky Villani and Carlos Ribeiro.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "primitive-skateboarding", "team-video"],
+      "releaseYear": 2022,
+      "producedBy": "Primitive Skateboarding",
+      "directors": ["Alan Hannon"],
+      "riders": [
+        "Paul Rodriguez",
+        "JB Gillet",
+        "Wade Desarmo",
+        "Spencer Hamilton",
+        "Marek Zaprazny",
+        "Carlos Ribeiro",
+        "Tiago Lemos",
+        "Trent McClung",
+        "Patrick Zentgraf",
+        "Miles Silvas",
+        "Marcus Shaw",
+        "Pedro Biagio",
+        "Brian Peacock",
+        "Tre Williams",
+        "Charlie Munro",
+        "Franky Villani",
+        "Robert Neal",
+        "Jenn Soto",
+        "David Jakinda",
+        "Dylan Jaeb",
+        "Giovanni Vianna",
+        "Kyonosuke Yamashita",
+        "Marina Gabriela"
+      ],
+      "locations": [],
+      "duration": 4134,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Y_KaZQwCOyY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Y_KaZQwCOyY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=Y_KaZQwCOyY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Y_KaZQwCOyY",
+          "embedUrl": "https://www.youtube.com/embed/Y_KaZQwCOyY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Primitive Skate",
+          "channelUrl": "https://www.youtube.com/@Primitiveskateboarding",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Y_KaZQwCOyY",
+          "sourceDetails": "Public, embeddable full-length upload on Primitive Skate's verified channel; exact runtime 1:08:54 and complete production credits in the description.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        },
+        {
+          "source": "primitive-skate",
+          "url": "https://videos.primitiveskate.com/video/define/",
+          "sourceDetails": "Official Primitive archive confirming full-length status, 2022 release, director, filming team, executive producers and principal chapters.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/primitive-define",
+          "sourceDetails": "Independent filmography reference confirming 69-minute runtime, year, filmmaker and 23 rider credits.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of the official Primitive upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "DEFINE. (2022) Skate Film",
+        "description": "Watch Primitive Skateboarding's 2022 full-length DEFINE. from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "primitive-encore-2019",
+      "type": "film",
+      "title": "ENCORE",
+      "description": "Primitive Skateboarding's 2019 second full-length brings 21 riders together in a 46-minute film directed by Alan Hannon. ENCORE builds from Franky Villani and Carlos Ribeiro through Giovanni Vianna, Miles Silvas and a closing Tiago Lemos part.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "primitive-skateboarding", "team-video"],
+      "releaseYear": 2019,
+      "producedBy": "Primitive Skateboarding",
+      "directors": ["Alan Hannon"],
+      "riders": [
+        "Bastien Salabanzi",
+        "Devine Calloway",
+        "JB Gillet",
+        "Wade Desarmo",
+        "Spencer Hamilton",
+        "Marek Zaprazny",
+        "Roman Lisivka",
+        "Carlos Ribeiro",
+        "Tiago Lemos",
+        "Trent McClung",
+        "Patrick Zentgraf",
+        "Miles Silvas",
+        "Pedro Biagio",
+        "Brian Peacock",
+        "Tre Williams",
+        "Charlie Munro",
+        "Franky Villani",
+        "Robert Neal",
+        "Jenn Soto",
+        "David Jakinda",
+        "Giovanni Vianna"
+      ],
+      "locations": [],
+      "duration": 2776,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/sgNR-hA-Bho/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/sgNR-hA-Bho/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=sgNR-hA-Bho",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=sgNR-hA-Bho",
+          "embedUrl": "https://www.youtube.com/embed/sgNR-hA-Bho",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Primitive Skate",
+          "channelUrl": "https://www.youtube.com/@Primitiveskateboarding",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=sgNR-hA-Bho",
+          "sourceDetails": "Public, embeddable full-length upload on Primitive Skate's verified channel; exact runtime 46:16 and complete production credits in the description.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        },
+        {
+          "source": "primitive-skate",
+          "url": "https://videos.primitiveskate.com/video/encore/",
+          "sourceDetails": "Official Primitive archive confirming full-length status, 2019 release, director, filming team and chapter credits.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/primitive-encore",
+          "sourceDetails": "Independent filmography reference confirming 46-minute runtime, year, filmmakers and 21 rider credits.",
+          "retrievedAt": "2026-09-02T22:47:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of the official Primitive upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "ENCORE (2019) Skate Film",
+        "description": "Watch Primitive Skateboarding's 2019 full-length ENCORE from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
