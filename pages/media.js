@@ -2,7 +2,6 @@ import {
   ArrowDownUp,
   Compass,
   Film,
-  Filter,
   Loader2,
   Play,
   Plus,
@@ -30,7 +29,6 @@ import {
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { addReaction, getFeed, getTrendingFeed, removeReaction } from '../lib/apiFeed';
 import {
-  CONTENT_TYPES,
   COUCH_SORT_OPTIONS,
   getCollections,
   getCouchVideos,
@@ -54,8 +52,7 @@ export default function Media() {
   const [activeTab, setActiveTab] = useState('couch');
   const [feedFilter, setFeedFilter] = useState('for-you');
   const [sportFilter, setSportFilter] = useState('all');
-  const [contentTypeFilter, setContentTypeFilter] = useState('all');
-  const [sortFilter, setSortFilter] = useState('createdAt');
+  const [sortFilter, setSortFilter] = useState('releaseYear');
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -65,13 +62,10 @@ export default function Media() {
     if (typeof router.query.sport === 'string') {
       setSportFilter(router.query.sport);
     }
-    if (typeof router.query.type === 'string') {
-      setContentTypeFilter(router.query.type);
-    }
     if (typeof router.query.sort === 'string') {
       setSortFilter(router.query.sort);
     }
-  }, [router.isReady, router.query.sort, router.query.sport, router.query.tab, router.query.type]);
+  }, [router.isReady, router.query.sort, router.query.sport, router.query.tab]);
 
   // Data states
   const [featured, setFeatured] = useState(null);
@@ -98,7 +92,6 @@ export default function Media() {
           getCollections({ sport: sportFilter }).catch(() => []),
           getCouchVideos({
             sport: sportFilter,
-            type: contentTypeFilter,
             sort: sortFilter,
             limit: COUCH_PAGE_SIZE,
             page: 1,
@@ -118,11 +111,11 @@ export default function Media() {
     if (activeTab === 'couch') {
       fetchCouchData();
     }
-  }, [activeTab, contentTypeFilter, sortFilter, sportFilter]);
+  }, [activeTab, sortFilter, sportFilter]);
 
   const updateCouchFilter = (key, value) => {
     const nextQuery = { ...router.query, tab: 'couch' };
-    if (value === 'all' || (key === 'sort' && value === 'createdAt')) delete nextQuery[key];
+    if (value === 'all' || (key === 'sort' && value === 'releaseYear')) delete nextQuery[key];
     else nextQuery[key] = value;
     router.replace({ pathname: router.pathname, query: nextQuery }, undefined, { shallow: true });
   };
@@ -133,7 +126,6 @@ export default function Media() {
     try {
       const videos = await getCouchVideos({
         sport: sportFilter,
-        type: contentTypeFilter,
         sort: sortFilter,
         limit: COUCH_PAGE_SIZE,
         page: nextPage,
@@ -152,13 +144,12 @@ export default function Media() {
     return [featured, ...recentVideos].filter((video) => {
       if (!video || !getHeroImage(video)) return false;
       if (sportFilter !== 'all' && !video.sportTypes?.includes(sportFilter)) return false;
-      if (contentTypeFilter !== 'all' && video.type !== contentTypeFilter) return false;
       const id = video._id || video.slug || video.title;
       if (!id || seen.has(id)) return false;
       seen.add(id);
       return true;
     });
-  }, [contentTypeFilter, featured, recentVideos, sportFilter]);
+  }, [featured, recentVideos, sportFilter]);
 
   useEffect(() => {
     if (heroVideos.length < 2) return undefined;
@@ -417,27 +408,9 @@ export default function Media() {
                   </button>
                 ))}
               </div>
-              <div className="flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Filter className="h-4 w-4" />
-                  <span>{recentVideos.length} videos</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 sm:flex sm:w-auto">
-                  <Select
-                    value={contentTypeFilter}
-                    onValueChange={(value) => updateCouchFilter('type', value)}
-                  >
-                    <SelectTrigger className="w-full sm:w-44" aria-label="Filter by content type">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CONTENT_TYPES.map((type) => (
-                        <SelectItem key={type.value} value={type.value}>
-                          {type.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+              <div className="flex items-center justify-between gap-3 border-t border-border pt-4">
+                <span className="text-sm text-muted-foreground">{recentVideos.length} videos</span>
+                <div className="w-48">
                   <Select
                     value={sortFilter}
                     onValueChange={(value) => updateCouchFilter('sort', value)}
