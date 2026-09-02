@@ -1,0 +1,161 @@
+{
+  "source": "Official publisher YouTube channels, publisher film pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-02T23:43:49.961Z",
+  "films": [
+    {
+      "slug": "nike-sb-constant-2021",
+      "type": "film",
+      "title": "Constant",
+      "description": "Nike SB's 2021 full-length follows the team through Los Angeles, London, Australia, New York City, parks and backyard pools. Directed by Ant Travis, the 30-minute film features Grant Taylor, Carlos Ribeiro, Sean Malto, Korahn Gayle, Daan Van Der Linden, Nicole Hause, Hugo Boserup and Oskar Rozenberg Hallberg alongside the wider Nike SB roster.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "nike-sb", "team-video"],
+      "releaseYear": 2021,
+      "producedBy": "Nike SB",
+      "directors": ["Ant Travis"],
+      "riders": [
+        "Eric Koston",
+        "Grant Taylor",
+        "Sean Malto",
+        "Korahn Gayle",
+        "Carlos Ribeiro",
+        "John Fitzgerald",
+        "Daan Van Der Linden",
+        "Blake Carpenter",
+        "Mason Silva",
+        "Hugo Boserup",
+        "Nicole Hause",
+        "Oskar Rozenberg Hallberg"
+      ],
+      "locations": ["Los Angeles", "London", "Australia", "New York City"],
+      "duration": 1839,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/AB2kpLrXYWA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/AB2kpLrXYWA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=AB2kpLrXYWA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=AB2kpLrXYWA",
+          "embedUrl": "https://www.youtube.com/embed/AB2kpLrXYWA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-02T23:43:49.961Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=AB2kpLrXYWA",
+          "sourceDetails": "Public, embeddable full-length upload on Thrasher Magazine's authorized publishing channel; exact runtime 30:39.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        },
+        {
+          "source": "nike-sb",
+          "url": "https://www.nikesb.com/articles/sb-constant",
+          "sourceDetails": "Official Nike SB film page confirming the 2021 full-length, director Ant Travis, principal riders and filming locations.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/nike-sb-constant",
+          "sourceDetails": "Independent filmography confirming the 2021 release, 31-minute runtime, filmmaker and 12 rider credits.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of the authorized Thrasher upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Constant (2021) Skate Film",
+        "description": "Watch Nike SB's 2021 full-length Constant from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "volcom-microwave-2026",
+      "type": "film",
+      "title": "MICROWAVE",
+      "description": "Volcom's 2026 full-length is a 27-minute team film directed by Shane Azar and filmed and edited by George Kousoulis. MICROWAVE follows an international roster led by Simon Bannerot, Rome Collyer, Liv Lovelace, Milton Martinez, Giovanni Vianna and Omar Hassan.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "volcom", "team-video"],
+      "releaseYear": 2026,
+      "producedBy": "Volcom",
+      "directors": ["Shane Azar", "George Kousoulis"],
+      "riders": [
+        "Simon Bannerot",
+        "Rome Collyer",
+        "Liv Lovelace",
+        "Jay Runciman",
+        "Ethan Copeland",
+        "Milton Martinez",
+        "Jesse Noonan",
+        "Giovanni Vianna",
+        "Harry Lintell",
+        "Omar Hassan",
+        "Theo Clarke",
+        "Shane Azar",
+        "Kai Shimakage",
+        "Rob Pace"
+      ],
+      "locations": [],
+      "duration": 1630,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/icquxwiUvYU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/icquxwiUvYU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=icquxwiUvYU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=icquxwiUvYU",
+          "embedUrl": "https://www.youtube.com/embed/icquxwiUvYU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Volcom",
+          "channelUrl": "https://www.youtube.com/@volcom",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-02T23:43:49.961Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=icquxwiUvYU",
+          "sourceDetails": "Public, embeddable full-length upload on Volcom's official channel; exact runtime 27:10 with director, filmer and rider credits in the description.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        },
+        {
+          "source": "manual-magazine",
+          "url": "https://manualmagazine.com/2026/03/28/microwave-a-volcom-skate-film/",
+          "sourceDetails": "Independent release coverage confirming the 2026 film, George Kousoulis and the complete 14-rider roster.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/companies/volcom",
+          "sourceDetails": "Independent filmography confirming the 2026 full-length, 27-minute runtime, filmmaker and rider credits.",
+          "retrievedAt": "2026-09-02T23:43:49.961Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Volcom's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "MICROWAVE (2026) Skate Film",
+        "description": "Watch Volcom's 2026 full-length MICROWAVE from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
