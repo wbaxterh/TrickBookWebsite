@@ -111,9 +111,15 @@ export default function Riders() {
                       {rider.riderProfile?.nickname && (
                         <p className="truncate text-sm text-muted-foreground">{rider.name}</p>
                       )}
-                      <p className="mt-2 line-clamp-2 text-sm">
-                        {rider.bio || 'Building their trickbook.'}
-                      </p>
+                      {rider.bio && <p className="mt-2 line-clamp-2 text-sm">{rider.bio}</p>}
+                      {!rider.bio && rider.riderProfile?.riderStyle && (
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          {rider.riderProfile.riderStyle}
+                          {rider.riderProfile?.nationality
+                            ? ` · ${rider.riderProfile.nationality}`
+                            : ''}
+                        </p>
+                      )}
                       <p className="mt-3 text-xs font-medium text-yellow-600">
                         {(rider.sports || []).join(' · ') || 'Action sports'}
                       </p>
