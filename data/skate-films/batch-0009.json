@@ -1,0 +1,158 @@
+{
+  "source": "Official brand uploads, first-party film pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T05:13:26.7574127Z",
+  "films": [
+    {
+      "slug": "baker-video-with-andrew-zach-rowan-2022",
+      "type": "film",
+      "title": "BAKER VIDEO WITH, ANDREW, ZACH and ROWAN",
+      "description": "Baker Skateboards' 2022 full-length brings together complete parts from Andrew Reynolds, Zach Allen and Rowan Zorilla, with sections from Sully Cormier, Max Wasungu and other Baker teammates. Andrew Reynolds and Ryan Ewing filmed the 25-minute production.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "baker-skateboards", "team-video"],
+      "releaseYear": 2022,
+      "producedBy": "Baker Skateboards",
+      "directors": ["Andrew Reynolds", "Ryan Ewing"],
+      "riders": [
+        "Kevin Long",
+        "Andrew Reynolds",
+        "Elissa Steamer",
+        "Rowan Zorilla",
+        "Tristan Funkhouser",
+        "Jacopo Carozzi",
+        "Kader Sylla",
+        "Zach Allen",
+        "Brian O'Dwyer",
+        "Max Wasungu",
+        "Sully Cormier",
+        "Davey Sayles"
+      ],
+      "locations": ["United States"],
+      "duration": 1531,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/LYpHzG2reOc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/LYpHzG2reOc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=LYpHzG2reOc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=LYpHzG2reOc",
+          "embedUrl": "https://www.youtube.com/embed/LYpHzG2reOc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Baker Has A Deathwish",
+          "channelUrl": "https://www.youtube.com/@bakerhasadeathwish",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T05:13:26.7574127Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=LYpHzG2reOc",
+          "sourceDetails": "Public, embeddable complete film on Baker Skateboards and Deathwish's official channel; exact runtime 25:31 and upload date February 16, 2022. The description links Baker's official website and supplies section timestamps.",
+          "retrievedAt": "2026-09-03T05:13:26.7574127Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/baker-baker-video-with-andrew-zach-and-rowan",
+          "sourceDetails": "Independent filmography confirms the 2022 release, full-length classification, Baker production, filmmakers Andrew Reynolds and Ryan Ewing, United States location and 12 rider credits.",
+          "retrievedAt": "2026-09-03T05:13:26.7574127Z"
+        },
+        {
+          "source": "free-skate-magazine",
+          "url": "https://www.freeskatemag.com/2022/02/16/baker-video-with-andrew-zach-and-rowan/",
+          "sourceDetails": "Independent release coverage dated February 16, 2022 confirms the title and featured full parts from Andrew Reynolds, Zach Allen and Rowan Zorilla.",
+          "retrievedAt": "2026-09-03T05:13:26.7574127Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Baker Skateboards and Deathwish's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "BAKER VIDEO WITH, ANDREW, ZACH and ROWAN (2022)",
+        "description": "Watch Baker Skateboards' 2022 full-length BAKER VIDEO WITH, ANDREW, ZACH and ROWAN from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "vans-credits-2020",
+      "type": "film",
+      "title": "CREDITS",
+      "description": "Directed by Shari White, Vans' 2020 film CREDITS celebrates the global women's skate community through the styles and friendships of Una Farrar, Breana Geering, Fabiana Delfino and eight more riders. The 15-minute film was made over nearly a year.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "skate-film", "vans", "women-skateboarding"],
+      "releaseYear": 2020,
+      "producedBy": "Vans",
+      "directors": ["Shari White"],
+      "riders": [
+        "Beatrice Domond",
+        "Fabiana Delfino",
+        "Breana Geering",
+        "Una Farrar",
+        "Shari White",
+        "Clara Solar",
+        "Adelaide Norris",
+        "Dayana Young",
+        "Helena Long",
+        "Poppy Olsen",
+        "Cher Strauberry"
+      ],
+      "locations": [
+        "Montréal, QC",
+        "Miami, FL",
+        "Barcelona, Spain",
+        "Vancouver, BC",
+        "New York City, NY"
+      ],
+      "duration": 923,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/IQbZFFpK4kE/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/IQbZFFpK4kE/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=IQbZFFpK4kE",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=IQbZFFpK4kE",
+          "embedUrl": "https://www.youtube.com/embed/IQbZFFpK4kE",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Vans",
+          "channelUrl": "https://www.youtube.com/@vans",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T05:13:26.7574127Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=IQbZFFpK4kE",
+          "sourceDetails": "Public, embeddable complete film on Vans' verified official channel; exact runtime 15:23 and upload date April 21, 2020. The description identifies director Shari White and all 11 featured riders.",
+          "retrievedAt": "2026-09-03T05:13:26.7574127Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/vans-credits",
+          "sourceDetails": "Independent filmography confirms the 2020 release, 15-minute web edit, Vans production, director Shari White, five filming locations and 11 rider credits.",
+          "retrievedAt": "2026-09-03T05:13:26.7574127Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Vans' official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "CREDITS (2020) Skate Film",
+        "description": "Watch Vans' 2020 skate film CREDITS, directed by Shari White, from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "source": "Official brand uploads, first-party archives, and independent skate-film sources",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T06:44:23.1457210Z",
+  "films": [
+    {
+      "slug": "antihero-arbitrary-function-2019",
+      "type": "film",
+      "title": "Arbitrary Function",
+      "description": "Antihero Skateboards' 2019 Implosionistic Tendencies installment is a compact team film credited to the Grimple Brothers. Arbitrary Function features Frank Gerwer, Tony Trujillo, Grant Taylor, Chris Pfanner, Austin Kanfoush, Ishod Wair, Raney Beres, Daan Van Der Linden and seven more skaters.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "skate-film", "antihero-skateboards", "team-video"],
+      "releaseYear": 2019,
+      "producedBy": "Antihero Skateboards",
+      "directors": ["Grimple Brothers"],
+      "riders": [
+        "Frank Gerwer",
+        "Tony Trujillo",
+        "Grant Taylor",
+        "Chris Pfanner",
+        "Tony Miorana",
+        "Austin Kanfoush",
+        "Ishod Wair",
+        "Raney Beres",
+        "Daan Van Der Linden",
+        "Div Adam",
+        "Bino",
+        "Shay Martinson",
+        "Justin Demmon",
+        "Gut",
+        "Pat McClain"
+      ],
+      "locations": [],
+      "duration": 836,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/kDu49dQIgvE/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/kDu49dQIgvE/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=kDu49dQIgvE",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=kDu49dQIgvE",
+          "embedUrl": "https://www.youtube.com/embed/kDu49dQIgvE",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Antihero Skateboards",
+          "channelUrl": "https://www.youtube.com/channel/UClk1vhvMhVVwlKFjFwoRr_w",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=kDu49dQIgvE",
+          "sourceDetails": "Public, embeddable complete film on Antihero Skateboards' official channel; exact runtime 13:56 and upload date December 25, 2019. The official description identifies it as the final installment in the Implosionistic Tendencies saga.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/antihero-implosionistic-tendencies-arbitrary-function",
+          "sourceDetails": "Independent filmography confirms the 2019 Antihero production, Grimple Brothers credit and 15 featured skaters.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/antihero-skateboards-arbitrary-function",
+          "sourceDetails": "Independent release coverage dated December 26, 2019 confirms Antihero Skateboards' Arbitrary Function film.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Antihero Skateboards' official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Arbitrary Function (2019) Skate Film",
+        "description": "Watch Antihero Skateboards' 2019 film Arbitrary Function from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "real-through-and-through-2015",
+      "type": "film",
+      "title": "Through and Through",
+      "description": "REAL Skateboards' 2015 full-length grew out of everyday sessions with the team rather than a planned production. Filmed by Jeremy McNamara and Tim Fulton, the 17-minute film features Dennis Busenitz, Ishod Wair, Peter Ramondetta, Kyle Walker, Chima Ferguson and twelve more REAL riders.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "real-skateboards", "team-video"],
+      "releaseYear": 2015,
+      "producedBy": "REAL Skateboards",
+      "directors": ["Jeremy McNamara", "Tim Fulton"],
+      "riders": [
+        "Dennis Busenitz",
+        "Max Schaaf",
+        "Ernie Torres",
+        "Justin Brock",
+        "Peter Ramondetta",
+        "Antoine Asselin",
+        "JT Aultz",
+        "James Hardy",
+        "Chima Ferguson",
+        "Robbie Brockel",
+        "Davis Torgerson",
+        "Massimo Cavedoni",
+        "Ishod Wair",
+        "Jack Olson",
+        "Kyle Walker",
+        "Jake Donnelly",
+        "Jake Ruiz"
+      ],
+      "locations": [],
+      "duration": 1052,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/CxMEFFevFTw/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/CxMEFFevFTw/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=CxMEFFevFTw",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=CxMEFFevFTw",
+          "embedUrl": "https://www.youtube.com/embed/CxMEFFevFTw",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "REAL Skateboards",
+          "channelUrl": "https://www.youtube.com/channel/UCfAFEJj6edzegro3Tdn4B9A",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=CxMEFFevFTw",
+          "sourceDetails": "Public, embeddable full video on REAL Skateboards' official channel; exact runtime 17:32 and upload date October 12, 2015. The description identifies it as the complete film and explains its informal team-session origin.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/real-through-and-through",
+          "sourceDetails": "Independent filmography confirms the 2015 full-length, 17-minute classification, REAL Skateboards production, Jeremy McNamara credit and 17 riders.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "kickerclub",
+          "url": "https://www.kickerclub.com/2015/10/real-through-and-through-video/",
+          "sourceDetails": "Independent release coverage confirms the 17-minute film, principal riders, and filming by Tim Fulton and Jeremy McNamara.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of REAL Skateboards' official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Through and Through (2015) Skate Film",
+        "description": "Watch REAL Skateboards' 2015 full-length Through and Through from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "girl-doll-2018",
+      "type": "film",
+      "title": "Doll",
+      "description": "Girl Skateboards' 2018 full-length introduces Niels Bennett and Griffin Gass alongside a wide Girl and Chocolate cast. Directed by John Marello, Rye Beres and Cory Weincheque, Doll combines team parts and satirical office skits in a 30-minute production.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "girl-skateboards", "team-video"],
+      "releaseYear": 2018,
+      "producedBy": "Girl Skateboards",
+      "directors": ["John Marello", "Rye Beres", "Cory Weincheque", "Tanner Cudney"],
+      "riders": [
+        "Brandon Biebel",
+        "Justin Eldridge",
+        "Kenny Anderson",
+        "Mike Carroll",
+        "Rick Howard",
+        "Rick McCrank",
+        "Mike Mo Capaldi",
+        "Jeron Wilson",
+        "Andrew Brophy",
+        "Jesus Fernandez",
+        "Sean Malto",
+        "Vincent Alvarez",
+        "Stevie Perez",
+        "Cory Kennedy",
+        "Raven Tershy",
+        "Yonnie Cruz",
+        "Simon Bannerot",
+        "Tyler Pacheco",
+        "Niels Bennett",
+        "Griffin Gass"
+      ],
+      "locations": ["United States"],
+      "duration": 1799,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/xjmyx1eH2w4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/xjmyx1eH2w4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=xjmyx1eH2w4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=xjmyx1eH2w4",
+          "embedUrl": "https://www.youtube.com/embed/xjmyx1eH2w4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "crailtap",
+          "channelUrl": "https://www.youtube.com/channel/UCF-aJUf_vFcltYdnTCTiuIQ",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=xjmyx1eH2w4",
+          "sourceDetails": "Public, embeddable complete film on Crailtap, Girl Distribution Company's official publishing channel; exact runtime 29:59 and upload date October 22, 2018. The description supplies chapters and featured rider credits.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "girl-films",
+          "url": "https://films.girlskateboards.com/",
+          "sourceDetails": "Girl Skateboards' first-party film archive supplies the chapter structure, directors John Marello, Rye Beres and Cory Weincheque, filmer Tanner Cudney, editor John Marello and producer Sam Smyth.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/girl-doll",
+          "sourceDetails": "Independent filmography confirms the 2018 full-length, 30-minute classification, Girl Skateboards production, filmmaker credits, United States origin and 20 riders.",
+          "retrievedAt": "2026-09-03T06:44:23.1457210Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Girl Distribution Company's official Crailtap upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Doll (2018) Skate Film",
+        "description": "Watch Girl Skateboards' 2018 full-length Doll from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

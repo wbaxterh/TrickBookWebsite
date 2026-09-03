@@ -1,0 +1,92 @@
+{
+  "source": "Official Odyssey BMX FEAST full-film upload with first-party and DIG BMX release metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T19:45:00Z",
+  "films": [
+    {
+      "slug": "odyssey-feast-2023",
+      "type": "film",
+      "title": "FEAST",
+      "description": "Odyssey BMX's 2023 team film FEAST serves up dedicated parts from Boyd Hilder, Santi Laverde, and Mikey Andrew, with appearances from 13 more Odyssey riders. Filmed primarily in Southern California with clips from Texas, Nevada, and New York, the 16-minute film was filmed and edited by Zach Krejmas with additional filming by Trent Lutzke and Stephan August.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "odyssey-bmx", "team-video", "street-bmx"],
+      "releaseYear": 2023,
+      "producedBy": "Odyssey BMX",
+      "directors": ["Zach Krejmas", "Trent Lutzke", "Stephan August"],
+      "riders": [
+        "Boyd Hilder",
+        "Santi Laverde",
+        "Mikey Andrew",
+        "Tommy Dugan",
+        "Tallon Pemberton",
+        "Takato Ueda",
+        "Markus Hoyte",
+        "Aryei Levenson",
+        "Johnny Raekes",
+        "Gary Young",
+        "Dennis Enarson",
+        "Hilario Olivos",
+        "Devin Burks",
+        "Justin Spriet",
+        "Jarren Barboza",
+        "Aaron Ross"
+      ],
+      "locations": [
+        "Southern California, United States",
+        "Texas, United States",
+        "Nevada, United States",
+        "New York, United States"
+      ],
+      "duration": 1001,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/bjO1S9eHgEI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/bjO1S9eHgEI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=bjO1S9eHgEI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=bjO1S9eHgEI",
+          "embedUrl": "https://www.youtube.com/embed/bjO1S9eHgEI",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Odyssey BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCJHbVOD6qHuwkTth4Nn38PQ",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T19:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=bjO1S9eHgEI",
+          "sourceDetails": "Public, playable complete film on Odyssey BMX's official channel; exact runtime 16:41. The description supplies the principal and supporting riders, locations, Zach Krejmas film/edit credit, and additional filming credits for Trent Lutzke and Stephan August.",
+          "retrievedAt": "2026-09-03T19:45:00Z"
+        },
+        {
+          "source": "odyssey-bmx",
+          "url": "https://odysseybmx.com/2023/11/new-video-feast/",
+          "sourceDetails": "Odyssey's first-party release post embeds the official complete film and confirms its November 2023 release, rider credits, primary filming locations, and Zach Krejmas film/edit credit.",
+          "retrievedAt": "2026-09-03T19:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/feast-odyssey-bmx",
+          "sourceDetails": "DIG BMX independently confirms the November 23, 2023 release, complete-film presentation, Zach Krejmas filming/editing credit, rider roster, and locations.",
+          "retrievedAt": "2026-09-03T19:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Odyssey BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "FEAST (2023) BMX Film",
+        "description": "Watch Odyssey BMX's 2023 team film FEAST from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

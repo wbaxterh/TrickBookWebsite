@@ -33,11 +33,15 @@ export default function CouchVideoPage({ initialVideo }) {
 
   useEffect(() => {
     if (!videoId) return;
-    getVideoStreamUrl(videoId)
-      .then(setStream)
-      .catch(() => setStream(null));
+    if (externalWatch?.embedUrl) {
+      setStream(null);
+    } else {
+      getVideoStreamUrl(videoId)
+        .then(setStream)
+        .catch(() => setStream(null));
+    }
     if (token) getVideoReaction(videoId, token).then(setUserReaction);
-  }, [token, videoId]);
+  }, [externalWatch?.embedUrl, token, videoId]);
 
   const handleReaction = async (type) => {
     if (!token) {

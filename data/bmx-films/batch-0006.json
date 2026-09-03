@@ -1,0 +1,92 @@
+{
+  "source": "Official Federal Bikes FTS complete-film upload with first-party release metadata and independent BMX press credits",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T20:45:00Z",
+  "films": [
+    {
+      "slug": "federal-fts-2019",
+      "type": "film",
+      "title": "FTS",
+      "description": "Federal Bikes' 2019 NORA Cup-winning full-length follows the team through two years of street filming around the world. Filmed and edited by Rich Forne, the 49-minute film features Bruno Hoffmann, Ryan Eles, Michal Smelko, James Cunningham, Joe Jarvis, Anthony Perrin, and Dan Lacey across London, Seville, Philadelphia, California, Barcelona, Tel Aviv, and Madrid.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "federal-bikes", "team-video", "street-bmx", "dvd"],
+      "releaseYear": 2019,
+      "producedBy": "Federal Bikes",
+      "directors": ["Rich Forne"],
+      "riders": [
+        "Bruno Hoffmann",
+        "Ryan Eles",
+        "Michal Smelko",
+        "James Cunningham",
+        "Joe Jarvis",
+        "Anthony Perrin",
+        "Dan Lacey"
+      ],
+      "locations": [
+        "London, England",
+        "Seville, Spain",
+        "Philadelphia, Pennsylvania, United States",
+        "California, United States",
+        "Barcelona, Spain",
+        "Tel Aviv, Israel",
+        "Madrid, Spain"
+      ],
+      "duration": 2937,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/63qxuDTCPfA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/63qxuDTCPfA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=63qxuDTCPfA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=63qxuDTCPfA",
+          "embedUrl": "https://www.youtube.com/embed/63qxuDTCPfA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Federal Bikes",
+          "channelUrl": "https://www.youtube.com/channel/UCg-C5SGBn1qxMlxWbJWLQrg",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T20:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=63qxuDTCPfA",
+          "sourceDetails": "Public, embeddable complete film on Federal Bikes' official channel; exact runtime 48:57. The description identifies FTS as the brand's complete NORA Cup-winning full-length and credits the worldwide production to Rich Forne and the Federal team.",
+          "retrievedAt": "2026-09-03T20:45:00Z"
+        },
+        {
+          "source": "federal-bikes",
+          "url": "https://federalbikes.com/blogs/fts/fts-full-dvd",
+          "sourceDetails": "Federal Bikes' first-party release page presents FTS in its entirety, identifies it as a worldwide full-length, and credits Rich Forne for filming and editing.",
+          "retrievedAt": "2026-09-03T20:45:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/ride-uk-features/dvd-review-federal-bikes-fts.html",
+          "sourceDetails": "Ride UK BMX's July 2019 review confirms the original release year, approximately 50-minute runtime, full-length DVD format, principal sections, and Rich Forne's authorship.",
+          "retrievedAt": "2026-09-03T20:45:00Z"
+        },
+        {
+          "source": "freedom-bmx",
+          "url": "https://freedombmx.de/top-stories/federal-bikes-fts-trailer.html",
+          "sourceDetails": "Freedom BMX's contemporary release coverage confirms the two-year production, Rich Forne credit, six principal riders plus the later-released Joe Jarvis section, and filming locations across Europe, the United States, and Israel.",
+          "retrievedAt": "2026-09-03T20:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Federal Bikes' official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "FTS (2019) BMX Film",
+        "description": "Watch Federal Bikes' 2019 full-length BMX film FTS from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

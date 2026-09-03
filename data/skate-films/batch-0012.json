@@ -1,0 +1,83 @@
+{
+  "source": "Official brand uploads and independent skate-film sources",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T07:32:52.4563984Z",
+  "films": [
+    {
+      "slug": "emerica-made-chapter-two-2016",
+      "type": "film",
+      "title": "MADE Chapter Two",
+      "description": "Emerica's 2016 full-length concludes the MADE series with parts from Jon Dickson, Bryan Herman, Andrew Reynolds, Eniz Fazliov, Rob Maatman, Jeremy Leabres, Leo Romero, Brandon Westgate, Collin Provost, Kevin \"Spanky\" Long, Jerry Hsu and Justin \"Figgy\" Figueroa. Filmed by Jon Miner and Bucky Gonzalez and edited by Miner, the 41-minute film was reissued in full on Emerica's official channel.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "emerica", "team-video"],
+      "releaseYear": 2016,
+      "producedBy": "Emerica",
+      "directors": ["Jon Miner", "Bucky Gonzalez"],
+      "riders": [
+        "Brandon Westgate",
+        "Collin Provost",
+        "Jerry Hsu",
+        "Kevin Long",
+        "Andrew Reynolds",
+        "Bryan Herman",
+        "Leo Romero",
+        "Eniz Fazliov",
+        "Justin Figueroa",
+        "Jon Dickson",
+        "Rob Maatman",
+        "Jeremy Leabres"
+      ],
+      "locations": ["United States"],
+      "duration": 2493,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/oN3fqFXDNxA/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/oN3fqFXDNxA/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=oN3fqFXDNxA",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=oN3fqFXDNxA",
+          "embedUrl": "https://www.youtube.com/embed/oN3fqFXDNxA",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "emerica",
+          "channelUrl": "https://www.youtube.com/channel/UCtmU6euep0ehxk85iaBRO7Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T07:32:52.4563984Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=oN3fqFXDNxA",
+          "sourceDetails": "Public, embeddable complete film on Emerica's verified official channel; exact runtime 41:33. The official title identifies the 2016 release, while the description supplies all 12 featured riders and filming credits for Jon Miner and Bucky Gonzalez.",
+          "retrievedAt": "2026-09-03T07:32:52.4563984Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/emerica-made-chapter-two",
+          "sourceDetails": "Independent filmography confirms the 2016 Emerica full-length, 42-minute classification, Jon Miner credit, United States origin and 12 featured skaters.",
+          "retrievedAt": "2026-09-03T07:32:52.4563984Z"
+        },
+        {
+          "source": "skate-sonr",
+          "url": "https://skatesonr.com/films/m/made_chapter_two-2668418704740352/",
+          "sourceDetails": "Independent catalog records the October 3, 2016 release date, full-length classification, Emerica production and detailed cast and crew credits.",
+          "retrievedAt": "2026-09-03T07:32:52.4563984Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Emerica's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "MADE Chapter Two (2016) Skate Film",
+        "description": "Watch Emerica's 2016 full-length MADE Chapter Two from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

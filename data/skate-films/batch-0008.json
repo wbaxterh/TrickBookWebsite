@@ -1,0 +1,216 @@
+{
+  "source": "Official brand uploads, first-party film pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T04:28:00.000Z",
+  "films": [
+    {
+      "slug": "primitive-wildfire-2024",
+      "type": "film",
+      "title": "WILDFIRE",
+      "description": "Primitive Skateboarding's 2024 film WILDFIRE is a 22-minute showcase starring Kyonosuke Yamashita, Aimu Yamazuki and Trent McClung. Directed by Alan Hannon and Eric Iwakura, it also features ten Primitive teammates across the United States and Japan.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "skate-film", "primitive-skateboarding", "team-video"],
+      "releaseYear": 2024,
+      "producedBy": "Primitive Skateboarding",
+      "directors": ["Alan Hannon", "Eric Iwakura"],
+      "riders": [
+        "Kyonosuke Yamashita",
+        "Aimu Yamazuki",
+        "Trent McClung",
+        "Giovanni Vianna",
+        "Tre Williams",
+        "Paul Rodriguez",
+        "Miyu Ito",
+        "Tiago Lemos",
+        "Filipe Mota",
+        "Jonny Hernandez",
+        "Carlos Ribeiro",
+        "Miles Silvas",
+        "Dylan Jaeb"
+      ],
+      "locations": ["United States", "Japan"],
+      "duration": 1332,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/MVVLkYqhGY0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/MVVLkYqhGY0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=MVVLkYqhGY0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=MVVLkYqhGY0",
+          "embedUrl": "https://www.youtube.com/embed/MVVLkYqhGY0",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Primitive Skate",
+          "channelUrl": "https://www.youtube.com/@Primitiveskateboarding",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=MVVLkYqhGY0",
+          "sourceDetails": "Public, embeddable complete film on Primitive Skate's official channel; exact runtime 22:12 and upload date December 16, 2024. The description supplies directors and all 13 rider credits.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/primitive-skate-wildfire",
+          "sourceDetails": "Independent filmography confirms the 2024 release, 22-minute classification, Primitive production, directors Alan Hannon and Eric Iwakura, locations and 13 riders.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Primitive Skate's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "WILDFIRE (2024) Skate Film",
+        "description": "Watch Primitive Skateboarding's 2024 film WILDFIRE from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "swatch-skate-break-2024",
+      "type": "film",
+      "title": "SKATE BREAK",
+      "description": "Swatch's 2024 SKATE BREAK follows Andy Anderson through a surreal office built from fully skateable furniture. The 21-minute film was directed by the Zenga Bros, whose desks, couches, lamps and boardroom obstacles turn everyday workspaces into dreamlike skate spots.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "skate-film", "swatch", "andy-anderson"],
+      "releaseYear": 2024,
+      "producedBy": "Swatch",
+      "directors": ["Zenga Bros"],
+      "riders": ["Andy Anderson"],
+      "locations": [],
+      "duration": 1260,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/EsvnrTr4fGs/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/EsvnrTr4fGs/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=EsvnrTr4fGs",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=EsvnrTr4fGs",
+          "embedUrl": "https://www.youtube.com/embed/EsvnrTr4fGs",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Swatch",
+          "channelUrl": "https://www.youtube.com/@swatch",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=EsvnrTr4fGs",
+          "sourceDetails": "Public, embeddable full-length film on Swatch's official channel; exact runtime 21:00 and upload date November 6, 2024. The description and chapters identify Andy Anderson and the Zenga Bros-built obstacles.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        },
+        {
+          "source": "swatch",
+          "url": "https://www.swatch.com/en-us/skate-break-with-andy-anderson.html",
+          "sourceDetails": "Swatch's first-party project page identifies SKATE BREAK, Andy Anderson and the Zenga Bros as the filmmakers and creators of its skateable office set.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        },
+        {
+          "source": "zenga-bros-youtube",
+          "url": "https://www.youtube.com/watch?v=8r0dr3NVQe0",
+          "sourceDetails": "The authorized filmmaker upload confirms the project was presented by Swatch, directed by the Zenga Bros and features Andy Anderson.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Swatch's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "SKATE BREAK (2024) Skate Film",
+        "description": "Watch Swatch and the Zenga Bros' 2024 skate film SKATE BREAK from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "carhartt-wip-ishin-denshin-2026",
+      "type": "film",
+      "title": "Ishin Denshin",
+      "description": "Carhartt WIP's first full-length skate film set in Asia follows an international team through Tokyo, Osaka and Nagoya. Directed and edited by Romain Batard, the 2026 film was produced by Joseph Biais and Etienne Chatelain and introduces Kyonosuke Yamashita alongside ten teammates.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "carhartt-wip", "japan"],
+      "releaseYear": 2026,
+      "producedBy": "Carhartt WIP",
+      "directors": ["Romain Batard"],
+      "riders": [
+        "Noah Mahieu",
+        "Kyonosuke Yamashita",
+        "Max Palmer",
+        "Eetu Toropainen",
+        "Yuma Takei",
+        "Kelly Ishihara",
+        "Tanner Burzinski",
+        "Willow Voges Fernandes",
+        "Amélien Foures",
+        "Raphael Langslow",
+        "Eddie Cernicky"
+      ],
+      "locations": ["Tokyo, Japan", "Osaka, Japan", "Nagoya, Japan"],
+      "duration": 1153,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Vg1oYLNgpLU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Vg1oYLNgpLU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=Vg1oYLNgpLU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Vg1oYLNgpLU",
+          "embedUrl": "https://www.youtube.com/embed/Vg1oYLNgpLU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Carhartt WIP",
+          "channelUrl": "https://www.youtube.com/@carharttwip",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Vg1oYLNgpLU",
+          "sourceDetails": "Public, embeddable complete film on Carhartt WIP's official channel; exact runtime 19:13 and upload date January 30, 2026. The description supplies the director, filmers, producers and 11 rider credits.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        },
+        {
+          "source": "carhartt-wip",
+          "url": "https://carhartt-wip.com.sg/blogs/news/ishin-denshin-a-carhartt-wip-skate-film",
+          "sourceDetails": "Carhartt WIP's first-party release page confirms its first full-length set in Asia, the January 29, 2026 YouTube premiere, Japan locations, filming credits and rider lineup.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/ishin-denshin-a-carhartt-wip-skate-film",
+          "sourceDetails": "Independent filmography confirms the 2026 release, 19-minute runtime, Carhartt production, director and filmer credits, Japan locations, producers and 11 riders.",
+          "retrievedAt": "2026-09-03T04:28:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Carhartt WIP's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Ishin Denshin (2026) Skate Film",
+        "description": "Watch Carhartt WIP's 2026 full-length skate film Ishin Denshin from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
