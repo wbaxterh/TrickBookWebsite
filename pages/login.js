@@ -4,12 +4,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import Header from '../components/Header';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
+import { getRecoveryMessage } from '../lib/authRecovery';
 
 const validate = (values) => {
   const errors = {};
@@ -38,6 +39,11 @@ export default function Login() {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (!router.isReady || router.query.error !== 'provider_mismatch') return;
+    setLoginError(getRecoveryMessage(router.query.provider));
+  }, [router.isReady, router.query.error, router.query.provider]);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -56,7 +62,13 @@ export default function Login() {
         });
 
         if (result?.error) {
-          setLoginError(result.error);
+          if (result.error.startsWith('AUTH_PROVIDER_MISMATCH:')) {
+            setLoginError(getRecoveryMessage(result.error.split(':')[1]));
+          } else if (result.error === 'AUTH_RECOVERY_REQUIRED') {
+            setLoginError(getRecoveryMessage());
+          } else {
+            setLoginError(result.error);
+          }
         } else if (result?.ok) {
           logIn(null, values.email);
           router.push('/profile');
@@ -105,8 +117,14 @@ export default function Login() {
             <CardContent className="pt-6 space-y-4">
               {/* Error Message */}
               {loginError && (
-                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
-                  {loginError}
+                <div role="alert" className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-center space-y-2">
+                  <p className="text-red-500">{loginError}</p>
+                  <Link
+                    href="/forgot-password"
+                    className="inline-block font-medium text-yellow-500 hover:text-yellow-400 transition-colors"
+                  >
+                    Still can’t sign in? Reset your password
+                  </Link>
                 </div>
               )}
 
