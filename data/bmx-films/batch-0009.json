@@ -1,0 +1,103 @@
+{
+  "source": "Fit Bike Co.'s official complete-film upload and first-party production credits, corroborated by DIG BMX and Source BMX",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T22:20:00Z",
+  "films": [
+    {
+      "slug": "fit-f-it-all-2022",
+      "type": "film",
+      "title": "F-IT ALL",
+      "description": "Fit Bike Co.'s fifth feature-length team film, F-IT ALL, follows a 20-rider roster across street, park, and trails riding. The 2022 film was filmed and edited by Justin Benthien and runs 36 minutes, 30 seconds.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "team-film", "fit-bike-co", "street-bmx", "park-bmx", "trails-bmx"],
+      "releaseYear": 2022,
+      "producedBy": "Fit Bike Co.",
+      "directors": ["Justin Benthien"],
+      "riders": [
+        "Tom Dugan",
+        "Jordan Hango",
+        "Ethan Corriere",
+        "Matt Nordstrom",
+        "Austin Augie",
+        "Justin Spriet",
+        "Cory Nastazio",
+        "Kurt Perkins",
+        "Nick Bonnell",
+        "Max Miller",
+        "John Nelson",
+        "Mikey Andrew",
+        "Van Homan",
+        "Nico Badet",
+        "Damian Cespedes",
+        "Kairi Yamada",
+        "Emerson Morgan",
+        "Markus Hoyte",
+        "Coltin Knudson",
+        "Riley Abramyk"
+      ],
+      "locations": [],
+      "duration": 2190,
+      "thumbnails": {
+        "poster": "https://fitbikeco.com/wp-content/uploads/2022/12/f-it-all-full-vid-1080x607.jpg",
+        "backdrop": "https://fitbikeco.com/wp-content/uploads/2022/12/f-it-all-full-vid-1080x607.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=4QWFnQ8X1-M",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=4QWFnQ8X1-M",
+          "embedUrl": "https://www.youtube.com/embed/4QWFnQ8X1-M",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Fitbikeco.",
+          "channelUrl": "https://www.youtube.com/@FitbikecoVideos",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T22:20:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=4QWFnQ8X1-M",
+          "sourceDetails": "Public, embeddable complete film on Fit Bike Co.'s official YouTube channel; exact runtime 36:30. The official description identifies it as the complete full-length and names nine featured riders.",
+          "retrievedAt": "2026-09-03T22:20:00Z"
+        },
+        {
+          "source": "fit-bike-co",
+          "url": "https://fitbikeco.com/89249/",
+          "sourceDetails": "Fit Bike Co.'s first-party complete-film page embeds the official YouTube upload, labels it the full video, and provides official artwork and featured riders.",
+          "retrievedAt": "2026-09-03T22:20:00Z"
+        },
+        {
+          "source": "fit-bike-co",
+          "url": "https://fitbikeco.com/86701/",
+          "sourceDetails": "Fit Bike Co.'s first-party release page supplies the full 20-rider roster and credits Justin Benthien for filming and editing.",
+          "retrievedAt": "2026-09-03T22:20:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/f-it-all-full-video",
+          "sourceDetails": "DIG BMX independently confirms the December 2022 complete-film release, the official Fit upload, and Justin Benthien's filming credit.",
+          "retrievedAt": "2026-09-03T22:20:00Z"
+        },
+        {
+          "source": "source-bmx",
+          "url": "https://us.sourcebmx.com/en-cr/products/fit-f-it-all-dvd",
+          "sourceDetails": "Independent BMX retailer metadata confirms the feature-length film, 20-rider credits, Justin Benthien filming/editing credit, and exact 36:30 runtime.",
+          "retrievedAt": "2026-09-03T22:20:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Fit Bike Co.'s official YouTube upload; no media rehosting permission inferred. No film-wide location list was published, so no locations were inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "F-IT ALL (2022) BMX Film",
+        "description": "Watch Fit Bike Co.'s 2022 team film F-IT ALL from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
