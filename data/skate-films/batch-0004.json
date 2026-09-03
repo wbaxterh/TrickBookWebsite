@@ -1,0 +1,234 @@
+{
+  "source": "Official publisher YouTube channels, publisher film pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T00:27:22.510Z",
+  "films": [
+    {
+      "slug": "new-balance-numeric-intervals-2024",
+      "type": "film",
+      "title": "Intervals",
+      "description": "New Balance Numeric's 2024 full-length brings Brandon Westgate, Tiago Lemos and Jamie Foy together for 24 minutes of street skating. Directed by Kyle Camarillo, Intervals was filmed across major United States street spots and released through Thrasher Magazine.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "new-balance-numeric", "team-video"],
+      "releaseYear": 2024,
+      "producedBy": "New Balance Numeric",
+      "directors": ["Kyle Camarillo"],
+      "riders": ["Brandon Westgate", "Tiago Lemos", "Jamie Foy"],
+      "locations": [],
+      "duration": 1460,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/hsjkd3kUTWo/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/hsjkd3kUTWo/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=hsjkd3kUTWo",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=hsjkd3kUTWo",
+          "embedUrl": "https://www.youtube.com/embed/hsjkd3kUTWo",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=hsjkd3kUTWo",
+          "sourceDetails": "Public, embeddable full-length upload on Thrasher Magazine's authorized publishing channel; exact runtime 24:20 with director, cinematography and principal rider credits.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "nick-studio",
+          "url": "https://nick.studio/New-Balance-Numeric-Intervals",
+          "sourceDetails": "The campaign's creative studio confirms the October 2024 premiere, New Balance Numeric production, director Kyle Camarillo and the three featured riders.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/new-balance-intervals",
+          "sourceDetails": "Independent filmography confirms the 2024 release, 24-minute full-length classification, director and three rider credits.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Intervals (2024) Skate Film",
+        "description": "Watch New Balance Numeric's 2024 full-length Intervals from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "element-search-2026",
+      "type": "film",
+      "title": "Search",
+      "description": "Element Skateboards' 2026 full-length follows its international team through scenic street spots across Europe, the Americas and Japan. Directed by Jim Craven and Phil Zwijsen, Search features Madars Apse, Jaakko Ojanen, Vincent Milou, Brandon Westgate and twelve more Element riders.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "element-skateboards", "team-video"],
+      "releaseYear": 2026,
+      "producedBy": "Element Skateboards",
+      "directors": ["Jim Craven", "Phil Zwijsen"],
+      "riders": [
+        "Madars Apse",
+        "Jaakko Ojanen",
+        "Vincent Milou",
+        "Brandon Westgate",
+        "Vitória Mendonça",
+        "Archibald Bruno",
+        "Vinicius Costa",
+        "Rafaela Costa",
+        "Yukito Aoki",
+        "Ryo Sejiri",
+        "Leon Charo-Tite",
+        "Alexis Lacroix",
+        "Tom Barthélémy",
+        "Antoine Laurent",
+        "Filip Dziewięcki",
+        "Theophilus Löffler"
+      ],
+      "locations": [],
+      "duration": 2038,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/mT9T1IAbJAk/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/mT9T1IAbJAk/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=mT9T1IAbJAk",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=mT9T1IAbJAk",
+          "embedUrl": "https://www.youtube.com/embed/mT9T1IAbJAk",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=mT9T1IAbJAk",
+          "sourceDetails": "Public, embeddable full-length upload on Thrasher Magazine's authorized publishing channel; exact runtime 33:58 with directors, filmers, editors and complete rider credits.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/element-search",
+          "sourceDetails": "Independent filmography confirms the 2026 release, 34-minute full-length classification, two directors and complete rider roster.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Search (2026) Skate Film",
+        "description": "Watch Element Skateboards' 2026 full-length Search from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "pop-trading-company-pop-2024",
+      "type": "film",
+      "title": "POP",
+      "description": "Pop Trading Company's first full-length is a 48-minute portrait of its European team. Directed and edited by Jan Maarten Sneep and Patrick Louwerse, POP features Pascal Moelaert, Billy Hoogendijk, Rob Maatman, Tomas de Keulenaer and sixteen more riders.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "pop-trading-company", "team-video"],
+      "releaseYear": 2024,
+      "producedBy": "Pop Trading Company",
+      "directors": ["Jan Maarten Sneep", "Patrick Louwerse"],
+      "riders": [
+        "Pascal Moelaert",
+        "Billy Hoogendijk",
+        "Rob Maatman",
+        "Tomas de Keulenaer",
+        "Yeelen Moens",
+        "Emile de Vos",
+        "King van den Ban",
+        "Issey Kumatani",
+        "Jaïr Gravenberch",
+        "Jérôme Sossou",
+        "Logan Da Silva Ortiz",
+        "Alex Raeymaekers",
+        "Noah Bunink",
+        "Mats Edel",
+        "Hugo Snelooper",
+        "Laura van der Velden",
+        "Willem van Dijk",
+        "Bastiaan van Zadelhoff",
+        "Jeff van der Veken",
+        "Arthur Le Duc"
+      ],
+      "locations": [],
+      "duration": 2880,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Nxvtj5qD9Ow/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Nxvtj5qD9Ow/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=Nxvtj5qD9Ow",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Nxvtj5qD9Ow",
+          "embedUrl": "https://www.youtube.com/embed/Nxvtj5qD9Ow",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Pop Trading Company",
+          "channelUrl": "https://www.youtube.com/@poptradingcompany",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Nxvtj5qD9Ow",
+          "sourceDetails": "Public, embeddable full-length upload on Pop Trading Company's official channel; exact runtime 48:00 with directors, executive producers, production crew and complete rider credits.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "pop-trading-company",
+          "url": "https://poptradingcompany.com/pages/videos",
+          "sourceDetails": "Official publisher video archive identifies POP as the brand's full-length skate video.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "free-skate-magazine",
+          "url": "https://www.freeskatemag.com/2024/08/16/pop-trading-companys-pop-video-full-length/",
+          "sourceDetails": "Independent contemporary release coverage confirms the August 2024 release, first full-length status, filmmaker and principal riders.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/pop-a-full-length-skateboard-video-by-pop-trading-company",
+          "sourceDetails": "Independent filmography confirms the 2024 release, 48-minute runtime, directors and complete rider roster.",
+          "retrievedAt": "2026-09-03T00:27:22.510Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Pop Trading Company's official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "POP (2024) Skate Film",
+        "description": "Watch Pop Trading Company's 2024 full-length POP from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
