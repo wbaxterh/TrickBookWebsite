@@ -1,0 +1,244 @@
+{
+  "source": "Official Kink BMX Video Vault full-film uploads with first-party and BMX press metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T18:45:00Z",
+  "films": [
+    {
+      "slug": "kink-intervention-2016",
+      "type": "film",
+      "title": "Intervention",
+      "description": "Kink BMX's 2016 team film Intervention captures the full crew during the final months of 2015, traveling through the Southwest, California, the East Coast, Costa Rica, Barcelona, and Latvia. Filmed by Darryl Tocco, Dan Coller, and Calvin Kosovich and edited by Tocco, the 23-minute project includes a full Dan Coller section.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video"],
+      "releaseYear": 2016,
+      "producedBy": "Kink BMX",
+      "directors": ["Darryl Tocco", "Dan Coller", "Calvin Kosovich"],
+      "riders": ["Dan Coller"],
+      "locations": [
+        "Southwest United States",
+        "California, United States",
+        "East Coast, United States",
+        "Costa Rica",
+        "Barcelona, Spain",
+        "Latvia"
+      ],
+      "duration": 1390,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/CmAl6S2BEmQ/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/CmAl6S2BEmQ/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=CmAl6S2BEmQ",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=CmAl6S2BEmQ",
+          "embedUrl": "https://www.youtube.com/embed/CmAl6S2BEmQ",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=CmAl6S2BEmQ",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 23:10. The description supplies the filming credits and locations and identifies the full Dan Coller section.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Intervention as a 2016 full-length, embeds the official film, and confirms its production period, filming credits, locations, and Dan Coller section.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/kink-intervention-full-video",
+          "sourceDetails": "DIG BMX independently confirms the January 2016 full-film release, global filming locations, and filming credits for Darryl Tocco, Dan Coller, and Calvin Kosovich.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Intervention (2016) BMX Film",
+        "description": "Watch Kink BMX's 2016 full-length Intervention from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "kink-squash-it-2013",
+      "type": "film",
+      "title": "Squash It",
+      "description": "Kink BMX's 2013 full-length Squash It follows the team across the United Kingdom, Thailand, Japan, South Korea, Canada, and the United States. Filmed and edited by Darryl Tocco with additional filming by Jay Roe, it features sections from Dan Coller, Chris Doyle, Aaron Smith, Darryl Tocco, Lloyd Wright, Ben Hittle, Sean Sexton, Tony Hamlin, KC Badger, Tom Dillon, Chad Osburn, and more.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video"],
+      "releaseYear": 2013,
+      "producedBy": "Kink BMX",
+      "directors": ["Darryl Tocco"],
+      "riders": [
+        "Dan Coller",
+        "Chris Doyle",
+        "Aaron Smith",
+        "Darryl Tocco",
+        "Lloyd Wright",
+        "Ben Hittle",
+        "Sean Sexton",
+        "Tony Hamlin",
+        "KC Badger",
+        "Tom Dillon",
+        "Chad Osburn"
+      ],
+      "locations": [
+        "United Kingdom",
+        "Thailand",
+        "Japan",
+        "South Korea",
+        "Vancouver, Canada",
+        "Montreal, Canada",
+        "United States"
+      ],
+      "duration": 2435,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/QeDByqdA2Pc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/QeDByqdA2Pc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=QeDByqdA2Pc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=QeDByqdA2Pc",
+          "embedUrl": "https://www.youtube.com/embed/QeDByqdA2Pc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=QeDByqdA2Pc",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 40:35. The description supplies the principal riders, locations, Darryl Tocco filming/editing credit, and Jay Roe's additional filming credit.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Squash It as a 2013 full-length DVD, embeds the official film, and confirms its principal riders, international locations, and production credits.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/one-hit-wednesday-20-ft-chris-doyle",
+          "sourceDetails": "DIG BMX independently identifies Squash It as Kink's 2013 DVD and confirms Chris Doyle's section plus Darryl Tocco's filming and editing role.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Squash It (2013) BMX Film",
+        "description": "Watch Kink BMX's 2013 full-length Squash It from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "kink-safety-first-2008",
+      "type": "film",
+      "title": "Safety First",
+      "description": "Kink BMX's 2008 full-length Safety First documents a rebuilt team led by Chris Doyle, Sean Sexton, Tony Hamlin, and Darryl Tocco, with riding filmed primarily across the United States and Canada. The classic 40-minute DVD was filmed and edited by Darryl Tocco as his first project for Kink.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video"],
+      "releaseYear": 2008,
+      "producedBy": "Kink BMX",
+      "directors": ["Darryl Tocco"],
+      "riders": [
+        "Jason Owens",
+        "Sean Sexton",
+        "Tony Hamlin",
+        "KC Badger",
+        "Josh Shaw",
+        "Jay Roe",
+        "Tom Dillon",
+        "James Steele",
+        "Albert Mercado",
+        "Lil' John",
+        "Landon Anderson",
+        "Darryl Tocco",
+        "Aaron Smith",
+        "Chris Doyle"
+      ],
+      "locations": ["United States", "Canada"],
+      "duration": 2408,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/nnnGtnJUmyQ/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/nnnGtnJUmyQ/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=nnnGtnJUmyQ",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=nnnGtnJUmyQ",
+          "embedUrl": "https://www.youtube.com/embed/nnnGtnJUmyQ",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=nnnGtnJUmyQ",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 40:08. The description identifies the principal riders, broad filming locations, and Darryl Tocco's filming and editing credit.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Safety First as a 2008 full-length DVD, embeds the official film, and confirms its principal riders, North American locations, and Darryl Tocco production credit.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "bmx-movie-database",
+          "url": "https://bmxmdb.com/films/92-Safety-First",
+          "sourceDetails": "Independent filmography confirms the 2008 release, 40-minute DVD runtime, USA origin, Darryl Tocco filming/editing credits, and section-by-section rider credits.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/mvideos/sean-sexton-in-safety-first-kink-cold-cuts-ep-6",
+          "sourceDetails": "DIG BMX retrospectively confirms Safety First as Kink's full-length and credits Darryl Tocco as filmer for Sean Sexton's section.",
+          "retrievedAt": "2026-09-03T18:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Safety First (2008) BMX Film",
+        "description": "Watch Kink BMX's 2008 full-length Safety First from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
