@@ -1,0 +1,94 @@
+{
+  "source": "Sidewayz Films' official complete-film upload, corroborated by Wakeboarding Magazine's contemporary review and anniversary feature",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-03T23:20:00Z",
+  "films": [
+    {
+      "slug": "12-honkeys-2000",
+      "type": "film",
+      "title": "12 Honkeys",
+      "description": "Sidewayz Films' scripted wakeboarding classic follows 17 riders as an escaped chain gang, mixing a comic storyline with full sections from many of the era's leading riders. Shot on 16mm film in 1999 and released in 2000, the complete film runs 54 minutes, 27 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": ["wakeboarding", "boat-wakeboarding", "team-film", "sidewayz-films", "16mm-film"],
+      "releaseYear": 2000,
+      "producedBy": "Sidewayz Films",
+      "directors": [],
+      "riders": [
+        "Scott Byerly",
+        "Shaun Murray",
+        "Darin Shapiro",
+        "Parks Bonifay",
+        "Shane Bonifay",
+        "Danny Harf",
+        "Gregg Necrason",
+        "Collin Wright",
+        "Shawn Watson",
+        "Ricky Gonzales",
+        "Chad Sharpe",
+        "Rob Struharik",
+        "Gerry Nunn",
+        "Matt Staker",
+        "Chase Heavener",
+        "Zane Schwenk",
+        "Cobe Mikacich"
+      ],
+      "locations": [],
+      "duration": 3267,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/liIm2qJGLD4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/liIm2qJGLD4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=liIm2qJGLD4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=liIm2qJGLD4",
+          "embedUrl": "https://www.youtube.com/embed/liIm2qJGLD4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Sidewayz Films",
+          "channelUrl": "https://www.youtube.com/@Sidewayz_Films",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T23:20:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=liIm2qJGLD4",
+          "sourceDetails": "Public, embeddable complete film on Sidewayz Films' official YouTube channel; exact runtime 54:27. The official description confirms the 1999 16mm shoot, 2000 release, and featured rider credits.",
+          "retrievedAt": "2026-09-03T23:20:00Z"
+        },
+        {
+          "source": "vimeo",
+          "url": "https://vimeo.com/67169970",
+          "sourceDetails": "Sidewayz Films' first-party trailer page confirms that the film was shot in 1999 on 16mm and describes the scripted production and cast context.",
+          "retrievedAt": "2026-09-03T23:20:00Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/blog/gear/accessories/2000/04/02/12-honkeys-sidewayz/",
+          "sourceDetails": "Contemporary independent review confirms Sidewayz as producer, the scripted full-film format, 17 pro riders, and the 2000 release period.",
+          "retrievedAt": "2026-09-03T23:20:00Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/story/videos/12-honkeys-20th-birthday/",
+          "sourceDetails": "Independent anniversary feature confirms the April 1, 2000 debut and identifies 12 Honkeys as a Sidewayz Films classic.",
+          "retrievedAt": "2026-09-03T23:20:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Sidewayz Films' official YouTube upload; no media rehosting permission inferred. No reliable film-wide location list or director credit was published, so neither was inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "12 Honkeys (2000) Wakeboarding Film",
+        "description": "Watch Sidewayz Films' 2000 wakeboarding classic 12 Honkeys from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
