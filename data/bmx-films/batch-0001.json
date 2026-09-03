@@ -1,0 +1,280 @@
+{
+  "source": "Official Odyssey BMX and Kink BMX full-film uploads with first-party and BMX press metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T18:15:00Z",
+  "films": [
+    {
+      "slug": "odyssey-electronical-2008",
+      "type": "film",
+      "title": "Electronical",
+      "description": "Odyssey BMX's 2008 team film Electronical captures a wide-ranging crew across street, park, trails, and transition. Filmed and edited by Will Stroud, the full-length features Gary Young, Matt Beringer, Jimmy Levan, KC Badger, Brandon Turner, Adam Banton, Taj Mihelich, Jim Bauer, Josh Betley, Mike Aitken, Jim Cielencki, Chase Hawk, and Aaron Ross.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "odyssey-bmx", "team-video"],
+      "releaseYear": 2008,
+      "producedBy": "Odyssey BMX",
+      "directors": ["Will Stroud"],
+      "riders": [
+        "Gary Young",
+        "Matt Beringer",
+        "Jimmy Levan",
+        "KC Badger",
+        "Brandon Turner",
+        "Adam Banton",
+        "Taj Mihelich",
+        "Jim Bauer",
+        "Josh Betley",
+        "Mike Aitken",
+        "Jim Cielencki",
+        "Chase Hawk",
+        "Aaron Ross"
+      ],
+      "locations": [
+        "New Zealand",
+        "United States",
+        "South Africa",
+        "Spain",
+        "Canada",
+        "China",
+        "Germany"
+      ],
+      "duration": 3520,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/yWCZMln4PdU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/yWCZMln4PdU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=yWCZMln4PdU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=yWCZMln4PdU",
+          "embedUrl": "https://www.youtube.com/embed/yWCZMln4PdU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Odyssey BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCJHbVOD6qHuwkTth4Nn38PQ",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=yWCZMln4PdU",
+          "sourceDetails": "Public, embeddable complete film on Odyssey BMX's official channel; exact runtime 58:40. The description identifies this as the tenth-anniversary re-upload of Electronical.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "odyssey-bmx",
+          "url": "https://odysseybmx.com/2018/02/electronical-10-year-anniversary/",
+          "sourceDetails": "First-party anniversary post confirms the film premiered ten years earlier and embeds Odyssey's full-film upload.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/odyssey-electronical-full-video",
+          "sourceDetails": "DIG BMX confirms the 2008 DVD, credits Will Stroud, and identifies the principal full-section riders.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "bmx-movie-database",
+          "url": "https://bmxmdb.com/films/70-Electronical",
+          "sourceDetails": "Independent filmography confirms the 2008 release, 58-minute runtime, USA origin, Will Stroud filming/editing credit, and section-by-section rider credits.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/brands/odyssey",
+          "sourceDetails": "BMX press profile identifies Electronical's filming locations as New Zealand, USA, South Africa, Spain, Canada, China, and Germany.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Odyssey BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Electronical (2008) BMX Film",
+        "description": "Watch Odyssey BMX's 2008 full-length Electronical from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "odyssey-on-lock-2025",
+      "type": "film",
+      "title": "ON LOCK",
+      "description": "Odyssey BMX's 2025 full-length ON LOCK celebrates the brand's 40th year with a 55-minute freestyle medley spanning its current crew and surprise appearances. The film was made by Zach Krejmas and features riders including Dennis Enarson, Broc Raiford, Corey Walsh, Gary Young, Perris Benegas, Murray Loubser, Preston Okert, Matt Nordstrom, and many more.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "odyssey-bmx", "team-video"],
+      "releaseYear": 2025,
+      "producedBy": "Odyssey BMX",
+      "directors": ["Zach Krejmas"],
+      "riders": [
+        "Mike Aitken",
+        "Mikey Andrew",
+        "Boyd Hilder",
+        "Corey Walsh",
+        "Dennis Enarson",
+        "Preston Okert",
+        "Murray Loubser",
+        "Matt Nordstrom",
+        "Aryei Levenson",
+        "Broc Raiford",
+        "Gary Young",
+        "Johnny Raekes",
+        "Bethany Hedrick",
+        "Santi Laverde",
+        "Teresa Fernández-Miranda",
+        "Perris Benegas",
+        "Aaron Ross",
+        "Scott Marceau",
+        "Linda Grabner",
+        "Josh Delarosa",
+        "Jacob Cable",
+        "Jarren Barboza",
+        "Kevin Robinson Jr.",
+        "Hilario Olivos",
+        "Takato Ueda",
+        "Devin Burks",
+        "Tommy Dugan",
+        "Matt Beringer",
+        "John Nelson",
+        "Justin Spriet",
+        "Jim Cielencki"
+      ],
+      "locations": [
+        "California, United States",
+        "Salt Lake City, Utah, United States",
+        "Vancouver, Canada"
+      ],
+      "duration": 3317,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/CJazfMTvoBw/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/CJazfMTvoBw/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=CJazfMTvoBw",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=CJazfMTvoBw",
+          "embedUrl": "https://www.youtube.com/embed/CJazfMTvoBw",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Odyssey BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCJHbVOD6qHuwkTth4Nn38PQ",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=CJazfMTvoBw",
+          "sourceDetails": "Public, embeddable complete film on Odyssey BMX's official channel; exact runtime 55:17. The description supplies the full ordered rider list, chapter locations, and Zach Krejmas credit.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "odyssey-bmx",
+          "url": "https://odysseybmx.com/2025/12/odyssey-on-lock-video/",
+          "sourceDetails": "First-party release post identifies ON LOCK as Odyssey's new full-length, states its 55-plus-minute length, and credits Zach Krejmas.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/on-lock-odyssey-bmx",
+          "sourceDetails": "DIG BMX independently confirms the December 12, 2025 release, full-length status, 55-minute runtime, Odyssey production, and Zach Krejmas credit.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Odyssey BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "ON LOCK (2025) BMX Film",
+        "description": "Watch Odyssey BMX's 2025 full-length ON LOCK from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "kink-champagne-2019",
+      "type": "film",
+      "title": "Champagne",
+      "description": "Kink BMX's 2019 full-length Champagne follows more than two years of filming across over 20 cities in the United States, Australia, Canada, and Europe. Filmed and edited by Darryl Tocco, it features full sections from Travis Hughes, Agus Gutierrez, Chad Osburn, Calvin Kosovich, Hobie Doan, Dan Coller, and Nathan Williams.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video"],
+      "releaseYear": 2019,
+      "producedBy": "Kink BMX",
+      "directors": ["Darryl Tocco"],
+      "riders": [
+        "Travis Hughes",
+        "Agus Gutierrez",
+        "Chad Osburn",
+        "Calvin Kosovich",
+        "Hobie Doan",
+        "Dan Coller",
+        "Nathan Williams"
+      ],
+      "locations": ["United States", "Australia", "Canada", "Europe"],
+      "duration": 1827,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/ijKycMD-Zy0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/ijKycMD-Zy0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=ijKycMD-Zy0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=ijKycMD-Zy0",
+          "embedUrl": "https://www.youtube.com/embed/ijKycMD-Zy0",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=ijKycMD-Zy0",
+          "sourceDetails": "Public, embeddable complete film on Kink BMX's official channel; exact runtime 30:27. The description supplies the full-section riders, broad filming locations, and Darryl Tocco filming/editing credit.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Champagne as a 2019 full-length, embeds the official film, and lists its seven full-section riders and filming regions.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/features/creating-a-classic-kinks-champagne",
+          "sourceDetails": "DIG BMX's release feature confirms the 2019 film, two-year production, seven principal sections, and Darryl Tocco's filming and editing role.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/videos/kink-bmx-champagne-full-video.html",
+          "sourceDetails": "BMX press coverage confirms the complete official film, full-section rider list, worldwide filming, and Darryl Tocco credit.",
+          "retrievedAt": "2026-09-03T18:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Champagne (2019) BMX Film",
+        "description": "Watch Kink BMX's 2019 full-length Champagne from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
