@@ -1,0 +1,88 @@
+{
+  "source": "Official BSD BMX Transmission full-film upload with first-party and DIG BMX production metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T20:15:00Z",
+  "films": [
+    {
+      "slug": "bsd-transmission-2016",
+      "type": "film",
+      "title": "Transmission",
+      "description": "BSD BMX's 2016 first full-team DVD follows 11 riders across a 21-month production built around ten filming trips. Filmed and edited by Dave Sowerby, the 51-minute film features full sections from Dan Paley, David Grant, Sam Jones, Mike 'Jersey' Taylor, Matt Allpress, Jason Teet, Luc Legrand, Liam Zingbergs, Kriss Kyle, Reed Stark, and Alex Donnachie.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "bsd-bmx", "team-video", "street-bmx", "dvd"],
+      "releaseYear": 2016,
+      "producedBy": "BSD BMX",
+      "directors": ["Dave Sowerby"],
+      "riders": [
+        "Dan Paley",
+        "David Grant",
+        "Sam Jones",
+        "Mike 'Jersey' Taylor",
+        "Matt Allpress",
+        "Jason Teet",
+        "Luc Legrand",
+        "Liam Zingbergs",
+        "Kriss Kyle",
+        "Reed Stark",
+        "Alex Donnachie"
+      ],
+      "locations": ["Minneapolis, Minnesota, United States", "Tel Aviv, Israel"],
+      "duration": 3072,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/daC2EJcRlFY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/daC2EJcRlFY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=daC2EJcRlFY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=daC2EJcRlFY",
+          "embedUrl": "https://www.youtube.com/embed/daC2EJcRlFY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "BSD BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCG89NxV6p_7UieCd6EPY75Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T20:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=daC2EJcRlFY",
+          "sourceDetails": "Public, embeddable complete film on BSD BMX's official channel; exact runtime 51:12. The description identifies the full rider roster and chapter order.",
+          "retrievedAt": "2026-09-03T20:15:00Z"
+        },
+        {
+          "source": "bsd-bmx",
+          "url": "https://bsdforever.com/blogs/transmission/bsd-transmission-full-dvd",
+          "sourceDetails": "BSD BMX's first-party page presents Transmission as the full DVD and confirms the complete principal rider roster.",
+          "retrievedAt": "2026-09-03T20:15:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/features/the-making-of-bsds-transmission-dvd",
+          "sourceDetails": "DIG BMX's November 2016 production feature confirms Transmission as BSD's first full-team DVD, Dave Sowerby's filming role, the 21-month ten-trip production, and filming in Minneapolis and Tel Aviv.",
+          "retrievedAt": "2026-09-03T20:15:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/bsd-transmission-dvd-full-video",
+          "sourceDetails": "DIG BMX's complete-film page confirms the full-video presentation and credits Dave Sowerby for filming and editing.",
+          "retrievedAt": "2026-09-03T20:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of BSD BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Transmission (2016) BMX Film",
+        "description": "Watch BSD BMX's 2016 full-length team film Transmission from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
