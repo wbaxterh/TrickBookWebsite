@@ -4,8 +4,16 @@ on:
   pull_request:
     branches:
       - main
+      - staging
 
 jobs:
+  production-promotion:
+    if: github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require staging as the production source
+        run: test "${{ github.head_ref }}" = "staging"
+
   validate:
     runs-on: ubuntu-latest
     steps:
