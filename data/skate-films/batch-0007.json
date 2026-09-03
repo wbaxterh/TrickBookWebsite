@@ -1,0 +1,260 @@
+{
+  "source": "Authorized Thrasher uploads, first-party publisher pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T03:43:00.000Z",
+  "films": [
+    {
+      "slug": "pizza-ethereum-2021",
+      "type": "film",
+      "title": "Ethereum",
+      "description": "Pizza Skateboards' second full-length was built over 20 months and released in 2021. Filmed by Richard Hughes, Ethereum brings together James Gaehner, Ducky Kovacs, Vincent Milou, Rahim Robinson, David Oakley, Marcus Attwood Jr. and Branson Howard.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "pizza-skateboards", "team-video"],
+      "releaseYear": 2021,
+      "producedBy": "Pizza Skateboards",
+      "directors": ["Richard Hughes"],
+      "riders": [
+        "James Gaehner",
+        "Zachary Kovacs",
+        "Vincent Milou",
+        "Rahim Robinson",
+        "David Oakley",
+        "Marcus Attwood Jr.",
+        "Branson Howard"
+      ],
+      "locations": [],
+      "duration": 2258,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/I5fk_tASEMM/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/I5fk_tASEMM/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=I5fk_tASEMM",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=I5fk_tASEMM",
+          "embedUrl": "https://www.youtube.com/embed/I5fk_tASEMM",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=I5fk_tASEMM",
+          "sourceDetails": "Public, embeddable complete film on Thrasher Magazine's authorized publishing channel; exact runtime 37:38 and upload date March 12, 2021.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "pizza-skateboards",
+          "url": "https://pizzaskateboards.com/blogs/blog/ethereum-full-length-video",
+          "sourceDetails": "Pizza Skateboards' first-party release page identifies Ethereum as the brand's second full-length, confirms its March 12, 2021 release and embeds the authorized film.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/pizza-ethereum",
+          "sourceDetails": "Independent filmography confirms the 2021 release, 37-minute full-length classification, Pizza Skateboards production, filmmaker Richard Hughes and seven rider credits.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Ethereum (2021) Skate Film",
+        "description": "Watch Pizza Skateboards' 2021 full-length Ethereum from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "homies-fun-raiser-2022",
+      "type": "film",
+      "title": "Fun Raiser",
+      "description": "Rye Beres' 2022 Homies crew film gathers generations of skaters into 34 minutes of sessions and shared terrain. Fun Raiser features Ishod Wair, Ronnie Sandoval, Grant Taylor, Lizzie Armanto, Pedro Delfino and dozens more.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "crew-film", "homies", "full-length-film"],
+      "releaseYear": 2022,
+      "producedBy": "Homies",
+      "directors": ["Rye Beres"],
+      "riders": [
+        "Kevin Long",
+        "Rick Howard",
+        "Andrew Reynolds",
+        "Justin Strubing",
+        "Grant Taylor",
+        "Evan Smith",
+        "Jeff Grosso",
+        "Shane Heyl",
+        "Andrew Allen",
+        "Wes Kremer",
+        "Chris Gregson",
+        "Curren Caples",
+        "Louie Lopez",
+        "Matt Bublitz",
+        "Ishod Wair",
+        "Raven Tershy",
+        "Taylor Kirby",
+        "Pedro Barros",
+        "Raney Beres",
+        "Zion Wright",
+        "Cody Chapman",
+        "Ronnie Sandoval",
+        "Tyson Peterson",
+        "Pedro Delfino",
+        "Corey Glick",
+        "Ryan Townley",
+        "Jake Anderson",
+        "Austin Leleu",
+        "Clint Beswick",
+        "Jake Phelps",
+        "Roman Pabich",
+        "Zach Allen",
+        "Simon Bannerot",
+        "Tyler Pacheco",
+        "Lizzie Armanto",
+        "Niels Bennett",
+        "Christian Henry",
+        "Daniel Wheatley",
+        "Tanner Burzinski",
+        "Nicole Hause",
+        "Mike Gigliotti",
+        "Cedric Pabich",
+        "Chandler Burton",
+        "Daiki Ikeda",
+        "Robin Wilson",
+        "Brian O'Dwyer",
+        "Chucky Lane",
+        "Allan Stoops",
+        "Gray Mesa",
+        "Kyle Walsh",
+        "Dan Lundy",
+        "Hanna Scott",
+        "Ryan Lee",
+        "Alex Papke",
+        "Felix Soto"
+      ],
+      "locations": [],
+      "duration": 2057,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/dp-oZ7NEO3M/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/dp-oZ7NEO3M/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=dp-oZ7NEO3M",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=dp-oZ7NEO3M",
+          "embedUrl": "https://www.youtube.com/embed/dp-oZ7NEO3M",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=dp-oZ7NEO3M",
+          "sourceDetails": "Public, embeddable complete film on Thrasher Magazine's authorized publishing channel; exact runtime 34:17 and upload date February 25, 2022.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/homies-fun-raiser-video",
+          "sourceDetails": "Independent filmography confirms the 2022 release, 34-minute crew-film classification, filmmaker Rye Beres and 55 credited skaters.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "vhs-mag",
+          "url": "https://www.vhsmag.com/news/homies-fun-raiser/",
+          "sourceDetails": "Contemporary skate publication coverage confirms the February 2022 release, Rye Beres' authorship and the Homies ensemble format.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Fun Raiser (2022) Skate Film",
+        "description": "Watch Rye Beres' 2022 Homies crew film Fun Raiser from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "beautiful-moment-2014",
+      "type": "film",
+      "title": "Beautiful Moment",
+      "description": "Beautiful Moment is an independent 2014 film rooted in San Francisco's skate scene. The 40-minute film by Dayman Cash was shot by local lensman Dayman Torelli and features Bay Area riders including Julian Klein, Greg DeMartini and Nick Hutter.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "san-francisco", "independent-film"],
+      "releaseYear": 2014,
+      "producedBy": "Dayman Cash",
+      "directors": ["Dayman Torelli"],
+      "riders": ["Julian Klein", "Greg DeMartini", "Nick Hutter"],
+      "locations": ["San Francisco, California"],
+      "duration": 2465,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/EJdfjUQXqP8/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/EJdfjUQXqP8/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=EJdfjUQXqP8",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=EJdfjUQXqP8",
+          "embedUrl": "https://www.youtube.com/embed/EJdfjUQXqP8",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=EJdfjUQXqP8",
+          "sourceDetails": "Public, embeddable complete film on Thrasher Magazine's authorized publishing channel; exact runtime 41:05 and upload date October 26, 2014. The description credits local lensman Dayman Torelli.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "sf-funcheap",
+          "url": "https://sf.funcheap.com/beautiful-moment-roxie-theater/",
+          "sourceDetails": "Contemporary Roxie Theater event listing identifies Beautiful Moment as a 2014 San Francisco skate film by Dayman Cash with a 40-minute listed runtime.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        },
+        {
+          "source": "kickerclub",
+          "url": "https://www.kickerclub.com/2014/10/beautiful-moment-full-video/",
+          "sourceDetails": "Contemporary skate coverage confirms the 2014 full-length, filmer Dayman Torelli and featured riders Julian Klein, Greg DeMartini and Nick Hutter.",
+          "retrievedAt": "2026-09-03T03:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Beautiful Moment (2014) Skate Film",
+        "description": "Watch the 2014 San Francisco skate film Beautiful Moment from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
