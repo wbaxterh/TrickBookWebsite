@@ -1,0 +1,84 @@
+{
+  "source": "Official brand upload and independent skate-film sources",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T05:58:30.3905098Z",
+  "films": [
+    {
+      "slug": "krooked-lsd-lets-skate-dude-2017",
+      "type": "film",
+      "title": "LSD: Let's Skate Dude",
+      "description": "Krooked Skateboards' 2017 full-length mixes six complete parts with team travel montages from Barcelona, New York City, Santa Monica and San Francisco. Filmed and edited by Tim Fulton, it features Mark Gonzales, Mike Anderson, Brad Cromer, Bobby Worrest, Dan Drehobl, Sebo Walker, Ronnie Sandoval and Matt Gottwig.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "krooked-skateboards", "team-video"],
+      "releaseYear": 2017,
+      "producedBy": "Krooked Skateboards",
+      "directors": ["Tim Fulton"],
+      "riders": [
+        "Mark Gonzales",
+        "Mike Anderson",
+        "Brad Cromer",
+        "Bobby Worrest",
+        "Dan Drehobl",
+        "Sebo Walker",
+        "Ronnie Sandoval",
+        "Matt Gottwig"
+      ],
+      "locations": [
+        "Barcelona, Spain",
+        "New York City, NY",
+        "Santa Monica, CA",
+        "San Francisco, CA"
+      ],
+      "duration": 1827,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/H2XVayp3Iqc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/H2XVayp3Iqc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=H2XVayp3Iqc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=H2XVayp3Iqc",
+          "embedUrl": "https://www.youtube.com/embed/H2XVayp3Iqc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Krooked Skateboarding",
+          "channelUrl": "https://www.youtube.com/@krooked",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T05:58:30.3905098Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=H2XVayp3Iqc",
+          "sourceDetails": "Public, embeddable complete film on Krooked Skateboarding's official channel; exact runtime 30:27 and upload date November 27, 2017. The description identifies the film as a full-length and lists eight featured team riders.",
+          "retrievedAt": "2026-09-03T05:58:30.3905098Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/krooked-lsd-lets-skate-dude",
+          "sourceDetails": "Independent filmography confirms the 2017 release, full-length classification, Krooked Skateboards production, filmmaker Tim Fulton, United States origin and eight rider credits.",
+          "retrievedAt": "2026-09-03T05:58:30.3905098Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/2017-review-krooked-lsd",
+          "sourceDetails": "Independent review confirms that Tim Fulton filmed and edited the full-length, that it debuted on Krooked's YouTube channel, and that it contains six full parts and four team travel montages.",
+          "retrievedAt": "2026-09-03T05:58:30.3905098Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Krooked Skateboards' official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "LSD: Let's Skate Dude (2017) Skate Film",
+        "description": "Watch Krooked Skateboards' 2017 full-length LSD: Let's Skate Dude, filmed and edited by Tim Fulton, from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
