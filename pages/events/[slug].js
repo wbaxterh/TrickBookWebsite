@@ -5,6 +5,7 @@ import {
   ExternalLink,
   Loader2,
   MapPin,
+  PlayCircle,
   Radio,
   ShieldCheck,
   Ticket,
@@ -212,6 +213,47 @@ export default function EventDetailPage() {
                   />
                 </div>
               </div>
+
+              {(event.externalLinks?.length > 0 || event.media?.videos?.length > 0) && (
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground">Event links</h2>
+                  <div className="grid sm:grid-cols-2 gap-3 mt-4">
+                    {event.externalLinks?.map((link) => (
+                      <a
+                        key={`${link.kind}-${link.url}`}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-xl border border-border bg-card p-4 no-underline hover:border-yellow-500/60 transition-colors"
+                      >
+                        <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
+                          <ExternalLink className="h-4 w-4 text-yellow-500" />
+                          {link.kind === 'registration' ? 'Registration' : 'Official source'}
+                        </div>
+                        <p className="text-sm font-medium text-foreground mt-2">
+                          {link.label || 'Open link'}
+                        </p>
+                      </a>
+                    ))}
+                    {event.media?.videos?.map((video) => (
+                      <a
+                        key={video.url}
+                        href={video.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-xl border border-border bg-card p-4 no-underline hover:border-yellow-500/60 transition-colors"
+                      >
+                        <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
+                          <PlayCircle className="h-4 w-4 text-yellow-500" /> Previous event video
+                        </div>
+                        <p className="text-sm font-medium text-foreground mt-2">
+                          {video.label || 'Watch video'}
+                        </p>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <aside>
