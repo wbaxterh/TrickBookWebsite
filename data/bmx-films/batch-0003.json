@@ -1,0 +1,244 @@
+{
+  "source": "Official Kink BMX Video Vault full-film uploads with first-party and BMX filmography metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T19:15:00Z",
+  "films": [
+    {
+      "slug": "kink-jetlagged-2010",
+      "type": "film",
+      "title": "Jetlagged",
+      "description": "Kink BMX's 2010 full-length Jetlagged follows the team through Eastern Europe, New Zealand, Australia, and California. Originally distributed as a free DVD, the 28-minute travel film features Tony Hamlin, Lloyd Wright, Albert Mercado, Tom Dillon, Lil' Jon, Ben Hittle, Lil Dan, Sean Sexton, Aaron Smith, Darryl Tocco, KC Badger, and Chris Doyle, and was filmed and edited by Tocco.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video", "travel-film"],
+      "releaseYear": 2010,
+      "producedBy": "Kink BMX",
+      "directors": ["Darryl Tocco"],
+      "riders": [
+        "Tony Hamlin",
+        "Lloyd Wright",
+        "Albert Mercado",
+        "Tom Dillon",
+        "Lil' Jon",
+        "Ben Hittle",
+        "Lil Dan",
+        "Sean Sexton",
+        "Aaron Smith",
+        "Darryl Tocco",
+        "KC Badger",
+        "Chris Doyle"
+      ],
+      "locations": ["Eastern Europe", "New Zealand", "Australia", "California, United States"],
+      "duration": 1679,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Ckzp3a5YxPU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Ckzp3a5YxPU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ckzp3a5YxPU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Ckzp3a5YxPU",
+          "embedUrl": "https://www.youtube.com/embed/Ckzp3a5YxPU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Ckzp3a5YxPU",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 27:59. The description identifies the Eastern Europe, New Zealand, Australia, and California travel itinerary and its original free-DVD release.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Jetlagged as a 2010 full-length, embeds the official complete film, and confirms the travel regions and original free-DVD distribution.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "bmx-movie-database",
+          "url": "https://www.bmxmdb.com/films/802-Jetlagged",
+          "sourceDetails": "Independent BMX filmography confirms the 2010 DVD release, Darryl Tocco's filming and editing credits, and section-by-section rider credits.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/videos/kink-bmx-video-vault.html",
+          "sourceDetails": "BMX press coverage confirms Kink's authorized Video Vault makes Jetlagged and the brand's other full-length films available online.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Jetlagged (2010) BMX Film",
+        "description": "Watch Kink BMX's 2010 full-length Jetlagged from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "kink-cheap-thrills-2004",
+      "type": "film",
+      "title": "Cheap Thrills",
+      "description": "Kink BMX's 2004 full-length Cheap Thrills was the brand's second full-length DVD. The 33-minute film includes sections from Danny Hickerson, Chris Arriaga, Ian Munro, KC Badger, Ryan Sher, Rob Tibbs, Dirty Dan Bogard, and Jim Cielencki, plus an extensive friends section.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video"],
+      "releaseYear": 2004,
+      "producedBy": "Kink BMX",
+      "directors": [],
+      "riders": [
+        "Danny Hickerson",
+        "Chris Arriaga",
+        "Ian Munro",
+        "KC Badger",
+        "Ryan Sher",
+        "Rob Tibbs",
+        "Dan Bogard",
+        "Jim Cielencki"
+      ],
+      "locations": ["United States"],
+      "duration": 1981,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/9dR_cfdPjpU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/9dR_cfdPjpU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=9dR_cfdPjpU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=9dR_cfdPjpU",
+          "embedUrl": "https://www.youtube.com/embed/9dR_cfdPjpU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=9dR_cfdPjpU",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 33:01. The description identifies the film as Kink's second full-length DVD and lists its principal sections.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Cheap Thrills as a 2004 full-length DVD, embeds the official complete film, and lists its principal riders.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "bmx-movie-database",
+          "url": "https://bmxmdb.com/films/91-Cheap-Thrills",
+          "sourceDetails": "Independent BMX filmography supplies the section-by-section rider credits and identifies the production as a USA DVD; its page displays 2005 while its year index categorizes the title under 2004, so the first-party 2004 date is used.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/videos/kink-bmx-video-vault.html",
+          "sourceDetails": "BMX press coverage confirms Kink's authorized Video Vault makes Cheap Thrills and the brand's other full-length films available online.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Cheap Thrills (2004) BMX Film",
+        "description": "Watch Kink BMX's 2004 full-length Cheap Thrills from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "kink-wasted-days-2002",
+      "type": "film",
+      "title": "Wasted Days",
+      "description": "Kink BMX's 2002 full-length Wasted Days was the brand's first full-length release on VHS and DVD. Edited by Chris Hargrave, the 33-minute film features full parts from Rob Tibbs, KC Badger, Dirty Dan Bogard, Ryan Sher, Ian Munro, Jim Cielencki, and Chris Arriaga.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "full-length-film", "kink-bmx", "team-video", "vhs"],
+      "releaseYear": 2002,
+      "producedBy": "Kink BMX",
+      "directors": ["Chris Hargrave"],
+      "riders": [
+        "Rob Tibbs",
+        "KC Badger",
+        "Dan Bogard",
+        "Ryan Sher",
+        "Ian Munro",
+        "Jim Cielencki",
+        "Chris Arriaga"
+      ],
+      "locations": ["United States"],
+      "duration": 1966,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/tj-MN_GNz-s/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/tj-MN_GNz-s/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=tj-MN_GNz-s",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=tj-MN_GNz-s",
+          "embedUrl": "https://www.youtube.com/embed/tj-MN_GNz-s",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Kink BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCTcAhfF9BLSDoJawNXZ7t-Q",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=tj-MN_GNz-s",
+          "sourceDetails": "Public, playable complete film on Kink BMX's official channel; exact runtime 32:46. The description confirms the 2002 VHS/DVD release, full-part riders, Kink production credit, and Chris Hargrave editing credit.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "kink-bmx-video-vault",
+          "url": "https://kinkbmx.com/pages/videovault",
+          "sourceDetails": "Kink's first-party Video Vault identifies Wasted Days as its first full-length, released in 2002 on VHS and DVD, embeds the official complete film, and lists its full-part riders.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "bmx-movie-database",
+          "url": "https://bmxmdb.com/films/157-Wasted-Days",
+          "sourceDetails": "Independent BMX filmography confirms the 2002 USA VHS/DVD release and section rider credits.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        },
+        {
+          "source": "ride-uk-bmx",
+          "url": "https://rideukbmx.com/videos/kink-bmx-video-vault.html",
+          "sourceDetails": "BMX press coverage confirms Kink's authorized Video Vault makes Wasted Days and the brand's other full-length films available online.",
+          "retrievedAt": "2026-09-03T19:15:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Kink BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Wasted Days (2002) BMX Film",
+        "description": "Watch Kink BMX's 2002 full-length Wasted Days from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
