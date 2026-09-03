@@ -1,0 +1,263 @@
+{
+  "source": "Official publisher YouTube channels, publisher film pages and independent filmographies",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-03T02:13:38.772Z",
+  "films": [
+    {
+      "slug": "creature-sever-2025",
+      "type": "film",
+      "title": "SEVER",
+      "description": "Creature Skateboards' 2025 short film follows Kevin Bækkel, Peter Raffin and eight featured Fiends on a brutal tour of Australia's east coast. Created by Lannie Rhoades and filmed by Rhoades and Noah Quale, SEVER is an NHS After Hours production.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "short-film", "creature-skateboards", "team-video"],
+      "releaseYear": 2025,
+      "producedBy": "Creature Skateboards / NHS",
+      "directors": ["Lannie Rhoades", "Noah Quale"],
+      "riders": [
+        "Kevin Bækkel",
+        "Peter Raffin",
+        "John Worthington",
+        "David Gravette",
+        "Cody Lockwood",
+        "Nixen Osborne",
+        "Marley Rae",
+        "Vincent Matheron",
+        "Milton Martínez",
+        "Mathias Torres"
+      ],
+      "locations": ["Australia"],
+      "duration": 1660,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/6FmNP5SolaY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/6FmNP5SolaY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=6FmNP5SolaY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=6FmNP5SolaY",
+          "embedUrl": "https://www.youtube.com/embed/6FmNP5SolaY",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Creature Skateboards",
+          "channelUrl": "https://www.youtube.com/@CreatureFiends",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=6FmNP5SolaY",
+          "sourceDetails": "Public, embeddable complete film on Creature Skateboards' official channel; exact runtime 27:40 with film, production and complete rider credits in the description.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/creature-sever",
+          "sourceDetails": "Independent filmography confirms the 2025 release, 28-minute classification, Creature/NHS production, filmmakers and ten credited riders.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Creature Skateboards' official upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "SEVER (2025) Skate Film",
+        "description": "Watch Creature Skateboards' 2025 film SEVER from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "huf-forever-2023",
+      "type": "film",
+      "title": "Forever",
+      "description": "HUF's first full-length skate video is a 42-minute tribute to Keith Hufnagel and the brand's city-skating roots. Shot and edited by Tyler Smolinski, Forever moves through San Francisco, Philadelphia, Chicago, Los Angeles, Miami, Richmond and New York with HUF's team and friends.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "huf", "team-video"],
+      "releaseYear": 2023,
+      "producedBy": "HUF",
+      "directors": ["Tyler Smolinski"],
+      "riders": [
+        "Dennis Busenitz",
+        "Elissa Steamer",
+        "Tyler Bledsoe",
+        "Joel Meinholz",
+        "Brad Cromer",
+        "Brendan Carroll",
+        "Nick Matthews",
+        "Cyrus Bennett",
+        "Dick Rizzo",
+        "Mason Silva",
+        "Drake Johnson",
+        "Henri Yoro",
+        "Salomon Cardenas",
+        "Caleb McNeely",
+        "Justin Drysen",
+        "Simon Jensen",
+        "Erik Herrera",
+        "Teddy Seeley",
+        "Gus Gordon",
+        "Sam Narvaez",
+        "Daiki Hoshino",
+        "Josh Wolff"
+      ],
+      "locations": [
+        "San Francisco, California",
+        "Philadelphia, Pennsylvania",
+        "Chicago, Illinois",
+        "Los Angeles, California",
+        "Miami, Florida",
+        "Richmond, Virginia",
+        "New York City, New York"
+      ],
+      "duration": 2560,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/FJ1rCxxxS9Q/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/FJ1rCxxxS9Q/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=FJ1rCxxxS9Q",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=FJ1rCxxxS9Q",
+          "embedUrl": "https://www.youtube.com/embed/FJ1rCxxxS9Q",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=FJ1rCxxxS9Q",
+          "sourceDetails": "Public, embeddable complete film on Thrasher Magazine's authorized publishing channel; exact runtime 42:40.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "huf-worldwide",
+          "url": "https://hufworldwide.com/pages/forever",
+          "sourceDetails": "Official HUF film page identifies Forever as the brand's first full-length video and credits Tyler Smolinski with shooting and editing it.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "huf-worldwide-japan",
+          "url": "https://www.hufworldwide.jp/blogs/what/huf-forever-premiere",
+          "sourceDetails": "Official August 2023 premiere announcement confirms the release year, Tyler Smolinski and the featured HUF team roster.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/huf-forever",
+          "sourceDetails": "Independent filmography confirms the 2023 release, 43-minute full-length classification, filmmaker, locations and 22 on-screen rider credits.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Forever (2023) Skate Film",
+        "description": "Watch HUF's first full-length skate video Forever from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "vans-eu-where-is-tom-2024",
+      "type": "film",
+      "title": "Where Is Tom?",
+      "description": "Vans Europe's 2024 full-length crisscrosses the continent with a 24-rider cast led by Willow Voges Fernandes, Jordan Thackeray, Rob Maatman, Victor Pellegrin, Chris Pfanner and Martino Cattaneo. The 39-minute sequel to Tom's Tales was filmed by Jack Thompson, Jon Wolf, Max Pack and editor Paul Labadie.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "vans-europe", "team-video"],
+      "releaseYear": 2024,
+      "producedBy": "Vans Europe",
+      "directors": ["Jack Thompson", "Jon Wolf", "Max Pack", "Paul Labadie"],
+      "riders": [
+        "Albert Nyberg",
+        "Alexey Krasniy",
+        "Axel Cruysberghs",
+        "Bert Roeterdink",
+        "Chris Pfanner",
+        "Helena Long",
+        "Jelle Maatman",
+        "Jordan Thackeray",
+        "Joseph Biais",
+        "Marco Kada",
+        "Martino Cattaneo",
+        "Mickael Germond",
+        "Notis Aggelis",
+        "Pascal Moelaert",
+        "Pietro Tirelli",
+        "Rob Maatman",
+        "Samuel Partaix",
+        "Schianta Lepori",
+        "Sebastiaan Vijverberg",
+        "Tania Cruz",
+        "Victor Pellegrin",
+        "Willow Voges Fernandes",
+        "Yann Horowitz",
+        "Yeelen Moens"
+      ],
+      "locations": [],
+      "duration": 2385,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/PiO-J85bpk8/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/PiO-J85bpk8/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=PiO-J85bpk8",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=PiO-J85bpk8",
+          "embedUrl": "https://www.youtube.com/embed/PiO-J85bpk8",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/@ThrasherMag",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=PiO-J85bpk8",
+          "sourceDetails": "Public, embeddable complete film on Thrasher Magazine's authorized publishing channel; exact runtime 39:45.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "vans",
+          "url": "https://www.vans.com/pt-pt/vans-stories/willow-voges-fernandes",
+          "sourceDetails": "Official Vans story identifies Where Is Tom? as the sequel to Tom's Tales and documents the multi-year Vans production.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        },
+        {
+          "source": "vague-magazine",
+          "url": "https://www.vaguemag.com/vans-eu-where-is-tom/",
+          "sourceDetails": "Independent contemporary release coverage confirms the May 2024 release, 40-minute full-length status, complete 24-rider roster, filming team and editor.",
+          "retrievedAt": "2026-09-03T02:13:38.772Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Thrasher Magazine's authorized upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Where Is Tom? (2024) Skate Film",
+        "description": "Watch Vans Europe's 2024 full-length Where Is Tom? from the authorized Thrasher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
