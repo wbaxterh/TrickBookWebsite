@@ -97,6 +97,11 @@
   color: #ffd700;
 }
 
+.mistakeText :global(.MuiListItemText-secondary),
+.sourceAttribution {
+  color: hsl(var(--muted-foreground));
+}
+
 .progressionSection {
   margin-bottom: 1.5rem;
 }
