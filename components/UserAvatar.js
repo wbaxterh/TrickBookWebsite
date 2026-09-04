@@ -26,14 +26,8 @@ export default function UserAvatar({ user, size = 40, className = '', showBadge 
     (user?.subscription?.status === 'active' || user?.subscription?.status === 'canceled'); // Show badge until subscription actually ends
 
   // Get avatar background color from rider profile
-  const avatarIconValue = user?.riderProfile?.avatarIcon;
-  // Older profiles store a plain emoji while current profiles store
-  // { id, emoji, bg }. Never pass the object itself to React as a child.
-  const avatarIcon = typeof avatarIconValue === 'string' ? avatarIconValue : avatarIconValue?.emoji;
-  const avatarBgColor =
-    (typeof avatarIconValue === 'object' && avatarIconValue?.bg) ||
-    user?.riderProfile?.avatarBgColor ||
-    '#374151';
+  const avatarBgColor = user?.riderProfile?.avatarBgColor || '#374151';
+  const avatarIcon = user?.riderProfile?.avatarIcon;
 
   return (
     <div className={`relative inline-block flex-shrink-0 ${className}`}>

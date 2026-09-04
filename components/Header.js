@@ -111,7 +111,7 @@ const Header = () => {
               { href: '/trickbook', label: t('nav.trickbook', 'TrickBook'), Icon: BookOpen },
               { href: '/spots', label: t('nav.spots', 'Spots'), Icon: MapPin },
               { href: '/events', label: t('nav.events', 'Events'), Icon: CalendarDays },
-              { href: '/riders', label: t('nav.riders', 'Riders'), Icon: Users },
+              { href: '/homies', label: t('nav.homies', 'Homies'), Icon: Users },
               { href: '/media', label: t('nav.media', 'Media'), Icon: Clapperboard },
             ].map(({ href, label, Icon }) => (
               <Link key={href} href={href} passHref legacyBehavior>
@@ -258,12 +258,6 @@ const Header = () => {
                         {unreadCount > 99 ? '99+' : unreadCount}
                       </span>
                     )}
-                  </NavDropdown.Item>
-                </Link>
-                <Link href="/homies" passHref legacyBehavior>
-                  <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <Users size={18} />
-                    {t('nav.homies', 'Homies')}
                   </NavDropdown.Item>
                 </Link>
                 <NavDropdown.Divider />
