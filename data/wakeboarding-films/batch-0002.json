@@ -1,0 +1,80 @@
+{
+  "source": "Pointless Productions' athlete-owned complete-film upload, corroborated by Wakeboarding Magazine and Alliance Wake",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-03T23:25:00Z",
+  "films": [
+    {
+      "slug": "incomplete-2001",
+      "type": "film",
+      "title": "Incomplete",
+      "description": "Pointless Productions' first full-length film documents two years of wakeboarding progression through technical wake tricks, early rail and gap riding, and wakeskating. The nine featured riders shot, produced, and helped edit their own sections; the 2001 film runs 42 minutes, 21 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": ["wakeboarding", "wakeskating", "rail-riding", "team-film", "pointless-productions"],
+      "releaseYear": 2001,
+      "producedBy": "Pointless Productions",
+      "directors": [],
+      "riders": [
+        "Shane Bonifay",
+        "Shawn Watson",
+        "Francois Roy",
+        "Chad Sharpe",
+        "Erik Ruck",
+        "Brian Grubb",
+        "Parks Bonifay",
+        "Danny Harf",
+        "Nick Weinacker"
+      ],
+      "locations": [],
+      "duration": 2541,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/7W-SKoK8zrI/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/7W-SKoK8zrI/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=7W-SKoK8zrI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=7W-SKoK8zrI",
+          "embedUrl": "https://www.youtube.com/embed/7W-SKoK8zrI",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "POINTLESS PRODUCTIONS shane bonifay",
+          "channelUrl": "https://www.youtube.com/@POINTLESSpro",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T23:25:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=7W-SKoK8zrI",
+          "sourceDetails": "Public, embeddable complete film on the Pointless Productions/Shane Bonifay athlete-owned channel; player metadata reports 2,541 seconds. The official description supplies the nine-rider cast and confirms that the riders shot, produced, and edited the film.",
+          "retrievedAt": "2026-09-03T23:25:00Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/blog/news/2001/10/19/pointless-premieres-new-film-incomplete/",
+          "sourceDetails": "Contemporary independent premiere coverage confirms the 2001 release cycle, nine-member Pointless cast, DV production, and rider-edited sections.",
+          "retrievedAt": "2026-09-03T23:25:00Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/videos/POINTLESS-Incomplete-Shane-Bonifay/",
+          "sourceDetails": "Independent wakeboarding publication embeds Shane Bonifay's official Pointless channel upload of his section and quotes him identifying Incomplete as a 2001 Pointless Productions film.",
+          "retrievedAt": "2026-09-03T23:25:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of the Pointless Productions/Shane Bonifay channel's official complete-film upload; no media rehosting permission inferred. No reliable film-wide location list or single director credit was published, so neither was inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Incomplete (2001) Wakeboarding Film",
+        "description": "Watch Pointless Productions' 2001 wakeboarding film Incomplete from the official athlete-owned source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
