@@ -114,8 +114,32 @@
 }
 
 .progressionCard {
-  background: var(--app-secondary-bg);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: hsl(var(--card-foreground));
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.progressionCard :global(.MuiCardActionArea-root) {
+  color: inherit;
+}
+
+.progressionCard :global(.MuiTypography-h6),
+.progressionCard :global(.MuiChip-label),
+.progressionConnection {
+  color: hsl(var(--card-foreground));
+}
+
+.progressionReason {
+  color: hsl(var(--muted-foreground));
+}
+
+.progressionCard:hover,
+.progressionCard:focus-within {
+  border-color: rgba(255, 215, 0, 0.55);
+}
+
+.progressionCard :global(.MuiCardActionArea-focusHighlight) {
+  background-color: #ffd700;
 }
 
 @media (max-width: 900px) {
