@@ -1,0 +1,93 @@
+{
+  "source": "Slingshot Sports' official complete-film YouTube upload, corroborated by Apple TV and Wakeboarding Magazine",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T04:23:15Z",
+  "films": [
+    {
+      "slug": "lipsmack-2012",
+      "type": "film",
+      "title": "Lipsmack",
+      "description": "Slingshot Wake's first full-length team film celebrates creative boat, cable, and rail riding at a turning point in early-2010s wakeboarding. Filmed and edited by Patrick Wieland, the official complete 2012 film runs 30 minutes, 3 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "cable-wakeboarding",
+        "boat-wakeboarding",
+        "rail-riding",
+        "team-film",
+        "slingshot-wake",
+        "shredtown"
+      ],
+      "releaseYear": 2012,
+      "producedBy": "Slingshot Wake",
+      "directors": ["Patrick Wieland"],
+      "riders": [
+        "Shredtown",
+        "Oli Derome",
+        "Mike Ennen",
+        "Jeff House",
+        "Steffen Vollert",
+        "Nate Perry",
+        "Dylan Miller",
+        "Brian Reeder",
+        "Jeff McKee"
+      ],
+      "locations": ["Philippines", "Texas, USA", "Canada", "Germany"],
+      "duration": 1803,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Zz5jzKpNElo/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Zz5jzKpNElo/maxresdefault.jpg"
+      },
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Zz5jzKpNElo",
+          "embedUrl": "https://www.youtube.com/embed/Zz5jzKpNElo",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Slingshot Sports",
+          "channelUrl": "https://www.youtube.com/@slingshotsports",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T04:23:15Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Zz5jzKpNElo",
+          "sourceDetails": "Public, embeddable complete film on Slingshot Sports' official YouTube channel. Current player metadata reports playable status, video ID, official publisher, and an exact 1,803-second runtime; the official description supplies the production, filmmaker, and rider credits.",
+          "retrievedAt": "2026-09-04T04:23:15Z"
+        },
+        {
+          "source": "apple-tv",
+          "url": "https://tv.apple.com/us/movie/lipsmack/umc.cmc.235m7rgl3fonq9linnfgaqii6",
+          "sourceDetails": "The licensed catalog page corroborates the 2012 release, 30-minute runtime, Slingshot Sports studio and producer credit, Patrick Wieland director credit, and principal cast.",
+          "retrievedAt": "2026-09-04T04:23:15Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/blog/photos/2012/05/14/photos-slingshots-lipsmack-premiere/",
+          "sourceDetails": "Contemporary independent premiere coverage confirms Slingshot's May 2012 team-film release, its cable, rail, and boat-wakeboarding scope, and filming context spanning Texas, Canada, and Germany.",
+          "retrievedAt": "2026-09-04T04:23:15Z"
+        },
+        {
+          "source": "awake",
+          "url": "https://awakelc.wordpress.com/2012/05/02/words-the-patrick-wieland-x-lipsmack-story/",
+          "sourceDetails": "Contemporary interview with Patrick Wieland identifies him as the filmmaker, describes Slingshot's production role, confirms the Philippines as the first official film trip, and records the 30-minute runtime and team-film format.",
+          "retrievedAt": "2026-09-04T04:23:15Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, YouTube-hosted artwork, and an embed of Slingshot Sports' official complete-film upload; no media rehosting permission inferred. Location credits are limited to places explicitly identified in contemporary production and premiere coverage."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Lipsmack (2012) Wakeboarding Film",
+        "description": "Watch Slingshot Wake's 2012 team film Lipsmack from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
