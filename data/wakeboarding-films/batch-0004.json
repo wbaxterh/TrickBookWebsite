@@ -1,0 +1,109 @@
+{
+  "source": "Liquid Force Wakeboards' official complete-film YouTube upload, corroborated by Wakeboarding Magazine and an independent wake-film credit index",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T02:10:00Z",
+  "films": [
+    {
+      "slug": "the-truth-2006",
+      "type": "film",
+      "title": "The Truth",
+      "description": "Liquid Force Films' 2006 team video captures a broad cross-section of the era's wakeboarding and wakeskating team. Filmed, directed, and edited by Justin Stephens, the official complete upload runs 44 minutes, 58 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "wakeskating",
+        "boat-wakeboarding",
+        "team-film",
+        "liquid-force",
+        "liquid-force-films"
+      ],
+      "releaseYear": 2006,
+      "producedBy": "Liquid Force Films",
+      "directors": ["Justin Stephens"],
+      "riders": [
+        "Ben Greenwood",
+        "Mike Ennen",
+        "Tino Santori",
+        "Melissa Marquardt",
+        "Harley Clifford",
+        "Daniel Doud",
+        "Lauren Loe",
+        "Aaron Aubrey",
+        "Mikey Marsh",
+        "Collin Harrington",
+        "Gregg Necrason",
+        "Phillip Basino",
+        "Steve Schoenhals",
+        "Silas Thurman",
+        "Kyle Hyams",
+        "Kyle Walton",
+        "Kevin Henshaw",
+        "Phillip Combs",
+        "Devin Rogers",
+        "Amber Wing",
+        "Aaron Reed",
+        "Danny Hampson",
+        "Keith Lyman",
+        "Phillip Soven",
+        "Shawn Watson",
+        "Shane Bonifay"
+      ],
+      "locations": [],
+      "duration": 2698,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/jAY4qK8qszI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/jAY4qK8qszI/maxresdefault.jpg"
+      },
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=jAY4qK8qszI",
+          "embedUrl": "https://www.youtube.com/embed/jAY4qK8qszI",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Liquid Force Wakeboards",
+          "channelUrl": "https://www.youtube.com/@liquidforceofficial",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T02:10:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=jAY4qK8qszI",
+          "sourceDetails": "Public, embeddable complete film on Liquid Force Wakeboards' official YouTube channel. Current YouTube player metadata reports playable status, the official publisher, video ID, and exact 2,698-second runtime.",
+          "retrievedAt": "2026-09-04T02:10:00Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/story/videos/liquid-force-the-truth/",
+          "sourceDetails": "Independent wakeboarding coverage embeds the same official complete film, identifies The Truth as Liquid Force's 2006 team video, and credits Justin Stephens as filmer, director, and editor.",
+          "retrievedAt": "2026-09-04T02:10:00Z"
+        },
+        {
+          "source": "wakeboard-music",
+          "url": "https://wakeboardmusic.blogspot.com/2009/01/liquid-force-truth-wakeboard-music.html",
+          "sourceDetails": "Independent wake-film and soundtrack index supplies production credits and the principal rider lineup; names were normalized only for clear typographical errors corroborated by the film and established athlete spellings.",
+          "retrievedAt": "2026-09-04T02:10:00Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/blog/news/2007/03/30/justin-stephens-on-fuels-the-daily-habit/",
+          "sourceDetails": "Contemporary coverage identifies The Truth as Justin Stephens' most recent film and records its Best Core Film award at the 2007 X-Dance Action Sports Film Festival.",
+          "retrievedAt": "2026-09-04T02:10:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, YouTube-hosted artwork, and an embed of Liquid Force Wakeboards' official complete-film upload; no media rehosting permission inferred. No reliable complete film-wide location list was published, so locations were left empty."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Truth (2006) Wakeboarding Film",
+        "description": "Watch Liquid Force Films' 2006 wakeboarding team video The Truth from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
