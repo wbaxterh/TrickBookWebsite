@@ -1,0 +1,78 @@
+{
+  "source": "Red Bull's official complete-film player, corroborated by Red Bull production coverage and Alliance Wake",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T05:04:00Z",
+  "films": [
+    {
+      "slug": "beyond-perception-2014",
+      "type": "film",
+      "title": "Beyond Perception",
+      "description": "Raph Derome and filmmaker Jonathan Ferguson spent two years building a focused portrait of progressive wakeboarding through custom rails, urban spots, cable riding, and boat riding. Presented by Red Bull Media House with Billabong and Malibu Boats, the official complete 2014 film runs 8 minutes, 41 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "cable-wakeboarding",
+        "boat-wakeboarding",
+        "urban-wakeboarding",
+        "rail-riding",
+        "athlete-film",
+        "red-bull",
+        "still-not-famous"
+      ],
+      "releaseYear": 2014,
+      "producedBy": "Red Bull Media House / Still Not Famous",
+      "directors": ["Jonathan Ferguson"],
+      "riders": ["Raph Derome"],
+      "locations": ["Florida, USA", "Quebec, Canada", "Ontario Place, Toronto, Canada"],
+      "duration": 521,
+      "thumbnails": {
+        "poster": "https://img.redbull.com/images/c_crop,w_1600,h_900/f_auto,q_auto/redbullcom/2014/10/10/1331683855844_3/raph-derome-wakeboarding-tampa-florida",
+        "backdrop": "https://img.redbull.com/images/c_crop,w_1600,h_900/f_auto,q_auto/redbullcom/2014/10/10/1331683855844_3/raph-derome-wakeboarding-tampa-florida"
+      },
+      "watchOptions": [
+        {
+          "platform": "redbull",
+          "url": "https://www.redbull.com/us-en/videos/raph-derome-beyond-perception",
+          "embedUrl": "https://www.redbull.com/embed/rrn:content:videos:ec3dbf06-482e-4c25-aae2-277ab05120c8:en-INT",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Red Bull",
+          "channelUrl": "https://www.redbull.com/us-en",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T05:04:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "red-bull-player",
+          "url": "https://www.redbull.com/us-en/videos/raph-derome-beyond-perception",
+          "sourceDetails": "Red Bull's current official page serves the complete film through its embeddable player. Current player metadata reports no playability errors, embedding enabled, a 521-second duration, the Red Bull asset identifier, official artwork, and Raph Derome as the subject.",
+          "retrievedAt": "2026-09-04T05:04:00Z"
+        },
+        {
+          "source": "red-bull",
+          "url": "https://www.redbull.com/ca-en/raph-deromes-beyond-perception-teaser",
+          "sourceDetails": "First-party production coverage published in 2014 identifies Red Bull Media House as presenter, Billabong and Malibu Boats as partners, the two-year production period, and filming in Florida, Quebec, and Ontario Place in Toronto; it also records the original October 2014 full release window.",
+          "retrievedAt": "2026-09-04T05:04:00Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/wake/videos-wake/beyond-perception-behind-the-scene-part-1/",
+          "sourceDetails": "Independent wakeboarding coverage identifies Jonathan Ferguson as Raph Derome's longtime friend and director, describes the project as the complete Beyond Perception edit, and corroborates Red Bull's production role.",
+          "retrievedAt": "2026-09-04T05:04:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, Red Bull-hosted artwork, and Red Bull's embedding-enabled official player; no media is downloaded or rehosted. Credits and locations are limited to details explicitly published by Red Bull and Alliance Wake."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Beyond Perception (2014) Wakeboarding Film",
+        "description": "Watch Raph Derome's 2014 wakeboarding film Beyond Perception from Red Bull's official source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
