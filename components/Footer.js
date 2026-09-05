@@ -60,10 +60,10 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  href="/homies"
+                  href="/riders"
                   className="text-sm text-muted-foreground hover:text-yellow-500 transition-colors"
                 >
-                  {t('nav.homies', 'Homies')}
+                  {t('nav.riders', 'Riders')}
                 </Link>
               </li>
               <li>
