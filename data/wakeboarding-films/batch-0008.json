@@ -1,0 +1,97 @@
+{
+  "source": "Space Mob's official complete-film upload and first-party catalog, corroborated by Alliance Wake and Wakeboarding Magazine",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T05:49:36Z",
+  "films": [
+    {
+      "slug": "the-coalition-the-movie-the-trilogy-2021",
+      "type": "film",
+      "title": "The Coalition The Movie The Trilogy",
+      "description": "Space Mob's third Coalition feature is an all-winch street-wakeboarding film built over nearly three years. The 2021 Wake Awards Film/Video of the Year follows eight riders through urban spots and waterways around the world, with substantial filming in Ontario, and the official uninterrupted cut runs 50 minutes, 25 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "winch-wakeboarding",
+        "urban-wakeboarding",
+        "street-riding",
+        "team-film",
+        "space-mob"
+      ],
+      "releaseYear": 2021,
+      "producedBy": "Space Mob",
+      "directors": [],
+      "riders": [
+        "Wesley Mark Jacobsen",
+        "Crosse Bearden",
+        "Sina Fuchs",
+        "Jesse Jarrett",
+        "Coti Scaglia",
+        "Travis Doran",
+        "Quinn Silvernale",
+        "Dary Znebel"
+      ],
+      "locations": ["Ontario, Canada"],
+      "duration": 3025,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/SE1ed1_WYbk/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/SE1ed1_WYbk/maxresdefault.jpg"
+      },
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=SE1ed1_WYbk",
+          "embedUrl": "https://www.youtube.com/embed/SE1ed1_WYbk",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Space Mob",
+          "channelUrl": "https://www.youtube.com/@spacemob",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T05:49:36Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=SE1ed1_WYbk",
+          "sourceDetails": "Public, embeddable uninterrupted complete film on Space Mob's official YouTube channel. Current player metadata reports playable status, embedding support, the November 1, 2021 publication date, official publisher, exact 3,025-second runtime, artwork, and the eight full-part rider credits.",
+          "retrievedAt": "2026-09-04T05:49:36Z"
+        },
+        {
+          "source": "space-mob",
+          "url": "https://www.spacemob.tv/videos",
+          "sourceDetails": "Space Mob's first-party video catalog embeds the uninterrupted TCTMTT film, identifies it as the third Coalition feature, says the crew filmed it for about three years, and supplies the same eight full-part rider credits.",
+          "retrievedAt": "2026-09-04T05:49:36Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/5-questions-with-wesley-mark-jacobsen",
+          "sourceDetails": "Independent interview with Space Mob leader and editor Wesley Mark Jacobsen establishes the all-winch street-film concept, nearly three-year production, eight-rider lineup, and his behind-the-lens and editing role without assigning an unsupported formal director credit.",
+          "retrievedAt": "2026-09-04T05:49:36Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/news/2021-wake-awards-the-winners/",
+          "sourceDetails": "Independent awards coverage names The Coalition The Movie The Trilogy, produced by Space Mob, as the 2021 Wake Awards Best Film/Video of the Year.",
+          "retrievedAt": "2026-09-04T05:49:36Z"
+        },
+        {
+          "source": "wake-sports-water-ski-ontario",
+          "url": "https://wswo.ca/resources/2022/2022-WSWO-WakesMag.pdf",
+          "sourceDetails": "The provincial sport organization's 2022 report calls it the prior year's world number-one wake film, identifies Ontario riders Dary Znebel, Jesse Jarrett, and Coti Scaglia, and states that much of their footage was filmed in Ontario.",
+          "retrievedAt": "2026-09-04T05:49:36Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, YouTube-hosted artwork, and an embed of Space Mob's official complete-film upload; no media is downloaded or rehosted. Rider, production, format, and location claims are limited to Space Mob and corroborating independent sources, and no formal director credit is inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Coalition The Movie The Trilogy (2021) Wakeboarding Film",
+        "description": "Watch Space Mob's award-winning 2021 winch wakeboarding film from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

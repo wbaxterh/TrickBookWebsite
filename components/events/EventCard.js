@@ -18,6 +18,7 @@ const STATUS_CLASSES = {
   warning: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30',
   info: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30',
   live: 'bg-red-500 text-white border-red-500',
+  past: 'bg-muted text-muted-foreground border-border',
 };
 
 export default function EventCard({ event, saved = false, onToggleSave }) {
@@ -26,12 +27,21 @@ export default function EventCard({ event, saved = false, onToggleSave }) {
   const status = getEventStatus(event);
   const action = getEventAction(event);
   const detailUrl = `/events/${event.slug || event._id}`;
+  const isPast = status?.tone === 'past';
 
   return (
-    <Card className="group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
+    <Card
+      className={`group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200 ${
+        isPast ? 'opacity-60 hover:opacity-85 grayscale-[35%]' : ''
+      }`}
+    >
       <CardContent className="p-0">
         <div className="flex">
-          <div className="w-20 sm:w-24 flex-shrink-0 bg-yellow-400 text-black flex flex-col items-center justify-center px-2 py-5">
+          <div
+            className={`w-20 sm:w-24 flex-shrink-0 text-black flex flex-col items-center justify-center px-2 py-5 ${
+              isPast ? 'bg-muted-foreground/30' : 'bg-yellow-400'
+            }`}
+          >
             <span className="text-xs font-black tracking-[0.18em]">{date.month}</span>
             <span className="text-3xl sm:text-4xl leading-none font-black mt-1">{date.day}</span>
           </div>

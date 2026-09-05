@@ -233,13 +233,27 @@ export default function TrickDetailPage() {
                   ))}
                 </ol>
               </Box>
+              {trickData.tips?.length > 0 && (
+                <Box component="section" className="mb-4">
+                  <Typography variant="h6">Practical tips</Typography>
+                  <ul>
+                    {trickData.tips.map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
+                  </ul>
+                </Box>
+              )}
               {trickData.commonMistakes?.length > 0 && (
                 <Box component="section" className="mb-4">
                   <Typography variant="h6">Common mistakes and fixes</Typography>
                   <List>
                     {trickData.commonMistakes.map((mistake) => (
                       <ListItem key={`${mistake.mistake}-${mistake.fix}`}>
-                        <ListItemText primary={mistake.mistake} secondary={mistake.fix} />
+                        <ListItemText
+                          className={styles.mistakeText}
+                          primary={mistake.mistake}
+                          secondary={mistake.fix}
+                        />
                       </ListItem>
                     ))}
                   </List>
@@ -308,7 +322,7 @@ export default function TrickDetailPage() {
                 </Box>
               ) : null}
               {trickData.source && (
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" className={styles.sourceAttribution}>
                   Source: {trickData.source}
                 </Typography>
               )}

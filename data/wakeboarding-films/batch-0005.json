@@ -1,0 +1,178 @@
+{
+  "source": "Remedy Films' official complete-film YouTube uploads, corroborated by Alliance Wake",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T03:45:45Z",
+  "films": [
+    {
+      "slug": "seasons-2016",
+      "type": "film",
+      "title": "Seasons",
+      "description": "Remedy Films, OneWake, and Singleton Marine Group follow the OneWake and Malibu Boats teams through the 2015 wakeboarding season. Directed by Jamie Graff and shot in 4K across nine locations, the official complete film runs 65 minutes, 31 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "wakesurfing",
+        "boat-wakeboarding",
+        "team-film",
+        "documentary",
+        "remedy-films",
+        "onewake",
+        "malibu-boats"
+      ],
+      "releaseYear": 2016,
+      "producedBy": "Remedy Films / Singleton Marine Group",
+      "directors": ["Jamie Graff"],
+      "riders": [
+        "Adam Silcio",
+        "Austin Keen",
+        "Ben Watts",
+        "Bryan Magaldi",
+        "Callaway Ford",
+        "Corey Bradley",
+        "Gigi Meyer",
+        "Jamie Eichler",
+        "Jeff Langley",
+        "Jeremy Haley",
+        "Joel Schrader",
+        "Mark Roche",
+        "Missy Olivares",
+        "Morgan Crescent",
+        "Oli Derome",
+        "Pierce Bishop",
+        "Steel Lafferty",
+        "Vinny Knapp"
+      ],
+      "locations": [],
+      "duration": 3931,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Yg1HFwq8kwg/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Yg1HFwq8kwg/maxresdefault.jpg"
+      },
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Yg1HFwq8kwg",
+          "embedUrl": "https://www.youtube.com/embed/Yg1HFwq8kwg",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "REMEDY",
+          "channelUrl": "https://www.youtube.com/@RemedyFilms",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T03:45:45Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=Yg1HFwq8kwg",
+          "sourceDetails": "Public, embeddable complete film on Remedy Films' official YouTube channel. Current YouTube player metadata reports playable status, video ID, official publisher, and an exact 3,931-second runtime; the description supplies the director and 18-rider cast.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/videos/seasons-wake-film/",
+          "sourceDetails": "Independent wakeboarding coverage presents the complete film, identifies Singleton Marine and Remedy Films as presenters, confirms the 4K production, nine-location scope, 18-rider cast, and Jamie Graff director credit.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/videos/seasons-official-trailer-4k/",
+          "sourceDetails": "Contemporary release coverage records the April 23 premiere and May 1, 2016 global online release and repeats the production and rider credits.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, YouTube-hosted artwork, and an embed of Remedy Films' official complete-film upload; no media rehosting permission inferred. Sources state that filming covered nine locations but do not publish a reliable complete location list, so locations were left empty."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Seasons (2016) Wakeboarding Film",
+        "description": "Watch Remedy Films' 2016 wakeboarding documentary Seasons from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-single-day-2011",
+      "type": "film",
+      "title": "A Single Day",
+      "description": "Remedy Films' first wakeboarding production brings the Singleton Marine Group team together for one day of grassroots riding, filming, helicopter jumps, and lake life. The official complete 2011 mini-feature runs 43 minutes, 3 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "boat-wakeboarding",
+        "grassroots-wakeboarding",
+        "team-film",
+        "documentary",
+        "remedy-films",
+        "singleton-marine-group"
+      ],
+      "releaseYear": 2011,
+      "producedBy": "Remedy Films",
+      "directors": [],
+      "riders": [
+        "Johnny Tobaben",
+        "Ben Watts",
+        "Jamie Graff",
+        "Ryan Free",
+        "Cori Wagoner",
+        "David 'Jimmy' Taylor",
+        "Sawyer Davis",
+        "Nicholas Mohnacky",
+        "Chase Andrews",
+        "Corey Bradley"
+      ],
+      "locations": ["Georgia, USA"],
+      "duration": 2583,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/4Cr5EUkUgsk/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/4Cr5EUkUgsk/maxresdefault.jpg"
+      },
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=4Cr5EUkUgsk",
+          "embedUrl": "https://www.youtube.com/embed/4Cr5EUkUgsk",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "REMEDY",
+          "channelUrl": "https://www.youtube.com/@RemedyFilms",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T03:45:45Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=4Cr5EUkUgsk",
+          "sourceDetails": "Public, embeddable complete film on Remedy Films' official YouTube channel. Current player metadata reports playable status, video ID, official publisher, and an exact 2,583-second runtime; the filmmaker description supplies the production context and ten-rider cast.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/wake/videos-wake/a-single-day-team-smg/",
+          "sourceDetails": "Contemporary independent coverage published January 24, 2011 identifies Remedy Films as producer, describes the 43-minute complete mini-feature and Georgia setting, and supplies the ten featured riders.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        },
+        {
+          "source": "axis-wake-research",
+          "url": "https://axiswake.blogspot.com/2011/",
+          "sourceDetails": "Contemporary Axis Wake Research dealer coverage dated January 26, 2011 corroborates Remedy Films, Singleton Marine Group, the Alabama and Georgia team context, and the film's full-day concept.",
+          "retrievedAt": "2026-09-04T03:45:45Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, YouTube-hosted artwork, and an embed of Remedy Films' official complete-film upload; no media rehosting permission inferred. Sources credit Remedy Films founders Jamie Graff and Chase Andrews but do not publish a discrete director credit, so directors were left empty."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Single Day (2011) Wakeboarding Film",
+        "description": "Watch Remedy Films' 2011 wakeboarding mini-feature A Single Day from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
