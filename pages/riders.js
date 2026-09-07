@@ -100,49 +100,8 @@ export default function Riders() {
         {loading && <p className="py-16 text-center text-muted-foreground">Loading riders…</p>}
         {error && <p className="py-16 text-center text-red-500">{error}</p>}
 
-        {!loading && !error && proRiders.length > 0 && (
-          <section className="mb-10">
-            <h2 className="mb-1 text-2xl font-bold">Pro riders</h2>
-            <p className="mb-4 text-sm text-muted-foreground">
-              Editorial profiles of the riders behind the films and contests we cover.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {proRiders.map((rider) => (
-                <Link href={`/riders/${rider.slug}`} key={rider.slug} className="no-underline">
-                  <Card className="h-full transition hover:-translate-y-0.5 hover:border-yellow-500">
-                    <CardContent className="flex gap-4 p-5">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-yellow-500 text-2xl font-bold text-black">
-                        {rider.canonicalName.charAt(0)}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="truncate text-lg font-semibold">{rider.canonicalName}</h3>
-                        {(rider.nationality || rider.homeRegion) && (
-                          <p className="truncate text-sm text-muted-foreground">
-                            {[rider.nationality, rider.homeRegion].filter(Boolean).join(' · ')}
-                          </p>
-                        )}
-                        {rider.biography && (
-                          <p className="mt-2 line-clamp-2 text-sm">{rider.biography}</p>
-                        )}
-                        <p className="mt-3 text-xs font-medium capitalize text-yellow-600">
-                          {rider.primarySport}
-                          {rider.sponsors?.length
-                            ? ` · ${rider.sponsors.slice(0, 3).join(' · ')}`
-                            : ''}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
         {!loading && !error && (
-          <p className="mb-4 text-sm text-muted-foreground">
-            {proRiders.length > 0 ? `Community riders · ${total}` : `${total} riders`}
-          </p>
+          <p className="mb-4 text-sm text-muted-foreground">{total + proRiders.length} riders</p>
         )}
         {!loading && !error && riders.length === 0 && proRiders.length === 0 && (
           <p className="py-16 text-center text-muted-foreground">
@@ -150,8 +109,46 @@ export default function Riders() {
           </p>
         )}
 
-        {!loading && !error && riders.length > 0 && (
+        {!loading && !error && (riders.length > 0 || proRiders.length > 0) && (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {proRiders.map((rider) => (
+              <Link href={`/riders/${rider.slug}`} key={rider.slug} className="no-underline">
+                <Card className="h-full transition hover:-translate-y-0.5 hover:border-yellow-500">
+                  <CardContent className="flex gap-4 p-5">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-yellow-500 text-2xl font-bold text-black">
+                      {rider.canonicalName.charAt(0)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h2 className="truncate text-lg font-semibold">{rider.canonicalName}</h2>
+                        {rider.rep?.score > 0 && (
+                          <span
+                            className="shrink-0 rounded-full bg-yellow-500/15 px-2 py-0.5 text-xs font-bold text-yellow-600"
+                            title="Rep score"
+                          >
+                            {rider.rep.score} rep
+                          </span>
+                        )}
+                      </div>
+                      {(rider.nationality || rider.homeRegion) && (
+                        <p className="truncate text-sm text-muted-foreground">
+                          {[rider.nationality, rider.homeRegion].filter(Boolean).join(' · ')}
+                        </p>
+                      )}
+                      {rider.biography && (
+                        <p className="mt-2 line-clamp-2 text-sm">{rider.biography}</p>
+                      )}
+                      <p className="mt-3 text-xs font-medium capitalize text-yellow-600">
+                        {rider.primarySport}
+                        {rider.sponsors?.length
+                          ? ` · ${rider.sponsors.slice(0, 3).join(' · ')}`
+                          : ''}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
             {riders.map((rider) => (
               <Link href={`/profile/${rider._id}`} key={rider._id} className="no-underline">
                 <Card className="h-full transition hover:-translate-y-0.5 hover:border-yellow-500">

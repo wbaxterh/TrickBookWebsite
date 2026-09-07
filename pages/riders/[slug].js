@@ -1,4 +1,4 @@
-import { ArrowLeft, Award, Film, Globe, MapPin } from 'lucide-react';
+import { ArrowLeft, Award, Film, Flame, Globe, MapPin } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Card, CardContent } from '../../components/ui/card';
@@ -39,7 +39,7 @@ export default function EditorialRiderProfile({ rider }) {
               {rider.canonicalName.charAt(0)}
             </div>
           )}
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h1 className="text-4xl font-bold">{rider.canonicalName}</h1>
             <p className="mt-1 font-medium capitalize text-yellow-600">
               {rider.primarySport}
@@ -52,6 +52,16 @@ export default function EditorialRiderProfile({ rider }) {
               </p>
             )}
           </div>
+          {rider.rep?.score > 0 && (
+            <div className="shrink-0 rounded-xl border border-yellow-500/40 bg-yellow-500/10 px-5 py-3 text-center">
+              <p className="flex items-center gap-1 text-3xl font-bold text-yellow-500">
+                <Flame className="h-6 w-6" /> {rider.rep.score}
+              </p>
+              <p className="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Rep
+              </p>
+            </div>
+          )}
         </div>
 
         {rider.biography && (
@@ -107,11 +117,58 @@ export default function EditorialRiderProfile({ rider }) {
             <Card>
               <CardContent className="p-5">
                 <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
-                  <Film className="h-5 w-5 text-yellow-500" /> Film credits
+                  <Film className="h-5 w-5 text-yellow-500" /> Watch on the Couch
                 </h2>
                 <ul className="space-y-2 text-sm">
                   {rider.couchCredits.map((credit) => (
-                    <li key={credit.filmId}>{credit.context || credit.creditedName}</li>
+                    <li key={credit.filmId}>
+                      {credit.filmSlug ? (
+                        <Link
+                          href={`/media/couch/${credit.filmSlug}`}
+                          className="hover:text-yellow-500"
+                        >
+                          {credit.filmTitle
+                            ? `${credit.filmTitle} — ${credit.context || 'featured rider'}`
+                            : credit.context || credit.creditedName}
+                        </Link>
+                      ) : (
+                        credit.context || credit.creditedName
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {rider.rep?.breakdown && (
+            <Card>
+              <CardContent className="p-5">
+                <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
+                  <Flame className="h-5 w-5 text-yellow-500" /> Rep breakdown
+                </h2>
+                <ul className="space-y-2 text-sm">
+                  {[
+                    ['Video parts & film credits', rider.rep.breakdown.parts, 40],
+                    ['Contest results & awards', rider.rep.breakdown.results, 35],
+                    ['Social & web presence', rider.rep.breakdown.social, 10],
+                    ['Years active', rider.rep.breakdown.longevity, 10],
+                    ['Independent sourcing', rider.rep.breakdown.evidence, 5],
+                  ].map(([label, value, cap]) => (
+                    <li key={label}>
+                      <div className="flex justify-between gap-3">
+                        <span>{label}</span>
+                        <span className="shrink-0 font-medium text-yellow-600">
+                          {value}/{cap}
+                        </span>
+                      </div>
+                      <div className="mt-1 h-1.5 rounded-full bg-muted">
+                        <div
+                          className="h-1.5 rounded-full bg-yellow-500"
+                          style={{ width: `${Math.min(100, (value / cap) * 100)}%` }}
+                        />
+                      </div>
+                    </li>
                   ))}
                 </ul>
               </CardContent>
