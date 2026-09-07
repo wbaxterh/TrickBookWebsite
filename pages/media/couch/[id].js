@@ -250,9 +250,27 @@ export default function CouchVideoPage({ initialVideo }) {
                     Featured riders
                   </h2>
                   <ul className="mt-3 grid grid-cols-2 gap-x-5 gap-y-2 text-sm">
-                    {video.riders.map((rider) => (
-                      <li key={rider}>{rider}</li>
-                    ))}
+                    {video.riders.map((rider) => {
+                      const profileSlug = video.riderProfiles?.find(
+                        (profile) => profile.name === rider,
+                      )?.slug;
+                      return (
+                        <li key={rider}>
+                          {profileSlug ? (
+                            <a
+                              href={`/riders/${profileSlug}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-yellow-500 hover:underline"
+                            >
+                              {rider}
+                            </a>
+                          ) : (
+                            rider
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
