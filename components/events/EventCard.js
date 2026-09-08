@@ -1,4 +1,12 @@
-import { Bell, CalendarDays, ExternalLink, MapPin, Radio, ShieldCheck } from 'lucide-react';
+import {
+  Bell,
+  CalendarDays,
+  ExternalLink,
+  MapPin,
+  Navigation,
+  Radio,
+  ShieldCheck,
+} from 'lucide-react';
 import Link from 'next/link';
 import {
   formatEventDate,
@@ -8,6 +16,7 @@ import {
   getPrimarySport,
   getSportMeta,
 } from '../../lib/eventFormatters';
+import { formatDistance } from '../../lib/geo';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
@@ -18,30 +27,21 @@ const STATUS_CLASSES = {
   warning: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30',
   info: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30',
   live: 'bg-red-500 text-white border-red-500',
-  past: 'bg-muted text-muted-foreground border-border',
 };
 
-export default function EventCard({ event, saved = false, onToggleSave }) {
+export default function EventCard({ event, saved = false, onToggleSave, distanceMi = null }) {
   const date = formatEventDate(event);
   const sport = getSportMeta(getPrimarySport(event));
   const status = getEventStatus(event);
   const action = getEventAction(event);
   const detailUrl = `/events/${event.slug || event._id}`;
-  const isPast = status?.tone === 'past';
+  const distanceLabel = formatDistance(distanceMi);
 
   return (
-    <Card
-      className={`group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200 ${
-        isPast ? 'opacity-60 hover:opacity-85 grayscale-[35%]' : ''
-      }`}
-    >
+    <Card className="group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
       <CardContent className="p-0">
         <div className="flex">
-          <div
-            className={`w-20 sm:w-24 flex-shrink-0 text-black flex flex-col items-center justify-center px-2 py-5 ${
-              isPast ? 'bg-muted-foreground/30' : 'bg-yellow-400'
-            }`}
-          >
+          <div className="w-20 sm:w-24 flex-shrink-0 bg-yellow-400 text-black flex flex-col items-center justify-center px-2 py-5">
             <span className="text-xs font-black tracking-[0.18em]">{date.month}</span>
             <span className="text-3xl sm:text-4xl leading-none font-black mt-1">{date.day}</span>
           </div>
@@ -58,6 +58,15 @@ export default function EventCard({ event, saved = false, onToggleSave }) {
                     <Badge variant="outline" className={STATUS_CLASSES[status.tone]}>
                       {status.tone === 'live' && <Radio className="h-3 w-3 mr-1" />}
                       {status.label}
+                    </Badge>
+                  )}
+                  {distanceLabel && (
+                    <Badge
+                      variant="outline"
+                      className="border-yellow-500/40 text-yellow-700 dark:text-yellow-300"
+                    >
+                      <Navigation className="h-3 w-3 mr-1" />
+                      {distanceLabel}
                     </Badge>
                   )}
                 </div>
