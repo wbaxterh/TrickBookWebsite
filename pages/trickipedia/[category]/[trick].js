@@ -280,15 +280,14 @@ export default function TrickDetailPage() {
                         px: 2,
                         mb: 1,
                         borderRadius: 1,
-                        backgroundColor: 'rgba(255,255,255,0.05)',
-                        '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
                       }}
+                      className={styles.videoRow}
                     >
                       <a
                         href={video.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#FFD700', textDecoration: 'none', flex: 1 }}
+                        className={styles.videoLink}
                       >
                         {video.title || video.url}
                       </a>
@@ -300,9 +299,9 @@ export default function TrickDetailPage() {
                           textTransform: 'capitalize',
                           backgroundColor:
                             video.platform === 'youtube'
-                              ? '#FF0000'
+                              ? '#c00000'
                               : video.platform === 'instagram'
-                                ? '#E1306C'
+                                ? '#ad1f57'
                                 : video.platform === 'tiktok'
                                   ? '#000'
                                   : '#555',
@@ -316,7 +315,12 @@ export default function TrickDetailPage() {
               ) : trickData.videoUrl ? (
                 <Box className="mb-4">
                   <Typography variant="h6">Video Tutorial:</Typography>
-                  <a href={trickData.videoUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={trickData.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.videoLink}
+                  >
                     {trickData.videoUrl}
                   </a>
                 </Box>
