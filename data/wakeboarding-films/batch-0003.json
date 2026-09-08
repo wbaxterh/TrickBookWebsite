@@ -1,0 +1,108 @@
+{
+  "source": "BFY Action Films & Media's first-party portfolio and official complete-film Vimeo upload, corroborated by Wakeboarding Magazine and Alliance Wake",
+  "sport": "wakeboarding",
+  "researchedAt": "2026-09-04T00:50:49Z",
+  "films": [
+    {
+      "slug": "the-butter-effect-2005",
+      "type": "film",
+      "title": "The Butter Effect",
+      "description": "BFY Productions' 2005 wakeboarding film pairs nine principal rider sections with a wakeskating section from Scott Byerly and Aaron Reed, plus appearances from four additional riders. Produced by Sean Kilgus and captured entirely on 16mm film, the official complete upload runs 50 minutes, 13 seconds.",
+      "sportTypes": ["wakeboarding"],
+      "tags": [
+        "wakeboarding",
+        "wakeskating",
+        "boat-wakeboarding",
+        "team-film",
+        "bfy-productions",
+        "16mm-film"
+      ],
+      "releaseYear": 2005,
+      "producedBy": "BFY Productions",
+      "directors": [],
+      "riders": [
+        "Shawn Watson",
+        "Danny Harf",
+        "Scott Byerly",
+        "Andrew Adkison",
+        "Keith Lyman",
+        "Ben Greenwood",
+        "Aaron Reed",
+        "Rusty Malinoski",
+        "Brent Starr",
+        "Parks Bonifay",
+        "Shane Bonifay",
+        "Chad Sharpe",
+        "Gerry Nunn"
+      ],
+      "locations": [],
+      "duration": 3013,
+      "thumbnails": {
+        "poster": "https://bfyactionfilmsmedia.com/wp-content/uploads/2021/03/ButterEffectImage.png",
+        "backdrop": "https://bfyactionfilmsmedia.com/wp-content/uploads/2021/03/ButterEffectImage.png"
+      },
+      "watchOptions": [
+        {
+          "platform": "vimeo",
+          "url": "https://vimeo.com/518111074",
+          "embedUrl": "https://player.vimeo.com/video/518111074?dnt=1",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "BFY Actions Films & MEDIA, LLC",
+          "channelUrl": "https://vimeo.com/bfyactionfilmsmedia",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-04T00:50:49Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "vimeo",
+          "url": "https://vimeo.com/518111074",
+          "sourceDetails": "Public, embeddable complete film on BFY Action Films & Media's official Vimeo business channel. Vimeo's player metadata identifies the publisher, title, video ID, and exact 3,013-second runtime; browser playback was verified from the first-party BFY portfolio embed.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        },
+        {
+          "source": "bfy-action-films-media",
+          "url": "https://bfyactionfilmsmedia.com/portfolio/the-butter-effect/",
+          "sourceDetails": "BFY Action Films & Media's first-party portfolio page is dated March 11, 2005, embeds the official complete Vimeo film, and supplies the film artwork used by this catalog record.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        },
+        {
+          "source": "wakeboarding-magazine",
+          "url": "https://www.wakeboardingmag.com/blog/in-this-issue/2005/06/13/july-2005/",
+          "sourceDetails": "Contemporary independent coverage references The Butter Effect premiere in Seattle in its July 2005 issue preview, corroborating the release year.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/features/lyman-leaving/",
+          "sourceDetails": "Independent wakeboarding coverage identifies Sean Kilgus of BFY Productions and lists Keith Lyman's section in the 2005 film The Butter Effect.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        },
+        {
+          "source": "alliance-wake",
+          "url": "https://alliancewake.com/skate/videos-skate/throwback-thursday-reed-and-byerly-the-butter-effect/",
+          "sourceDetails": "Independent wakeboarding coverage identifies the Aaron Reed and Scott Byerly wakeskate section as footage from Sean Kilgus's The Butter Effect.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        },
+        {
+          "source": "wakeboard-music",
+          "url": "https://wakeboardmusic.blogspot.com/2008/11/bump-films-butter-effect-wakeboard.html",
+          "sourceDetails": "Independent film and soundtrack index supplies the full principal and appearance rider credits, the BFY Productions and Sean Kilgus production credit, the 2005 release year, and the 16mm capture format.",
+          "retrievedAt": "2026-09-04T00:50:49Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, artwork, and embed of BFY Action Films & Media's official complete-film Vimeo upload; no media rehosting permission inferred. No reliable discrete director credit or complete film-wide location list was published, so neither was inferred. Principal riders and credited appearances are combined in the catalog's rider field."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Butter Effect (2005) Wakeboarding Film",
+        "description": "Watch BFY Productions' 2005 wakeboarding film The Butter Effect from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

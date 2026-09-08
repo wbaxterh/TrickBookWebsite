@@ -233,13 +233,27 @@ export default function TrickDetailPage() {
                   ))}
                 </ol>
               </Box>
+              {trickData.tips?.length > 0 && (
+                <Box component="section" className="mb-4">
+                  <Typography variant="h6">Practical tips</Typography>
+                  <ul>
+                    {trickData.tips.map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
+                  </ul>
+                </Box>
+              )}
               {trickData.commonMistakes?.length > 0 && (
                 <Box component="section" className="mb-4">
                   <Typography variant="h6">Common mistakes and fixes</Typography>
                   <List>
                     {trickData.commonMistakes.map((mistake) => (
                       <ListItem key={`${mistake.mistake}-${mistake.fix}`}>
-                        <ListItemText primary={mistake.mistake} secondary={mistake.fix} />
+                        <ListItemText
+                          className={styles.mistakeText}
+                          primary={mistake.mistake}
+                          secondary={mistake.fix}
+                        />
                       </ListItem>
                     ))}
                   </List>
@@ -266,15 +280,14 @@ export default function TrickDetailPage() {
                         px: 2,
                         mb: 1,
                         borderRadius: 1,
-                        backgroundColor: 'rgba(255,255,255,0.05)',
-                        '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
                       }}
+                      className={styles.videoRow}
                     >
                       <a
                         href={video.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#FFD700', textDecoration: 'none', flex: 1 }}
+                        className={styles.videoLink}
                       >
                         {video.title || video.url}
                       </a>
@@ -286,9 +299,9 @@ export default function TrickDetailPage() {
                           textTransform: 'capitalize',
                           backgroundColor:
                             video.platform === 'youtube'
-                              ? '#FF0000'
+                              ? '#c00000'
                               : video.platform === 'instagram'
-                                ? '#E1306C'
+                                ? '#ad1f57'
                                 : video.platform === 'tiktok'
                                   ? '#000'
                                   : '#555',
@@ -302,13 +315,18 @@ export default function TrickDetailPage() {
               ) : trickData.videoUrl ? (
                 <Box className="mb-4">
                   <Typography variant="h6">Video Tutorial:</Typography>
-                  <a href={trickData.videoUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={trickData.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.videoLink}
+                  >
                     {trickData.videoUrl}
                   </a>
                 </Box>
               ) : null}
               {trickData.source && (
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" className={styles.sourceAttribution}>
                   Source: {trickData.source}
                 </Typography>
               )}

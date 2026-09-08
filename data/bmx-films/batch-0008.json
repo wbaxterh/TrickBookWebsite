@@ -1,0 +1,140 @@
+{
+  "source": "Official Fiend BMX and Cinema BMX complete team-film uploads with independent BMX press metadata",
+  "sport": "bmx",
+  "researchedAt": "2026-09-03T21:45:00Z",
+  "films": [
+    {
+      "slug": "fiend-dark-days-2020",
+      "type": "film",
+      "title": "Dark Days",
+      "description": "Fiend BMX's 2020 team film Dark Days brings Garrett Reynolds, Colin Varanyak, Johnny Raekes, Ty Morrow, Antonio Chavez, and Matt Closson together for eight minutes of street riding in and around Las Vegas. The complete project was filmed by Tony Ennis.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "team-film", "fiend-bmx", "street-bmx", "las-vegas"],
+      "releaseYear": 2020,
+      "producedBy": "Fiend BMX",
+      "directors": ["Tony Ennis"],
+      "riders": [
+        "Garrett Reynolds",
+        "Colin Varanyak",
+        "Johnny Raekes",
+        "Ty Morrow",
+        "Antonio Chavez",
+        "Matt Closson"
+      ],
+      "locations": ["Las Vegas, Nevada, United States"],
+      "duration": 468,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/WU95EJkLs2Y/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/WU95EJkLs2Y/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=WU95EJkLs2Y",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=WU95EJkLs2Y",
+          "embedUrl": "https://www.youtube.com/embed/WU95EJkLs2Y",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Fiend BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCk0J3k5HbHJ-GP0DZwmz6UA",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T21:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=WU95EJkLs2Y",
+          "sourceDetails": "Public, embeddable complete team film on Fiend BMX's official channel; exact runtime 7:48. The upload identifies Garrett Reynolds, Colin Varanyak, Johnny Raekes, Ty Morrow, Antonio Chavez, and Matt Closson, credits Tony Ennis for the film, and locates the project in Las Vegas, Nevada.",
+          "retrievedAt": "2026-09-03T21:45:00Z"
+        },
+        {
+          "source": "tbb-bike",
+          "url": "https://www.tbb-bike.cz/fiend-bmx-dark-days/",
+          "sourceDetails": "Independent BMX retailer coverage confirms the late-2020 release, Fiend team roster, Tony Ennis filming credit, and Las Vegas-area location while embedding the official film.",
+          "retrievedAt": "2026-09-03T21:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Fiend BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Dark Days (2020) BMX Film",
+        "description": "Watch Fiend BMX's 2020 team film Dark Days from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "cinema-district-of-cinema-2017",
+      "type": "film",
+      "title": "District of Cinema",
+      "description": "Cinema BMX's 2017 team film District of Cinema reunites Garrett Reynolds, Chad Kerley, Nathan Williams, Dakota Roche, and Corey Martinez for a nine-minute street project filmed in Washington, D.C. The complete film was directed and edited by Cinema team manager Will Stroud.",
+      "sportTypes": ["bmx"],
+      "tags": ["bmx", "team-film", "cinema-bmx", "street-bmx", "washington-dc"],
+      "releaseYear": 2017,
+      "producedBy": "Cinema BMX",
+      "directors": ["Will Stroud"],
+      "riders": [
+        "Garrett Reynolds",
+        "Chad Kerley",
+        "Nathan Williams",
+        "Dakota Roche",
+        "Corey Martinez"
+      ],
+      "locations": ["Washington, D.C., United States"],
+      "duration": 570,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/MYiev27oO8U/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/MYiev27oO8U/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=MYiev27oO8U",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=MYiev27oO8U",
+          "embedUrl": "https://www.youtube.com/embed/MYiev27oO8U",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "Cinema BMX",
+          "channelUrl": "https://www.youtube.com/channel/UCNLec6yKTHYI0IxF1dV79ww",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-03T21:45:00Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=MYiev27oO8U",
+          "sourceDetails": "Public, embeddable complete team film on Cinema BMX's official channel; exact runtime 9:30 and original upload date May 22, 2017.",
+          "retrievedAt": "2026-09-03T21:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/videos/district-of-cinema",
+          "sourceDetails": "DIG BMX's release page confirms the May 22, 2017 release, Cinema BMX production, Washington, D.C. setting, five-rider team roster, and Will Stroud directing/editing credit.",
+          "retrievedAt": "2026-09-03T21:45:00Z"
+        },
+        {
+          "source": "dig-bmx",
+          "url": "https://digbmx.com/features/district-of-cinema-photo-journal",
+          "sourceDetails": "DIG BMX's contemporary photo journal independently documents the Cinema team trip to Washington, D.C., the five featured riders, and Will Stroud's role leading and filming the team.",
+          "retrievedAt": "2026-09-03T21:45:00Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata and embed of Cinema BMX's official YouTube upload; no media rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "District of Cinema (2017) BMX Film",
+        "description": "Watch Cinema BMX's 2017 team film District of Cinema from the official publisher source."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

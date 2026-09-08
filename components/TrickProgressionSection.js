@@ -39,10 +39,16 @@ export default function TrickProgressionSection({ title, kind, edges = [] }) {
                   </Typography>
                   {edge.strength && <Chip size="small" label={edge.strength} />}
                 </Box>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                <Typography variant="body2" className={styles.progressionReason} sx={{ mt: 1 }}>
                   {edge.reason}
                 </Typography>
-                <Box display="flex" alignItems="center" gap={0.5} sx={{ mt: 1.5 }}>
+                <Box
+                  className={styles.progressionConnection}
+                  display="flex"
+                  alignItems="center"
+                  gap={0.5}
+                  sx={{ mt: 1.5 }}
+                >
                   <CheckCircleOutline fontSize="small" />
                   <Typography variant="caption">Why this connects</Typography>
                 </Box>

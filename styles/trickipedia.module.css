@@ -94,7 +94,49 @@
 
 .sourceLink {
   display: inline-block;
+  /* Dark gold for light backgrounds; the classic gold returns in dark mode. */
+  color: #8a6d00;
+}
+
+:global(.dark) .sourceLink {
   color: #ffd700;
+}
+
+.videoLink {
+  color: #8a6d00;
+  text-decoration: none;
+  flex: 1;
+}
+
+:global(.dark) .videoLink {
+  color: #ffd700;
+}
+
+.videoRow {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.videoRow:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) .videoRow {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .videoRow:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* The static MUI light palette leaves text.secondary near-black on dark
+ * backgrounds; keep secondary text readable in both themes. */
+:global(.dark) .trickipediaContainer :global(.MuiTypography-body2) {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.mistakeText :global(.MuiListItemText-secondary),
+.sourceAttribution {
+  color: hsl(var(--muted-foreground));
 }
 
 .progressionSection {
@@ -114,8 +156,32 @@
 }
 
 .progressionCard {
-  background: var(--app-secondary-bg);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: hsl(var(--card-foreground));
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.progressionCard :global(.MuiCardActionArea-root) {
+  color: inherit;
+}
+
+.progressionCard :global(.MuiTypography-h6),
+.progressionCard :global(.MuiChip-label),
+.progressionConnection {
+  color: hsl(var(--card-foreground));
+}
+
+.progressionReason {
+  color: hsl(var(--muted-foreground));
+}
+
+.progressionCard:hover,
+.progressionCard:focus-within {
+  border-color: rgba(255, 215, 0, 0.55);
+}
+
+.progressionCard :global(.MuiCardActionArea-focusHighlight) {
+  background-color: #ffd700;
 }
 
 @media (max-width: 900px) {
