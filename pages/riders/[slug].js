@@ -26,13 +26,28 @@ export default function EditorialRiderProfile({ rider }) {
           <ArrowLeft className="h-4 w-4" /> All riders
         </Link>
 
-        <div className="mb-8 flex items-start gap-5">
-          {rider.heroImage?.url ? (
-            // eslint-disable-next-line @next/next/no-img-element
+        {rider.heroImage?.url && (
+          <div className="mb-6 overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={rider.heroImage.url}
               alt={rider.heroImage.alt || rider.canonicalName}
-              className="h-24 w-24 rounded-full object-cover"
+              className="h-48 w-full object-cover md:h-64"
+            />
+            {rider.heroImage.credit && (
+              <p className="mt-1 text-right text-[10px] text-muted-foreground">
+                {rider.heroImage.credit}
+              </p>
+            )}
+          </div>
+        )}
+        <div className="mb-8 flex items-start gap-5">
+          {rider.profileImage?.url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={rider.profileImage.url}
+              alt={rider.profileImage.alt || rider.canonicalName}
+              className="h-24 w-24 shrink-0 rounded-full object-cover"
             />
           ) : (
             <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-yellow-500 text-4xl font-bold text-black">

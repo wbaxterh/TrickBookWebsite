@@ -115,9 +115,18 @@ export default function Riders() {
               <Link href={`/riders/${rider.slug}`} key={rider.slug} className="no-underline">
                 <Card className="h-full transition hover:-translate-y-0.5 hover:border-yellow-500">
                   <CardContent className="flex gap-4 p-5">
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-yellow-500 text-2xl font-bold text-black">
-                      {rider.canonicalName.charAt(0)}
-                    </div>
+                    {rider.profileImage?.url || rider.heroImage?.url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={(rider.profileImage || rider.heroImage).url}
+                        alt={(rider.profileImage || rider.heroImage).alt || rider.canonicalName}
+                        className="h-16 w-16 shrink-0 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-yellow-500 text-2xl font-bold text-black">
+                        {rider.canonicalName.charAt(0)}
+                      </div>
+                    )}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <h2 className="truncate text-lg font-semibold">{rider.canonicalName}</h2>
