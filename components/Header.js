@@ -163,6 +163,7 @@ const Header = () => {
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14 }}>
                 <Link href="/login" passHref legacyBehavior>
                   <a
+                    onClick={() => setExpanded(false)}
                     style={{
                       color: isDark ? '#f0f0f0' : '#1a1a1a',
                       fontWeight: 500,
@@ -174,7 +175,7 @@ const Header = () => {
                   </a>
                 </Link>
                 <Link href="/signup" passHref legacyBehavior>
-                  <a className="login-btn">
+                  <a className="login-btn" onClick={() => setExpanded(false)}>
                     <PersonIcon style={{ fontSize: 18 }} />
                     <span>{t('nav.signupFree', 'Sign up free')}</span>
                   </a>

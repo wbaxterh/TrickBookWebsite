@@ -45,9 +45,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
                   </Layout>
                 </ToastProvider>
               </CategoryProvider>
-              {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-              )}
+              {process.env.NEXT_PUBLIC_HOMEPAGE_PREVIEW !== 'true' &&
+                process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+                  <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+                )}
             </PostHogProvider>
           </AuthProvider>
         </SessionProvider>

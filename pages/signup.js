@@ -21,6 +21,7 @@ import { AuthContext } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
+import { trackSignupCompleted } from '../lib/analytics';
 
 // Sport categories with icons
 const SPORT_CATEGORIES = [
@@ -175,6 +176,7 @@ export default function Signup() {
         password,
       });
 
+      trackSignupCompleted('email');
       const loginResult = await signIn('credentials', { redirect: false, email, password });
       if (loginResult?.error) {
         setErrors({ submit: 'Account created — please log in to finish setup.' });
