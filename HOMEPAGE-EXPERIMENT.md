@@ -24,3 +24,8 @@ Owner: Wes Huber. Review first results seven days after an approved experiment l
 
 ## Verification record ? September 10, 2026
 Five allocation tests passed. Scoped Biome check passed (warnings remain in existing code/style overrides). Next production build passed with the existing next-i18next dynamic-dependency warning. Automated browser verified both design switches, example completion, sport change reset, 390px mobile layout without horizontal overflow, and menu closure when navigating to signup. Authentication was not submitted. A final build follows the mobile spacing refinement and removal of internal instructions from public docs.
+
+## Temporary photo reference (September 10, 2026)
+The preview uses Kris Pounds's opening Venice Skate Park photograph, VeniceSkatePark-12.jpg, only when NEXT_PUBLIC_HOMEPAGE_PREVIEW is true. The complete frame is preserved with a linked credit. Permission was requested through the photographer's contact form; the form confirmed Thank you. Permission is pending. Replace the photograph or obtain permission before public publication.
+Rider outcome: show the shared session and community. Validation: browser confirmed the 1500 x 1000 photo loaded with contain sizing; scoped Biome check passed with warnings. Feedback signal: whether riders recognize the community feeling at first glance.
+

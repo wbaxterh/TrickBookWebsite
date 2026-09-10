@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   BookOpen,
   Check,
-  CheckCheck,
   MapPin,
   Plus,
   Sparkles,
@@ -29,6 +28,8 @@ export default function ProgressionHomepage() {
   const [sport, setSport] = useState('Skateboarding');
   const [landed, setLanded] = useState(false);
   const [hasTried, setHasTried] = useState(false);
+  // Temporary design reference; publication permission is pending.
+  const referencePhoto = process.env.NEXT_PUBLIC_HOMEPAGE_PREVIEW === 'true';
   const signupHref = loggedIn ? '/trickbook' : '/signup';
   const signupLabel = loggedIn ? 'Open my TrickBook' : 'Start my TrickBook';
 
@@ -102,29 +103,32 @@ export default function ProgressionHomepage() {
         </div>
         <div className={styles.heroVisual}>
           <Image
-            src="/skaterKids.png"
-            alt="Friends hanging out at a skatepark while a rider practices behind them"
+            src={
+              referencePhoto
+                ? 'https://images.squarespace-cdn.com/content/v1/6635038c12480337a0908f81/7f3b229e-2337-4af1-b0df-6ab72fcaa326/VeniceSkatePark-12.jpg?format=1500w'
+                : '/skaterKids.png'
+            }
+            unoptimized={referencePhoto}
+            alt={
+              referencePhoto
+                ? 'Riders sharing a session at Venice Skatepark, photographed by Kris Pounds'
+                : 'Friends hanging out at a skatepark'
+            }
             fill
             priority
             sizes="(max-width: 800px) 100vw, 50vw"
             className={styles.heroImage}
           />
-          <div className={styles.photoShade} />
-          <div className={styles.photoTop}>
-            <span>LESS SCROLLING.</span>
-            <span>MORE OF THIS. ↗</span>
-          </div>
-          <div className={styles.photoCaption}>
-            THE BEST PART?
-            <br />
-            <em>YOU'RE JUST GETTING STARTED.</em>
-          </div>
-          <div className={styles.makeSticker}>
-            <CheckCheck size={23} />
-            <div>
-              THAT FIRST-MAKE FEELING.<small>Keep a record of every one.</small>
-            </div>
-          </div>
+          {referencePhoto && (
+            <a
+              className={styles.photoCredit}
+              href="https://www.krispounds.com/stories/venice-skate-park"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Venice Skatepark | Photo: Kris Pounds
+            </a>
+          )}
         </div>
       </section>
 
