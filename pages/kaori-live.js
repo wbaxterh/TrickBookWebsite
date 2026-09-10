@@ -10,6 +10,14 @@ import {
   sendMessage,
   startBotConversation,
 } from '../lib/apiMessages';
+import {
+  createTrickDemoState,
+  driveDemo,
+  isDemoActive,
+  startAction,
+  TRICKS,
+} from '../lib/kaori/trickAnimations';
+import { actionForSentence, detectTrickId, startDemoIfCued } from '../lib/kaori/trickCues';
 import { connectMessagesSocket } from '../lib/socket';
 import styles from '../styles/kaori-live.module.css';
 
@@ -45,6 +53,15 @@ export default function KaoriLivePage() {
   const audioCtxRef = useRef(null);
   const audioQueueRef = useRef([]);
   const audioPlayingRef = useRef(false);
+
+  // Trick-demo choreography (ported from the mobile companion stage): the
+  // demo state machine owns Kaori's body while she rides the board; her
+  // reply's sentences (one Kith turn per sentence) cue the moves.
+  const demoStateRef = useRef(null);
+  if (!demoStateRef.current) demoStateRef.current = createTrickDemoState();
+  const replySentencesRef = useRef(null);
+  const sentenceIndexRef = useRef(0);
+  const lastUserTextRef = useRef('');
 
   const SpeechRecognition = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -114,6 +131,22 @@ export default function KaoriLivePage() {
         }
         return [...prev, message];
       });
+
+      // Demo choreography: Kaori's reply just arrived — if the exchange cues a
+      // trick demo (user asked to see one, or her reply announces one), she
+      // steps onto the board for the whole reply and her spoken sentences cue
+      // the moves (see the Kith turn_start handler). Voiceless (no Kith
+      // session): run the full trick once instead.
+      const isOwn = message.senderId?.toString() === userId?.toString();
+      if (!isOwn && message.content) {
+        startDemoIfCued(
+          lastUserTextRef.current,
+          message.content,
+          kithSessionRef.current || null,
+          demoStateRef.current,
+          replySentencesRef,
+        );
+      }
 
       // Voice playback is handled by Kith WebSocket, not from message content.
     };
@@ -240,7 +273,19 @@ export default function KaoriLivePage() {
             break;
 
           case 'turn_start':
-            if (event.role === 'assistant') setCharState('speaking');
+            if (event.role === 'assistant') {
+              setCharState('speaking');
+              // Kith speaks a reply SENTENCE BY SENTENCE (one turn cycle per
+              // sentence) — each assistant turn_start is the cue that sentence
+              // n is about to play. Mirror the mobile onAssistantSentence
+              // callback: map what she's saying to what her body does.
+              const sentences = replySentencesRef.current;
+              if (sentences) {
+                const action = actionForSentence(sentences[sentenceIndexRef.current] ?? '');
+                if (action) startAction(demoStateRef.current, action);
+              }
+              sentenceIndexRef.current += 1;
+            }
             break;
 
           case 'turn_end':
@@ -248,7 +293,17 @@ export default function KaoriLivePage() {
               // Delay idle until audio queue drains
               const checkIdle = () => {
                 if (audioQueueRef.current.length === 0 && !audioPlayingRef.current) {
-                  setCharState('idle');
+                  // Drain grace (mirrors the mobile Kith hook): turn_end fires
+                  // per SENTENCE, so wait a beat and re-check before calling
+                  // the reply over — a slow next sentence must not cut the
+                  // reply (or the trick-demo session) off early.
+                  setTimeout(() => {
+                    if (audioQueueRef.current.length === 0 && !audioPlayingRef.current) {
+                      setCharState('idle');
+                      demoStateRef.current.session = false;
+                      replySentencesRef.current = null;
+                    }
+                  }, 500);
                 } else {
                   setTimeout(checkIdle, 100);
                 }
@@ -503,6 +558,11 @@ export default function KaoriLivePage() {
       modelRoot.updateWorldMatrix(true, true);
       const box = new THREE.Box3().setFromObject(modelRoot);
 
+      // Captured for the trick-demo rig: the pose engine works in the VRM's
+      // natural units, so demo lengths (CoM pivot, jump height, board size)
+      // scale by whatever the auto-fit applied.
+      let appliedFitScale = 1;
+
       if (!box.isEmpty()) {
         const size = box.getSize(new THREE.Vector3());
         const safeHeight = Math.max(size.y || 0, 0.001);
@@ -511,6 +571,7 @@ export default function KaoriLivePage() {
         const fitScale = Math.min(4, Math.max(0.2, rawScale));
 
         modelRoot.scale.multiplyScalar(fitScale);
+        appliedFitScale = fitScale;
         modelRoot.updateWorldMatrix(true, true);
 
         const box2 = new THREE.Box3().setFromObject(modelRoot);
@@ -528,9 +589,199 @@ export default function KaoriLivePage() {
 
       modelRoot.rotation.y = 0;
 
-      scene.add(modelRoot);
+      // --- Trick-demo rider rig (ported from the mobile KaoriStage) ---------
+      // The demo's whole-body transform (yaw*pitch quaternion pivoted at the
+      // CoM) is authored in the VRM's natural frame: feet at y=0, hips at
+      // COM_LOCAL_Y. The web stage auto-fits the model (scale + offset), so
+      // wrap it in a rig that re-anchors that frame: modelRoot keeps its fitted
+      // transform INSIDE riderRig with the feet at rig-local y=0, and the demo
+      // drives the RIG — idle keeps working untouched (rig stays identity).
+      const fitScale = appliedFitScale;
+      modelRoot.updateWorldMatrix(true, true);
+      const feetBox = new THREE.Box3().setFromObject(modelRoot);
+      // Feet baseline after the auto-fit (lowest vertex — the boot soles).
+      const feetY = feetBox.isEmpty() ? modelRoot.position.y : feetBox.min.y;
+      const riderRig = new THREE.Group();
+      modelRoot.position.y -= feetY;
+      riderRig.position.set(0, feetY, 0);
+      riderRig.add(modelRoot);
+
+      scene.add(riderRig);
       fallbackMesh.visible = false;
       setStageDebug(vrm ? 'vrm_loaded' : 'gltf_loaded_no_vrm');
+
+      // Stylized snowboard that appears under Kaori's feet during trick demos.
+      // Deck shape ported from the mobile TrickBoard: a segmented box
+      // vertex-warped so the nose and tail round off (circular outline taper)
+      // and kick upward (rocker).
+      const makeBoardGeometry = (length, thickness, width, kick) => {
+        const geometry = new THREE.BoxGeometry(length, thickness, width, 48, 1, 8);
+        const positions = geometry.attributes.position;
+        const half = length / 2;
+        const tipStart = 0.74; // outline starts rounding here (fraction of half-length)
+        const kickStart = 0.62; // tips start curving up here
+        for (let i = 0; i < positions.count; i++) {
+          const u = Math.abs(positions.getX(i)) / half;
+          if (u > tipStart) {
+            const v = (u - tipStart) / (1 - tipStart);
+            positions.setZ(i, positions.getZ(i) * Math.sqrt(Math.max(0, 1 - v * v)));
+          }
+          if (u > kickStart) {
+            const k = (u - kickStart) / (1 - kickStart);
+            positions.setY(i, positions.getY(i) + kick * k * k);
+          }
+        }
+        geometry.computeVertexNormals();
+        return geometry;
+      };
+
+      const board = new THREE.Group();
+      const deckGeometry = makeBoardGeometry(1.15, 0.03, 0.27, 0.09);
+      const baseGeometry = makeBoardGeometry(1.19, 0.014, 0.3, 0.09);
+      const bindingGeometry = new THREE.BoxGeometry(0.16, 0.04, 0.2);
+      // Deck — sakura-pink topsheet (matches Kaori's jacket, pops against the
+      // dark floor), long axis through the rider's feet.
+      const deckMat = new THREE.MeshStandardMaterial({
+        color: '#f48fb8',
+        roughness: 0.35,
+        transparent: true,
+        fog: false,
+      });
+      // White rails/base peeking out around the deck.
+      const baseMat = new THREE.MeshStandardMaterial({
+        color: '#f4f6fb',
+        roughness: 0.3,
+        transparent: true,
+        fog: false,
+      });
+      const bindingMat = new THREE.MeshStandardMaterial({ color: '#101319', roughness: 0.7 });
+      board.add(new THREE.Mesh(deckGeometry, deckMat));
+      const baseMesh = new THREE.Mesh(baseGeometry, baseMat);
+      baseMesh.position.y = -0.004;
+      board.add(baseMesh);
+      // Binding hints (bindings live at ±0.24 along the board's +X long axis).
+      for (const bx of [-0.24, 0.24]) {
+        const binding = new THREE.Mesh(bindingGeometry, bindingMat);
+        binding.position.set(bx, 0.035, 0);
+        board.add(binding);
+      }
+      board.scale.setScalar(fitScale); // board authored in VRM units like the poses
+      board.visible = false;
+      scene.add(board);
+
+      // --- Whole-body flip transform (yaw*pitch quaternion pivoted at the CoM)
+      // Hip/CoM height in the VRM's natural frame (feet ~y=0; THIGH_LEN +
+      // SHIN_LEN ≈ 0.84 straight-leg foot→hip). The fixed pivot height for a
+      // flip — NOT rootY.
+      const COM_LOCAL_Y = 0.85;
+      const _flipQ = new THREE.Quaternion();
+      const _flipQYaw = new THREE.Quaternion();
+      const _flipQPitch = new THREE.Quaternion();
+      const _flipYAxis = new THREE.Vector3(0, 1, 0);
+      // Flip axis = toe-heel line in her LOCAL frame (+Z), horizontal and
+      // PERPENDICULAR to the board. A wildcat/tamedog tumbles END OVER END —
+      // the nose sweeps up and over while the tail dives (board pitches
+      // nose-over-tail with her). The old axis (1,0,0) was the foot-to-foot
+      // line, which produced a gymnast-style backflip over the heel edge with
+      // the board staying crossways — wrong trick. If flips now tumble over the
+      // WRONG edge (toe vs heel plane), flip this to (0,0,-1); tail-vs-nose
+      // direction is the totalFlip sign in TRICKS.
+      const _flipPitchAxis = new THREE.Vector3(0, 0, 1);
+      const _flipComOffset = new THREE.Vector3();
+      /** Foot bone ≈ ankle; drop the deck this far below the midpoint so the
+       *  soles sit on top of the board rather than through it (VRM units). */
+      const BOARD_SOLE_DROP = 0.07;
+
+      // Scratch objects reused every frame so locking the board allocates nothing.
+      const _footL = new THREE.Vector3();
+      const _footR = new THREE.Vector3();
+      const _boardX = new THREE.Vector3();
+      const _boardY = new THREE.Vector3();
+      const _boardZ = new THREE.Vector3();
+      const _worldFwd = new THREE.Vector3(0, 0, 1);
+      const _boardBasis = new THREE.Matrix4();
+      const _boardQuat = new THREE.Quaternion();
+      // Board "up" derived from her body (for flips) — see lockBoardToFeet.
+      const _bodyUp = new THREE.Vector3();
+      const _rootQ = new THREE.Quaternion();
+
+      /**
+       * Lock the trick board to the rider's actual feet. The board's long axis
+       * (+X, where the bindings live at ±0.24) is aimed straight down the line
+       * between the two foot bones and the deck kept facing up, so the bindings
+       * stay under the soles and the board ANGLE follows the legs — lift the
+       * back leg and the tail rises because that foot rose. Writes the world
+       * transform into demo state for the board mesh to copy. Must run after
+       * vrm.update() so the foot bones are posed.
+       */
+      const lockBoardToFeet = (state) => {
+        const humanoid = vrm?.humanoid;
+        const lf = humanoid?.getRawBoneNode('leftFoot');
+        const rf = humanoid?.getRawBoneNode('rightFoot');
+        if (!lf || !rf) {
+          state.boardLocked = false;
+          return;
+        }
+        lf.getWorldPosition(_footL);
+        rf.getWorldPosition(_footR);
+
+        // Board long axis (+X) runs foot-to-foot; build an orthonormal,
+        // up-facing basis around it. Feet coincident (never really happens)
+        // keeps the last transform; a near-VERTICAL axis (big stylish leg-lift)
+        // rebuilds off world-forward so the board STAYS locked instead of
+        // unlocking and getting flung to the origin.
+        _boardX.subVectors(_footR, _footL);
+        if (_boardX.lengthSq() < 1e-6) {
+          state.boardLocked = false;
+          return;
+        }
+        _boardX.normalize();
+        // Board "up" comes from HER body, not the world — so through a flip
+        // inversion the deck ROLLS with her and stays soles-down instead of
+        // lying world-flat under an upside-down rider. rootPitch=0 (spins) →
+        // body-up == world-up → unchanged. (The flip axis IS the foot line, so
+        // foot-to-foot never goes vertical; the world-fwd fallback is only for
+        // the near-degenerate stylish lift.)
+        _bodyUp.set(0, 1, 0);
+        if (state.rootPitch) {
+          _rootQ.set(state.rootQuat[0], state.rootQuat[1], state.rootQuat[2], state.rootQuat[3]);
+          _bodyUp.applyQuaternion(_rootQ);
+        }
+        _boardZ.crossVectors(_boardX, _bodyUp);
+        if (_boardZ.lengthSq() < 1e-4) {
+          _boardZ.crossVectors(_boardX, _worldFwd);
+        }
+        _boardZ.normalize();
+        _boardY.crossVectors(_boardZ, _boardX).normalize();
+        _boardBasis.makeBasis(_boardX, _boardY, _boardZ);
+        _boardQuat.setFromRotationMatrix(_boardBasis);
+
+        const soleDrop = BOARD_SOLE_DROP * fitScale;
+        state.boardPos[0] = (_footL.x + _footR.x) / 2 - _boardY.x * soleDrop;
+        state.boardPos[1] = (_footL.y + _footR.y) / 2 - _boardY.y * soleDrop;
+        state.boardPos[2] = (_footL.z + _footR.z) / 2 - _boardY.z * soleDrop;
+        state.boardQuat[0] = _boardQuat.x;
+        state.boardQuat[1] = _boardQuat.y;
+        state.boardQuat[2] = _boardQuat.z;
+        state.boardQuat[3] = _boardQuat.w;
+        state.boardLocked = true;
+      };
+
+      // Console/automation hook (mirrors the tricklab): drive a trick demo
+      // without the chat, e.g. window.__kaoriDemo.run('wildcat').
+      window.__kaoriDemo = {
+        state: demoStateRef.current,
+        tricks: Object.keys(TRICKS),
+        detectTrickId,
+        camera,
+        ready: () => Boolean(vrm),
+        run: (trickId) => {
+          if (!TRICKS[trickId]) return false;
+          demoStateRef.current.trick = trickId;
+          startAction(demoStateRef.current, 'full');
+          return true;
+        },
+      };
 
       const lookTarget = new THREE.Object3D();
       lookTarget.position.set(0, 1.35, 2.8);
@@ -600,13 +851,80 @@ export default function KaoriLivePage() {
           dt,
         );
 
+        // --- Trick demo (ported from the mobile KaoriStage frame loop) ---
+        // While a demo session is live the state machine owns the BODY; the
+        // face keeps talking (blink/mouth/expressions below) so she narrates
+        // while riding and performing. The existing idle/gesture system below
+        // is skipped for the frame and resumes untouched once the demo's
+        // stance blend has fully released (driveDemo returns false).
+        const demoSt = demoStateRef.current;
+        const demoActive = Boolean(vrm?.humanoid) && isDemoActive(demoSt);
+        if (demoActive) {
+          const demoLive = driveDemo(vrm, demoSt, dt);
+          // Compose the whole-body orientation: YAW (stance + spin, about Y)
+          // THEN PITCH (flip, about her local toe-heel axis — end over end).
+          // q = qYaw * qPitch so the flip axis rotates WITH her facing. Pure
+          // 360 → rootPitch=0 → qPitch=identity → q is pure Y yaw.
+          _flipQYaw.setFromAxisAngle(_flipYAxis, demoSt.rootYaw);
+          _flipQPitch.setFromAxisAngle(_flipPitchAxis, demoSt.rootPitch);
+          _flipQ.copy(_flipQYaw).multiply(_flipQPitch);
+          riderRig.quaternion.copy(_flipQ);
+          // Publish the root quaternion so lockBoardToFeet can roll the deck
+          // with her through a flip inversion (else it stays world-flat while
+          // she inverts).
+          demoSt.rootQuat[0] = _flipQ.x;
+          demoSt.rootQuat[1] = _flipQ.y;
+          demoSt.rootQuat[2] = _flipQ.z;
+          demoSt.rootQuat[3] = _flipQ.w;
+          // Pivot around the CoM/hip, not the feet: place the rig origin at
+          // arcCoM − q·comLocal so the hip sits at (0, rootY + COM, 0) for
+          // every pitch angle (the body orbits the hip). pitch=0 → y=rootY.
+          const comY = COM_LOCAL_Y * fitScale;
+          _flipComOffset.set(0, comY, 0).applyQuaternion(_flipQ);
+          riderRig.position.set(
+            -_flipComOffset.x,
+            feetY + demoSt.rootY * fitScale + comY - _flipComOffset.y,
+            -_flipComOffset.z,
+          );
+          if (!demoLive) {
+            riderRig.quaternion.identity();
+            riderRig.position.set(0, feetY, 0);
+          }
+        }
+
         if (vrm) {
           vrm.update(dt);
         }
 
+        // With the skeleton fully updated, lock the trick board under the
+        // actual feet so the bindings stay attached and the board angle
+        // follows the legs (lift the back leg → the tail rises).
+        if (demoActive && demoSt.boardOpacity > 0.05) {
+          lockBoardToFeet(demoSt);
+        } else {
+          demoSt.boardLocked = false;
+        }
+        // Cut off a bit higher than 0 so the board doesn't linger as a faint
+        // ghost after she's already stood back up.
+        board.visible = demoActive && demoSt.boardOpacity > 0.05;
+        if (board.visible) {
+          // If a frame fails to lock (first frame / missing bone / degenerate
+          // basis) these hold the LAST good transform, so the deck never
+          // flings to the world origin under an airborne, spinning Kaori.
+          board.position.set(demoSt.boardPos[0], demoSt.boardPos[1], demoSt.boardPos[2]);
+          board.quaternion.set(
+            demoSt.boardQuat[0],
+            demoSt.boardQuat[1],
+            demoSt.boardQuat[2],
+            demoSt.boardQuat[3],
+          );
+          deckMat.opacity = demoSt.boardOpacity;
+          baseMat.opacity = demoSt.boardOpacity;
+        }
+
         // No mixer — fully procedural animation for reliable bone control
 
-        if (vrm?.humanoid) {
+        if (vrm?.humanoid && !demoActive) {
           const neck = vrm.humanoid.getNormalizedBoneNode('neck');
           const spine = vrm.humanoid.getNormalizedBoneNode('spine');
           const chest = vrm.humanoid.getNormalizedBoneNode('chest');
@@ -841,9 +1159,10 @@ export default function KaoriLivePage() {
             if (spine) spine.rotation.x += pose.sX;
             if (chest) chest.rotation.x += pose.sX * 0.5;
           }
-        } else {
-          modelRoot.rotation.y = Math.sin(t * 0.35) * 0.06;
-          modelRoot.position.y = -1.05 + Math.sin(t * 1.3) * 0.03;
+        } else if (!vrm?.humanoid) {
+          // No humanoid (plain glTF fallback) — sway the rig the model sits in.
+          riderRig.rotation.y = Math.sin(t * 0.35) * 0.06;
+          riderRig.position.y = feetY + Math.sin(t * 1.3) * 0.03;
         }
 
         // Natural blinking — every ~3.5 seconds, quick 150ms close/open
@@ -887,7 +1206,13 @@ export default function KaoriLivePage() {
         ring.rotation.z += 0.003;
         pulse.scale.setScalar(1 + Math.sin(t * 2.4) * 0.04 + smoothedVoice * 0.04);
 
-        camera.lookAt(0, 1.2, 0);
+        // Dolly back while she's strapped in so airborne tricks stay in frame
+        // (the conversational framing is a tight 3/4 close-up). Eased by the
+        // demo's smoothed stance weight so it glides, never cuts.
+        const stanceW = demoSt.stance;
+        camera.position.z = 2.15 + 1.35 * stanceW;
+        camera.position.y = 1.25 + 0.05 * stanceW;
+        camera.lookAt(0, 1.2 - 0.15 * stanceW, 0);
         renderer.render(scene, camera);
         threeRef.current.raf = requestAnimationFrame(animate);
       };
@@ -913,8 +1238,16 @@ export default function KaoriLivePage() {
         cleanup: () => {
           window.removeEventListener('resize', onResize);
           if (threeRef.current.raf) cancelAnimationFrame(threeRef.current.raf);
-          scene.remove(modelRoot);
+          if (window.__kaoriDemo?.state === demoStateRef.current) delete window.__kaoriDemo;
+          scene.remove(riderRig);
+          scene.remove(board);
           // no mixer to clean up — fully procedural
+          deckGeometry.dispose();
+          baseGeometry.dispose();
+          bindingGeometry.dispose();
+          deckMat.dispose();
+          baseMat.dispose();
+          bindingMat.dispose();
           fallbackGeo.dispose();
           fallbackMat.dispose();
           ringGeo.dispose();
@@ -966,6 +1299,10 @@ export default function KaoriLivePage() {
     lastSubmitRef.current = { text: content, ts: now };
     setSending(true);
     setCharState('thinking');
+    // Demo choreography: remember what the user asked (the reply arrives async
+    // via socket.io) and reset the Kith sentence counter for the new reply.
+    lastUserTextRef.current = content;
+    sentenceIndexRef.current = 0;
 
     const optimistic = {
       _id: `temp-${Date.now()}`,
