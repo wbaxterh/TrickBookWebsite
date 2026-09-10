@@ -15,6 +15,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import EventCoverImage from '../../components/events/EventCoverImage';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -106,6 +107,13 @@ export default function EventDetailPage() {
             >
               <ArrowLeft className="h-4 w-4" /> Back to Events
             </Link>
+
+            <EventCoverImage
+              key={event._id || event.slug}
+              event={event}
+              variant="hero"
+              className="mt-7"
+            />
 
             <div className="grid lg:grid-cols-[1fr_320px] gap-8 mt-7">
               <div>
