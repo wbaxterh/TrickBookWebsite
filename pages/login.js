@@ -117,7 +117,10 @@ export default function Login() {
             <CardContent className="pt-6 space-y-4">
               {/* Error Message */}
               {loginError && (
-                <div role="alert" className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-center space-y-2">
+                <div
+                  role="alert"
+                  className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-center space-y-2"
+                >
                   <p className="text-red-500">{loginError}</p>
                   <Link
                     href="/forgot-password"

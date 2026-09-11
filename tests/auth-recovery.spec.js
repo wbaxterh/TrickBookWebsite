@@ -13,7 +13,7 @@ test('shows provider-specific recovery and forgot-password fallback', async ({ p
 
 test('shows a safe recovery fallback when the provider is unknown', async ({ page }) => {
   await page.goto('/login?error=provider_mismatch');
-  await expect(
-    page.getByRole('alert').filter({ hasText: 'We could not confirm' }),
-  ).toContainText('We could not confirm how this account was created.');
+  await expect(page.getByRole('alert').filter({ hasText: 'We could not confirm' })).toContainText(
+    'We could not confirm how this account was created.',
+  );
 });
