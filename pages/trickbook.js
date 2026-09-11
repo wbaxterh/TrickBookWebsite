@@ -55,6 +55,7 @@ function getCategoryName(slug) {
   if (!slug) return null;
   return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
 }
+
 import {
   createTrickList,
   deleteTrickList,
@@ -65,6 +66,20 @@ import {
 } from '../lib/apiTrickLists';
 
 const ITEMS_PER_PAGE = 20;
+
+function getSearchRank(trick, normalizedSearchTerm) {
+  const name = trick.name.toLowerCase();
+  const baseName = name.replace(/\s*\([^)]*\)\s*$/, '');
+
+  if (baseName === normalizedSearchTerm) {
+    if (trick.category === 'Skateboarding') return 0;
+    if (trick.category === 'Snowboarding') return 1;
+    return 2;
+  }
+  if (name.startsWith(normalizedSearchTerm)) return 3;
+  if (name.includes(normalizedSearchTerm)) return 4;
+  return 5;
+}
 
 export default function TrickBook() {
   const router = useRouter();
@@ -146,8 +161,7 @@ export default function TrickBook() {
   const fetchTricks = useCallback(async () => {
     setLoading(true);
     try {
-      const category =
-        selectedCategory === 'all' ? null : getCategoryName(selectedCategory);
+      const category = selectedCategory === 'all' ? null : getCategoryName(selectedCategory);
       const tricksData = await getSortedTricksData(category);
       const sorted = selectedCategory === 'all' ? sortTricksByPreference(tricksData) : tricksData;
       setTricks(sorted);
@@ -199,12 +213,19 @@ export default function TrickBook() {
     if (!searchTerm) {
       setFilteredTricks(tricks);
     } else {
-      const filtered = tricks.filter(
-        (trick) =>
-          trick.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          trick.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          trick.category?.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
+      const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+      const filtered = tricks
+        .filter(
+          (trick) =>
+            trick.name.toLowerCase().includes(normalizedSearchTerm) ||
+            trick.description?.toLowerCase().includes(normalizedSearchTerm) ||
+            trick.category?.toLowerCase().includes(normalizedSearchTerm),
+        )
+        .sort((a, b) => {
+          const rankDifference =
+            getSearchRank(a, normalizedSearchTerm) - getSearchRank(b, normalizedSearchTerm);
+          return rankDifference || a.name.localeCompare(b.name);
+        });
       setFilteredTricks(filtered);
     }
     setCurrentPage(1);
