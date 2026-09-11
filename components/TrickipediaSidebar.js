@@ -5,6 +5,9 @@ import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 
+const categoryItemClass =
+  'focus:bg-yellow-500/20 focus:text-foreground data-[state=checked]:text-yellow-400';
+
 export default function TrickipediaSidebar({
   selectedCategory,
   onCategoryChange,
@@ -44,9 +47,15 @@ export default function TrickipediaSidebar({
             <SelectValue placeholder="All Categories" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="all" className={categoryItemClass}>
+              All Categories
+            </SelectItem>
             {categories.map((category) => (
-              <SelectItem key={category._id} value={category.name.toLowerCase()}>
+              <SelectItem
+                key={category._id}
+                value={category.name.toLowerCase()}
+                className={categoryItemClass}
+              >
                 {category.name}
               </SelectItem>
             ))}
