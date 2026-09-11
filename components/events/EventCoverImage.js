@@ -22,13 +22,21 @@ export default function EventCoverImage({ event, variant = 'card', className = '
   const candidates = useMemo(() => getEventImageCandidates(event), [event]);
   const [candidateIndex, setCandidateIndex] = useState(0);
 
-  const src = candidates[candidateIndex];
-  if (!src) return null;
+  const sizing = variant === 'hero' ? 'aspect-[16/9] max-h-[560px] rounded-2xl' : 'aspect-[4/3]';
 
-  const sizing =
-    variant === 'hero'
-      ? 'aspect-[16/9] max-h-[560px] rounded-2xl'
-      : 'aspect-[16/7] sm:aspect-[16/6]';
+  const src = candidates[candidateIndex];
+
+  if (!src) {
+    return (
+      <div
+        role="img"
+        aria-label={`${event.title || 'Event'} cover coming soon`}
+        className={`relative overflow-hidden bg-gradient-to-br from-yellow-400/25 via-muted to-muted ${sizing} ${className}`}
+      >
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(135deg,transparent_45%,rgba(250,204,21,0.35)_45%,rgba(250,204,21,0.35)_55%,transparent_55%)]" />
+      </div>
+    );
+  }
 
   return (
     <div className={`relative overflow-hidden bg-muted ${sizing} ${className}`}>
