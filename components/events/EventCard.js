@@ -20,6 +20,7 @@ import { formatDistance } from '../../lib/geo';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
+import EventCoverImage from './EventCoverImage';
 
 const STATUS_CLASSES = {
   success: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30',
@@ -40,6 +41,9 @@ export default function EventCard({ event, saved = false, onToggleSave, distance
   return (
     <Card className="group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
       <CardContent className="p-0">
+        <Link href={detailUrl} className="block no-underline" aria-label={`View ${event.title}`}>
+          <EventCoverImage key={event._id || event.slug} event={event} />
+        </Link>
         <div className="flex">
           <div className="w-20 sm:w-24 flex-shrink-0 bg-yellow-400 text-black flex flex-col items-center justify-center px-2 py-5">
             <span className="text-xs font-black tracking-[0.18em]">{date.month}</span>
