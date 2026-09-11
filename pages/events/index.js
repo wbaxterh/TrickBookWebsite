@@ -422,7 +422,7 @@ export default function EventsPage() {
             forYouLoading ? (
               <LoadingBlock />
             ) : forYouRanked.length > 0 ? (
-              <div className="grid gap-4">
+              <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {forYouRanked.map(({ event, mi }) => (
                   <EventCard
                     key={event._id}
@@ -443,7 +443,7 @@ export default function EventsPage() {
             <LoadingBlock />
           ) : allEvents.length > 0 ? (
             <>
-              <div className="grid gap-4">
+              <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {allEvents.map((event) => (
                   <EventCard
                     key={event._id}
