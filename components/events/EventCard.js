@@ -39,19 +39,19 @@ export default function EventCard({ event, saved = false, onToggleSave, distance
   const distanceLabel = formatDistance(distanceMi);
 
   return (
-    <Card className="group overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
-      <CardContent className="p-0">
+    <Card className="group h-full overflow-hidden border-border hover:border-yellow-500 transition-all duration-200">
+      <CardContent className="flex h-full flex-col p-0">
         <Link href={detailUrl} className="block no-underline" aria-label={`View ${event.title}`}>
           <EventCoverImage key={event._id || event.slug} event={event} />
         </Link>
-        <div className="flex">
+        <div className="flex flex-1">
           <div className="w-20 sm:w-24 flex-shrink-0 bg-yellow-400 text-black flex flex-col items-center justify-center px-2 py-5">
             <span className="text-xs font-black tracking-[0.18em]">{date.month}</span>
             <span className="text-3xl sm:text-4xl leading-none font-black mt-1">{date.day}</span>
           </div>
 
-          <div className="min-w-0 flex-1 p-4 sm:p-5">
-            <div className="flex items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+            <div className="flex flex-1 items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <Badge variant="outline" className="border-yellow-500/40">
