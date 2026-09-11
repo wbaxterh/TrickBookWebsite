@@ -7,6 +7,7 @@ import NextAuth from 'next-auth';
 import AppleProvider from 'next-auth/providers/apple';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
+import { recoveryUrl } from '../../../lib/authRecovery';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000';
 
@@ -53,6 +54,13 @@ export default NextAuth({
           };
         } catch (error) {
           console.error('Error during Google authentication:', error);
+          if (error.response?.data?.code === 'AUTH_PROVIDER_MISMATCH') {
+            return {
+              id: profile.sub,
+              email: profile.email,
+              authRecoveryProvider: error.response.data.expectedProvider,
+            };
+          }
           throw new Error('Failed to authenticate with Google.');
         }
       },
@@ -83,6 +91,13 @@ export default NextAuth({
           };
         } catch (error) {
           console.error('Error during Apple authentication:', error);
+          if (error.response?.data?.code === 'AUTH_PROVIDER_MISMATCH') {
+            return {
+              id: profile.sub,
+              email: profile.email,
+              authRecoveryProvider: error.response.data.expectedProvider,
+            };
+          }
           throw new Error('Failed to authenticate with Apple.');
         }
       },
@@ -113,12 +128,23 @@ export default NextAuth({
           };
         } catch (error) {
           console.error('Error in authorize function:', error.response?.data || error.message);
+          const recovery = error.response?.data;
+          if (recovery?.code === 'AUTH_PROVIDER_MISMATCH') {
+            throw new Error(`AUTH_PROVIDER_MISMATCH:${recovery.expectedProvider}`);
+          }
+          if (recovery?.code === 'AUTH_RECOVERY_REQUIRED') {
+            throw new Error('AUTH_RECOVERY_REQUIRED');
+          }
           throw new Error('Invalid email or password');
         }
       },
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      if (user?.authRecoveryProvider) return recoveryUrl(user.authRecoveryProvider);
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
