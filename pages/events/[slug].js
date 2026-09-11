@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import EventCoverImage from '../../components/events/EventCoverImage';
+import EventShareDialog from '../../components/events/EventShareDialog';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -165,6 +166,7 @@ export default function EventDetailPage() {
                   <Button variant="outline" className="w-full mt-2" disabled>
                     <Bell className="h-4 w-4 mr-2" /> Save event
                   </Button>
+                  <EventShareDialog event={event} />
                   <p className="text-xs text-muted-foreground mt-3 text-center">
                     Registration, ticketing, and streaming happen on the official source.
                   </p>
