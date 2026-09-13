@@ -1,14 +1,4 @@
-import {
-  BellPlus,
-  CalendarDays,
-  LayoutList,
-  Loader2,
-  MapPin,
-  Navigation,
-  Radio,
-  Sparkles,
-  X,
-} from 'lucide-react';
+import { CalendarDays, LayoutList, Loader2, MapPin, Navigation, Sparkles, X } from 'lucide-react';
 import Head from 'next/head';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import EventCard from '../../components/events/EventCard';
@@ -226,11 +216,6 @@ export default function EventsPage() {
     return withDistance.slice(0, FORYOU_LIMIT);
   }, [forYouRaw, coords, filters.radius]);
 
-  const savedCount = useMemo(() => {
-    const list = activeTab === 'foryou' ? forYouRanked.map((x) => x.event) : allEvents;
-    return list.filter((event) => savedIds.has(event._id)).length;
-  }, [activeTab, forYouRanked, allEvents, savedIds]);
-
   const updateFilter = (key, value) => setFilters((current) => ({ ...current, [key]: value }));
 
   const toggleSave = (event) => {
@@ -287,34 +272,6 @@ export default function EventsPage() {
       </Head>
 
       <main className="min-h-screen bg-background">
-        <section className="border-b border-border overflow-hidden relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(252,241,80,0.16),transparent_45%)]" />
-          <div className="container relative py-12 md:py-20">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-sm text-yellow-700 dark:text-yellow-300">
-                <Radio className="h-3.5 w-3.5" /> The action-sports calendar
-              </div>
-              <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mt-5">
-                Know what&apos;s happening. <span className="text-yellow-500">Go ride.</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mt-5 max-w-2xl">
-                Find competitions to enter, events to attend, and live action to watch across every
-                TrickBook sport.
-              </p>
-              <div className="flex flex-wrap gap-3 mt-7">
-                <Button className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold" disabled>
-                  <BellPlus className="h-4 w-4 mr-2" /> Create event alert
-                </Button>
-                {savedCount > 0 && (
-                  <div className="h-10 px-4 rounded-md border border-border flex items-center text-sm text-muted-foreground">
-                    {savedCount} saved in these results
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="container py-8 md:py-12">
           <EventFilters
             filters={filters}
