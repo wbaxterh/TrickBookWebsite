@@ -1,3 +1,4 @@
+import { getEvents } from '../lib/apiEvents';
 import { getSnowboardFilms } from '../lib/filmCatalog';
 
 const escapeXml = (value) =>
@@ -11,13 +12,44 @@ export default function Sitemap() {
   return null;
 }
 
+async function getAllEvents(view) {
+  const events = [];
+  let cursor = null;
+
+  do {
+    const page = await getEvents({ view }, cursor);
+    events.push(...page.events);
+    cursor = page.nextCursor;
+  } while (cursor && events.length < 50000);
+
+  return events;
+}
+
 export async function getServerSideProps({ res }) {
   let films = [];
+  let events = [];
   try {
     films = (await getSnowboardFilms({ limit: 100 })).films || [];
   } catch {}
+  try {
+    const [upcoming, archive] = await Promise.all([
+      getAllEvents('upcoming'),
+      getAllEvents('archive'),
+    ]);
+    events = [...upcoming, ...archive];
+  } catch {}
+
+  const eventUrls = [
+    ...new Map(events.filter((event) => event.slug).map((event) => [event.slug, event])).values(),
+  ].map((event) => ({
+    loc: `https://thetrickbook.com/events/${event.slug}`,
+    priority: '0.8',
+    lastmod: event.updatedAt || event.freshness?.lastVerifiedAt || event.lastSeenAt,
+  }));
   const urls = [
     { loc: 'https://thetrickbook.com/', priority: '1.0' },
+    { loc: 'https://thetrickbook.com/events', priority: '0.9' },
+    ...eventUrls,
     { loc: 'https://thetrickbook.com/media', priority: '0.9' },
     ...films.map((film) => ({
       loc: `https://thetrickbook.com/media/couch/${film.slug}`,
