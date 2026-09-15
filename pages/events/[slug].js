@@ -12,6 +12,7 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import EventBreadcrumbs from '../../components/events/EventBreadcrumbs';
 import EventCalendarActions from '../../components/events/EventCalendarActions';
 import EventConversionCta from '../../components/events/EventConversionCta';
 import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
@@ -109,9 +110,10 @@ export default function EventDetailPage({ event, relatedEvents }) {
       <main className="min-h-screen bg-background">
         <section className="border-b border-border bg-card/40">
           <div className="container py-8 md:py-12">
+            <EventBreadcrumbs event={event} />
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-yellow-500 no-underline"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-yellow-500 no-underline"
             >
               <ArrowLeft className="h-4 w-4" /> Back to Events
             </Link>
