@@ -1,0 +1,435 @@
+{
+  "source": "Official Polar Skate Co. and authorized Thrasher complete-film uploads, corroborated by first-party company pages and independent skate-film archives/publications",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-15T23:27:07.596Z",
+  "films": [
+    {
+      "slug": "polar-sounds-like-you-guys-are-crushing-it-2022",
+      "aliases": [
+        "Polar - Sounds Like You Guys Are Crushing It",
+        "POLAR SKATE CO. - Sounds Like You Guys Are Crushing It"
+      ],
+      "type": "film",
+      "title": "Sounds Like You Guys Are Crushing It",
+      "description": "Polar Skate Co.'s 45-minute global team full-length was composed by Pontus Alv and filmed by Tor Ström. The complete first-party credits distinguish 13 featured riders from four guest appearances, while preserving five main filmers, 16 additional filmers, motion-graphics, sound-mixing and music-licensing credits.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "polar-skate-co",
+        "team-video",
+        "street-skateboarding",
+        "new-york-city",
+        "los-angeles",
+        "copenhagen",
+        "2020s"
+      ],
+      "releaseYear": 2022,
+      "releaseDate": "2022-10-02",
+      "producedBy": "Polar Skate Co.",
+      "directors": ["Pontus Alv"],
+      "editors": [],
+      "cinematographers": ["Tor Ström"],
+      "mainFilming": [
+        "Ben Chadourne",
+        "Michael McCloud",
+        "James Cruickshank",
+        "Sirus F Gahan",
+        "Jon Colyer"
+      ],
+      "additionalFilming": [
+        "Nick Boserio",
+        "Dane Brady",
+        "Ryan Garshell",
+        "Nick Rios",
+        "Johnny Wilson",
+        "Ryan Lee",
+        "Orion Stefanidis",
+        "Will Miles",
+        "Mack Scharff",
+        "Hadrien Buhannic",
+        "Pontus Alv",
+        "Geoff Campbell",
+        "Love Ohlin",
+        "Connor Peterson",
+        "Paul Young",
+        "Waylon Bone"
+      ],
+      "motionGraphics": ["Fabian Fuchs"],
+      "soundMixing": ["Jean-Louis Huhta"],
+      "musicLicensing": ["Ashleigh Maclean"],
+      "riders": [
+        "Nick Boserio",
+        "Oskar Rozenberg",
+        "Aaron Herrington",
+        "Shin Sanbongi",
+        "Hjalte Halberg",
+        "Paul Grund",
+        "Roman Gonzalez",
+        "Ville Wester",
+        "Jamie Platt",
+        "Dane Brady",
+        "Emile Laurent",
+        "David Stenström",
+        "Nick Rios",
+        "Kyle Wilson",
+        "Steve Alba",
+        "Julius Rohrberg",
+        "Jonas Skrøder"
+      ],
+      "riderCreditGroups": {
+        "featured": [
+          "Nick Boserio",
+          "Oskar Rozenberg",
+          "Aaron Herrington",
+          "Shin Sanbongi",
+          "Hjalte Halberg",
+          "Paul Grund",
+          "Roman Gonzalez",
+          "Ville Wester",
+          "Jamie Platt",
+          "Dane Brady",
+          "Emile Laurent",
+          "David Stenström",
+          "Nick Rios"
+        ],
+        "guestSkaters": ["Kyle Wilson", "Steve Alba", "Julius Rohrberg", "Jonas Skrøder"]
+      },
+      "creditNotes": [
+        "Polar's official upload supplies the complete 13-rider featured roster, four guest appearances and every supported production credit retained here.",
+        "SkateVideoSite independently classifies the release as a 45-minute full-length, catalogs all 17 appearances and confirms Pontus Alv and Tor Ström as the principal filmmakers.",
+        "The Skateboarder's Companion independently repeats the featured/guest distinction and the principal and main camera credits.",
+        "Polar describes Pontus Alv's role as 'A Film composed by'; it is represented as the principal creative/directing credit without inventing a separate editor credit."
+      ],
+      "locations": [
+        "Los Angeles, California, USA",
+        "New York City, New York, USA",
+        "Copenhagen, Denmark"
+      ],
+      "locationNote": "SkateVideoSite's section catalog explicitly labels Los Angeles, New York City and Copenhagen montages; no unsupported city list is inferred from the remaining footage.",
+      "duration": 2710,
+      "historicalContext": "Contemporary coverage presented the film as a possible final Pontus Alv-produced Polar video. It became the second of two consecutive Polar full-lengths filmed principally by Tor Ström before the company changed lead filmmakers for Everything is Normal.",
+      "artworkNotes": "The exact official upload's 480x360 YouTube thumbnail was visually reviewed on 2026-09-15. It is a letterboxed landscape frame from the authorized film, with no misleading trailer, episode or event text; this upload exposes no max-resolution thumbnail.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/chkI_SdwRgY/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/chkI_SdwRgY/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=chkI_SdwRgY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=chkI_SdwRgY",
+          "embedUrl": "https://www.youtube.com/embed/chkI_SdwRgY",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Polar Skate Co.",
+          "channelUrl": "https://www.youtube.com/channel/UCgNKsdbv1xvWeraeCNEmS3A",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "chkI_SdwRgY",
+          "url": "https://www.youtube.com/watch?v=chkI_SdwRgY",
+          "sourceDetails": "Polar Skate Co.'s official channel hosts the uninterrupted complete film and supplies the full rider, guest and production credits. YouTube reports status OK, playableInEmbed true, a 2,710-second runtime, channelId UCgNKsdbv1xvWeraeCNEmS3A and October 2, 2022 publication; oEmbed returned HTTP 200. Controlled Chrome measured 2,710.021 seconds and advanced the exact player 5.017 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/polar-sounds-like-you-guys-are-crushing-it",
+          "sourceDetails": "Independent filmography classifies the release as a 45-minute 2022 Polar full-length, catalogs all 17 skaters, credits Pontus Alv and Tor Ström, reproduces the main/additional filming credits and identifies the Los Angeles, New York City and Copenhagen montages.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "the-skateboarders-companion",
+          "url": "https://theskateboarderscompanion.com/polar-skate-co-sounds-like-you-guys-are-crushing-it/",
+          "sourceDetails": "Independent contemporary coverage confirms the featured roster, all four guest clips, Tor Ström's camera credit and the five principal additional filmers, and records the contemporary context around Pontus Alv's production role.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Polar Skate Co.'s own company channel (channelId UCgNKsdbv1xvWeraeCNEmS3A), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Sounds Like You Guys Are Crushing It (2022) - Polar Skate Film",
+        "description": "Watch Polar Skate Co.'s complete 45-minute team film, with all 13 featured riders, four guest skaters and full supported production credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "polar-we-blew-it-at-some-point-2018",
+      "aliases": ["Polar - We Blew It At Some Point", "POLAR SKATE CO. - We blew it at some point"],
+      "type": "film",
+      "title": "We Blew It At Some Point",
+      "description": "Polar Skate Co.'s award-winning 34-minute 2018 full-length was composed by Pontus Alv and filmed by Tor Ström. Eleven featured riders carry the principal sections and montages, while five explicitly billed guest skaters are retained separately; the complete company credits also preserve five main and 12 additional camera contributors.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "polar-skate-co",
+        "team-video",
+        "street-skateboarding",
+        "sweden",
+        "new-york-city",
+        "2010s",
+        "award-winning"
+      ],
+      "releaseYear": 2018,
+      "releaseDate": "2018-08-29",
+      "producedBy": "Polar Skate Co.",
+      "directors": ["Pontus Alv"],
+      "editors": [],
+      "cinematographers": ["Tor Ström"],
+      "mainFilming": ["Ben Chadourne", "Waylon Bone", "Johnny Wilson", "Pontus Alv", "Dane Brady"],
+      "additionalFilming": [
+        "Geoff Campbell",
+        "James Cruickshank",
+        "Uruma Masaonori",
+        "William Strobeck",
+        "Sean Dahlberg",
+        "Seamus Foster",
+        "Brendan Roura",
+        "Nick Boserio",
+        "Nick Rios",
+        "Jesse Alba",
+        "Chris Milic",
+        "Papo"
+      ],
+      "motionGraphics": ["Fabian Fuchs"],
+      "colorGrading": ["Nanna Dalunde"],
+      "soundMixing": ["Jean-Louis Huhta"],
+      "riders": [
+        "Nick Boserio",
+        "Emile Laurent",
+        "David Stenström",
+        "Oskar Rozenberg",
+        "Aaron Herrington",
+        "Andrew Wilson",
+        "Shin Sanbongi",
+        "Hjalte Halberg",
+        "Paul Grund",
+        "Roman Gonzalez",
+        "Dane Brady",
+        "Ville Wester",
+        "Pontus Alv",
+        "Jonas Skrøder",
+        "Peter Stege",
+        "Nick Rios"
+      ],
+      "riderCreditGroups": {
+        "featured": [
+          "Nick Boserio",
+          "Emile Laurent",
+          "David Stenström",
+          "Oskar Rozenberg",
+          "Aaron Herrington",
+          "Andrew Wilson",
+          "Shin Sanbongi",
+          "Hjalte Halberg",
+          "Paul Grund",
+          "Roman Gonzalez",
+          "Dane Brady"
+        ],
+        "guestSkaters": ["Ville Wester", "Pontus Alv", "Jonas Skrøder", "Peter Stege", "Nick Rios"]
+      },
+      "creditNotes": [
+        "Polar's official upload supplies all 11 featured riders, five guest skaters and every supported production credit retained here.",
+        "SkateVideoSite independently classifies the release as a 34-minute full-length, catalogs the 11 principal appearances and credits Pontus Alv and Tor Ström as the principal filmmakers; the five additional names remain guest appearances according to Polar's first-party billing.",
+        "Polar describes Pontus Alv's role as 'A Film composed by'; it is represented as the principal creative/directing credit without inventing a separate editor credit."
+      ],
+      "locations": ["Sweden", "New York City, New York, USA"],
+      "locationNote": "SkateVideoSite catalogs Sweden as the film's origin and explicitly labels a New York City section; no broader city list is asserted.",
+      "duration": 2042,
+      "historicalContext": "A prominent release in the 2018 resurgence of the company full-length format, the film won Transworld Skateboarding's reader-voted 2018 Year in Review Video award.",
+      "awards": ["Transworld Skateboarding Year in Review 2018 - Video winner"],
+      "artworkNotes": "The official 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-15. It is a tree-lined landscape frame from the exact Polar upload, with no misleading trailer, episode or event text.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/6kSklbnfT8U/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/6kSklbnfT8U/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=6kSklbnfT8U",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=6kSklbnfT8U",
+          "embedUrl": "https://www.youtube.com/embed/6kSklbnfT8U",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Polar Skate Co.",
+          "channelUrl": "https://www.youtube.com/channel/UCgNKsdbv1xvWeraeCNEmS3A",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "6kSklbnfT8U",
+          "url": "https://www.youtube.com/watch?v=6kSklbnfT8U",
+          "sourceDetails": "Polar Skate Co.'s official channel hosts the uninterrupted complete film and supplies all rider, guest and production credits. YouTube reports status OK, playableInEmbed true, a 2,042-second runtime, channelId UCgNKsdbv1xvWeraeCNEmS3A and August 29, 2018 publication; oEmbed returned HTTP 200. Controlled Chrome measured 2,042.341 seconds and advanced the exact player 5.008 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/polar-we-blew-it-at-some-point",
+          "sourceDetails": "Independent filmography classifies the release as a 34-minute 2018 full-length, credits Pontus Alv and Tor Ström, catalogs Sweden and New York City, and confirms the 11 principal rider appearances and section structure.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "free-skate-mag",
+          "url": "https://www.freeskatemag.com/2018/08/29/polar-skate-cos-we-blew-it-at-some-point/",
+          "sourceDetails": "Independent contemporary release coverage confirms the August 29, 2018 online release as Polar's new complete video and identifies principal team riders.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Polar Skate Co.'s own company channel (channelId UCgNKsdbv1xvWeraeCNEmS3A), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "We Blew It At Some Point (2018) - Polar Skate Film",
+        "description": "Watch Polar Skate Co.'s award-winning complete 2018 full-length, with all 11 featured riders, five guests and full supported production credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "rvca-the-balance-of-opposites-2019",
+      "aliases": [
+        "RVCA - The Balance of Opposites",
+        "The Balance Of Opposites",
+        "RVCA's The Balance of Opposites Video"
+      ],
+      "type": "film",
+      "title": "The Balance of Opposites",
+      "description": "RVCA's 30-minute company full-length gathers footage from skate-team trips around the world between fall 2017 and summer 2019. Directed by Austin Stephens, produced by PM Tenore, filmed by Brandon Jensen and Don Luong and edited by Jensen, it preserves the complete ten-rider roster across dedicated parts, montages and shared sections.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "rvca",
+        "team-video",
+        "street-skateboarding",
+        "united-states",
+        "middle-east",
+        "australia",
+        "2010s"
+      ],
+      "releaseYear": 2019,
+      "producedBy": "RVCA / PM Tenore",
+      "directors": ["Austin Stephens"],
+      "editors": ["Brandon Jensen"],
+      "cinematographers": ["Brandon Jensen", "Don Luong"],
+      "riders": [
+        "Aidan Campbell",
+        "Andrew Reynolds",
+        "Curren Caples",
+        "Greyson Fletcher",
+        "Jeremy Leabres",
+        "Julian Davidson",
+        "Kevin Long",
+        "Mark Suciu",
+        "Nestor Judkins",
+        "Zach Allen"
+      ],
+      "riderCreditGroups": {
+        "completeCompanyRoster": [
+          "Aidan Campbell",
+          "Andrew Reynolds",
+          "Curren Caples",
+          "Greyson Fletcher",
+          "Jeremy Leabres",
+          "Julian Davidson",
+          "Kevin Long",
+          "Mark Suciu",
+          "Nestor Judkins",
+          "Zach Allen"
+        ]
+      },
+      "creditNotes": [
+        "RVCA's first-party film and premiere pages supply the full ten-rider roster, the global filming window and the company's positioning of the release as its first skate full-length in more than five years.",
+        "An independent contemporary Bordeaux screening program explicitly credits Austin Stephens as director, PM Tenore as producer, Brandon Jensen and Don Luong as filmers, and Jensen as editor.",
+        "SkateVideoSite independently classifies the film as a 29-minute 2019 RVCA full-length, confirms Jensen and Luong and catalogs all ten skaters."
+      ],
+      "locations": ["United States", "Middle East", "Australia"],
+      "locationNote": "The authorized Thrasher upload describes the journey as spanning the United States, the Middle East and Australia; RVCA describes the source footage as global team trips from fall 2017 through summer 2019.",
+      "duration": 1828,
+      "historicalContext": "RVCA described The Balance of Opposites as its first full-length skate video in more than five years. It was assembled from almost two years of international team trips before premiering at RVCA headquarters in 2019.",
+      "premiereNotes": [
+        "RVCA documents a packed 2019 premiere at company headquarters; a free Bordeaux screening followed on December 12, 2019."
+      ],
+      "artworkNotes": "The official 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-15. It is a dedicated RVCA title card over an action photograph from the film's Middle East footage and matches the exact authorized player.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/2mD1LPva4YQ/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/2mD1LPva4YQ/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=2mD1LPva4YQ",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=2mD1LPva4YQ",
+          "embedUrl": "https://www.youtube.com/embed/2mD1LPva4YQ",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/channel/UCt16NSYjauKclK67LCXvQyA",
+          "publisherRelationship": "authorized skate-media publisher linked by RVCA's first-party release and premiere coverage",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "2mD1LPva4YQ",
+          "url": "https://www.youtube.com/watch?v=2mD1LPva4YQ",
+          "sourceDetails": "Thrasher's authorized channel hosts the uninterrupted complete film; RVCA's first-party coverage directs viewers to Thrasher for the full video. YouTube reports status OK, playableInEmbed true, a 1,828-second runtime, channelId UCt16NSYjauKclK67LCXvQyA and July 16, 2020 publication; oEmbed returned HTTP 200. Controlled Chrome measured 1,828.381 seconds and advanced the exact player 5.008 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "rvca",
+          "url": "https://rvca.co.uk/blog/skate/Balance-of-Opposites-RVCA-Skate.html",
+          "sourceDetails": "RVCA's first-party film page identifies the project as footage accumulated during team trips from fall 2017 through summer 2019 and supplies the complete ten-rider roster.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "rvca",
+          "url": "https://rvca.es/blog/skate/RECAP-Balance-of-Opposites-Premiere.html",
+          "sourceDetails": "RVCA's first-party premiere recap identifies the release as its first full-length skate video in more than five years, documents the headquarters premiere, repeats the complete roster and directs viewers to the full film at Thrasher.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/rvca-the-balance-of-opposites",
+          "sourceDetails": "Independent filmography classifies the release as a 29-minute 2019 RVCA full-length, credits Brandon Jensen and Don Luong, catalogs the complete ten-skater roster and preserves the section structure.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        },
+        {
+          "source": "around-the-waves",
+          "url": "https://aroundthewaves.com/fr/surfnights/balance-opposites-bordeaux",
+          "sourceDetails": "Independent contemporary screening program explicitly credits Austin Stephens as director, PM Tenore as producer, Brandon Jensen and Don Luong as filmers and Jensen as editor, while confirming a 30-minute 2019 RVCA production and the full roster.",
+          "retrievedAt": "2026-09-15T23:27:07.596Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film from Thrasher's authorized publisher channel (channelId UCt16NSYjauKclK67LCXvQyA), expressly linked by RVCA's first-party release and premiere coverage; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Balance of Opposites (2019) - RVCA Skate Film",
+        "description": "Watch RVCA's complete global team film, directed by Austin Stephens and featuring all ten credited riders."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    }
+  ]
+}
