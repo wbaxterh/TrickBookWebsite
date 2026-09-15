@@ -64,11 +64,23 @@ export async function getServerSideProps({ res }) {
       priority: '0.7',
     }),
   );
+  const organizerUrls = uniqueLabels(events.map((event) => event.organizer?.name)).map(
+    (organizer) => ({
+      loc: `https://thetrickbook.com/events/organizer/${encodeURIComponent(organizer)}`,
+      priority: '0.7',
+    }),
+  );
+  const seriesUrls = uniqueLabels(events.map((event) => event.series)).map((series) => ({
+    loc: `https://thetrickbook.com/events/series/${encodeURIComponent(series)}`,
+    priority: '0.7',
+  }));
   const urls = [
     { loc: 'https://thetrickbook.com/', priority: '1.0' },
     { loc: 'https://thetrickbook.com/events', priority: '0.9' },
     ...sportUrls,
     ...regionUrls,
+    ...organizerUrls,
+    ...seriesUrls,
     ...eventUrls,
     { loc: 'https://thetrickbook.com/media', priority: '0.9' },
     ...films.map((film) => ({
@@ -83,4 +95,15 @@ export async function getServerSideProps({ res }) {
   res.write(xml);
   res.end();
   return { props: {} };
+}
+
+function uniqueLabels(labels) {
+  return [
+    ...new Map(
+      labels
+        .map((label) => String(label || '').trim())
+        .filter(Boolean)
+        .map((label) => [label.toLocaleLowerCase('en-US'), label]),
+    ).values(),
+  ];
 }

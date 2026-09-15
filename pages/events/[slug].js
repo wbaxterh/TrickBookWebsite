@@ -24,7 +24,7 @@ import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { EVENT_FIXTURES, getFixtureEvent } from '../../data/eventFixtures';
-import { trackEventAction, trackEventViewed } from '../../lib/analytics';
+import { trackEventAction, trackEventArchiveClick, trackEventViewed } from '../../lib/analytics';
 import { getEvent, getEvents } from '../../lib/apiEvents';
 import {
   formatEventRange,
@@ -293,9 +293,28 @@ export default function EventDetailPage({ event, relatedEvents, resolvedSpot }) 
                     )}
                     <h2 className="font-bold text-foreground">Source</h2>
                   </div>
-                  <p className="font-medium text-foreground mt-3">
-                    {event.organizer?.name || 'Event organizer'}
-                  </p>
+                  {event.organizer?.name ? (
+                    <Link
+                      href={`/events/organizer/${encodeURIComponent(event.organizer.name)}`}
+                      className="mt-3 block font-medium text-foreground no-underline hover:text-yellow-500"
+                      onClick={() =>
+                        trackEventArchiveClick(event, 'organizer', event.organizer.name)
+                      }
+                    >
+                      {event.organizer.name}
+                    </Link>
+                  ) : (
+                    <p className="font-medium text-foreground mt-3">Event organizer</p>
+                  )}
+                  {event.series && (
+                    <Link
+                      href={`/events/series/${encodeURIComponent(event.series)}`}
+                      className="mt-2 block text-sm font-medium text-yellow-600 no-underline hover:underline dark:text-yellow-400"
+                      onClick={() => trackEventArchiveClick(event, 'series', event.series)}
+                    >
+                      More from {event.series}
+                    </Link>
+                  )}
                   <p className="text-sm text-muted-foreground mt-1">
                     {event.sourceTrust?.replace(/_/g, ' ') || 'Source attribution pending'}
                   </p>
@@ -402,7 +421,9 @@ function buildEventStructuredData(event, canonicalUrl, description, images) {
       ? {
           '@type': 'Organization',
           name: event.organizer.name,
-          url: event.organizer.url || undefined,
+          url:
+            event.organizer.url ||
+            `${SITE_URL}/events/organizer/${encodeURIComponent(event.organizer.name)}`,
         }
       : undefined,
     location: physicalLocation
