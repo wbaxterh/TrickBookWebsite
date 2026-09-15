@@ -1,6 +1,5 @@
 import {
   ArrowLeft,
-  Bell,
   CalendarDays,
   ExternalLink,
   MapPin,
@@ -13,7 +12,9 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import EventCalendarActions from '../../components/events/EventCalendarActions';
 import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
+import EventSaveButton from '../../components/events/EventSaveButton';
 import EventShareDialog from '../../components/events/EventShareDialog';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
@@ -172,9 +173,8 @@ export default function EventDetailPage({ event }) {
                       Details coming soon
                     </Button>
                   )}
-                  <Button variant="outline" className="w-full mt-2" disabled>
-                    <Bell className="h-4 w-4 mr-2" /> Save event
-                  </Button>
+                  <EventSaveButton event={event} />
+                  <EventCalendarActions event={event} />
                   <EventShareDialog event={event} />
                   <p className="text-xs text-muted-foreground mt-3 text-center">
                     Registration, ticketing, and streaming happen on the official source.
