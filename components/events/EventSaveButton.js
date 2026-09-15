@@ -2,7 +2,7 @@ import { Bell, Check, Loader2 } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
 import { trackEventSaved } from '../../lib/analytics';
-import { saveEvent, unsaveEvent } from '../../lib/apiEvents';
+import { getSavedEventIds, saveEvent, unsaveEvent } from '../../lib/apiEvents';
 import { Button } from '../ui/button';
 
 const STORAGE_KEY = 'trickbook:saved-events';
@@ -34,8 +34,21 @@ export default function EventSaveButton({ event }) {
   }, [eventId]);
 
   useEffect(() => {
-    if (!loggedIn || !token || !readSavedIds().has(eventId)) return;
-    saveEvent(eventId, token).catch(() => {});
+    if (!loggedIn || !token) return;
+    let active = true;
+    const reconcile = async () => {
+      const localIds = [...readSavedIds()];
+      await Promise.allSettled(localIds.map((id) => saveEvent(id, token)));
+      const accountIds = await getSavedEventIds(token);
+      if (!active) return;
+      const mergedIds = new Set([...localIds, ...accountIds.map(String)]);
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify([...mergedIds]));
+      setSaved(mergedIds.has(eventId));
+    };
+    reconcile().catch(() => {});
+    return () => {
+      active = false;
+    };
   }, [eventId, loggedIn, token]);
 
   const toggle = async () => {
