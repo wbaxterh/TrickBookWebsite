@@ -13,6 +13,7 @@ import EventCoverImage from './EventCoverImage';
 
 export default function RelatedEvents({ event, events }) {
   if (!events?.length) return null;
+  const sport = getSportMeta(getPrimarySport(event));
 
   return (
     <section aria-labelledby="related-events-heading">
@@ -26,10 +27,10 @@ export default function RelatedEvents({ event, events }) {
           </h2>
         </div>
         <Link
-          href="/events"
+          href={`/events/sport/${sport.id}`}
           className="text-sm font-semibold text-yellow-600 no-underline hover:underline dark:text-yellow-400"
         >
-          Browse all
+          Browse {sport.label.toLowerCase()}
         </Link>
       </div>
       <div className="mt-4 grid gap-4 md:grid-cols-3">

@@ -1,4 +1,5 @@
 import { getEvents } from '../lib/apiEvents';
+import { SPORT_OPTIONS } from '../lib/eventFormatters';
 import { getSnowboardFilms } from '../lib/filmCatalog';
 
 const escapeXml = (value) =>
@@ -46,9 +47,28 @@ export async function getServerSideProps({ res }) {
     priority: '0.8',
     lastmod: event.updatedAt || event.freshness?.lastVerifiedAt || event.lastSeenAt,
   }));
+  const validSports = new Set(
+    SPORT_OPTIONS.filter((sport) => sport.id !== 'all').map((sport) => sport.id),
+  );
+  const sportUrls = [
+    ...new Set(
+      events.flatMap((event) => event.sports || []).filter((sport) => validSports.has(sport)),
+    ),
+  ].map((sport) => ({
+    loc: `https://thetrickbook.com/events/sport/${encodeURIComponent(sport)}`,
+    priority: '0.7',
+  }));
+  const regionUrls = [...new Set(events.map((event) => event.venue?.region).filter(Boolean))].map(
+    (region) => ({
+      loc: `https://thetrickbook.com/events/region/${encodeURIComponent(region)}`,
+      priority: '0.7',
+    }),
+  );
   const urls = [
     { loc: 'https://thetrickbook.com/', priority: '1.0' },
     { loc: 'https://thetrickbook.com/events', priority: '0.9' },
+    ...sportUrls,
+    ...regionUrls,
     ...eventUrls,
     { loc: 'https://thetrickbook.com/media', priority: '0.9' },
     ...films.map((film) => ({
