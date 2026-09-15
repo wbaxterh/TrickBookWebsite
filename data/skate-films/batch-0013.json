@@ -1,0 +1,500 @@
+{
+  "source": "A Happy Medium Skateboarding official uploads and independent skate-film catalogs",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-14T16:15:00.000Z",
+  "films": [
+    {
+      "slug": "a-happy-medium-2-2011",
+      "type": "film",
+      "title": "A Happy Medium 2",
+      "description": "Buster and Hunter O'Shea's second A Happy Medium film is a 2011 Arizona independent skate video built around inventive street skating and the crew's distinctive visual style. The full film features John Motta, Tyler Franz, Jeff Stevens, Riley Hawk, Kody Kohlman, Brett Woodward, Eric Thomas, Derek Tracy, Johnrob Moore, Josh Hawkins and Aaron \"Jaws\" Homoki.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2010s"
+      ],
+      "releaseYear": 2011,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "John Motta",
+        "Tyler Franz",
+        "Jeff Stevens",
+        "Riley Hawk",
+        "Kody Kohlman",
+        "Brett Woodward",
+        "Eric Thomas",
+        "Derek Tracy",
+        "Johnrob Moore",
+        "Josh Hawkins",
+        "Aaron Homoki"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 2822,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/7V21_DGAjQg/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/7V21_DGAjQg/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=7V21_DGAjQg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=7V21_DGAjQg",
+          "embedUrl": "https://www.youtube.com/embed/7V21_DGAjQg",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=7V21_DGAjQg",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. The first-party description credits Buster and Hunter O'Shea and names the featured roster; the exact asset runs 2,822 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/a-happy-medium-2",
+          "sourceDetails": "Independent filmography confirms the 2011 release, approximately 47-minute runtime, filmmakers and 11 featured skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "contemporary-review",
+          "url": "https://tubercul0sis.wordpress.com/2011/11/25/a-happy-medium-2-review/",
+          "sourceDetails": "Contemporary review identifies the Arizona production by brothers Buster and Hunter O'Shea and documents the July 22, 2011 premiere.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium 2 (2011) Skate Film",
+        "description": "Watch Buster and Hunter O'Shea's 2011 Arizona skate film A Happy Medium 2 from the official filmmaker channel."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-happy-medium-3-2014",
+      "type": "film",
+      "title": "A Happy Medium 3",
+      "description": "The third A Happy Medium film expands the O'Shea brothers' Arizona-based series into a 56-minute showcase of technical street skating, creative spots and heavy-impact gaps. The 2014 release features Aaron \"Jaws\" Homoki, John Motta, Johnrob Moore, Josh Hawkins, Ryan Reyes, Marshall Winter, Ted Schmitz, Kody Kohlman, Jeff Stevens, Brett Woodward, Eric Thomas, Ray Nguyen and Derek Tracy.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2010s"
+      ],
+      "releaseYear": 2014,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "Aaron Homoki",
+        "John Motta",
+        "Johnrob Moore",
+        "Josh Hawkins",
+        "Ryan Reyes",
+        "Marshall Winter",
+        "Ted Schmitz",
+        "Kody Kohlman",
+        "Jeff Stevens",
+        "Brett Woodward",
+        "Eric Thomas",
+        "Ray Nguyen",
+        "Derek Tracy"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 3397,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/BXhU-vC4Ww4/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/BXhU-vC4Ww4/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=BXhU-vC4Ww4",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=BXhU-vC4Ww4",
+          "embedUrl": "https://www.youtube.com/embed/BXhU-vC4Ww4",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=BXhU-vC4Ww4",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. The description credits Buster and Hunter O'Shea and supplies the featured roster; the exact asset runs 3,397 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/companies/a-happy-medium-skateboards",
+          "sourceDetails": "Independent filmography confirms the 2014 release, approximately 55-minute runtime, filmmakers and featured skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "sidewalk",
+          "url": "https://sidewalkmag.com/tag/a-happy-medium",
+          "sourceDetails": "Contemporary skate coverage identifies A Happy Medium 3 as the O'Shea brothers' independent scene-video series and documents its individual parts and promotion.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium 3 (2014) Skate Film",
+        "description": "Watch the O'Shea brothers' 2014 full-length A Happy Medium 3 from the official filmmaker channel."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-happy-medium-4-2018",
+      "type": "film",
+      "title": "A Happy Medium 4",
+      "description": "A Happy Medium 4 is Buster and Hunter O'Shea's 2018 return to their Arizona independent series, pairing unconventional terrain with progressive street skating. The film features Johnrob Moore, John Motta, Aaron \"Jaws\" Homoki, Jeff Stevens, Nick Zizzo, Ray Nguyen, Seth Pluhar, Peter Grannis and Jordan Rommel.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2010s"
+      ],
+      "releaseYear": 2018,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "Johnrob Moore",
+        "John Motta",
+        "Aaron Homoki",
+        "Jeff Stevens",
+        "Nick Zizzo",
+        "Ray Nguyen",
+        "Seth Pluhar",
+        "Peter Grannis",
+        "Jordan Rommel"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 2121,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/eC_VPvC8XkI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/eC_VPvC8XkI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=eC_VPvC8XkI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=eC_VPvC8XkI",
+          "embedUrl": "https://www.youtube.com/embed/eC_VPvC8XkI",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=eC_VPvC8XkI",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. The description credits Buster and Hunter O'Shea; the exact current asset runs 2,121 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/?id=47&page=190",
+          "sourceDetails": "Independent contemporary catalog entry confirms the 2018 release, Buster and Hunter O'Shea credits, independent classification and nine featured skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "sidewalk",
+          "url": "https://sidewalkmag.com/tag/a-happy-medium",
+          "sourceDetails": "Contemporary skate publication describes the fourth installment as the O'Shea brothers' independent scene-video series.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium 4 (2018) Skate Film",
+        "description": "Watch Buster and Hunter O'Shea's 2018 independent skate film A Happy Medium 4."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-happy-medium-5-2019",
+      "type": "film",
+      "title": "A Happy Medium 5",
+      "description": "A Happy Medium 5 continues Buster and Hunter O'Shea's independent skate-film series with a deep Arizona crew and nearly an hour of inventive street skating. The 2019 film features Johnrob Moore, Jeff Stevens, Aaron \"Jaws\" Homoki, Josh Hawkins, Derek Tracy, Seth Pluhar, Ray Nguyen, Kilian Martin, Jason Park, Jordan Rommel and John Motta.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2010s"
+      ],
+      "releaseYear": 2019,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "Johnrob Moore",
+        "Jeff Stevens",
+        "Aaron Homoki",
+        "Josh Hawkins",
+        "Derek Tracy",
+        "Seth Pluhar",
+        "Ray Nguyen",
+        "Kilian Martin",
+        "Jason Park",
+        "Jordan Rommel",
+        "John Motta"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 3441,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/yCo00o6w6EU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/yCo00o6w6EU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=yCo00o6w6EU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=yCo00o6w6EU",
+          "embedUrl": "https://www.youtube.com/embed/yCo00o6w6EU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=yCo00o6w6EU",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. The description credits Buster and Hunter O'Shea, supplies chapter timestamps and names the full principal roster; exact runtime is 3,441 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/a-happy-medium-5",
+          "sourceDetails": "Independent filmography confirms the 2019 release, approximately 57-minute runtime, filmmakers and 11 featured skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatefolio",
+          "url": "https://skatefol.io/jeffstevens",
+          "sourceDetails": "Independent rider filmography corroborates A Happy Medium 5 as a 2019 release within the series.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium 5 (2019) Skate Film",
+        "description": "Watch the O'Shea brothers' 2019 full-length A Happy Medium 5 from the official filmmaker channel."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-happy-medium-colors-2024",
+      "type": "film",
+      "title": "A Happy Medium: COLORS",
+      "description": "COLORS is Buster and Hunter O'Shea's 2024 A Happy Medium film, bringing the series' playful editing and spot selection to a compact new full-length. Its principal sections feature John Motta, Jeff Stevens, Aaron \"Jaws\" Homoki, Kilian Martin, Jason Park, Jordan Rommel and Johnrob Moore, with a broad friends montage linking generations of the crew.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2024,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "editors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "John Motta",
+        "Jeff Stevens",
+        "Aaron Homoki",
+        "Kilian Martin",
+        "Jason Park",
+        "Jordan Rommel",
+        "Johnrob Moore"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 1948,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/a2qeFU_Tyzc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/a2qeFU_Tyzc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=a2qeFU_Tyzc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=a2qeFU_Tyzc",
+          "embedUrl": "https://www.youtube.com/embed/a2qeFU_Tyzc",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=a2qeFU_Tyzc",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. Its description credits Buster and Hunter O'Shea and gives section timestamps; exact runtime is 1,948 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/a-happy-medium-colors",
+          "sourceDetails": "Independent filmography confirms the 2024 release, approximately 32-minute runtime, filmmaker credits and seven principal skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "pocket-skateboard-magazine",
+          "url": "https://pocketskatemag.com/a-happy-medium-colors/",
+          "sourceDetails": "Independent contemporary coverage published March 17, 2024 credits filming and editing to Buster and Hunter O'Shea and identifies the principal cast.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium: COLORS (2024) Skate Film",
+        "description": "Watch COLORS, Buster and Hunter O'Shea's 2024 A Happy Medium skate film, from the official channel."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "a-happy-medium-hd-2025",
+      "type": "film",
+      "title": "A Happy Medium HD",
+      "description": "A Happy Medium HD is Buster and Hunter O'Shea's 2025 full-length, reuniting longtime series riders with newer faces in a crisp 31-minute production. The film features John Motta, Jeff Stevens, Michael Eddy, Lazer Crawford, Kilian Martin, Jason Park, Johnrob Moore, Jordan Rommel and Aaron \"Jaws\" Homoki.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "a-happy-medium",
+        "arizona",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "producedBy": "A Happy Medium Skateboarding",
+      "directors": ["Buster O'Shea", "Hunter O'Shea"],
+      "riders": [
+        "John Motta",
+        "Jeff Stevens",
+        "Michael Eddy",
+        "Lazer Crawford",
+        "Kilian Martin",
+        "Jason Park",
+        "Johnrob Moore",
+        "Jordan Rommel",
+        "Aaron Homoki"
+      ],
+      "locations": ["Arizona, USA"],
+      "duration": 1906,
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/PgT6_b8PspU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/PgT6_b8PspU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=PgT6_b8PspU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=PgT6_b8PspU",
+          "embedUrl": "https://www.youtube.com/embed/PgT6_b8PspU",
+          "access": "free",
+          "label": "Watch Film",
+          "channel": "A Happy Medium Skateboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCMYHlfiWjacqE8opC3aI-GQ",
+          "publisherRelationship": "official filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=PgT6_b8PspU",
+          "sourceDetails": "Public, embeddable complete film on the official A Happy Medium Skateboarding channel. The first-party description credits Buster and Hunter O'Shea, dates the film to 2025 and supplies section timestamps; exact runtime is 1,906 seconds.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/a-happy-medium-hd",
+          "sourceDetails": "Independent filmography confirms the 2025 release, approximately 31-minute full-length classification, filmmaker credits and nine featured skaters.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        },
+        {
+          "source": "skatefolio",
+          "url": "https://skatefol.io/jeffstevens",
+          "sourceDetails": "Independent rider filmography places A Happy Medium HD in the series chronology and corroborates Jeff Stevens' appearance.",
+          "retrievedAt": "2026-09-14T16:15:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "Catalog metadata, official YouTube artwork and an external embed of the filmmakers' public complete-film upload; no media download or rehosting permission inferred."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Happy Medium HD (2025) Skate Film",
+        "description": "Watch Buster and Hunter O'Shea's 2025 full-length A Happy Medium HD from the official filmmaker channel."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}

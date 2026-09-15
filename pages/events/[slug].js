@@ -1,9 +1,7 @@
 import {
   ArrowLeft,
-  Bell,
   CalendarDays,
   ExternalLink,
-  Loader2,
   MapPin,
   PlayCircle,
   Radio,
@@ -13,15 +11,21 @@ import {
 } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import EventCoverImage from '../../components/events/EventCoverImage';
+import { useEffect } from 'react';
+import EventBreadcrumbs from '../../components/events/EventBreadcrumbs';
+import EventCalendarActions from '../../components/events/EventCalendarActions';
+import EventConversionCta from '../../components/events/EventConversionCta';
+import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
+import EventSaveButton from '../../components/events/EventSaveButton';
 import EventShareDialog from '../../components/events/EventShareDialog';
+import EventVenueSpot from '../../components/events/EventVenueSpot';
+import RelatedEvents from '../../components/events/RelatedEvents';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
-import { getFixtureEvent } from '../../data/eventFixtures';
-import { getEvent } from '../../lib/apiEvents';
+import { EVENT_FIXTURES, getFixtureEvent } from '../../data/eventFixtures';
+import { trackEventAction, trackEventArchiveClick, trackEventViewed } from '../../lib/analytics';
+import { getEvent, getEvents } from '../../lib/apiEvents';
 import {
   formatEventRange,
   getEventAction,
@@ -30,47 +34,18 @@ import {
   getPrimarySport,
   getSportMeta,
 } from '../../lib/eventFormatters';
+import { resolveEventSpot } from '../../lib/eventSpot';
 
 const useFixtures = process.env.NEXT_PUBLIC_EVENTS_USE_FIXTURES === 'true';
+const SITE_URL = 'https://thetrickbook.com';
 
-export default function EventDetailPage() {
-  const router = useRouter();
-  const { slug } = router.query;
-  const [event, setEvent] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
-
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: The detail layout conditionally renders independent event fields.
+export default function EventDetailPage({ event, relatedEvents, resolvedSpot }) {
   useEffect(() => {
-    if (!slug) return;
-    let active = true;
-    const load = async () => {
-      setLoading(true);
-      setNotFound(false);
-      try {
-        const data = useFixtures ? getFixtureEvent(slug) : await getEvent(slug);
-        if (!data) throw new Error('not found');
-        if (active) setEvent(data);
-      } catch (_error) {
-        if (active) setNotFound(true);
-      } finally {
-        if (active) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      active = false;
-    };
-  }, [slug]);
+    if (event) trackEventViewed(event);
+  }, [event]);
 
-  if (loading) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center text-muted-foreground">
-        <Loader2 className="h-6 w-6 mr-3 animate-spin text-yellow-500" /> Loading event
-      </div>
-    );
-  }
-
-  if (notFound || !event) {
+  if (!event) {
     return (
       <div className="container py-24 text-center">
         <CalendarDays className="h-12 w-12 text-yellow-500 mx-auto" />
@@ -86,6 +61,22 @@ export default function EventDetailPage() {
   const action = getEventAction(event);
   const status = getEventStatus(event);
   const sport = getSportMeta(getPrimarySport(event));
+  const canonicalUrl = `${SITE_URL}/events/${event.slug}`;
+  const location = getEventLocation(event);
+  const dateLabel = event.startAt
+    ? new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: event.timezone || undefined,
+      }).format(new Date(event.startAt))
+    : null;
+  const metaTitle = [event.title, dateLabel, location].filter(Boolean).join(' | ');
+  const metaDescription =
+    event.description ||
+    `Find dates, location, registration, tickets, and viewing details for ${event.title}.`;
+  const images = getEventImageCandidates(event);
+  const structuredData = buildEventStructuredData(event, canonicalUrl, metaDescription, images);
   const sourceChecked = event.freshness?.lastVerifiedAt
     ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(
         new Date(event.freshness.lastVerifiedAt),
@@ -95,16 +86,36 @@ export default function EventDetailPage() {
   return (
     <>
       <Head>
-        <title>{event.title} | TrickBook Events</title>
-        <meta name="description" content={event.description || `Details for ${event.title}`} />
+        <title>{metaTitle} | TrickBook Events</title>
+        <meta name="description" content={metaDescription} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Trick Book" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        {images[0] && <meta property="og:image" content={images[0]} />}
+        <meta name="twitter:card" content={images[0] ? 'summary_large_image' : 'summary'} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        {images[0] && <meta name="twitter:image" content={images[0]} />}
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires raw script content; '<' is escaped above.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+          }}
+        />
       </Head>
 
       <main className="min-h-screen bg-background">
         <section className="border-b border-border bg-card/40">
           <div className="container py-8 md:py-12">
+            <EventBreadcrumbs event={event} />
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-yellow-500 no-underline"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-yellow-500 no-underline"
             >
               <ArrowLeft className="h-4 w-4" /> Back to Events
             </Link>
@@ -154,7 +165,12 @@ export default function EventDetailPage() {
                       asChild
                       className="w-full mt-3 bg-yellow-400 hover:bg-yellow-300 text-black font-bold"
                     >
-                      <a href={action.url} target="_blank" rel="noreferrer">
+                      <a
+                        href={action.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => trackEventAction(event, action)}
+                      >
                         {action.label} <ExternalLink className="h-4 w-4 ml-2" />
                       </a>
                     </Button>
@@ -163,9 +179,8 @@ export default function EventDetailPage() {
                       Details coming soon
                     </Button>
                   )}
-                  <Button variant="outline" className="w-full mt-2" disabled>
-                    <Bell className="h-4 w-4 mr-2" /> Save event
-                  </Button>
+                  <EventSaveButton event={event} />
+                  <EventCalendarActions event={event} />
                   <EventShareDialog event={event} />
                   <p className="text-xs text-muted-foreground mt-3 text-center">
                     Registration, ticketing, and streaming happen on the official source.
@@ -264,9 +279,12 @@ export default function EventDetailPage() {
                   </div>
                 </div>
               )}
+              <EventConversionCta event={event} />
+              <RelatedEvents event={event} events={relatedEvents} />
             </div>
 
-            <aside>
+            <aside className="space-y-4">
+              <EventVenueSpot event={event} resolvedSpot={resolvedSpot} />
               <Card>
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2">
@@ -275,9 +293,28 @@ export default function EventDetailPage() {
                     )}
                     <h2 className="font-bold text-foreground">Source</h2>
                   </div>
-                  <p className="font-medium text-foreground mt-3">
-                    {event.organizer?.name || 'Event organizer'}
-                  </p>
+                  {event.organizer?.name ? (
+                    <Link
+                      href={`/events/organizer/${encodeURIComponent(event.organizer.name)}`}
+                      className="mt-3 block font-medium text-foreground no-underline hover:text-yellow-500"
+                      onClick={() =>
+                        trackEventArchiveClick(event, 'organizer', event.organizer.name)
+                      }
+                    >
+                      {event.organizer.name}
+                    </Link>
+                  ) : (
+                    <p className="font-medium text-foreground mt-3">Event organizer</p>
+                  )}
+                  {event.series && (
+                    <Link
+                      href={`/events/series/${encodeURIComponent(event.series)}`}
+                      className="mt-2 block text-sm font-medium text-yellow-600 no-underline hover:underline dark:text-yellow-400"
+                      onClick={() => trackEventArchiveClick(event, 'series', event.series)}
+                    >
+                      More from {event.series}
+                    </Link>
+                  )}
                   <p className="text-sm text-muted-foreground mt-1">
                     {event.sourceTrust?.replace(/_/g, ' ') || 'Source attribution pending'}
                   </p>
@@ -294,6 +331,134 @@ export default function EventDetailPage() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps({ params, res }) {
+  try {
+    const event = useFixtures ? getFixtureEvent(params.slug) : await getEvent(params.slug);
+    if (!event) return { notFound: true };
+
+    let candidates = [];
+    try {
+      candidates = useFixtures
+        ? EVENT_FIXTURES
+        : (await getEvents({ sport: getPrimarySport(event) })).events;
+    } catch (_error) {}
+    const relatedEvents = rankRelatedEvents(event, candidates).slice(0, 3);
+    let resolvedSpot = null;
+    try {
+      resolvedSpot = await resolveEventSpot(event);
+    } catch (_error) {}
+
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
+    return {
+      props: { event, relatedEvents, resolvedSpot },
+    };
+  } catch (_error) {
+    return { notFound: true };
+  }
+}
+
+function rankRelatedEvents(event, candidates) {
+  const primarySport = getPrimarySport(event);
+  const disciplines = new Set(event.disciplines || []);
+  return candidates
+    .filter(
+      (candidate) =>
+        candidate.slug && candidate.slug !== event.slug && candidate.sports?.includes(primarySport),
+    )
+    .map((candidate) => {
+      let score = 0;
+      if (event.series && candidate.series === event.series) score += 8;
+      if (event.organizer?.name && candidate.organizer?.name === event.organizer.name) score += 6;
+      if (event.venue?.city && candidate.venue?.city === event.venue.city) score += 5;
+      if (event.venue?.region && candidate.venue?.region === event.venue.region) score += 3;
+      if (candidate.disciplines?.some((discipline) => disciplines.has(discipline))) score += 2;
+      return { candidate, score };
+    })
+    .sort(
+      (a, b) => b.score - a.score || new Date(a.candidate.startAt) - new Date(b.candidate.startAt),
+    )
+    .map(({ candidate }) => candidate);
+}
+
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Schema.org output intentionally maps optional event fields.
+function buildEventStructuredData(event, canonicalUrl, description, images) {
+  const action = getEventAction(event);
+  const physicalLocation = [
+    event.venue?.name,
+    event.venue?.address,
+    event.venue?.city,
+    event.venue?.region,
+    event.venue?.country,
+  ].some(Boolean);
+  const online = Boolean(event.isOnline || event.spectating?.streamUrl);
+  const schemaStatus = {
+    cancelled: 'https://schema.org/EventCancelled',
+    completed: 'https://schema.org/EventCompleted',
+    postponed: 'https://schema.org/EventPostponed',
+    rescheduled: 'https://schema.org/EventRescheduled',
+    scheduled: 'https://schema.org/EventScheduled',
+  }[event.status || 'scheduled'];
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    description,
+    url: canonicalUrl,
+    startDate: event.startAt,
+    endDate: event.endAt || undefined,
+    eventStatus: schemaStatus || 'https://schema.org/EventScheduled',
+    eventAttendanceMode:
+      online && physicalLocation
+        ? 'https://schema.org/MixedEventAttendanceMode'
+        : online
+          ? 'https://schema.org/OnlineEventAttendanceMode'
+          : 'https://schema.org/OfflineEventAttendanceMode',
+    image: images.length ? images : undefined,
+    organizer: event.organizer?.name
+      ? {
+          '@type': 'Organization',
+          name: event.organizer.name,
+          url:
+            event.organizer.url ||
+            `${SITE_URL}/events/organizer/${encodeURIComponent(event.organizer.name)}`,
+        }
+      : undefined,
+    location: physicalLocation
+      ? {
+          '@type': 'Place',
+          name: event.venue?.name || getEventLocation(event),
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: event.venue?.address || undefined,
+            addressLocality: event.venue?.city || undefined,
+            addressRegion: event.venue?.region || undefined,
+            addressCountry: event.venue?.country || undefined,
+          },
+        }
+      : online
+        ? {
+            '@type': 'VirtualLocation',
+            url: event.spectating?.streamUrl || action.url || canonicalUrl,
+          }
+        : undefined,
+    offers: action.url
+      ? {
+          '@type': 'Offer',
+          url: action.url,
+          availability:
+            event.participation?.registrationStatus === 'sold_out'
+              ? 'https://schema.org/SoldOut'
+              : 'https://schema.org/InStock',
+          validFrom: event.participation?.registrationOpensAt || undefined,
+        }
+      : undefined,
+    previousStartDate: event.previousStartAt || undefined,
+  };
+
+  return JSON.parse(JSON.stringify(data));
 }
 
 function InfoItem({ icon: Icon, label, value }) {

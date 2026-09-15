@@ -53,18 +53,20 @@ export default function EventCard({ event, saved = false, onToggleSave, distance
             <span className="mt-1 text-2xl font-black leading-none">{date.day}</span>
           </div>
 
-          <button
-            type="button"
-            onClick={() => onToggleSave?.(event)}
-            className={`absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-colors ${
-              saved
-                ? 'border-yellow-400 bg-yellow-400 text-black'
-                : 'border-white/50 bg-black/70 text-white hover:border-yellow-400 hover:text-yellow-400'
-            }`}
-            aria-label={saved ? `Remove ${event.title} from saved events` : `Save ${event.title}`}
-          >
-            <Bell className={`h-4 w-4 ${saved ? 'fill-current' : ''}`} />
-          </button>
+          {onToggleSave && (
+            <button
+              type="button"
+              onClick={() => onToggleSave(event)}
+              className={`absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-colors ${
+                saved
+                  ? 'border-yellow-400 bg-yellow-400 text-black'
+                  : 'border-white/50 bg-black/70 text-white hover:border-yellow-400 hover:text-yellow-400'
+              }`}
+              aria-label={saved ? `Remove ${event.title} from saved events` : `Save ${event.title}`}
+            >
+              <Bell className={`h-4 w-4 ${saved ? 'fill-current' : ''}`} />
+            </button>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col p-4 sm:p-5">
