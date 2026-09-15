@@ -1,0 +1,333 @@
+{
+  "source": "Official skate-company YouTube uploads with first-party release material and independent skate-publication / SkateVideoSite corroboration",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-15T19:39:00.000Z",
+  "films": [
+    {
+      "slug": "elcd-the-epic-video-2025",
+      "aliases": [
+        "The Epic Video",
+        "ELCD: THE EPIC VIDEO",
+        "Epic Life Changing Device: The Epic Video"
+      ],
+      "type": "film",
+      "title": "THE EPIC VIDEO",
+      "description": "Swedish brand Epic Life Changing Device's 16-minute full-length links its European base with East Coast street skating. Simon Capdevila edited the film and shares camera duties with Steffen Austerheim, Jonathan Norberg and Eros Fagnani; six additional camera contributors are explicitly credited. The complete ten-skater appearance roster retains Joppe and Eirik Svensen as supporting appearances alongside the eight principal-billed riders.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "epic-life-changing-device",
+        "team-video",
+        "sweden",
+        "street-skateboarding",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "releaseDate": "2025-07-17",
+      "producedBy": "Epic Life Changing Device",
+      "directors": [],
+      "editors": ["Simon Capdevila"],
+      "cinematographers": [
+        "Simon Capdevila",
+        "Steffen Austerheim",
+        "Jonathan Norberg",
+        "Eros Fagnani"
+      ],
+      "additionalFilming": [
+        "Gustav Tønnesen",
+        "Brian Panebianco",
+        "DJ Traceman",
+        "Dan Stene",
+        "CarlTage",
+        "Torsten Frank"
+      ],
+      "riders": [
+        "Simon Capdevila",
+        "John Shanahan",
+        "Brian Panebianco",
+        "Jahmir Brown",
+        "Kevin Bilyeu",
+        "Jonathan Norberg",
+        "Eros Fagnani",
+        "Joppe",
+        "Steffen Austerheim",
+        "Eirik Svensen"
+      ],
+      "riderCreditGroups": {
+        "principalBillingInAppearanceOrder": [
+          "Simon Capdevila",
+          "John Shanahan",
+          "Brian Panebianco",
+          "Jahmir Brown",
+          "Kevin Bilyeu",
+          "Jonathan Norberg",
+          "Eros Fagnani",
+          "Steffen Austerheim"
+        ],
+        "supportingAppearances": ["Joppe", "Eirik Svensen"]
+      },
+      "creditNotes": [
+        "The official upload supplies the complete order, Simon Capdevila's edit credit, four principal camera credits and six additional-camera credits.",
+        "Free Skate Mag independently repeats the appearance order and identifies Joppe with Eros Fagnani and Eirik Svensen with Steffen Austerheim; those two are preserved as supporting appearances rather than promoted to principal billing.",
+        "No formal director credit was found, so none is asserted."
+      ],
+      "locations": ["Sweden", "United States"],
+      "locationNote": "BE Skate Mag describes the film as connecting the Swedish brand's European roots with East Coast street skating; no city-level filming list was published.",
+      "duration": 942,
+      "historicalContext": "Epic Life Changing Device's company full-length is a transatlantic team film, not the preceding Steffen Austerheim teaser/part that Free Skate Mag referenced in its release coverage.",
+      "artworkNotes": "The official 1280x720 YouTube max-resolution thumbnail was visually reviewed on 2026-09-15. It is a genuine fisheye street-skating frame from the exact company upload, with no misleading event or trailer text.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/31MaAB5aR8A/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/31MaAB5aR8A/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=31MaAB5aR8A",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=31MaAB5aR8A",
+          "embedUrl": "https://www.youtube.com/embed/31MaAB5aR8A",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "EPIC LIFE CHANGING DEVICE",
+          "channelUrl": "https://www.youtube.com/channel/UC5456aMykauLyB_2pw0JKsQ",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T19:39:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "31MaAB5aR8A",
+          "url": "https://www.youtube.com/watch?v=31MaAB5aR8A",
+          "sourceDetails": "Epic Life Changing Device's official channel hosts the uninterrupted complete film and supplies all rider, edit and camera credits. YouTube reports status OK, playableInEmbed true, a 942-second runtime, channelId UC5456aMykauLyB_2pw0JKsQ and July 17, 2025 publication; oEmbed returned HTTP 200. Controlled Chrome measured 942.101 seconds and advanced the exact player from 0 to 11.123 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        },
+        {
+          "source": "free-skate-mag",
+          "url": "https://www.freeskatemag.com/2025/07/16/elcd-the-epic-video/",
+          "sourceDetails": "Independent release coverage classifies the upload as the Swedish brand's full-length, repeats the complete appearance order, identifies the two supporting appearances and confirms Simon Capdevila's edit plus the four main camera credits.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        },
+        {
+          "source": "be-skate-mag",
+          "url": "https://beskatemag.com/blog-all-skate-videos-news/2025/7/18/epic-life-changing-device-the-epic-skate-video",
+          "sourceDetails": "Independent coverage corroborates the ten-skater roster and the film's Swedish / European-to-East-Coast context.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Epic Life Changing Device's own company channel (channelId UC5456aMykauLyB_2pw0JKsQ), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "THE EPIC VIDEO (2025) - ELCD Skate Film",
+        "description": "Watch Epic Life Changing Device's complete 2025 skate film, edited by Simon Capdevila and featuring all ten credited riders."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "civil-the-civil-video-2025",
+      "aliases": ["Civil: The Civil Video", "Civil - The Civil Video"],
+      "type": "film",
+      "title": "The Civil Video",
+      "description": "Civil Skateshop's first full-length is a 23-minute Rhode Island scene document filmed by Luke Franco, Kenny Borge and Dan McGrath. Civil's official billing highlights seven team riders, while the independently catalogued credits preserve 40 additional montage and community appearances for a complete 47-skater roster.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "civil-skateshop",
+        "rhode-island",
+        "providence",
+        "shop-video",
+        "scene-video",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "releaseDate": "2025-06-09",
+      "producedBy": "Civil Skateshop",
+      "directors": [],
+      "editors": [],
+      "cinematographers": ["Luke Franco", "Kenny Borge", "Dan McGrath"],
+      "photographers": ["Lucky St. Angelo"],
+      "riders": [
+        "Sergio Alvarez",
+        "Evin Paquette",
+        "Hector Rivera",
+        "Jay Poirier",
+        "John-Nestor Gamez",
+        "Nolan McCaffrey",
+        "Eddy Eacueo",
+        "Josh Silva",
+        "Sean Egan",
+        "Mike Odamsu",
+        "Mikie C",
+        "Maxime Belykh",
+        "Henry Ledesma",
+        "Jerico Rodriguez",
+        "Dave Garcia",
+        "Nick Petkauskos",
+        "Mark Poole",
+        "Rob Hall",
+        "Mario Ramirez",
+        "Cameron Smigel",
+        "Asher Soares",
+        "Xavier Ko",
+        "Dylan Rosa",
+        "Rob Braxton",
+        "Enoch Dorsaint",
+        "Vut",
+        "Zack Gentes",
+        "Will Cornwall",
+        "Guido Silvestri",
+        "Mat Denton",
+        "Justin Healey",
+        "Seth Pernal",
+        "Dennis Vieira",
+        "Justin Kelley",
+        "Jon Hoisington",
+        "Kevin Demello",
+        "Colin Kennery",
+        "Jordan Sihavong",
+        "Justin Souliere",
+        "Aiden Chenard",
+        "Luke Franco",
+        "Adam Howe",
+        "Mekhi Irving",
+        "Kenny Borge",
+        "Brian Young",
+        "Thom Musso",
+        "Eric Sweeney"
+      ],
+      "riderCreditGroups": {
+        "firstPartyFeatured": [
+          "Sergio Alvarez",
+          "Evin Paquette",
+          "Hector Rivera",
+          "Jay Poirier",
+          "John-Nestor Gamez",
+          "Nolan McCaffrey",
+          "Eddy Eacueo"
+        ],
+        "additionalMontageAndCommunityAppearances": [
+          "Josh Silva",
+          "Sean Egan",
+          "Mike Odamsu",
+          "Mikie C",
+          "Maxime Belykh",
+          "Henry Ledesma",
+          "Jerico Rodriguez",
+          "Dave Garcia",
+          "Nick Petkauskos",
+          "Mark Poole",
+          "Rob Hall",
+          "Mario Ramirez",
+          "Cameron Smigel",
+          "Asher Soares",
+          "Xavier Ko",
+          "Dylan Rosa",
+          "Rob Braxton",
+          "Enoch Dorsaint",
+          "Vut",
+          "Zack Gentes",
+          "Will Cornwall",
+          "Guido Silvestri",
+          "Mat Denton",
+          "Justin Healey",
+          "Seth Pernal",
+          "Dennis Vieira",
+          "Justin Kelley",
+          "Jon Hoisington",
+          "Kevin Demello",
+          "Colin Kennery",
+          "Jordan Sihavong",
+          "Justin Souliere",
+          "Aiden Chenard",
+          "Luke Franco",
+          "Adam Howe",
+          "Mekhi Irving",
+          "Kenny Borge",
+          "Brian Young",
+          "Thom Musso",
+          "Eric Sweeney"
+        ]
+      },
+      "creditNotes": [
+        "Civil's official upload names seven featured team riders, the three filmers and Lucky St. Angelo's thumbnail photo credit.",
+        "SkateVideoSite's independent section and montage catalog expands the roster to 47 named appearances. The additional 40 are retained as montage/community appearances and are not promoted to principal-part status.",
+        "No formal director or editor credit was found, so neither is asserted."
+      ],
+      "locations": ["Providence, Rhode Island, USA", "Rhode Island, USA"],
+      "locationNote": "Civil states that the entire video was filmed in Rhode Island; SkateVideoSite specifically catalogs Providence.",
+      "duration": 1390,
+      "historicalContext": "Civil opened in 2006 and described this release as its first proper shop full-length, documenting Rhode Island's local skate community after nearly two decades of shop activity.",
+      "premiereNotes": [
+        "Civil's first-party announcement documents a free April 26, 2025 premiere, with the screening scheduled for 8:00 PM; the complete film was published online June 9, 2025."
+      ],
+      "physicalReleaseNotes": [
+        "SkateVideoSite records a limited run of 50 DVD copies and lists an active Civil purchase link as of March 2026."
+      ],
+      "artworkNotes": "The official 1280x720 YouTube max-resolution thumbnail was visually reviewed on 2026-09-15. It is Lucky St. Angelo's vertically composed action photo of a Civil rider skating over a car, pillar-boxed within the standard player frame, and it matches the exact company upload.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/EzkOQBZYREo/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/EzkOQBZYREo/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=EzkOQBZYREo",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=EzkOQBZYREo",
+          "embedUrl": "https://www.youtube.com/embed/EzkOQBZYREo",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "wearecivil",
+          "channelUrl": "https://www.youtube.com/channel/UCcJ9glFIQS-cPqwGLmJuPZw",
+          "publisherRelationship": "Civil Skateshop's official company channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T19:39:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "EzkOQBZYREo",
+          "url": "https://www.youtube.com/watch?v=EzkOQBZYREo",
+          "sourceDetails": "Civil Skateshop's official channel hosts the uninterrupted complete film and supplies the featured team roster, complete filming credits, Rhode Island provenance and thumbnail photo credit. YouTube reports status OK, playableInEmbed true, a 1,390-second runtime, channelId UCcJ9glFIQS-cPqwGLmJuPZw and June 9, 2025 publication; oEmbed returned HTTP 200. Controlled Chrome measured 1,389.741 seconds and advanced the exact player from 0 to 10.092 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        },
+        {
+          "source": "civil-skateshop",
+          "url": "https://www.wearecivil.com/blogs/blog/the-civil-video-premiere",
+          "sourceDetails": "Civil's first-party premiere announcement confirms this as a Rhode Island team video, lists principal riders and documents the April 26, 2025 free premiere.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/civil-the-civil-video",
+          "sourceDetails": "Independent filmography classifies the release as a 23-minute 2025 Civil shop full-length, confirms Providence, the three filmers and Lucky St. Angelo's photo credit, and supplies the complete 47-skater appearance roster plus section/montage structure.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/the-civil-video/",
+          "sourceDetails": "Independent pre-release feature documents Civil's role in Rhode Island skateboarding since 2006, confirms the project as the shop's first proper video and identifies several principal riders and photographers.",
+          "retrievedAt": "2026-09-15T19:39:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of Civil Skateshop's uninterrupted complete film from the shop's own channel (channelId UCcJ9glFIQS-cPqwGLmJuPZw), using the exact upload's official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "The Civil Video (2025) - Rhode Island Skate Film",
+        "description": "Watch Civil Skateshop's complete first full-length, filmed entirely in Rhode Island and preserving all 47 credited skater appearances."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
