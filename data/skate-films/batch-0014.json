@@ -1,0 +1,465 @@
+{
+  "source": "Official filmmaker/company YouTube uploads with independent skate-publication and SkateVideoSite corroboration",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-15T17:26:00.000Z",
+  "films": [
+    {
+      "slug": "toy-machine-real-life-sucks-2024",
+      "aliases": ["Real Life Sucks", "Toy Machine: Real Life Sucks"],
+      "type": "film",
+      "title": "REAL LIFE SUCKS",
+      "description": "Toy Machine's tenth full-length video is a tightly edited 24-minute team film directed by Don Luong. Jeremy Leabres, Georgia Martin, Myles Willard, Axel Cruysberghs, Shiloh Catori and Braden Hoban receive the principal billing, while nine additional team riders appear across the two montages and supporting sections.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "toy-machine",
+        "team-video",
+        "don-luong",
+        "2020s"
+      ],
+      "releaseYear": 2024,
+      "releaseDate": "2024-05-24",
+      "producedBy": "Toy Machine",
+      "directors": ["Don Luong"],
+      "editors": ["Don Luong"],
+      "riders": [
+        "Jeremy Leabres",
+        "Georgia Martin",
+        "Myles Willard",
+        "Axel Cruysberghs",
+        "Shiloh Catori",
+        "Braden Hoban",
+        "Geoff Rowley",
+        "Leo Romero",
+        "Daniel Lutheran",
+        "CJ Collins",
+        "Daiki Ikeda",
+        "Susie Heath",
+        "Cordano Russell",
+        "Terrill Jefferson",
+        "Raphae Ueda"
+      ],
+      "riderCreditGroups": {
+        "principalBilling": [
+          "Jeremy Leabres",
+          "Georgia Martin",
+          "Myles Willard",
+          "Axel Cruysberghs",
+          "Shiloh Catori",
+          "Braden Hoban"
+        ],
+        "teamAndMontageAppearances": [
+          "Geoff Rowley",
+          "Leo Romero",
+          "Daniel Lutheran",
+          "CJ Collins",
+          "Daiki Ikeda",
+          "Susie Heath",
+          "Cordano Russell",
+          "Terrill Jefferson",
+          "Raphae Ueda"
+        ]
+      },
+      "creditNotes": [
+        "Toy Machine's upload explicitly bills the six principal skaters and Don Luong as director and editor.",
+        "SkateVideoSite's section-by-section catalog expands the first-party 'rest of the team' note to the complete 15-skater appearance roster; the additional nine are retained as team/montage appearances, not promoted to full-part billing."
+      ],
+      "locations": [],
+      "duration": 1440,
+      "historicalContext": "Released as Toy Machine skateboard video number ten, REAL LIFE SUCKS is a modern company full-length rather than a trailer, episode or compilation.",
+      "artworkNotes": "The official 480x360 YouTube thumbnail was visually reviewed on 2026-09-15. It is a genuine skate frame from the exact film; this upload has no max-resolution YouTube thumbnail, so the working hqdefault asset is retained.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/u_YiPKY8TRg/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/u_YiPKY8TRg/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=u_YiPKY8TRg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=u_YiPKY8TRg",
+          "embedUrl": "https://www.youtube.com/embed/u_YiPKY8TRg",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Toy Machine",
+          "channelUrl": "https://www.youtube.com/channel/UCLerjPY5lt_-xuJSOMkSqSg",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "u_YiPKY8TRg",
+          "url": "https://www.youtube.com/watch?v=u_YiPKY8TRg",
+          "sourceDetails": "Toy Machine's official channel hosts the uninterrupted complete film. The first-party description identifies video number ten, Don Luong's direction/edit and six principal skaters. YouTube reports status OK, playableInEmbed true, a 1,440-second runtime and May 24, 2024 publication; oEmbed returned HTTP 200. Controlled Chrome measured 1,439.921 seconds and advanced the exact player 4.964 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/toy-machine-real-life-sucks",
+          "sourceDetails": "Independent filmography classifies the release as a 24-minute 2024 Toy Machine full-length, credits Don Luong and supplies the section-by-section 15-skater roster.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Toy Machine's own company channel (channelId UCLerjPY5lt_-xuJSOMkSqSg), using the official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "REAL LIFE SUCKS (2024) - Toy Machine Skate Film",
+        "description": "Watch Toy Machine's complete 2024 team film REAL LIFE SUCKS, directed by Don Luong and featuring all 15 credited skaters."
+      },
+      "isPublished": true,
+      "isFeatured": false,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "transcend-5-2025",
+      "aliases": ["Transcend 5 (Full-Length Skateboard Film)", "T5"],
+      "type": "film",
+      "title": "Transcend 5",
+      "description": "Eric Ferguson's fifth Transcend film is a 78-minute Salt Lake City scene document assembled from footage filmed between April 2022 and February 2025. Twenty-one skaters receive named sections or shared-part billing, while two large homies montages preserve another 39 explicitly credited appearances from the wider crew.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "transcend",
+        "salt-lake-city",
+        "scene-video",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "releaseDate": "2025-04-18",
+      "producedBy": "Eric Ferguson / Transcend",
+      "directors": ["Eric Ferguson"],
+      "editors": ["Eric Ferguson"],
+      "cinematographers": ["Eric Ferguson"],
+      "additionalFilming": [
+        "Dago Moncada",
+        "Kai Taylor",
+        "Dillon Miller",
+        "Morgan Beck",
+        "Riley Winch",
+        "Nick Lee",
+        "Josh Mohs",
+        "Jake Culver",
+        "Patrick Ring",
+        "Cal Aamodt",
+        "Chris Dunne",
+        "Aaron Gailey",
+        "Caleb Orton"
+      ],
+      "photographers": ["Coltyn Nelson", "Dago Moncada"],
+      "riders": [
+        "Mason Webb",
+        "Mike Zanelli",
+        "Morgan Beck",
+        "Dago Moncada",
+        "Nick Lee",
+        "Jonah Ephroni",
+        "Brandon Aguayo",
+        "Parley Southworth",
+        "Tyler Bowers",
+        "Eric Ferguson",
+        "Caleb Orton",
+        "Otto Orton",
+        "Dillon Miller",
+        "Aaron Gailey",
+        "Coltyn Nelson",
+        "Kai Taylor",
+        "Miguel Lopez",
+        "Ricky Chavez",
+        "Landen Fergus",
+        "Nate Brown",
+        "Riley Winch",
+        "Chris McColgan",
+        "Shawn Seabaugh",
+        "James Somber",
+        "Dylan Manley",
+        "Matt Bergmann",
+        "Parker",
+        "Preemeaux",
+        "Josephus Mcgee",
+        "Jose Alanis",
+        "Michael",
+        "Utah County Homie",
+        "Max",
+        "Colin Sheffield",
+        "Chase Strikwerda",
+        "Trevor Mason",
+        "Dallon",
+        "Keigan Shepard",
+        "Victor Quintana",
+        "Tyson Herrera",
+        "Brooks Young",
+        "Dyltwee",
+        "Kordell Black",
+        "Adam Dyet",
+        "Jake Davis",
+        "Mikey Martinez",
+        "Levi Faust",
+        "Hans Bremhorst",
+        "Bryan Gennaro",
+        "Deng Tear",
+        "Cameron Hall",
+        "Jake Taylor",
+        "Sherm",
+        "Chris Ruberio",
+        "Jackson Mohs",
+        "Josh Mohs",
+        "Jesse Charpentier",
+        "Alex Alaniz",
+        "Justin Newton",
+        "Kwami Adzitso"
+      ],
+      "riderCreditGroups": {
+        "namedSectionsAndSharedParts": [
+          "Mason Webb",
+          "Mike Zanelli",
+          "Morgan Beck",
+          "Dago Moncada",
+          "Nick Lee",
+          "Jonah Ephroni",
+          "Brandon Aguayo",
+          "Parley Southworth",
+          "Tyler Bowers",
+          "Eric Ferguson",
+          "Caleb Orton",
+          "Otto Orton",
+          "Dillon Miller",
+          "Aaron Gailey",
+          "Coltyn Nelson",
+          "Kai Taylor",
+          "Miguel Lopez",
+          "Ricky Chavez",
+          "Landen Fergus",
+          "Nate Brown",
+          "Riley Winch"
+        ],
+        "homiesPart1": [
+          "Chris McColgan",
+          "Shawn Seabaugh",
+          "James Somber",
+          "Dylan Manley",
+          "Matt Bergmann",
+          "Parker",
+          "Preemeaux",
+          "Josephus Mcgee",
+          "Jose Alanis",
+          "Michael",
+          "Utah County Homie",
+          "Max",
+          "Colin Sheffield",
+          "Chase Strikwerda",
+          "Trevor Mason",
+          "Dallon",
+          "Keigan Shepard",
+          "Victor Quintana",
+          "Tyson Herrera",
+          "Brooks Young",
+          "Dyltwee"
+        ],
+        "homiesPart2": [
+          "Kordell Black",
+          "Adam Dyet",
+          "Jake Davis",
+          "Mikey Martinez",
+          "Levi Faust",
+          "Hans Bremhorst",
+          "Bryan Gennaro",
+          "Deng Tear",
+          "Cameron Hall",
+          "Jake Taylor",
+          "Sherm",
+          "Chris Ruberio",
+          "Jackson Mohs",
+          "Josh Mohs",
+          "Jesse Charpentier",
+          "Alex Alaniz",
+          "Justin Newton",
+          "Kwami Adzitso"
+        ]
+      },
+      "creditNotes": [
+        "The official chapter list supplies the 21 named-section/shared-part riders and separately labels the two homies montages; all 39 montage names are preserved without upgrading them to principal-part status.",
+        "The first-party description credits Eric Ferguson for filming and editing, 13 additional filmers, Coltyn Nelson for analog photos and Dago Moncada for digital photos."
+      ],
+      "locations": [
+        "Salt Lake City, Utah, USA",
+        "Phoenix, Arizona, USA",
+        "Denver, Colorado, USA",
+        "Seattle, Washington, USA",
+        "Las Vegas, Nevada, USA",
+        "Boise, Idaho, USA",
+        "Southern California, USA"
+      ],
+      "locationNote": "Skate Jawn identifies Salt Lake City as the crew's home and explicitly lists Phoenix, Denver, Seattle, Las Vegas, Boise and Southern California as additional filming regions.",
+      "duration": 4675,
+      "historicalContext": "The fifth full-length in the Transcend crew series documents a multigenerational Salt Lake City street scene over nearly three years of filming.",
+      "premiereNotes": [
+        "The filmmaker's description documents a March 30, 2025 premiere at the Downtown Salt Lake City Library Auditorium; the complete film was published online April 18, 2025."
+      ],
+      "artworkNotes": "The official 1920x1080 YouTube thumbnail was visually reviewed on 2026-09-15. It carries the Transcend 5 title, shows the crew and bills the film as an Eric Ferguson skate film; it matches the exact authorized player.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/cT2hWZL9j8U/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/cT2hWZL9j8U/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=cT2hWZL9j8U",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=cT2hWZL9j8U",
+          "embedUrl": "https://www.youtube.com/embed/cT2hWZL9j8U",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "FergyFilms",
+          "channelUrl": "https://www.youtube.com/channel/UCcz5kEyMvFy2newSEV_u4Pg",
+          "publisherRelationship": "filmmaker's own channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "cT2hWZL9j8U",
+          "url": "https://www.youtube.com/watch?v=cT2hWZL9j8U",
+          "sourceDetails": "Eric Ferguson's FergyFilms channel hosts the uninterrupted complete film and supplies the full chaptered principal roster, two homies-montage rosters, complete supported production credits, filming window and premiere. YouTube reports status OK, playableInEmbed true, a 4,675-second runtime and April 18, 2025 publication; oEmbed returned HTTP 200. Controlled Chrome measured 4,674.881 seconds and advanced the exact player 4.960 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/transcend-5/",
+          "sourceDetails": "Independent April 23, 2025 coverage identifies Transcend 5 as the crew's fifth full-length, confirms Eric Ferguson's filming/editing and documents Salt Lake City plus six travel regions.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        },
+        {
+          "source": "reapers-grip",
+          "url": "https://www.reapersgrip.com/videos",
+          "sourceDetails": "The supporting skate brand's film page reproduces the chapter order, named sections and extensive additional filming credits.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of Eric Ferguson's uninterrupted complete film from the filmmaker's own FergyFilms channel (channelId UCcz5kEyMvFy2newSEV_u4Pg), using the official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Transcend 5 (2025) - Salt Lake City Skate Film",
+        "description": "Watch Eric Ferguson's complete 78-minute Transcend 5 skate film, with 21 principal section riders and both fully credited homies montages."
+      },
+      "isPublished": true,
+      "isFeatured": false,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "calico-2025",
+      "aliases": ["CALICO - A Full-Length Skate Video"],
+      "type": "film",
+      "title": "CALICO",
+      "description": "CALICO is a 17-minute independent full-length rooted in Lincoln, Nebraska. Filmed by Noah Appleget and edited by Appleget with Dawson ElDorado, it presents all 11 credited skaters in order of appearance and preserves a focused snapshot of the local street scene.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "calico",
+        "lincoln-nebraska",
+        "scene-video",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "releaseDate": "2025-01-28",
+      "producedBy": "CALICO",
+      "directors": [],
+      "editors": ["Noah Appleget", "Dawson ElDorado"],
+      "cinematographers": ["Noah Appleget"],
+      "riders": [
+        "Chase Michael",
+        "Dawson ElDorado",
+        "Lauren Gambaiana",
+        "Nate Judds",
+        "Nate VanZandbergen",
+        "Ian Appleget",
+        "Cooper Daringer",
+        "Lee Osterholt",
+        "Levi Drake",
+        "David Maya",
+        "Noah Appleget"
+      ],
+      "riderCreditGroups": {
+        "orderOfAppearance": [
+          "Chase Michael",
+          "Dawson ElDorado",
+          "Lauren Gambaiana",
+          "Nate Judds",
+          "Nate VanZandbergen",
+          "Ian Appleget",
+          "Cooper Daringer",
+          "Lee Osterholt",
+          "Levi Drake",
+          "David Maya",
+          "Noah Appleget"
+        ]
+      },
+      "creditNotes": [
+        "The complete order-of-appearance roster and supported filming/editing credits are identical in the filmmaker upload and independent SkateVideoSite catalog."
+      ],
+      "locations": ["Lincoln, Nebraska, USA"],
+      "duration": 1004,
+      "historicalContext": "A locally produced scene full-length, CALICO documents Lincoln's independent street-skate community rather than presenting isolated parts or a compilation.",
+      "artworkNotes": "The official 1920x1080 YouTube thumbnail was visually reviewed on 2026-09-15. It shows a skate frame at a Lincoln spot with dedicated CALICO title artwork and matches the exact filmmaker player.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/We9P6w__Sg0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/We9P6w__Sg0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=We9P6w__Sg0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=We9P6w__Sg0",
+          "embedUrl": "https://www.youtube.com/embed/We9P6w__Sg0",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "CALICO",
+          "channelUrl": "https://www.youtube.com/channel/UCWJ1YWsIbZK2W_syM_PBASA",
+          "publisherRelationship": "film's own official channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "We9P6w__Sg0",
+          "url": "https://www.youtube.com/watch?v=We9P6w__Sg0",
+          "sourceDetails": "The film's CALICO channel hosts the uninterrupted complete film and supplies Lincoln provenance, all 11 skaters in order, Noah Appleget's camera credit and the two editors. YouTube reports status OK, playableInEmbed true, a 1,004-second runtime and January 28, 2025 publication; oEmbed returned HTTP 200. Controlled Chrome measured 1,003.541 seconds and advanced the exact player 4.960 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/calico",
+          "sourceDetails": "Independent filmography classifies CALICO as a 17-minute 2025 full-length from Lincoln and confirms the complete roster plus filming and editing credits.",
+          "retrievedAt": "2026-09-15T17:26:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film from CALICO's own film channel (channelId UCWJ1YWsIbZK2W_syM_PBASA), using its official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "CALICO (2025) - Lincoln Nebraska Skate Film",
+        "description": "Watch the complete 2025 Lincoln skate film CALICO, filmed by Noah Appleget and featuring all 11 credited skaters."
+      },
+      "isPublished": true,
+      "isFeatured": false,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
