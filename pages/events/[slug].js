@@ -18,6 +18,7 @@ import EventConversionCta from '../../components/events/EventConversionCta';
 import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
 import EventSaveButton from '../../components/events/EventSaveButton';
 import EventShareDialog from '../../components/events/EventShareDialog';
+import EventVenueSpot from '../../components/events/EventVenueSpot';
 import RelatedEvents from '../../components/events/RelatedEvents';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
@@ -33,12 +34,13 @@ import {
   getPrimarySport,
   getSportMeta,
 } from '../../lib/eventFormatters';
+import { resolveEventSpot } from '../../lib/eventSpot';
 
 const useFixtures = process.env.NEXT_PUBLIC_EVENTS_USE_FIXTURES === 'true';
 const SITE_URL = 'https://thetrickbook.com';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: The detail layout conditionally renders independent event fields.
-export default function EventDetailPage({ event, relatedEvents }) {
+export default function EventDetailPage({ event, relatedEvents, resolvedSpot }) {
   useEffect(() => {
     if (event) trackEventViewed(event);
   }, [event]);
@@ -281,7 +283,8 @@ export default function EventDetailPage({ event, relatedEvents }) {
               <RelatedEvents event={event} events={relatedEvents} />
             </div>
 
-            <aside>
+            <aside className="space-y-4">
+              <EventVenueSpot event={event} resolvedSpot={resolvedSpot} />
               <Card>
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2">
@@ -323,10 +326,14 @@ export async function getServerSideProps({ params, res }) {
         : (await getEvents({ sport: getPrimarySport(event) })).events;
     } catch (_error) {}
     const relatedEvents = rankRelatedEvents(event, candidates).slice(0, 3);
+    let resolvedSpot = null;
+    try {
+      resolvedSpot = await resolveEventSpot(event);
+    } catch (_error) {}
 
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
     return {
-      props: { event, relatedEvents },
+      props: { event, relatedEvents, resolvedSpot },
     };
   } catch (_error) {
     return { notFound: true };
