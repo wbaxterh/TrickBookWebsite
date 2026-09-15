@@ -1,4 +1,5 @@
 import { ExternalLink, MapPin, Navigation, ShieldCheck, Store } from 'lucide-react';
+import Link from 'next/link';
 import { formatDistance } from '../../lib/geo';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
@@ -18,12 +19,17 @@ export default function ShopCard({ shop, distanceMi }) {
   const address = shop.address || {};
   const location =
     [address.city, address.region].filter(Boolean).join(', ') || 'Location unavailable';
+  const detailUrl = `/shops/${shop.slug || shop._id}`;
   return (
     <Card className="group h-full overflow-hidden border-border transition-all duration-200 hover:border-yellow-500">
       <CardContent className="flex h-full flex-col p-0">
-        <div className="flex h-36 items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-yellow-500/40">
+        <Link
+          href={detailUrl}
+          aria-label={`View ${shop.name}`}
+          className="flex h-36 items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-yellow-500/40 no-underline"
+        >
           <Store className="h-14 w-14 text-yellow-400 transition-transform group-hover:scale-110" />
-        </div>
+        </Link>
         <div className="flex flex-1 flex-col p-5">
           <div className="mb-2 flex flex-wrap gap-2">
             {(shop.sports || []).slice(0, 2).map((sport) => (
@@ -42,9 +48,11 @@ export default function ShopCard({ shop, distanceMi }) {
             )}
           </div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-foreground transition-colors group-hover:text-yellow-500">
-              {shop.name}
-            </h2>
+            <Link href={detailUrl} className="no-underline">
+              <h2 className="text-xl font-bold text-foreground transition-colors group-hover:text-yellow-500">
+                {shop.name}
+              </h2>
+            </Link>
             {shop.verified && (
               <ShieldCheck
                 className="h-4 w-4 shrink-0 text-emerald-500"
@@ -67,18 +75,17 @@ export default function ShopCard({ shop, distanceMi }) {
               </span>
             ))}
           </div>
-          <div className="mt-auto pt-5">
+          <div className="mt-auto flex flex-wrap gap-2 pt-5">
+            <Button asChild variant="outline">
+              <Link href={detailUrl}>Details</Link>
+            </Button>
             {shop.website ? (
               <Button asChild className="bg-yellow-400 font-bold text-black hover:bg-yellow-300">
                 <a href={shop.website} target="_blank" rel="noreferrer">
                   Visit shop <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-            ) : (
-              <Button disabled variant="outline">
-                Website unavailable
-              </Button>
-            )}
+            ) : null}
           </div>
         </div>
       </CardContent>
