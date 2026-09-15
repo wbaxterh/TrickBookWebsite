@@ -63,6 +63,16 @@ export default function EventConversionCta({ event }) {
                 <Smartphone className="mr-2 h-4 w-4" /> App Store
               </a>
             </Button>
+            <Button asChild variant="outline">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.thetrickbook.trickbook"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackEventConversion(event, 'google_play')}
+              >
+                <Smartphone className="mr-2 h-4 w-4" /> Google Play
+              </a>
+            </Button>
           </div>
         </div>
       </CardContent>
