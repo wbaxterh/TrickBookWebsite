@@ -13,15 +13,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import EventCalendarActions from '../../components/events/EventCalendarActions';
+import EventConversionCta from '../../components/events/EventConversionCta';
 import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
 import EventSaveButton from '../../components/events/EventSaveButton';
 import EventShareDialog from '../../components/events/EventShareDialog';
+import RelatedEvents from '../../components/events/RelatedEvents';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
-import { getFixtureEvent } from '../../data/eventFixtures';
+import { EVENT_FIXTURES, getFixtureEvent } from '../../data/eventFixtures';
 import { trackEventAction, trackEventViewed } from '../../lib/analytics';
-import { getEvent } from '../../lib/apiEvents';
+import { getEvent, getEvents } from '../../lib/apiEvents';
 import {
   formatEventRange,
   getEventAction,
@@ -35,7 +37,7 @@ const useFixtures = process.env.NEXT_PUBLIC_EVENTS_USE_FIXTURES === 'true';
 const SITE_URL = 'https://thetrickbook.com';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: The detail layout conditionally renders independent event fields.
-export default function EventDetailPage({ event }) {
+export default function EventDetailPage({ event, relatedEvents }) {
   useEffect(() => {
     if (event) trackEventViewed(event);
   }, [event]);
@@ -273,6 +275,8 @@ export default function EventDetailPage({ event }) {
                   </div>
                 </div>
               )}
+              <EventConversionCta event={event} />
+              <RelatedEvents event={event} events={relatedEvents} />
             </div>
 
             <aside>
@@ -310,13 +314,44 @@ export async function getServerSideProps({ params, res }) {
     const event = useFixtures ? getFixtureEvent(params.slug) : await getEvent(params.slug);
     if (!event) return { notFound: true };
 
+    let candidates = [];
+    try {
+      candidates = useFixtures
+        ? EVENT_FIXTURES
+        : (await getEvents({ sport: getPrimarySport(event) })).events;
+    } catch (_error) {}
+    const relatedEvents = rankRelatedEvents(event, candidates).slice(0, 3);
+
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
     return {
-      props: { event },
+      props: { event, relatedEvents },
     };
   } catch (_error) {
     return { notFound: true };
   }
+}
+
+function rankRelatedEvents(event, candidates) {
+  const primarySport = getPrimarySport(event);
+  const disciplines = new Set(event.disciplines || []);
+  return candidates
+    .filter(
+      (candidate) =>
+        candidate.slug && candidate.slug !== event.slug && candidate.sports?.includes(primarySport),
+    )
+    .map((candidate) => {
+      let score = 0;
+      if (event.series && candidate.series === event.series) score += 8;
+      if (event.organizer?.name && candidate.organizer?.name === event.organizer.name) score += 6;
+      if (event.venue?.city && candidate.venue?.city === event.venue.city) score += 5;
+      if (event.venue?.region && candidate.venue?.region === event.venue.region) score += 3;
+      if (candidate.disciplines?.some((discipline) => disciplines.has(discipline))) score += 2;
+      return { candidate, score };
+    })
+    .sort(
+      (a, b) => b.score - a.score || new Date(a.candidate.startAt) - new Date(b.candidate.startAt),
+    )
+    .map(({ candidate }) => candidate);
 }
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Schema.org output intentionally maps optional event fields.
