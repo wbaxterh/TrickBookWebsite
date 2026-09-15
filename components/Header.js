@@ -8,6 +8,7 @@ import {
   MapPin,
   MessageCircle,
   Moon,
+  Store,
   Sun,
   User,
   Users,
@@ -111,6 +112,7 @@ const Header = () => {
               { href: '/trickbook', label: t('nav.trickbook', 'TrickBook'), Icon: BookOpen },
               { href: '/spots', label: t('nav.spots', 'Spots'), Icon: MapPin },
               { href: '/events', label: t('nav.events', 'Events'), Icon: CalendarDays },
+              { href: '/shops', label: t('nav.shops', 'Shops'), Icon: Store },
               { href: '/riders', label: t('nav.riders', 'Riders'), Icon: Users },
               { href: '/media', label: t('nav.media', 'Media'), Icon: Clapperboard },
             ].map(({ href, label, Icon }) => (
