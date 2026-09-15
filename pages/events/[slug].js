@@ -12,12 +12,14 @@ import {
 } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import EventCoverImage, { getEventImageCandidates } from '../../components/events/EventCoverImage';
 import EventShareDialog from '../../components/events/EventShareDialog';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import { getFixtureEvent } from '../../data/eventFixtures';
+import { trackEventAction, trackEventViewed } from '../../lib/analytics';
 import { getEvent } from '../../lib/apiEvents';
 import {
   formatEventRange,
@@ -33,6 +35,10 @@ const SITE_URL = 'https://thetrickbook.com';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: The detail layout conditionally renders independent event fields.
 export default function EventDetailPage({ event }) {
+  useEffect(() => {
+    if (event) trackEventViewed(event);
+  }, [event]);
+
   if (!event) {
     return (
       <div className="container py-24 text-center">
@@ -152,7 +158,12 @@ export default function EventDetailPage({ event }) {
                       asChild
                       className="w-full mt-3 bg-yellow-400 hover:bg-yellow-300 text-black font-bold"
                     >
-                      <a href={action.url} target="_blank" rel="noreferrer">
+                      <a
+                        href={action.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => trackEventAction(event, action)}
+                      >
                         {action.label} <ExternalLink className="h-4 w-4 ml-2" />
                       </a>
                     </Button>
