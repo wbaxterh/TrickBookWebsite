@@ -1,0 +1,400 @@
+{
+  "source": "Authorized complete-film uploads from a licensed editorial premiere and filmmaker channels, corroborated by The Skateboarder's Companion, SkateVideoSite, Free Skate Magazine, Skate Jawn and Lowcard",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-16T15:59:33.411Z",
+  "films": [
+    {
+      "slug": "treatment-blossom-2026",
+      "aliases": ["Treatment Skateboards - Blossom", "Treatment Skateboards - Blossom (2026)"],
+      "type": "film",
+      "title": "Blossom",
+      "description": "Treatment Skateboards' 18-minute full-length follows the Glasgow collective through two years of filming, a changing team and the arrival of spring 2026. Eight Treatment riders anchor the film alongside eight documented friends, with sessions and trips spanning Glasgow, Fife, Edinburgh, Newcastle and Scotland's central belt.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "treatment-skateboards",
+        "glasgow",
+        "scotland",
+        "newcastle",
+        "crew-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-25",
+      "producedBy": "Treatment Skateboards",
+      "directors": [],
+      "filmmakers": ["Dean Mackie"],
+      "cinematographers": [
+        "Dean Mackie",
+        "Amy Greig",
+        "Bobby Kelly",
+        "Matthew Smith",
+        "Kashif Saghar",
+        "Ryan Gray",
+        "Alexis Lewis",
+        "Kerr Melville",
+        "Ross Patrick"
+      ],
+      "additionalProductionCredits": ["Kerr Melville"],
+      "riders": [
+        "Ross Zajac",
+        "Oskar Waren",
+        "Billy Johnston",
+        "Seaghan 'Scotch' Crawley",
+        "Dasha Valentine",
+        "Brandon Pena",
+        "Lorn Geddes",
+        "Beth Walker",
+        "Chibuco Beardmore",
+        "Kai Shannon",
+        "Cameron Donaldson",
+        "Louise Taylor",
+        "Jordo Lightowler",
+        "Sean McDonald",
+        "Cammy Lambie",
+        "Kechnie"
+      ],
+      "riderCreditGroups": {
+        "treatmentTeam": [
+          "Ross Zajac",
+          "Oskar Waren",
+          "Billy Johnston",
+          "Seaghan 'Scotch' Crawley",
+          "Dasha Valentine",
+          "Brandon Pena",
+          "Lorn Geddes",
+          "Beth Walker"
+        ],
+        "friendsAndAdditionalAppearances": [
+          "Chibuco Beardmore",
+          "Kai Shannon",
+          "Cameron Donaldson",
+          "Louise Taylor",
+          "Jordo Lightowler",
+          "Sean McDonald",
+          "Cammy Lambie",
+          "Kechnie"
+        ]
+      },
+      "creditNotes": [
+        "The licensed Skateboarder's Companion premiere and its first-person Treatment feature supply the eight team riders, the friends roster, Dean Mackie's filming/editing credit and the two-year production history.",
+        "The exact film's end-title roll was visually reviewed to preserve Sean McDonald, Cammy Lambie and Kechnie beyond the abbreviated upload description and to document the supported additional camera credits.",
+        "SkateVideoSite independently classifies Blossom as a 2026 full-length and indexes all 16 skaters plus the production credits. It normalizes Scotch under Seaghan Crawley; this record preserves the first-party nickname and spelling. No unsupported formal director credit is asserted."
+      ],
+      "locations": [
+        "Glasgow, Scotland, UK",
+        "Fife, Scotland, UK",
+        "Edinburgh, Scotland, UK",
+        "Newcastle upon Tyne, England, UK",
+        "Aberdeen, Scotland, UK"
+      ],
+      "locationNote": "Treatment and Dean Mackie's first-person feature documents regular filming in Glasgow, Fife, Edinburgh and Scotland's central belt, a four-day Newcastle trip and an Aberdeen caption; no unsupported spot-by-spot itinerary is asserted.",
+      "duration": 1123,
+      "historicalContext": "Filmed across 2024 and 2025 while Treatment's ownership and team evolved, Blossom marks the young Glasgow collective's next chapter and introduced newer riders Beth Walker and Oskar Waren within a wider Scottish and northern-English scene film.",
+      "artworkNotes": "The exact authorized upload's 1920x1080 YouTube max-resolution artwork was visually reviewed on 2026-09-16. It is Kerr Melville's credited cover photograph of Oskar Waren kickflipping at night and contains no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/utf5Lmqwzow/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/utf5Lmqwzow/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=utf5Lmqwzow",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=utf5Lmqwzow",
+          "embedUrl": "https://www.youtube.com/embed/utf5Lmqwzow",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "The Skateboarder's Companion",
+          "channelUrl": "https://www.youtube.com/channel/UC_DZaZKGwOP2QePxUAwHESQ",
+          "publisherRelationship": "licensed editorial premiere with first-person Treatment feature",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T15:59:33.411Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "utf5Lmqwzow",
+          "url": "https://www.youtube.com/watch?v=utf5Lmqwzow",
+          "sourceDetails": "The Skateboarder's Companion hosts the authorized uninterrupted premiere and links its first-person Treatment feature. YouTube reports a 1,123.081-second runtime, February 25, 2026 publication and channelId UC_DZaZKGwOP2QePxUAwHESQ. The exact embed advanced 5.012 seconds at readyState 4 with no ad or media error.",
+          "retrievedAt": "2026-09-16T15:59:33.411Z"
+        },
+        {
+          "source": "the-skateboarders-companion",
+          "url": "https://theskateboarderscompanion.com/treatment-skateboards-blossom-full-video-photo-gallery/",
+          "sourceDetails": "First-person features by Treatment's Ross Zajac and filmmaker Dean Mackie document the two-year production, team changes, locations, premiere, complete supported roster and filming/editing credits.",
+          "retrievedAt": "2026-09-16T15:56:59.539Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/treatment-skateboards-blossom",
+          "sourceDetails": "Independent filmography classifies the release as a 2026 full-length and indexes all 16 skaters and 12 production credits. The exact official player controls runtime.",
+          "retrievedAt": "2026-09-16T15:57:00.610Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of The Skateboarder's Companion's authorized complete-film premiere, backed by its first-person Treatment/filmmaker feature; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Blossom (2026) - Treatment Skateboards Film",
+        "description": "Watch Treatment Skateboards' complete 18-minute Glasgow full-length Blossom, featuring eight team riders and eight documented friends."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    },
+    {
+      "slug": "dan-schulz-back-then-2026",
+      "aliases": ["Back Then", "Back Then by Dan Schulz"],
+      "type": "film",
+      "title": "BACK THEN",
+      "description": "Dan Schulz's 22-minute Berlin full-length brings together 24 skaters across generations and scenes, led by a part from German veteran Sami Harithi. Filmed and edited by Schulz, the independent video also features Tim Janke, Michi Mackrodt, Leo Romero, Wes Kremer, Valeri Rosomako and a broad Berlin-centered cast.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "dan-schulz",
+        "berlin",
+        "germany",
+        "independent-skate-video",
+        "european-skateboarding",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-04-26",
+      "producedBy": "Dan Schulz",
+      "directors": [],
+      "filmmakers": ["Dan Schulz"],
+      "cinematographers": ["Dan Schulz"],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Sami Harithi",
+        "Tim Janke",
+        "Michi Mackrodt",
+        "Christoph Friedmann",
+        "Leo Romero",
+        "Matheus Du Bronks",
+        "Wes Kremer",
+        "Jan Kliewer",
+        "Daniel Winkenhoff",
+        "Collin McLean",
+        "Giorgi Balkhamishivilli",
+        "Nepomuk Herok",
+        "Valentin Ott",
+        "Daniel Ledermann",
+        "Manu Bogner",
+        "Valeri Rosomako",
+        "Pascal Reif",
+        "Jacob Reid",
+        "Ilja Judizki",
+        "Tjark Thielker",
+        "Kappes Georgios",
+        "Matze Aigner",
+        "Tabo Löchelt",
+        "Sascha Scharf"
+      ],
+      "riderCreditGroups": {
+        "creditedAppearances": [
+          "Sami Harithi",
+          "Tim Janke",
+          "Michi Mackrodt",
+          "Christoph Friedmann",
+          "Leo Romero",
+          "Matheus Du Bronks",
+          "Wes Kremer",
+          "Jan Kliewer",
+          "Daniel Winkenhoff",
+          "Collin McLean",
+          "Giorgi Balkhamishivilli",
+          "Nepomuk Herok",
+          "Valentin Ott",
+          "Daniel Ledermann",
+          "Manu Bogner",
+          "Valeri Rosomako",
+          "Pascal Reif",
+          "Jacob Reid",
+          "Ilja Judizki",
+          "Tjark Thielker",
+          "Kappes Georgios",
+          "Matze Aigner",
+          "Tabo Löchelt",
+          "Sascha Scharf"
+        ]
+      },
+      "creditNotes": [
+        "Dan Schulz's filmmaker-channel upload explicitly identifies BACK THEN as a full-length, credits Schulz with filming and editing and supplies all 24 named appearances.",
+        "Free Skate Magazine and Skate Jawn independently identify the work as Schulz's Berlin full-length and repeat the complete roster, with Free highlighting Sami Harithi's featured part.",
+        "The official description thanks Nils Werner, David Lichtenauer, Dominik Grube and Nicklas Stinner without assigning formal roles, so they are preserved in source notes rather than promoted to production credits."
+      ],
+      "locations": ["Berlin, Germany"],
+      "locationNote": "Both Free Skate Magazine and Skate Jawn explicitly identify the film as a Berlin video; no unsupported spot-by-spot itinerary is asserted.",
+      "duration": 1333,
+      "historicalContext": "BACK THEN is Dan Schulz's 2026 Berlin full-length, linking a broad local and visiting cast with a centerpiece from German skate veteran Sami Harithi.",
+      "artworkNotes": "The exact filmmaker upload's 1920x1080 YouTube max-resolution artwork was visually reviewed on 2026-09-16. It uses dedicated orange-and-white BACK THEN title treatment and contains no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/U93AT8hD2ME/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/U93AT8hD2ME/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=U93AT8hD2ME",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=U93AT8hD2ME",
+          "embedUrl": "https://www.youtube.com/embed/U93AT8hD2ME",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "720 x576",
+          "channelUrl": "https://www.youtube.com/channel/UCrhQYDlprJpaPax61hG93OQ",
+          "publisherRelationship": "filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T15:59:33.411Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "U93AT8hD2ME",
+          "url": "https://www.youtube.com/watch?v=U93AT8hD2ME",
+          "sourceDetails": "Dan Schulz's 720 x576 channel hosts the uninterrupted complete film and supplies the full roster and Schulz's filming/editing credit. YouTube reports a 1,332.561-second runtime, April 26, 2026 publication and channelId UCrhQYDlprJpaPax61hG93OQ. The exact embed advanced 5.016 seconds at readyState 4 with no ad or media error.",
+          "retrievedAt": "2026-09-16T15:59:33.411Z"
+        },
+        {
+          "source": "free-skate-magazine",
+          "url": "https://www.freeskatemag.com/2026/04/27/back-then-by-dan-schulz/",
+          "sourceDetails": "Contemporary independent coverage identifies BACK THEN as Dan Schulz's new Berlin full-length, repeats the complete 24-skater roster and highlights Sami Harithi's part.",
+          "retrievedAt": "2026-09-16T15:57:01.545Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/back-then/",
+          "sourceDetails": "Independent release coverage identifies the film as a Dan Schulz full-length filmed in Berlin and independently repeats the complete roster.",
+          "retrievedAt": "2026-09-16T15:57:02.103Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Dan Schulz's own filmmaking channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "BACK THEN (2026) - Dan Schulz Skate Film",
+        "description": "Watch Dan Schulz's complete 22-minute Berlin full-length BACK THEN, featuring Sami Harithi and 23 additional documented skaters."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "blue-jeep-bandit-mental-vacation-2026",
+      "aliases": [
+        "Blue Jeep Bandit Productions - Mental Vacation",
+        "Blue Jeep Bandit - Mental Vacation"
+      ],
+      "type": "film",
+      "title": "Mental Vacation",
+      "description": "Blue Jeep Bandit Productions' 32-minute road full-length delivers seven billed full parts from Scott Bentley, Jose Cubero, Johnny Dowdy, Josh Frates, Jason Kisling, Joey Fisk and Jacob Krajewski, plus an unitemized friends section. Filmmaker Joey Fisk's crew covers serious mileage while keeping the production rooted in its independent, road-driven identity.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "blue-jeep-bandit-productions",
+        "joey-fisk",
+        "crew-video",
+        "road-video",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-06-20",
+      "producedBy": "Blue Jeep Bandit Productions",
+      "directors": [],
+      "filmmakers": ["Joey Fisk"],
+      "cinematographers": [
+        "Joey Fisk",
+        "Jacob Krajewski",
+        "Scott Bentley",
+        "Josh Frates",
+        "Jason Kisling",
+        "Johnny Dowdy"
+      ],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Scott Bentley",
+        "Jose Cubero",
+        "Johnny Dowdy",
+        "Josh Frates",
+        "Jason Kisling",
+        "Joey Fisk",
+        "Jacob Krajewski"
+      ],
+      "riderCreditGroups": {
+        "fullParts": [
+          "Scott Bentley",
+          "Jose Cubero",
+          "Johnny Dowdy",
+          "Josh Frates",
+          "Jason Kisling",
+          "Joey Fisk",
+          "Jacob Krajewski"
+        ],
+        "friendsSection": []
+      },
+      "creditNotes": [
+        "Joey Fisk's own upload supplies the seven full-part riders, identifies a separate friends section and credits Fisk with the video.",
+        "The exact end titles were visually reviewed and support additional filming by Jacob Krajewski, Scott Bentley, Josh Frates, Jason Kisling and Johnny Dowdy. The friends section is explicitly billed but its individual appearances are not enumerated by the first-party description, end titles or Lowcard, so no names are invented.",
+        "Lowcard independently identifies the Blue Jeep Bandit Productions full-length, Joey Fisk's production role, the same complete principal roster and the film's road-travel context. No unsupported formal director credit is asserted."
+      ],
+      "locations": [],
+      "locationNote": "The official and Lowcard descriptions establish a road production covering substantial mileage but do not publish a defensible city-by-city itinerary; no location is invented.",
+      "duration": 1945,
+      "historicalContext": "Mental Vacation continues Blue Jeep Bandit Productions' independent road-video output in 2026, pairing seven full parts with a separate friends section and a deliberately DIY presentation.",
+      "artworkNotes": "The exact filmmaker upload's 1920x1080 YouTube max-resolution artwork was visually reviewed on 2026-09-16. It uses dedicated blue MENTAL VACATION title treatment over a skate frame and contains no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/pLUS6VQWW6w/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/pLUS6VQWW6w/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=pLUS6VQWW6w",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=pLUS6VQWW6w",
+          "embedUrl": "https://www.youtube.com/embed/pLUS6VQWW6w",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Joey Fisk",
+          "channelUrl": "https://www.youtube.com/channel/UCtJj721zzR1axn2FQpZvCHA",
+          "publisherRelationship": "filmmaker channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T15:59:33.411Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "pLUS6VQWW6w",
+          "url": "https://www.youtube.com/watch?v=pLUS6VQWW6w",
+          "sourceDetails": "Filmmaker Joey Fisk's own channel hosts the uninterrupted complete film and supplies the principal roster and production credit. YouTube reports a 1,944.821-second runtime, June 20, 2026 publication and channelId UCtJj721zzR1axn2FQpZvCHA. The exact embed advanced 5.017 seconds at readyState 4 with no ad or media error; visually reviewed end titles supplied the additional camera credits.",
+          "retrievedAt": "2026-09-16T15:59:33.411Z"
+        },
+        {
+          "source": "lowcard",
+          "url": "https://www.lowcardmag.com/video/mental-vacation/",
+          "sourceDetails": "Contemporary independent coverage identifies the Blue Jeep Bandit Productions release as another full-length by Joey Fisk's crew, matches all seven principal riders and documents the road-mileage context.",
+          "retrievedAt": "2026-09-16T15:57:03.294Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on filmmaker Joey Fisk's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Mental Vacation (2026) - Blue Jeep Bandit Skate Film",
+        "description": "Watch Blue Jeep Bandit Productions' complete 32-minute Mental Vacation, featuring seven documented full parts and a friends section."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
