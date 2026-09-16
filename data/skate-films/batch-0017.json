@@ -1,0 +1,420 @@
+{
+  "source": "Official Welcome and Foundation company uploads plus Thrasher's authorized ASICS full-film upload, corroborated by first-party company material, filmmaker interviews and independent skate-film archives/publications",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-16T01:43:00.000Z",
+  "films": [
+    {
+      "slug": "welcome-sugar-high-2026",
+      "aliases": ["Welcome - Sugar High", "Welcome Skateboards: Sugar High"],
+      "type": "film",
+      "title": "Sugar High",
+      "description": "Welcome Skateboards' 23-minute team full-length centers the loose, social side of skating: friends, missed tricks, late nights and rolling without a scoreboard. The complete first-party billing preserves all 11 featured skaters, while Jeremy Creed receives the principal filming and editing credits.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "welcome-skateboards",
+        "team-video",
+        "street-skateboarding",
+        "united-states",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-01-09",
+      "producedBy": "Welcome Skateboards",
+      "directors": [],
+      "editors": ["Jeremy Creed"],
+      "cinematographers": ["Jeremy Creed", "Daniel Vargas"],
+      "riders": [
+        "Nathan Ko (Bevup)",
+        "Filthy Pond",
+        "Ryan Townley",
+        "Jakob Beaver",
+        "Jake Yanko",
+        "Laird Brunson",
+        "Kasci Woolf",
+        "Nora Vasconcellos",
+        "Jamie Sedo",
+        "Nick Garcia",
+        "Ryan Reyes"
+      ],
+      "riderCreditGroups": {
+        "featured": [
+          "Nathan Ko (Bevup)",
+          "Filthy Pond",
+          "Ryan Townley",
+          "Jakob Beaver",
+          "Jake Yanko",
+          "Laird Brunson",
+          "Kasci Woolf",
+          "Nora Vasconcellos",
+          "Jamie Sedo",
+          "Nick Garcia",
+          "Ryan Reyes"
+        ],
+        "newestWelcomeRecruits": ["Nick Garcia", "Ryan Reyes"]
+      },
+      "creditNotes": [
+        "Welcome's official upload supplies the complete 11-name featured billing and explicitly credits Jeremy Creed with principal filming and editing.",
+        "SkateVideoSite independently classifies Sugar High as a 24-minute full-length, confirms the soundtrack section structure, identifies Bevup as Nathan Ko and credits Jeremy Creed and Daniel Vargas as filmmakers.",
+        "TransWorld independently identifies all 11 appearances, distinguishes Nick Garcia and Ryan Reyes as Welcome's newest recruits and credits the video to Jeremy Creed.",
+        "Jake Yanko appears in Welcome's first-party featured billing and is retained even though SkateVideoSite's indexed skater count omits him."
+      ],
+      "locations": ["United States"],
+      "locationNote": "SkateVideoSite catalogs the film as a United States production; no narrower location list is asserted from the footage alone.",
+      "duration": 1410,
+      "historicalContext": "Welcome framed Sugar High as a deliberate celebration of friendship and fun over competitive escalation. Contemporary TransWorld coverage treated it as a new company full-length and highlighted its entire current squad.",
+      "artworkNotes": "The exact official upload's 1280x720 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is a dedicated neon Sugar High title card from the authorized film, with no trailer, episode or event labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/KwPaO-FECnU/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/KwPaO-FECnU/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=KwPaO-FECnU",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=KwPaO-FECnU",
+          "embedUrl": "https://www.youtube.com/embed/KwPaO-FECnU",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "WELCOME SKATEBOARDS",
+          "channelUrl": "https://www.youtube.com/channel/UCuIzjpZgIbloBFbxejOYA4w",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "KwPaO-FECnU",
+          "url": "https://www.youtube.com/watch?v=KwPaO-FECnU",
+          "sourceDetails": "Welcome Skateboards' official channel hosts the uninterrupted complete film and supplies all 11 featured names plus Jeremy Creed's principal filming/editing credit. YouTube reports status OK, playableInEmbed true, a 1,410-second runtime, channelId UCuIzjpZgIbloBFbxejOYA4w and January 9, 2026 publication. Controlled Chrome measured 1,409.561 seconds and advanced the exact player 4.538 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "welcome-skateboards",
+          "url": "https://welcomeskateboards.com/blogs/news/sugarhigh",
+          "sourceDetails": "Welcome's first-party film page embeds the official upload and states the film's friendship-and-fun creative intent.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/welcome-sugar-high",
+          "sourceDetails": "Independent filmography classifies the release as a 24-minute 2026 Welcome full-length, documents the soundtrack sections, resolves Bevup to Nathan Ko and credits Jeremy Creed and Daniel Vargas as filmmakers.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/welcome-skateboards-video-sugar-high",
+          "sourceDetails": "Independent contemporary release coverage identifies all 11 featured skaters, calls Sugar High a new full-length and credits the video to Jeremy Creed.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Welcome Skateboards' own company channel (channelId UCuIzjpZgIbloBFbxejOYA4w), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Sugar High (2026) - Welcome Skateboards Full Film",
+        "description": "Watch Welcome Skateboards' complete Sugar High team film with all 11 featured riders and supported filmmaker credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "foundation-today-tomorrow-forever-2026",
+      "aliases": ["Foundation - Today Tomorrow Forever", "Today. Tomorrow. Forever."],
+      "type": "film",
+      "title": "Today Tomorrow Forever",
+      "description": "Foundation Skateboards' 22-minute team film was directed and edited by Don Luong after roughly two years of work. Six principal parts carry the film, while an F Block montage adds four further credited appearances; the official end titles also preserve 17 additional camera contributors.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "foundation-skateboards",
+        "team-video",
+        "street-skateboarding",
+        "united-states",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-05-22",
+      "producedBy": "Foundation Skateboards",
+      "directors": ["Don Luong"],
+      "editors": ["Don Luong"],
+      "cinematographers": ["Don Luong"],
+      "additionalFilming": [
+        "Ed Sanchez",
+        "Nick Cohen",
+        "Jacob Nunez",
+        "Nando Yiv",
+        "Phil Williamson",
+        "Andrew Real",
+        "Junktown",
+        "Alex Kissinger",
+        "Josh Peacock",
+        "Peter Freeman",
+        "John Martin",
+        "Justin Reynolds",
+        "Trevor McClung",
+        "Joseph Licas",
+        "Mike Sinclair",
+        "Myles Willard",
+        "Raymond Ramdass"
+      ],
+      "riders": [
+        "Jessie Darnall",
+        "Aidan Campbell",
+        "Tanner Lawler",
+        "Ruby Lilley",
+        "Austin Heilman",
+        "Jesse Lindloff",
+        "Dakota Servold",
+        "Ryan Hamburg",
+        "Julian Lewis",
+        "Tania Cruz"
+      ],
+      "riderCreditGroups": {
+        "principalParts": [
+          "Jessie Darnall",
+          "Aidan Campbell",
+          "Tanner Lawler",
+          "Ruby Lilley",
+          "Austin Heilman",
+          "Jesse Lindloff"
+        ],
+        "fBlockSupportingAppearances": ["Dakota Servold", "Ryan Hamburg", "Julian Lewis", "Tania Cruz"]
+      },
+      "creditNotes": [
+        "Foundation's official upload supplies the six principal riders and the release date.",
+        "A visual review of the official end titles explicitly confirms 'Directed and Edited by Don Luong,' identifies the four additional F Block appearances and preserves all 17 names on the camera card.",
+        "SkateVideoSite independently classifies the release as a 22-minute full-length, credits Don Luong as principal filmmaker and confirms the six principal sections and their order.",
+        "The PLATFRM's behind-the-scenes feature independently documents the two-year production and identifies Don Luong behind the lens."
+      ],
+      "locations": ["United States"],
+      "locationNote": "SkateVideoSite catalogs the film as a United States production. The official thumbnail visibly identifies one Encinitas location, but no unsupported comprehensive city list is inferred.",
+      "duration": 1341,
+      "historicalContext": "The two-year project was Foundation's sixth video in ten years. Its title revives the dedication from Foundation's 2001 Art Bars: Subtitles and Seagulls, while the premiere marked Ruby Lilley's promotion to professional status.",
+      "premiereNotes": ["The film premiered in May 2026 before its official online release on May 22."],
+      "artworkNotes": "The exact official upload exposes a 480x360 YouTube thumbnail rather than a valid max-resolution image. It was visually reviewed on 2026-09-16 and shows a skater above the Encinitas City Hall sign from the film, with no misleading trailer, episode or event text.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/KU0FEvlPN9M/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/KU0FEvlPN9M/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=KU0FEvlPN9M",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=KU0FEvlPN9M",
+          "embedUrl": "https://www.youtube.com/embed/KU0FEvlPN9M",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Foundation Skateboards",
+          "channelUrl": "https://www.youtube.com/channel/UChjp02eA5KGjf0vGiNsMOMQ",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "KU0FEvlPN9M",
+          "url": "https://www.youtube.com/watch?v=KU0FEvlPN9M",
+          "sourceDetails": "Foundation Skateboards' official channel hosts the uninterrupted complete film and bills the six principal riders. YouTube reports status OK, playableInEmbed true, a 1,341-second runtime, channelId UChjp02eA5KGjf0vGiNsMOMQ and May 22, 2026 publication. Controlled Chrome measured 1,340.761 seconds and advanced the exact player 4.015 seconds at readyState 4 without media error. A controlled end-credit review confirmed Don Luong as director/editor, four F Block supporting appearances and 17 additional camera contributors.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/foundation-today-tomorrow-forever",
+          "sourceDetails": "Independent filmography classifies the release as a 22-minute 2026 Foundation full-length, credits Don Luong and catalogs the six principal riders and section order.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "the-platfrm-via-skate-sonr",
+          "url": "https://skatesonr.com/videos/yt_channel_video/2026/05/15/this_is_how_foundation_skateboards_today_tomorrow_forever_video_was_made-543930/",
+          "sourceDetails": "Independent behind-the-scenes feature documents the two-year production, repeats all six principal riders and identifies Don Luong behind the lens.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "simple-magic",
+          "url": "https://www.simplemagic.ca/today-tomorrow-and-also-forever/",
+          "sourceDetails": "Contemporary Don Luong interview documents the film's creative direction, Jessie Darnall's first major video, Ruby Lilley's pro surprise, the title's Art Bars origin and Foundation's six-video decade.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Foundation Skateboards' own company channel (channelId UChjp02eA5KGjf0vGiNsMOMQ), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Today Tomorrow Forever (2026) - Foundation Skate Film",
+        "description": "Watch Foundation Skateboards' complete Don Luong film with six principal parts, four supporting appearances and full camera credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "asics-a-guided-tour-2025",
+      "aliases": ["ASICS' A Guided Tour Full Length", "ASICS: A Guided Tour", "Asics - A Guided Tour"],
+      "type": "film",
+      "title": "A Guided Tour",
+      "description": "ASICS Skateboarding's 25-minute global full-length was directed and edited by Jacob Harris, with Jake Gascoyne shaping its creative framework. Five skaters receive principal parts and 20 more appear across montage and supporting sections filmed over eight months from Helsinki and Okinawa to Los Angeles and New York City.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "asics-skateboarding",
+        "team-video",
+        "street-skateboarding",
+        "helsinki",
+        "okinawa",
+        "los-angeles",
+        "new-york-city",
+        "2020s"
+      ],
+      "releaseYear": 2025,
+      "releaseDate": "2025-09-17",
+      "producedBy": "ASICS Skateboarding",
+      "directors": ["Jacob Harris"],
+      "editors": ["Jacob Harris"],
+      "cinematographers": ["Jacob Harris"],
+      "creativeContributors": ["Jake Gascoyne"],
+      "riders": [
+        "Jaakko Ojanen",
+        "Kyonosuke Yamashita",
+        "Shay Sandiford",
+        "Evan Wasser",
+        "Victor Campillo",
+        "Akwasi Owusu",
+        "Zander Mitchell",
+        "Kieran Woolley",
+        "Tai Wepa",
+        "Atali Mendes",
+        "Amin Sharif",
+        "Susie Heath",
+        "Luca Hirata",
+        "Max Jang",
+        "Jake Lemonds",
+        "Nico Marti",
+        "Mark Humienik",
+        "Zak Anders",
+        "Trung Nguyen",
+        "Alan Bell",
+        "Monica Torres",
+        "Marca Barbier",
+        "Andrea Benitez",
+        "Justin Hearn",
+        "Davey Sayles"
+      ],
+      "riderCreditGroups": {
+        "principalParts": ["Jaakko Ojanen", "Kyonosuke Yamashita", "Shay Sandiford", "Evan Wasser", "Victor Campillo"],
+        "montageAndSupportingAppearances": [
+          "Akwasi Owusu",
+          "Zander Mitchell",
+          "Kieran Woolley",
+          "Tai Wepa",
+          "Atali Mendes",
+          "Amin Sharif",
+          "Susie Heath",
+          "Luca Hirata",
+          "Max Jang",
+          "Jake Lemonds",
+          "Nico Marti",
+          "Mark Humienik",
+          "Zak Anders",
+          "Trung Nguyen",
+          "Alan Bell",
+          "Monica Torres",
+          "Marca Barbier",
+          "Andrea Benitez",
+          "Justin Hearn",
+          "Davey Sayles"
+        ]
+      },
+      "creditNotes": [
+        "Contemporary release coverage identifies five principal parts and 20 additional montage/supporting appearances; all 25 are retained and distinguished here.",
+        "SkateVideoSite independently classifies the release as a 26-minute ASICS full-length, credits Jacob Elliott Harris as principal filmmaker and corroborates the section structure.",
+        "Jacob Harris' first-person VHSMAG interview directly discusses filming and editing A Guided Tour and explains its wellness framing.",
+        "Premiere coverage explicitly credits Jacob Harris as director and Jake Gascoyne with shaping the creative framework."
+      ],
+      "locations": [
+        "Helsinki, Finland",
+        "Okinawa, Japan",
+        "Los Angeles, California, USA",
+        "New York City, New York, USA"
+      ],
+      "locationNote": "Contemporary premiere coverage explicitly identifies the four filming destinations and states that production spanned eight months.",
+      "duration": 1521,
+      "historicalContext": "A Guided Tour was ASICS Skateboarding's third full-length and one of its most ambitious projects, introducing Jaakko Ojanen, Kyonosuke Yamashita, Evan Wasser and Victor Campillo to the roster through a satirical but sincere wellness-themed travel framework.",
+      "premiereNotes": ["A community premiere took place on September 13, 2025 before the worldwide online release on September 17."],
+      "artworkNotes": "The authorized Thrasher upload's 1280x720 max-resolution YouTube thumbnail was visually reviewed on 2026-09-16. It is an unaltered landscape action frame from the exact full film, with no trailer, episode or event text.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/qkCyq5d1_68/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/qkCyq5d1_68/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=qkCyq5d1_68",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=qkCyq5d1_68",
+          "embedUrl": "https://www.youtube.com/embed/qkCyq5d1_68",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/channel/UCt16NSYjauKclK67LCXvQyA",
+          "publisherRelationship": "authorized skate-media publisher for the complete ASICS film",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "qkCyq5d1_68",
+          "url": "https://www.youtube.com/watch?v=qkCyq5d1_68",
+          "sourceDetails": "Thrasher's authorized channel hosts the uninterrupted complete ASICS film. YouTube reports status OK, playableInEmbed true, a 1,521-second runtime, channelId UCt16NSYjauKclK67LCXvQyA and September 17, 2025 publication. Controlled Chrome measured 1,521.201 seconds and advanced the exact player 4.008 seconds at readyState 4 without media error.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "vhsmag",
+          "url": "https://www.vhsmag.com/voice-of-freedom/jacob-harris-en/",
+          "sourceDetails": "First-person filmmaker interview identifies A Guided Tour as Jacob Harris' ASICS project and directly discusses its concept, filming, editing, music and structure.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "empr",
+          "url": "https://empr.store/en/blogs/empr-en/a-guided-tour-recap-en",
+          "sourceDetails": "Contemporary ASICS premiere partner coverage calls the film a 25-minute global odyssey and the company's third full-length, credits director Jacob Harris and creative contributor Jake Gascoyne, identifies the eight-month production window and names Helsinki, Okinawa, Los Angeles and New York City.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "note-skate-shop",
+          "url": "https://www.noteshop.co.uk/blogs/post-office/asics-a-guided-tour",
+          "sourceDetails": "Independent contemporary release coverage explicitly distinguishes the five principal parts from 20 additional appearances, providing the complete 25-skater billing.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/asics-a-guided-tour",
+          "sourceDetails": "Independent filmography classifies the release as a 26-minute 2025 ASICS full-length, credits Jacob Elliott Harris and corroborates the principal and montage section structure.",
+          "retrievedAt": "2026-09-16T01:43:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete ASICS film from Thrasher's authorized skate-media publisher channel (channelId UCt16NSYjauKclK67LCXvQyA), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "A Guided Tour (2025) - ASICS Skateboarding Full Film",
+        "description": "Watch ASICS Skateboarding's complete Jacob Harris film with five principal parts, 20 supporting appearances and global location credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    }
+  ]
+}

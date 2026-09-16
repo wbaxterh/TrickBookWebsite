@@ -26,7 +26,10 @@
         "Reed Stark",
         "Alex Donnachie"
       ],
-      "locations": ["Minneapolis, Minnesota, United States", "Tel Aviv, Israel"],
+      "locations": [
+        "Minneapolis, Minnesota, United States",
+        "Tel Aviv, Israel"
+      ],
       "duration": 3072,
       "thumbnails": {
         "poster": "https://i.ytimg.com/vi/daC2EJcRlFY/maxresdefault.jpg",

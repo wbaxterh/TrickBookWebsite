@@ -218,7 +218,12 @@
         "Dan Coller",
         "Nathan Williams"
       ],
-      "locations": ["United States", "Australia", "Canada", "Europe"],
+      "locations": [
+        "United States",
+        "Australia",
+        "Canada",
+        "Europe"
+      ],
       "duration": 1827,
       "thumbnails": {
         "poster": "https://i.ytimg.com/vi/ijKycMD-Zy0/maxresdefault.jpg",
