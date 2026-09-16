@@ -1,0 +1,282 @@
+{
+  "source": "Official Toebock complete-film upload and Free Skate Magazine's authorized Piss Drunx release, corroborated by first-party project pages, SkateVideoSite and contemporary independent skate media",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-16T09:03:00.000Z",
+  "films": [
+    {
+      "slug": "toebock-american-folklore-2026",
+      "aliases": ["American Folklore", "Toebock American Folklore", "Toebock - American Folklore"],
+      "type": "film",
+      "title": "American Folklore",
+      "description": "Adam Crew and Fred Zahina's 32-minute Toebock road film follows a loose family of West Coast skateboarders from Northern California through Oregon to Washington's Kitsap County. Six named sections anchor a broader scene roster as the crew travels through Santa Rosa, Bodega Bay, Bremerton and the Olympic Peninsula.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "toebock",
+        "road-film",
+        "independent-skate-video",
+        "west-coast",
+        "california",
+        "oregon",
+        "washington",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-10",
+      "producedBy": "Toebock Media Group",
+      "directors": [],
+      "filmmakers": ["Adam Crew", "Fred Zahina"],
+      "cinematographers": [
+        "Adam Crew",
+        "Fred Zahina",
+        "Colton Light",
+        "Ben Ericson",
+        "Drew Cercley"
+      ],
+      "additionalProductionCredits": ["Ben Erickson", "Neil Hager", "Mike Rusczyk"],
+      "riders": [
+        "Bobby Dodd",
+        "Jacob Scherrer",
+        "Connor Ferguson",
+        "Storm Fogg",
+        "Steve Perdue",
+        "Adam Crew",
+        "Tyler Price",
+        "Angel Ramierez",
+        "Matt Kehoe",
+        "Josh Mohs",
+        "Nich Kunz",
+        "Julian Quevedo",
+        "Travis Knight",
+        "Ryan Gomez",
+        "Kevin McGowan",
+        "Steven Tran",
+        "Eddie Munz",
+        "Antonio Gilmore",
+        "Henry Mendonza",
+        "Twan Celeri"
+      ],
+      "riderCreditGroups": {
+        "namedSections": [
+          "Bobby Dodd",
+          "Steven Tran",
+          "Jacob Scherrer",
+          "Storm Fogg",
+          "Connor Ferguson",
+          "Steve Perdue"
+        ],
+        "independentlyIndexedAppearances": [
+          "Adam Crew",
+          "Tyler Price",
+          "Angel Ramierez",
+          "Matt Kehoe",
+          "Josh Mohs",
+          "Nich Kunz",
+          "Julian Quevedo",
+          "Travis Knight",
+          "Ryan Gomez",
+          "Kevin McGowan"
+        ],
+        "additionalSectionAppearances": [
+          "Eddie Munz",
+          "Antonio Gilmore",
+          "Henry Mendonza",
+          "Twan Celeri"
+        ],
+        "collectiveCredit": ["Foley Street crew"]
+      },
+      "creditNotes": [
+        "Toebock's official upload supplies six timestamped named sections and credits Adam Crew and Fred Zahina with the film, Adam Crew as editor, Colton Light, Ben Ericson and Drew Cercley with additional video, Fred Zahina with Super 8, Ben Erickson with 16mm and Neil Hager with the main title.",
+        "SkateVideoSite independently classifies the release as a 32-minute 2026 full-length and indexes 16 named people plus the collective Foley Street section; its soundtrack detail supports four further named appearances.",
+        "The source spells Ben's surname both Ericson and Erickson in separate credit roles; both source spellings are preserved rather than silently conflated. No unsupported formal director credit is asserted."
+      ],
+      "locations": [
+        "San Francisco Bay Area, California, USA",
+        "Santa Rosa, California, USA",
+        "Bodega Bay, California, USA",
+        "Oregon, USA",
+        "Bremerton, Washington, USA",
+        "Kitsap County, Washington, USA",
+        "Olympic Peninsula, Washington, USA"
+      ],
+      "locationNote": "The official project page describes the route from Northern California's Bay Area through Oregon to Kitsap County and identifies Santa Rosa, Bodega Bay, Bremerton and Olympic Peninsula imagery; no more specific itinerary is asserted.",
+      "duration": 1952,
+      "historicalContext": "American Folklore is Toebock's final chapter in a long-running Pacific Northwest filmography and preserves Adam Crew's last skateboarding clips. It premiered in theaters and clubs for roughly six months before its February 2026 online release.",
+      "artworkNotes": "The exact official upload's 1280x720 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is dedicated black-and-white road-film artwork with a skater beside the Toebock van, a West Coast map and large yellow AMERICAN FOLKLORE title treatment.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/goEPQHAGipc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/goEPQHAGipc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=goEPQHAGipc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=goEPQHAGipc",
+          "embedUrl": "https://www.youtube.com/embed/goEPQHAGipc",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Toebock",
+          "channelUrl": "https://www.youtube.com/channel/UCBXpyEzW08n_6wdzHtouF1A",
+          "publisherRelationship": "production-company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T09:08:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "goEPQHAGipc",
+          "url": "https://www.youtube.com/watch?v=goEPQHAGipc",
+          "sourceDetails": "Toebock's own channel hosts the uninterrupted complete film and provides its timestamped sections, synopsis and full supported production credits. YouTube reports status OK, playableInEmbed true, channelId UCBXpyEzW08n_6wdzHtouF1A, a 1,952-second runtime and February 10, 2026 publication. The exact source player was separately observed advancing 5.019 seconds at readyState 4 during discovery.",
+          "retrievedAt": "2026-09-16T09:08:00.000Z"
+        },
+        {
+          "source": "toebock",
+          "url": "https://www.toebock.com/videos/toebock-american-folklore/",
+          "sourceDetails": "First-party project page identifies the film by Fred Zahina and Adam Crew, the featured principals and the West Coast route, and links the same exact complete-film player and physical release.",
+          "retrievedAt": "2026-09-16T09:03:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/toebock-american-folklore",
+          "sourceDetails": "Independent filmography classifies American Folklore as a 32-minute 2026 full-length, preserves the timestamped structure, indexes 16 named people plus the Foley Street collective and corroborates the production credits.",
+          "retrievedAt": "2026-09-16T09:03:00.000Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/toebock-american-folklore-online-release",
+          "sourceDetails": "Contemporary independent coverage documents the online release, six-month premiere run, 32-minute runtime, Adam Crew's final clips and the supported camera, film-format, title and editing credits.",
+          "retrievedAt": "2026-09-16T09:03:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Toebock Media Group's own channel, using the exact upload's official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "American Folklore (2026) - Toebock Full Skate Film",
+        "description": "Watch Toebock's complete 32-minute road film American Folklore, traveling from Northern California through Oregon to Washington with 20 documented skaters."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "piss-drunx-forghetaboutit-2026",
+      "aliases": ["FORGHETABOUTIT", "PISSDRUNX - FORGHETABOUTIT", "Piss Drunx - FORGHETABOUTIT"],
+      "type": "film",
+      "title": "FORGHETABOUTIT",
+      "description": "Dustin Dollin's 28-minute Piss Drunx full-length cuts six street parts through a deliberately chaotic mix of formats and frame rates. Matisse Banc, Enzo Morel, Maite Steenhoudt, Jamie Tancowny, Jeroen Bruggeman and Alexey Krasniy carry the film from its opening section through the 22-minute outro.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "piss-drunx",
+        "pd-skateboards",
+        "dustin-dollin",
+        "street-skateboarding",
+        "free-skate-mag",
+        "barcelona",
+        "new-york-city",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-01-07",
+      "producedBy": "Piss Drunx",
+      "directors": [],
+      "filmmakers": ["Dustin Dollin"],
+      "cinematographers": [],
+      "additionalProductionCredits": [
+        "Marc Leblanc",
+        "Harvey Brepson",
+        "Max Pack",
+        "Thomas Curteille",
+        "Griffhin Deschijnck",
+        "Harry Billiet",
+        "Ben Daeleman",
+        "Grant 'Skippy' Levy",
+        "Tyler Bamdas"
+      ],
+      "riders": [
+        "Matisse Banc",
+        "Enzo Morel",
+        "Maite Steenhoudt",
+        "Jamie Tancowny",
+        "Jeroen Bruggeman",
+        "Alexey Krasniy"
+      ],
+      "riderCreditGroups": {
+        "timestampedParts": [
+          "Matisse Banc",
+          "Enzo Morel",
+          "Maite Steenhoudt",
+          "Jamie Tancowny",
+          "Jeroen Bruggeman",
+          "Alexey Krasniy"
+        ]
+      },
+      "creditNotes": [
+        "Free Skate Magazine's own upload supplies all six timestamped parts and explicitly credits Dustin Dollin as editor.",
+        "SkateVideoSite independently classifies the release as a 28-minute full-length, matches all six riders and preserves nine additional production contributors without assigning unsupported formal roles.",
+        "Free Skate Magazine's release article identifies the project as a Dustin Dollin production and a PD Skateboards full-length."
+      ],
+      "locations": ["Barcelona, Catalonia, Spain", "New York City, New York, USA"],
+      "locationNote": "Free Skate Magazine specifically describes Alexey Krasniy's section as spanning Barcelona to New York City; no broader film-wide itinerary is asserted.",
+      "duration": 1693,
+      "historicalContext": "FORGHETABOUTIT extends the Piss Drunx film lineage with a new multinational crew and Dollin's deliberately rough, multi-format editing style, pairing established names with emerging street talent.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is a clean full-frame skate still from the film with no trailer, episode or compilation labeling; the title and full-length context are supplied by the upload and release article.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/-zBX07oTQok/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/-zBX07oTQok/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=-zBX07oTQok",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=-zBX07oTQok",
+          "embedUrl": "https://www.youtube.com/embed/-zBX07oTQok",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Freeskatemag",
+          "channelUrl": "https://www.youtube.com/channel/UCTuYNudPxr5rAatvZg8Zndg",
+          "publisherRelationship": "authorized editorial premiere / licensed skate-media publisher",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T09:08:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "-zBX07oTQok",
+          "url": "https://www.youtube.com/watch?v=-zBX07oTQok",
+          "sourceDetails": "Free Skate Magazine's own channel hosts the uninterrupted complete Piss Drunx release and supplies all six timestamped parts plus Dustin Dollin's edit credit. YouTube reports status OK, playableInEmbed true, channelId UCTuYNudPxr5rAatvZg8Zndg, a 1,693-second runtime and January 7, 2026 publication. The exact source player was separately observed advancing 5.020 seconds at readyState 4 during discovery.",
+          "retrievedAt": "2026-09-16T09:08:00.000Z"
+        },
+        {
+          "source": "free-skate-magazine",
+          "url": "https://www.freeskatemag.com/2026/01/07/pissdrunx-forghetaboutit/",
+          "sourceDetails": "The publisher's release page embeds the same exact full film, calls it a new Dustin Dollin production and describes the six principal sections and PD Skateboards context.",
+          "retrievedAt": "2026-09-16T09:03:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/piss-drunx-forghetaboutit",
+          "sourceDetails": "Independent filmography classifies FORGHETABOUTIT as a 28-minute 2026 Piss Drunx full-length, matches the six timestamped riders, confirms Dollin's edit and indexes nine additional production contributors.",
+          "retrievedAt": "2026-09-16T09:03:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of Free Skate Magazine's authorized complete-film premiere, published alongside its own release article with the first-party section and edit credits; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "FORGHETABOUTIT (2026) - Piss Drunx Full Skate Film",
+        "description": "Watch the complete 28-minute Piss Drunx film FORGHETABOUTIT, edited by Dustin Dollin and featuring six full street parts."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    }
+  ]
+}
