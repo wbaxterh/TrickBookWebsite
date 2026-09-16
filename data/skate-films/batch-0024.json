@@ -1,0 +1,502 @@
+{
+  "source": "Official and brand-authorized complete-film uploads, corroborated by SkateVideoSite, Rollersnakes, Skate Jawn and Quartersnacks",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-16T14:32:08.000Z",
+  "films": [
+    {
+      "slug": "awaysted-into-otherness-2026",
+      "aliases": ["Awaysted - Into Otherness", "Awaysted presents Into Otherness"],
+      "type": "film",
+      "title": "Into Otherness",
+      "description": "Awaysted's 16-minute San Francisco-based full-length follows Nate Guest, Myles Tussey and Blake Norris through individual parts, with appearances by Elijah Akerley, Carlos Sanchez and Takuto Nashida. Filmed from 2024 through 2025, it carries the crew from Las Vegas to Osaka and back to San Francisco.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "awaysted",
+        "san-francisco",
+        "las-vegas",
+        "osaka",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-09",
+      "producedBy": "Awaysted",
+      "directors": [],
+      "filmmakers": ["Adam Anorga"],
+      "cinematographers": [
+        "Adam Anorga",
+        "Sean Cagney",
+        "Israel Garcia II",
+        "Cody Thompson",
+        "Kaylanne Diaz",
+        "Calvin Millar",
+        "George Kousoulis",
+        "Milton Martinez"
+      ],
+      "additionalProductionCredits": ["Eric Palozzolo"],
+      "riders": [
+        "Nate Guest",
+        "Myles Tussey",
+        "Blake Norris",
+        "Elijah Akerley",
+        "Carlos Sanchez",
+        "Takuto Nashida"
+      ],
+      "riderCreditGroups": {
+        "timestampedParts": ["Nate Guest", "Myles Tussey", "Blake Norris"],
+        "specialAppearances": ["Elijah Akerley", "Carlos Sanchez", "Takuto Nashida"]
+      },
+      "creditNotes": [
+        "Awaysted's official upload supplies the three timestamped principal parts, all three special appearances, Adam Anorga's video credit, seven additional filming credits and Eric Palozzolo's thumbnail credit.",
+        "SkateVideoSite independently classifies the release as a 2026 Awaysted full-length, matches the principal roster and documents its San Francisco base.",
+        "No unsupported formal director or editor credit is asserted."
+      ],
+      "locations": ["San Francisco, California, USA", "Las Vegas, Nevada, USA", "Osaka, Japan"],
+      "locationNote": "The official film description explicitly frames the production as San Francisco-based and documents travel from Las Vegas to Osaka and back to San Francisco; no unsupported spot-by-spot itinerary is asserted.",
+      "duration": 988,
+      "historicalContext": "Filmed during 2024 and 2025, Into Otherness is an independent Awaysted road video that connects a San Francisco home base with trips through Las Vegas and Osaka while centering three full parts.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It shows a skate frame on a concrete bank with dedicated AWAYSTED / Into Otherness title treatment and contains no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/IuySBDnrN7Q/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/IuySBDnrN7Q/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=IuySBDnrN7Q",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=IuySBDnrN7Q",
+          "embedUrl": "https://www.youtube.com/embed/IuySBDnrN7Q",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "AWAYSTED",
+          "channelUrl": "https://www.youtube.com/channel/UCNyGmMVkgoRbN55s9AXzZ0g",
+          "publisherRelationship": "brand / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "IuySBDnrN7Q",
+          "url": "https://www.youtube.com/watch?v=IuySBDnrN7Q",
+          "sourceDetails": "Awaysted's own channel hosts the uninterrupted complete film and supplies the complete supported rider and production credits. YouTube reports a 987.761-second runtime, February 9, 2026 publication and channelId UCNyGmMVkgoRbN55s9AXzZ0g. The exact main player advanced 4.945 seconds at readyState 4 with no ad or media error.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/awaysted-into-otherness",
+          "sourceDetails": "Independent filmography corroborates the 2026 Awaysted full-length classification, Adam Anorga's film credit, the principal roster and San Francisco setting. Its rounded runtime conflicts with the exact player, so the measured official-player runtime controls.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Awaysted's own channel, using the exact upload's official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Into Otherness (2026) - Awaysted Skate Film",
+        "description": "Watch Awaysted's complete 16-minute skate film Into Otherness, featuring Nate Guest, Myles Tussey, Blake Norris and three documented special appearances."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "baghead-crew-repent-2026",
+      "aliases": ["REPENT by Baghead Crew", "Baghead Crew - REPENT"],
+      "type": "film",
+      "title": "REPENT",
+      "description": "Baghead Crew's 24-minute transatlantic full-length builds seven principal parts and cameos around a deep 41-rider guest roster spanning the United Kingdom and United States. Filmed and edited by Forde Brookfield, REPENT moves from the core crew to appearances by Tony Hawk, Andy Anderson, Jason Adams, Ace Pelka and many more without losing its DIY identity.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "baghead-crew",
+        "united-kingdom",
+        "united-states",
+        "crew-video",
+        "independent-skate-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-22",
+      "producedBy": "Baghead Crew",
+      "directors": [],
+      "filmmakers": ["Forde Brookfield"],
+      "cinematographers": ["Forde Brookfield", "Bail Gun Gary", "Matt Tomasello", "Ted Purtell"],
+      "additionalProductionCredits": ["Scorpion Dagger", "James Wilson"],
+      "riders": [
+        "Matt Tomasello",
+        "John Benton",
+        "Joe Markham",
+        "Dead Dave",
+        "Rasheed Osman",
+        "Will Sayer",
+        "Chris Atherton",
+        "Tony Hawk",
+        "Andy Anderson",
+        "Christopher Hiett",
+        "Jason Adams",
+        "Ace Pelka",
+        "Tom Karangelov",
+        "Justin Reynolds",
+        "Colin Fiske",
+        "Abe Dubin",
+        "Justis Walton",
+        "Nick Murray",
+        "Sam Helwig",
+        "Tony DeRosa",
+        "Christopher Botsch",
+        "Rob Hall",
+        "Twiggy",
+        "Dave Vey",
+        "Wesley Morgan",
+        "Ronny Calow",
+        "Christopher Price",
+        "Andy Pike",
+        "Denver Adams",
+        "Nick Binnington",
+        "Thomas Geoghegan",
+        "Jack Wisialowski",
+        "Zak Papatsoris",
+        "Frankie Nash",
+        "Leif Hauge",
+        "Dave Lewis",
+        "Ray Gurz",
+        "Tom Meyer",
+        "Matty Reddy",
+        "Will Mux",
+        "Rob Whiston",
+        "Brendan Watson",
+        "Amanda Perez",
+        "Mark Radden",
+        "Tim Wolf",
+        "Forde Brookfield",
+        "Lola Sayer",
+        "Ness Sayer"
+      ],
+      "riderCreditGroups": {
+        "principalPartsAndCameos": [
+          "Matt Tomasello",
+          "John Benton",
+          "Joe Markham",
+          "Dead Dave",
+          "Rasheed Osman",
+          "Will Sayer",
+          "Chris Atherton"
+        ],
+        "specialGuestAppearances": [
+          "Tony Hawk",
+          "Andy Anderson",
+          "Christopher Hiett",
+          "Jason Adams",
+          "Ace Pelka",
+          "Tom Karangelov",
+          "Justin Reynolds",
+          "Colin Fiske",
+          "Abe Dubin",
+          "Justis Walton",
+          "Nick Murray",
+          "Sam Helwig",
+          "Tony DeRosa",
+          "Christopher Botsch",
+          "Rob Hall",
+          "Twiggy",
+          "Dave Vey",
+          "Wesley Morgan",
+          "Ronny Calow",
+          "Christopher Price",
+          "Andy Pike",
+          "Denver Adams",
+          "Nick Binnington",
+          "Thomas Geoghegan",
+          "Jack Wisialowski",
+          "Zak Papatsoris",
+          "Frankie Nash",
+          "Leif Hauge",
+          "Dave Lewis",
+          "Ray Gurz",
+          "Tom Meyer",
+          "Matty Reddy",
+          "Will Mux",
+          "Rob Whiston",
+          "Brendan Watson",
+          "Amanda Perez",
+          "Mark Radden",
+          "Tim Wolf",
+          "Forde Brookfield",
+          "Lola Sayer",
+          "Ness Sayer"
+        ]
+      },
+      "creditNotes": [
+        "Baghead Crew's official upload supplies the seven principal names, 41 additional credited appearances, Forde Brookfield's filming/editing credit, the additional camera contributors, Scorpion Dagger's intro animation and James Wilson's artwork credit.",
+        "SkateVideoSite independently resolves credited nicknames and spellings, including Orange Man as Abe Dubin, Milk Snake as Justis Walton, Big as Nick Murray, Radman as Mark Radden and Floppy Tim as Tim Wolf; it identifies Dave Vey where the first-party description uses The King of Freestyle.",
+        "Rollersnakes independently embeds the same complete film and corroborates the seven principal names, Brookfield's filming/editing role and the DVD release. No unsupported formal director credit is asserted."
+      ],
+      "locations": ["United Kingdom", "United States"],
+      "locationNote": "The official and independently indexed credits establish a cross-Atlantic United Kingdom / United States production; no unsupported city-level itinerary is asserted.",
+      "duration": 1449,
+      "historicalContext": "REPENT is Baghead Crew's cross-Atlantic DIY full-length, combining the crew's core UK and US circle with an unusually broad guest roster and a physical DVD edition documented at release.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It uses dedicated REPENT title artwork, Baghead Crew branding and the seven principal names, with no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/BnffZYFWx78/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/BnffZYFWx78/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=BnffZYFWx78",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=BnffZYFWx78",
+          "embedUrl": "https://www.youtube.com/embed/BnffZYFWx78",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "BAGHEAD CREW",
+          "channelUrl": "https://www.youtube.com/channel/UCnKjiWIWOiMHMhZOZpWrXdQ",
+          "publisherRelationship": "crew / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "BnffZYFWx78",
+          "url": "https://www.youtube.com/watch?v=BnffZYFWx78",
+          "sourceDetails": "Baghead Crew's own channel hosts the uninterrupted complete film and supplies the complete credited roster and production credits. YouTube reports a 1,448.581-second runtime, February 22, 2026 publication and channelId UCnKjiWIWOiMHMhZOZpWrXdQ. After a preroll was cleared, the exact main player advanced 5.019 seconds at readyState 4 with no ad or media error.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/baghead-crew-repent",
+          "sourceDetails": "Independent filmography classifies REPENT as a 24-minute 2026 Baghead Crew full-length, indexes all 48 skaters and resolves several nicknames and normalized spellings used in the official description.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "rollersnakes",
+          "url": "https://rollersnakes.co.uk/blogs/news/repent-full-video-by-baghead-crew",
+          "sourceDetails": "Contemporary independent release coverage by Forde Brookfield embeds the same exact film, matches the principal roster, credits Brookfield with filming/editing and documents the DVD edition.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/repent/",
+          "sourceDetails": "Independent skate publication preserves a contemporary release page for the complete Baghead Crew film.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Baghead Crew's own channel, using the exact upload's official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "REPENT (2026) - Baghead Crew Skate Film",
+        "description": "Watch Baghead Crew's complete 24-minute skate film REPENT, featuring seven principal parts and cameos plus 41 documented guest appearances."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "venue-to-the-bone-2026",
+      "aliases": ["TO THE BONE - A Venue Skateboards Video", "Venue Skateboards - To The Bone"],
+      "type": "film",
+      "title": "TO THE BONE",
+      "description": "Venue Skateboards' tenth full-length celebrates 32 years of Richmond skateboarding in a 36-minute intergenerational scene film. Fourteen named section riders anchor a deep 29-name friends montage, with landmarks including SunTrust and the Richmond Coliseum carrying the shop's history into a new generation.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "venue-skateboards",
+        "bust-crew",
+        "richmond",
+        "virginia",
+        "shop-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-09-13",
+      "producedBy": "Venue Skateboards",
+      "producers": ["Maury Blankinship", "Kim Blankinship"],
+      "directors": [],
+      "filmmakers": ["Will Rosenstock", "Thomas Goldman", "Kevin O'Dell"],
+      "cinematographers": ["Will Rosenstock", "Thomas Goldman", "Kevin O'Dell"],
+      "additionalProductionCredits": [
+        "Adelle Blankinship",
+        "Jeremy Tubbs",
+        "Brent O'Donnell",
+        "Jonathan Mehring",
+        "KJ Thomas",
+        "Daniel Ravenal",
+        "Freddy Johnson",
+        "Carlos Kenner",
+        "Josh Swyers"
+      ],
+      "riders": [
+        "Maury Blankinship",
+        "Gee Blankinship",
+        "Evan Gabriel",
+        "Landon Powell",
+        "Will Rosenstock",
+        "Ty Beall",
+        "Jon Rowe",
+        "KJ Thomas",
+        "Caleb McNeely",
+        "Daniel Ravenal",
+        "Gilbert Crockett",
+        "Carlos Kenner",
+        "Travis Pulley",
+        "Josh Swyers",
+        "Thomas Goldman",
+        "Will Polly",
+        "Zaki Young",
+        "Tatsu Tauchi",
+        "Liam Hardman",
+        "Noble Silva",
+        "Mante Camper",
+        "Cooper Qua",
+        "Dylan Jaeb",
+        "Alex Deweese",
+        "Justin Henry",
+        "Jeremy Tubbs",
+        "Rand Ploesser",
+        "Alex Kehoe",
+        "Zac Baker",
+        "Will Marshall",
+        "Alex Schmidt",
+        "George Hanuschack",
+        "Monroe Snipes, Brotha",
+        "Zander Moehling",
+        "Joe Lilley",
+        "Daniel Nusbaum",
+        "Ben Samuels",
+        "Mike Butler",
+        "Gary Guinwald",
+        "Parker Cianci",
+        "Dane Barker",
+        "Semmes Weston",
+        "Eric Valladeres"
+      ],
+      "riderCreditGroups": {
+        "namedSections": [
+          "Maury Blankinship",
+          "Gee Blankinship",
+          "Evan Gabriel",
+          "Landon Powell",
+          "Will Rosenstock",
+          "Ty Beall",
+          "Jon Rowe",
+          "KJ Thomas",
+          "Caleb McNeely",
+          "Daniel Ravenal",
+          "Gilbert Crockett",
+          "Carlos Kenner",
+          "Travis Pulley",
+          "Josh Swyers"
+        ],
+        "endTitleMontageAppearances": [
+          "Thomas Goldman",
+          "Will Polly",
+          "Zaki Young",
+          "Tatsu Tauchi",
+          "Liam Hardman",
+          "Noble Silva",
+          "Mante Camper",
+          "Cooper Qua",
+          "Dylan Jaeb",
+          "Alex Deweese",
+          "Justin Henry",
+          "Jeremy Tubbs",
+          "Rand Ploesser",
+          "Alex Kehoe",
+          "Zac Baker",
+          "Will Marshall",
+          "Alex Schmidt",
+          "George Hanuschack",
+          "Monroe Snipes, Brotha",
+          "Zander Moehling",
+          "Joe Lilley",
+          "Daniel Nusbaum",
+          "Ben Samuels",
+          "Mike Butler",
+          "Gary Guinwald",
+          "Parker Cianci",
+          "Dane Barker",
+          "Semmes Weston",
+          "Eric Valladeres"
+        ]
+      },
+      "creditNotes": [
+        "Venue and Bust Crew's authorized upload supplies the timestamped named sections, the filmers, Will Rosenstock's edit, Maury and Kim Blankinship's co-producer credits and Adelle Blankinship's title credit.",
+        "The exact film's end-title card was visually reviewed and transcribed to preserve all 29 montage names in order of appearance. The unusual credit string 'Monroe Snipes, Brotha' is retained exactly as displayed rather than normalized without support.",
+        "Skate Jawn independently matches the principal roster and production credits. Quartersnacks independently identifies the tenth-full-length and 32-year shop context, the intergenerational opening, Richmond Coliseum farewell and overwhelmingly Richmond-area geography.",
+        "No unsupported formal director credit is asserted."
+      ],
+      "locations": ["Richmond, Virginia, USA", "New York City, New York, USA"],
+      "locationNote": "Quartersnacks reports that the film is almost entirely in the Richmond metropolitan area with only about two New York City clips; Richmond therefore controls the film-wide location identity.",
+      "duration": 2206,
+      "historicalContext": "Founded in Richmond in 1994, Venue marks 32 years with its tenth full-length. TO THE BONE treats the shop as a living intergenerational archive, pairing Maury Blankinship with his son Gee and preserving a final Richmond Coliseum session alongside newer local parts.",
+      "artworkNotes": "The exact authorized upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It shows an action frame at an architectural arch with dedicated TO THE BONE / A Venue Skateboards Video title treatment and no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/3S2QpPjAvZY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/3S2QpPjAvZY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=3S2QpPjAvZY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=3S2QpPjAvZY",
+          "embedUrl": "https://www.youtube.com/embed/3S2QpPjAvZY",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Bustcrew",
+          "channelUrl": "https://www.youtube.com/channel/UC1_ngzr0ifMR0fChzfRHwlg",
+          "publisherRelationship": "filmmaker / brand-authorized collaborative channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "3S2QpPjAvZY",
+          "url": "https://www.youtube.com/watch?v=3S2QpPjAvZY",
+          "sourceDetails": "Bust Crew's Venue-linked channel hosts the uninterrupted complete film and supplies its timestamped structure and full production credits. YouTube reports a 2,206.141-second runtime, September 13, 2026 publication and channelId UC1_ngzr0ifMR0fChzfRHwlg. The exact main player advanced 4.000 seconds at readyState 4 with no media error; its end-title cards supplied the full friends-montage appearance order.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "venue-skateboards",
+          "url": "https://venueskateboards.com/",
+          "sourceDetails": "Venue Skateboards' first-party site establishes the brand and shop rights-holder context behind the collaborative Bust Crew upload.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/to-the-bone/",
+          "sourceDetails": "Contemporary independent release coverage identifies TO THE BONE as Venue's tenth full-length, matches the principal roster and corroborates the filmers, editor, co-producers and title designer.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        },
+        {
+          "source": "quartersnacks",
+          "url": "https://quartersnacks.com/2026/09/richmond-report-venue-skateshops-to-the-bone-video/",
+          "sourceDetails": "Contemporary independent review documents Venue's 1994 origin, tenth-film and 32-year context, the Maury/Gee opening, Richmond Coliseum farewell, production credits and Richmond-dominant geography.",
+          "retrievedAt": "2026-09-16T14:32:08.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on the filmmaker's Venue-authorized collaborative channel, corroborated by Venue's first-party site and contemporary release coverage; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "TO THE BONE (2026) - Venue Skateboards Film",
+        "description": "Watch Venue Skateboards' complete tenth full-length TO THE BONE, a 36-minute Richmond skate film with 43 documented riders across named sections and the full friends montage."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    }
+  ]
+}
