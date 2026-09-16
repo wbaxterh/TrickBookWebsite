@@ -1,5 +1,6 @@
 import {
   ArrowLeft,
+  Camera,
   Clock3,
   ExternalLink,
   Globe2,
@@ -10,6 +11,11 @@ import {
 } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
+import ShopFAQs from '../../components/shops/ShopFAQs';
+import ShopPressFeatures from '../../components/shops/ShopPressFeatures';
+import ShopReviewSummary from '../../components/shops/ShopReviewSummary';
+import ShopSocialLinks from '../../components/shops/ShopSocialLinks';
+import ShopTeamRiders from '../../components/shops/ShopTeamRiders';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -69,15 +75,26 @@ export default function ShopDetailPage({ shop }) {
           </Link>
 
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="flex min-h-52 items-center justify-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-yellow-500/40 px-6 py-12">
+            <div className="relative flex min-h-52 items-center justify-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-yellow-500/40 px-6 py-12">
               {shop.imageUrl ? (
                 <img
                   src={shop.imageUrl}
-                  alt={`${shop.name} storefront`}
+                  alt={shop.imageAlt || `${shop.name} storefront`}
                   className="max-h-72 w-full rounded-xl object-cover"
                 />
               ) : (
                 <Store className="h-24 w-24 text-yellow-400" />
+              )}
+              {shop.imageSourceUrl && (
+                <a
+                  href={shop.imageSourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs text-white/80 no-underline backdrop-blur-sm transition-colors hover:text-white"
+                >
+                  <Camera className="h-3 w-3" />
+                  Photo source
+                </a>
               )}
             </div>
             <div className="p-6 md:p-8">
@@ -183,9 +200,26 @@ export default function ShopDetailPage({ shop }) {
                     </span>
                   </div>
                 )}
+                {shop.socialLinks && Object.keys(shop.socialLinks).length > 0 && (
+                  <div className="pt-2">
+                    <ShopSocialLinks socialLinks={shop.socialLinks} />
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
+
+          {(shop.reviewSummary ||
+            shop.teamRiders?.length > 0 ||
+            shop.faqs?.length > 0 ||
+            shop.pressFeatures?.length > 0) && (
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <ShopReviewSummary reviewSummary={shop.reviewSummary} />
+              <ShopTeamRiders teamRiders={shop.teamRiders} />
+              <ShopFAQs faqs={shop.faqs} />
+              <ShopPressFeatures pressFeatures={shop.pressFeatures} />
+            </div>
+          )}
         </section>
       </main>
     </>
