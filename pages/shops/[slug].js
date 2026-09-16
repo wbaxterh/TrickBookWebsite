@@ -1,16 +1,9 @@
-import {
-  ArrowLeft,
-  Camera,
-  Clock3,
-  ExternalLink,
-  Globe2,
-  MapPin,
-  Phone,
-  ShieldCheck,
-  Store,
-} from 'lucide-react';
+import { ArrowLeft, Clock3, ExternalLink, Globe2, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
+import ShopCommentSection from '../../components/shops/ShopCommentSection';
+import ShopConversionCta from '../../components/shops/ShopConversionCta';
+import ShopCoverImage from '../../components/shops/ShopCoverImage';
 import ShopFAQs from '../../components/shops/ShopFAQs';
 import ShopPressFeatures from '../../components/shops/ShopPressFeatures';
 import ShopReviewSummary from '../../components/shops/ShopReviewSummary';
@@ -75,28 +68,7 @@ export default function ShopDetailPage({ shop }) {
           </Link>
 
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="relative flex min-h-52 items-center justify-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-yellow-500/40 px-6 py-12">
-              {shop.imageUrl ? (
-                <img
-                  src={shop.imageUrl}
-                  alt={shop.imageAlt || `${shop.name} storefront`}
-                  className="max-h-72 w-full rounded-xl object-cover"
-                />
-              ) : (
-                <Store className="h-24 w-24 text-yellow-400" />
-              )}
-              {shop.imageSourceUrl && (
-                <a
-                  href={shop.imageSourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs text-white/80 no-underline backdrop-blur-sm transition-colors hover:text-white"
-                >
-                  <Camera className="h-3 w-3" />
-                  Photo source
-                </a>
-              )}
-            </div>
+            <ShopCoverImage shop={shop} variant="hero" className="rounded-t-2xl" />
             <div className="p-6 md:p-8">
               <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
                 <div>
@@ -220,6 +192,23 @@ export default function ShopDetailPage({ shop }) {
               <ShopPressFeatures pressFeatures={shop.pressFeatures} />
             </div>
           )}
+
+          <div className="mt-6">
+            <ShopConversionCta shop={shop} />
+          </div>
+
+          <div className="mt-6">
+            <ShopCommentSection shop={shop} />
+          </div>
+
+          <div className="mt-8">
+            <Link
+              href="/shops"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground no-underline hover:text-yellow-500"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to all shops
+            </Link>
+          </div>
         </section>
       </main>
     </>

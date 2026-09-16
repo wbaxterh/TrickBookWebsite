@@ -1,5 +1,6 @@
 import { ExternalLink, MapPin, Navigation, ShieldCheck, Star, Store } from 'lucide-react';
 import Link from 'next/link';
+import { useMemo, useState } from 'react';
 import { formatDistance } from '../../lib/geo';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
@@ -15,6 +16,18 @@ const SPORT_LABELS = {
   rollerblading: 'Rollerblading',
 };
 
+function getShopImageCandidates(shop) {
+  const candidates = [
+    shop?.imageUrl,
+    shop?.image,
+    typeof shop?.image === 'object' ? shop?.image?.url : null,
+  ]
+    .filter(Boolean)
+    .map((img) => (typeof img === 'string' ? img.trim() : ''))
+    .filter(Boolean);
+  return [...new Set(candidates)];
+}
+
 export default function ShopCard({ shop, distanceMi }) {
   const address = shop.address || {};
   const location =
@@ -23,26 +36,40 @@ export default function ShopCard({ shop, distanceMi }) {
   const imageAlt = shop.imageAlt || `${shop.name} storefront`;
   const hasRating = shop.reviewSummary?.rating != null;
 
+  const imageCandidates = useMemo(() => getShopImageCandidates(shop), [shop]);
+  const [imageIndex, setImageIndex] = useState(0);
+  const currentImage = imageCandidates[imageIndex];
+  const hasValidImage = currentImage && imageIndex < imageCandidates.length;
+
   return (
     <Card className="group h-full overflow-hidden border-border transition-all duration-200 hover:border-yellow-500">
       <CardContent className="flex h-full flex-col p-0">
         <Link
           href={detailUrl}
           aria-label={`View ${shop.name}`}
-          className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-800 to-yellow-500/40 no-underline"
+          className="relative block aspect-[4/3] min-h-[180px] overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-800 to-yellow-500/40 no-underline"
         >
-          {shop.imageUrl ? (
+          {hasValidImage ? (
             <img
-              src={shop.imageUrl}
+              src={currentImage}
               alt={imageAlt}
               className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              onError={() => setImageIndex((idx) => idx + 1)}
             />
           ) : (
-            <Store className="h-14 w-14 text-yellow-400 transition-transform group-hover:scale-110" />
+            <div className="flex h-full w-full items-center justify-center">
+              <Store
+                className="h-16 w-16 text-yellow-400 transition-transform group-hover:scale-110"
+                aria-hidden="true"
+              />
+            </div>
           )}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
           {hasRating && (
             <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/70 px-2 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" aria-hidden="true" />
               {shop.reviewSummary.rating.toFixed(1)}
             </span>
           )}
