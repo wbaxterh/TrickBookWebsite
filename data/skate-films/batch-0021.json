@@ -1,0 +1,420 @@
+{
+  "source": "Official William Strobeck, Mixed Landbirds and Loop Hardware complete-film uploads, corroborated by SkateVideoSite and independent skate-media coverage",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-16T07:02:00.000Z",
+  "films": [
+    {
+      "slug": "violet-squeaky-2026",
+      "aliases": ["Violet - SQUEAKY", "Violet SQUEAKY", "\"SQUEAKY\""],
+      "type": "film",
+      "title": "SQUEAKY",
+      "description": "William Strobeck's 54-minute Violet full-length moves through Philadelphia, New York and Los Angeles with 13 documented skater appearances. Its long-form sections center Joseph Campos, Mike Ward, Seven Strong, Kyle Teh, Auguste Bouznad, Jax Effs, Lucas Desmarescaux, Efron Danzig, Kris Brown, Patrick O'Mara, Troy Gipson and Kader Sylla, with Orion Curtis also independently indexed.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "violet",
+        "william-strobeck",
+        "team-video",
+        "street-skateboarding",
+        "philadelphia",
+        "new-york-city",
+        "los-angeles",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-06-14",
+      "producedBy": "Violet",
+      "directors": [],
+      "filmmakers": ["William Strobeck"],
+      "cinematographers": [],
+      "additionalProductionCredits": [
+        "Harry Bergenfield",
+        "Nate Hanson",
+        "Kei Tsuruta",
+        "Alex Greenberg",
+        "Michael Rodriguez",
+        "Tristan Warren",
+        "Valentin Ferreira",
+        "Johnny Wilson",
+        "Johnathan Flechas (Flech)",
+        "Benny Maglinao (George Pukas)",
+        "Ben Chadourne",
+        "Eli Awbrey",
+        "Omar Massiah",
+        "Cody Green",
+        "Augustin Giovannoni",
+        "Brian Panebianco",
+        "John De Perrot",
+        "Carson Reuther",
+        "DJ Traceman",
+        "Ethan Moriceau",
+        "Danny Fuenzalida",
+        "David De Los Santos",
+        "Jourdynn Sherman (Jourdy)",
+        "Angus Cheng",
+        "Brandon Yuenger",
+        "Shari White",
+        "Dustin Wadsworth",
+        "RB Umali"
+      ],
+      "riders": [
+        "Joseph Campos",
+        "Seven Strong",
+        "Mike Ward",
+        "Kyle Teh",
+        "Jax Effs",
+        "Auguste Bouznad",
+        "Kris Brown",
+        "Efron Danzig",
+        "Patrick O'Mara",
+        "Troy Gipson",
+        "Kader Sylla",
+        "Orion Curtis",
+        "Lucas Desmarescaux"
+      ],
+      "riderCreditGroups": {
+        "documentedSections": [
+          "Joseph Campos",
+          "Mike Ward",
+          "Seven Strong",
+          "Kyle Teh",
+          "Auguste Bouznad",
+          "Jax Effs",
+          "Lucas Desmarescaux",
+          "Efron Danzig",
+          "Kris Brown",
+          "Patrick O'Mara",
+          "Troy Gipson",
+          "Kader Sylla"
+        ],
+        "additionalIndexedAppearance": ["Orion Curtis"]
+      },
+      "creditNotes": [
+        "Strobeck's official upload identifies SQUEAKY as his Violet video; the dedicated title artwork bills 10 principal Violet riders.",
+        "SkateVideoSite independently classifies it as a 54-minute 2026 full-length by William Strobeck, catalogs 13 skaters and preserves 28 additional production contributors.",
+        "Quartersnacks documents the premiere, years-in-the-making context and the 12 named sections; Orion Curtis is retained separately as an independently indexed appearance."
+      ],
+      "locations": [
+        "Philadelphia, Pennsylvania, USA",
+        "New York City, New York, USA",
+        "Los Angeles, California, USA",
+        "Brooklyn Banks, New York City, New York, USA",
+        "Municipal Plaza, Philadelphia, Pennsylvania, USA",
+        "Hollywood Walk of Fame, Los Angeles, California, USA"
+      ],
+      "locationNote": "SkateVideoSite catalogs the three cities plus Brooklyn Banks, Municipal Plaza and Hollywood Walk of Fame; no broader itinerary is asserted.",
+      "duration": 3248,
+      "historicalContext": "SQUEAKY is Violet's long-awaited, years-in-the-making first feature-length team statement. Contemporary Quartersnacks coverage treated it as a marquee release and documented the packed theatrical premiere response.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is dedicated SQUEAKY title artwork reading 'A Video by William Strobeck' and billing 10 riders, with no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/0uo85GWYE_Q/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/0uo85GWYE_Q/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=0uo85GWYE_Q",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=0uo85GWYE_Q",
+          "embedUrl": "https://www.youtube.com/embed/0uo85GWYE_Q",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "William Strobeck",
+          "channelUrl": "https://www.youtube.com/channel/UCt-67P8kpqTNVYt6Ohy3EwQ",
+          "publisherRelationship": "filmmaker / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T07:09:50.053Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "0uo85GWYE_Q",
+          "url": "https://www.youtube.com/watch?v=0uo85GWYE_Q",
+          "sourceDetails": "William Strobeck's own channel hosts the uninterrupted complete Violet film and identifies it as his 2026 video. YouTube reports status OK, embeddable true, a 3,248-second runtime, channelId UCt-67P8kpqTNVYt6Ohy3EwQ and June 14, 2026 publication. Controlled Chrome measured 3,247.901 seconds at readyState 4 and the exact player advanced 12.416 seconds without media error.",
+          "retrievedAt": "2026-09-16T07:09:50.053Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/violet-squeaky",
+          "sourceDetails": "Independent filmography classifies SQUEAKY as a 54-minute 2026 Violet full-length by William Strobeck, catalogs 13 skaters, 28 production contributors, three cities and two named spots.",
+          "retrievedAt": "2026-09-16T07:02:00.000Z"
+        },
+        {
+          "source": "quartersnacks",
+          "url": "https://quartersnacks.com/2026/06/was-waiting-for-that-one-violets-squeaky-video/",
+          "sourceDetails": "Contemporary independent coverage calls SQUEAKY a long-awaited, years-in-the-making marquee release and documents the premiere and 12 named sections.",
+          "retrievedAt": "2026-09-16T07:02:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on filmmaker William Strobeck's own channel (channelId UCt-67P8kpqTNVYt6Ohy3EwQ), using the exact upload's official YouTube artwork; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "SQUEAKY (2026) - Violet Full Skate Film",
+        "description": "Watch William Strobeck's complete 54-minute Violet film SQUEAKY, with 13 documented skater appearances across Philadelphia, New York and Los Angeles."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "mixed-landbirds-take-it-easy-2026",
+      "aliases": ["Take It Easy", "Mixed Landbirds - Take It Easy", "TAKE IT EASY - FULL VIDEO"],
+      "type": "film",
+      "title": "TAKE IT EASY",
+      "description": "Mixed Landbirds' 18-minute Bay Area full-length documents a Concord-rooted crew that began by pressing, shaping and hand-drawing its own boards. The official film credits 17 local riders, moving from JR Villacorte through homies and series montages to full sections from Eric Preston, Chris Ward, Nick McCarthy and Coleman Meyer.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "mixed-landbirds",
+        "mixed-skateboards",
+        "independent-film",
+        "scene-video",
+        "bay-area",
+        "concord",
+        "oakland",
+        "san-francisco",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-08-19",
+      "producedBy": "Mixed Landbirds / Mixed Skateboards",
+      "directors": [],
+      "filmmakers": ["Nick McCarthy", "Jack Glancy", "Kyle Hughes"],
+      "cinematographers": ["Nick McCarthy", "Jack Glancy", "Kyle Hughes"],
+      "additionalProductionCredits": ["Liam Cumming", "Quinton McKee", "Norman Villacorte"],
+      "riders": [
+        "JR Villacorte",
+        "Quinton McKee",
+        "Jadon Mercurio",
+        "Eli Whitney",
+        "Rylan Chiang",
+        "Jason Ross",
+        "Calvin Burrage",
+        "Ryan Lee",
+        "Norman Villacorte",
+        "Jared Stull",
+        "Jack Glancy",
+        "Liam Cumming",
+        "Jake Hoffman",
+        "Eric Preston",
+        "Chris Ward",
+        "Nick McCarthy",
+        "Coleman Meyer"
+      ],
+      "riderCreditGroups": {
+        "namedSections": [
+          "JR Villacorte",
+          "Eric Preston",
+          "Chris Ward",
+          "Nick McCarthy",
+          "Coleman Meyer"
+        ],
+        "homiesAndSeriesAppearances": [
+          "Quinton McKee",
+          "Jadon Mercurio",
+          "Eli Whitney",
+          "Rylan Chiang",
+          "Jason Ross",
+          "Calvin Burrage",
+          "Ryan Lee",
+          "Norman Villacorte",
+          "Jared Stull",
+          "Jack Glancy",
+          "Liam Cumming",
+          "Jake Hoffman"
+        ]
+      },
+      "creditNotes": [
+        "Mixed Landbirds' official upload supplies the complete 17-name featured bill and timestamps for five named sections plus homies and series montages.",
+        "SkateVideoSite independently classifies TAKE IT EASY as an 18-minute 2026 full-length, names Jack Glancy, Kyle Hughes and Nick McCarthy in the film header, catalogs 16 skaters and lists three further production contributors.",
+        "Lowcard identifies Nick McCarthy as the crew's filmer and mastermind, documents its handmade-board roots and preserves the full first-party roster; Rylan Chiang is retained from the official bill despite omission from the independent index."
+      ],
+      "locations": [
+        "Concord, California, USA",
+        "Oakland, California, USA",
+        "San Francisco, California, USA",
+        "Walnut Creek, California, USA",
+        "Break Free Skate Shop, Oakland, California, USA"
+      ],
+      "locationNote": "SkateVideoSite catalogs San Francisco, Oakland, Concord and Walnut Creek; first-party and Lowcard context document the Break Free Skate Shop premiere in Oakland.",
+      "duration": 1086,
+      "historicalContext": "TAKE IT EASY is a homegrown Bay Area scene film from a Concord crew founded in 2022 around handmade boards and hand-drawn graphics. Its Oakland premiere and all-local roster place the film firmly in the independent shop-and-homies tradition.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is a clean action frame from the film showing a skateboarder on a concrete bank, with no trailer, episode or event labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/RR-xk4JbSCI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/RR-xk4JbSCI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=RR-xk4JbSCI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=RR-xk4JbSCI",
+          "embedUrl": "https://www.youtube.com/embed/RR-xk4JbSCI",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Mixed Landbirds",
+          "channelUrl": "https://www.youtube.com/channel/UC67OerhqkHo0hUe1p1kmiPg",
+          "publisherRelationship": "official crew / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T07:09:50.053Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "RR-xk4JbSCI",
+          "url": "https://www.youtube.com/watch?v=RR-xk4JbSCI",
+          "sourceDetails": "Mixed Landbirds' official channel hosts the uninterrupted complete film and supplies all 17 rider names and section timestamps. YouTube reports status OK, embeddable true, a 1,086-second runtime, channelId UC67OerhqkHo0hUe1p1kmiPg and August 19, 2026 publication. Controlled Chrome measured 1,085.681 seconds at readyState 4 and the exact player advanced 4.979 seconds without media error.",
+          "retrievedAt": "2026-09-16T07:09:50.053Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/mixed-landbirds-take-it-easy",
+          "sourceDetails": "Independent filmography classifies TAKE IT EASY as an 18-minute 2026 full-length, catalogs four Bay Area locations, indexes 16 skaters and identifies three principal and three additional production contributors.",
+          "retrievedAt": "2026-09-16T07:02:00.000Z"
+        },
+        {
+          "source": "lowcard",
+          "url": "https://www.lowcardmag.com/video/mixed-landbirds-take-it-easy/",
+          "sourceDetails": "Independent contemporary coverage identifies the Concord crew's handmade-board roots, Nick McCarthy as filmer and mastermind, the Break Free premiere and the full 17-rider bill.",
+          "retrievedAt": "2026-09-16T07:02:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Mixed Landbirds' own crew channel (channelId UC67OerhqkHo0hUe1p1kmiPg), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "TAKE IT EASY (2026) - Mixed Landbirds Full Film",
+        "description": "Watch Mixed Landbirds' complete Bay Area full-length TAKE IT EASY, featuring 17 local riders and sections from JR Villacorte, Eric Preston, Chris Ward, Nick McCarthy and Coleman Meyer."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "loop-hardware-stfu-2026",
+      "aliases": ["Loop Hardware - STFU", "Loop Hardware 'STFU'"],
+      "type": "film",
+      "title": "STFU",
+      "description": "Poppy Starr Olsen's 11.6-minute Loop Hardware road film packs 13 skaters into a 2,000-mile trip from Los Angeles to Vancouver. The official roster brings together Fabiana Delfino, Nicole Hause, Dayana Young, Georgia Martin, Cata Diaz, Hayley Wilson, Ruby Lilley, Ariana Spencer, Hannah Tallman, Samarria Brevard, Kasci Woolf, Jill Perkins and Olsen.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "loop-hardware",
+        "road-film",
+        "team-video",
+        "street-skateboarding",
+        "los-angeles",
+        "san-francisco",
+        "vancouver",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-04",
+      "producedBy": "Loop Hardware",
+      "directors": [],
+      "filmmakers": ["Poppy Starr Olsen"],
+      "cinematographers": ["Poppy Starr Olsen"],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Fabiana Delfino",
+        "Nicole Hause",
+        "Dayana Young",
+        "Georgia Martin",
+        "Cata Diaz",
+        "Hayley Wilson",
+        "Ruby Lilley",
+        "Ariana Spencer",
+        "Hannah Tallman",
+        "Samarria Brevard",
+        "Kasci Woolf",
+        "Jill Perkins",
+        "Poppy Starr Olsen"
+      ],
+      "riderCreditGroups": {
+        "officialFirstPartyStarringBill": [
+          "Fabiana Delfino",
+          "Nicole Hause",
+          "Dayana Young",
+          "Georgia Martin",
+          "Cata Diaz",
+          "Hayley Wilson",
+          "Ruby Lilley",
+          "Ariana Spencer",
+          "Hannah Tallman",
+          "Samarria Brevard",
+          "Kasci Woolf",
+          "Jill Perkins",
+          "Poppy Starr Olsen"
+        ]
+      },
+      "creditNotes": [
+        "Loop Hardware's current official upload identifies the film as Poppy Starr Olsen's work and supplies all 13 starring names, including Samarria Brevard.",
+        "SkateVideoSite independently classifies STFU as a 12-minute 2026 full-length, catalogs all 13 skaters and identifies the San Francisco, Los Angeles and Vancouver route.",
+        "The film's '12 homies' wording describes the traveling group around filmmaker/rider Poppy Starr Olsen; the complete explicit starring bill contains 13 names and is retained verbatim."
+      ],
+      "locations": [
+        "Los Angeles, California, USA",
+        "San Francisco, California, USA",
+        "Vancouver, British Columbia, Canada",
+        "United States",
+        "Canada"
+      ],
+      "locationNote": "The official synopsis defines the route as Los Angeles to Vancouver over more than 2,000 miles; SkateVideoSite additionally catalogs San Francisco.",
+      "duration": 698,
+      "historicalContext": "STFU is a compact do-it-yourself Loop Hardware road film built around a 2,000-mile west-coast van trip and a cross-generational 13-skater roster, filmed from inside the crew by Poppy Starr Olsen.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube max-resolution thumbnail was visually reviewed on 2026-09-16. It is a vivid action frame showing a skateboarder above a concrete transition while Poppy Starr Olsen films from the deck, with no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/uiCiyOvieVg/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/uiCiyOvieVg/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=uiCiyOvieVg",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=uiCiyOvieVg",
+          "embedUrl": "https://www.youtube.com/embed/uiCiyOvieVg",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Loop Hardware",
+          "channelUrl": "https://www.youtube.com/channel/UCIVc7rc0DQB2p2WbO-qshPA",
+          "publisherRelationship": "official company / rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-16T07:09:50.053Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "uiCiyOvieVg",
+          "url": "https://www.youtube.com/watch?v=uiCiyOvieVg",
+          "sourceDetails": "Loop Hardware's official channel hosts the uninterrupted complete film and supplies Poppy Starr Olsen's filmmaker credit, the 2,000-mile route and all 13 starring names. YouTube reports status OK, embeddable true, a 698-second runtime, channelId UCIVc7rc0DQB2p2WbO-qshPA and February 4, 2026 publication. Controlled Chrome measured 697.921 seconds at readyState 4 and the exact player advanced 4.975 seconds without media error.",
+          "retrievedAt": "2026-09-16T07:09:50.053Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/loop-hardware-stfu",
+          "sourceDetails": "Independent filmography classifies STFU as a 12-minute 2026 full-length, catalogs the Los Angeles-San Francisco-Vancouver route and indexes all 13 skaters.",
+          "retrievedAt": "2026-09-16T07:02:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Loop Hardware's own company channel (channelId UCIVc7rc0DQB2p2WbO-qshPA), using the exact upload's official YouTube thumbnail; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "STFU (2026) - Loop Hardware Full Skate Film",
+        "description": "Watch Poppy Starr Olsen's complete Loop Hardware road film STFU, following 13 skaters over 2,000 miles from Los Angeles to Vancouver."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
