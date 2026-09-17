@@ -1,0 +1,149 @@
+{
+  "source": "Authorized complete-film uploads from Skate Jawn, Free Skate Magazine and Ace Trucks, supplemented by first-party descriptions and SkateVideoSite filmography records",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T00:44:00.000Z",
+  "films": [
+    {
+      "slug": "social-hour-luster-2025",
+      "aliases": ["LUSTER", "Social Hour LUSTER", "Social Hour Skateboards LUSTER"],
+      "type": "film",
+      "title": "LUSTER",
+      "description": "Social Hour Skateboards' fourth full-length documents an East Coast crew across 28 minutes filmed from August 2022 through December 2024. Eight named parts and shared sections anchor three broad montages, bringing the richest defensible roster to 43 skaters.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "social-hour-skateboards", "east-coast", "independent", "super-8", "crew-video", "2020s"],
+      "releaseYear": 2025,
+      "releaseDate": "2025-01-05",
+      "producedBy": "Social Hour Skateboards",
+      "directors": [],
+      "filmmakers": ["Ethan Giorgetti"],
+      "cinematographers": ["Ethan Giorgetti"],
+      "additionalProductionCredits": ["Peter Freeman", "Jack O'Connor", "Justin Koziol", "Alex Florek", "Tommy Colangelo", "Dylan Rutherford", "Matt Skrzypiec"],
+      "riders": [
+        "Tommy Colangelo", "Jack O'Connor", "Justin Koziol", "Ethan Giorgetti", "Peter Freeman", "Scott Northrop", "Matt Skrzypiec", "Jacob Colbath",
+        "DJ Rosa", "Dustin Walls", "Chris Misenti", "Larry Hill", "Max Holsbeke", "Josh Eckert", "Kyle Sabre", "Kyle McKay", "Alex Nivison", "Al Solomon", "Derrick Durity", "Myles Willard", "Julian Lewis",
+        "Connor Noll", "Thomas Purtell", "Kevin Phu", "Sirmichael Burrow", "Nate Martinsen",
+        "Dylan Rutherford", "Eddie Comini", "Alex Florek", "James Merati", "Sean Milnes", "Conor Johnson", "Matt Urbano", "Phil McCormick", "Nolan Fonda", "Noah McManus", "Nate Plumb", "Ricky Pelchar", "Marse Farmer", "Peter Kryger", "Chris Mathis", "Brian Weglicki", "Josh Paynter"
+      ],
+      "riderCreditGroups": {
+        "namedPartsAndSharedSections": ["Tommy Colangelo", "Jack O'Connor", "Justin Koziol", "Ethan Giorgetti", "Peter Freeman", "Scott Northrop", "Matt Skrzypiec", "Jacob Colbath"],
+        "montageOne": ["DJ Rosa", "Dustin Walls", "Chris Misenti", "Larry Hill", "Max Holsbeke", "Josh Eckert", "Kyle Sabre", "Kyle McKay", "Alex Nivison", "Al Solomon", "Derrick Durity", "Myles Willard", "Julian Lewis"],
+        "montageTwo": ["Connor Noll", "Thomas Purtell", "Kevin Phu", "Sirmichael Burrow", "Nate Martinsen"],
+        "montageThree": ["Dylan Rutherford", "Eddie Comini", "Alex Florek", "James Merati", "Sean Milnes", "Conor Johnson", "Matt Urbano", "Phil McCormick", "Nolan Fonda", "Noah McManus", "Nate Plumb", "Ricky Pelchar", "Marse Farmer", "Peter Kryger", "Chris Mathis", "Brian Weglicki", "Josh Paynter"]
+      },
+      "creditNotes": [
+        "Skate Jawn's authorized complete-film upload names Ethan Giorgetti as filmmaker and identifies the principal cast and August 2022-December 2024 production window.",
+        "SkateVideoSite independently classifies LUSTER as a 28-minute full-length and preserves the ten-section structure and seven additional production contributors. Its narrative credits explicitly include Al Solomon in Montage 1 while its structured 42-name roster omits him; the record retains that directly credited appearance, yielding 43 defensible riders.",
+        "The additional production contributors are retained without invented formal job titles because the filmography does not specify their individual roles."
+      ],
+      "locations": ["Rochester, New York, USA", "Hartford, Connecticut, USA", "Montréal, Québec, Canada"],
+      "locationNote": "SkateVideoSite identifies Rochester, Hartford and Montréal and maps Washington Square Park and Burr Mall; Skate Jawn more broadly describes East Coast filming.",
+      "duration": 1679,
+      "historicalContext": "LUSTER is Social Hour's fourth full-length and records more than two years of East Coast filming, pairing a core crew with three unusually deep community montages.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-16. It uses a dedicated LUSTER title card over a black-and-white city image and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/H8zefPHgn9k/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/H8zefPHgn9k/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=H8zefPHgn9k",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=H8zefPHgn9k", "embedUrl": "https://www.youtube.com/embed/H8zefPHgn9k", "access": "free", "label": "Watch Full Film", "channel": "SKATEJAWN", "channelUrl": "https://www.youtube.com/channel/UCjKjORPOx_65rdOBPeYFoGQ", "publisherRelationship": "established skate-media licensed full-film publication", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T00:44:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "H8zefPHgn9k", "url": "https://www.youtube.com/watch?v=H8zefPHgn9k", "sourceDetails": "Skate Jawn's established editorial channel hosts the uninterrupted complete film with direct Social Hour, filmmaker, production-window and cast attribution. YouTube reports channelId UCjKjORPOx_65rdOBPeYFoGQ, a 1,678.541-second main feature, January 5, 2025 publication and embed permission.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "skate-jawn", "url": "https://skatejawn.com/luster/", "sourceDetails": "The accompanying Skate Jawn article calls LUSTER Social Hour's new full-length, credits Ethan Giorgetti and identifies the principal cast and East Coast context.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "skatevideosite", "url": "https://www.skatevideosite.com/videos/social-hour-luster", "sourceDetails": "Independent filmography classifies the 28-minute film and preserves the section/montage credits, production index and three documented cities. Its narrative includes Al Solomon while its structured 42-name roster omits him, so the richer explicit-credit union is 43.", "retrievedAt": "2026-09-17T00:44:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film published by established skate-media outlet Skate Jawn with direct project and filmmaker attribution; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "LUSTER (2025) - Social Hour Skateboards Full Film", "description": "Watch Social Hour Skateboards' complete 28-minute East Coast full-length LUSTER, featuring 43 documented skaters."},
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    },
+    {
+      "slug": "5boro-5ball-2025",
+      "aliases": ["5Ball", "The 5Ball Video", "5BORONYC 5Ball", "5boro 5Ball"],
+      "type": "film",
+      "title": "5Ball",
+      "description": "5BORO's 19-minute New York full-length returns the company to the format after a decade. Six principal riders carry five timestamped sections, while five explicitly billed guests expand the complete documented roster to 11.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "5boro", "new-york-city", "brooklyn", "team-video", "street-skating", "2020s"],
+      "releaseYear": 2025,
+      "releaseDate": "2025-01-20",
+      "producedBy": "5BORO",
+      "directors": [],
+      "filmmakers": ["Mike Sass"],
+      "cinematographers": ["Mike Sass"],
+      "additionalProductionCredits": ["RB Umali", "Ted Schmitz", "Jordan Moss", "Dylan Holderness", "Matt Schleyer", "Naquan Rollings", "Neil Herrick", "Elias Parise", "Danny Falla", "Mike Heikkila", "Sam McKenna", "Bryan Weis"],
+      "riders": ["Jimmy McDonald", "Rob Gonyon", "Danny Falla", "Andrew Singh", "Justin Fabus", "Keith Hardy", "Amir Denis", "Chris Tenorio", "Chris Anderson", "Liam McCabe", "Neil Herrick"],
+      "riderCreditGroups": {
+        "principalSectionRiders": ["Jimmy McDonald", "Andrew Singh", "Justin Fabus", "Keith Hardy", "Chris Anderson", "Neil Herrick"],
+        "explicitlyBilledGuestAppearances": ["Rob Gonyon", "Danny Falla", "Amir Denis", "Chris Tenorio", "Liam McCabe"]
+      },
+      "creditNotes": [
+        "Free Skate Magazine's authorized complete-film upload supplies the five section timestamps, all six principal riders, all five explicitly featured guests and Mike Sass's filming/editing credit.",
+        "Free's accompanying article independently identifies the release as 5BORO's new full-length after a ten-year gap and corroborates the six principal stars and Mike Sass credit.",
+        "SkateVideoSite independently classifies the 19-minute full-length, corroborates all 11 riders, the January 17 Brooklyn premiere and 12 further production contributors, whose individual roles are not invented."
+      ],
+      "locations": ["New York City, New York, USA", "Brooklyn, New York, USA", "Queens, New York, USA"],
+      "locationNote": "The official and Free records establish the New York/Brooklyn setting. SkateVideoSite maps the Brooklyn Banks, Flushing Meadows Corona Park, Seaport, Grant's Tomb, Con Edison Banks and other New York spots.",
+      "duration": 1122,
+      "historicalContext": "5Ball marked 5BORO's return to the full-length format roughly ten years after its previous major team video, connecting longtime New York riders with new talent. It premiered at Lou's Athletic Club in Brooklyn on January 17, 2025.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-16. It pairs a black-and-white street-skating photograph with 5BORO's orange 5-ball identity and contains no trailer or episode labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/nQKFEud5j-Y/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/nQKFEud5j-Y/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=nQKFEud5j-Y",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=nQKFEud5j-Y", "embedUrl": "https://www.youtube.com/embed/nQKFEud5j-Y", "access": "free", "label": "Watch Full Film", "channel": "Freeskatemag", "channelUrl": "https://www.youtube.com/channel/UCTuYNudPxr5rAatvZg8Zndg", "publisherRelationship": "established skate-media licensed publication with direct 5BORO backlink", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T00:44:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "nQKFEud5j-Y", "url": "https://www.youtube.com/watch?v=nQKFEud5j-Y", "sourceDetails": "Free Skate Magazine hosts the uninterrupted complete film, directly links 5BORO and supplies the chapter-level roster and Mike Sass credit. YouTube reports channelId UCTuYNudPxr5rAatvZg8Zndg, a 1,121.801-second main feature, January 20, 2025 publication and embed permission.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "free-skate-magazine", "url": "https://www.freeskatemag.com/2025/01/20/the-5ball-video-5boronyc/", "sourceDetails": "Contemporary editorial coverage calls 5Ball the new 5BORO full-length after a ten-year gap, lists all six principal stars and credits Mike Sass with filming and editing.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "skatevideosite", "url": "https://www.skatevideosite.com/videos/5boro-5ball", "sourceDetails": "Independent filmography classifies the 19-minute full-length, corroborates all 11 riders, preserves the production index, premiere details and New York spot map.", "retrievedAt": "2026-09-17T00:44:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film published by established skate-media outlet Free Skate Magazine with a direct 5BORO backlink and complete project credits; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "5Ball (2025) - 5BORO Full Skate Film", "description": "Watch 5BORO's complete 19-minute New York full-length 5Ball, featuring six principal riders and five credited guests."},
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    },
+    {
+      "slug": "ace-furnace-furnace-2025",
+      "aliases": ["FurnACE", "Ace x Furnace FurnACE", "Ace Trucks FurnACE Video", "Ace x Furnace - FurnACE"],
+      "type": "film",
+      "title": "FurnACE",
+      "description": "Ace Trucks and Furnace Skate Shop's 26-minute collaboration celebrates a shop approaching its thirtieth year by centering the local crew that sustains it. The complete film documents 15 skaters, with Joseph Licas leading a 12-person camera team.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "ace-trucks", "furnace-skate-shop", "shop-video", "team-video", "community", "2020s"],
+      "releaseYear": 2025,
+      "releaseDate": "2025-12-16",
+      "producedBy": "Ace Trucks and Furnace Skate Shop",
+      "directors": [],
+      "filmmakers": ["Joseph Licas"],
+      "cinematographers": ["Joseph Licas", "Matt Bublitz", "Nando Yiv", "Aaron Brown", "Riley Detar", "Kyle Hughes", "Jack Springer", "Aleks Lewandowski", "Don Luong", "Luke Murphy", "Jake Frank", "Cody Long"],
+      "additionalProductionCredits": ["Jas Cuhadar"],
+      "riders": ["Kaylee Chen", "Randy Padayo", "Jeremy Ponce", "Jacob Dawkins", "Skyler Barney", "Tanner Lawler", "Austin Heilman", "Taylor McClung", "Justin Reynolds", "Joey Pulsifer", "Nando Yiv", "Jasmine Cuhadar", "Johnny Perez", "Kento Takahashi", "Haesung Jang"],
+      "riderCreditGroups": {"documentedFilmAppearances": ["Kaylee Chen", "Randy Padayo", "Jeremy Ponce", "Jacob Dawkins", "Skyler Barney", "Tanner Lawler", "Austin Heilman", "Taylor McClung", "Justin Reynolds", "Joey Pulsifer", "Nando Yiv", "Jasmine Cuhadar", "Johnny Perez", "Kento Takahashi", "Haesung Jang"]},
+      "creditNotes": [
+        "Ace Trucks' official complete-film upload credits Joseph Licas with filming and editing, names all eleven additional camera contributors and credits Jas Cuhadar with photography.",
+        "SkateVideoSite independently classifies FurnACE as a 26-minute full-length, identifies Joseph Licas as filmmaker and preserves the complete 15-skater roster.",
+        "Jas Cuhadar is retained exactly as credited by Ace; SkateVideoSite catalogs the rider Jasmine Cuhadar separately, and the record does not assume they are the same person."
+      ],
+      "locations": [],
+      "locationNote": "The sources establish Furnace's Southern California shop-community context but do not provide a reliable complete filming itinerary, so no city or spot list is inferred.",
+      "duration": 1540,
+      "historicalContext": "Released as Furnace approached its thirtieth year, FurnACE is framed by Ace Trucks as a defense of local skate shops and the multigenerational crews that keep them alive during widespread shop closures.",
+      "artworkNotes": "The exact official upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-16. It combines a night street-skating still, flames and a dedicated FurnACE/Ace title treatment and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/g3EoXQszKe0/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/g3EoXQszKe0/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=g3EoXQszKe0",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=g3EoXQszKe0", "embedUrl": "https://www.youtube.com/embed/g3EoXQszKe0", "access": "free", "label": "Watch Full Film", "channel": "ACE TRUCKS", "channelUrl": "https://www.youtube.com/channel/UCdqKLXRWpoHcg3IZ8ZHwSBw", "publisherRelationship": "brand / producing rights-holder channel", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T00:44:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "g3EoXQszKe0", "url": "https://www.youtube.com/watch?v=g3EoXQszKe0", "sourceDetails": "Ace Trucks' official channel hosts the uninterrupted complete collaboration and supplies its community context and production credits. YouTube reports channelId UCdqKLXRWpoHcg3IZ8ZHwSBw, a 1,540.121-second main feature, December 16, 2025 publication and embed permission.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "skatevideosite", "url": "https://www.skatevideosite.com/videos/ace-x-furnace-furnace", "sourceDetails": "Independent filmography classifies FurnACE as a 26-minute Ace/Furnace full-length, credits Joseph Licas and preserves the complete 15-skater roster.", "retrievedAt": "2026-09-17T00:44:00.000Z"},
+        {"source": "skate-sonr", "url": "https://skatesonr.com/organizations/a/ace_trucks-3621707894099968/", "sourceDetails": "Independent archival index preserves Ace's December 16 release context and the official description and credits for the FurnACE video.", "retrievedAt": "2026-09-17T00:44:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film on Ace Trucks' official producing-brand channel; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "FurnACE (2025) - Ace Trucks x Furnace Full Film", "description": "Watch Ace Trucks and Furnace Skate Shop's complete 26-minute FurnACE film, featuring 15 documented skaters."},
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
