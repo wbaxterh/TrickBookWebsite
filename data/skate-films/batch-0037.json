@@ -1,0 +1,423 @@
+{
+  "source": "Authorized complete-film uploads from BLAME and filmmaker Milan Stolper plus Vague Skate Mag's explicitly hosted filmmaker-supplied Greyburn player, corroborated by SkateVideoSite and Vague",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T17:35:00.000Z",
+  "films": [
+    {
+      "slug": "blame-v4-2026",
+      "aliases": ["V4.", "V4", "Blame - V4."],
+      "type": "film",
+      "title": "V4.",
+      "description": "BLAME's 16-minute Cleveland independent film brings together 26 skaters under Benny Liberatore's filming and editing. Premiered at The Happy Dog in Cleveland on December 26, 2025, the complete film arrived online in January 2026 alongside a first-party poster release.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "independent-film",
+        "blame",
+        "benny-liberatore",
+        "cleveland",
+        "ohio",
+        "midwest",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-01-06",
+      "producedBy": "BLAME",
+      "directors": [],
+      "filmmakers": ["Benny Liberatore"],
+      "cinematographers": ["Benny Liberatore"],
+      "additionalProductionCredits": ["Benny Liberatore (editor)"],
+      "riders": [
+        "Joe Lanzilotti",
+        "Michael Rosenberg",
+        "Kevin Terpening",
+        "Alex Vogel",
+        "Ben Collier",
+        "Jalen Willis",
+        "Daiki Hoshino",
+        "Tylor Horton",
+        "Jojo Morehouse",
+        "Frankie Wolf",
+        "Chris Hernandez",
+        "Joel Sims",
+        "Gary Dean",
+        "Brandon Bowe",
+        "Liam Nanninga",
+        "Preston Fergon",
+        "Alex Yost",
+        "Cris Lesh",
+        "Eric Viccarone",
+        "Jake Smith",
+        "Gary Habeeb",
+        "AJ Kish",
+        "Hunter Leach",
+        "Peter Morris",
+        "Justin Drysen",
+        "Nick Griffin"
+      ],
+      "riderCreditGroups": {
+        "officialFeaturedRiders": [
+          "Joe Lanzilotti",
+          "Michael Rosenberg",
+          "Kevin Terpening",
+          "Alex Vogel",
+          "Ben Collier",
+          "Jalen Willis",
+          "Daiki Hoshino",
+          "Tylor Horton",
+          "Jojo Morehouse",
+          "Frankie Wolf",
+          "Chris Hernandez",
+          "Joel Sims",
+          "Gary Dean",
+          "Brandon Bowe",
+          "Liam Nanninga",
+          "Preston Fergon",
+          "Alex Yost",
+          "Cris Lesh",
+          "Eric Viccarone",
+          "Jake Smith",
+          "Gary Habeeb",
+          "AJ Kish",
+          "Hunter Leach",
+          "Peter Morris",
+          "Justin Drysen",
+          "Nick Griffin"
+        ]
+      },
+      "creditNotes": [
+        "BLAME's authorized complete-film description names all 26 featured skaters in appearance order and formally credits Benny Liberatore for filming and editing.",
+        "SkateVideoSite independently classifies V4. as a 16-minute 2026 BLAME independent film by Ben 'Benny' Liberatore, corroborates the complete 26-skater roster and records Cleveland as the location.",
+        "The official source does not publish a formal part hierarchy, so all 26 skaters remain under its featured-rider label rather than being assigned unsupported solo parts."
+      ],
+      "locations": ["Cleveland, Ohio, USA"],
+      "locationNote": "The official description documents the Cleveland premiere, while SkateVideoSite independently identifies Cleveland as the film's location and BLAME as a Cleveland company.",
+      "duration": 981,
+      "historicalContext": "V4. continues BLAME and Benny Liberatore's Cleveland video lineage after The Blame Video, Blame Style and V3, moving the series into a fourth installment with a 26-skater cross-section of the local and visiting scene.",
+      "artworkNotes": "The exact authorized upload's 1920x1080 YouTube artwork and player were visually reviewed on 2026-09-17. The red BLAME identity frame is dedicated film artwork and the page carries no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/NiXIWZdd86s/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/NiXIWZdd86s/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=NiXIWZdd86s",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=NiXIWZdd86s",
+          "embedUrl": "https://www.youtube.com/embed/NiXIWZdd86s",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "BLAME",
+          "channelUrl": "https://www.youtube.com/channel/UCH11PZkdyg9x7WlrcSLgn6Q",
+          "publisherRelationship": "brand / producing rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "NiXIWZdd86s",
+          "url": "https://www.youtube.com/watch?v=NiXIWZdd86s",
+          "sourceDetails": "BLAME's own channel hosts the uninterrupted complete film and publishes its 26-rider roster, filmmaker/editor credit, premiere venue and poster link. YouTube reports channelId UCH11PZkdyg9x7WlrcSLgn6Q, a 981-second feature, January 6, 2026 publication, OK playability and permitted embedding.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/blame-v4",
+          "sourceDetails": "Independent filmography classifies V4. as a 16-minute 2026 BLAME independent film by Benny Liberatore, corroborates 26 skating appearances and documents Cleveland and the physical-poster release.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        },
+        {
+          "source": "blame-store",
+          "url": "https://blameblameblame.bigcartel.com/",
+          "sourceDetails": "The producing brand's store is linked directly by the authorized upload for V4 premiere posters and supports the first-party BLAME relationship.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on BLAME's own producing-brand channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "V4. (2026) - BLAME Full Skate Film",
+        "description": "Watch BLAME and Benny Liberatore's complete 16-minute Cleveland skate film with all 26 featured riders credited."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "milan-stolper-lcrmov-2026",
+      "aliases": ["LCRMOV", "LCRMOV by Milan Stolper"],
+      "type": "film",
+      "title": "LCRMOV",
+      "description": "Milan Stolper's 23-minute independent film crosses nine cities on three continents, centering seven starring riders and documenting 19 additional appearances. Stolper leads the production, with three named additional filmers and two further independently catalogued contributors.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "independent-film",
+        "milan-stolper",
+        "international",
+        "europe",
+        "north-america",
+        "asia",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-04-26",
+      "producedBy": "Milan Stolper",
+      "directors": [],
+      "filmmakers": ["Milan Stolper", "Vukman Milan", "Igor Nowak", "Kuba Gasior"],
+      "cinematographers": ["Milan Stolper", "Vukman Milan", "Igor Nowak", "Kuba Gasior"],
+      "additionalProductionCredits": [
+        "Wiktor Jakowski (production credit)",
+        "Kacper Serkowski (production credit)"
+      ],
+      "riders": [
+        "Kacper Firmanty",
+        "Jack Mcdonagh",
+        "Jamie Griffin",
+        "Miko Peller",
+        "Lukasz Gosiewski",
+        "Maciej Dyrwal",
+        "Wiktor Jakowski",
+        "Davy Mercado",
+        "Carlos Marinero",
+        "Daniel Weaver",
+        "Josh Katz",
+        "Christopher Hiett",
+        "James White",
+        "Ollie Vejanovski",
+        "Jago Kinnersley",
+        "Tylo Sterling",
+        "Joshua Mayson",
+        "Christian Barroso",
+        "Marcel Podlewski",
+        "Rafal Kosciolek",
+        "Dominik Ortyl",
+        "Kuba Gasior",
+        "Johnny Pacyna",
+        "Josh Dubski",
+        "Jay Figuora",
+        "Alex Decunha"
+      ],
+      "riderCreditGroups": {
+        "officialStarringRiders": [
+          "Kacper Firmanty",
+          "Jack Mcdonagh",
+          "Jamie Griffin",
+          "Miko Peller",
+          "Lukasz Gosiewski",
+          "Maciej Dyrwal",
+          "Wiktor Jakowski"
+        ],
+        "officialFeaturedAppearances": [
+          "Davy Mercado",
+          "Carlos Marinero",
+          "Daniel Weaver",
+          "Josh Katz",
+          "Christopher Hiett",
+          "James White",
+          "Ollie Vejanovski",
+          "Jago Kinnersley",
+          "Tylo Sterling",
+          "Joshua Mayson",
+          "Christian Barroso",
+          "Marcel Podlewski",
+          "Rafal Kosciolek",
+          "Dominik Ortyl",
+          "Kuba Gasior",
+          "Johnny Pacyna"
+        ],
+        "independentlyDocumentedAdditionalAppearances": [
+          "Josh Dubski",
+          "Jay Figuora",
+          "Alex Decunha"
+        ]
+      },
+      "creditNotes": [
+        "Milan Stolper's authorized complete-film description distinguishes seven starring riders from 16 featured appearances and formally credits Vukman Milan, Igor Nowak and Kuba Gasior for additional filming.",
+        "SkateVideoSite independently classifies LCRMOV as a 23-minute 2026 film by Stolper, corroborates the starring and featured roster, and additionally catalogs Josh Dubski, Jay Figuora and Alex Decunha as appearances plus Wiktor Jakowski and Kacper Serkowski as production contributors.",
+        "The three archive-only appearances are retained in a separate group, while the two additional generic production contributors are not assigned narrower unsupported roles. Official spellings take precedence where the sources vary."
+      ],
+      "locations": [
+        "Gdansk, Poland",
+        "London, England, United Kingdom",
+        "Los Angeles, California, USA",
+        "Barcelona, Spain",
+        "Bangkok, Thailand",
+        "San Francisco, California, USA",
+        "Warsaw, Poland",
+        "Budapest, Hungary",
+        "Krakow, Poland"
+      ],
+      "locationNote": "The filmmaker's description names all nine cities, and SkateVideoSite independently records the same international footprint across the United States, Spain, United Kingdom, Thailand, Poland and Hungary.",
+      "duration": 1371,
+      "historicalContext": "Built over multiple years, LCRMOV is an unusually broad independent travel film spanning Gdansk, London, Los Angeles, Barcelona, Bangkok, San Francisco, Warsaw, Budapest and Krakow while preserving a clearly separated starring cast and international supporting roster.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork and player were visually reviewed on 2026-09-17. Its LCRMOV title treatment appears over a stylized city image and carries no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/Sy-BbC4eRXw/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/Sy-BbC4eRXw/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=Sy-BbC4eRXw",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=Sy-BbC4eRXw",
+          "embedUrl": "https://www.youtube.com/embed/Sy-BbC4eRXw",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "MilanStolper",
+          "channelUrl": "https://www.youtube.com/channel/UC63NsJ2CtnclEGUntvoi8WQ",
+          "publisherRelationship": "filmmaker's own channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "Sy-BbC4eRXw",
+          "url": "https://www.youtube.com/watch?v=Sy-BbC4eRXw",
+          "sourceDetails": "Milan Stolper's own channel hosts the uninterrupted complete film and publishes its starring/featured roster, three additional camera credits and nine-city footprint. YouTube reports channelId UC63NsJ2CtnclEGUntvoi8WQ, a 1,371-second feature, April 26, 2026 publication, OK playability and permitted embedding.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/lcrmov",
+          "sourceDetails": "Independent filmography classifies LCRMOV as a 23-minute 2026 Milan Stolper film, catalogs 25 appearances and five production contributors, distinguishes soundtrack sections and corroborates the nine-city international production.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on filmmaker Milan Stolper's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "LCRMOV (2026) - Milan Stolper Skate Film",
+        "description": "Watch Milan Stolper's complete 23-minute international skate film with its full starring, featured and additional rider credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "jeremy-przybyla-greyburn-2026",
+      "aliases": ["Greyburn", "Greyburn by Jeremy Przybyla"],
+      "type": "film",
+      "title": "Greyburn",
+      "description": "Jeremy Przybyla's 18-minute Midwest film follows nine skaters through rough-edged street terrain across Wisconsin, Michigan and Indiana. Vague Skate Mag explicitly hosts the complete filmmaker-supplied film, with Przybyla credited for filming and editing and Harry Reynolds and Felix Meyers on additional cameras.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "independent-film",
+        "jeremy-przybyla",
+        "midwest",
+        "wisconsin",
+        "michigan",
+        "indiana",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-04-07",
+      "producedBy": "Jeremy Przybyla",
+      "directors": [],
+      "filmmakers": ["Jeremy Przybyla", "Harry Reynolds", "Felix Meyers"],
+      "cinematographers": ["Jeremy Przybyla", "Harry Reynolds", "Felix Meyers"],
+      "additionalProductionCredits": ["Jeremy Przybyla (editor)"],
+      "riders": [
+        "Danny Sokol",
+        "Vince Stranc",
+        "Charles Arpin",
+        "Graham Collings",
+        "Nick Mistele",
+        "Sean Hanley",
+        "Benny Fosco",
+        "Payne Counihan",
+        "Max Tellefson"
+      ],
+      "riderCreditGroups": {
+        "featuredRiders": [
+          "Danny Sokol",
+          "Vince Stranc",
+          "Charles Arpin",
+          "Graham Collings",
+          "Nick Mistele",
+          "Sean Hanley",
+          "Benny Fosco",
+          "Payne Counihan",
+          "Max Tellefson"
+        ],
+        "sharedSections": [
+          "Charles Arpin / Graham Collings",
+          "Nick Mistele / Sean Hanley / Benny Fosco"
+        ]
+      },
+      "creditNotes": [
+        "Vague Skate Mag's complete-film page and hosted player name all nine featured riders, formally credit Jeremy Przybyla for filming and editing, and identify Felix Meyers and Harry Reynolds for additional filming.",
+        "SkateVideoSite independently classifies Greyburn as an 18-minute 2026 independent film by Przybyla and corroborates the complete roster, camera credits, soundtrack section structure and Midwest context.",
+        "Shared sections are retained only where the independently catalogued soundtrack explicitly groups riders; no unsupported solo-part hierarchy is inferred."
+      ],
+      "locations": ["Wisconsin, USA", "Michigan, USA", "Indiana, USA"],
+      "locationNote": "Vague's first-party hosting page explicitly says the film covers Wisconsin, Michigan and Indiana, while SkateVideoSite independently tags the film as a United States Midwest production.",
+      "duration": 1101,
+      "historicalContext": "Greyburn is a compact regional document of Midwest street skating that deliberately foregrounds weathered, irregular spots over polished plazas and connects crews across Wisconsin, Michigan and Indiana.",
+      "artworkNotes": "The exact licensed upload's 1280x720 YouTube artwork and player were visually reviewed on 2026-09-17. The image is a dedicated film still from the Greyburn page and carries no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/f0ZXkhHWuNM/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/f0ZXkhHWuNM/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=f0ZXkhHWuNM",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=f0ZXkhHWuNM",
+          "embedUrl": "https://www.youtube.com/embed/f0ZXkhHWuNM",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Vague Skate Mag",
+          "channelUrl": "https://www.youtube.com/channel/UCkkjdgCbn1FJZ_auaoS-e6w",
+          "publisherRelationship": "established skate editorial publisher explicitly hosting the filmmaker-supplied complete film",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "f0ZXkhHWuNM",
+          "url": "https://www.youtube.com/watch?v=f0ZXkhHWuNM",
+          "sourceDetails": "Vague Skate Mag's channel hosts the uninterrupted complete filmmaker-supplied film and publishes its nine-rider roster, filmmaker/editor credit, two additional camera credits and three-state context. YouTube reports channelId UCkkjdgCbn1FJZ_auaoS-e6w, a 1,101-second feature, April 7, 2026 publication, OK playability and permitted embedding.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        },
+        {
+          "source": "vague-skate-mag",
+          "url": "https://www.vaguemag.com/videos/greyburn-by-jeremy-przybyla/",
+          "sourceDetails": "Vague explicitly states that it is hosting Jeremy Przybyla's film, names all nine riders, credits Przybyla for filming/editing and identifies the two additional filmers and Wisconsin/Michigan/Indiana footprint.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/greyburn",
+          "sourceDetails": "Independent filmography classifies Greyburn as an 18-minute 2026 film by Jeremy Przybyla, corroborates all nine riders, the two additional camera credits and its Midwest classification.",
+          "retrievedAt": "2026-09-17T17:35:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the complete filmmaker-supplied film on Vague Skate Mag, an established skate publisher that explicitly states it is hosting the work; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Greyburn (2026) - Jeremy Przybyla Skate Film",
+        "description": "Watch Jeremy Przybyla's complete 18-minute Midwest skate film with all nine riders and full supported camera credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_licensed_source"
+    }
+  ]
+}
