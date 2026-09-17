@@ -1,0 +1,341 @@
+{
+  "source": "Authorized complete-film uploads from Astray, Will Lloyd and Myles Rushforth, supplemented by Skate Jawn, Route One and SkateVideoSite",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T04:00:00.000Z",
+  "films": [
+    {
+      "slug": "astray-for-you-2026",
+      "aliases": ["FOR YOU", "Astray FOR YOU", "FOR YOU - FULL LENGTH SKATE VIDEO"],
+      "type": "film",
+      "title": "FOR YOU",
+      "description": "Astray's 19-minute full-length was filmed entirely in Barcelona by Pris Pietroboni. The uninterrupted film closes with a 23-rider credit roll documenting the crew and friends represented across the project.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "astray",
+        "barcelona",
+        "crew-video",
+        "street-skating",
+        "independent",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-07-12",
+      "producedBy": "Astray",
+      "directors": [],
+      "filmmakers": ["Pris Pietroboni"],
+      "cinematographers": ["Pris Pietroboni"],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Gonzalo Emilio",
+        "Marcelo Morales",
+        "Hans Reyes",
+        "Javier Castillo",
+        "Clemente Corral",
+        "Eduardo Pietroboni",
+        "Diego Quintana",
+        "Anibal Henriquez",
+        "Fabian Flores",
+        "Akira Utida",
+        "Leonardo Favaro",
+        "Anderson Gomez",
+        "Andre Saide",
+        "Raphael Silva",
+        "Pablo Marquez",
+        "Sebastian Felini",
+        "Victor Porras",
+        "Carlos Olave",
+        "Esteban Medel",
+        "Cristian Reyes",
+        "Wlady Osorio",
+        "Felipe Castro",
+        "Diego Riquelme"
+      ],
+      "riderCreditGroups": {
+        "officialEndCredits": [
+          "Gonzalo Emilio",
+          "Marcelo Morales",
+          "Hans Reyes",
+          "Javier Castillo",
+          "Clemente Corral",
+          "Eduardo Pietroboni",
+          "Diego Quintana",
+          "Anibal Henriquez",
+          "Fabian Flores",
+          "Akira Utida",
+          "Leonardo Favaro",
+          "Anderson Gomez",
+          "Andre Saide",
+          "Raphael Silva",
+          "Pablo Marquez",
+          "Sebastian Felini",
+          "Victor Porras",
+          "Carlos Olave",
+          "Esteban Medel",
+          "Cristian Reyes",
+          "Wlady Osorio",
+          "Felipe Castro",
+          "Diego Riquelme"
+        ]
+      },
+      "creditNotes": [
+        "The complete authorized upload supplies the uninterrupted film and its 23-name closing credit roll; rider spellings preserve the published end cards.",
+        "Skate Jawn independently identifies the project as Astray's Barcelona full-length and credits Pris Pietroboni with filming.",
+        "No riders are inferred from appearance alone; the roster is limited to names in the film's formal credit roll."
+      ],
+      "locations": ["Barcelona, Spain"],
+      "locationNote": "Both the first-party upload and Skate Jawn state that the full-length was filmed entirely in Barcelona.",
+      "duration": 1148,
+      "historicalContext": "FOR YOU preserves a contemporary Barcelona-based crew document with a formal closing roster broad enough to capture the local and visiting skaters who shaped the production.",
+      "artworkNotes": "The exact authorized upload's 480x360 YouTube artwork was visually reviewed on 2026-09-16. It shows a fisheye street-skating frame at a sunlit Barcelona spot and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/toZclREmTQk/hqdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/toZclREmTQk/hqdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=toZclREmTQk",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=toZclREmTQk",
+          "embedUrl": "https://www.youtube.com/embed/toZclREmTQk",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Cinta astray",
+          "channelUrl": "https://www.youtube.com/channel/UC2GEnkZSnhidTZN5uLbbyDQ",
+          "publisherRelationship": "Astray crew channel publishing its own complete full-length",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "toZclREmTQk",
+          "url": "https://www.youtube.com/watch?v=toZclREmTQk",
+          "sourceDetails": "Astray's crew channel hosts the uninterrupted complete film, describes it as a full-length filmed entirely in Barcelona and supplies the formal 23-rider closing credit roll. YouTube reports channelId UC2GEnkZSnhidTZN5uLbbyDQ, a 1,148-second main feature, July 12, 2026 publication and embed permission.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/for-you/",
+          "sourceDetails": "Independent coverage embeds the exact upload, identifies FOR YOU as Astray's Barcelona full-length and credits Pris Pietroboni with filming.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Astray's own crew channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "FOR YOU (2026) - Astray Full Skate Film",
+        "description": "Watch Astray's complete Barcelona full-length FOR YOU, filmed by Pris Pietroboni and featuring 23 formally credited riders."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "will-lloyd-warm-one-2026",
+      "aliases": ["WARM ONE", "Warm One", "Will Lloyd WARM ONE"],
+      "type": "film",
+      "title": "WARM ONE",
+      "description": "Will Lloyd's sixth full skate video collects nearly two and a half years of filming across Arkansas, Texas and Missouri. The 27-minute independent full-length formally spotlights complete parts from Jake Bowman and Todd Given while retaining the broader montage crew as unnamed rather than inventing credits.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "will-lloyd",
+        "independent",
+        "arkansas",
+        "austin",
+        "st-louis",
+        "kansas-city",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-06-21",
+      "producedBy": "Will Lloyd",
+      "directors": [],
+      "filmmakers": ["Will Lloyd"],
+      "cinematographers": ["Will Lloyd"],
+      "additionalProductionCredits": [],
+      "riders": ["Jake Bowman", "Todd Given"],
+      "riderCreditGroups": { "formallyNamedFullParts": ["Jake Bowman", "Todd Given"] },
+      "creditNotes": [
+        "Will Lloyd's first-party description identifies WARM ONE as his sixth full skate video and formally names full parts from Jake Bowman and Todd Given.",
+        "The upload says the film also features the wider crew, old and new, while Skate Jawn says 'many more'; because neither publishes those names, only the two formally named full-part riders are promoted into the roster.",
+        "Skate Jawn independently corroborates Will Lloyd's authorship, the project's full-length status and its Arkansas, Texas and Missouri production footprint."
+      ],
+      "locations": [
+        "Arkansas, USA",
+        "Austin, Texas, USA",
+        "St. Louis, Missouri, USA",
+        "Kansas City, Missouri, USA"
+      ],
+      "locationNote": "The first-party description specifically names Austin, St. Louis and Kansas City; Skate Jawn independently broadens the documented footprint to Arkansas, Texas and Missouri.",
+      "duration": 1640,
+      "historicalContext": "Released on Go Skateboarding Day 2026, WARM ONE extends Will Lloyd's long-running independent video series with a multi-state regional document built patiently over nearly two and a half years.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-16. It shows two skaters celebrating beside a yellow curb and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/A5RKxrDZgUk/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/A5RKxrDZgUk/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=A5RKxrDZgUk",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=A5RKxrDZgUk",
+          "embedUrl": "https://www.youtube.com/embed/A5RKxrDZgUk",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Lilwoyd",
+          "channelUrl": "https://www.youtube.com/channel/UCMZgY2ffBOaMeYi89QwbD2Q",
+          "publisherRelationship": "filmmaker's own channel publishing his complete sixth skate video",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "A5RKxrDZgUk",
+          "url": "https://www.youtube.com/watch?v=A5RKxrDZgUk",
+          "sourceDetails": "Will Lloyd's own channel hosts the uninterrupted complete film and supplies its production history, exact named full-part riders and principal locations. YouTube reports channelId UCMZgY2ffBOaMeYi89QwbD2Q, a 1,640-second main feature, June 21, 2026 publication and embed permission.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/warm-one/",
+          "sourceDetails": "Independent coverage identifies WARM ONE as Will Lloyd's sixth video, corroborates Jake Bowman and Todd Given as full-part riders and documents the Arkansas, Texas and Missouri filming footprint.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on filmmaker Will Lloyd's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "WARM ONE (2026) - Will Lloyd Full Skate Film",
+        "description": "Watch Will Lloyd's complete sixth skate video WARM ONE, featuring full parts from Jake Bowman and Todd Given."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "myles-rushforth-nowt-daft-2026",
+      "aliases": [
+        "NOWT DAFT",
+        "Nowt Daft",
+        "NOWT DAFT - FULL VIDEO",
+        "A Barnsley / Sheffield Skateboard Video"
+      ],
+      "type": "film",
+      "title": "NOWT DAFT",
+      "description": "Myles Rushforth's 33-minute South Yorkshire scene video joins Barnsley and Sheffield across eight documented riders. Rushforth filmed and edited the project, whose chaptered structure closes with an Eamon Samojlow tribute and credits.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "myles-rushforth",
+        "barnsley",
+        "sheffield",
+        "south-yorkshire",
+        "scene-video",
+        "independent",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-04-24",
+      "producedBy": "Myles Rushforth",
+      "directors": [],
+      "filmmakers": ["Myles Rushforth"],
+      "cinematographers": ["Myles Rushforth"],
+      "additionalProductionCredits": ["Myles Rushforth (editor)"],
+      "riders": [
+        "Jayden Hallows",
+        "Zak Wright",
+        "Alex Bird",
+        "Freya Brooks",
+        "Myles Rushforth",
+        "James Tudor",
+        "Caleb Bertenshaw",
+        "Ed Kilner"
+      ],
+      "riderCreditGroups": {
+        "documentedChapterRiders": [
+          "Jayden Hallows",
+          "Zak Wright",
+          "Alex Bird",
+          "Freya Brooks",
+          "Myles Rushforth",
+          "James Tudor",
+          "Caleb Bertenshaw",
+          "Ed Kilner"
+        ]
+      },
+      "creditNotes": [
+        "The filmmaker's complete upload names all eight riders in its description and chapter list and explicitly credits Myles Rushforth with filming and editing.",
+        "SkateVideoSite independently classifies NOWT DAFT as a 33-minute 2026 full-length and corroborates the complete eight-rider roster and Myles Rushforth's filmmaking credit.",
+        "Route One independently describes the project as a South Yorkshire scene video and a labor of love showcasing skateboarding across Sheffield and Barnsley."
+      ],
+      "locations": ["Barnsley, South Yorkshire, England", "Sheffield, South Yorkshire, England"],
+      "locationNote": "The first-party title treatment identifies a Barnsley / Sheffield skateboard video, and Route One independently corroborates both South Yorkshire locations.",
+      "duration": 1972,
+      "historicalContext": "NOWT DAFT is Myles Rushforth's fifth scene-video offering and a contemporary record of connected generations of skateboarders across Barnsley and Sheffield.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-16. It shows a skater clearing a gap between metal utility housings beneath a dedicated NOWT DAFT / A BARNSLEY SHEFFIELD SKATEBOARD VIDEO title treatment, with no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/02Li-PpPSII/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/02Li-PpPSII/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=02Li-PpPSII",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=02Li-PpPSII",
+          "embedUrl": "https://www.youtube.com/embed/02Li-PpPSII",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Myles Rushforth",
+          "channelUrl": "https://www.youtube.com/channel/UCo9bdHniN7w-H-UNsGgtppA",
+          "publisherRelationship": "filmmaker's own channel publishing the complete film",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "02Li-PpPSII",
+          "url": "https://www.youtube.com/watch?v=02Li-PpPSII",
+          "sourceDetails": "Myles Rushforth's own channel hosts the uninterrupted complete film, identifies all eight riders through its description and chapters, and credits Rushforth with filming and editing. YouTube reports channelId UCo9bdHniN7w-H-UNsGgtppA, a 1,972-second main feature, April 24, 2026 publication and embed permission.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/nowt-daft",
+          "sourceDetails": "Independent filmography classifies NOWT DAFT as a 33-minute 2026 full-length and corroborates the complete eight-rider roster and filmmaker credit.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        },
+        {
+          "source": "route-one",
+          "url": "https://www.routeone.co.uk/blogs/news/skate-update-theres-nowt-daft-about-this-weeks-skateboarding-highlights",
+          "sourceDetails": "Independent contemporary coverage describes NOWT DAFT as a South Yorkshire scene video and a labor of love documenting Sheffield and Barnsley skateboarding.",
+          "retrievedAt": "2026-09-17T04:00:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on filmmaker Myles Rushforth's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "NOWT DAFT (2026) - Myles Rushforth Full Skate Film",
+        "description": "Watch Myles Rushforth's complete 33-minute Barnsley and Sheffield scene video NOWT DAFT, featuring eight documented riders."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
