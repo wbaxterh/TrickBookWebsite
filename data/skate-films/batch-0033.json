@@ -1,0 +1,418 @@
+{
+  "source": "Authorized complete-film uploads from Quartersnacks, Thrasher and Vans, supplemented by SkateVideoSite, TransWorld, VHS Mag, SkateSonr and California Street",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T09:49:00.000Z",
+  "films": [
+    {
+      "slug": "crabi-2026",
+      "aliases": ["CRABI", "CRABI by Victor Campillo & the Homies", "Asics Skateboarding CRABI"],
+      "type": "film",
+      "title": "CRABI",
+      "description": "Victor Campillo and an extended Marseille, Swiss and New York crew turn a month-long trip into a 17-minute independent film. Its complete published credits preserve all 20 skaters in order of appearance, seven camera contributors and the collaborative edit.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "independent-film",
+        "crabi",
+        "victor-campillo",
+        "asics-skateboarding",
+        "new-york-city",
+        "trip-film",
+        "crew-video",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-02-25",
+      "producedBy": "Victor Campillo & the Homies / Asics Skateboarding",
+      "directors": [],
+      "filmmakers": [
+        "Victor Campillo",
+        "Guillaume Berthet",
+        "Hadrien Maillard",
+        "Luc Boimond",
+        "John Clodfelter",
+        "Sebastian Clark",
+        "Nico Marti"
+      ],
+      "cinematographers": [
+        "Victor Campillo",
+        "Guillaume Berthet",
+        "Hadrien Maillard",
+        "Luc Boimond",
+        "John Clodfelter",
+        "Sebastian Clark",
+        "Nico Marti"
+      ],
+      "additionalProductionCredits": [
+        "Victor Campillo and the homies (edit)",
+        "Celian Cordt-Moller (title)",
+        "Jérôme Boinali (photography)",
+        "Luc Boimond / Crabi (photography)",
+        "Guillaume Berthet (photography)"
+      ],
+      "riders": [
+        "Pierre-Edouard Grimaud",
+        "Tony Rafanomezana",
+        "Valentin Verd",
+        "Felipe Rodriguez",
+        "Juuni",
+        "Maclyn Milsark",
+        "Luc Boimond",
+        "Guillaume Berthet",
+        "Dimitri Morel",
+        "Tom Abord",
+        "Celian Cordt-Moller",
+        "Ernest Gaudray",
+        "Victor Campillo",
+        "Jalil Sommerhalder",
+        "Max Jang",
+        "Corentin Derume",
+        "Léo-Paul Hamoui",
+        "Devin Sweat",
+        "Daniel Rozenberg",
+        "Chase Walker"
+      ],
+      "riderCreditGroups": {
+        "officialOrderOfAppearance": [
+          "Pierre-Edouard Grimaud",
+          "Tony Rafanomezana",
+          "Valentin Verd",
+          "Felipe Rodriguez",
+          "Juuni",
+          "Maclyn Milsark",
+          "Luc Boimond",
+          "Guillaume Berthet",
+          "Dimitri Morel",
+          "Tom Abord",
+          "Celian Cordt-Moller",
+          "Ernest Gaudray",
+          "Victor Campillo",
+          "Jalil Sommerhalder",
+          "Max Jang",
+          "Corentin Derume",
+          "Léo-Paul Hamoui",
+          "Devin Sweat",
+          "Daniel Rozenberg",
+          "Chase Walker"
+        ]
+      },
+      "creditNotes": [
+        "Quartersnacks' complete-film publication carries the crew's own statement and publishes all 20 skaters in order, seven filmers, the collaborative edit and Celian Cordt-Moller's title credit.",
+        "SkateVideoSite independently classifies CRABI as a 17-minute 2026 Asics-supported independent film by Victor Campillo and corroborates the credited roster.",
+        "TransWorld independently identifies the production as a combined Marseille and OG.2000 crew film made in New York City."
+      ],
+      "locations": ["New York City, New York, USA"],
+      "locationNote": "Quartersnacks documents the month-long New York trip and identifies several city spots, while TransWorld independently corroborates the NYC setting.",
+      "duration": 1001,
+      "historicalContext": "CRABI joins Victor Campillo's Marseille crew with Switzerland's OG.2000 collective and New York friends in an Asics-supported city document built around low-impact technical street skating.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-17. It is a dedicated group portrait beneath the Manhattan Bridge with no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/lV-G18x3X4Y/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/lV-G18x3X4Y/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=lV-G18x3X4Y",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=lV-G18x3X4Y",
+          "embedUrl": "https://www.youtube.com/embed/lV-G18x3X4Y",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Quartersnacks",
+          "channelUrl": "https://www.youtube.com/channel/UCMuL0mX8q0-9H1TLkoNzKIg",
+          "publisherRelationship": "established skate editorial publisher presenting a directly supplied crew film with formal credits and sponsor support",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "lV-G18x3X4Y",
+          "url": "https://www.youtube.com/watch?v=lV-G18x3X4Y",
+          "sourceDetails": "Quartersnacks hosts the uninterrupted complete film with the crew's statement, full 20-skater order and role-specific credits. YouTube reports channelId UCMuL0mX8q0-9H1TLkoNzKIg, a 1,001-second main feature, February 25, 2026 publication and embed permission.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "quartersnacks",
+          "url": "https://quartersnacks.com/2026/02/crabi-a-new-york-trip-edit-by-victor-campillo-the-homies/",
+          "sourceDetails": "The film's publication page documents the month-long New York trip, Asics support, full rider order and complete available production credits.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/skaters/victor-campillo",
+          "sourceDetails": "Independent filmography classifies CRABI as a 17-minute 2026 Asics Skateboarding independent film by Victor Campillo and corroborates the roster.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/crabi-nyc-missions-with-victor-campillo-the-crew",
+          "sourceDetails": "Independent contemporary coverage identifies the Marseille and OG.2000 crews and corroborates the New York City production context.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted directly supplied crew film on Quartersnacks' established editorial channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "CRABI (2026) - Victor Campillo Full Skate Film",
+        "description": "Watch the complete 17-minute New York crew film CRABI, with all 20 skaters and seven filmers credited."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "vans-video-by-flech-2023",
+      "aliases": ["VANS VIDEO By Flech", "Vans Video By Flech", "Vans - Vans Video By Flech"],
+      "type": "film",
+      "title": "VANS VIDEO By Flech",
+      "description": "Johnathan Flechas' 19-minute Vans full-length gives five riders defined sections and threads five additional team appearances through its cameos and montages. Its route crosses five U.S. cities, pairing Aidan Mackey's downhill skating with Ben Kadow and Diego Todd's closing cuts.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "vans",
+        "johnathan-flechas",
+        "team-video",
+        "new-york",
+        "los-angeles",
+        "austin",
+        "2020s"
+      ],
+      "releaseYear": 2023,
+      "releaseDate": "2023-02-20",
+      "producedBy": "Vans",
+      "directors": [],
+      "filmmakers": ["Johnathan Flechas"],
+      "cinematographers": ["Johnathan Flechas"],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Andrew Allen",
+        "Elijah Berle",
+        "Rowan Zorilla",
+        "Aidan Mackey",
+        "Ben Kadow",
+        "Stu Kirst",
+        "Nick Michel",
+        "Etienne Gagne",
+        "Diego Todd",
+        "Sully Cormier"
+      ],
+      "riderCreditGroups": {
+        "soundtrackDocumentedSections": [
+          "Aidan Mackey",
+          "Etienne Gagne",
+          "Rowan Zorilla",
+          "Ben Kadow",
+          "Diego Todd"
+        ],
+        "documentedCameoAndMontageAppearances": [
+          "Andrew Allen",
+          "Elijah Berle",
+          "Stu Kirst",
+          "Nick Michel",
+          "Sully Cormier"
+        ]
+      },
+      "creditNotes": [
+        "Thrasher's authorized complete-film description explicitly highlights Aidan Mackey, Rowan Zorilla, Etienne Gagne and Diego Todd and identifies the remaining material as cameos and hijinks.",
+        "SkateVideoSite independently classifies the project as a 19-minute 2023 Vans full-length by Johnathan Flechas, documents all ten appearances and maps five filming cities.",
+        "The five soundtrack-indexed sections are separated from the five additional documented appearances rather than treating every credited rider as a full part."
+      ],
+      "locations": [
+        "Rochester, New York, USA",
+        "Albany, New York, USA",
+        "Syracuse, New York, USA",
+        "Los Angeles, California, USA",
+        "Austin, Texas, USA"
+      ],
+      "locationNote": "SkateVideoSite documents the five-city filming footprint and specifically identifies Empire State Plaza in Albany and Pyramid Ledges in New York City among its spots.",
+      "duration": 1115,
+      "historicalContext": "The film captures the overlap between Vans, Hockey and Fucking Awesome-era crews through Flechas' rough-cut visual style and a compact sequence of principal sections and cameos.",
+      "artworkNotes": "The exact authorized upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-17. Its dedicated monochrome title composition names Ben, Diego, Aidan, ET and Rowan and contains no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/pB8FtF968CY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/pB8FtF968CY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=pB8FtF968CY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=pB8FtF968CY",
+          "embedUrl": "https://www.youtube.com/embed/pB8FtF968CY",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "ThrasherMagazine",
+          "channelUrl": "https://www.youtube.com/channel/UCt16NSYjauKclK67LCXvQyA",
+          "publisherRelationship": "authorized Thrasher complete-film publication of a Vans production",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "pB8FtF968CY",
+          "url": "https://www.youtube.com/watch?v=pB8FtF968CY",
+          "sourceDetails": "Thrasher hosts the uninterrupted complete Vans film and identifies four principal riders plus the cameo structure. YouTube reports channelId UCt16NSYjauKclK67LCXvQyA, a 1,115-second main feature, February 20, 2023 publication and embed permission.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/vans-vans-video-by-flech",
+          "sourceDetails": "Independent filmography classifies the project as a 19-minute full-length, credits Johnathan Flechas, documents all ten appearances, five section cues and the five-city footprint.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "vhs-mag",
+          "url": "https://www.vhsmag.com/news/vans-video-by-flech/",
+          "sourceDetails": "Independent contemporary coverage attributes the complete release to Vans and embeds the authorized Thrasher publication.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted Vans film on Thrasher's authorized complete-film channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "VANS VIDEO By Flech (2023) - Full Skate Film",
+        "description": "Watch Johnathan Flechas' complete 19-minute Vans film, featuring five principal sections and ten documented riders."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "vans-coast-2-coast-2022",
+      "aliases": [
+        "Coast 2 Coast",
+        "Vans Coast 2 Coast",
+        "Vans Skateboarding Presents: Coast 2 Coast"
+      ],
+      "type": "film",
+      "title": "Coast 2 Coast",
+      "description": "Vans Japan's first full-length skate team video crosses the country from Okinawa to Hokkaido in 18 minutes. Kyota Kamei filmed and edited the project, which preserves all 16 riders from the official release and its seven documented soundtrack sections.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "vans-japan",
+        "kyota-kamei",
+        "team-video",
+        "japan",
+        "okinawa",
+        "hokkaido",
+        "2020s"
+      ],
+      "releaseYear": 2022,
+      "releaseDate": "2022-07-10",
+      "producedBy": "Vans Japan",
+      "directors": [],
+      "filmmakers": ["Kyota Kamei"],
+      "cinematographers": ["Kyota Kamei"],
+      "additionalProductionCredits": ["Kyota Kamei (editor)"],
+      "riders": [
+        "Cocona Hiraki",
+        "Daiki Hoshino",
+        "Hina Maeda",
+        "Junnosuke Hasegawa",
+        "Kihana Ogawa",
+        "Mami Tezuka",
+        "Raido Tajima",
+        "Rio Morishige",
+        "Sakura Yosozumi",
+        "Shogo Zama",
+        "Shor West",
+        "Sota Tomikawa",
+        "Toa Sasaki",
+        "Yuma Takei",
+        "Yoshiaki Nagado",
+        "Yushin Hashimoto"
+      ],
+      "riderCreditGroups": {
+        "officialTeamRoster": [
+          "Cocona Hiraki",
+          "Daiki Hoshino",
+          "Hina Maeda",
+          "Junnosuke Hasegawa",
+          "Kihana Ogawa",
+          "Mami Tezuka",
+          "Raido Tajima",
+          "Rio Morishige",
+          "Sakura Yosozumi",
+          "Shogo Zama",
+          "Shor West",
+          "Sota Tomikawa",
+          "Toa Sasaki",
+          "Yuma Takei",
+          "Yoshiaki Nagado",
+          "Yushin Hashimoto"
+        ]
+      },
+      "creditNotes": [
+        "Vans' official complete-film description identifies Coast 2 Coast as the Japan team's first full-length, publishes all 16 riders and credits Kyota Kamei with filming and editing.",
+        "SkateSonr independently corroborates the release date, full-length classification, complete cast, Kyota Kamei's production role and the seven-section structure.",
+        "California Street's contemporary Japanese coverage independently attributes the film to Vans and confirms the Japan-team focus."
+      ],
+      "locations": ["Okinawa, Japan", "Hokkaido, Japan", "Japan"],
+      "locationNote": "Vans states the film was shot entirely in Japan, from Okinawa's southern coasts to Hokkaido in the north.",
+      "duration": 1068,
+      "historicalContext": "Coast 2 Coast was presented by Vans as its Japan skate team's first full-length, uniting a 16-rider roster across a country-spanning route.",
+      "artworkNotes": "The exact official upload's 1280x720 YouTube artwork was visually reviewed on 2026-09-17. It uses a dedicated teal-tinted fisheye image, Coast 2 Coast title treatment and Vans Japan skateboarding label with no trailer or episode wording.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/PwEFgdii1SY/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/PwEFgdii1SY/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=PwEFgdii1SY",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=PwEFgdii1SY",
+          "embedUrl": "https://www.youtube.com/embed/PwEFgdii1SY",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Vans",
+          "channelUrl": "https://www.youtube.com/channel/UCnJ0mt5Cgx4ER_LhTijG_4A",
+          "publisherRelationship": "brand / producing rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "PwEFgdii1SY",
+          "url": "https://www.youtube.com/watch?v=PwEFgdii1SY",
+          "sourceDetails": "Vans' official channel hosts the uninterrupted complete film, publishes all 16 riders and credits Kyota Kamei with filming and editing. YouTube reports channelId UCnJ0mt5Cgx4ER_LhTijG_4A, a 1,068-second main feature, July 10, 2022 publication and embed permission.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "skatesonr",
+          "url": "https://skatesonr.com/films/c/coast_2_coast-295664/",
+          "sourceDetails": "Independent cataloging corroborates the full-length classification, July 10 release date, all 16 athletes, Kyota Kamei's credits and seven soundtrack sections.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        },
+        {
+          "source": "california-street",
+          "url": "https://www.californiastreet.net/skateboard-mag/info/vans-coast2coast.html",
+          "sourceDetails": "Independent contemporary Japanese coverage attributes the team film to Vans and corroborates its Japan rider focus.",
+          "retrievedAt": "2026-09-17T09:49:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Vans' official producing-brand channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Coast 2 Coast (2022) - Vans Japan Full Skate Film",
+        "description": "Watch Vans Japan's complete first full-length Coast 2 Coast, featuring 16 riders from Okinawa to Hokkaido."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
