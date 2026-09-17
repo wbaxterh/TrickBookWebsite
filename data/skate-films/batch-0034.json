@@ -1,0 +1,432 @@
+{
+  "source": "Authorized complete-film uploads from Theories of Atlantis, Madrid Skateboards and Deza Skateboards, supplemented by SkateVideoSite, TransWorld Skateboarding, Village Psychic and Madrid's first-party premiere notice",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T11:03:00.000Z",
+  "films": [
+    {
+      "slug": "traffic-its-completely-fine-2024",
+      "aliases": [
+        "It's Completely Fine",
+        "It's Completely Fine: The Toynbee Project",
+        "Traffic - It's Completely Fine",
+        "Traffic Skateboards: The Toynbee Project"
+      ],
+      "type": "film",
+      "title": "It's Completely Fine: The Toynbee Project",
+      "description": "Traffic Skateboards' sixth full-length turns 20 years of East Coast spot seeking into a 27-minute team film. Jake Todd filmed the project and co-edited it with Pat Stiener, building seven principal chapters around a broad Traffic roster and a Toynbee-tile visual motif.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "traffic-skateboards",
+        "theories-of-atlantis",
+        "jake-todd",
+        "pat-stiener",
+        "east-coast",
+        "team-video",
+        "2020s"
+      ],
+      "releaseYear": 2024,
+      "releaseDate": "2024-11-03",
+      "producedBy": "Traffic Skateboards / Theories of Atlantis",
+      "directors": [],
+      "filmmakers": ["Jake Todd"],
+      "cinematographers": ["Jake Todd"],
+      "additionalProductionCredits": ["Jake Todd (editor)", "Pat Stiener (editor)"],
+      "riders": [
+        "Ricky Oyola",
+        "Shaun Williams",
+        "Pat Stiener",
+        "Mark Wetzel",
+        "Kevin Coakley",
+        "Luke Malaney",
+        "George Hanuschak",
+        "Hiroki Muraoka",
+        "Josh Feist",
+        "Chris Teta",
+        "James Sayres",
+        "Brian Powderly",
+        "Keith Denley",
+        "Andrea Bethke",
+        "Ian McGraw",
+        "Nate Grzechowiak",
+        "Josh Wilhite",
+        "Justin Grzechowiak"
+      ],
+      "riderCreditGroups": {
+        "principalChapterRiders": [
+          "Kevin Coakley",
+          "Hiroki Muraoka",
+          "Chris Teta",
+          "Luke Malaney",
+          "Josh Feist",
+          "James Sayres"
+        ],
+        "sharedMontageRiders": [
+          "Andrea Bethke",
+          "Shaun Williams",
+          "Mark Wetzel",
+          "Ian McGraw",
+          "Josh Wilhite",
+          "Nate Grzechowiak",
+          "Justin Grzechowiak"
+        ],
+        "additionalDocumentedAppearances": [
+          "Ricky Oyola",
+          "Pat Stiener",
+          "George Hanuschak",
+          "Brian Powderly",
+          "Keith Denley"
+        ]
+      },
+      "creditNotes": [
+        "The authorized complete-film description identifies Traffic's sixth full-length, chapters Kevin Coakley, the shared montage, Hiroki Muraoka, Chris Teta, Luke Malaney, Josh Feist and James Sayres, and credits Jake Todd with filming plus Todd and Pat Stiener with editing.",
+        "SkateVideoSite independently classifies the project as a 27-minute 2024 Traffic full-length by Jake Todd, catalogs 16 appearances and documents the soundtrack chapter structure.",
+        "Josh Wilhite and Justin Grzechowiak are retained as explicitly named shared-montage riders in the first-party description and independently documented soundtrack section rather than being promoted to solo-part status."
+      ],
+      "locations": ["Philadelphia, Pennsylvania, USA", "East Coast, USA"],
+      "locationNote": "SkateVideoSite identifies the film's Philadelphia context, while TransWorld describes the team as an East Coast spot-seeking crew and specifically notes Kevin Coakley's Massachusetts terrain.",
+      "duration": 1643,
+      "historicalContext": "Released during Traffic Skateboards' twentieth year, the film extends the brand's blue-collar East Coast lineage and uses handmade Toynbee-inspired tiles as its recurring identity. Village Psychic's contemporary interview with Pat Stiener and Jake Todd documents the multi-year production and tile-making process.",
+      "artworkNotes": "The exact authorized upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-17. It is a dedicated skate still with the film title and no trailer, episode or compilation labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/UwYHFCSpwgc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/UwYHFCSpwgc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=UwYHFCSpwgc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=UwYHFCSpwgc",
+          "embedUrl": "https://www.youtube.com/embed/UwYHFCSpwgc",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Theories Of Atlantis",
+          "channelUrl": "https://www.youtube.com/channel/UCRsvxrMs9-rCvHh6yjIg4qg",
+          "publisherRelationship": "established skate-video distributor hosting Traffic Skateboards' complete film with direct brand, team and filmmaker attribution",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T11:10:26.760Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "UwYHFCSpwgc",
+          "url": "https://www.youtube.com/watch?v=UwYHFCSpwgc",
+          "sourceDetails": "Theories of Atlantis hosts Traffic Skateboards' uninterrupted sixth full-length, publishes the principal chapter roster and credits Jake Todd and Pat Stiener. YouTube reports channelId UCRsvxrMs9-rCvHh6yjIg4qg, a 1,643-second main feature, November 3, 2024 publication and embed permission.",
+          "retrievedAt": "2026-09-17T11:08:39.604Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/traffic-its-completely-fine",
+          "sourceDetails": "Independent filmography classifies the project as a 27-minute 2024 Traffic full-length by Jake Todd, catalogs the documented appearances and preserves the soundtrack chapter structure.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/its-completely-fine-the-toynbee-project-by-traffic-skateboards",
+          "sourceDetails": "Independent contemporary coverage identifies the complete Traffic full-length, its East Coast context, chapter sequence and Jake Todd / Pat Stiener credits.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        },
+        {
+          "source": "village-psychic",
+          "url": "https://www.villagepsychic.net/blog/traffic-its-completely-fine",
+          "sourceDetails": "A contemporary interview with Pat Stiener and Jake Todd documents the Traffic production, its multi-year development and the handmade Toynbee-tile concept.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of Traffic Skateboards' uninterrupted complete film on Theories of Atlantis' established distribution channel with direct brand and filmmaker attribution; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "It's Completely Fine (2024) - Traffic Full Skate Film",
+        "description": "Watch Traffic Skateboards' complete 27-minute Toynbee Project, filmed by Jake Todd with the full documented team roster."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "madrid-momentum-2024",
+      "aliases": ["MOMENTUM", "Madrid Skateboards MOMENTUM", "MOMENTUM | Madrid Skateboards"],
+      "type": "film",
+      "title": "MOMENTUM",
+      "description": "Madrid Skateboards' 21-minute team full-length moves through eleven riders in a precisely chaptered order of appearance. The company's official release spans veteran Lester Kasai, a returning Mike Berdis, Daniel Yeager and a new generation of Madrid riders before Phil Ceja's two-song closer.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "madrid-skateboards",
+        "daniel-yeager",
+        "team-video",
+        "united-states",
+        "2020s"
+      ],
+      "releaseYear": 2024,
+      "releaseDate": "2024-07-21",
+      "producedBy": "Madrid Skateboards",
+      "directors": [],
+      "filmmakers": ["Daniel Yeager"],
+      "cinematographers": [],
+      "additionalProductionCredits": [
+        "Henry Viswat (production credit)",
+        "Eagle Barber (production credit)",
+        "Aldric Gonzalas (production credit)",
+        "Andrew Jimenez (production credit)",
+        "Chris Massie (production credit)",
+        "Shane Maloney (production credit)",
+        "Sebastian Mora (production credit)",
+        "Robert Milas (production credit)",
+        "Shawn Karagjozi (production credit)",
+        "John Lewinski (production credit)",
+        "Rob Fall (production credit)",
+        "Tyler Youd (production credit)",
+        "Nate Klein (production credit)",
+        "Alec Wallace (production credit)",
+        "Tuan Nguyen (production credit)",
+        "Caleb Bonnell (production credit)",
+        "Josue Sanchez (production credit)",
+        "Caylan Kipers (production credit)",
+        "Damien Alzidan (production credit)",
+        "Mike Jawns (production credit)"
+      ],
+      "riders": [
+        "Mike Berdis",
+        "Robert Milas",
+        "Daniel Yeager",
+        "Dezmin Lane",
+        "Lester Kasai",
+        "Marlon Price",
+        "Maya Kenny",
+        "Blake Smith",
+        "Arjun Shah",
+        "Chris Massie",
+        "Phil Ceja"
+      ],
+      "riderCreditGroups": {
+        "officialOrderOfAppearance": [
+          "Mike Berdis",
+          "Robert Milas",
+          "Daniel Yeager",
+          "Dezmin Lane",
+          "Lester Kasai",
+          "Marlon Price",
+          "Maya Kenny",
+          "Blake Smith",
+          "Arjun Shah",
+          "Chris Massie",
+          "Phil Ceja"
+        ]
+      },
+      "creditNotes": [
+        "Madrid Skateboards' official upload publishes all eleven riders in order of appearance and separates repeated Mike Berdis passages and Phil Ceja's two-song closing section.",
+        "SkateVideoSite independently classifies MOMENTUM as a 21-minute 2024 Madrid full-length, identifies Daniel Yeager as filmmaker, corroborates all eleven riders and records twenty additional production contributors.",
+        "The additional contributors are retained under SkateVideoSite's generic production-credit label; more specific formal roles are not inferred."
+      ],
+      "locations": ["United States"],
+      "locationNote": "SkateVideoSite identifies the production country as the United States. Madrid's first-party premiere notice documents the film's debut at OC Ramps in Santa Ana, California, but that premiere venue is not treated as a filming location.",
+      "duration": 1247,
+      "historicalContext": "Madrid premiered MOMENTUM at OC Ramps on July 20, 2024 and released it through the company's own channel the following day, adding a modern team full-length to a skateboard manufacturer whose history reaches back to 1976.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-17. It is dedicated Madrid-branded film artwork with the MOMENTUM title, a fisheye skate image and no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/0SXOGfUHDnI/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/0SXOGfUHDnI/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=0SXOGfUHDnI",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=0SXOGfUHDnI",
+          "embedUrl": "https://www.youtube.com/embed/0SXOGfUHDnI",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Madrid Skateboards",
+          "channelUrl": "https://www.youtube.com/channel/UCKKr86dBkKQwhOkPVRWW3NA",
+          "publisherRelationship": "brand / producing rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T11:10:26.760Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "0SXOGfUHDnI",
+          "url": "https://www.youtube.com/watch?v=0SXOGfUHDnI",
+          "sourceDetails": "Madrid Skateboards' official channel hosts the uninterrupted complete film and publishes its eleven-rider order of appearance. YouTube reports channelId UCKKr86dBkKQwhOkPVRWW3NA, a 1,247-second main feature, July 21, 2024 publication and embed permission.",
+          "retrievedAt": "2026-09-17T11:08:39.604Z"
+        },
+        {
+          "source": "madrid-skateboards",
+          "url": "https://www.madridskateboards.com/",
+          "sourceDetails": "Madrid's first-party site announces the July 20 OC Ramps premiere of its new full-length MOMENTUM and directs nonlocal viewers to the official YouTube release.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/madrid-skateboards-momentum",
+          "sourceDetails": "Independent filmography classifies MOMENTUM as a 21-minute 2024 full-length, credits Daniel Yeager, corroborates all eleven riders and catalogs twenty production contributors.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Madrid Skateboards' official producing-brand channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "MOMENTUM (2024) - Madrid Skateboards Full Film",
+        "description": "Watch Madrid Skateboards' complete 21-minute MOMENTUM team video with all eleven riders credited in order."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "deza-nada-es-para-siempre-2024",
+      "aliases": [
+        "Nada Es Para Siempre",
+        "Deza Skateboards - Nada Es Para Siempre",
+        "Video de Deza Skateboards NADA ES PARA SIEMPRE"
+      ],
+      "type": "film",
+      "title": "Nada Es Para Siempre",
+      "description": "Deza Skateboards' first full-length follows an eight-rider international team across Mexico, the United States and Europe for 36 minutes. Pepe Baeza filmed and edited the project, while owner Shadi Charbel shaped its skits and a title concept about accepting that nothing lasts forever.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "deza-skateboards",
+        "pepe-baeza",
+        "mexico",
+        "el-paso",
+        "international-team",
+        "team-video",
+        "2020s"
+      ],
+      "releaseYear": 2024,
+      "releaseDate": "2024-12-29",
+      "releaseNote": "TransWorld published the complete film and its first-party interview on December 29, 2024. Deza's own YouTube copy was uploaded January 7, 2025; the canonical 2024 year follows the film's documented release and independent cataloging rather than the later official-channel mirror date.",
+      "producedBy": "Deza Skateboards",
+      "directors": [],
+      "filmmakers": ["Pepe Baeza"],
+      "cinematographers": ["Pepe Baeza"],
+      "additionalProductionCredits": [
+        "Pepe Baeza (editor and skit filmmaker)",
+        "Daniel / Yogui (additional editor)",
+        "Luis Ponce (animation and illustration)",
+        "Luis Jimenez (color correction)",
+        "Shadi Charbel (production credit)",
+        "Jesus Guerrero (production credit and skit concept)",
+        "Sonia Guerra (production credit)",
+        "Alan Alpizar (filmer / photographer)",
+        "Alejandro 'Guli' Limon (filmer / photographer)",
+        "Alejandro Torres (filmer / photographer)",
+        "Angle Medrano (filmer / photographer)",
+        "Alex Marquez (filmer / photographer)",
+        "Alonso Leal (filmer / photographer)",
+        "Betunka (filmer / photographer)",
+        "Diego Alvarado (filmer / photographer)",
+        "Daniel Vigenor (filmer / photographer)",
+        "Felipe Esquivel (filmer / photographer)",
+        "Gael Rodriguez (filmer / photographer)",
+        "Gabriel Molina (filmer / photographer)",
+        "Gustavo Ordaz (filmer / photographer)",
+        "Jacobo Castro (filmer / photographer)",
+        "Jonas Reyes (filmer / photographer)",
+        "Jhon A. / Choimaert.tv (filmer / photographer)",
+        "Jordan Standley (filmer / photographer)",
+        "Joel Tlacaelel (filmer / photographer)",
+        "Juan P. Ramirez (filmer / photographer)",
+        "Jude Valencia (filmer / photographer)",
+        "Justin Boots (filmer / photographer)",
+        "Luis Gonzalez (filmer / photographer)",
+        "Luis Trejo (filmer / photographer)",
+        "Rudy Garcia (filmer / photographer)",
+        "Zahid Ojeda (filmer / photographer)"
+      ],
+      "riders": [
+        "Richard Moore",
+        "Erick Silva",
+        "David Borges",
+        "Erick Fernandez",
+        "Leon Rodriguez",
+        "Gabriel Molina",
+        "Flo Marfaing",
+        "Danny Ruiz"
+      ],
+      "riderCreditGroups": {
+        "documentedTeamRoster": [
+          "Richard Moore",
+          "Erick Silva",
+          "David Borges",
+          "Erick Fernandez",
+          "Leon Rodriguez",
+          "Gabriel Molina",
+          "Flo Marfaing",
+          "Danny Ruiz"
+        ]
+      },
+      "creditNotes": [
+        "Deza Skateboards' official complete-film description thanks the riders and production contributors, while the exact roster is cross-checked against SkateVideoSite's eight documented skaters.",
+        "TransWorld's contemporary interview with Deza owner Shadi Charbel identifies this as the company's only full-length, explains the title and skit concepts, and formally credits Pepe Baeza with filming and editing.",
+        "SkateVideoSite independently classifies the film as a 36-minute 2024 Deza full-length by Pepe Baeza and preserves the additional editor, animation, color, production and filmer/photographer credits. Generic credit labels are retained without inventing narrower roles."
+      ],
+      "locations": ["Mexico", "El Paso, Texas, USA", "Spain", "United States", "Europe"],
+      "locationNote": "TransWorld documents that most of the film was shot across Mexico, Richard Moore's part was filmed entirely in the United States, Danny Ruiz's section was filmed in El Paso, and Flo Marfaing's European footage was shot mostly in Spain.",
+      "duration": 2207,
+      "historicalContext": "Filming began during the 2020 pandemic and grew into Deza Skateboards' first full-length. Shadi Charbel tied the title to accepting the end of his own skating ambitions after knee surgeries, while the film's international structure connects Deza's Mexican base to riders in the United States and Europe.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-17. It is a dedicated black-and-white title card carrying the Deza logo and the English subtitle 'Nothing Is Forever,' with no trailer or episode labeling.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/t2BCyC_GNIo/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/t2BCyC_GNIo/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=t2BCyC_GNIo",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=t2BCyC_GNIo",
+          "embedUrl": "https://www.youtube.com/embed/t2BCyC_GNIo",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Deza Skateboards",
+          "channelUrl": "https://www.youtube.com/channel/UC0WtDDRLim7aqtyDQMVPHOw",
+          "publisherRelationship": "brand / producing rights-holder channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-17T11:10:26.760Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "t2BCyC_GNIo",
+          "url": "https://www.youtube.com/watch?v=t2BCyC_GNIo",
+          "sourceDetails": "Deza Skateboards' official channel hosts the uninterrupted complete film and names its riders and contributors. YouTube reports channelId UC0WtDDRLim7aqtyDQMVPHOw, a 2,207-second main feature, January 7, 2025 upload and embed permission.",
+          "retrievedAt": "2026-09-17T11:08:39.604Z"
+        },
+        {
+          "source": "transworld-skateboarding",
+          "url": "https://www.skateboarding.com/news/deza-skateboards-new-full-length-video-out-of-mexico",
+          "sourceDetails": "Contemporary December 29, 2024 coverage embeds the complete film and publishes a detailed first-party interview with Deza owner Shadi Charbel covering its release, filming history, locations, team structure, title and Pepe Baeza's filming/editing credit.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/nada-es-para-siempre",
+          "sourceDetails": "Independent filmography classifies Nada Es Para Siempre as a 36-minute 2024 Deza full-length by Pepe Baeza, corroborates all eight skaters and catalogs the available production contributors.",
+          "retrievedAt": "2026-09-17T11:03:00.000Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on Deza Skateboards' official producing-brand channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "Nada Es Para Siempre (2024) - Deza Full Skate Film",
+        "description": "Watch Deza Skateboards' complete 36-minute first full-length with all eight riders and Pepe Baeza's production credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
