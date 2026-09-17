@@ -1,0 +1,141 @@
+{
+  "source": "Authorized complete-film uploads from Theories of Atlantis, EDGLRD and Jacker, supplemented by first-party credits, SkateVideoSite filmography records, Skatefolio and contemporary TransWorld coverage",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-17T03:18:00.000Z",
+  "films": [
+    {
+      "slug": "motor-lobby-d-spot-2025",
+      "aliases": ["D Spot", "D-Spot", "Motor Lobby D Spot", "MOTOR LOBBY PRESENTS \"D SPOT\""],
+      "type": "film",
+      "title": "D SPOT",
+      "description": "Motor Lobby Skateboards' 32-minute full-length documents the growing street-skate scene in St. Petersburg, Florida. Eight credited riders carry the film, with Matt Conner leading the video and Buck Prichard and Adam Hadden contributing additional formats and footage.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "motor-lobby", "st-petersburg", "florida", "independent", "scene-video", "super-8", "2020s"],
+      "releaseYear": 2025,
+      "releaseDate": "2025-02-14",
+      "producedBy": "Motor Lobby Skateboards",
+      "directors": [],
+      "filmmakers": ["Matt Conner"],
+      "cinematographers": ["Matt Conner", "Buck Prichard", "Adam Hadden"],
+      "additionalProductionCredits": [],
+      "riders": ["Nick Barwick", "Brandon Knowles", "Parker Leonard", "Chris Lesh", "Sergio Quijano", "DJ Brown", "Haze Miller", "Jeremy Leyva"],
+      "riderCreditGroups": {
+        "documentedFilmAppearances": ["Nick Barwick", "Brandon Knowles", "Parker Leonard", "Chris Lesh", "Sergio Quijano", "DJ Brown", "Haze Miller", "Jeremy Leyva"]
+      },
+      "creditNotes": [
+        "Theories of Atlantis' authorized complete-film publication explicitly names all eight riders, credits Matt Conner with the video, Matt Conner and Buck Prichard with filming, and Adam Hadden with Super 8 footage.",
+        "SkateVideoSite independently classifies D Spot as a 32-minute full-length, corroborates the complete eight-rider roster, the production credits and St. Petersburg location.",
+        "No additional unnamed appearances are promoted into the roster; 'and more' in the publisher synopsis is not a defensible formal credit."
+      ],
+      "locations": ["St. Petersburg, Florida, USA"],
+      "locationNote": "The publisher describes D Spot as a St. Petersburg scene video, and SkateVideoSite independently maps the film to St. Petersburg.",
+      "duration": 1936,
+      "historicalContext": "D Spot is presented as evidence of St. Petersburg's expanding contemporary scene, giving a smaller Tampa Bay skate city a dedicated full-length rather than treating it as a stop in a broader tour video.",
+      "artworkNotes": "The exact authorized upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-16. It uses a dedicated orange-and-black d-spot title treatment over a recognizable St. Petersburg waterfront image and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/4cAGsJBLrjw/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/4cAGsJBLrjw/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=4cAGsJBLrjw",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=4cAGsJBLrjw", "embedUrl": "https://www.youtube.com/embed/4cAGsJBLrjw", "access": "free", "label": "Watch Full Film", "channel": "Theories Of Atlantis", "channelUrl": "https://www.youtube.com/channel/UCRsvxrMs9-rCvHh6yjIg4qg", "publisherRelationship": "established skate-video distributor publishing the complete film with direct Motor Lobby and filmmaker attribution", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T03:18:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "4cAGsJBLrjw", "url": "https://www.youtube.com/watch?v=4cAGsJBLrjw", "sourceDetails": "Theories of Atlantis hosts the uninterrupted complete Motor Lobby full-length and supplies the complete named roster, project context and production credits. YouTube reports channelId UCRsvxrMs9-rCvHh6yjIg4qg, a 1,936-second main feature, February 14, 2025 publication and embed permission.", "retrievedAt": "2026-09-17T03:18:00.000Z"},
+        {"source": "skatevideosite", "url": "https://www.skatevideosite.com/videos/motor-lobby-d-spot", "sourceDetails": "Independent filmography classifies D Spot as a 32-minute 2025 full-length and corroborates all eight riders, Matt Conner, Buck Prichard, Adam Hadden and St. Petersburg.", "retrievedAt": "2026-09-17T03:18:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film published by established skate-video distributor Theories of Atlantis with direct Motor Lobby and filmmaker attribution; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "D SPOT (2025) - Motor Lobby Full Skate Film", "description": "Watch Motor Lobby Skateboards' complete 32-minute St. Petersburg full-length D SPOT, featuring eight documented riders."},
+      "isPublished": true,
+      "researchStatus": "verified_authorized_source"
+    },
+    {
+      "slug": "edglrd-point-cloud-2025",
+      "aliases": ["Point Cloud", "EDGLRD Point Cloud", "POINT CLOUD - A SKATE FILM BY EDGLRD"],
+      "type": "film",
+      "title": "POINT CLOUD",
+      "description": "EDGLRD's 23-minute Miami full-length combines nine skaters with the visual-effects language of Harmony Korine's multimedia studio. The film preserves an unusually deep first-party production record spanning camera, edit, VFX, sound and design.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "edglrd", "miami", "team-video", "visual-effects", "initial-video-offering", "2020s"],
+      "releaseYear": 2025,
+      "releaseDate": "2025-03-07",
+      "producedBy": "EDGLRD",
+      "directors": [],
+      "filmmakers": ["Justin Stout", "Blake Matthews", "Sean Gilchrist"],
+      "cinematographers": ["Justin Stout", "Blake Matthews", "Johnny Wilson", "Nick Katz", "Dan Lundy", "Logan Lara", "James Cruishank", "Jay Burles", "Jonathan Flechas", "Cody Thompson", "Medet Shayakhmetov", "Joao Rosa"],
+      "additionalProductionCredits": ["Harmony Korine", "Nick Katz", "Joao Rosa", "Joel Meinholz", "Sean Gilchrist", "Stephen McClintock", "James Clauer", "20x20", "Pedro Silva", "Ariel Wolinger", "Oliver Capp", "Tony Wang", "C.A.V.E.", "Mike Bloom", "Nic Stephen", "Lucas Achkar", "Ben Morsberger", "Chuck Boston", "Dillon Hall", "Sammy Pernas", "Alberto Montes"],
+      "riders": ["Rezza Honarvar", "Sean Pablo", "Kalman Ocheltree", "Mike Arnold", "Taylor Nida", "Josh Wolff", "Eric Koston", "Vincent Touzery", "Elijah Odom"],
+      "riderCreditGroups": {
+        "officiallyCreditedSkaters": ["Rezza Honarvar", "Sean Pablo", "Kalman Ocheltree", "Mike Arnold", "Taylor Nida", "Josh Wolff", "Eric Koston", "Vincent Touzery", "Elijah Odom"]
+      },
+      "creditNotes": [
+        "EDGLRD's official complete-film description supplies all nine skaters and role-specific credits for two executive producers, visuals, two principal camera operators, a team manager, ten additional filmers, editor, two producers, VFX, sound, music supervision, associate production, production coordination and product design.",
+        "SkateVideoSite independently classifies POINT CLOUD as a 23-minute full-length, corroborates the nine-rider roster, three principal filmmaker/editor credits, 28 production contributors and Miami location.",
+        "Names and spellings follow the first-party credit roll where it is more specific; no uncredited direction role is inferred."
+      ],
+      "locations": ["Miami, Florida, USA"],
+      "locationNote": "SkateVideoSite identifies Miami as the film's location; EDGLRD's project identity and independent filmography both frame it as the studio's Miami skate offering.",
+      "duration": 1383,
+      "historicalContext": "POINT CLOUD is EDGLRD's initial full-length skate-video offering, applying the studio's effects-heavy visual practice to a team film that joins local and international riders including Eric Koston, Sean Pablo and Vincent Touzery.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-16. It shows two credited skaters with POINT CLOUD's distinctive yellow sculptural mask in a fisheye street frame and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/XHdzhyTxmo0/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/XHdzhyTxmo0/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=XHdzhyTxmo0",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=XHdzhyTxmo0", "embedUrl": "https://www.youtube.com/embed/XHdzhyTxmo0", "access": "free", "label": "Watch Full Film", "channel": "EDGLRD", "channelUrl": "https://www.youtube.com/channel/UCYzh1MR0OkYz2bPHUi1LdAg", "publisherRelationship": "brand / producing rights-holder channel", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T03:18:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "XHdzhyTxmo0", "url": "https://www.youtube.com/watch?v=XHdzhyTxmo0", "sourceDetails": "EDGLRD's official channel hosts the uninterrupted complete film and supplies the full rider roster and role-specific production credits. YouTube reports channelId UCYzh1MR0OkYz2bPHUi1LdAg, a 1,383-second main feature, March 7, 2025 publication and embed permission.", "retrievedAt": "2026-09-17T03:18:00.000Z"},
+        {"source": "skatevideosite", "url": "https://www.skatevideosite.com/videos/edglrd-point-cloud", "sourceDetails": "Independent filmography classifies POINT CLOUD as a 23-minute 2025 full-length, corroborates all nine skaters, 28 production contributors and Miami location, and preserves the section structure.", "retrievedAt": "2026-09-17T03:18:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film on EDGLRD's official producing-brand channel; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "POINT CLOUD (2025) - EDGLRD Full Skate Film", "description": "Watch EDGLRD's complete 23-minute Miami skate film POINT CLOUD, featuring nine documented skaters and full production credits."},
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "jacker-rush-2024",
+      "aliases": ["JACKER - RUSH", "RUSH - A JACKER SKATEBOARDING FILM", "RUSH by Jacker"],
+      "type": "film",
+      "title": "RUSH",
+      "description": "Jacker's 24-minute full-length presents nine riders in a deliberately credited order of appearance. Aurélien Migaud edited and filmed the project and shares directing credit with Antony Lopez and Aurélien Courbon, supported by an extensive international camera roster.",
+      "sportTypes": ["skateboarding"],
+      "tags": ["skateboarding", "full-length-film", "jacker", "europe", "team-video", "street-skating", "independent", "2020s"],
+      "releaseYear": 2024,
+      "releaseDate": "2024-07-28",
+      "producedBy": "Jacker",
+      "directors": ["Antony Lopez", "Aurélien Courbon", "Aurélien Migaud"],
+      "filmmakers": ["Aurélien Migaud"],
+      "cinematographers": ["Aurélien Migaud", "Charlélie Guillemin", "Mario Cano", "Luis Beltrán", "Maximiliano", "Austin Roberts", "Toni Gomez", "Antonio", "Carreño", "Henner Figueiro", "Lokus Pokus", "Jérôme Bouazaoui", "Harvey Brepson", "Antoine Laurent", "Camille Bénard", "Eric Ikonomidis", "Thomas Vivier", "Beagle", "Darien Brown", "Spencer Burdock", "Rey Choto", "Berns", "Dalton Palacio"],
+      "additionalProductionCredits": [],
+      "riders": ["Loris Baccilleri", "Anderson Pereira", "Thomas Puig", "Fran Molina", "Valentin Graindorge", "Denis Cuerdo", "Antony Lopez", "Etienne Turnbull", "Nick Dias"],
+      "riderCreditGroups": {
+        "officialOrderOfAppearance": ["Loris Baccilleri", "Anderson Pereira", "Thomas Puig", "Fran Molina", "Valentin Graindorge", "Denis Cuerdo", "Antony Lopez", "Etienne Turnbull", "Nick Dias"]
+      },
+      "creditNotes": [
+        "Jacker's official upload and matching first-party film page provide the same nine-rider order, identify Aurélien Migaud as editor and principal filmer, name all three directors and preserve the complete additional-filming list.",
+        "Skatefolio independently corroborates Camille Bénard's additional-filming credit, and contemporary TransWorld coverage describes RUSH as Jacker's 24-minute full-length.",
+        "The first-party punctuation presents Antonio and Carreño as separate additional-filming credits; the record preserves the published credit rather than inventing a combined identity."
+      ],
+      "locations": [],
+      "locationNote": "The sources establish a multi-country European production context but do not publish a reliable complete filming itinerary, so no cities are inferred from the imagery.",
+      "duration": 1446,
+      "historicalContext": "RUSH established Jacker's contemporary full-length team-video identity; subsequent TransWorld coverage used it as the benchmark for the brand's position in European skateboarding and contrasted later trip edits with the completed full-length.",
+      "artworkNotes": "The exact official upload's 1920x1080 YouTube artwork was visually reviewed on 2026-09-16. It overlays a dedicated RUSH: A Jacker Skateboarding Film title treatment on a street-skating frame and contains no trailer, episode or compilation labeling.",
+      "thumbnails": {"poster": "https://i.ytimg.com/vi/YOy1hv6cAwY/maxresdefault.jpg", "backdrop": "https://i.ytimg.com/vi/YOy1hv6cAwY/maxresdefault.jpg"},
+      "youtubeUrl": "https://www.youtube.com/watch?v=YOy1hv6cAwY",
+      "watchOptions": [{
+        "platform": "youtube", "url": "https://www.youtube.com/watch?v=YOy1hv6cAwY", "embedUrl": "https://www.youtube.com/embed/YOy1hv6cAwY", "access": "free", "label": "Watch Full Film", "channel": "Jacker", "channelUrl": "https://www.youtube.com/channel/UCNAr_aHXlBwkW8NxXcF6-mQ", "publisherRelationship": "brand / producing rights-holder channel", "isOfficialPublisher": true, "lastVerifiedAt": "2026-09-17T03:18:00.000Z"
+      }],
+      "sourceRecords": [
+        {"source": "youtube", "sourceId": "YOy1hv6cAwY", "url": "https://www.youtube.com/watch?v=YOy1hv6cAwY", "sourceDetails": "Jacker's official channel hosts the uninterrupted complete film and supplies the rider order, editor, directors, principal filmer and complete additional camera list. YouTube reports channelId UCNAr_aHXlBwkW8NxXcF6-mQ, a 1,446-second main feature, July 27, 2024 publication and embed permission.", "retrievedAt": "2026-09-17T03:18:00.000Z"},
+        {"source": "jacker", "url": "https://www.jacker.fr/blogs/infos/rush", "sourceDetails": "Jacker's first-party film page dated July 28, 2024 embeds the exact official player and independently repeats the full rider and production credits.", "retrievedAt": "2026-09-17T03:18:00.000Z"},
+        {"source": "skatefolio", "url": "https://skatefol.io/fruga", "sourceDetails": "Independent filmmaker portfolio indexes JACKER - RUSH as a 2024 project and corroborates Camille Bénard's additional-filming role.", "retrievedAt": "2026-09-17T03:18:00.000Z"},
+        {"source": "transworld-syndication", "url": "https://www.yardbarker.com/skateboarding/articles/the_jacker_team_takes_the_perfect_skate_trip/s1_17378_41886708", "sourceDetails": "Contemporary TransWorld coverage independently describes RUSH as Jacker's prior 24-minute full-length and provides later historical context for the team.", "retrievedAt": "2026-09-17T03:18:00.000Z"}
+      ],
+      "rights": {"hostingStatus": "external_only", "basis": "External embed of the uninterrupted complete film on Jacker's official producing-brand channel, also embedded on Jacker's first-party film page; TrickBook does not download or rehost the film."},
+      "availabilityStatus": "available",
+      "seo": {"title": "RUSH (2024) - Jacker Full Skate Film", "description": "Watch Jacker's complete 24-minute full-length RUSH, featuring nine riders in official order of appearance."},
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
