@@ -1,0 +1,469 @@
+{
+  "source": "Authorized complete-film uploads from Series World, Berg and Soundboarding, corroborated by Skate Jawn, Quartersnacks and SkateVideoSite",
+  "sport": "skateboarding",
+  "researchedAt": "2026-09-19T03:31:11.317Z",
+  "films": [
+    {
+      "slug": "series-world-the-series-video-2026",
+      "aliases": ["Series World - The Series Video"],
+      "type": "film",
+      "title": "THE SERIES VIDEO",
+      "description": "Jack Glancy's 15-minute Series World video assembles a 20-rider cast around timestamped sections for Tin and David Lilley, Jared Stull, Coleman Meyer and Jake Hofmann. The complete official roster is retained, with filming by Glancy and Kyle Hughes and editing by Glancy.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "team-video",
+        "series-world",
+        "jack-glancy",
+        "san-francisco",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-05-24",
+      "producedBy": "Series World",
+      "directors": [],
+      "filmmakers": ["Jack Glancy", "Kyle Hughes"],
+      "cinematographers": ["Jack Glancy", "Kyle Hughes"],
+      "additionalProductionCredits": ["Jack Glancy (editor)"],
+      "riders": [
+        "Tin Lilley",
+        "David Lilley",
+        "Cole Blazevich",
+        "Kai Sorensen",
+        "Clyde Ottney",
+        "Kaden Ryu Skinner",
+        "Kenny Schmidgall",
+        "Luke Johnson",
+        "Leif Bishop",
+        "Jason Ross",
+        "Lukas Wong",
+        "Jack Glancy",
+        "Cody Crowell",
+        "Haesung Jang",
+        "Kyle Hughes",
+        "Julian Gibson",
+        "Liam Cumming",
+        "Jared Stull",
+        "Coleman Meyer",
+        "Jake Hofmann"
+      ],
+      "riderCreditGroups": {
+        "officialFeaturedRoster": [
+          "Tin Lilley",
+          "David Lilley",
+          "Cole Blazevich",
+          "Kai Sorensen",
+          "Clyde Ottney",
+          "Kaden Ryu Skinner",
+          "Kenny Schmidgall",
+          "Luke Johnson",
+          "Leif Bishop",
+          "Jason Ross",
+          "Lukas Wong",
+          "Jack Glancy",
+          "Cody Crowell",
+          "Haesung Jang",
+          "Kyle Hughes",
+          "Julian Gibson",
+          "Liam Cumming",
+          "Jared Stull",
+          "Coleman Meyer",
+          "Jake Hofmann"
+        ],
+        "timestampedSections": [
+          "Tin Lilley",
+          "David Lilley",
+          "Jared Stull",
+          "Coleman Meyer",
+          "Jake Hofmann"
+        ]
+      },
+      "creditNotes": [
+        "Series World's authorized upload credits Jack Glancy with the video and edit, credits Jack Glancy and Kyle Hughes for filming, and names all 20 featured skaters.",
+        "Skate Jawn independently repeats the full roster and production credits. SkateVideoSite separately catalogs the release as a 15-minute Series World video by Jack Glancy.",
+        "The first-party chapter list supports named sections for Tin and David Lilley, Jared Stull, Coleman Meyer and Jake Hofmann; no unsupported part hierarchy is assigned to the rest of the featured cast."
+      ],
+      "locations": ["San Francisco, California, United States"],
+      "locationNote": "SkateVideoSite indexes the video to San Francisco. Neither the official upload nor corroborating editorial coverage supplies a defensible broader city-by-city inventory.",
+      "duration": 913,
+      "historicalContext": "The release documents Series World's extended crew in a compact team-video format, pairing broad ensemble appearances with five timestamped closing and featured sections.",
+      "artworkNotes": "The exact authorized upload's 1280x720 artwork and player were visually reviewed on 2026-09-18. The upload artwork is a candid exact-film frame centered on a smiling skater in a green hoodie with two companions; it is not trailer artwork or an unrelated compilation image.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/JzGqsyXCqy0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/JzGqsyXCqy0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=JzGqsyXCqy0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=JzGqsyXCqy0",
+          "embedUrl": "https://www.youtube.com/embed/JzGqsyXCqy0",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "SERIES WRLD",
+          "channelUrl": "https://www.youtube.com/channel/UCdTNZUDw6Xjzu4wu1FC3b4A",
+          "publisherRelationship": "producing skate crew's own channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "JzGqsyXCqy0",
+          "url": "https://www.youtube.com/watch?v=JzGqsyXCqy0",
+          "sourceDetails": "Series World's own channel hosts the uninterrupted complete video and supplies all 20 riders plus filming and edit credits. YouTube reports channelId UCdTNZUDw6Xjzu4wu1FC3b4A, a 913-second feature, May 24, 2026 publication, public availability and permitted embedding.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/the-series-video/",
+          "sourceDetails": "Independent contemporary coverage repeats the complete 20-rider roster and credits Jack Glancy and Kyle Hughes for filming and Glancy for editing.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        },
+        {
+          "source": "skatevideosite",
+          "url": "https://www.skatevideosite.com/videos/series-world-the-series-video",
+          "sourceDetails": "Independent filmography catalogs the release as a 15-minute 2026 Series World video by Jack Glancy and indexes it to San Francisco.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on producing crew Series World's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "THE SERIES VIDEO (2026) - Series World Skate Film",
+        "description": "Watch Series World's complete 15-minute skate film by Jack Glancy with all 20 featured riders and full supported production credits."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "thomas-goldman-clips-2026",
+      "aliases": ["\"CLIPS\" | A BERG VIDEO", "CLIPS | A BERG VIDEO"],
+      "type": "film",
+      "title": "CLIPS",
+      "description": "Thomas Goldman's 29-minute Berg video turns Richmond street footage from 2024 through 2026 into ten timestamped starring sections and a 19-rider featured ensemble. All 29 riders, all ten named camera contributors and KJ Thomas' title credit are preserved.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "crew-video",
+        "berg",
+        "thomas-goldman",
+        "richmond",
+        "virginia",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-06-30",
+      "producedBy": "Berg / Thomas Goldman",
+      "directors": [],
+      "filmmakers": ["Thomas Goldman"],
+      "cinematographers": [
+        "Thomas Goldman",
+        "Will Rosenstock",
+        "Will Polly",
+        "Levi Douthit",
+        "Sean Biacan",
+        "Evan Gabriel",
+        "Kevin O'Dell",
+        "Argent Conner",
+        "Ian Rodriguez",
+        "Jacob Palumbo"
+      ],
+      "additionalProductionCredits": ["Thomas Goldman (video by)", "KJ Thomas (titles)"],
+      "riders": [
+        "Liam Hardman",
+        "Landon Powell",
+        "KJ Thomas",
+        "Evan Gabriel",
+        "Zaki Young",
+        "Sean Biacan",
+        "Ben Samuels",
+        "Tatsu Tauchi",
+        "Eric Valladares",
+        "Will Polly",
+        "Jake Schmader",
+        "Ian Rodriguez",
+        "Jamie Aquino",
+        "Levi Douthit",
+        "Aidan Murphy",
+        "Elijah Thompson",
+        "Juan Garcia",
+        "Tony Elliott",
+        "Zach Kaloustian",
+        "Grayson Schick",
+        "Argent Conner",
+        "Alex Stewart",
+        "John Klotsko",
+        "Josh Herrmann",
+        "Josh Swyers",
+        "Daniel Ravenal",
+        "Berg",
+        "Will Rosenstock",
+        "Carlos Pooch Kenner"
+      ],
+      "riderCreditGroups": {
+        "officialStarringRoster": [
+          "Liam Hardman",
+          "Landon Powell",
+          "KJ Thomas",
+          "Evan Gabriel",
+          "Zaki Young",
+          "Sean Biacan",
+          "Ben Samuels",
+          "Tatsu Tauchi",
+          "Eric Valladares",
+          "Will Polly"
+        ],
+        "officialFeaturedRoster": [
+          "Jake Schmader",
+          "Ian Rodriguez",
+          "Jamie Aquino",
+          "Levi Douthit",
+          "Aidan Murphy",
+          "Elijah Thompson",
+          "Juan Garcia",
+          "Tony Elliott",
+          "Zach Kaloustian",
+          "Grayson Schick",
+          "Argent Conner",
+          "Alex Stewart",
+          "John Klotsko",
+          "Josh Herrmann",
+          "Josh Swyers",
+          "Daniel Ravenal",
+          "Berg",
+          "Will Rosenstock",
+          "Carlos Pooch Kenner"
+        ]
+      },
+      "creditNotes": [
+        "Berg's authorized complete-film description names Thomas Goldman as creator, supplies timestamped sections for ten starring riders, separately lists 19 featured riders and credits all ten camera contributors.",
+        "Skate Jawn independently describes CLIPS as Goldman's third video, confirms the ten starring riders and places the crew in Richmond streets. Quartersnacks separately identifies it as a Richmond video by Thomas Goldman.",
+        "The first-party starring and featured group distinction is retained without promoting ensemble appearances to unsupported solo parts."
+      ],
+      "locations": ["Richmond, Virginia, United States"],
+      "locationNote": "The official description says the video was filmed in Richmond, Virginia from 2024 through 2026; independent Skate Jawn and Quartersnacks coverage corroborates Richmond.",
+      "duration": 1738,
+      "historicalContext": "CLIPS is Thomas Goldman's third full crew video and a record of Richmond street skating accumulated across 2024, 2025 and 2026.",
+      "artworkNotes": "The exact authorized upload's 1280x720 artwork and player were visually reviewed on 2026-09-18. The dedicated title artwork places a large black CLIPS wordmark over a red vehicle on a tow truck; it is not trailer artwork.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/5TqctDzirUc/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/5TqctDzirUc/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=5TqctDzirUc",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=5TqctDzirUc",
+          "embedUrl": "https://www.youtube.com/embed/5TqctDzirUc",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "Berg",
+          "channelUrl": "https://www.youtube.com/channel/UCdda0uAwXpDzOAMOoltds_g",
+          "publisherRelationship": "producing skate crew's own channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "5TqctDzirUc",
+          "url": "https://www.youtube.com/watch?v=5TqctDzirUc",
+          "sourceDetails": "Berg's own channel hosts the uninterrupted complete video and supplies 29 riders, Thomas Goldman's authorship, all ten camera contributors and KJ Thomas' title credit. YouTube reports channelId UCdda0uAwXpDzOAMOoltds_g, a 1,738-second feature, June 30, 2026 publication, public availability and permitted embedding.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/clips/",
+          "sourceDetails": "Independent contemporary coverage calls CLIPS Thomas Goldman's third video, confirms its ten starring riders and documents the crew's Richmond street context.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        },
+        {
+          "source": "quartersnacks",
+          "url": "https://quartersnacks.com/2026/07/it-cant-be-that-fun-if-you-keep-texting-me/",
+          "sourceDetails": "Independent contemporary skate coverage identifies CLIPS as a Richmond video by Thomas Goldman.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on producing crew Berg's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "CLIPS (2026) - Thomas Goldman and Berg Skate Film",
+        "description": "Watch Thomas Goldman's complete 29-minute Richmond skate video for Berg with all 29 riders and ten camera contributors."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    },
+    {
+      "slug": "soundboarding-daycare-2026",
+      "aliases": ["DAYCARE full video", "Soundboarding DAYCARE"],
+      "type": "film",
+      "title": "DAYCARE",
+      "description": "Soundboarding's 36-minute Osaka full-length centers Mike Rogers, Tohmi Shiroyama, Junji Murata and Mizopang while preserving 35 separately credited friend appearances. The first-party release does not identify an individual filmer or editor, so no unsupported formal production role is invented.",
+      "sportTypes": ["skateboarding"],
+      "tags": [
+        "skateboarding",
+        "full-length-film",
+        "crew-video",
+        "soundboarding",
+        "daycare",
+        "osaka",
+        "japan",
+        "2020s"
+      ],
+      "releaseYear": 2026,
+      "releaseDate": "2026-05-19",
+      "producedBy": "Soundboarding",
+      "directors": [],
+      "filmmakers": [],
+      "cinematographers": [],
+      "additionalProductionCredits": [],
+      "riders": [
+        "Mike Rogers",
+        "Tohmi Shiroyama",
+        "Junji Murata",
+        "Mizopang",
+        "Nobu",
+        "Takuma Sunakawa",
+        "Shigenobu Fukayama",
+        "Sakutaro",
+        "Benny",
+        "Mitarashi",
+        "Masato Yamaguchi",
+        "Goh Okuno",
+        "Hidefumi Utsumi",
+        "Shingo Yumiyama",
+        "DAL",
+        "Junpei Yoshida",
+        "Ryohey Tanaka",
+        "Yuma Sotoike",
+        "Nariaki Fukui",
+        "Ayumi Takesue",
+        "Yuichi Sansei Igei",
+        "Chinatsu",
+        "Motokichi",
+        "Kento Takahashi",
+        "Nijiho",
+        "Setsura Kaino",
+        "Takumu Kuramoto",
+        "Kazuaki Kojima",
+        "Akira Kawai",
+        "Itsuki Sakamoto",
+        "Mike Chinner",
+        "Matt Taylor",
+        "Shane Powell",
+        "John Benton",
+        "Leo Heinert",
+        "Pako",
+        "Phil Hamilton",
+        "Cameron Markin",
+        "Shota Kubo"
+      ],
+      "riderCreditGroups": {
+        "officialStarringRoster": ["Mike Rogers", "Tohmi Shiroyama", "Junji Murata", "Mizopang"],
+        "officialFriendAppearances": [
+          "Nobu",
+          "Takuma Sunakawa",
+          "Shigenobu Fukayama",
+          "Sakutaro",
+          "Benny",
+          "Mitarashi",
+          "Masato Yamaguchi",
+          "Goh Okuno",
+          "Hidefumi Utsumi",
+          "Shingo Yumiyama",
+          "DAL",
+          "Junpei Yoshida",
+          "Ryohey Tanaka",
+          "Yuma Sotoike",
+          "Nariaki Fukui",
+          "Ayumi Takesue",
+          "Yuichi Sansei Igei",
+          "Chinatsu",
+          "Motokichi",
+          "Kento Takahashi",
+          "Nijiho",
+          "Setsura Kaino",
+          "Takumu Kuramoto",
+          "Kazuaki Kojima",
+          "Akira Kawai",
+          "Itsuki Sakamoto",
+          "Mike Chinner",
+          "Matt Taylor",
+          "Shane Powell",
+          "John Benton",
+          "Leo Heinert",
+          "Pako",
+          "Phil Hamilton",
+          "Cameron Markin",
+          "Shota Kubo"
+        ]
+      },
+      "creditNotes": [
+        "Soundboarding's authorized complete-film description distinguishes four starring riders from 35 friend appearances and supplies every retained name.",
+        "Skate Jawn independently identifies DAYCARE as a full-length out of Osaka, Japan and confirms Mike Rogers, Tohmi Shiroyama, Junji Murata and Mizopang as its four stars.",
+        "No inspected first-party or independent source names an individual filmer, editor or director. TrickBook therefore credits Soundboarding as producer without inventing narrower roles."
+      ],
+      "locations": ["Osaka, Japan"],
+      "locationNote": "Independent Skate Jawn coverage explicitly describes DAYCARE as a full-length out of Osaka, Japan. No unsupported broader shoot itinerary is inferred.",
+      "duration": 2181,
+      "historicalContext": "DAYCARE extends Soundboarding's Osaka-centered videography through a four-rider core and a wide local and visiting ensemble documented as friends.",
+      "artworkNotes": "The exact authorized upload's 1280x720 artwork and player were visually reviewed on 2026-09-18. The dedicated image carries an orange-and-yellow DAYCARE wordmark over a night urban structure and skating frame; it is not trailer artwork.",
+      "thumbnails": {
+        "poster": "https://i.ytimg.com/vi/VgN-_1N4rl0/maxresdefault.jpg",
+        "backdrop": "https://i.ytimg.com/vi/VgN-_1N4rl0/maxresdefault.jpg"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=VgN-_1N4rl0",
+      "watchOptions": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/watch?v=VgN-_1N4rl0",
+          "embedUrl": "https://www.youtube.com/embed/VgN-_1N4rl0",
+          "access": "free",
+          "label": "Watch Full Film",
+          "channel": "soundboarding",
+          "channelUrl": "https://www.youtube.com/channel/UCOVzRGlVSRUb0ItTmTXLKaw",
+          "publisherRelationship": "producing skate crew's own channel",
+          "isOfficialPublisher": true,
+          "lastVerifiedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "sourceRecords": [
+        {
+          "source": "youtube",
+          "sourceId": "VgN-_1N4rl0",
+          "url": "https://www.youtube.com/watch?v=VgN-_1N4rl0",
+          "sourceDetails": "Soundboarding's own channel hosts the uninterrupted complete video and supplies four starring riders plus 35 friend appearances. YouTube reports channelId UCOVzRGlVSRUb0ItTmTXLKaw, a 2,181-second feature, May 19, 2026 publication, public availability and permitted embedding.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        },
+        {
+          "source": "skate-jawn",
+          "url": "https://skatejawn.com/daycare/",
+          "sourceDetails": "Independent contemporary coverage identifies DAYCARE as a Soundboarding full-length out of Osaka and confirms its four starring riders.",
+          "retrievedAt": "2026-09-19T03:31:11.317Z"
+        }
+      ],
+      "rights": {
+        "hostingStatus": "external_only",
+        "basis": "External embed of the uninterrupted complete film on producer Soundboarding's own channel; TrickBook does not download or rehost the film."
+      },
+      "availabilityStatus": "available",
+      "seo": {
+        "title": "DAYCARE (2026) - Soundboarding Osaka Skate Film",
+        "description": "Watch Soundboarding's complete 36-minute Osaka full-length with its four starring riders and all 35 credited friend appearances."
+      },
+      "isPublished": true,
+      "researchStatus": "verified_official_source"
+    }
+  ]
+}
