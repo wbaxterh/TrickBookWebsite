@@ -18,6 +18,37 @@
     "events": { "title": "See what's happening", "text": "Find contests, sessions, premieres, and meetups." },
     "scene": { "title": "Connect with the scene", "text": "Find riders, crews, and local knowledge." }
   },
+  "product": {
+    "heroCta": "See what TrickBook does",
+    "heroProof": "Free to start. Built for every level and every session.",
+    "dashboardAlt": "TrickBook mobile app dashboard showing goals, progress, quick actions, and community activity",
+    "tricklistAlt": "A TrickBook custom trick list with landed and to-do trick statuses",
+    "floating": {
+      "goal": "Current goal",
+      "session": "This session"
+    },
+    "eyebrow": "The riding app that does more",
+    "title": "Everything your next session needs.",
+    "subtitle": "TrickBook brings progression, local discovery, coaching, clips, and community into one app—so you spend less time searching and more time riding.",
+    "features": {
+      "track": { "title": "Track your progression", "text": "Build custom TrickLists, set goals, and mark tricks as you learn and land them." },
+      "learn": { "title": "Learn with Trickipedia", "text": "Get trick breakdowns, tutorials, and a clear idea of what to try next." },
+      "explore": { "title": "Find your next spot", "text": "Explore parks, street spots, resorts, shops, and events near you or anywhere you travel." },
+      "connect": { "title": "Ride with your people", "text": "Find homies, follow local riders, message your crew, and stay connected to the scene." },
+      "watch": { "title": "Stay close to the culture", "text": "Watch clips and full films, share sessions, and discover riders across action sports." },
+      "coach": { "title": "Get a progression partner", "text": "Ask Kaori for coaching, trick ideas, and the push to keep moving when you get stuck." }
+    },
+    "progression": {
+      "eyebrow": "Your progression, made visible",
+      "title": "Know what you're working on—and how far you've come.",
+      "text": "Turn a vague idea like “I want to get better” into a living plan for every spot, discipline, and session.",
+      "points": {
+        "lists": "Build TrickLists for a spot, a trip, a season, or a single session.",
+        "status": "Move tricks from not started to learning to landed in one tap.",
+        "momentum": "See your wins add up and always have a meaningful next move."
+      }
+    }
+  },
   "value": {
     "eyebrow": "Useful before you sign up",
     "title": "Get what you came for.",

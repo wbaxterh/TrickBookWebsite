@@ -15,6 +15,7 @@ import {
   Target,
   TrendingUp,
   Users,
+  Video,
 } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -29,42 +30,20 @@ import nextI18NextConfig from '../next-i18next.config';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || '';
 
-const INTENTS = [
-  {
-    key: 'learn',
-    href: '/trickbook',
-    icon: BookOpen,
-    accent: 'text-yellow-300',
-    glow: 'bg-yellow-300/10',
-  },
-  {
-    key: 'ride',
-    href: '/spots',
-    icon: MapPin,
-    accent: 'text-emerald-300',
-    glow: 'bg-emerald-300/10',
-  },
-  {
-    key: 'events',
-    href: '/events',
-    icon: CalendarDays,
-    accent: 'text-sky-300',
-    glow: 'bg-sky-300/10',
-  },
-  {
-    key: 'scene',
-    href: '/riders',
-    icon: Users,
-    accent: 'text-violet-300',
-    glow: 'bg-violet-300/10',
-  },
-];
-
 const DISCOVERY_LINKS = [
   { key: 'tricks', href: '/trickbook', icon: Target },
   { key: 'spots', href: '/spots', icon: Compass },
   { key: 'events', href: '/events', icon: CalendarDays },
   { key: 'shops', href: '/shops', icon: Store },
+];
+
+const PRODUCT_FEATURES = [
+  { key: 'track', icon: Target, color: 'text-yellow-300', bg: 'bg-yellow-300/10' },
+  { key: 'learn', icon: BookOpen, color: 'text-sky-300', bg: 'bg-sky-300/10' },
+  { key: 'explore', icon: MapPin, color: 'text-emerald-300', bg: 'bg-emerald-300/10' },
+  { key: 'connect', icon: Users, color: 'text-violet-300', bg: 'bg-violet-300/10' },
+  { key: 'watch', icon: Video, color: 'text-orange-300', bg: 'bg-orange-300/10' },
+  { key: 'coach', icon: Sparkles, color: 'text-cyan-300', bg: 'bg-cyan-300/10' },
 ];
 
 function formatNumber(num) {
@@ -120,33 +99,6 @@ function AppStoreBadges({ className = '', location = 'unknown' }) {
   );
 }
 
-function IntentCard({ item, t }) {
-  const Icon = item.icon;
-  return (
-    <Link
-      href={item.href}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 no-underline transition-all hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
-      onClick={() => trackCtaClick(`intent_${item.key}`, 'hero')}
-    >
-      <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full blur-2xl ${item.glow}`} />
-      <div className="relative flex items-start justify-between gap-4">
-        <div>
-          <span
-            className={`mb-4 flex h-10 w-10 items-center justify-center rounded-xl ${item.glow}`}
-          >
-            <Icon className={`h-5 w-5 ${item.accent}`} />
-          </span>
-          <h2 className="mb-1 text-base font-bold text-white">{t(`intent.${item.key}.title`)}</h2>
-          <p className="mb-0 text-sm leading-relaxed text-gray-400">
-            {t(`intent.${item.key}.text`)}
-          </p>
-        </div>
-        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-gray-600 transition-all group-hover:translate-x-1 group-hover:text-white" />
-      </div>
-    </Link>
-  );
-}
-
 export default function Home() {
   const { t } = useTranslation('home');
   const { loggedIn } = useContext(AuthContext);
@@ -191,27 +143,69 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(250,204,21,0.13),transparent_32%),radial-gradient(circle_at_82%_25%,rgba(34,197,94,0.08),transparent_28%)]" />
           <div className="relative container mx-auto px-4 pb-16 md:pb-24">
-            <div className="mx-auto max-w-5xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-300/20 bg-yellow-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-yellow-200">
-                <Sparkles className="h-4 w-4" />
-                {t('intent.eyebrow')}
+            <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+              <div className="text-center lg:text-left">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-300/20 bg-yellow-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-yellow-200">
+                  <Sparkles className="h-4 w-4" />
+                  {t('intent.eyebrow')}
+                </div>
+                <h1 className="mb-6 text-[clamp(3.2rem,7vw,6.6rem)] font-black leading-[0.88] tracking-[-0.065em]">
+                  {t('intent.headline.line1')}
+                  <span className="block text-yellow-300">{t('intent.headline.line2')}</span>
+                </h1>
+                <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl lg:mx-0">
+                  {t('intent.subline')}
+                </p>
+                <div className="mb-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-2 rounded-xl bg-yellow-300 px-6 py-3.5 font-bold !text-black no-underline transition-transform hover:-translate-y-0.5 hover:!text-black"
+                    onClick={() => {
+                      trackCtaClick('see_features', 'hero');
+                      document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    {t('product.heroCta')} <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <AppStoreBadges
+                    className="justify-center lg:justify-start"
+                    location="homepage_hero"
+                  />
+                </div>
+                <p className="flex items-center justify-center gap-2 text-sm text-gray-500 lg:justify-start">
+                  <Check className="h-4 w-4 text-emerald-400" /> {t('product.heroProof')}
+                </p>
               </div>
-              <h1 className="mb-6 text-[clamp(3.2rem,9vw,7.5rem)] font-black leading-[0.88] tracking-[-0.065em]">
-                {t('intent.headline.line1')}
-                <span className="block text-yellow-300">{t('intent.headline.line2')}</span>
-              </h1>
-              <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl">
-                {t('intent.subline')}
-              </p>
 
-              <div className="mx-auto mb-6 grid max-w-4xl grid-cols-1 gap-3 text-left sm:grid-cols-2 lg:grid-cols-4">
-                {INTENTS.map((item) => (
-                  <IntentCard key={item.key} item={item} t={t} />
-                ))}
+              <div className="relative mx-auto w-full max-w-[560px]">
+                <div className="absolute inset-10 rounded-full bg-yellow-300/20 blur-[90px]" />
+                <div className="relative mx-auto w-[72%] rotate-[2deg] drop-shadow-[0_30px_45px_rgba(0,0,0,0.65)] transition-transform duration-500 hover:rotate-0 hover:scale-[1.02]">
+                  <Image
+                    src="/trickBookScreenShotNoBg.png"
+                    width={984}
+                    height={2048}
+                    priority
+                    alt={t('product.dashboardAlt')}
+                    className="h-auto w-full"
+                  />
+                </div>
+                <div className="absolute left-0 top-[22%] rounded-2xl border border-white/10 bg-black/80 p-3 shadow-xl backdrop-blur md:p-4">
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                    {t('product.floating.goal')}
+                  </p>
+                  <p className="mb-0 text-sm font-bold md:text-base">
+                    Kickflip <span className="text-yellow-300">67%</span>
+                  </p>
+                </div>
+                <div className="absolute bottom-[18%] right-0 rounded-2xl border border-emerald-300/20 bg-black/80 p-3 shadow-xl backdrop-blur md:p-4">
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                    {t('product.floating.session')}
+                  </p>
+                  <p className="mb-0 flex items-center gap-2 text-sm font-bold md:text-base">
+                    <TrendingUp className="h-4 w-4 text-emerald-300" /> +3 landed
+                  </p>
+                </div>
               </div>
-              <p className="flex items-center justify-center gap-2 text-sm text-gray-500">
-                <Check className="h-4 w-4 text-emerald-400" /> {t('intent.noAccount')}
-              </p>
             </div>
           </div>
         </section>
@@ -234,6 +228,67 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section id="features" className="border-b border-white/5 py-20 md:py-28">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-14 max-w-3xl text-center">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-yellow-300">
+                {t('product.eyebrow')}
+              </p>
+              <h2 className="mb-5 text-4xl font-black tracking-tight md:text-6xl">
+                {t('product.title')}
+              </h2>
+              <p className="text-lg leading-relaxed text-gray-400">{t('product.subtitle')}</p>
+            </div>
+            <div className="mb-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {PRODUCT_FEATURES.map(({ key, icon: Icon, color, bg }) => (
+                <div key={key} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
+                  <span
+                    className={`mb-5 flex h-11 w-11 items-center justify-center rounded-xl ${bg}`}
+                  >
+                    <Icon className={`h-5 w-5 ${color}`} />
+                  </span>
+                  <h3 className="mb-2 text-xl font-bold">{t(`product.features.${key}.title`)}</h3>
+                  <p className="mb-0 text-sm leading-relaxed text-gray-500">
+                    {t(`product.features.${key}.text`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid items-center gap-12 rounded-[2rem] border border-white/10 bg-[#0d0f0e] p-6 md:p-10 lg:grid-cols-2 lg:p-14">
+              <div className="relative mx-auto max-w-[370px]">
+                <div className="absolute inset-8 rounded-full bg-yellow-300/10 blur-[70px]" />
+                <Image
+                  src="/trickListScreenshot.png"
+                  width={747}
+                  height={1454}
+                  alt={t('product.tricklistAlt')}
+                  className="relative h-auto w-full drop-shadow-2xl"
+                />
+              </div>
+              <div>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-yellow-300">
+                  {t('product.progression.eyebrow')}
+                </p>
+                <h2 className="mb-5 text-4xl font-black tracking-tight md:text-5xl">
+                  {t('product.progression.title')}
+                </h2>
+                <p className="mb-8 text-lg leading-relaxed text-gray-400">
+                  {t('product.progression.text')}
+                </p>
+                <div className="space-y-4">
+                  {['lists', 'status', 'momentum'].map((key) => (
+                    <div key={key} className="flex gap-3">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-yellow-300" />
+                      <p className="mb-0 text-gray-300">{t(`product.progression.points.${key}`)}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
