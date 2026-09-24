@@ -54,7 +54,7 @@ Key points:
 |---|---|
 | Framework | Next.js 13.5 (Pages Router), React 18.2 |
 | Auth | next-auth 4.24 (Credentials, Google, Apple providers) |
-| Styling | Tailwind CSS 3.4 + MUI 5 (transitioning to Tailwind-first), Radix UI primitives, Bootstrap/react-bootstrap (legacy), next-themes for dark mode |
+| Styling | Tailwind CSS 3.4 + MUI 5 (transitioning to Tailwind-first), Radix UI primitives, next-themes for dark mode |
 | Data fetching | axios clients in `lib/` against the Express backend |
 | Real-time | socket.io-client |
 | Maps | `@vis.gl/react-google-maps` + `@googlemaps/markerclusterer` |

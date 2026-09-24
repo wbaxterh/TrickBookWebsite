@@ -6,9 +6,9 @@ const PageHeader = ({ title, className, sx, col, heroImage, author, date, readin
   const imageSrc = heroImage || '/defaultBlogBG.png';
 
   return (
-    <div className={`row ${className}`}>
-      <div className={`${col} p-0`}>
-        <div className={`position-relative ${styles.heroImageContainer}`}>
+    <div className={`-mx-3 flex flex-wrap ${className}`}>
+      <div className={`max-w-full shrink-0 p-0 ${col}`}>
+        <div className={`relative ${styles.heroImageContainer}`}>
           <img src={imageSrc} alt={`${title}`} className={styles.heroImage} />
           <div className={styles.overlay}>
             <Typography variant="h2" className={`header-text ${styles.headerText}`} sx={{ ...sx }}>
@@ -41,7 +41,7 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   className: '',
   sx: {},
-  col: 'col-sm',
+  col: 'w-full sm:flex-1',
   heroImage: null,
   author: null,
   date: null,

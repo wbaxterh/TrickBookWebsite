@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function BlogCard({ id, firstImage, title, date, author }) {
   return (
     <Link href={`/blog/${id}`} passHref style={{ textDecoration: 'none' }}>
-      <div className="card d-flex">
+      <div className="relative flex min-w-0 flex-col rounded-md border border-black/[0.175] bg-inherit dark:border-[#333] dark:bg-[#1e1e1e]">
         {firstImage && (
           <div
             style={{
@@ -14,7 +14,7 @@ export default function BlogCard({ id, firstImage, title, date, author }) {
             }}
           >
             <Image
-              className="rounded-top"
+              className="rounded-t-md"
               src={firstImage}
               alt={`${title}`}
               fill
@@ -23,14 +23,14 @@ export default function BlogCard({ id, firstImage, title, date, author }) {
             />
           </div>
         )}
-        <div className="card-body app-secondary-bg rounded-bottom">
-          <Typography variant="h5" className="card-title app-primary">
+        <div className="flex-auto rounded-b-md p-4 app-secondary-bg">
+          <Typography variant="h5" className="mb-2 app-primary">
             {title}
           </Typography>
-          <Typography className="card-text text-light" variant="body1">
+          <Typography className="text-[#f8f9fa]" variant="body1">
             {date}
           </Typography>
-          <Typography className="card-text text-light" variant="body1">
+          <Typography className="text-[#f8f9fa]" variant="body1">
             By {author}
           </Typography>
         </div>
