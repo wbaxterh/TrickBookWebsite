@@ -31,12 +31,16 @@ import AdminLayout from '../../components/AdminLayout';
 import {
   fetchAppStores,
   fetchAppUsers,
+  fetchClientVersions,
   fetchCtas,
   fetchDownloads,
+  fetchFeatureValue,
   fetchFunnel,
+  fetchLtv,
   fetchOverview,
   fetchPages,
   fetchReferrers,
+  fetchRetention,
   fetchScrollDepth,
   fetchSections,
   fetchTraffic,
@@ -163,6 +167,10 @@ export default function AnalyticsDashboard() {
       fetchReferrers(token, days).catch(() => []),
       fetchAppUsers(token, days).catch(() => null),
       fetchDownloads(token, days).catch(() => null),
+      fetchRetention(token, days).catch(() => null),
+      fetchFeatureValue(token, days).catch(() => null),
+      fetchLtv(token).catch(() => null),
+      fetchClientVersions(token, days).catch(() => null),
     ])
       .then(
         ([
@@ -177,6 +185,10 @@ export default function AnalyticsDashboard() {
           referrers,
           appUsers,
           downloads,
+          retention,
+          featureValue,
+          ltv,
+          clientVersions,
         ]) => {
           setData({
             overview: overview || {},
@@ -190,6 +202,10 @@ export default function AnalyticsDashboard() {
             referrers: referrers || [],
             appUsers: appUsers || null,
             downloads: downloads || null,
+            retention: retention || null,
+            featureValue: featureValue || null,
+            ltv: ltv || null,
+            clientVersions: clientVersions || null,
           });
           setLoading(false);
         },
@@ -300,6 +316,105 @@ export default function AnalyticsDashboard() {
                 icon={Smartphone}
                 sub={timeAgo(appUsers?.lastSignup?.createdAt)}
               />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
+              <ChartCard title="Activation & Retention">
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <StatCard
+                    label="48h Activation"
+                    value={
+                      data.retention ? `${Math.round(data.retention.activationRate * 100)}%` : '—'
+                    }
+                    icon={Activity}
+                    sub={`${data.retention?.activated || 0} of ${data.retention?.signups || 0} signups`}
+                  />
+                  {(data.retention?.retention || []).map((row) => (
+                    <StatCard
+                      key={row.day}
+                      label={`D${row.day} Retention`}
+                      value={
+                        row.eligible ? `${Math.round((row.retained / row.eligible) * 100)}%` : '—'
+                      }
+                      icon={Users}
+                      sub={`${row.retained}/${row.eligible} eligible`}
+                    />
+                  ))}
+                </div>
+              </ChartCard>
+
+              <ChartCard title="Most-Valued Actions">
+                <div className="space-y-2">
+                  {(data.featureValue?.rows || []).slice(0, 8).map((row) => (
+                    <div
+                      key={row.event}
+                      className="flex justify-between text-sm border-b border-border py-1"
+                    >
+                      <span className="text-foreground">{row.event.replaceAll('_', ' ')}</span>
+                      <span className="text-muted-foreground">
+                        {row.riders} riders · {row.actions} actions
+                      </span>
+                    </div>
+                  ))}
+                  {!data.featureValue?.rows?.length && (
+                    <p className="text-muted-foreground text-center py-8">
+                      No meaningful actions yet
+                    </p>
+                  )}
+                </div>
+              </ChartCard>
+
+              <ChartCard title="LTV Run-Rate">
+                <div className="grid grid-cols-2 gap-3">
+                  <StatCard
+                    label="Paying Riders"
+                    value={data.ltv?.payingUsers ?? '—'}
+                    icon={Users}
+                    sub={`${Math.round((data.ltv?.paidConversionRate || 0) * 100)}% conversion`}
+                  />
+                  <StatCard
+                    label="Est. MRR"
+                    value={`$${((data.ltv?.estimatedMrrCents || 0) / 100).toFixed(0)}`}
+                    icon={Activity}
+                    sub="active subscriber run-rate"
+                  />
+                  <StatCard
+                    label="Monthly ARPU"
+                    value={`$${((data.ltv?.monthlyArpuCents || 0) / 100).toFixed(2)}`}
+                    icon={Activity}
+                    sub="across all riders"
+                  />
+                  <StatCard
+                    label="LTV Proxy"
+                    value={`$${((data.ltv?.ltvProxyCents || 0) / 100).toFixed(2)}`}
+                    icon={Activity}
+                    sub={`${data.ltv?.assumptions?.assumedLifetimeMonths || 12}-month assumption`}
+                  />
+                </div>
+              </ChartCard>
+
+              <ChartCard title="Active App Versions">
+                <div className="space-y-2">
+                  {(data.clientVersions?.versions || []).slice(0, 10).map((row) => (
+                    <div
+                      key={`${row.platform}-${row.appVersion}-${row.buildNumber}`}
+                      className="flex justify-between text-sm border-b border-border py-1"
+                    >
+                      <span className="text-foreground">
+                        {row.platform} {row.appVersion} ({row.buildNumber})
+                      </span>
+                      <span className="text-muted-foreground">
+                        {row.installations} devices · {row.users} users
+                      </span>
+                    </div>
+                  ))}
+                  {!data.clientVersions?.versions?.length && (
+                    <p className="text-muted-foreground text-center py-8">
+                      No version heartbeats yet
+                    </p>
+                  )}
+                </div>
+              </ChartCard>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
