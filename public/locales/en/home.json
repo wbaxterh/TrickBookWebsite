@@ -5,6 +5,80 @@
     "keywords": "skateboarding app, trick tracker, skate spots, snowboarding app, action sports, trick list, skateboard progress, find skate spots",
     "ogDescription": "The free app for action sports riders to track tricks, discover spots, and connect with the community."
   },
+  "intent": {
+    "eyebrow": "Your next session starts here",
+    "headline": {
+      "line1": "FIND YOUR",
+      "line2": "NEXT MOVE."
+    },
+    "subline": "Whether you're learning your first trick or hunting for a new place to ride, TrickBook gets you to something useful in seconds.",
+    "noAccount": "Explore first. No account required.",
+    "learn": { "title": "Learn a trick", "text": "Clear steps, videos, and what to learn next." },
+    "ride": { "title": "Find a place to ride", "text": "Discover spots, parks, and resorts near you." },
+    "events": { "title": "See what's happening", "text": "Find contests, sessions, premieres, and meetups." },
+    "scene": { "title": "Connect with the scene", "text": "Find riders, crews, and local knowledge." }
+  },
+  "product": {
+    "heroCta": "See what TrickBook does",
+    "heroProof": "Free to start. Built for every level and every session.",
+    "dashboardAlt": "TrickBook mobile app dashboard showing goals, progress, quick actions, and community activity",
+    "tricklistAlt": "A TrickBook custom trick list with landed and to-do trick statuses",
+    "floating": {
+      "goal": "Current goal",
+      "session": "This session"
+    },
+    "eyebrow": "The riding app that does more",
+    "title": "Everything your next session needs.",
+    "subtitle": "TrickBook brings progression, local discovery, coaching, clips, and community into one app—so you spend less time searching and more time riding.",
+    "features": {
+      "track": { "title": "Track your progression", "text": "Build custom TrickLists, set goals, and mark tricks as you learn and land them." },
+      "learn": { "title": "Learn with Trickipedia", "text": "Get trick breakdowns, tutorials, and a clear idea of what to try next." },
+      "explore": { "title": "Find your next spot", "text": "Explore parks, street spots, resorts, shops, and events near you or anywhere you travel." },
+      "connect": { "title": "Ride with your people", "text": "Find homies, follow local riders, message your crew, and stay connected to the scene." },
+      "watch": { "title": "Stay close to the culture", "text": "Watch clips and full films, share sessions, and discover riders across action sports." },
+      "coach": { "title": "Get a progression partner", "text": "Ask Kaori for coaching, trick ideas, and the push to keep moving when you get stuck." }
+    },
+    "progression": {
+      "eyebrow": "Your progression, made visible",
+      "title": "Know what you're working on—and how far you've come.",
+      "text": "Turn a vague idea like “I want to get better” into a living plan for every spot, discipline, and session.",
+      "points": {
+        "lists": "Build TrickLists for a spot, a trip, a season, or a single session.",
+        "status": "Move tricks from not started to learning to landed in one tap.",
+        "momentum": "See your wins add up and always have a meaningful next move."
+      }
+    }
+  },
+  "value": {
+    "eyebrow": "Useful before you sign up",
+    "title": "Get what you came for.",
+    "subtitle": "TrickBook is an open action-sports guide first. Create an account when you want to save, track, and connect.",
+    "tricks": { "title": "Trickipedia", "text": "Browse tricks across seven action sports with tutorials and progression paths.", "cta": "Find a trick" },
+    "spots": { "title": "Spots & resorts", "text": "Find somewhere worth riding, from local parks to mountain resorts.", "cta": "Explore the map" },
+    "events": { "title": "Events", "text": "Know what's happening, where it is, and how to enter, attend, or watch.", "cta": "See upcoming events" },
+    "shops": { "title": "Local shops", "text": "Support the stores, teams, and people that keep your local scene moving.", "cta": "Find a shop" }
+  },
+  "loop": {
+    "eyebrow": "More value every time you ride",
+    "title": "Turn curiosity into progression.",
+    "text": "Save what inspires you, make a plan for your next session, log what you land, and always know where to go next.",
+    "cta": "Start my TrickBook",
+    "steps": {
+      "discover": { "title": "Discover", "text": "Find the trick, spot, event, or rider that gets you moving." },
+      "plan": { "title": "Make it yours", "text": "Build a trick list and save places and sessions you care about." },
+      "ride": { "title": "Go ride", "text": "Spend less time searching and more time learning by doing." },
+      "grow": { "title": "See your progress", "text": "Log what you land and turn every session into the next step." }
+    }
+  },
+  "kaoriSimple": { "title": "A coach that knows your progression." },
+  "appCta": {
+    "eyebrow": "Take TrickBook with you",
+    "title": "Your riding life, in one place.",
+    "text": "Download the app to keep your goals, spots, sessions, and crew in your pocket—ready when you are.",
+    "free": "Free to start",
+    "fast": "Useful in minutes",
+    "private": "Your data stays yours"
+  },
   "hero": {
     "variants": {
       "control": {
