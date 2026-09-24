@@ -111,6 +111,7 @@ See `.env.example` for the full documented template.
 | `npm run lint` / `npm run lint:fix` | Biome check (read-only / auto-fix) |
 | `npm run format` / `npm run format:check` | Biome formatting |
 | `npm run validate` | Biome check + production build (CI-style gate) |
+| `npm test` | Jest unit tests for the pure helpers in `lib/` |
 | `npm run test:blog-smoke` | Playwright blog smoke test |
 
 Husky + lint-staged run Biome on staged files before every commit.
@@ -122,6 +123,8 @@ Blog content is **API-backed, not file-backed**: posts live in the backend datab
 The markdown files in `posts/` (read by `lib/posts.js` via gray-matter) are a legacy/local content path that is no longer wired into the blog pages — treat them as source-of-record drafts, not the publishing mechanism.
 
 ## Testing
+
+Unit tests live next to the code in `lib/__tests__/` and run with `npm test` (Jest through `next/jest`, no browser, no API). Add one whenever a helper in `lib/` gains a branch worth keeping.
 
 Playwright smoke tests live in `tests/` (`playwright.config.js`):
 

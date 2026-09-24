@@ -12,8 +12,9 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "test:blog-smoke": "playwright test tests/blog-smoke.spec.js",
-    "validate": "biome check . && npm run build",
-    "prepare": "husky"
+    "validate": "biome check . && npm test && npm run build",
+    "prepare": "husky",
+    "test": "jest --ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -75,6 +76,7 @@
     "@playwright/test": "^1.54.2",
     "autoprefixer": "^10.4.23",
     "husky": "^9.1.7",
+    "jest": "^29.7.0",
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19"

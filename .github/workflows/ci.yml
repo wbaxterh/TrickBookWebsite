@@ -46,5 +46,8 @@ jobs:
           echo "Running Biome on ${#changed_files[@]} changed files..."
           npx biome check "${changed_files[@]}"
 
+      - name: Unit tests
+        run: npm test
+
       - name: Build
         run: npm run build
