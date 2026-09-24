@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../auth/AuthContext';
-import { identifyUser, resetUser, trackPageview } from '../lib/analytics';
+import { identifyUser, resetUser, sendClientHeartbeat, trackPageview } from '../lib/analytics';
 import { initPostHog } from '../lib/posthog';
 
 export default function PostHogProvider({ children }) {
@@ -12,6 +12,7 @@ export default function PostHogProvider({ children }) {
   useEffect(() => {
     initPostHog();
     trackPageview();
+    sendClientHeartbeat().catch(() => {});
 
     const handleRouteChange = () => {
       trackPageview();
@@ -22,6 +23,11 @@ export default function PostHogProvider({ children }) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  useEffect(() => {
+    if (loggedIn === null) return;
+    sendClientHeartbeat().catch(() => {});
+  }, [loggedIn]);
 
   // Identify/reset user when auth state changes
   useEffect(() => {
