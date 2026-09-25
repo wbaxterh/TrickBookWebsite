@@ -49,13 +49,13 @@ export default function DocsIndex({ docs }) {
         />
       </Head>
 
-      <div className="container-fluid" style={{ background: '#121212', minHeight: '100vh' }}>
-        <PageHeader title="Documentation" col="col-sm-4" />
+      <div className="mx-auto w-full px-3" style={{ background: '#121212', minHeight: '100vh' }}>
+        <PageHeader title="Documentation" col="w-full sm:w-1/3" />
 
         <div className="container py-5">
-          <div className="row g-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {docs.map((doc) => (
-              <div key={doc.slug} className="col-md-6 col-lg-4">
+              <div key={doc.slug}>
                 <Link href={`/docs/${doc.slug}`} style={{ textDecoration: 'none' }}>
                   <div
                     style={{
