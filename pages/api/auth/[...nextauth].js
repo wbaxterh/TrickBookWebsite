@@ -35,15 +35,12 @@ export default NextAuth({
         },
       },
       profile: async (profile, tokens) => {
-        console.log('Tokens:', tokens);
-
         try {
           const response = await axios.post(`${baseUrl}/api/auth/google-auth`, {
             tokenId: tokens.id_token,
           });
 
           const jwtToken = response.data;
-          console.log('JWT Token from backend:', jwtToken);
 
           return {
             id: profile.sub,
