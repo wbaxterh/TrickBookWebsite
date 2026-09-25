@@ -158,20 +158,20 @@ export default function TrickipediaAdmin() {
             </Button>
           </div>
         ) : filteredTricks.length > 0 ? (
-          <div className="row">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
             {filteredTricks.map((trick) => (
-              <div className="col-md-6 col-lg-4 mb-4" key={trick.id}>
-                <div className="card h-100">
+              <div key={trick.id}>
+                <div className="relative flex min-w-0 flex-col rounded-md border border-black/[0.175] bg-inherit dark:border-[#333] dark:bg-[#1e1e1e] h-full">
                   {trick.images?.[0] && (
                     <img
                       src={trick.images[0]}
-                      className="card-img-top"
+                      className="w-full rounded-t-md"
                       alt={trick.name}
                       style={{ height: '200px', objectFit: 'cover' }}
                     />
                   )}
-                  <div className="card-body">
-                    <Typography variant="h5" className="card-title">
+                  <div className="flex-auto p-4">
+                    <Typography variant="h5" className="mb-2">
                       {trick.name}
                     </Typography>
                     <div className="mb-2">

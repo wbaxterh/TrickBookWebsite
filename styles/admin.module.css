@@ -2,7 +2,7 @@
    (site dark bg ~#0b0d12/#121212, elevated surfaces, brand yellow accent).
    The .table/.tableCell/.tableRow classes are used by the admin dashboard;
    .container/.form are referenced by other admin pages and left as no-ops so
-   they keep relying on the global/bootstrap layout. */
+   they keep relying on the global Tailwind layout. */
 
 .table {
   width: 100%;

@@ -66,11 +66,12 @@ function getImageAltFallback({ title, explicitAlt, src, index, isHero = false })
   }
 
   if (src) {
-    const fileName = src.split('/').pop()?.split('?')[0]?.replace(/\.[a-z0-9]+$/i, '');
-    const normalizedName = fileName
-      ?.replace(/[-_]+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    const fileName = src
+      .split('/')
+      .pop()
+      ?.split('?')[0]
+      ?.replace(/\.[a-z0-9]+$/i, '');
+    const normalizedName = fileName?.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim();
 
     if (normalizedName) {
       return normalizedName.charAt(0).toUpperCase() + normalizedName.slice(1);
@@ -116,8 +117,7 @@ function normalizeArticleContent(content, title) {
       }
 
       const existingIdMatch = rawAttributes.match(/\sid=["']([^"']+)["']/i);
-      const baseId =
-        existingIdMatch?.[1] || slugifyHeading(headingText, headings.length + 1);
+      const baseId = existingIdMatch?.[1] || slugifyHeading(headingText, headings.length + 1);
       const instanceCount = headingCounts.get(baseId) || 0;
       const id = instanceCount === 0 ? baseId : `${baseId}-${instanceCount + 1}`;
 
@@ -214,8 +214,7 @@ function normalizeFooterCta(postData) {
     primaryHref: postData.footerCta?.primaryHref || postData.cta?.primaryHref || '/blog',
     secondaryLabel:
       postData.footerCta?.secondaryLabel || postData.cta?.secondaryLabel || 'Open TrickBook',
-    secondaryHref:
-      postData.footerCta?.secondaryHref || postData.cta?.secondaryHref || '/trickbook',
+    secondaryHref: postData.footerCta?.secondaryHref || postData.cta?.secondaryHref || '/trickbook',
   };
 }
 
@@ -247,10 +246,7 @@ export default function BlogPost({ postData, adjacentPosts }) {
   const heroImageAlt = getImageAltFallback({
     title,
     explicitAlt:
-      postData.heroImageAlt ||
-      postData.coverImageAlt ||
-      postData.coverAlt ||
-      postData.imageAlt,
+      postData.heroImageAlt || postData.coverImageAlt || postData.coverAlt || postData.imageAlt,
     src: heroImage,
     index: 1,
     isHero: true,
@@ -299,7 +295,7 @@ export default function BlogPost({ postData, adjacentPosts }) {
         <meta name="twitter:description" content={`${title} - by ${author}`} />
         <meta name="twitter:image" content={ogImage} />
       </Head>
-      <div className={`container-fluid ${styles.postContainer}`}>
+      <div className={`mx-auto w-full px-3 ${styles.postContainer}`}>
         <PostHero
           title={title}
           deck={deck}

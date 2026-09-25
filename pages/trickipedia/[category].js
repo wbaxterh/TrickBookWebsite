@@ -70,10 +70,10 @@ export default function CategoryPage() {
           content={`${category ? category : 'Tricks'}, How to, Tutorial, Action Sports`}
         />
       </Head>
-      <div className={`container-fluid ${styles.trickipediaContainer}`}>
+      <div className={`mx-auto w-full px-3 ${styles.trickipediaContainer}`}>
         <PageHeader
           title={`${category ? getCategoryName(category, categoryMap) : 'Tricks'} Tricks`}
-          col="col-sm-4"
+          col="w-full sm:w-1/3"
         />
 
         <div className="container mt-4">

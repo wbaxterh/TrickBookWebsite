@@ -286,7 +286,7 @@ export default function CreateTrick() {
             Steps:
           </Typography>
           {steps.map((step, index) => (
-            <Box key={index} className="d-flex align-items-center mb-2">
+            <Box key={index} className="mb-2 flex items-center">
               <TextField
                 label={`Step ${index + 1}`}
                 value={step}
@@ -314,21 +314,21 @@ export default function CreateTrick() {
           {existingImages.length > 0 && (
             <div className="mb-3">
               <Typography variant="subtitle1">Existing Images:</Typography>
-              <div className="row">
+              <div className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-4">
                 {existingImages.map((image, index) => (
-                  <div key={index} className="col-md-3 mb-2">
-                    <div className="position-relative">
+                  <div key={index}>
+                    <div className="relative">
                       <img
                         src={image}
                         alt={`${name} ${index + 1}`}
-                        className="img-fluid rounded"
+                        className="h-auto max-w-full rounded"
                         style={{ height: '150px', objectFit: 'cover' }}
                       />
                       <IconButton
                         onClick={() => handleRemoveExistingImage(index)}
                         color="secondary"
                         size="small"
-                        className="position-absolute top-0 end-0"
+                        className="absolute end-0 top-0"
                         style={{ backgroundColor: 'rgba(255,255,255,0.8)' }}
                       >
                         <DeleteIcon />
@@ -341,17 +341,17 @@ export default function CreateTrick() {
           )}
 
           {/* New Images */}
-          <div className="row">
-            <div className="col-6 mx-auto text-center">
+          <div className="-mx-3 flex flex-wrap">
+            <div className="mx-auto w-1/2 px-3 text-center">
               <h3>Add New Images</h3>
               <input type="file" onChange={handleFileChange} multiple />
             </div>
           </div>
 
           {selectedFiles.length > 0 && (
-            <div className="row mt-4">
+            <div className="-mx-3 mt-4 flex flex-wrap">
               {selectedFiles.map((file, index) => (
-                <div key={index} className="col-6 mx-auto text-center">
+                <div key={index} className="mx-auto w-1/2 px-3 text-center">
                   <Typography>{file.name}</Typography>
                   <IconButton color="secondary" onClick={() => handleRemoveImage(index)}>
                     <DeleteIcon />
@@ -361,10 +361,10 @@ export default function CreateTrick() {
             </div>
           )}
 
-          <div className="row mt-4">
+          <div className="mt-4 flex">
             <Button
               type="submit"
-              className="col-6 mx-auto"
+              className="mx-auto w-1/2"
               variant="contained"
               color="primary"
               disabled={submitting}

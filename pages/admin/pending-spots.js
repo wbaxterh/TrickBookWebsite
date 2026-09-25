@@ -254,10 +254,10 @@ export default function PendingSpotsAdmin() {
           </Box>
         ) : spots.length > 0 ? (
           <>
-            <div className="row">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
               {spots.map((spot) => (
-                <div className="col-md-6 col-lg-4 mb-4" key={spot._id}>
-                  <div className="card h-100">
+                <div key={spot._id}>
+                  <div className="relative flex min-w-0 flex-col rounded-md border border-black/[0.175] bg-inherit dark:border-[#333] dark:bg-[#1e1e1e] h-full">
                     <div style={{ position: 'relative', height: '180px' }}>
                       {spot.imageURL ? (
                         <Image
@@ -266,7 +266,7 @@ export default function PendingSpotsAdmin() {
                           fill
                           style={{ objectFit: 'cover' }}
                           unoptimized
-                          className="card-img-top"
+                          className="w-full rounded-t-md"
                         />
                       ) : (
                         <div
@@ -293,8 +293,8 @@ export default function PendingSpotsAdmin() {
                         }}
                       />
                     </div>
-                    <div className="card-body">
-                      <Typography variant="h5" className="card-title">
+                    <div className="flex-auto p-4">
+                      <Typography variant="h5" className="mb-2">
                         {spot.name}
                       </Typography>
                       <Box display="flex" alignItems="center" gap={0.5} mb={1}>
