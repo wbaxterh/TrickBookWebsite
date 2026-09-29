@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../styles/blog.module.css';
 
 const PageHeader = ({ title, className, sx, col, heroImage, author, date, readingTime }) => {
-  const imageSrc = heroImage || '/defaultBlogBG.png';
+  const imageSrc = heroImage || '/tbBackgroundDark.png';
 
   return (
     <div className={`-mx-3 flex flex-wrap ${className}`}>
