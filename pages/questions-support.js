@@ -33,8 +33,8 @@ export default function QuestionsSupport() {
           content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
         />
       </Head>
-      <div className={`container-fluid ${styles.questionsContainer}`}>
-        <PageHeader title="Questions & Support" col="col-sm-6" />
+      <div className={`mx-auto w-full px-3 ${styles.questionsContainer}`}>
+        <PageHeader title="Questions & Support" col="w-full sm:w-1/2" />
         <div className="container mt-4">
           <h3>Contact Us</h3>
 
@@ -119,7 +119,7 @@ export default function QuestionsSupport() {
                     className="mb-3"
                   />
                 </div>
-                <div className="d-flex justify-content-between">
+                <div className="flex justify-between">
                   <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
                     {isSubmitting ? <CircularProgress size={24} /> : 'Submit'}
                   </Button>

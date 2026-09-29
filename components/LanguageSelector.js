@@ -1,7 +1,13 @@
 import Cookies from 'js-cookie';
 import { Check, Globe } from 'lucide-react';
 import { useRouter } from 'next/router';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { cn } from '../lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 // Languages are shown in their own language (endonyms), so this list is
 // intentionally not translated. Keep in sync with next-i18next.config.js.
@@ -35,32 +41,46 @@ const LanguageSelector = ({ onSelect }) => {
   };
 
   return (
-    <NavDropdown
-      align="end"
-      className="language-selector"
-      id="language-selector-dropdown"
-      title={
-        <span className="language-selector-title">
-          <Globe size={18} aria-hidden="true" />
-          <span className="language-selector-label">{currentLanguage.label}</span>
-        </span>
-      }
-    >
-      {LANGUAGES.map(({ code, label }) => (
-        <NavDropdown.Item
-          key={code}
-          active={code === currentLanguage.code}
-          lang={code}
-          onClick={() => changeLanguage(code)}
-          style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-        >
-          <span style={{ width: 18, display: 'inline-flex' }}>
-            {code === currentLanguage.code && <Check size={16} aria-hidden="true" />}
-          </span>
-          {label}
-        </NavDropdown.Item>
-      ))}
-    </NavDropdown>
+    <DropdownMenu modal={false}>
+      <div className="language-selector">
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            id="language-selector-dropdown"
+            className="language-selector-toggle tb-caret"
+            data-testid="language-toggle"
+          >
+            <span className="language-selector-title">
+              <Globe size={18} aria-hidden="true" />
+              <span className="language-selector-label">{currentLanguage.label}</span>
+            </span>
+          </button>
+        </DropdownMenuTrigger>
+      </div>
+      <DropdownMenuContent
+        align="end"
+        sideOffset={2}
+        className="tb-dropdown-menu language-selector-menu"
+      >
+        {LANGUAGES.map(({ code, label }) => (
+          <DropdownMenuItem
+            key={code}
+            lang={code}
+            className={cn(
+              'tb-dropdown-item language-selector-item',
+              code === currentLanguage.code && 'active',
+            )}
+            onSelect={() => changeLanguage(code)}
+            style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+          >
+            <span style={{ width: 18, display: 'inline-flex' }}>
+              {code === currentLanguage.code && <Check size={16} aria-hidden="true" />}
+            </span>
+            {label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

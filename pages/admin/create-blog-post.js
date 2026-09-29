@@ -216,15 +216,15 @@ export default function CreateBlogPost() {
             multiline
             rows={10}
           />
-          <div className="row">
-            <div className="col-6 mx-auto text-center">
+          <div className="-mx-3 flex flex-wrap">
+            <div className="mx-auto w-1/2 px-3 text-center">
               <h3>Add an Image</h3>
               <input type="file" onChange={handleFileChange} />
             </div>
           </div>
-          <div className="row mt-4">
+          <div className="-mx-3 mt-4 flex flex-wrap">
             {selectedFiles.map((file, index) => (
-              <div key={index} className="col-6 mx-auto text-center">
+              <div key={index} className="mx-auto w-1/2 px-3 text-center">
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -243,8 +243,8 @@ export default function CreateBlogPost() {
               </div>
             ))}
           </div>
-          <div className="row mt-4">
-            <Button type="submit" className="col-6 mx-auto" variant="contained" color="primary">
+          <div className="mt-4 flex">
+            <Button type="submit" className="mx-auto w-1/2" variant="contained" color="primary">
               {isEdit === 'true' ? 'Update Post' : 'Submit Post'}
             </Button>
           </div>

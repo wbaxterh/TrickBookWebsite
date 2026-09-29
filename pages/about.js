@@ -19,8 +19,8 @@ export default function About() {
           content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
         />
       </Head>
-      <div className={`container-fluid ${styles.aboutContainer}`}>
-        <PageHeader title="About Us" col="col-sm-4" />
+      <div className={`mx-auto w-full px-3 ${styles.aboutContainer}`}>
+        <PageHeader title="About Us" col="w-full sm:w-1/3" />
         <section className={`my-5 p-5 ${styles.missionStatement}`}>
           <Typography variant="h2">Our Mission</Typography>
           <Typography variant="h5">

@@ -13,11 +13,11 @@ export default function TrickCard({ id, name, category, difficulty, description,
 
   return (
     <Link href={url} passHref style={{ textDecoration: 'none' }}>
-      <div className={`card ${styles.trickCard}`}>
+      <div className={`relative flex min-w-0 flex-col rounded-md ${styles.trickCard}`}>
         {images?.[0] && images[0].length > 0 && (
           <div className={styles.trickImageContainer}>
             <Image
-              className="rounded-top"
+              className="rounded-t-md"
               src={images[0]}
               alt={`${name}`}
               fill
@@ -26,11 +26,11 @@ export default function TrickCard({ id, name, category, difficulty, description,
             />
           </div>
         )}
-        <div className="card-body app-secondary-bg rounded-bottom">
-          <Typography variant="h5" className="card-title app-primary">
+        <div className="flex-auto rounded-b-md p-4 app-secondary-bg">
+          <Typography variant="h5" className="mb-2 app-primary">
             {name}
           </Typography>
-          <div className="d-flex gap-2 mb-2">
+          <div className="mb-2 flex gap-2">
             <Chip label={category} size="small" color="primary" variant="outlined" />
             <Chip
               label={difficulty}
@@ -38,7 +38,7 @@ export default function TrickCard({ id, name, category, difficulty, description,
               color={difficultyColors[difficulty] || 'default'}
             />
           </div>
-          <Typography className="card-text text-light" variant="body2">
+          <Typography className="text-[#f8f9fa]" variant="body2">
             {description?.substring(0, 150)}...
           </Typography>
         </div>

@@ -12,7 +12,9 @@
     "signupFree": "Sign up free",
     "myProfile": "My Profile",
     "messages": "Messages",
-    "logout": "Logout"
+    "logout": "Logout",
+    "toggleMenu": "Toggle navigation",
+    "primary": "Primary"
   },
   "theme": {
     "toggle": "Toggle theme",

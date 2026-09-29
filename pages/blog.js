@@ -41,7 +41,7 @@ export default function Blog({ allPostsData }) {
         <meta property="og:url" content="https://thetrickbook.com/blog" />
         <meta property="og:site_name" content="The Trick Book" />
       </Head>
-      <div className={`container-fluid ${styles.postContainer}`}>
+      <div className={`mx-auto w-full px-3 ${styles.postContainer}`}>
         {/* Blog header */}
         <div className={styles.blogHeader}>
           <h1 className={styles.blogHeaderTitle}>Blog</h1>
@@ -52,8 +52,8 @@ export default function Blog({ allPostsData }) {
 
         {/* Featured post */}
         {featuredPost && (
-          <div className="row mb-4">
-            <div className="col-12">
+          <div className="mb-4">
+            <div>
               <Link href={`/blog/${featuredPost.url}`} style={{ textDecoration: 'none' }}>
                 <div className={styles.featuredPost}>
                   <img
@@ -77,9 +77,9 @@ export default function Blog({ allPostsData }) {
 
         {/* Remaining posts grid */}
         {remainingPosts.length > 0 && (
-          <div className={`row mt-2`}>
+          <div className="mb-4 mt-2 grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-3">
             {remainingPosts.map(({ id, date, title, author, url, images }) => (
-              <div className="col-md-4 col-sm-12 mb-4" key={id}>
+              <div key={id}>
                 <BlogCard
                   id={url}
                   firstImage={images?.find((image) => image.includes('?hero=true')) || images?.[0]}

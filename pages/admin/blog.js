@@ -99,9 +99,9 @@ export default function BlogAdmin() {
             {loadError}
           </Alert>
         ) : posts.length > 0 ? (
-          <div className="row">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-3">
             {posts.map((post) => (
-              <div className="col-md-4 col-sm-12 mb-4" key={post.id}>
+              <div key={post.id}>
                 <BlogCard
                   id={post.url}
                   firstImage={post.images.find((image) => image.includes('?hero=true'))}

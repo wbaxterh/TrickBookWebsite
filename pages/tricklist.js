@@ -20,8 +20,8 @@ export default function Trickipedia() {
           content="Trick, Book, Skateboarding, Snowboarding, Trickbook, TheTrickBook, App"
         />
       </Head>
-      <div className={`container-fluid ${styles.trickipediaContainer}`}>
-        <PageHeader title="Trickipedia" col="col-sm-4" />
+      <div className={`mx-auto w-full px-3 ${styles.trickipediaContainer}`}>
+        <PageHeader title="Trickipedia" col="w-full sm:w-1/3" />
         <section className={`my-5 p-5 ${styles.missionStatement}`}>
           <Typography variant="h2">Trickipedia</Typography>
           <Typography variant="h5">Choose a category / sport</Typography>

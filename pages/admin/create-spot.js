@@ -360,10 +360,10 @@ export default function CreateSpot() {
             ))}
           </Box>
 
-          <div className="row mt-4">
+          <div className="mt-4 flex">
             <Button
               type="submit"
-              className="col-6 mx-auto"
+              className="mx-auto w-1/2"
               variant="contained"
               color="primary"
               disabled={submitting}

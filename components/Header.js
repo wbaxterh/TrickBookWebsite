@@ -6,6 +6,7 @@ import {
   Clapperboard,
   LogOut,
   MapPin,
+  Menu,
   MessageCircle,
   Moon,
   Store,
@@ -18,20 +19,36 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { useContext, useEffect, useRef, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../auth/AuthContext';
 import { getUnreadCount } from '../lib/apiMessages';
 import { connectMessagesSocket } from '../lib/socket';
+import { cn } from '../lib/utils';
 import styles from '../styles/Home.module.css';
 import LanguageSelector from './LanguageSelector';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+
+const unreadBadgeStyle = {
+  backgroundColor: '#fcf150',
+  color: '#000',
+  borderRadius: '50%',
+  fontWeight: 'bold',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const menuItemStyle = { display: 'flex', alignItems: 'center', gap: 10 };
 
 const Header = () => {
   const { t } = useTranslation('common');
   const { email, loggedIn, token, logOut } = useContext(AuthContext);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [expanded, setExpanded] = useState(false);
@@ -63,7 +80,7 @@ const Header = () => {
     socketRef.current = socket;
 
     // Listen for new messages to increment badge
-    socket.on('message:new', ({ message }) => {
+    socket.on('message:new', () => {
       // Only increment if not from current user
       setUnreadCount((prev) => prev + 1);
     });
@@ -81,70 +98,75 @@ const Header = () => {
   }, [loggedIn, token]);
 
   const isDark = mounted && resolvedTheme === 'dark';
+  const closeMenu = () => setExpanded(false);
+  const linkColor = isDark ? '#f0f0f0' : '#1a1a1a';
+
+  const navItems = [
+    { href: '/trickbook', label: t('nav.trickbook', 'TrickBook'), Icon: BookOpen },
+    { href: '/media', label: t('nav.media', 'Media'), Icon: Clapperboard },
+    { href: '/spots', label: t('nav.spots', 'Spots'), Icon: MapPin },
+    { href: '/events', label: t('nav.events', 'Events'), Icon: CalendarDays },
+    { href: '/shops', label: t('nav.shops', 'Shops'), Icon: Store },
+    { href: '/riders', label: t('nav.riders', 'Riders'), Icon: Users },
+  ];
 
   return (
-    <Navbar
-      variant={isDark ? 'dark' : 'light'}
-      className={`navbar-fixed-top ${styles.navWrapper}`}
-      expand="lg"
-      expanded={expanded}
-      onToggle={(value) => setExpanded(value)}
-    >
-      <Container>
-        <Link href="/" legacyBehavior>
-          <Navbar.Brand>
-            <a>
-              <Image
-                className={styles.icon}
-                src="/adaptive-icon.png"
-                style={{ margin: '0 auto', textAlign: 'center' }}
-                height={55}
-                width={55}
-                alt={t('brand.logoAlt', 'Trick Book')}
-              />
-            </a>
-          </Navbar.Brand>
+    <header className={`site-header ${styles.navWrapper}`}>
+      <div className="container site-header-inner">
+        <Link href="/" className="site-brand">
+          <Image
+            className={styles.icon}
+            src="/adaptive-icon.png"
+            style={{ margin: '0 auto', textAlign: 'center' }}
+            height={55}
+            width={55}
+            alt={t('brand.logoAlt', 'Trick Book')}
+          />
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto mobile-nav-section">
-            {[
-              { href: '/trickbook', label: t('nav.trickbook', 'TrickBook'), Icon: BookOpen },
-              { href: '/media', label: t('nav.media', 'Media'), Icon: Clapperboard },
-              { href: '/spots', label: t('nav.spots', 'Spots'), Icon: MapPin },
-              { href: '/events', label: t('nav.events', 'Events'), Icon: CalendarDays },
-              { href: '/shops', label: t('nav.shops', 'Shops'), Icon: Store },
-              { href: '/riders', label: t('nav.riders', 'Riders'), Icon: Users },
-            ].map(({ href, label, Icon }) => (
-              <Link key={href} href={href} passHref legacyBehavior>
-                <Nav.Link
-                  className="mobile-nav-link"
-                  style={{
-                    color: isDark ? '#f0f0f0' : '#1a1a1a',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    whiteSpace: 'nowrap',
-                  }}
-                  onClick={() => setExpanded(false)}
-                >
-                  <Icon size={17} aria-hidden="true" />
-                  {label}
-                </Nav.Link>
+        <button
+          type="button"
+          className="nav-toggle lg:hidden"
+          data-testid="nav-toggle"
+          aria-controls="site-nav"
+          aria-expanded={expanded}
+          aria-label={t('nav.toggleMenu', 'Toggle navigation')}
+          onClick={() => setExpanded((value) => !value)}
+        >
+          <Menu style={{ width: '1.5em', height: '1.5em' }} aria-hidden="true" />
+        </button>
+        <div
+          id="site-nav"
+          className={cn('site-nav-collapse', expanded ? 'block' : 'hidden', 'lg:flex')}
+        >
+          <nav
+            className="site-nav site-nav-primary mobile-nav-section"
+            aria-label={t('nav.primary', 'Primary')}
+          >
+            {navItems.map(({ href, label, Icon }) => (
+              <Link
+                key={href}
+                href={href}
+                className="site-nav-link mobile-nav-link"
+                style={{ color: linkColor }}
+                onClick={closeMenu}
+              >
+                <Icon size={17} aria-hidden="true" />
+                {label}
               </Link>
             ))}
-          </Nav>
+          </nav>
 
           {/* Mobile divider */}
-          <hr className="mobile-nav-divider d-lg-none" />
+          <hr className="mobile-nav-divider lg:hidden" />
 
-          <Nav className={`ms-auto align-items-lg-center mobile-utility-section`}>
+          <div className="site-nav site-nav-utility mobile-utility-section">
             {/* Language Selector */}
-            <LanguageSelector onSelect={() => setExpanded(false)} />
+            <LanguageSelector onSelect={closeMenu} />
 
             {/* Theme Toggle */}
             {mounted && (
               <button
+                type="button"
                 onClick={() => setTheme(isDark ? 'light' : 'dark')}
                 className="theme-toggle-btn"
                 aria-label={t('theme.toggle', 'Toggle theme')}
@@ -157,137 +179,132 @@ const Header = () => {
             )}
 
             {/* Mobile divider before account section */}
-            <hr className="mobile-nav-divider d-lg-none" />
+            <hr className="mobile-nav-divider lg:hidden" />
 
             {loggedIn === null ? (
               <Skeleton variant="rectangular" width={120} height={36} />
             ) : !loggedIn ? (
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14 }}>
-                <Link href="/login" passHref legacyBehavior>
-                  <a
-                    style={{
-                      color: isDark ? '#f0f0f0' : '#1a1a1a',
-                      fontWeight: 500,
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {t('nav.login', 'Log in')}
-                  </a>
+                <Link
+                  href="/login"
+                  style={{
+                    color: linkColor,
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {t('nav.login', 'Log in')}
                 </Link>
-                <Link href="/signup" passHref legacyBehavior>
-                  <a className="login-btn">
-                    <PersonIcon style={{ fontSize: 18 }} />
-                    <span>{t('nav.signupFree', 'Sign up free')}</span>
-                  </a>
+                <Link href="/signup" className="login-btn">
+                  <PersonIcon style={{ fontSize: 18 }} />
+                  <span>{t('nav.signupFree', 'Sign up free')}</span>
                 </Link>
               </div>
             ) : (
-              <NavDropdown
-                align="end"
-                title={
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      position: 'relative',
-                      color: isDark ? '#1a1a1a' : '#f0f0f0',
-                    }}
-                  >
-                    <PersonIcon style={{ fontSize: 20 }} />
-                    <span style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {email}
-                    </span>
-                    {unreadCount > 0 && (
-                      <span
-                        style={{
-                          position: 'absolute',
-                          top: -8,
-                          right: -8,
-                          backgroundColor: '#fcf150',
-                          color: '#000',
-                          borderRadius: '50%',
-                          minWidth: 18,
-                          height: 18,
-                          fontSize: 11,
-                          fontWeight: 'bold',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          padding: '0 4px',
-                        }}
-                      >
-                        {unreadCount > 99 ? '99+' : unreadCount}
-                      </span>
-                    )}
-                  </span>
-                }
-                id="profile-dropdown"
-                className="profile-dropdown"
-                style={{
-                  backgroundColor: isDark ? '#333' : '#e0e0e0',
-                  borderRadius: 4,
-                }}
-              >
-                <Link href="/profile" passHref legacyBehavior>
-                  <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <User size={18} />
-                    {t('nav.myProfile', 'My Profile')}
-                  </NavDropdown.Item>
-                </Link>
-                <Link href="/messages" passHref legacyBehavior>
-                  <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <MessageCircle size={18} />
-                    {t('nav.messages', 'Messages')}
-                    {unreadCount > 0 && (
-                      <span
-                        style={{
-                          marginLeft: 'auto',
-                          backgroundColor: '#fcf150',
-                          color: '#000',
-                          borderRadius: '50%',
-                          minWidth: 20,
-                          height: 20,
-                          fontSize: 12,
-                          fontWeight: 'bold',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          padding: '0 6px',
-                        }}
-                      >
-                        {unreadCount > 99 ? '99+' : unreadCount}
-                      </span>
-                    )}
-                  </NavDropdown.Item>
-                </Link>
-                <Link href="/homies" passHref legacyBehavior>
-                  <NavDropdown.Item style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <Users size={18} />
-                    {t('nav.homies', 'Homies')}
-                  </NavDropdown.Item>
-                </Link>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={logOut}
+              <DropdownMenu modal={false}>
+                <div
+                  className="profile-dropdown"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    color: '#dc3545',
-                    cursor: 'pointer',
+                    backgroundColor: isDark ? '#333' : '#e0e0e0',
+                    borderRadius: 4,
                   }}
                 >
-                  <LogOut size={18} />
-                  {t('nav.logout', 'Logout')}
-                </NavDropdown.Item>
-              </NavDropdown>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      id="profile-dropdown"
+                      className="profile-dropdown-toggle tb-caret"
+                      data-testid="profile-toggle"
+                    >
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          position: 'relative',
+                          color: isDark ? '#1a1a1a' : '#f0f0f0',
+                        }}
+                      >
+                        <PersonIcon style={{ fontSize: 20 }} />
+                        <span
+                          style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        >
+                          {email}
+                        </span>
+                        {unreadCount > 0 && (
+                          <span
+                            style={{
+                              ...unreadBadgeStyle,
+                              position: 'absolute',
+                              top: -8,
+                              right: -8,
+                              minWidth: 18,
+                              height: 18,
+                              fontSize: 11,
+                              padding: '0 4px',
+                            }}
+                          >
+                            {unreadCount > 99 ? '99+' : unreadCount}
+                          </span>
+                        )}
+                      </span>
+                    </button>
+                  </DropdownMenuTrigger>
+                </div>
+                <DropdownMenuContent
+                  align="end"
+                  sideOffset={2}
+                  className="tb-dropdown-menu profile-dropdown-menu"
+                >
+                  <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
+                    <Link href="/profile" style={menuItemStyle}>
+                      <User size={18} />
+                      {t('nav.myProfile', 'My Profile')}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
+                    <Link href="/messages" style={menuItemStyle}>
+                      <MessageCircle size={18} />
+                      {t('nav.messages', 'Messages')}
+                      {unreadCount > 0 && (
+                        <span
+                          style={{
+                            ...unreadBadgeStyle,
+                            marginLeft: 'auto',
+                            minWidth: 20,
+                            height: 20,
+                            fontSize: 12,
+                            padding: '0 6px',
+                          }}
+                        >
+                          {unreadCount > 99 ? '99+' : unreadCount}
+                        </span>
+                      )}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
+                    <Link href="/homies" style={menuItemStyle}>
+                      <Users size={18} />
+                      {t('nav.homies', 'Homies')}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="tb-dropdown-divider" />
+                  <DropdownMenuItem
+                    className="tb-dropdown-item profile-dropdown-item"
+                    onSelect={logOut}
+                    style={{ ...menuItemStyle, color: '#dc3545', cursor: 'pointer' }}
+                  >
+                    <LogOut size={18} />
+                    {t('nav.logout', 'Logout')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 
