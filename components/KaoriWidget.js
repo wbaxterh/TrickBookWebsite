@@ -9,11 +9,13 @@ import {
   getCompanionGreeting,
   getKaoriUsage,
   getMessages,
+  getPublicKaoriGreeting,
   sendMessage,
   startBotConversation,
 } from '../lib/apiMessages';
 import { connectMessagesSocket } from '../lib/socket';
 import styles from './KaoriWidget.module.css';
+import MessageText from './MessageText';
 import UserAvatar from './UserAvatar';
 
 const GREETING_PREFIX = 'tb_kaori_widget_greeted_';
@@ -22,12 +24,7 @@ const KAORI_AVATAR = {
   name: 'Kaori',
   imageUri: 'https://api.thetrickbook.com/assets/kaori-avatar.jpg',
 };
-const GUEST_OPENERS = [
-  'Yo, what are you trying to land next? Drop the trick and I’ll help you dial it. 🏂',
-  'What’s good, shredder? Tell me your sport and skill level — let’s build your next progression.',
-  'Fresh tracks, fresh goals. You working on a trick, hunting a spot, or planning your next session?',
-  'Ayo 👋 I’m Kaori. Got a clip to study, a trick to unlock, or a riding question? Send it.',
-];
+const FALLBACK_GREETING = "Yo, I'm Kaori. What are you working on today?";
 
 const isKaoriVoiceMessage = (text = '') =>
   /Kaori\s+voice:/i.test(text) || /https?:\/\/[^\s)]+kaori-voice[^\s)]*\.mp3/i.test(text);
@@ -83,7 +80,8 @@ export default function KaoriWidget() {
   const [messages, setMessages] = useState([]);
   const [greeting, setGreeting] = useState('');
   const [usage, setUsage] = useState(null);
-  const [guestOpenerIndex, setGuestOpenerIndex] = useState(0);
+  const [guestGreeting, setGuestGreeting] = useState(FALLBACK_GREETING);
+  const [showPreview, setShowPreview] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [ssoProvider, setSsoProvider] = useState('');
   const scrollRef = useRef(null);
@@ -101,12 +99,17 @@ export default function KaoriWidget() {
   }, [hidden, loggedIn]);
 
   useEffect(() => {
-    setGuestOpenerIndex(Math.floor(Math.random() * GUEST_OPENERS.length));
-    const timer = window.setInterval(
-      () => setGuestOpenerIndex((current) => (current + 1) % GUEST_OPENERS.length),
-      7000,
-    );
-    return () => window.clearInterval(timer);
+    let cancelled = false;
+    getPublicKaoriGreeting()
+      .then((data) => {
+        if (!cancelled && data?.greeting) setGuestGreeting(data.greeting);
+      })
+      .catch(() => {});
+    const timer = window.setTimeout(() => setShowPreview(true), 3500);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -231,7 +234,7 @@ export default function KaoriWidget() {
       window.sessionStorage.setItem(PENDING_DRAFT_KEY, content);
       setShowAuthGate(true);
       trackKaoriEvent('kaori_account_wall_viewed', {
-        opener_index: guestOpenerIndex,
+        opener_source: 'model',
         draft_length: content.length,
       });
       return;
@@ -327,9 +330,9 @@ export default function KaoriWidget() {
           {loggedIn === false ? (
             <>
               <div className={styles.messages} aria-live="polite">
-                <MessageBubble content={GUEST_OPENERS[guestOpenerIndex]} mine={false} />
+                <MessageBubble content={guestGreeting} mine={false} />
                 <p className={styles.guestHint}>
-                  Reply to Kaori — creating an account is one click.
+                  Reply to Kaori. Creating an account is one click.
                 </p>
               </div>
               <form className={styles.composer} onSubmit={handleSend}>
@@ -421,10 +424,7 @@ export default function KaoriWidget() {
                 )}
                 {!loading && greeting && <MessageBubble content={greeting} mine={false} />}
                 {!loading && messages.length === 0 && !greeting && !error && (
-                  <MessageBubble
-                    content="Hey — I’m Kaori. What are you riding, and what are you working on?"
-                    mine={false}
-                  />
+                  <MessageBubble content={FALLBACK_GREETING} mine={false} />
                 )}
                 {messages.map((message) => (
                   <MessageBubble
@@ -512,18 +512,26 @@ export default function KaoriWidget() {
       )}
 
       {!open && (
-        <button
-          type="button"
-          className={styles.launcher}
-          onClick={openWidget}
-          aria-label="Chat with Kaori"
-        >
-          <span className={styles.launcherAvatar}>
-            <UserAvatar user={kaori || KAORI_AVATAR} size={40} showBadge={false} />
-          </span>
-          <span>Ask Kaori</span>
-          <i aria-hidden="true" />
-        </button>
+        <div className={styles.launcherStack}>
+          {showPreview && (
+            <button type="button" className={styles.preview} onClick={openWidget}>
+              <UserAvatar user={KAORI_AVATAR} size={30} showBadge={false} />
+              <span>{guestGreeting}</span>
+            </button>
+          )}
+          <button
+            type="button"
+            className={styles.launcher}
+            onClick={openWidget}
+            aria-label="Chat with Kaori"
+          >
+            <span className={styles.launcherAvatar}>
+              <UserAvatar user={kaori || KAORI_AVATAR} size={40} showBadge={false} />
+            </span>
+            <span>Ask Kaori</span>
+            <i aria-hidden="true" />
+          </button>
+        </div>
       )}
     </div>
   );
@@ -565,32 +573,9 @@ function MessageBubble({ content, mine, sending }) {
   return (
     <div className={`${styles.messageRow} ${mine ? styles.mine : ''}`}>
       <div className={`${styles.bubble} ${mine ? styles.mineBubble : styles.kaoriBubble}`}>
-        <LinkifiedText content={content} />
+        <MessageText content={content} className={styles.messageText} />
         {sending && <Loader2 className={styles.inlineSpin} size={12} aria-label="Sending" />}
       </div>
     </div>
   );
-}
-
-function LinkifiedText({ content = '' }) {
-  const parts = content.split(/(\[[^\]]+\]\(https?:\/\/[^)\s]+\)|https?:\/\/[^\s]+)/g);
-  let offset = 0;
-  return parts.map((part) => {
-    const partOffset = offset;
-    offset += part.length;
-    const markdown = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
-    const href = markdown?.[2] || (part.startsWith('http') ? part.replace(/[),.!?]+$/, '') : '');
-    if (!href) return part;
-    return (
-      <a
-        className={styles.messageLink}
-        href={href}
-        key={`${href}-${partOffset}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {markdown?.[1] || href}
-      </a>
-    );
-  });
 }
