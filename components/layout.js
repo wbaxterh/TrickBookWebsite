@@ -1,5 +1,6 @@
 import Footer from './Footer';
 import HeaderWrapper from './HeaderWrapper';
+import KaoriWidget from './KaoriWidget';
 import styles from './layout.module.css';
 
 export default function Layout({ children }) {
@@ -8,6 +9,7 @@ export default function Layout({ children }) {
       <HeaderWrapper />
       <main className={styles.mainContent}>{children}</main>
       <Footer />
+      <KaoriWidget />
     </div>
   );
 }
