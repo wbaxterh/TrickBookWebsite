@@ -156,8 +156,19 @@
 }
 .mineBubble {
   border-bottom-right-radius: 4px;
-  background: #facc15;
+  background: #fcf150;
   color: #111827;
+}
+.messageLink {
+  color: #fcf150;
+  font-weight: 750;
+  text-decoration: underline;
+  text-decoration-color: rgba(252, 241, 80, 0.55);
+  text-underline-offset: 2px;
+}
+.mineBubble .messageLink {
+  color: #111827;
+  text-decoration-color: rgba(17, 24, 39, 0.45);
 }
 .inlineSpin {
   display: inline;
@@ -215,7 +226,7 @@
   flex: 0 0 auto;
   border: 0;
   border-radius: 9px;
-  background: #facc15;
+  background: #fcf150;
   color: #111827;
   padding: 7px 10px;
   font-size: 11px;
@@ -280,8 +291,8 @@
   flex: 0 0 auto;
   border: 0;
   border-radius: 12px;
-  background: #38bdf8;
-  color: #082f49;
+  background: #fcf150;
+  color: #111827;
 }
 .composer button:disabled {
   opacity: 0.42;

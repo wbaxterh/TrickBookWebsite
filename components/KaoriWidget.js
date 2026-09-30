@@ -565,9 +565,32 @@ function MessageBubble({ content, mine, sending }) {
   return (
     <div className={`${styles.messageRow} ${mine ? styles.mine : ''}`}>
       <div className={`${styles.bubble} ${mine ? styles.mineBubble : styles.kaoriBubble}`}>
-        {content}
+        <LinkifiedText content={content} />
         {sending && <Loader2 className={styles.inlineSpin} size={12} aria-label="Sending" />}
       </div>
     </div>
   );
+}
+
+function LinkifiedText({ content = '' }) {
+  const parts = content.split(/(\[[^\]]+\]\(https?:\/\/[^)\s]+\)|https?:\/\/[^\s]+)/g);
+  let offset = 0;
+  return parts.map((part) => {
+    const partOffset = offset;
+    offset += part.length;
+    const markdown = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
+    const href = markdown?.[2] || (part.startsWith('http') ? part.replace(/[),.!?]+$/, '') : '');
+    if (!href) return part;
+    return (
+      <a
+        className={styles.messageLink}
+        href={href}
+        key={`${href}-${partOffset}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {markdown?.[1] || href}
+      </a>
+    );
+  });
 }
