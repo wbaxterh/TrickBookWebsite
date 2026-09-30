@@ -6,6 +6,44 @@
   font-family: inherit;
 }
 
+.launcherStack {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: min(320px, calc(100vw - 44px));
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px 16px 4px 16px;
+  background: #20242c;
+  color: #f1f5f9;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.36);
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: left;
+  animation: previewIn 180ms ease-out both;
+}
+
+.preview span:last-child {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@keyframes previewIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
 .launcher {
   position: relative;
   display: flex;
@@ -159,14 +197,14 @@
   background: #fcf150;
   color: #111827;
 }
-.messageLink {
+.messageText a {
   color: #fcf150;
   font-weight: 750;
   text-decoration: underline;
   text-decoration-color: rgba(252, 241, 80, 0.55);
   text-underline-offset: 2px;
 }
-.mineBubble .messageLink {
+.mineBubble .messageText a {
   color: #111827;
   text-decoration-color: rgba(17, 24, 39, 0.45);
 }

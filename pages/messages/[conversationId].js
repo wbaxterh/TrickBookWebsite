@@ -1,9 +1,10 @@
-import { ArrowLeft, Bot, Check, CheckCheck, Loader2, Send, Sparkles } from 'lucide-react';
+import { ArrowLeft, Bot, Check, CheckCheck, Loader2, Send } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import MessageText from '../../components/MessageText';
 import UserAvatar from '../../components/UserAvatar';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -361,7 +362,10 @@ export default function Conversation() {
                               : 'bg-secondary text-foreground rounded-bl-sm'
                           }`}
                         >
-                          <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+                          <MessageText
+                            content={msg.content}
+                            className="text-sm whitespace-pre-wrap break-words"
+                          />
                         </div>
                         <div
                           className={`flex items-center gap-1 mt-1 ${
