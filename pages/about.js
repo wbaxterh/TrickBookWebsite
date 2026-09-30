@@ -62,11 +62,10 @@ export default function About() {
             directory of tricks and a historical reference. Sort of like a Wikipedia for action
             sports. We’re on a mission to collect data about each trick from each of the major
             disciplines like Skateboarding, Surfing, BMX, Snowboarding, Wakeboarding, Rollerblading,
-            Scootering, Mountain Biking and more. We’ll start creating a “Trick Wiki” on our website
-            which will provide details and history about the trick, links to the trick being done,
-            and some popular tutorial videos for each trick. Once we have established a good data
-            set of tricks on our website, we will release the Trick Wiki into our mobile app as
-            well.
+            Scootering, Mountain Biking and more. That vision is now live as “Trickipedia” — our
+            growing directory that provides details and history about each trick, links to the trick
+            being done, and popular tutorial videos. It’s already on our website and in the mobile
+            app, and we’re adding more tricks all the time.
           </Typography>
           <Typography variant="body1" className="my-4">
             The Trick Book will also set out on its own journey, through myself and my network of
@@ -79,14 +78,14 @@ export default function About() {
           <Typography variant="body1" className="my-4">
             I also want to emphasize that this platform will only start to gain momentum from active
             users. I am only one person, I can’t document every detail about every trick myself.
-            That’s why we’re going for a more “Wikipedia” like approach. The Trick Wiki will be a
-            community maintained ecosystem. Active users are the ones who are going to fuel the
-            momentum of the Trick Book in the long run.
+            That’s why we’re going for a more “Wikipedia” like approach. Trickipedia is a community
+            maintained ecosystem. Active users are the ones who are going to fuel the momentum of
+            the Trick Book in the long run.
           </Typography>
           <Typography variant="body1" className="my-4">
             Thank you for taking the time to check out The Trick Book, my name is Wes Huber. If you
             have any questions, suggestions, or if you want to get in touch please reach out to
-            info@thetrickbook.com or fill out our Contact Form. We’ll get back to you!
+            admin@thetrickbook.com or fill out our Contact Form. We’ll get back to you!
           </Typography>
           <Typography variant="body1" className="my-4">
             Peace ✌️

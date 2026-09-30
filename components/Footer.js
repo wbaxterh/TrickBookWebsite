@@ -131,7 +131,7 @@ function Footer() {
             <h3 className="font-semibold text-foreground mb-4">{t('footer.connect', 'Connect')}</h3>
             <div className="flex gap-4">
               <Link
-                href="https://instagram.com"
+                href="https://instagram.com/trickbook.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-yellow-500 transition-colors"
