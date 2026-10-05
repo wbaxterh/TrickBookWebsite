@@ -9,6 +9,7 @@ import ShopPressFeatures from '../../components/shops/ShopPressFeatures';
 import ShopReviewSummary from '../../components/shops/ShopReviewSummary';
 import ShopSocialLinks from '../../components/shops/ShopSocialLinks';
 import ShopTeamRiders from '../../components/shops/ShopTeamRiders';
+import ShopTrickBookRating from '../../components/shops/ShopTrickBookRating';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -181,12 +182,15 @@ export default function ShopDetailPage({ shop }) {
             </Card>
           </div>
 
-          {(shop.reviewSummary ||
-            shop.teamRiders?.length > 0 ||
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <ShopTrickBookRating shop={shop} />
+            <ShopReviewSummary reviewSummary={shop.reviewSummary} />
+          </div>
+
+          {(shop.teamRiders?.length > 0 ||
             shop.faqs?.length > 0 ||
             shop.pressFeatures?.length > 0) && (
             <div className="mt-6 grid gap-6 lg:grid-cols-2">
-              <ShopReviewSummary reviewSummary={shop.reviewSummary} />
               <ShopTeamRiders teamRiders={shop.teamRiders} />
               <ShopFAQs faqs={shop.faqs} />
               <ShopPressFeatures pressFeatures={shop.pressFeatures} />
