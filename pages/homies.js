@@ -10,7 +10,6 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { Input } from '../components/ui/input';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,7 +20,9 @@ import UserAvatar from '../components/UserAvatar';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { trackHomieConnected } from '../lib/analytics';
 import {
   acceptHomieRequest,
   getDiscoverableUsers,
@@ -189,6 +190,7 @@ export default function Homies() {
     setActionLoading(userId);
     try {
       await acceptHomieRequest(userId, token);
+      trackHomieConnected({ userId });
       // Refresh both homies and requests
       fetchHomies();
       fetchRequests();
@@ -607,9 +609,7 @@ export default function Homies() {
                     </Badge>
                   )}
                 </CardTitle>
-                <CardDescription>
-                  Search for riders by name
-                </CardDescription>
+                <CardDescription>Search for riders by name</CardDescription>
                 {/* Search Bar */}
                 <div className="relative mt-3">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -704,9 +704,7 @@ export default function Homies() {
                           disabled={loadingMore}
                           className="w-full"
                         >
-                          {loadingMore ? (
-                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                          ) : null}
+                          {loadingMore ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                           {loadingMore ? 'Loading...' : 'Load More'}
                         </Button>
                       </div>

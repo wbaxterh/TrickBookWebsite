@@ -44,6 +44,7 @@ import {
   fetchScrollDepth,
   fetchSections,
   fetchTraffic,
+  fetchWpr,
 } from '../../lib/apiAnalytics';
 
 class ChartErrorBoundary extends Component {
@@ -109,6 +110,74 @@ function ChartCard({ title, children, className = '' }) {
   );
 }
 
+function excludedNote(excluded) {
+  if (!excluded) return null;
+  const parts = [
+    [excluded.admins, 'admin'],
+    [excluded.bots, 'bot'],
+    [excluded.flagged, 'flagged account'],
+  ]
+    .filter(([count]) => count > 0)
+    .map(([count, noun]) => `${count} ${noun}${count === 1 ? '' : 's'}`);
+  return parts.length ? `excludes ${parts.join(', ')}` : 'no accounts excluded';
+}
+
+function shortDate(iso) {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? '' : `${d.getMonth() + 1}/${d.getDate()}`;
+}
+
+// Weekly Progressing Riders: the north-star metric from the retention spec.
+// Distinct riders with at least one meaningful action in a rolling seven-day window.
+function WprCard({ wpr }) {
+  if (!wpr?.current) {
+    return (
+      <ChartCard title="Weekly Progressing Riders">
+        <p className="text-muted-foreground text-center py-8">not available yet</p>
+      </ChartCard>
+    );
+  }
+  const series = wpr.series || [];
+  const peak = Math.max(1, ...series.map((week) => week.progressingRiders || 0));
+  return (
+    <ChartCard title="Weekly Progressing Riders">
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <StatCard
+          label="This week"
+          value={wpr.current.progressingRiders}
+          icon={Activity}
+          sub={excludedNote(wpr.excluded)}
+        />
+        <StatCard
+          label="Depth"
+          value={Number(wpr.current.depth || 0).toFixed(1)}
+          icon={Users}
+          sub={`${wpr.current.actions || 0} meaningful actions per rider`}
+        />
+      </div>
+      <div
+        className="flex items-end gap-1 h-24"
+        role="img"
+        aria-label="Weekly progressing riders, last weeks"
+      >
+        {series.map((week) => (
+          <div key={week.weekStart} className="flex-1 flex flex-col items-center gap-1 min-w-0">
+            <span className="text-[10px] text-muted-foreground">{week.progressingRiders}</span>
+            <div
+              className="w-full bg-yellow-500/80 rounded-t"
+              style={{ height: `${Math.max(4, (week.progressingRiders / peak) * 64)}px` }}
+              title={`${shortDate(week.weekStart)} to ${shortDate(week.weekEnd)}: ${week.progressingRiders} riders, ${week.actions} actions`}
+            />
+            <span className="text-[10px] text-muted-foreground truncate">
+              {shortDate(week.weekStart)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </ChartCard>
+  );
+}
+
 function timeAgo(dateStr) {
   if (!dateStr) return '—';
   const s = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
@@ -171,6 +240,7 @@ export default function AnalyticsDashboard() {
       fetchFeatureValue(token, days).catch(() => null),
       fetchLtv(token).catch(() => null),
       fetchClientVersions(token, days).catch(() => null),
+      fetchWpr(token, 8).catch(() => null),
     ])
       .then(
         ([
@@ -189,6 +259,7 @@ export default function AnalyticsDashboard() {
           featureValue,
           ltv,
           clientVersions,
+          wpr,
         ]) => {
           setData({
             overview: overview || {},
@@ -206,6 +277,7 @@ export default function AnalyticsDashboard() {
             featureValue: featureValue || null,
             ltv: ltv || null,
             clientVersions: clientVersions || null,
+            wpr: wpr || null,
           });
           setLoading(false);
         },
@@ -319,6 +391,8 @@ export default function AnalyticsDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
+              <WprCard wpr={data.wpr} />
+
               <ChartCard title="Activation & Retention">
                 <div className="grid grid-cols-2 gap-3 mb-4">
                   <StatCard
@@ -331,16 +405,25 @@ export default function AnalyticsDashboard() {
                   />
                   {(data.retention?.retention || []).map((row) => (
                     <StatCard
-                      key={row.day}
-                      label={`D${row.day} Retention`}
+                      key={row.label || row.day}
+                      label={`${row.label || `D${row.day}`} Retention`}
                       value={
                         row.eligible ? `${Math.round((row.retained / row.eligible) * 100)}%` : '—'
                       }
                       icon={Users}
-                      sub={`${row.retained}/${row.eligible} eligible`}
+                      sub={
+                        row.fromDay
+                          ? `${row.retained}/${row.eligible} eligible, days ${row.fromDay} to ${row.toDay}`
+                          : `${row.retained}/${row.eligible} eligible`
+                      }
                     />
                   ))}
                 </div>
+                {data.retention?.excluded && (
+                  <p className="text-xs text-muted-foreground">
+                    {excludedNote(data.retention.excluded)}
+                  </p>
+                )}
               </ChartCard>
 
               <ChartCard title="Most-Valued Actions">

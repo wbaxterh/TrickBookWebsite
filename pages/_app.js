@@ -4,6 +4,7 @@ import '../styles/tokens/blog.css';
 import 'material-icons/iconfont/material-icons.css';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import * as Sentry from '@sentry/react';
 import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
@@ -16,6 +17,19 @@ import { ThemeProvider } from '../components/theme-provider';
 import { ToastProvider } from '../components/ui/toast';
 import muiTheme from '../config/theme';
 import nextI18NextConfig from '../next-i18next.config';
+
+// Client-side error reporting. A no-op until NEXT_PUBLIC_SENTRY_DSN is set in the
+// Amplify environment; init alone captures uncaught errors and unhandled rejections.
+if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT || 'production',
+    release: process.env.NEXT_PUBLIC_APP_VERSION || undefined,
+    tracesSampleRate: 0,
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 0,
+  });
+}
 
 // Locales that render right-to-left (kept in sync with pages/_document.js).
 const RTL_LOCALES = ['ar'];

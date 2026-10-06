@@ -34,6 +34,8 @@ import {
   DialogTitle,
 } from '../../../components/ui/dialog';
 import { Input } from '../../../components/ui/input';
+import { trackTrickLanded } from '../../../lib/analytics';
+import { searchSpots } from '../../../lib/apiSpots';
 import {
   addTrickToList,
   deleteTrick,
@@ -46,7 +48,6 @@ import {
   updateTrickList,
   updateTrickStatus,
 } from '../../../lib/apiTrickLists';
-import { searchSpots } from '../../../lib/apiSpots';
 
 export default function TrickListDetail() {
   const router = useRouter();
@@ -175,6 +176,8 @@ export default function TrickListDetail() {
     const newStatus = isCurrentlyCompleted ? 'To Do' : 'Completed';
     try {
       await updateTrickStatus(trick._id, newStatus, token);
+      // Only the To Do -> Completed transition is a landing for retention.
+      if (newStatus === 'Completed') trackTrickLanded({ trickId: trick._id, listId });
       // Update local state optimistically
       setTricks((prev) =>
         prev.map((t) => (t._id === trick._id ? { ...t, checked: newStatus } : t)),
@@ -245,7 +248,10 @@ export default function TrickListDetail() {
   // Spot search handler
   const handleSpotSearch = async (query) => {
     setSpotSearchQuery(query);
-    if (query.length < 2) { setSpotSearchResults([]); return; }
+    if (query.length < 2) {
+      setSpotSearchResults([]);
+      return;
+    }
     setSpotSearching(true);
     try {
       const data = await searchSpots(query, '', '', '', 1, 10);
@@ -263,11 +269,17 @@ export default function TrickListDetail() {
     setLinkingSpot(true);
     try {
       await linkSpotToTrick(spotTrickTarget._id, spot._id, token);
-      setTricks(prev => prev.map(t =>
-        t._id === spotTrickTarget._id
-          ? { ...t, spotId: spot._id, spot: { name: spot.name, city: spot.city, state: spot.state } }
-          : t
-      ));
+      setTricks((prev) =>
+        prev.map((t) =>
+          t._id === spotTrickTarget._id
+            ? {
+                ...t,
+                spotId: spot._id,
+                spot: { name: spot.name, city: spot.city, state: spot.state },
+              }
+            : t,
+        ),
+      );
       setSpotDialogOpen(false);
       setSpotTrickTarget(null);
       setSpotSearchQuery('');
@@ -283,9 +295,9 @@ export default function TrickListDetail() {
   const handleUnlinkSpot = async (trick) => {
     try {
       await linkSpotToTrick(trick._id, null, token);
-      setTricks(prev => prev.map(t =>
-        t._id === trick._id ? { ...t, spotId: null, spot: null } : t
-      ));
+      setTricks((prev) =>
+        prev.map((t) => (t._id === trick._id ? { ...t, spotId: null, spot: null } : t)),
+      );
     } catch (_e) {}
   };
 
@@ -295,9 +307,9 @@ export default function TrickListDetail() {
     setLinkingVideo(true);
     try {
       await linkVideoToTrick(videoTrickTarget._id, videoUrl.trim(), null, token);
-      setTricks(prev => prev.map(t =>
-        t._id === videoTrickTarget._id ? { ...t, videoUrl: videoUrl.trim() } : t
-      ));
+      setTricks((prev) =>
+        prev.map((t) => (t._id === videoTrickTarget._id ? { ...t, videoUrl: videoUrl.trim() } : t)),
+      );
       setVideoDialogOpen(false);
       setVideoTrickTarget(null);
       setVideoUrl('');
@@ -559,16 +571,24 @@ export default function TrickListDetail() {
                             {trick.spot ? (
                               <span
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full text-xs cursor-pointer hover:bg-green-500/30"
-                                onClick={(e) => { e.stopPropagation(); handleUnlinkSpot(trick); }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleUnlinkSpot(trick);
+                                }}
                                 title="Click to unlink spot"
                               >
                                 <MapPin className="h-3 w-3" />
-                                {trick.spot.name}{trick.spot.city ? `, ${trick.spot.state || ''}` : ''}
+                                {trick.spot.name}
+                                {trick.spot.city ? `, ${trick.spot.state || ''}` : ''}
                                 <X className="h-3 w-3 ml-0.5" />
                               </span>
                             ) : (
                               <button
-                                onClick={(e) => { e.stopPropagation(); setSpotTrickTarget(trick); setSpotDialogOpen(true); }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSpotTrickTarget(trick);
+                                  setSpotDialogOpen(true);
+                                }}
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-secondary text-muted-foreground rounded-full text-xs hover:bg-secondary/80 hover:text-yellow-500 transition-colors"
                               >
                                 <MapPin className="h-3 w-3" />
@@ -598,7 +618,11 @@ export default function TrickListDetail() {
                               </Link>
                             ) : (
                               <button
-                                onClick={(e) => { e.stopPropagation(); setVideoTrickTarget(trick); setVideoDialogOpen(true); }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setVideoTrickTarget(trick);
+                                  setVideoDialogOpen(true);
+                                }}
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-secondary text-muted-foreground rounded-full text-xs hover:bg-secondary/80 hover:text-yellow-500 transition-colors"
                               >
                                 <Video className="h-3 w-3" />
@@ -799,7 +823,17 @@ export default function TrickListDetail() {
       </Dialog>
 
       {/* Spot Search Dialog */}
-      <Dialog open={spotDialogOpen} onOpenChange={(open) => { setSpotDialogOpen(open); if (!open) { setSpotSearchQuery(''); setSpotSearchResults([]); setSpotTrickTarget(null); } }}>
+      <Dialog
+        open={spotDialogOpen}
+        onOpenChange={(open) => {
+          setSpotDialogOpen(open);
+          if (!open) {
+            setSpotSearchQuery('');
+            setSpotSearchResults([]);
+            setSpotTrickTarget(null);
+          }
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Link a Spot to &quot;{spotTrickTarget?.name}&quot;</DialogTitle>
@@ -834,7 +868,8 @@ export default function TrickListDetail() {
                     <div>
                       <p className="text-sm font-medium">{spot.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {spot.city}{spot.state ? `, ${spot.state}` : ''}
+                        {spot.city}
+                        {spot.state ? `, ${spot.state}` : ''}
                       </p>
                     </div>
                   </button>
@@ -849,7 +884,16 @@ export default function TrickListDetail() {
       </Dialog>
 
       {/* Video Link Dialog */}
-      <Dialog open={videoDialogOpen} onOpenChange={(open) => { setVideoDialogOpen(open); if (!open) { setVideoUrl(''); setVideoTrickTarget(null); } }}>
+      <Dialog
+        open={videoDialogOpen}
+        onOpenChange={(open) => {
+          setVideoDialogOpen(open);
+          if (!open) {
+            setVideoUrl('');
+            setVideoTrickTarget(null);
+          }
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Link a Video to &quot;{videoTrickTarget?.name}&quot;</DialogTitle>
