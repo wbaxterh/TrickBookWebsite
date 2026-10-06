@@ -47,6 +47,8 @@ import {
   getSubscription,
   getUsage,
   reactivateSubscription,
+  reconcileSubscription,
+  verifyCheckoutSession,
 } from '../lib/apiPayments';
 
 // Sport categories
@@ -106,6 +108,8 @@ export default function SettingsPage() {
 
   // Subscription state
   const [subscription, setSubscription] = useState({ plan: 'free', status: 'active' });
+  // null until verify-session answers after a Stripe redirect, then true or false.
+  const [checkoutVerified, setCheckoutVerified] = useState(null);
   const [usage, setUsage] = useState(null);
   const [subscriptionLoading, setSubscriptionLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
@@ -156,13 +160,39 @@ export default function SettingsPage() {
     }
   }, [router.query.tab]);
 
+  // Back from Stripe: confirm the session server-side instead of trusting ?success=true.
+  useEffect(() => {
+    const sessionId = router.query.session_id;
+    if (!token || typeof sessionId !== 'string') return undefined;
+    let cancelled = false;
+    verifyCheckoutSession(token, sessionId)
+      .then((data) => {
+        if (cancelled) return;
+        if (data?.subscription) setSubscription(data.subscription);
+        setCheckoutVerified(Boolean(data?.verified));
+      })
+      .catch(() => {
+        if (!cancelled) setCheckoutVerified(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [token, router.query.session_id]);
+
   const fetchSubscriptionData = async () => {
     try {
       const [subData, usageData] = await Promise.all([
         getSubscription(token),
         getUsage(token).catch(() => null),
       ]);
-      setSubscription(subData.subscription || { plan: 'free', status: 'active' });
+      let current = subData.subscription || { plan: 'free', status: 'active' };
+      // A Stripe customer id without premium means a checkout started but never
+      // landed on the account; let the server re-read Stripe before showing "free".
+      if (current.plan !== 'premium' && current.stripeCustomerId) {
+        const repaired = await reconcileSubscription(token).catch(() => null);
+        if (repaired?.subscription) current = repaired.subscription;
+      }
+      setSubscription(current);
       setUsage(usageData);
     } catch (_error) {}
   };
@@ -962,8 +992,8 @@ export default function SettingsPage() {
                 </CardContent>
               </Card>
 
-              {/* Payment Success Message */}
-              {router.query.success === 'true' && (
+              {/* Payment result: only claim success once the plan really is premium */}
+              {router.query.success === 'true' && subscription.plan === 'premium' && (
                 <Card className="border-green-500/50 bg-green-500/5">
                   <CardContent className="py-4">
                     <div className="flex items-center gap-3">
@@ -975,6 +1005,22 @@ export default function SettingsPage() {
                         </p>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
+              )}
+              {router.query.success === 'true' && subscription.plan !== 'premium' && (
+                <Card className="border-yellow-500/50 bg-yellow-500/5">
+                  <CardContent className="py-4">
+                    <p className="font-medium">
+                      {checkoutVerified === false
+                        ? 'We could not confirm your payment yet'
+                        : 'Confirming your payment with Stripe'}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {checkoutVerified === false
+                        ? 'If your card was charged, your access will appear here once Stripe finishes processing. Refresh in a minute, or reach us through the contact page.'
+                        : 'This usually takes a moment.'}
+                    </p>
                   </CardContent>
                 </Card>
               )}
