@@ -2,6 +2,7 @@ import { ChevronDown, ChevronUp, Heart, Loader2, Send, Trash2 } from 'lucide-rea
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../auth/AuthContext';
+import { trackCommentCreated } from '../../lib/analytics';
 import {
   addComment,
   deleteComment,
@@ -105,6 +106,7 @@ export default function CommentSection({ postId, initialCommentCount = 0, onComm
     setSubmitting(true);
     try {
       const comment = await addComment(postId, newComment.trim(), null, token);
+      trackCommentCreated({ postId, isReply: false });
       setNewComment('');
       // Socket will add it via real-time event, but add optimistically
       setComments((prev) => {
@@ -126,6 +128,7 @@ export default function CommentSection({ postId, initialCommentCount = 0, onComm
     setSubmitting(true);
     try {
       const reply = await addComment(postId, replyContent.trim(), parentComment._id, token);
+      trackCommentCreated({ postId, isReply: true });
       setReplyContent('');
       setReplyingTo(null);
 

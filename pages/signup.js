@@ -16,11 +16,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
+import { trackSignupCompleted, trackSignupStarted } from '../lib/analytics';
 
 // Sport categories with icons
 const SPORT_CATEGORIES = [
@@ -154,12 +155,20 @@ export default function Signup() {
     );
   };
 
+  // One funnel entry per page view; SSO completions are recorded by the backend
+  // when it creates the account, so only the email path reports completion here.
+  useEffect(() => {
+    trackSignupStarted('web');
+  }, []);
+
   // Land new users on an activation moment (the spots map), not an empty profile.
   const handleGoogleSignIn = async () => {
+    trackSignupStarted('google');
     signIn('google', { callbackUrl: '/spots' });
   };
 
   const handleAppleSignIn = async () => {
+    trackSignupStarted('apple');
     signIn('apple', { callbackUrl: '/spots' });
   };
 
@@ -174,6 +183,7 @@ export default function Signup() {
         email,
         password,
       });
+      trackSignupCompleted('email');
 
       const loginResult = await signIn('credentials', { redirect: false, email, password });
       if (loginResult?.error) {

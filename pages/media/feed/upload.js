@@ -7,9 +7,7 @@ import {
   ImageIcon,
   Loader2,
   Lock,
-  MapPin,
   Plus,
-  Search,
   Upload,
   Users,
   Video,
@@ -22,16 +20,16 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
 import { Button } from '../../../components/ui/button';
+import { trackPostCreated } from '../../../lib/analytics';
 import { createPost } from '../../../lib/apiFeed';
 import { SPORT_TYPES } from '../../../lib/apiMedia';
+import { searchSpots } from '../../../lib/apiSpots';
 import {
   createVideoEntry,
   uploadImageToS3,
   uploadVideoTUS,
   waitForVideoProcessing,
 } from '../../../lib/apiUpload';
-import { searchSpots } from '../../../lib/apiSpots';
-import { Input } from '../../../components/ui/input';
 
 export default function UploadPost() {
   const router = useRouter();
@@ -133,7 +131,10 @@ export default function UploadPost() {
 
   const handleSpotSearch = async (query) => {
     setSpotSearchQuery(query);
-    if (query.length < 2) { setSpotSearchResults([]); return; }
+    if (query.length < 2) {
+      setSpotSearchResults([]);
+      return;
+    }
     setSpotSearching(true);
     try {
       const data = await searchSpots(query, '', '', '', 1, 8);
@@ -223,7 +224,7 @@ export default function UploadPost() {
     setUploadStep('creating');
     setProcessingStatus('Creating post...');
 
-    const _post = await createPost(
+    const post = await createPost(
       {
         mediaType: 'video',
         bunnyVideoId: videoEntry.videoId,
@@ -239,6 +240,12 @@ export default function UploadPost() {
       },
       token,
     );
+    trackPostCreated({
+      postId: post?._id,
+      mediaType: 'video',
+      hasSpot: Boolean(selectedSpot?._id),
+      trickCount: Array.isArray(tricks) ? tricks.length : 0,
+    });
 
     setUploadStep('done');
     setProcessingStatus('Post created!');
@@ -263,7 +270,7 @@ export default function UploadPost() {
     setUploadStep('creating');
     setProcessingStatus('Creating post...');
 
-    const _post = await createPost(
+    const post = await createPost(
       {
         mediaType: 'image',
         imageUrls: [uploadResult.fileUrl],
@@ -276,6 +283,12 @@ export default function UploadPost() {
       },
       token,
     );
+    trackPostCreated({
+      postId: post?._id,
+      mediaType: 'image',
+      hasSpot: Boolean(selectedSpot?._id),
+      trickCount: Array.isArray(tricks) ? tricks.length : 0,
+    });
 
     setUploadStep('done');
     setProcessingStatus('Post created!');
