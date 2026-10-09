@@ -240,7 +240,10 @@ a:hover {
 [style*="background-color: #fcf150"],
 [style*="backgroundColor: #fcf150"],
 [style*="background-color: rgb(252, 241, 80)"],
+.bg-yellow-300,
+.bg-yellow-400,
 .bg-yellow-500,
+.bg-yellow-600,
 .app-primary-bg,
 .custom-primary {
   color: #1a1a1a;
@@ -248,9 +251,33 @@ a:hover {
 
 [style*="background-color: #fcf150"] *,
 [style*="backgroundColor: #fcf150"] *,
+.bg-yellow-300 *,
+.bg-yellow-400 *,
 .bg-yellow-500 *,
+.bg-yellow-600 *,
 .app-primary-bg *,
 .custom-primary * {
+  color: #1a1a1a;
+}
+
+/* Dark-mode link styles are more specific than Tailwind text utilities. Keep
+   solid yellow controls and their icons dark in every theme and hover state. */
+.dark .bg-yellow-300,
+.dark .bg-yellow-400,
+.dark .bg-yellow-500,
+.dark .bg-yellow-600,
+.dark .bg-yellow-300 *,
+.dark .bg-yellow-400 *,
+.dark .bg-yellow-500 *,
+.dark .bg-yellow-600 *,
+.dark [class~="hover:bg-yellow-300"]:hover,
+.dark [class~="hover:bg-yellow-400"]:hover,
+.dark [class~="hover:bg-yellow-500"]:hover,
+.dark [class~="hover:bg-yellow-600"]:hover,
+.dark [class~="hover:bg-yellow-300"]:hover *,
+.dark [class~="hover:bg-yellow-400"]:hover *,
+.dark [class~="hover:bg-yellow-500"]:hover *,
+.dark [class~="hover:bg-yellow-600"]:hover * {
   color: #1a1a1a;
 }
 
