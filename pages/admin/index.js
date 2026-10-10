@@ -273,9 +273,14 @@ function Admin() {
       </Head>
       <AdminLayout>
         <div>
-          <Button variant="contained" color="primary" sx={{ mb: 2 }} href="/admin/categories">
-            Manage Categories
-          </Button>
+          <Box display="flex" gap={1.5} flexWrap="wrap" sx={{ mb: 2 }}>
+            <Button variant="contained" color="primary" href="/admin/analytics">
+              View Analytics Dashboard
+            </Button>
+            <Button variant="outlined" color="primary" href="/admin/categories">
+              Manage Categories
+            </Button>
+          </Box>
 
           <Typography variant="h2" gutterBottom>
             Admin Dashboard
