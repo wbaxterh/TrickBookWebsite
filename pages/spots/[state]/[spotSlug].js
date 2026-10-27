@@ -5,6 +5,7 @@ import {
   ExternalLink,
   FileText,
   Globe,
+  Instagram,
   Loader2,
   MapPin,
   Play,
@@ -418,10 +419,15 @@ export default function SpotDetail() {
             <div className="mt-8">
               <Card>
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
-                    <Play className="h-5 w-5 text-yellow-500" />
-                    Videos
-                  </h2>
+                  <div className="mb-4">
+                    <h2 className="text-xl font-bold flex items-center gap-2">
+                      <Play className="h-5 w-5 text-yellow-500" />
+                      Clips from this spot
+                    </h2>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Watch verified sessions and see how riders use the terrain.
+                    </p>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {spot.videos.map((video, index) => {
                       // Extract YouTube video ID for embed
@@ -429,6 +435,7 @@ export default function SpotDetail() {
                         /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
                       );
                       const ytId = ytMatch ? ytMatch[1] : null;
+                      const isInstagram = /instagram\.com/i.test(video.url || '');
 
                       return (
                         <div key={index} className="rounded-lg overflow-hidden bg-secondary/50">
@@ -448,24 +455,35 @@ export default function SpotDetail() {
                               href={video.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center justify-center h-40 bg-secondary hover:bg-secondary/80 transition-colors"
+                              className="group flex flex-col items-center justify-center gap-3 h-40 bg-secondary hover:bg-secondary/80 transition-colors"
+                              aria-label={`Watch ${video.title || 'spot clip'} on ${isInstagram ? 'Instagram' : 'the source site'}`}
                             >
-                              <Play className="h-12 w-12 text-yellow-500" />
+                              {isInstagram ? (
+                                <Instagram className="h-12 w-12 text-yellow-500 group-hover:scale-105 transition-transform" />
+                              ) : (
+                                <Play className="h-12 w-12 text-yellow-500 group-hover:scale-105 transition-transform" />
+                              )}
+                              <span className="text-sm font-semibold flex items-center gap-1">
+                                Watch {isInstagram ? 'on Instagram' : 'clip'}
+                                <ExternalLink className="h-3.5 w-3.5" />
+                              </span>
                             </a>
                           )}
                           <div className="p-3">
                             <p className="text-sm font-medium text-foreground line-clamp-2">
                               {video.title || 'Watch Video'}
                             </p>
-                            {video.channel && (
-                              <p className="text-xs text-muted-foreground mt-1">{video.channel}</p>
+                            {(video.handle || video.channel) && (
+                              <p className="text-xs text-muted-foreground mt-1">
+                                {video.handle || video.channel}
+                              </p>
                             )}
-                            {video.type && (
+                            {(video.platform || video.type) && (
                               <Badge
                                 variant="outline"
                                 className="mt-2 text-xs border-yellow-500/30 text-yellow-500"
                               >
-                                {video.type}
+                                {video.platform || video.type}
                               </Badge>
                             )}
                           </div>
