@@ -14,6 +14,7 @@ import {
   Video,
 } from 'lucide-react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
@@ -455,15 +456,27 @@ export default function SpotDetail() {
                               href={video.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group flex flex-col items-center justify-center gap-3 h-40 bg-secondary hover:bg-secondary/80 transition-colors"
+                              className="group relative flex flex-col items-center justify-center gap-3 h-40 overflow-hidden bg-secondary hover:bg-secondary/80 transition-colors"
                               aria-label={`Watch ${video.title || 'spot clip'} on ${isInstagram ? 'Instagram' : 'the source site'}`}
                             >
-                              {isInstagram ? (
-                                <Instagram className="h-12 w-12 text-yellow-500 group-hover:scale-105 transition-transform" />
-                              ) : (
-                                <Play className="h-12 w-12 text-yellow-500 group-hover:scale-105 transition-transform" />
+                              {video.thumbnail && (
+                                <>
+                                  <Image
+                                    src={video.thumbnail}
+                                    alt=""
+                                    fill
+                                    unoptimized
+                                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                  />
+                                  <span className="absolute inset-0 bg-black/45 transition-colors group-hover:bg-black/35" />
+                                </>
                               )}
-                              <span className="text-sm font-semibold flex items-center gap-1">
+                              {isInstagram ? (
+                                <Instagram className="relative z-10 h-12 w-12 text-yellow-500 drop-shadow group-hover:scale-105 transition-transform" />
+                              ) : (
+                                <Play className="relative z-10 h-12 w-12 text-yellow-500 drop-shadow group-hover:scale-105 transition-transform" />
+                              )}
+                              <span className="relative z-10 text-sm font-semibold text-white drop-shadow flex items-center gap-1">
                                 Watch {isInstagram ? 'on Instagram' : 'clip'}
                                 <ExternalLink className="h-3.5 w-3.5" />
                               </span>
