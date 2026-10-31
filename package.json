@@ -84,11 +84,11 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "biome check --write",
-      "biome format --write"
+      "biome check --write --no-errors-on-unmatched",
+      "biome format --write --no-errors-on-unmatched"
     ],
     "*.{json,css,md}": [
-      "biome format --write"
+      "biome format --write --no-errors-on-unmatched"
     ]
   }
 }
