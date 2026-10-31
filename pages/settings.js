@@ -97,7 +97,7 @@ const RIDER_STYLES = [
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { token, logOut, name, email, imageUri, setImageUri, setName, role } =
+  const { token, loggedIn, logOut, name, email, imageUri, setImageUri, setName, role } =
     useContext(AuthContext);
   const { theme, setTheme } = useTheme();
   const { addToast } = useToast();
@@ -245,8 +245,11 @@ export default function SettingsPage() {
   };
 
   useEffect(() => {
+    // loggedIn is null while auth is still loading — don't bounce yet, or a
+    // full page load (e.g. returning from Stripe Checkout) loses ?session_id.
+    if (loggedIn === null) return;
     if (!token) {
-      router.push('/login');
+      router.push(`/login?callbackUrl=${encodeURIComponent(router.asPath)}`);
       return;
     }
 
@@ -256,7 +259,7 @@ export default function SettingsPage() {
       fetchUserData(decoded.userId);
       fetchSubscriptionData();
     }
-  }, [token, fetchSubscriptionData, fetchUserData, router.push]);
+  }, [token, loggedIn, fetchSubscriptionData, fetchUserData, router.push, router.asPath]);
 
   const handleSave = async () => {
     setSaving(true);

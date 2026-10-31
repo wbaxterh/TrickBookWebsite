@@ -34,6 +34,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import ProBadge from './ui/ProBadge';
 import VerifiedBadge from './ui/VerifiedBadge';
 
 const unreadBadgeStyle = {
@@ -47,16 +48,6 @@ const unreadBadgeStyle = {
 };
 
 const menuItemStyle = { display: 'flex', alignItems: 'center', gap: 10 };
-const plusPillStyle = {
-  backgroundColor: '#fde047',
-  color: '#080908',
-  borderRadius: 999,
-  padding: '1px 7px',
-  fontSize: 10,
-  fontWeight: 900,
-  letterSpacing: '0.08em',
-  lineHeight: '16px',
-};
 
 const Header = () => {
   const { t } = useTranslation('common');
@@ -246,7 +237,7 @@ const Header = () => {
                         >
                           {email}
                         </span>
-                        {isPlus && <span style={plusPillStyle}>PLUS</span>}
+                        {isPlus && <ProBadge size="sm" />}
                         {unreadCount > 0 && (
                           <span
                             style={{
