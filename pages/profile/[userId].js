@@ -32,6 +32,7 @@ import { AuthContext } from '../../auth/AuthContext';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
+import ProBadge from '../../components/ui/ProBadge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import VerifiedBadge from '../../components/ui/VerifiedBadge';
 
@@ -223,8 +224,8 @@ export default function PublicProfile() {
       <div className="relative inline-block">
         {avatarContent}
         {isPremium && (
-          <div className="absolute bottom-1 right-1">
-            <VerifiedBadge size="xl" />
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+            <ProBadge size="xl" />
           </div>
         )}
       </div>
@@ -280,7 +281,10 @@ export default function PublicProfile() {
 
               <div className="flex-1 text-center sm:text-left">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                  <h1 className="text-3xl font-bold">{profile.name}</h1>
+                  <h1 className="flex items-center justify-center gap-2 text-3xl font-bold sm:justify-start">
+                    {profile.name}
+                    {isPremium && <VerifiedBadge size="lg" />}
+                  </h1>
                   {rp.nickname && (
                     <span className="text-muted-foreground text-lg">"{rp.nickname}"</span>
                   )}
