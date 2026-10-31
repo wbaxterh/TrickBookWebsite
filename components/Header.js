@@ -233,7 +233,11 @@ const Header = () => {
                       >
                         <PersonIcon style={{ fontSize: 20 }} />
                         <span
-                          style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}
+                          style={{
+                            maxWidth: isPlus ? 106 : 150,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                          }}
                         >
                           {email}
                         </span>
