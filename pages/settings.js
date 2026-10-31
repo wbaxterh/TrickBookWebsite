@@ -50,6 +50,7 @@ import {
   reconcileSubscription,
   verifyCheckoutSession,
 } from '../lib/apiPayments';
+import { clearPlusCache } from '../lib/usePlus';
 
 // Sport categories
 const SPORT_CATEGORIES = [
@@ -170,6 +171,11 @@ export default function SettingsPage() {
         if (cancelled) return;
         if (data?.subscription) setSubscription(data.subscription);
         setCheckoutVerified(Boolean(data?.verified));
+        // Paid and active: send the buyer straight to their unlocked perks.
+        if (data?.verified && data?.subscription?.plan === 'premium') {
+          clearPlusCache(userId);
+          router.replace('/plus?welcome=1');
+        }
       })
       .catch(() => {
         if (!cancelled) setCheckoutVerified(false);
@@ -177,7 +183,7 @@ export default function SettingsPage() {
     return () => {
       cancelled = true;
     };
-  }, [token, router.query.session_id]);
+  }, [token, router.query.session_id, userId]);
 
   const fetchSubscriptionData = async () => {
     try {
@@ -818,6 +824,13 @@ export default function SettingsPage() {
                           </li>
                         </ul>
                       </div>
+
+                      <Button
+                        asChild
+                        className="bg-yellow-300 font-bold text-[#080908] hover:bg-yellow-200"
+                      >
+                        <Link href="/plus">See your Plus perks</Link>
+                      </Button>
 
                       {/* Manage Subscription */}
                       <div className="pt-4 border-t border-border">
