@@ -139,21 +139,35 @@ export default function Home() {
       <main className="bg-[#080908] text-white">
         <section
           ref={heroRef}
-          className="relative overflow-hidden border-b border-white/5 pt-24 md:pt-32"
+          className="relative isolate flex min-h-[85vh] items-center overflow-hidden border-b border-white/5 pt-24 md:min-h-[92vh] md:pt-28"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(250,204,21,0.13),transparent_32%),radial-gradient(circle_at_82%_25%,rgba(34,197,94,0.08),transparent_28%)]" />
-          <div className="relative container mx-auto px-4 pb-16 md:pb-24">
-            <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          {/* Real action photo — full-bleed background */}
+          <Image
+            src="/hero-ride.jpg"
+            alt="Rider boosting a backside 450 over the corrugated gap at the cable park"
+            fill
+            priority
+            sizes="100vw"
+            className="-z-20 object-cover object-[62%_28%]"
+          />
+          {/* Dark brand overlays — hold the near-black feel and keep text legible */}
+          <div className="absolute inset-0 -z-10 bg-[#080908]/55 lg:bg-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#080908] via-[#080908]/80 to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#080908] via-[#080908]/15 to-[#080908]/45" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_18%,rgba(250,204,21,0.12),transparent_42%)]" />
+
+          <div className="relative container mx-auto w-full min-w-0 px-4 pb-16 md:pb-24">
+            <div className="grid min-w-0 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
               <div className="text-center lg:text-left">
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-300/20 bg-yellow-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-yellow-200">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-300/20 bg-yellow-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-yellow-200 backdrop-blur">
                   <Sparkles className="h-4 w-4" />
                   {t('intent.eyebrow')}
                 </div>
-                <h1 className="mb-6 text-[clamp(3.2rem,7vw,6.6rem)] font-black leading-[0.88] tracking-[-0.065em]">
+                <h1 className="mb-6 text-[clamp(3.2rem,7vw,6.6rem)] font-black leading-[0.88] tracking-[-0.065em] drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)]">
                   {t('intent.headline.line1')}
                   <span className="block text-yellow-300">{t('intent.headline.line2')}</span>
                 </h1>
-                <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl lg:mx-0">
+                <p className="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-gray-200 md:text-xl lg:mx-0">
                   {t('intent.subline')}
                 </p>
                 <div className="mb-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -172,38 +186,32 @@ export default function Home() {
                     location="homepage_hero"
                   />
                 </div>
-                <p className="flex items-center justify-center gap-2 text-sm text-gray-500 lg:justify-start">
+                <p className="flex items-center justify-center gap-2 text-sm text-gray-300 lg:justify-start">
                   <Check className="h-4 w-4 text-emerald-400" /> {t('product.heroProof')}
                 </p>
               </div>
 
-              <div className="relative mx-auto w-full max-w-[560px]">
-                <div className="absolute inset-10 rounded-full bg-yellow-300/20 blur-[90px]" />
-                <div className="relative mx-auto w-[72%] rotate-[2deg] drop-shadow-[0_30px_45px_rgba(0,0,0,0.65)] transition-transform duration-500 hover:rotate-0 hover:scale-[1.02]">
-                  <Image
-                    src="/trickBookScreenShotNoBg.png"
-                    width={984}
-                    height={2048}
-                    priority
-                    alt={t('product.dashboardAlt')}
-                    className="h-auto w-full"
-                  />
-                </div>
-                <div className="absolute left-0 top-[22%] rounded-2xl border border-white/10 bg-black/80 p-3 shadow-xl backdrop-blur md:p-4">
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                    {t('product.floating.goal')}
-                  </p>
-                  <p className="mb-0 text-sm font-bold md:text-base">
-                    Kickflip <span className="text-yellow-300">67%</span>
-                  </p>
-                </div>
-                <div className="absolute bottom-[18%] right-0 rounded-2xl border border-emerald-300/20 bg-black/80 p-3 shadow-xl backdrop-blur md:p-4">
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                    {t('product.floating.session')}
-                  </p>
-                  <p className="mb-0 flex items-center gap-2 text-sm font-bold md:text-base">
-                    <TrendingUp className="h-4 w-4 text-emerald-300" /> +3 landed
-                  </p>
+              {/* Phone showing the rider's real trick list */}
+              <div className="relative mx-auto mt-4 w-full max-w-[440px] lg:mt-0">
+                <div className="relative mx-auto w-[58%] max-w-[250px] rotate-[3deg] transition-transform duration-500 hover:rotate-0 lg:ml-auto lg:mr-6">
+                  <div className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-black p-2 shadow-[0_40px_70px_-20px_rgba(0,0,0,0.85)]">
+                    <Image
+                      src="/tricklist-screen.png"
+                      width={332}
+                      height={720}
+                      alt={t('product.dashboardAlt')}
+                      className="h-auto w-full rounded-[1.7rem]"
+                    />
+                  </div>
+                  <div className="absolute -left-8 top-10 rounded-2xl border border-white/10 bg-black/85 p-3 shadow-xl backdrop-blur md:-left-12 md:p-4">
+                    <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      {t('product.floating.justLogged')}
+                    </p>
+                    <p className="mb-0 flex items-center gap-2 text-sm font-bold md:text-base">
+                      <span className="h-2 w-2 rounded-full bg-yellow-300" /> BS 450
+                      <span className="text-yellow-300">· {t('product.floating.landed')}</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

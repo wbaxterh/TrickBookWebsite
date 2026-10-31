@@ -25,7 +25,9 @@
     "tricklistAlt": "A TrickBook custom trick list with landed and to-do trick statuses",
     "floating": {
       "goal": "Current goal",
-      "session": "This session"
+      "session": "This session",
+      "justLogged": "Just logged",
+      "landed": "Landed"
     },
     "eyebrow": "The riding app that does more",
     "title": "Everything your next session needs.",
