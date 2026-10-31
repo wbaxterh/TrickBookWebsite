@@ -14,7 +14,9 @@
     "messages": "Messages",
     "logout": "Logout",
     "toggleMenu": "Toggle navigation",
-    "primary": "Primary"
+    "primary": "Primary",
+    "plusPerks": "Your Plus perks",
+    "upgradePlus": "Upgrade to Plus"
   },
   "theme": {
     "toggle": "Toggle theme",

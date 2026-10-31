@@ -4,6 +4,7 @@ import {
   BookOpen,
   CalendarDays,
   Clapperboard,
+  Crown,
   LogOut,
   MapPin,
   Menu,
@@ -22,6 +23,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { getUnreadCount } from '../lib/apiMessages';
 import { connectMessagesSocket } from '../lib/socket';
+import usePlus from '../lib/usePlus';
 import { cn } from '../lib/utils';
 import styles from '../styles/Home.module.css';
 import LanguageSelector from './LanguageSelector';
@@ -32,6 +34,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import ProBadge from './ui/ProBadge';
+import VerifiedBadge from './ui/VerifiedBadge';
 
 const unreadBadgeStyle = {
   backgroundColor: '#fcf150',
@@ -48,6 +52,7 @@ const menuItemStyle = { display: 'flex', alignItems: 'center', gap: 10 };
 const Header = () => {
   const { t } = useTranslation('common');
   const { email, loggedIn, token, logOut } = useContext(AuthContext);
+  const { isPlus } = usePlus();
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -232,6 +237,7 @@ const Header = () => {
                         >
                           {email}
                         </span>
+                        {isPlus && <ProBadge size="sm" />}
                         {unreadCount > 0 && (
                           <span
                             style={{
@@ -261,6 +267,14 @@ const Header = () => {
                     <Link href="/profile" style={menuItemStyle}>
                       <User size={18} />
                       {t('nav.myProfile', 'My Profile')}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
+                    <Link href="/plus" style={menuItemStyle}>
+                      {isPlus ? <VerifiedBadge size="sm" /> : <Crown size={18} />}
+                      {isPlus
+                        ? t('nav.plusPerks', 'Your Plus perks')
+                        : t('nav.upgradePlus', 'Upgrade to Plus')}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">

@@ -1,5 +1,6 @@
 import { User } from 'lucide-react';
 import Image from 'next/image';
+import ProBadge from './ui/ProBadge';
 import VerifiedBadge from './ui/VerifiedBadge';
 
 /**
@@ -70,8 +71,13 @@ export default function UserAvatar({ user, size = 40, className = '', showBadge 
         </div>
       )}
 
-      {/* Verified Badge */}
-      {showBadge && isPremium && (
+      {/* Plus badge: PRO tag where it's readable, blue check on small avatars */}
+      {showBadge && isPremium && size >= 48 && (
+        <div className="absolute left-1/2 -translate-x-1/2" style={{ bottom: -6 }}>
+          <ProBadge size={size >= 96 ? 'lg' : 'sm'} />
+        </div>
+      )}
+      {showBadge && isPremium && size < 48 && (
         <div
           className="absolute"
           style={{

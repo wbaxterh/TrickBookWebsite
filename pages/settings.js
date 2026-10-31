@@ -50,6 +50,7 @@ import {
   reconcileSubscription,
   verifyCheckoutSession,
 } from '../lib/apiPayments';
+import { clearPlusCache } from '../lib/usePlus';
 
 // Sport categories
 const SPORT_CATEGORIES = [
@@ -96,7 +97,7 @@ const RIDER_STYLES = [
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { token, logOut, name, email, imageUri, setImageUri, setName, role } =
+  const { token, loggedIn, logOut, name, email, imageUri, setImageUri, setName, role } =
     useContext(AuthContext);
   const { theme, setTheme } = useTheme();
   const { addToast } = useToast();
@@ -170,6 +171,11 @@ export default function SettingsPage() {
         if (cancelled) return;
         if (data?.subscription) setSubscription(data.subscription);
         setCheckoutVerified(Boolean(data?.verified));
+        // Paid and active: send the buyer straight to their unlocked perks.
+        if (data?.verified && data?.subscription?.plan === 'premium') {
+          clearPlusCache(userId);
+          router.replace('/plus?welcome=1');
+        }
       })
       .catch(() => {
         if (!cancelled) setCheckoutVerified(false);
@@ -177,7 +183,7 @@ export default function SettingsPage() {
     return () => {
       cancelled = true;
     };
-  }, [token, router.query.session_id]);
+  }, [token, router.query.session_id, userId]);
 
   const fetchSubscriptionData = async () => {
     try {
@@ -238,9 +244,16 @@ export default function SettingsPage() {
     }
   };
 
+  // Run only on auth changes. fetchUserData/fetchSubscriptionData are recreated
+  // every render, so listing them as deps re-ran this after each fetch — an
+  // infinite request loop against the API.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: see above
   useEffect(() => {
+    // loggedIn is null while auth is still loading — don't bounce yet, or a
+    // full page load (e.g. returning from Stripe Checkout) loses ?session_id.
+    if (loggedIn === null) return;
     if (!token) {
-      router.push('/login');
+      router.push(`/login?callbackUrl=${encodeURIComponent(router.asPath)}`);
       return;
     }
 
@@ -250,7 +263,7 @@ export default function SettingsPage() {
       fetchUserData(decoded.userId);
       fetchSubscriptionData();
     }
-  }, [token, fetchSubscriptionData, fetchUserData, router.push]);
+  }, [token, loggedIn]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -818,6 +831,13 @@ export default function SettingsPage() {
                           </li>
                         </ul>
                       </div>
+
+                      <Button
+                        asChild
+                        className="bg-yellow-300 font-bold text-[#080908] hover:bg-yellow-200"
+                      >
+                        <Link href="/plus">See your Plus perks</Link>
+                      </Button>
 
                       {/* Manage Subscription */}
                       <div className="pt-4 border-t border-border">
