@@ -31,7 +31,6 @@
     },
     "eyebrow": "The riding app that does more",
     "title": "Everything your next session needs.",
-    "subtitle": "TrickBook brings progression, local discovery, coaching, clips, and community into one app—so you spend less time searching and more time riding.",
     "features": {
       "track": { "title": "Track your progression", "text": "Build custom TrickLists, set goals, and mark tricks as you learn and land them." },
       "learn": { "title": "Learn with Trickipedia", "text": "Get trick breakdowns, tutorials, and a clear idea of what to try next." },
@@ -42,7 +41,7 @@
     },
     "progression": {
       "eyebrow": "Your progression, made visible",
-      "title": "Know what you're working on—and how far you've come.",
+      "title": "Know what you're working on and how far you've come.",
       "text": "Turn a vague idea like “I want to get better” into a living plan for every spot, discipline, and session.",
       "points": {
         "lists": "Build TrickLists for a spot, a trip, a season, or a single session.",
@@ -76,7 +75,7 @@
   "appCta": {
     "eyebrow": "Take TrickBook with you",
     "title": "Your riding life, in one place.",
-    "text": "Download the app to keep your goals, spots, sessions, and crew in your pocket—ready when you are.",
+    "text": "Download the app to keep your goals, spots, sessions, and crew in your pocket, ready when you are.",
     "free": "Free to start",
     "fast": "Useful in minutes",
     "private": "Your data stays yours"
@@ -131,7 +130,7 @@
     "aiCompanion": "AI Companion",
     "status": "Ready for your next lap",
     "userMessage": "I finally landed frontside 360s. What should I learn next?",
-    "reply": "That's huge. Since your front 3 is solid, let's build toward a frontside 540. I'll break down the setup, takeoff, and landing—and we can start with the first progression now.",
+    "reply": "That's huge. Since your front 3 is solid, let's build toward a frontside 540. I'll break down the setup, takeoff, and landing. We can start with the first progression now.",
     "voiceHint": "Kaori can talk you through it"
   },
   "stats": {

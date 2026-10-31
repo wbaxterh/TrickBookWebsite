@@ -1,18 +1,12 @@
 import {
   ArrowRight,
-  CalendarDays,
   Check,
-  ChevronRight,
-  Compass,
   Download,
   MapPin,
   MessageCircle,
   Play,
-  Search,
   Sparkles,
-  Store,
   Target,
-  TrendingUp,
   Users,
 } from 'lucide-react';
 import Head from 'next/head';
@@ -28,13 +22,6 @@ import { useScrollDepthTracking, useSectionViewTracking } from '../lib/useScroll
 import nextI18NextConfig from '../next-i18next.config';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || '';
-
-const DISCOVERY_LINKS = [
-  { key: 'tricks', href: '/trickbook', icon: Target },
-  { key: 'spots', href: '/spots', icon: Compass },
-  { key: 'events', href: '/events', icon: CalendarDays },
-  { key: 'shops', href: '/shops', icon: Store },
-];
 
 function formatNumber(num) {
   if (num >= 1000) return `${(num / 1000).toFixed(1).replace(/\.0$/, '')}k`;
@@ -96,8 +83,6 @@ export default function Home() {
   useScrollDepthTracking();
 
   const heroRef = useSectionViewTracking('hero_intent');
-  const valueRef = useSectionViewTracking('instant_value');
-  const loopRef = useSectionViewTracking('progression_loop');
   const companionRef = useSectionViewTracking('kaori_companion');
   const appRef = useSectionViewTracking('app_conversion');
 
@@ -238,86 +223,8 @@ export default function Home() {
               <h2 className="mb-5 text-4xl font-black tracking-tight md:text-6xl">
                 {t('product.title')}
               </h2>
-              <p className="text-lg leading-relaxed text-gray-400">{t('product.subtitle')}</p>
             </div>
             <FeatureShowcase />
-          </div>
-        </section>
-
-        <section ref={valueRef} className="py-20 md:py-28">
-          <div className="container mx-auto px-4">
-            <div className="mb-12 max-w-2xl">
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-yellow-300">
-                {t('value.eyebrow')}
-              </p>
-              <h2 className="mb-4 text-4xl font-black tracking-tight md:text-6xl">
-                {t('value.title')}
-              </h2>
-              <p className="text-lg leading-relaxed text-gray-400">{t('value.subtitle')}</p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {DISCOVERY_LINKS.map(({ key, href, icon: Icon }) => (
-                <Link
-                  key={key}
-                  href={href}
-                  className="group rounded-2xl border border-white/10 bg-white/[0.025] p-6 no-underline transition-colors hover:border-yellow-300/35 hover:bg-yellow-300/[0.04]"
-                >
-                  <Icon className="mb-8 h-7 w-7 text-gray-400 transition-colors group-hover:text-yellow-300" />
-                  <h3 className="mb-2 text-xl font-bold text-white">{t(`value.${key}.title`)}</h3>
-                  <p className="mb-6 min-h-[3.5rem] text-sm leading-relaxed text-gray-500">
-                    {t(`value.${key}.text`)}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-bold text-yellow-300">
-                    {t(`value.${key}.cta`)}{' '}
-                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section ref={loopRef} className="border-y border-white/5 bg-[#0d0f0e] py-20 md:py-28">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-              <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-emerald-300">
-                  {t('loop.eyebrow')}
-                </p>
-                <h2 className="mb-5 text-4xl font-black tracking-tight md:text-5xl">
-                  {t('loop.title')}
-                </h2>
-                <p className="mb-8 text-lg leading-relaxed text-gray-400">{t('loop.text')}</p>
-                <Link
-                  href={loggedIn ? '/trickbook' : '/signup'}
-                  className="inline-flex items-center gap-2 rounded-xl bg-yellow-300 px-6 py-3 font-bold !text-black no-underline transition-transform hover:-translate-y-0.5 hover:!text-black"
-                  onClick={() => trackCtaClick('start_progressing', 'progression_loop')}
-                >
-                  {loggedIn ? t('finalCta.goToTrickbook') : t('loop.cta')}{' '}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {[
-                  { key: 'discover', icon: Search, number: '01' },
-                  { key: 'plan', icon: Target, number: '02' },
-                  { key: 'ride', icon: Play, number: '03' },
-                  { key: 'grow', icon: TrendingUp, number: '04' },
-                ].map(({ key, icon: Icon, number }) => (
-                  <div key={key} className="rounded-2xl border border-white/10 bg-black/20 p-6">
-                    <div className="mb-6 flex items-center justify-between">
-                      <Icon className="h-6 w-6 text-emerald-300" />
-                      <span className="font-mono text-xs text-gray-600">{number}</span>
-                    </div>
-                    <h3 className="mb-2 text-lg font-bold">{t(`loop.steps.${key}.title`)}</h3>
-                    <p className="mb-0 text-sm leading-relaxed text-gray-500">
-                      {t(`loop.steps.${key}.text`)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 
