@@ -244,6 +244,10 @@ export default function SettingsPage() {
     }
   };
 
+  // Run only on auth changes. fetchUserData/fetchSubscriptionData are recreated
+  // every render, so listing them as deps re-ran this after each fetch — an
+  // infinite request loop against the API.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: see above
   useEffect(() => {
     // loggedIn is null while auth is still loading — don't bounce yet, or a
     // full page load (e.g. returning from Stripe Checkout) loses ?session_id.
@@ -259,7 +263,7 @@ export default function SettingsPage() {
       fetchUserData(decoded.userId);
       fetchSubscriptionData();
     }
-  }, [token, loggedIn, fetchSubscriptionData, fetchUserData, router.push, router.asPath]);
+  }, [token, loggedIn]);
 
   const handleSave = async () => {
     setSaving(true);
