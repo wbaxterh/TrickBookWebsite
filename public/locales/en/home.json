@@ -210,5 +210,71 @@
     "subtitle": "{{riders}}+ riders are already in. Free forever. No ads. No algorithm.",
     "goToTrickbook": "Go to my TrickBook",
     "signup": "I'm in"
+  },
+  "showcase": {
+    "swipeHint": "Swipe to see more",
+    "trickipedia": {
+      "eyebrow": "Learn",
+      "title": "Every trick, broken down.",
+      "text": "Trickipedia has tutorials and difficulty levels for skate, snow, BMX and more. Find your next trick and add it to a list in one tap.",
+      "cta": "Browse Trickipedia",
+      "alt": "Trickipedia in the TrickBook app: trick cards with tutorial videos, difficulty, and Add to List buttons"
+    },
+    "tricklists": {
+      "eyebrow": "Track",
+      "title": "Lists that keep score.",
+      "text": "Build a TrickList for a spot, a trip, or a season, and watch the landed bar fill up session by session.",
+      "cta": "Start a TrickList",
+      "alt": "My TrickLists in the TrickBook app showing lists with landed progress bars"
+    },
+    "spots": {
+      "eyebrow": "Explore",
+      "title": "Thousands of spots, one map.",
+      "text": "Parks, street spots and resorts mapped everywhere you ride. Filter by type and save the ones you'll actually hit.",
+      "cta": "Open the spot map",
+      "alt": "Spot map in the TrickBook app with clustered spot pins across the Midwest"
+    },
+    "events": {
+      "eyebrow": "Show up",
+      "title": "Contests, premieres, jams.",
+      "text": "See what's on this weekend near you, from game-of-skate nights to film premieres.",
+      "cta": "Find events",
+      "alt": "Events list in the TrickBook app with a Halloween game of skate and a film premiere"
+    },
+    "shops": {
+      "eyebrow": "Support local",
+      "title": "Core shops, verified.",
+      "text": "Hundreds of skate, snow and surf shops, so you can find the one down the street or on the road.",
+      "cta": "Find a shop",
+      "alt": "Shops directory in the TrickBook app listing verified skate shops"
+    },
+    "homies": {
+      "eyebrow": "Connect",
+      "title": "Your crew, plus Kaori.",
+      "text": "Message your homies and talk riding with Kaori, the AI companion who knows your progression.",
+      "cta": "Meet the riders",
+      "alt": "Riders tab in the TrickBook app with Kaori and a list of homies to message"
+    },
+    "pros": {
+      "eyebrow": "Follow",
+      "title": "Hundreds of pros, one search.",
+      "text": "Browse pro riders by discipline and hometown and see who's out there pushing it.",
+      "cta": "Browse pros",
+      "alt": "Pros directory in the TrickBook app listing pro skateboarders with locations"
+    },
+    "couch": {
+      "eyebrow": "Watch",
+      "title": "The Couch.",
+      "text": "Full skate, snow and surf films and edits, laid out like your favorite streaming app.",
+      "cta": "Watch on The Couch",
+      "alt": "The Couch in the TrickBook app with a featured surf film and rows of skate films"
+    },
+    "feed": {
+      "eyebrow": "Share",
+      "title": "Post the clip. Get the respect.",
+      "text": "Drop your session clips in The Feed and see what the crew is landing.",
+      "cta": "See The Feed",
+      "alt": "The Feed in the TrickBook app showing a rider's snowboard rail clip"
+    }
   }
 }
