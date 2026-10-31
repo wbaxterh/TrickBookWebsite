@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  BookOpen,
   CalendarDays,
   Check,
   ChevronRight,
@@ -15,7 +14,6 @@ import {
   Target,
   TrendingUp,
   Users,
-  Video,
 } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -24,6 +22,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
+import FeatureShowcase from '../components/FeatureShowcase';
 import { trackAppStoreClick, trackCtaClick, trackHeroVariant } from '../lib/analytics';
 import { useScrollDepthTracking, useSectionViewTracking } from '../lib/useScrollTracking';
 import nextI18NextConfig from '../next-i18next.config';
@@ -35,15 +34,6 @@ const DISCOVERY_LINKS = [
   { key: 'spots', href: '/spots', icon: Compass },
   { key: 'events', href: '/events', icon: CalendarDays },
   { key: 'shops', href: '/shops', icon: Store },
-];
-
-const PRODUCT_FEATURES = [
-  { key: 'track', icon: Target, color: 'text-yellow-300', bg: 'bg-yellow-300/10' },
-  { key: 'learn', icon: BookOpen, color: 'text-sky-300', bg: 'bg-sky-300/10' },
-  { key: 'explore', icon: MapPin, color: 'text-emerald-300', bg: 'bg-emerald-300/10' },
-  { key: 'connect', icon: Users, color: 'text-violet-300', bg: 'bg-violet-300/10' },
-  { key: 'watch', icon: Video, color: 'text-orange-300', bg: 'bg-orange-300/10' },
-  { key: 'coach', icon: Sparkles, color: 'text-cyan-300', bg: 'bg-cyan-300/10' },
 ];
 
 function formatNumber(num) {
@@ -250,53 +240,7 @@ export default function Home() {
               </h2>
               <p className="text-lg leading-relaxed text-gray-400">{t('product.subtitle')}</p>
             </div>
-            <div className="mb-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {PRODUCT_FEATURES.map(({ key, icon: Icon, color, bg }) => (
-                <div key={key} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
-                  <span
-                    className={`mb-5 flex h-11 w-11 items-center justify-center rounded-xl ${bg}`}
-                  >
-                    <Icon className={`h-5 w-5 ${color}`} />
-                  </span>
-                  <h3 className="mb-2 text-xl font-bold">{t(`product.features.${key}.title`)}</h3>
-                  <p className="mb-0 text-sm leading-relaxed text-gray-500">
-                    {t(`product.features.${key}.text`)}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid items-center gap-12 rounded-[2rem] border border-white/10 bg-[#0d0f0e] p-6 md:p-10 lg:grid-cols-2 lg:p-14">
-              <div className="relative mx-auto max-w-[370px]">
-                <div className="absolute inset-8 rounded-full bg-yellow-300/10 blur-[70px]" />
-                <Image
-                  src="/trickListScreenshot.png"
-                  width={747}
-                  height={1454}
-                  alt={t('product.tricklistAlt')}
-                  className="relative h-auto w-full drop-shadow-2xl"
-                />
-              </div>
-              <div>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-yellow-300">
-                  {t('product.progression.eyebrow')}
-                </p>
-                <h2 className="mb-5 text-4xl font-black tracking-tight md:text-5xl">
-                  {t('product.progression.title')}
-                </h2>
-                <p className="mb-8 text-lg leading-relaxed text-gray-400">
-                  {t('product.progression.text')}
-                </p>
-                <div className="space-y-4">
-                  {['lists', 'status', 'momentum'].map((key) => (
-                    <div key={key} className="flex gap-3">
-                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-yellow-300" />
-                      <p className="mb-0 text-gray-300">{t(`product.progression.points.${key}`)}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <FeatureShowcase />
           </div>
         </section>
 

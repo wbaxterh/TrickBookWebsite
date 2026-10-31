@@ -180,6 +180,9 @@ body {
   font-size: 18px;
   max-width: 100vw;
   overflow-x: hidden;
+  /* clip (unlike hidden) doesn't turn html/body into a scroll container,
+     which silently breaks position: sticky everywhere. hidden is the fallback. */
+  overflow-x: clip;
   background-color: #ffffff;
   color: #1a1a1a;
   transition:
