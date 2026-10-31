@@ -14,21 +14,24 @@ const SCREENS = [
   { key: 'shops', href: '/shops' },
   { key: 'homies', href: '/riders' },
   { key: 'pros', href: '/riders' },
-  { key: 'couch', href: '/media?tab=couch' },
+  // Real-life photo behind The Couch step (metadata/GPS stripped, 1200x1600).
+  { key: 'couch', href: '/media?tab=couch', photo: '/features/couch-photo.jpg' },
   { key: 'feed', href: '/media?tab=feed' },
 ];
 
 const SCREEN_W = 780;
 const SCREEN_H = 1688;
 
-function PhoneFrame({ children, className = '', style }) {
+function PhoneFrame({ children, className = '', style, compact = false }) {
   return (
     <div
-      className={`rounded-[2.6rem] border border-white/15 bg-black p-[9px] shadow-[0_50px_90px_-30px_rgba(0,0,0,0.9)] ${className}`}
+      className={`border border-white/15 bg-black shadow-[0_50px_90px_-30px_rgba(0,0,0,0.9)] ${
+        compact ? 'rounded-[1.6rem] p-[5px]' : 'rounded-[2.6rem] p-[9px]'
+      } ${className}`}
       style={style}
     >
       <div
-        className="relative overflow-hidden rounded-[2.1rem] bg-[#111]"
+        className={`relative overflow-hidden bg-[#111] ${compact ? 'rounded-[1.3rem]' : 'rounded-[2.1rem]'}`}
         style={{ aspectRatio: `${SCREEN_W} / ${SCREEN_H}` }}
       >
         {children}
@@ -84,7 +87,7 @@ export default function FeatureShowcase() {
       {/* Desktop: sticky phone, copy scrolls past it */}
       <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16">
         <div>
-          {SCREENS.map(({ key, href }, i) => (
+          {SCREENS.map(({ key, href, photo }, i) => (
             <div
               key={key}
               ref={(el) => {
@@ -95,7 +98,21 @@ export default function FeatureShowcase() {
                 active === i ? 'opacity-100' : 'opacity-30'
               }`}
             >
-              <StepCopy screenKey={key} href={href} t={t} index={i} />
+              {photo ? (
+                <div className="relative isolate flex min-h-[72vh] flex-col justify-end overflow-hidden rounded-[2rem] p-10">
+                  <Image
+                    src={photo}
+                    fill
+                    sizes="45vw"
+                    alt={t(`showcase.${key}.photoAlt`)}
+                    className="-z-20 object-cover object-[50%_72%]"
+                  />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#080908] from-10% via-[#080908]/60 via-35% to-transparent to-60%" />
+                  <StepCopy screenKey={key} href={href} t={t} index={i} />
+                </div>
+              ) : (
+                <StepCopy screenKey={key} href={href} t={t} index={i} />
+              )}
             </div>
           ))}
         </div>
@@ -141,9 +158,12 @@ export default function FeatureShowcase() {
       {/* Mobile/tablet: swipeable row of phones */}
       <div className="-mx-4 lg:hidden">
         <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {SCREENS.map(({ key, href }, i) => (
-            <div key={key} className="w-[74vw] max-w-[300px] shrink-0 snap-center">
-              <PhoneFrame className="mb-6">
+          {SCREENS.map(({ key, href, photo }, i) => {
+            const phone = (
+              <PhoneFrame
+                compact={Boolean(photo)}
+                className={photo ? 'absolute right-3 bottom-3 w-[46%] rotate-[4deg]' : 'mb-6'}
+              >
                 <Image
                   src={`/features/${key}.jpg`}
                   width={SCREEN_W}
@@ -154,9 +174,31 @@ export default function FeatureShowcase() {
                   loading={i < 2 ? 'eager' : 'lazy'}
                 />
               </PhoneFrame>
-              <StepCopy screenKey={key} href={href} t={t} index={i} />
-            </div>
-          ))}
+            );
+            return (
+              <div key={key} className="w-[74vw] max-w-[300px] shrink-0 snap-center">
+                {photo ? (
+                  // Real-life photo fills the card (same size as the phone cards);
+                  // a smaller tilted phone sits in the corner so the rider stays visible.
+                  <div className="relative isolate mb-6 overflow-hidden rounded-[2.6rem] border border-white/15 p-[9px]">
+                    {/* Spacer with PhoneFrame's padding + aspect so this card matches its neighbours */}
+                    <div style={{ aspectRatio: `${SCREEN_W} / ${SCREEN_H}` }} />
+                    <Image
+                      src={photo}
+                      fill
+                      sizes="(max-width: 1024px) 74vw, 300px"
+                      alt={t(`showcase.${key}.photoAlt`)}
+                      className="-z-20 object-cover object-[60%_50%]"
+                    />
+                    {phone}
+                  </div>
+                ) : (
+                  phone
+                )}
+                <StepCopy screenKey={key} href={href} t={t} index={i} />
+              </div>
+            );
+          })}
         </div>
         <p className="px-4 text-center text-xs font-bold uppercase tracking-[0.18em] text-gray-500">
           {t('showcase.swipeHint')}
