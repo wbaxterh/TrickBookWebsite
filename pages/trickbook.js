@@ -337,7 +337,7 @@ export default function TrickBook() {
                 difficulty={trick.difficulty}
                 description={trick.description}
                 images={trick.images}
-                url={`/trickipedia/${trick.category?.toLowerCase() || 'skateboarding'}/${trick.url || trick.id}`}
+                url={`/trickipedia/${trick.category?.toLowerCase().replace(/\s+/g, '-') || 'skateboarding'}/${trick.url || trick.id}`}
               />
             ))}
           </div>
