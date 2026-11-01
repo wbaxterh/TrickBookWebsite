@@ -27,7 +27,7 @@ export default function TrickProgressionSection({ title, kind, edges = [] }) {
             <CardActionArea
               onClick={() =>
                 router.push(
-                  `/trickipedia/${edge.trick.category.toLowerCase()}/${edge.trick.url || edge.trick._id}`,
+                  `/trickipedia/${edge.trick.category.toLowerCase().replace(/\s+/g, '-')}/${edge.trick.url || edge.trick._id}`,
                 )
               }
               aria-label={`${edge.trick.name}: ${edge.reason}`}

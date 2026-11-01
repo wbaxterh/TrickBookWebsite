@@ -40,7 +40,10 @@ const CATEGORY_MAP = {
 
 function getCategoryName(slug) {
   if (!slug) return '';
-  return CATEGORY_MAP[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+  return (
+    CATEGORY_MAP[slug.toLowerCase().replace(/\s+/g, '-')] ||
+    slug.charAt(0).toUpperCase() + slug.slice(1)
+  );
 }
 
 export default function TrickDetailPage() {

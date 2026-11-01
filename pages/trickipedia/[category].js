@@ -12,7 +12,10 @@ import styles from '../../styles/trickipedia.module.css';
 
 function getCategoryName(slug, categoryMap) {
   if (!slug) return '';
-  return categoryMap[slug.toLowerCase()] || slug.charAt(0).toUpperCase() + slug.slice(1);
+  return (
+    categoryMap[slug.toLowerCase().replace(/\s+/g, '-')] ||
+    slug.charAt(0).toUpperCase() + slug.slice(1)
+  );
 }
 
 export default function CategoryPage() {
