@@ -51,3 +51,20 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Install browser for responsive navigation regressions
+        run: npx playwright install --with-deps chromium
+
+      - name: Responsive navigation regressions
+        run: npx playwright test tests/responsive-navigation.spec.js --reporter=list,html
+
+      - name: Upload responsive navigation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-navigation-evidence
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
