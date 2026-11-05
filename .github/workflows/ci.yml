@@ -15,7 +15,8 @@ jobs:
         run: test "${{ github.head_ref }}" = "staging"
 
   validate:
-    runs-on: ubuntu-latest
+    # The pinned Playwright browser does not support Ubuntu 26.04 yet.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
