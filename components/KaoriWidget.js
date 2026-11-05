@@ -1,3 +1,4 @@
+import * as Dialog from '@radix-ui/react-dialog';
 import { Loader2, Send, Sparkles, Video, X } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
@@ -30,6 +31,7 @@ const isKaoriVoiceMessage = (text = '') =>
   /Kaori\s+voice:/i.test(text) || /https?:\/\/[^\s)]+kaori-voice[^\s)]*\.mp3/i.test(text);
 
 const idString = (value) => value?.toString?.() || String(value || '');
+const submitTarget = (event) => event.nativeEvent?.submitter || document.activeElement;
 
 async function loadKaoriChat(token) {
   const bots = await getBotCompanions(token);
@@ -84,13 +86,47 @@ export default function KaoriWidget() {
   const [showPreview, setShowPreview] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [ssoProvider, setSsoProvider] = useState('');
+  const [viewport, setViewport] = useState(null);
   const scrollRef = useRef(null);
   const launcherTrackedRef = useRef(false);
+  const launcherRef = useRef(null);
+  const chatCloseRef = useRef(null);
+  const authCloseRef = useRef(null);
+  const authTriggerRef = useRef(null);
+  const wasOpenRef = useRef(false);
 
   const hidden = useMemo(
     () => router.pathname === '/kaori-live' || router.pathname.startsWith('/admin'),
     [router.pathname],
   );
+
+  useEffect(() => {
+    if (!open || hidden) return undefined;
+    const visual = window.visualViewport;
+    const updateViewport = () => {
+      const height = visual?.height ?? window.innerHeight;
+      const top = visual?.offsetTop ?? 0;
+      setViewport((current) =>
+        current?.height === height && current?.top === top ? current : { height, top },
+      );
+    };
+    updateViewport();
+    visual?.addEventListener('resize', updateViewport);
+    visual?.addEventListener('scroll', updateViewport);
+    window.addEventListener('resize', updateViewport);
+    return () => {
+      visual?.removeEventListener('resize', updateViewport);
+      visual?.removeEventListener('scroll', updateViewport);
+      window.removeEventListener('resize', updateViewport);
+    };
+  }, [hidden, open]);
+
+  useEffect(() => {
+    if (hidden) return;
+    if (open) chatCloseRef.current?.focus({ preventScroll: true });
+    else if (wasOpenRef.current) launcherRef.current?.focus({ preventScroll: true });
+    wasOpenRef.current = open;
+  }, [hidden, open]);
 
   useEffect(() => {
     if (hidden || loggedIn === null || launcherTrackedRef.current) return;
@@ -187,22 +223,24 @@ export default function KaoriWidget() {
     };
   }, [conversationId, token, userId]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: new content should scroll, keystrokes and viewport updates should not.
   useEffect(() => {
     if (!open) return;
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-  });
+    const messages = scrollRef.current?.parentElement;
+    messages?.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
+  }, [open, messages.length, greeting, error]);
 
   useEffect(() => {
-    if (!open) return undefined;
+    if (!open || hidden) return undefined;
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && !event.defaultPrevented && !showAuthGate) {
         setOpen(false);
         trackKaoriEvent('kaori_closed', { authenticated: loggedIn === true });
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [loggedIn, open]);
+  }, [hidden, loggedIn, open, showAuthGate]);
 
   const openWidget = () => {
     setOpen(true);
@@ -210,6 +248,7 @@ export default function KaoriWidget() {
   };
 
   const closeWidget = () => {
+    setShowAuthGate(false);
     setOpen(false);
     trackKaoriEvent('kaori_closed', { authenticated: loggedIn === true });
   };
@@ -232,6 +271,7 @@ export default function KaoriWidget() {
     if (!content || sending) return;
     if (loggedIn === false) {
       window.sessionStorage.setItem(PENDING_DRAFT_KEY, content);
+      authTriggerRef.current = submitTarget(event);
       setShowAuthGate(true);
       trackKaoriEvent('kaori_account_wall_viewed', {
         opener_source: 'model',
@@ -302,8 +342,15 @@ export default function KaoriWidget() {
 
   if (hidden) return null;
 
+  const viewportStyle = viewport
+    ? {
+        '--kaori-viewport-height': `${viewport.height}px`,
+        '--kaori-viewport-top': `${viewport.top}px`,
+      }
+    : undefined;
+
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={viewportStyle}>
       {open && (
         <section className={styles.panel} aria-label="Chat with Kaori">
           <header className={styles.header}>
@@ -319,6 +366,7 @@ export default function KaoriWidget() {
             </div>
             <button
               type="button"
+              ref={chatCloseRef}
               className={styles.iconButton}
               onClick={closeWidget}
               aria-label="Close Kaori chat"
@@ -332,7 +380,7 @@ export default function KaoriWidget() {
               <div className={styles.messages} aria-live="polite">
                 <MessageBubble content={guestGreeting} mine={false} />
                 <p className={styles.guestHint}>
-                  Reply to Kaori. Creating an account is one click.
+                  Sign in or create a free account to send your reply. Your draft stays ready.
                 </p>
               </div>
               <form className={styles.composer} onSubmit={handleSend}>
@@ -357,61 +405,88 @@ export default function KaoriWidget() {
                   <Send size={18} />
                 </button>
               </form>
-              {showAuthGate && (
-                <div
-                  className={styles.authGate}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="kaori-auth-title"
-                >
-                  <button
-                    type="button"
-                    className={styles.authGateClose}
-                    onClick={() => setShowAuthGate(false)}
-                    aria-label="Close sign in"
+              <Dialog.Root open={showAuthGate} onOpenChange={setShowAuthGate}>
+                <Dialog.Portal>
+                  <Dialog.Overlay className={styles.authBackdrop} />
+                  <Dialog.Content
+                    className={styles.authGate}
+                    style={viewportStyle}
+                    onOpenAutoFocus={(event) => {
+                      event.preventDefault();
+                      authCloseRef.current?.focus({ preventScroll: true });
+                    }}
+                    onCloseAutoFocus={(event) => {
+                      event.preventDefault();
+                      if (authTriggerRef.current?.isConnected) {
+                        authTriggerRef.current.focus({ preventScroll: true });
+                      }
+                    }}
                   >
-                    <X size={18} />
-                  </button>
-                  <UserAvatar user={KAORI_AVATAR} size={58} showBadge={false} />
-                  <Sparkles size={20} />
-                  <h2 id="kaori-auth-title">Save your line and ride with me</h2>
-                  <p>Your reply is ready. Sign in or create a free TrickBook account to send it.</p>
-                  <button
-                    type="button"
-                    className={styles.googleButton}
-                    onClick={() => handleSso('google')}
-                    disabled={Boolean(ssoProvider)}
-                  >
-                    {ssoProvider === 'google' ? (
-                      <Loader2 className={styles.spin} size={18} />
-                    ) : (
-                      <GoogleIcon />
-                    )}
-                    Continue with Google
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.appleButton}
-                    onClick={() => handleSso('apple')}
-                    disabled={Boolean(ssoProvider)}
-                  >
-                    {ssoProvider === 'apple' ? (
-                      <Loader2 className={styles.spin} size={18} />
-                    ) : (
-                      <AppleIcon />
-                    )}
-                    Continue with Apple
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.emailLink}
-                    onClick={() => router.push('/login?callbackUrl=%2Fprofile%3Fkaori%3Dopen')}
-                  >
-                    Use email instead
-                  </button>
-                  <small>Free to join · your draft stays ready</small>
-                </div>
-              )}
+                    <Dialog.Close asChild>
+                      <button
+                        type="button"
+                        ref={authCloseRef}
+                        className={styles.authGateClose}
+                        aria-label="Close sign in"
+                      >
+                        <X size={18} />
+                      </button>
+                    </Dialog.Close>
+                    <div className={styles.authGateBody}>
+                      <UserAvatar user={KAORI_AVATAR} size={58} showBadge={false} />
+                      <Sparkles size={20} />
+                      <Dialog.Title asChild>
+                        <h2>Save your line and ride with me</h2>
+                      </Dialog.Title>
+                      <Dialog.Description asChild>
+                        <p>
+                          Your reply is ready. Sign in or create a free TrickBook account to send
+                          it.
+                        </p>
+                      </Dialog.Description>
+                      <button
+                        type="button"
+                        className={styles.googleButton}
+                        onClick={() => handleSso('google')}
+                        disabled={Boolean(ssoProvider)}
+                      >
+                        {ssoProvider === 'google' ? (
+                          <Loader2 className={styles.spin} size={18} />
+                        ) : (
+                          <GoogleIcon />
+                        )}
+                        Continue with Google
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.appleButton}
+                        onClick={() => handleSso('apple')}
+                        disabled={Boolean(ssoProvider)}
+                      >
+                        {ssoProvider === 'apple' ? (
+                          <Loader2 className={styles.spin} size={18} />
+                        ) : (
+                          <AppleIcon />
+                        )}
+                        Continue with Apple
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.emailLink}
+                        onClick={() => {
+                          authTriggerRef.current = null;
+                          setShowAuthGate(false);
+                          setOpen(false);
+                          router.push('/login?callbackUrl=%2Fprofile%3Fkaori%3Dopen');
+                        }}
+                      >
+                        Use email instead
+                      </button>
+                      <small>Free to join · your draft stays ready</small>
+                    </div>
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </Dialog.Root>
             </>
           ) : (
             <>
@@ -439,6 +514,25 @@ export default function KaoriWidget() {
                     {error}
                   </div>
                 )}
+                {usage?.upgradeRequired && (
+                  <div className={styles.paywall}>
+                    <div>
+                      <strong>Keep riding with Kaori</strong>
+                      <span>Upgrade to TrickBook Plus for a larger daily allowance.</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        trackKaoriEvent('kaori_upgrade_clicked', {
+                          conversation_id: conversationId,
+                        });
+                        router.push('/settings?tab=billing&source=kaori');
+                      }}
+                    >
+                      Upgrade
+                    </button>
+                  </div>
+                )}
                 <div ref={scrollRef} />
               </div>
 
@@ -458,24 +552,6 @@ export default function KaoriWidget() {
                   </span>
                 )}
               </div>
-
-              {usage?.upgradeRequired && (
-                <div className={styles.paywall}>
-                  <div>
-                    <strong>Keep riding with Kaori</strong>
-                    <span>Upgrade to TrickBook Plus for a larger daily allowance.</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      trackKaoriEvent('kaori_upgrade_clicked', { conversation_id: conversationId });
-                      router.push('/settings?tab=billing&source=kaori');
-                    }}
-                  >
-                    Upgrade
-                  </button>
-                </div>
-              )}
 
               <form className={styles.composer} onSubmit={handleSend}>
                 <label className="sr-only" htmlFor="kaori-widget-message">
@@ -521,6 +597,7 @@ export default function KaoriWidget() {
           )}
           <button
             type="button"
+            ref={launcherRef}
             className={styles.launcher}
             onClick={openWidget}
             aria-label="Chat with Kaori"
