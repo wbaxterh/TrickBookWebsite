@@ -96,6 +96,7 @@
   position: relative;
   width: min(390px, calc(100vw - 28px));
   height: min(610px, calc(100vh - 100px));
+  height: min(610px, calc(var(--kaori-viewport-height, 100dvh) - 44px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -113,6 +114,7 @@
   padding: 14px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.09);
   background: linear-gradient(135deg, #171a21, #101217);
+  flex-shrink: 0;
 }
 .identity {
   display: flex;
@@ -141,8 +143,9 @@
 .iconButton {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
@@ -155,7 +158,9 @@
 
 .messages {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
   padding: 15px;
   scrollbar-width: thin;
   scrollbar-color: #3f4652 transparent;
@@ -184,7 +189,7 @@
   border-radius: 15px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
 }
 .kaoriBubble {
@@ -229,6 +234,7 @@
   justify-content: space-between;
   padding: 8px 13px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
 }
 .allowance {
   color: #94a3b8;
@@ -244,6 +250,7 @@
   border: 1px solid rgba(250, 204, 21, 0.28);
   border-radius: 12px;
   background: rgba(250, 204, 21, 0.08);
+  flex-shrink: 0;
 }
 .paywall div {
   display: flex;
@@ -261,6 +268,7 @@
   line-height: 1.35;
 }
 .paywall button {
+  min-height: 44px;
   flex: 0 0 auto;
   border: 0;
   border-radius: 9px;
@@ -271,6 +279,7 @@
   font-weight: 800;
 }
 .liveButton {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -299,10 +308,12 @@
   align-items: flex-end;
   gap: 8px;
   padding: 10px 13px 13px;
+  flex-shrink: 0;
 }
 .composer textarea {
   flex: 1;
-  min-height: 42px;
+  min-width: 0;
+  min-height: 44px;
   max-height: 100px;
   resize: none;
   border: 1px solid rgba(255, 255, 255, 0.13);
@@ -310,7 +321,7 @@
   background: #171a21;
   color: white;
   padding: 10px 12px;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.45;
 }
 .composer textarea::placeholder {
@@ -322,8 +333,8 @@
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.12);
 }
 .composer button {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
@@ -343,21 +354,44 @@
   font-size: 11px;
   line-height: 1.4;
 }
-.authGate {
-  position: absolute;
+.authBackdrop {
+  position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.45);
+}
+.authGate {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 51;
+  width: min(390px, calc(100% - 44px));
+  height: min(610px, calc(var(--kaori-viewport-height, 100dvh) - 44px));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: 12px 18px 18px;
+  scroll-padding-block: 60px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 22px;
   background: rgba(7, 15, 25, 0.97);
+  color: #f8fafc;
   backdrop-filter: blur(12px);
   text-align: center;
 }
-.authGate > svg {
+.authGateBody {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  margin-block: auto;
+  padding: 0 12px 12px;
+}
+.authGateBody > * {
+  flex-shrink: 0;
+}
+.authGateBody > svg {
   margin-top: 12px;
   color: #7dd3fc;
 }
@@ -368,20 +402,23 @@
 .authGate p {
   margin: 0 0 20px;
   color: #94a3b8;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
 }
 .authGateClose {
-  position: absolute;
-  top: 14px;
-  right: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  align-self: flex-end;
+  flex: 0 0 auto;
+  margin-bottom: 8px;
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: #202a35;
   color: #cbd5e1;
 }
 .googleButton,
@@ -412,12 +449,17 @@
   opacity: 0.6;
 }
 .emailLink {
+  min-height: 44px;
   margin-top: 3px;
   border: 0;
   background: transparent;
   color: #7dd3fc;
   font-size: 12px;
   font-weight: 700;
+}
+.authGate button:focus-visible {
+  outline: 3px solid #67e8f9;
+  outline-offset: 2px;
 }
 .authGate small {
   margin-top: 13px;
@@ -438,14 +480,30 @@
     right: 12px;
     bottom: max(12px, env(safe-area-inset-bottom));
   }
-  .panel {
-    width: calc(100vw - 24px);
-    height: min(620px, calc(100dvh - 82px));
-    border-radius: 18px;
-  }
   .launcher {
     min-height: 48px;
     padding: 0 15px;
+  }
+}
+
+@media (max-width: 767px), (max-height: 500px) and (pointer: coarse) {
+  .panel,
+  .authGate {
+    position: fixed;
+    top: calc(var(--kaori-viewport-top, 0px) + max(8px, env(safe-area-inset-top)));
+    right: max(8px, env(safe-area-inset-right));
+    left: max(8px, env(safe-area-inset-left));
+    bottom: auto;
+    width: auto;
+    height: calc(
+      var(--kaori-viewport-height, 100dvh) -
+      max(8px, env(safe-area-inset-top)) -
+      max(8px, env(safe-area-inset-bottom))
+    );
+    border-radius: 18px;
+  }
+  .bubble {
+    font-size: 15px;
   }
 }
 
