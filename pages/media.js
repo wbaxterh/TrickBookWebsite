@@ -328,11 +328,11 @@ export default function Media() {
                       </Button>
                     </Link>
                   )}
-                  <Link href="/media/search">
-                    <Button variant="ghost" size="icon">
-                      <Search className="h-5 w-5" />
-                    </Button>
-                  </Link>
+                  <Button asChild variant="ghost" size="icon" className="min-h-11 min-w-11">
+                    <Link href="/media/search" aria-label="Search films">
+                      <Search className="h-5 w-5" aria-hidden="true" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </Tabs>
