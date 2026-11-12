@@ -152,8 +152,7 @@ export default function Spots() {
   const { loggedIn } = useContext(AuthContext);
   const [spotsByState, setSpotsByState] = useState({});
   const [spotsByCountry, setSpotsByCountry] = useState({});
-  const [allSpots, setAllSpots] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all'); // sport
   const [selectedType, setSelectedType] = useState('all'); // venue type (category)
   const [selectedCountry, setSelectedCountry] = useState('all');
@@ -237,12 +236,12 @@ export default function Spots() {
   });
 
   useEffect(() => {
+    if (viewMode !== 'list') return;
     const fetchSpots = async () => {
       setLoading(true);
       try {
         const countryFilter = selectedCountry === 'all' ? null : selectedCountry;
-        const data = await getSpotsByState(countryFilter);
-        setAllSpots(data);
+        const data = await getSpotsByState(countryFilter, selectedCategory, selectedType);
         setSpotsByState(data);
       } catch (_error) {
       } finally {
@@ -250,26 +249,7 @@ export default function Spots() {
       }
     };
     fetchSpots();
-  }, [selectedCountry]);
-
-  // Filter spots by sport type AND venue type (category)
-  useEffect(() => {
-    if (selectedCategory === 'all' && selectedType === 'all') {
-      setSpotsByState(allSpots);
-      return;
-    }
-    const bySport = (spot) =>
-      selectedCategory === 'all' || spot.sportTypes?.includes(selectedCategory);
-    const byType = (spot) => selectedType === 'all' || spot.category === selectedType;
-    const filtered = {};
-    Object.keys(allSpots).forEach((state) => {
-      const filteredSpots = allSpots[state].filter((spot) => bySport(spot) && byType(spot));
-      if (filteredSpots.length > 0) {
-        filtered[state] = filteredSpots;
-      }
-    });
-    setSpotsByState(filtered);
-  }, [selectedCategory, selectedType, allSpots]);
+  }, [selectedCategory, selectedCountry, selectedType, viewMode]);
 
   // Organize spots into country → state hierarchy
   const organizeByCountry = () => {
@@ -353,9 +333,11 @@ export default function Spots() {
                 Spots
               </h1>
               <span className="text-sm text-muted-foreground truncate">
-                {loading
-                  ? 'Loading…'
-                  : `${totalSpots.toLocaleString()} spots · ${sortedCountries.length} countries`}
+                {viewMode === 'map'
+                  ? 'Explore the visible area'
+                  : loading
+                    ? 'Loading…'
+                    : `${totalSpots.toLocaleString()} spots · ${sortedCountries.length} countries`}
               </span>
             </div>
 
