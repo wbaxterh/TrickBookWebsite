@@ -57,7 +57,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Responsive UI regressions
-        run: npx playwright test tests/responsive-navigation.spec.js tests/kaori-mobile.spec.js tests/media-search.spec.js tests/feed-video-loading.spec.js --reporter=list,html
+        run: npx playwright test tests/responsive-navigation.spec.js tests/kaori-mobile.spec.js tests/media-search.spec.js tests/feed-video-loading.spec.js tests/kaori-launcher.spec.js --reporter=list,html
 
       - name: Upload responsive UI evidence
         if: always()

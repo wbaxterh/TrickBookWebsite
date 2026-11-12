@@ -22,6 +22,7 @@ import { useTheme } from 'next-themes';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { getUnreadCount } from '../lib/apiMessages';
+import { requestKaoriOpen } from '../lib/kaoriUi';
 import { connectMessagesSocket } from '../lib/socket';
 import usePlus from '../lib/usePlus';
 import styles from '../styles/Home.module.css';
@@ -48,7 +49,7 @@ const unreadBadgeStyle = {
 
 const menuItemStyle = { display: 'flex', alignItems: 'center', gap: 10 };
 
-const Header = () => {
+const Header = ({ showCompanionLauncher = false }) => {
   const { t } = useTranslation('common');
   const { email, loggedIn, token, logOut } = useContext(AuthContext);
   const { isPlus } = usePlus();
@@ -150,6 +151,21 @@ const Header = () => {
             alt={t('brand.logoAlt', 'Trick Book')}
           />
         </Link>
+        {showCompanionLauncher && (
+          <button
+            type="button"
+            className="site-header-kaori-toggle"
+            data-kaori-launcher="header"
+            aria-label="Chat with Kaori"
+            title="Chat with Kaori"
+            onClick={(event) => {
+              closeMenu();
+              requestKaoriOpen(event.currentTarget);
+            }}
+          >
+            <MessageCircle size={22} aria-hidden="true" />
+          </button>
+        )}
         <button
           type="button"
           ref={toggleRef}

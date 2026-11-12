@@ -14,6 +14,12 @@ import {
   sendMessage,
   startBotConversation,
 } from '../lib/apiMessages';
+import {
+  allowsKaoriPromotion,
+  KAORI_OPEN_EVENT,
+  KAORI_PREVIEW_DISMISSED_KEY,
+  restoreKaoriFocus,
+} from '../lib/kaoriUi';
 import { connectMessagesSocket } from '../lib/socket';
 import styles from './KaoriWidget.module.css';
 import MessageText from './MessageText';
@@ -84,12 +90,15 @@ export default function KaoriWidget() {
   const [usage, setUsage] = useState(null);
   const [guestGreeting, setGuestGreeting] = useState(FALLBACK_GREETING);
   const [showPreview, setShowPreview] = useState(false);
+  const [previewDismissed, setPreviewDismissed] = useState(false);
+  const [formActive, setFormActive] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [ssoProvider, setSsoProvider] = useState('');
   const [viewport, setViewport] = useState(null);
   const scrollRef = useRef(null);
   const launcherTrackedRef = useRef(false);
   const launcherRef = useRef(null);
+  const externalTriggerRef = useRef(null);
   const chatCloseRef = useRef(null);
   const authCloseRef = useRef(null);
   const authTriggerRef = useRef(null);
@@ -122,9 +131,33 @@ export default function KaoriWidget() {
   }, [hidden, open]);
 
   useEffect(() => {
+    const onOpenRequest = (event) => {
+      if (hidden || open) return;
+      externalTriggerRef.current = event.detail?.trigger || null;
+      setOpen(true);
+      trackKaoriEvent('kaori_opened', { authenticated: loggedIn === true });
+    };
+    window.addEventListener(KAORI_OPEN_EVENT, onOpenRequest);
+    return () => window.removeEventListener(KAORI_OPEN_EVENT, onOpenRequest);
+  }, [hidden, loggedIn, open]);
+
+  useEffect(() => {
+    const onFocus = (event) => {
+      const target = event.type === 'focusin' ? event.target : event.relatedTarget;
+      setFormActive(Boolean(target?.closest?.('form') && !target.closest('[data-kaori-widget]')));
+    };
+    document.addEventListener('focusin', onFocus);
+    document.addEventListener('focusout', onFocus);
+    return () => {
+      document.removeEventListener('focusin', onFocus);
+      document.removeEventListener('focusout', onFocus);
+    };
+  }, []);
+
+  useEffect(() => {
     if (hidden) return;
     if (open) chatCloseRef.current?.focus({ preventScroll: true });
-    else if (wasOpenRef.current) launcherRef.current?.focus({ preventScroll: true });
+    else if (wasOpenRef.current) restoreKaoriFocus(externalTriggerRef.current, launcherRef.current);
     wasOpenRef.current = open;
   }, [hidden, open]);
 
@@ -136,6 +169,11 @@ export default function KaoriWidget() {
 
   useEffect(() => {
     let cancelled = false;
+    try {
+      setPreviewDismissed(window.sessionStorage.getItem(KAORI_PREVIEW_DISMISSED_KEY) === '1');
+    } catch {
+      // Storage can be unavailable in private/restricted browser contexts.
+    }
     getPublicKaoriGreeting()
       .then((data) => {
         if (!cancelled && data?.greeting) setGuestGreeting(data.greeting);
@@ -242,7 +280,8 @@ export default function KaoriWidget() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [hidden, loggedIn, open, showAuthGate]);
 
-  const openWidget = () => {
+  const openWidget = (event) => {
+    externalTriggerRef.current = event?.currentTarget || null;
     setOpen(true);
     trackKaoriEvent('kaori_opened', { authenticated: loggedIn === true });
   };
@@ -251,6 +290,17 @@ export default function KaoriWidget() {
     setShowAuthGate(false);
     setOpen(false);
     trackKaoriEvent('kaori_closed', { authenticated: loggedIn === true });
+  };
+
+  const dismissPreview = () => {
+    setPreviewDismissed(true);
+    setShowPreview(false);
+    try {
+      window.sessionStorage.setItem(KAORI_PREVIEW_DISMISSED_KEY, '1');
+    } catch {
+      // Keep the in-memory dismissal even when persistence is blocked.
+    }
+    restoreKaoriFocus(null, launcherRef.current);
   };
 
   const handleSso = (provider) => {
@@ -350,7 +400,7 @@ export default function KaoriWidget() {
     : undefined;
 
   return (
-    <div className={styles.root} style={viewportStyle}>
+    <div className={styles.root} style={viewportStyle} data-kaori-widget data-open={open}>
       {open && (
         <section className={styles.panel} aria-label="Chat with Kaori">
           <header className={styles.header}>
@@ -589,18 +639,37 @@ export default function KaoriWidget() {
 
       {!open && (
         <div className={styles.launcherStack}>
-          {showPreview && (
-            <button type="button" className={styles.preview} onClick={openWidget}>
-              <UserAvatar user={KAORI_AVATAR} size={30} showBadge={false} />
-              <span>{guestGreeting}</span>
-            </button>
-          )}
+          {showPreview &&
+            !previewDismissed &&
+            !formActive &&
+            allowsKaoriPromotion(router.pathname) && (
+              <div className={styles.preview}>
+                <button
+                  type="button"
+                  className={styles.previewAction}
+                  onClick={openWidget}
+                  aria-label="Open Kaori greeting"
+                >
+                  <UserAvatar user={KAORI_AVATAR} size={30} showBadge={false} />
+                  <span className={styles.previewText}>{guestGreeting}</span>
+                </button>
+                <button
+                  type="button"
+                  className={styles.previewClose}
+                  onClick={dismissPreview}
+                  aria-label="Dismiss Kaori greeting"
+                >
+                  <X size={18} aria-hidden="true" />
+                </button>
+              </div>
+            )}
           <button
             type="button"
             ref={launcherRef}
             className={styles.launcher}
+            data-kaori-launcher="footer"
             onClick={openWidget}
-            aria-label="Chat with Kaori"
+            aria-label="Chat with Kaori from footer"
           >
             <span className={styles.launcherAvatar}>
               <UserAvatar user={kaori || KAORI_AVATAR} size={40} showBadge={false} />

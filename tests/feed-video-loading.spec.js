@@ -107,10 +107,6 @@ test('scrolling unloads distant players and preserves playback/seek/quality', as
   await expect(first.locator('video')).toHaveJSProperty('paused', true);
   // Seek through the existing progress control, not by replacing the media clock.
   const seek = first.locator('.group\\/progress');
-  // Keep the control away from the known floating-launcher obstruction (#133), without forced clicks.
-  await seek.evaluate((element) =>
-    element.scrollIntoView({ block: 'center', behavior: 'instant' }),
-  );
   const box = await seek.boundingBox();
   await seek.click({ position: { x: box.width / 2, y: box.height / 2 } });
   await expect
