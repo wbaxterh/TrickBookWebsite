@@ -614,7 +614,7 @@ export default function Spots() {
                 <p className="text-muted-foreground max-w-md mb-4">
                   {selectedCategory !== 'all'
                     ? 'Try selecting a different category or check back soon!'
-                    : 'Check back soon or add spots using our Chrome extension!'}
+                    : 'Add a spot to help other riders find a place to ride.'}
                 </p>
                 {selectedCategory !== 'all' && (
                   <Button variant="outline" onClick={() => setSelectedCategory('all')}>
