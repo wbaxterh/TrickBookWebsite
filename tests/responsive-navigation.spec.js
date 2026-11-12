@@ -14,6 +14,7 @@ for (const width of [1023, 1024, 1025, 1100, 1280, 1440]) {
     await page.setViewportSize({ width, height: 768 });
     await page.goto('/');
     const header = page.locator('.site-header');
+    await expect(header).toBeVisible();
     expect((await header.boundingBox()).height).toBeLessThan(100);
     await expect(page.getByRole('button', { name: 'Toggle navigation' })).toBeVisible({
       visible: width < 1280,

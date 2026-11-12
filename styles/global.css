@@ -409,6 +409,28 @@ img {
   min-height: 44px;
 }
 
+.site-header-kaori-toggle {
+  display: inline-flex;
+  flex: 0 0 44px;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: 12px;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+  background: #0c4a6e;
+  color: #e0f2fe;
+}
+
+.site-header-kaori-toggle:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
+}
+
 .dark .nav-toggle {
   color: rgba(255, 255, 255, 0.55);
   border-color: rgba(255, 255, 255, 0.1);
