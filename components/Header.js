@@ -22,9 +22,9 @@ import { useTheme } from 'next-themes';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import { getUnreadCount } from '../lib/apiMessages';
+import { requestKaoriOpen } from '../lib/kaoriUi';
 import { connectMessagesSocket } from '../lib/socket';
 import usePlus from '../lib/usePlus';
-import { cn } from '../lib/utils';
 import styles from '../styles/Home.module.css';
 import LanguageSelector from './LanguageSelector';
 import {
@@ -49,7 +49,7 @@ const unreadBadgeStyle = {
 
 const menuItemStyle = { display: 'flex', alignItems: 'center', gap: 10 };
 
-const Header = () => {
+const Header = ({ showCompanionLauncher = false }) => {
   const { t } = useTranslation('common');
   const { email, loggedIn, token, logOut } = useContext(AuthContext);
   const { isPlus } = usePlus();
@@ -58,10 +58,33 @@ const Header = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const socketRef = useRef(null);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
+    const desktop = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = (event) => {
+      if (event.matches) setExpanded(false);
+    };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
   }, []);
+
+  useEffect(() => {
+    if (!expanded) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const dismiss = (event) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return;
+      setExpanded(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener('keydown', dismiss);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', dismiss);
+    };
+  }, [expanded]);
 
   // Fetch unread count and setup socket for real-time updates
   useEffect(() => {
@@ -116,9 +139,9 @@ const Header = () => {
   ];
 
   return (
-    <header className={`site-header ${styles.navWrapper}`}>
+    <header className={`site-header ${styles.navWrapper}`} data-expanded={expanded}>
       <div className="container site-header-inner">
-        <Link href="/" className="site-brand">
+        <Link href="/" className="site-brand" onClick={closeMenu}>
           <Image
             className={styles.icon}
             src="/adaptive-icon.png"
@@ -128,9 +151,25 @@ const Header = () => {
             alt={t('brand.logoAlt', 'Trick Book')}
           />
         </Link>
+        {showCompanionLauncher && (
+          <button
+            type="button"
+            className="site-header-kaori-toggle"
+            data-kaori-launcher="header"
+            aria-label="Chat with Kaori"
+            title="Chat with Kaori"
+            onClick={(event) => {
+              closeMenu();
+              requestKaoriOpen(event.currentTarget);
+            }}
+          >
+            <MessageCircle size={22} aria-hidden="true" />
+          </button>
+        )}
         <button
           type="button"
-          className="nav-toggle lg:hidden"
+          ref={toggleRef}
+          className="nav-toggle"
           data-testid="nav-toggle"
           aria-controls="site-nav"
           aria-expanded={expanded}
@@ -139,10 +178,7 @@ const Header = () => {
         >
           <Menu style={{ width: '1.5em', height: '1.5em' }} aria-hidden="true" />
         </button>
-        <div
-          id="site-nav"
-          className={cn('site-nav-collapse', expanded ? 'block' : 'hidden', 'lg:flex')}
-        >
+        <div id="site-nav" className="site-nav-collapse" data-expanded={expanded}>
           <nav
             className="site-nav site-nav-primary mobile-nav-section"
             aria-label={t('nav.primary', 'Primary')}
@@ -162,7 +198,7 @@ const Header = () => {
           </nav>
 
           {/* Mobile divider */}
-          <hr className="mobile-nav-divider lg:hidden" />
+          <hr className="mobile-nav-divider" />
 
           <div className="site-nav site-nav-utility mobile-utility-section">
             {/* Language Selector */}
@@ -184,14 +220,15 @@ const Header = () => {
             )}
 
             {/* Mobile divider before account section */}
-            <hr className="mobile-nav-divider lg:hidden" />
+            <hr className="mobile-nav-divider" />
 
             {loggedIn === null ? (
               <Skeleton variant="rectangular" width={120} height={36} />
             ) : !loggedIn ? (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14 }}>
+              <div className="site-nav-account">
                 <Link
                   href="/login"
+                  onClick={closeMenu}
                   style={{
                     color: linkColor,
                     fontWeight: 500,
@@ -201,7 +238,7 @@ const Header = () => {
                 >
                   {t('nav.login', 'Log in')}
                 </Link>
-                <Link href="/signup" className="login-btn">
+                <Link href="/signup" className="login-btn" onClick={closeMenu}>
                   <PersonIcon style={{ fontSize: 18 }} />
                   <span>{t('nav.signupFree', 'Sign up free')}</span>
                 </Link>
@@ -268,13 +305,13 @@ const Header = () => {
                   className="tb-dropdown-menu profile-dropdown-menu"
                 >
                   <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
-                    <Link href="/profile" style={menuItemStyle}>
+                    <Link href="/profile" style={menuItemStyle} onClick={closeMenu}>
                       <User size={18} />
                       {t('nav.myProfile', 'My Profile')}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
-                    <Link href="/plus" style={menuItemStyle}>
+                    <Link href="/plus" style={menuItemStyle} onClick={closeMenu}>
                       {isPlus ? <VerifiedBadge size="sm" /> : <Crown size={18} />}
                       {isPlus
                         ? t('nav.plusPerks', 'Your Plus perks')
@@ -282,7 +319,7 @@ const Header = () => {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
-                    <Link href="/messages" style={menuItemStyle}>
+                    <Link href="/messages" style={menuItemStyle} onClick={closeMenu}>
                       <MessageCircle size={18} />
                       {t('nav.messages', 'Messages')}
                       {unreadCount > 0 && (
@@ -302,7 +339,7 @@ const Header = () => {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="tb-dropdown-item profile-dropdown-item">
-                    <Link href="/homies" style={menuItemStyle}>
+                    <Link href="/homies" style={menuItemStyle} onClick={closeMenu}>
                       <Users size={18} />
                       {t('nav.homies', 'Homies')}
                     </Link>
@@ -310,7 +347,10 @@ const Header = () => {
                   <DropdownMenuSeparator className="tb-dropdown-divider" />
                   <DropdownMenuItem
                     className="tb-dropdown-item profile-dropdown-item"
-                    onSelect={logOut}
+                    onSelect={() => {
+                      closeMenu();
+                      logOut();
+                    }}
                     style={{ ...menuItemStyle, color: '#dc3545', cursor: 'pointer' }}
                   >
                     <LogOut size={18} />

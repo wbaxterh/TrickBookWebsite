@@ -14,6 +14,16 @@ module.exports = {
         destination: `https://${CANONICAL_HOST}/:path*`,
         permanent: true,
       },
+      // Printed QR codes (keychains, stickers, shop stands) point at /qr/<code> so the
+      // code stays short and its destination can change after printing. The UTM tags are
+      // picked up as first-touch attribution by lib/analytics.js. Kept temporary so
+      // phones never cache the destination. Codes are printed uppercase (/QR/DECK) to
+      // keep the QR small; redirect matching is case-insensitive, so both forms land here.
+      {
+        source: '/qr/:code([A-Za-z0-9_-]+)',
+        destination: '/?utm_source=qr&utm_medium=print&utm_campaign=:code',
+        permanent: false,
+      },
     ];
   },
   // Amplify's WEB_COMPUTE packager can omit next-i18next's dynamically loaded
