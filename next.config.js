@@ -39,6 +39,12 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'cdn.jwplayer.com',
+        port: '',
+        pathname: '/v2/media/*/poster.jpg',
+      },
+      {
+        protocol: 'https',
         hostname: 'trickbook.s3.amazonaws.com',
         pathname: '/**',
       },
