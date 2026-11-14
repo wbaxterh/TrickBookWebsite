@@ -1,5 +1,5 @@
 import { BookOpen, List, Menu, Users, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { getCategories } from '../lib/api';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -16,6 +16,12 @@ export default function TrickipediaSidebar({
 }) {
   const [categories, setCategories] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const panelId = useId();
+  const toggle = useRef(null);
+  const closeMobile = () => {
+    setMobileOpen(false);
+    toggle.current?.focus();
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -28,22 +34,25 @@ export default function TrickipediaSidebar({
   // Close mobile menu when tab changes
   const handleTabChange = (tab) => {
     onTabChange(tab);
-    setMobileOpen(false);
+    if (mobileOpen) closeMobile();
   };
 
   // Close mobile menu when category changes
   const handleCategoryChange = (category) => {
     onCategoryChange(category);
-    setMobileOpen(false);
+    if (mobileOpen) closeMobile();
   };
 
   const sidebarContent = (
     <>
       {/* Category Dropdown */}
       <div>
-        <label className="text-sm font-medium text-muted-foreground mb-2 block">Category</label>
+        <p className="text-sm font-medium text-muted-foreground mb-2 block">Category</p>
         <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-          <SelectTrigger className="w-full bg-background border-yellow-500/50 hover:border-yellow-500">
+          <SelectTrigger
+            aria-label="Trick category"
+            className="min-h-11 w-full bg-background border-yellow-500/50 hover:border-yellow-500"
+          >
             <SelectValue placeholder="All Categories" />
           </SelectTrigger>
           <SelectContent>
@@ -65,31 +74,31 @@ export default function TrickipediaSidebar({
 
       {/* Navigation Tabs */}
       <div>
-        <label className="text-sm font-medium text-muted-foreground mb-2 block">Browse</label>
+        <p className="text-sm font-medium text-muted-foreground mb-2 block">Browse</p>
         <Tabs
           value={activeTab}
           onValueChange={handleTabChange}
           orientation="vertical"
           className="w-full"
         >
-          <TabsList className="flex flex-col w-full gap-1 bg-transparent p-0">
+          <TabsList className="flex h-auto flex-col w-full gap-1 bg-transparent p-0">
             <TabsTrigger
               value="trickipedia"
-              className="w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
+              className="min-h-11 w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
             >
               <BookOpen className="h-4 w-4" />
               Trickipedia
             </TabsTrigger>
             <TabsTrigger
               value="my-lists"
-              className="w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
+              className="min-h-11 w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
             >
               <List className="h-4 w-4" />
               My Trick Lists
             </TabsTrigger>
             <TabsTrigger
               value="homie-lists"
-              className="w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
+              className="min-h-11 w-full justify-start gap-2 data-[state=active]:bg-yellow-500 data-[state=active]:text-black"
             >
               <Users className="h-4 w-4" />
               Homie Trick Lists
@@ -112,9 +121,13 @@ export default function TrickipediaSidebar({
     <>
       {/* Mobile Menu Button */}
       <Button
+        ref={toggle}
+        aria-label={mobileOpen ? 'Close trick navigation' : 'Open trick navigation'}
+        aria-expanded={mobileOpen}
+        aria-controls={panelId}
         variant="outline"
         size="icon"
-        className="fixed top-20 left-4 z-50 lg:hidden bg-background border-yellow-500/50"
+        className="fixed top-20 left-4 z-50 h-11 w-11 lg:hidden bg-background border-yellow-500/50"
         onClick={() => setMobileOpen(!mobileOpen)}
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -122,16 +135,23 @@ export default function TrickipediaSidebar({
 
       {/* Mobile Overlay */}
       {mobileOpen && (
-        <div
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Dismiss trick navigation"
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setMobileOpen(false)}
+          onClick={closeMobile}
         />
       )}
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-card border-r border-border p-4 pt-20 flex flex-col gap-6 z-50 transform transition-transform duration-300 lg:hidden ${
-          mobileOpen ? 'translate-x-0' : '-translate-x-full'
+        id={panelId}
+        onKeyDown={(event) => {
+          if (event.key === 'Escape') closeMobile();
+        }}
+        className={`fixed top-32 bottom-0 left-0 w-64 overflow-y-auto bg-card border-r border-border p-4 flex-col gap-6 z-50 lg:hidden ${
+          mobileOpen ? 'flex' : 'hidden'
         }`}
       >
         {sidebarContent}
