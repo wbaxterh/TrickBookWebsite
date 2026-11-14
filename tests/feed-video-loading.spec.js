@@ -118,8 +118,19 @@ test('scrolling unloads distant players and preserves playback/seek/quality', as
   if (page.context().browser().browserType().name() === 'chromium')
     await expect(quality).toBeVisible();
   if (await quality.count()) {
+    const qualityBox = await quality.boundingBox();
+    expect(qualityBox.width).toBeGreaterThanOrEqual(44);
+    expect(qualityBox.height).toBeGreaterThanOrEqual(44);
+    await quality.click();
+    await expect(quality).toHaveAttribute('aria-expanded', 'true');
+    await first.getByRole('button', { name: 'Auto', exact: true }).focus();
+    await page.keyboard.press('Escape');
+    await expect(quality).toBeFocused();
+    await expect(quality).toHaveAttribute('aria-expanded', 'false');
     await quality.click();
     await first.getByRole('button', { name: 'Auto', exact: true }).click();
+    await expect(quality).toBeFocused();
+    await expect(quality).toHaveAttribute('aria-expanded', 'false');
   }
   const last = page.locator('[data-feed-video="fixture-16"]');
   await expect(last.locator('img')).toHaveAttribute('loading', 'lazy');

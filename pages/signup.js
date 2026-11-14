@@ -307,19 +307,23 @@ export default function Signup() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Password</label>
+        <label htmlFor="signup-password" className="block text-sm font-medium mb-1">
+          Password
+        </label>
         <div className="relative">
           <Input
+            id="signup-password"
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="8+ characters"
-            className={`pr-10 ${errors.password ? 'border-destructive' : ''}`}
+            className={`min-h-11 pr-12 ${errors.password ? 'border-destructive' : ''}`}
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            className="absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-yellow-500"
+            aria-pressed={showPassword}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

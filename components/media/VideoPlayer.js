@@ -1,5 +1,5 @@
 import { Maximize, Pause, Play, Settings, Volume2, VolumeX } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 export default function VideoPlayer({
   src,
@@ -30,7 +30,9 @@ export default function VideoPlayer({
   const [qualities, setQualities] = useState([]);
   const [showControls, setShowControls] = useState(true);
   const [showQualityMenu, setShowQualityMenu] = useState(false);
-  const [_isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const qualityMenuId = useId();
+  const qualityToggleRef = useRef(null);
   const controlsTimeoutRef = useRef(null);
   const initialTimeRef = useRef(initialTime);
   const releasingRef = useRef(false);
@@ -115,6 +117,7 @@ export default function VideoPlayer({
       setQuality(levelIndex === -1 ? 'Auto' : `${qualities[levelIndex + 1]?.height}p`);
     }
     setShowQualityMenu(false);
+    qualityToggleRef.current?.focus();
   };
 
   const togglePlay = useCallback(() => {
@@ -146,18 +149,6 @@ export default function VideoPlayer({
       document.exitFullscreen();
     }
   }, []);
-
-  const handleSeek = useCallback(
-    (e) => {
-      const video = videoRef.current;
-      if (!video || !duration) return;
-
-      const rect = e.currentTarget.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      video.currentTime = pos * duration;
-    },
-    [duration],
-  );
 
   const formatTime = (seconds) => {
     if (Number.isNaN(seconds)) return '0:00';
@@ -204,7 +195,10 @@ export default function VideoPlayer({
       setIsPlaying(true);
       onPlay?.();
     };
-    const handlePause = () => setIsPlaying(false);
+    const handlePause = () => {
+      setIsPlaying(false);
+      handleTimeUpdate();
+    };
     const handleEnded = () => {
       setIsPlaying(false);
       onEnded?.();
@@ -245,7 +239,8 @@ export default function VideoPlayer({
         clearTimeout(controlsTimeoutRef.current);
       }
       controlsTimeoutRef.current = setTimeout(() => {
-        if (isPlaying) setShowControls(false);
+        if (isPlaying && !containerRef.current?.contains(document.activeElement))
+          setShowControls(false);
       }, 3000);
     };
 
@@ -273,6 +268,7 @@ export default function VideoPlayer({
       ref={containerRef}
       className={`relative group bg-black ${aspectRatioClass} ${className}`}
       onClick={togglePlay}
+      onFocusCapture={() => setShowControls(true)}
     >
       <video
         ref={videoRef}
@@ -304,41 +300,55 @@ export default function VideoPlayer({
       {controls && (
         <div
           className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
-            showControls ? 'opacity-100' : 'opacity-0'
+            showControls ? 'opacity-100' : 'opacity-0 focus-within:opacity-100'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Progress Bar */}
-          <div
-            className="relative h-1 bg-white/30 rounded-full mb-3 cursor-pointer group/progress"
-            onClick={handleSeek}
-          >
+          <div className="relative flex h-11 items-center rounded group/progress focus-within:outline focus-within:outline-2 focus-within:outline-yellow-500">
+            <div className="pointer-events-none absolute h-1 w-full rounded-full bg-white/30" />
             {/* Buffered */}
             <div
-              className="absolute h-full bg-white/50 rounded-full"
+              className="pointer-events-none absolute h-1 bg-white/50 rounded-full"
               style={{ width: `${buffered}%` }}
             />
             {/* Progress */}
             <div
-              className="absolute h-full bg-yellow-500 rounded-full"
+              className="pointer-events-none absolute h-1 bg-yellow-500 rounded-full"
               style={{ width: `${progress}%` }}
             />
             {/* Seek Handle */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-yellow-500 rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity"
+              className="pointer-events-none absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-yellow-500 rounded-full"
               style={{ left: `calc(${progress}% - 6px)` }}
+            />
+            <input
+              type="range"
+              aria-label="Seek video"
+              min="0"
+              max={duration || 0}
+              step="0.1"
+              value={currentTime}
+              disabled={!duration}
+              onChange={(event) => {
+                const time = Number(event.target.value);
+                if (videoRef.current) videoRef.current.currentTime = time;
+                setCurrentTime(time);
+                setProgress(duration ? (time / duration) * 100 : 0);
+              }}
+              className="relative h-11 w-full cursor-pointer opacity-0"
             />
           </div>
 
           {/* Controls Row */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-1">
+            <div className="flex items-center gap-1">
               {/* Play/Pause */}
               <button
                 type="button"
                 aria-label={isPlaying ? 'Pause video' : 'Play video'}
                 onClick={togglePlay}
-                className="text-white hover:text-yellow-500 transition-colors"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:text-yellow-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-yellow-500"
               >
                 {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
               </button>
@@ -347,40 +357,56 @@ export default function VideoPlayer({
               <button
                 type="button"
                 aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                aria-pressed={isMuted}
                 onClick={toggleMute}
-                className="text-white hover:text-yellow-500 transition-colors"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:text-yellow-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-yellow-500"
               >
                 {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
               </button>
 
               {/* Time */}
-              <span className="text-white text-sm">
+              <span className="text-white text-xs whitespace-nowrap">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               {/* Quality Selector */}
               {qualities.length > 0 && (
-                <div className="relative">
+                <div
+                  className="relative"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Escape') {
+                      setShowQualityMenu(false);
+                      qualityToggleRef.current?.focus();
+                    }
+                  }}
+                >
                   <button
+                    ref={qualityToggleRef}
                     type="button"
                     aria-label="Video quality"
+                    aria-expanded={showQualityMenu}
+                    aria-controls={qualityMenuId}
                     onClick={() => setShowQualityMenu(!showQualityMenu)}
-                    className="text-white hover:text-yellow-500 transition-colors flex items-center gap-1"
+                    className="min-h-11 min-w-11 rounded px-1 text-white hover:text-yellow-500 transition-colors flex items-center justify-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-yellow-500"
                   >
                     <Settings className="h-5 w-5" />
                     <span className="text-sm">{quality}</span>
                   </button>
 
                   {showQualityMenu && (
-                    <div className="absolute bottom-full right-0 mb-2 bg-black/90 rounded-lg py-2 min-w-[100px]">
+                    <div
+                      id={qualityMenuId}
+                      className="absolute bottom-full right-0 mb-2 bg-black/90 rounded-lg py-2 min-w-[100px]"
+                    >
                       {qualities.map((q) => (
                         <button
                           type="button"
                           key={q.index}
                           onClick={() => handleQualityChange(q.index)}
-                          className={`block w-full px-4 py-1 text-left text-sm hover:bg-white/10 ${
+                          aria-pressed={quality === q.label}
+                          className={`block min-h-11 w-full px-4 py-1 text-left text-sm hover:bg-white/10 ${
                             quality === q.label ? 'text-yellow-500' : 'text-white'
                           }`}
                         >
@@ -395,9 +421,10 @@ export default function VideoPlayer({
               {/* Fullscreen */}
               <button
                 type="button"
-                aria-label="Fullscreen video"
+                aria-label={isFullscreen ? 'Exit fullscreen video' : 'Fullscreen video'}
+                aria-pressed={isFullscreen}
                 onClick={toggleFullscreen}
-                className="text-white hover:text-yellow-500 transition-colors"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:text-yellow-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-yellow-500"
               >
                 <Maximize className="h-5 w-5" />
               </button>
