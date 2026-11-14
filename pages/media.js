@@ -11,11 +11,11 @@ import {
   Users,
 } from 'lucide-react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
+import CouchArtwork from '../components/media/CouchArtwork';
 import FeedPost from '../components/media/FeedPost';
 import VideoCard from '../components/media/VideoCard';
 import { Button } from '../components/ui/button';
@@ -35,16 +35,9 @@ import {
   getFeatured,
   SPORT_TYPES,
 } from '../lib/apiMedia';
+import { getCouchArtworkCandidates } from '../lib/couchArtwork';
 
 const COUCH_PAGE_SIZE = 50;
-
-const getHeroImage = (video) =>
-  video?.thumbnails?.backdrop ||
-  video?.thumbnails?.poster ||
-  video?.driveThumbnail ||
-  video?.artwork?.backdrop ||
-  video?.artwork?.poster ||
-  video?.artwork?.thumbnail;
 
 export default function Media() {
   const router = useRouter();
@@ -142,7 +135,7 @@ export default function Media() {
     const seen = new Set();
 
     return [featured, ...recentVideos].filter((video) => {
-      if (!video || !getHeroImage(video)) return false;
+      if (!video || !getCouchArtworkCandidates(video, 'backdrop').length) return false;
       if (sportFilter !== 'all' && !video.sportTypes?.includes(sportFilter)) return false;
       const id = video._id || video.slug || video.title;
       if (!id || seen.has(id)) return false;
@@ -345,11 +338,9 @@ export default function Media() {
             {/* Hero Section */}
             {heroVideo ? (
               <div className="relative h-[60vh] overflow-hidden">
-                <Image
-                  key={heroVideo._id || heroVideo.slug}
-                  src={getHeroImage(heroVideo)}
-                  alt={heroVideo.title}
-                  fill
+                <CouchArtwork
+                  video={heroVideo}
+                  variant="backdrop"
                   className="object-cover animate-in fade-in duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
