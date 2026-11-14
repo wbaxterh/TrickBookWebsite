@@ -7,6 +7,7 @@ import EventFilters from '../../components/events/EventFilters';
 import { Button } from '../../components/ui/button';
 import { EVENT_FIXTURES } from '../../data/eventFixtures';
 import { getEvents } from '../../lib/apiEvents';
+import { selectedFilterCount } from '../../lib/discoveryFilters';
 import { eventDistanceMiles } from '../../lib/geo';
 
 const DEFAULT_FILTERS = {
@@ -257,9 +258,7 @@ export default function EventsPage() {
   };
 
   const isForYou = activeTab === 'foryou';
-  const hasActiveFilters = Object.entries(filters).some(
-    ([key, value]) => key !== 'radius' && value && value !== 'all',
-  );
+  const hasActiveFilters = selectedFilterCount(filters) > 0;
 
   return (
     <>

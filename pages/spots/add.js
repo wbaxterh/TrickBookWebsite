@@ -585,9 +585,9 @@ export default function AddSpot() {
                 <div className="flex items-start gap-2 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-500">
                   <Info className="h-5 w-5 flex-shrink-0 mt-0.5" />
                   <p className="text-sm">
-                    You can also add spots directly from Google Maps using our{' '}
+                    The Chrome extension is currently unavailable. Use this form to add a spot, or{' '}
                     <Link href="/chrome-extension" className="underline hover:text-blue-400">
-                      Chrome extension
+                      check extension availability
                     </Link>
                     .
                   </p>
