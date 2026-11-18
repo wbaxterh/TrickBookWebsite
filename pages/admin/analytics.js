@@ -28,6 +28,7 @@ import {
 } from 'recharts';
 import { AuthContext } from '../../auth/AuthContext';
 import AdminLayout from '../../components/AdminLayout';
+import NewsletterAnalytics from '../../components/NewsletterAnalytics';
 import {
   fetchAppStores,
   fetchAppUsers,
@@ -326,7 +327,7 @@ export default function AnalyticsDashboard() {
           <div>
             <h1 className="text-2xl font-bold text-foreground">Analytics Dashboard</h1>
             <p className="text-sm text-muted-foreground">
-              Landing page performance & user engagement
+              Rider engagement, site performance & newsletter campaigns
             </p>
           </div>
           <div className="flex gap-2">
@@ -346,6 +347,8 @@ export default function AnalyticsDashboard() {
             ))}
           </div>
         </div>
+
+        <NewsletterAnalytics token={token} days={days} />
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
