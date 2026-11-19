@@ -386,10 +386,13 @@ export default function Spots() {
               </Select>
 
               {/* View toggle */}
-              <div className="flex items-center h-9 border border-border rounded-md overflow-hidden">
+              <div className="flex items-center border border-border rounded-md overflow-hidden">
                 <button
+                  type="button"
+                  aria-label="Map view"
+                  aria-pressed={viewMode === 'map'}
                   onClick={() => setViewMode('map')}
-                  className={`flex items-center gap-1.5 px-3 h-full text-sm transition-colors ${
+                  className={`flex min-w-11 items-center justify-center gap-1.5 px-3 h-11 text-sm transition-colors ${
                     viewMode === 'map'
                       ? 'bg-yellow-500 text-black font-medium'
                       : 'text-muted-foreground hover:text-foreground'
@@ -399,8 +402,11 @@ export default function Spots() {
                   <span className="hidden sm:inline">Map</span>
                 </button>
                 <button
+                  type="button"
+                  aria-label="List view"
+                  aria-pressed={viewMode === 'list'}
                   onClick={() => setViewMode('list')}
-                  className={`flex items-center gap-1.5 px-3 h-full text-sm transition-colors ${
+                  className={`flex min-w-11 items-center justify-center gap-1.5 px-3 h-11 text-sm transition-colors ${
                     viewMode === 'list'
                       ? 'bg-yellow-500 text-black font-medium'
                       : 'text-muted-foreground hover:text-foreground'
@@ -412,15 +418,16 @@ export default function Spots() {
               </div>
 
               {/* Add spot */}
-              <Link
-                href={loggedIn ? '/spots/add' : '/login?redirect=/spots/add'}
-                className="no-underline"
-              >
-                <Button size="sm" className="h-9">
+              <Button asChild size="sm" className="h-11 min-w-11">
+                <Link
+                  href={loggedIn ? '/spots/add' : '/login?redirect=/spots/add'}
+                  aria-label="Add spot"
+                  className="no-underline"
+                >
                   <Plus className="h-4 w-4 mr-1" />
                   <span className="hidden sm:inline">Add Spot</span>
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

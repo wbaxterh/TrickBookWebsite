@@ -295,6 +295,9 @@ export default function TrickBook() {
     <>
       {/* Search Bar */}
       <div className="mb-6">
+        <label htmlFor="trickbook-search" className="sr-only">
+          Search tricks
+        </label>
         <div className="relative">
           <div
             className={`absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none transition-all duration-200 ease-out ${
@@ -305,6 +308,7 @@ export default function TrickBook() {
             <span className="text-muted-foreground text-sm">Search tricks...</span>
           </div>
           <input
+            id="trickbook-search"
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

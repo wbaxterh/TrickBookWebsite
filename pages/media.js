@@ -314,12 +314,15 @@ export default function Media() {
 
                 <div className="flex items-center gap-2">
                   {activeTab === 'feed' && loggedIn && (
-                    <Link href="/media/feed/upload">
-                      <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+                    <Button
+                      asChild
+                      className="min-h-11 bg-yellow-500 hover:bg-yellow-600 text-black"
+                    >
+                      <Link href="/media/feed/upload">
                         <Plus className="h-4 w-4 mr-2" />
                         Post
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   )}
                   <Button asChild variant="ghost" size="icon" className="min-h-11 min-w-11">
                     <Link href="/media/search" aria-label="Search films">
@@ -352,20 +355,24 @@ export default function Media() {
                     {heroVideo.description}
                   </p>
                   <div className="flex gap-4">
-                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
-                      <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+                    <Button
+                      asChild
+                      className="min-h-11 bg-yellow-500 hover:bg-yellow-600 text-black"
+                    >
+                      <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
                         <Play className="h-5 w-5 mr-2" fill="currentColor" />
                         Watch Now
-                      </Button>
-                    </Link>
-                    <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
-                      <Button
-                        variant="outline"
-                        className="text-white border-white hover:bg-white/10"
-                      >
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="min-h-11 text-white border-white hover:bg-white/10"
+                    >
+                      <Link href={`/media/couch/${heroVideo.slug || heroVideo._id}`}>
                         More Info
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -570,18 +577,16 @@ export default function Media() {
                   Be the first to share a clip with the community!
                 </p>
                 {loggedIn ? (
-                  <Link href="/media/feed/upload">
-                    <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+                  <Button asChild className="min-h-11 bg-yellow-500 hover:bg-yellow-600 text-black">
+                    <Link href="/media/feed/upload">
                       <Plus className="h-4 w-4 mr-2" />
                       Create Post
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 ) : (
-                  <Link href="/login">
-                    <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-                      Sign in to Post
-                    </Button>
-                  </Link>
+                  <Button asChild className="min-h-11 bg-yellow-500 hover:bg-yellow-600 text-black">
+                    <Link href="/login">Sign in to Post</Link>
+                  </Button>
                 )}
               </div>
             ) : (
