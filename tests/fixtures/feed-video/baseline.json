@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "8f38e2e",
+  "description": "Local pre-fix measurement using the synthetic video and 17-post fixture, warm app shell then Couch to Feed tab; no scroll/playback. Stream traffic only, not whole-page bytes or a production data-plan benchmark.",
+  "viewport": "390x844",
+  "observationSeconds": 8,
+  "latencyMs": 80,
+  "downloadBytesPerSecond": 200000,
+  "fixturePosts": 17,
+  "distinctStreams": 17,
+  "streamRequests": 46,
+  "segmentRequests": 29,
+  "transferredBytes": 610586
+}

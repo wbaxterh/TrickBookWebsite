@@ -1,7 +1,7 @@
 import { MarkerClusterer, SuperClusterViewportAlgorithm } from '@googlemaps/markerclusterer';
 import { APIProvider, Map as GoogleMap, useMap } from '@vis.gl/react-google-maps';
-import { Loader2 } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Loader2, RefreshCw } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.thetrickbook.com/api';
 const MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
@@ -15,35 +15,29 @@ const CATEGORY_COLORS = {
   default: '#fcf150',
 };
 
-function createClusterRenderer() {
-  return {
-    render: ({ count, position }) => {
-      const size = count < 50 ? 40 : count < 200 ? 50 : 60;
-      return new google.maps.Marker({
-        position,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: size / 2,
-          fillColor: '#fcf150',
-          fillOpacity: 0.5,
-          strokeColor: '#1a1a1a',
-          strokeOpacity: 0.6,
-          strokeWeight: 3,
-        },
-        label: {
-          text: String(count),
-          color: '#1a1a1a',
-          fontWeight: '700',
-          fontSize: count < 50 ? '13px' : '15px',
-        },
-        zIndex: count,
-      });
+function createClusterMarker(count, position) {
+  const size = count < 50 ? 40 : count < 200 ? 50 : 60;
+  return new google.maps.Marker({
+    position,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: size / 2,
+      fillColor: '#fcf150',
+      fillOpacity: 0.55,
+      strokeColor: '#1a1a1a',
+      strokeOpacity: 0.65,
+      strokeWeight: 3,
     },
-  };
+    label: {
+      text: String(count),
+      color: '#1a1a1a',
+      fontWeight: '700',
+      fontSize: count < 50 ? '13px' : '15px',
+    },
+    zIndex: count,
+  });
 }
 
-// One icon descriptor per category color, shared across all markers.
-// Built lazily because google.maps.Size/Point need the Maps API loaded.
 const iconCache = {};
 function getCategoryIcon(color) {
   if (!iconCache[color]) {
@@ -61,27 +55,36 @@ function getCategoryIcon(color) {
   return iconCache[color];
 }
 
-function ClusteredMarkers({ pins, onMarkerClick }) {
+function MapMarkers({ pins, serverClusters, onMarkerClick }) {
   const map = useMap();
-  const clustererRef = useRef(null);
 
   useEffect(() => {
-    if (!map) return;
+    if (!map) return undefined;
 
-    // Clean up previous clusterer. noDraw=true: rendering with zero markers
-    // crashes SuperClusterViewportAlgorithm (see below).
-    if (clustererRef.current) {
-      clustererRef.current.clearMarkers(true);
-      clustererRef.current.setMap(null);
-      clustererRef.current = null;
+    if (serverClusters.length > 0) {
+      const markers = serverClusters.map((cluster) => {
+        const marker = createClusterMarker(cluster.count, {
+          lat: cluster.latitude,
+          lng: cluster.longitude,
+        });
+        marker.setMap(map);
+        marker.addListener('click', () => {
+          map.panTo(marker.getPosition());
+          map.setZoom(Math.min((map.getZoom() || 3) + 2, 18));
+        });
+        return marker;
+      });
+      return () => {
+        markers.forEach((marker) => {
+          marker.setMap(null);
+        });
+      };
     }
 
-    const validPins = pins.filter((p) => p.latitude && p.longitude);
-
-    // SuperClusterViewportAlgorithm never load()s an empty marker set (deepEqual
-    // sees no change from its initial []), then clusters against the unloaded
-    // index and throws "reading 'range'". Skip the clusterer until pins exist.
-    if (validPins.length === 0) return;
+    const validPins = pins.filter(
+      (pin) => Number.isFinite(pin.latitude) && Number.isFinite(pin.longitude),
+    );
+    if (validPins.length === 0) return undefined;
 
     const markers = validPins.map((pin) => {
       const color = CATEGORY_COLORS[pin.category] || CATEGORY_COLORS.default;
@@ -90,45 +93,48 @@ function ClusteredMarkers({ pins, onMarkerClick }) {
         title: pin.name,
         icon: getCategoryIcon(color),
       });
-
-      marker.addListener('click', () => {
-        onMarkerClick(pin);
-      });
-
+      marker.addListener('click', () => onMarkerClick(pin));
       return marker;
     });
-
-    clustererRef.current = new MarkerClusterer({
+    const clusterer = new MarkerClusterer({
       map,
       markers,
       algorithm: new SuperClusterViewportAlgorithm({ maxZoom: 16 }),
-      renderer: createClusterRenderer(),
+      renderer: { render: ({ count, position }) => createClusterMarker(count, position) },
     });
-
     return () => {
-      if (clustererRef.current) {
-        clustererRef.current.clearMarkers(true);
-        clustererRef.current.setMap(null);
-        clustererRef.current = null;
-      }
+      clusterer.clearMarkers(true);
+      clusterer.setMap(null);
     };
-  }, [map, pins, onMarkerClick]);
+  }, [map, onMarkerClick, pins, serverClusters]);
 
-  // Markers only — the selected spot renders in a panel below the map (handled
-  // by the parent via onMarkerClick), not in an on-map InfoWindow.
   return null;
 }
 
-function pinMatchesFilters(pin, selectedCategory, selectedType, selectedCountry) {
-  // Sport filter matches against the pin's sportTypes.
-  if (selectedCategory !== 'all') {
-    const matchesSport = Array.isArray(pin.sportTypes) && pin.sportTypes.includes(selectedCategory);
-    if (!matchesSport) return false;
-  }
-  // Venue-type filter matches the pin's category (park/street/backcountry/…).
-  if (selectedType !== 'all' && pin.category !== selectedType) return false;
-  if (selectedCountry !== 'all' && pin.country !== selectedCountry) return false;
-  return true;
+function ViewportLoader({ onViewport }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return undefined;
+    const emitViewport = () => {
+      const bounds = map.getBounds();
+      if (!bounds) return;
+      const northEast = bounds.getNorthEast();
+      const southWest = bounds.getSouthWest();
+      onViewport({
+        minLat: southWest.lat(),
+        maxLat: northEast.lat(),
+        minLng: southWest.lng(),
+        maxLng: northEast.lng(),
+        zoom: map.getZoom() || 3,
+      });
+    };
+    const listener = map.addListener('idle', emitViewport);
+    emitViewport();
+    return () => listener.remove();
+  }, [map, onViewport]);
+
+  return null;
 }
 
 export default function SpotsMap({
@@ -139,69 +145,104 @@ export default function SpotsMap({
   heightClass = 'h-[70vh]',
   rounded = true,
 }) {
-  const [allPins, setAllPins] = useState([]);
+  const [pins, setPins] = useState([]);
+  const [serverClusters, setServerClusters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const abortRef = useRef(null);
+  const debounceRef = useRef(null);
+  const requestSequenceRef = useRef(0);
+  const latestViewportRef = useRef(null);
+  const lastViewportKeyRef = useRef(null);
 
-  // Fetch all spots once
-  useEffect(() => {
-    fetch(`${API_BASE}/spots/map-pins`)
-      .then((res) => {
-        if (!res.ok) throw new Error('map-pins not available');
-        return res.json();
-      })
-      .then((data) => {
-        setAllPins(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
-      .catch(() => {
-        fetch(`${API_BASE}/spots?limit=5000`)
-          .then((res) => res.json())
-          .then((data) => {
-            const spots = (data.spots || []).map((s) => ({
-              _id: s._id,
-              name: s.name,
-              latitude: s.latitude,
-              longitude: s.longitude,
-              category: s.category,
-              sportTypes: s.sportTypes,
-              state: s.state,
-              country: s.country,
-              rating: s.rating,
-              description: s.description,
-              imageURL: s.imageURL,
-            }));
-            setAllPins(spots);
-            setLoading(false);
-          })
-          .catch((err) => {
-            console.error('Failed to load spots:', err);
-            setError('Failed to load spots');
-            setLoading(false);
+  const loadViewport = useCallback(
+    (viewport, force = false) => {
+      latestViewportRef.current = viewport;
+      const viewportKey = [
+        viewport.minLat.toFixed(4),
+        viewport.maxLat.toFixed(4),
+        viewport.minLng.toFixed(4),
+        viewport.maxLng.toFixed(4),
+        Math.round(viewport.zoom * 10) / 10,
+        selectedCategory,
+        selectedType,
+        selectedCountry,
+      ].join(':');
+      if (!force && viewportKey === lastViewportKeyRef.current) return;
+      lastViewportKeyRef.current = viewportKey;
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(async () => {
+        abortRef.current?.abort();
+        const controller = new AbortController();
+        abortRef.current = controller;
+        const sequence = ++requestSequenceRef.current;
+        const params = new URLSearchParams({
+          v: '2',
+          minLat: String(viewport.minLat),
+          maxLat: String(viewport.maxLat),
+          minLng: String(viewport.minLng),
+          maxLng: String(viewport.maxLng),
+          zoom: String(viewport.zoom),
+        });
+        if (selectedCategory !== 'all') params.set('sportType', selectedCategory);
+        if (selectedType !== 'all') params.set('category', selectedType);
+        if (selectedCountry !== 'all') params.set('country', selectedCountry);
+        setLoading(true);
+        setError(null);
+        try {
+          const response = await fetch(`${API_BASE}/spots/map-pins?${params}`, {
+            signal: controller.signal,
           });
-      });
-  }, []);
+          if (!response.ok) throw new Error(`Map request failed (${response.status})`);
+          const data = await response.json();
+          if (sequence !== requestSequenceRef.current) return;
+          if (data.type === 'clusters') {
+            setServerClusters(Array.isArray(data.items) ? data.items : []);
+            setPins([]);
+          } else {
+            setPins(Array.isArray(data.items) ? data.items : []);
+            setServerClusters([]);
+          }
+        } catch (requestError) {
+          if (requestError.name !== 'AbortError' && sequence === requestSequenceRef.current) {
+            setError('Could not load this area. Check your connection and try again.');
+          }
+        } finally {
+          if (sequence === requestSequenceRef.current) setLoading(false);
+        }
+      }, 250);
+    },
+    [selectedCategory, selectedCountry, selectedType],
+  );
 
-  // Filter pins based on selected category and country.
-  // Memoized so the array identity is stable across unrelated re-renders
-  // (e.g., selecting a pin) — otherwise ClusteredMarkers rebuilds every marker.
-  const pins = useMemo(
-    () =>
-      allPins.filter((pin) =>
-        pinMatchesFilters(pin, selectedCategory, selectedType, selectedCountry),
-      ),
-    [allPins, selectedCategory, selectedType, selectedCountry],
+  useEffect(() => {
+    if (latestViewportRef.current) loadViewport(latestViewportRef.current);
+  }, [loadViewport]);
+
+  useEffect(
+    () => () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      abortRef.current?.abort();
+    },
+    [],
   );
 
   const handleMarkerClick = useCallback(
-    (pin) => {
-      if (onSelectSpot) onSelectSpot(pin);
+    async (pin) => {
+      if (!onSelectSpot) return;
+      onSelectSpot({ ...pin, _loading: true });
+      try {
+        const response = await fetch(`${API_BASE}/spots/${pin._id}`);
+        if (!response.ok) throw new Error('Spot detail unavailable');
+        onSelectSpot(await response.json());
+      } catch {
+        onSelectSpot(pin);
+      }
     },
     [onSelectSpot],
   );
 
   const roundClass = rounded ? 'rounded-xl border' : 'border-y';
-
   if (!MAPS_KEY) {
     return (
       <div
@@ -217,16 +258,6 @@ export default function SpotsMap({
     );
   }
 
-  if (error) {
-    return (
-      <div
-        className={`w-full ${heightClass} bg-card border-border ${roundClass} flex items-center justify-center`}
-      >
-        <p className="text-muted-foreground">{error}</p>
-      </div>
-    );
-  }
-
   return (
     <div className={`w-full ${heightClass} overflow-hidden border-border ${roundClass} relative`}>
       <APIProvider apiKey={MAPS_KEY}>
@@ -237,32 +268,42 @@ export default function SpotsMap({
           disableDefaultUI={false}
           style={{ width: '100%', height: '100%' }}
         >
-          <ClusteredMarkers pins={pins} onMarkerClick={handleMarkerClick} />
+          <ViewportLoader onViewport={loadViewport} />
+          <MapMarkers
+            pins={pins}
+            serverClusters={serverClusters}
+            onMarkerClick={handleMarkerClick}
+          />
         </GoogleMap>
       </APIProvider>
       {loading && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-card border border-border rounded-full px-4 py-1.5 flex items-center shadow-md">
           <Loader2 className="h-4 w-4 animate-spin text-yellow-500" />
-          <span className="ml-2 text-sm text-muted-foreground">Loading spots...</span>
+          <span className="ml-2 text-sm text-muted-foreground">Updating this area...</span>
+        </div>
+      )}
+      {error && (
+        <div className="absolute inset-x-3 top-3 z-20 mx-auto max-w-md rounded-lg border border-red-500/40 bg-card p-3 shadow-lg flex items-center justify-between gap-3">
+          <span className="text-sm text-foreground">{error}</span>
+          <button
+            type="button"
+            onClick={() =>
+              latestViewportRef.current && loadViewport(latestViewportRef.current, true)
+            }
+            className="shrink-0 inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-sm hover:bg-muted"
+          >
+            <RefreshCw className="h-3.5 w-3.5" /> Retry
+          </button>
         </div>
       )}
       <div className="bg-card border-t border-border px-4 py-2 flex items-center justify-between text-sm">
         <span className="text-muted-foreground">
-          {loading ? 'Loading spots...' : `${pins.length.toLocaleString()} spots worldwide`}
+          {loading
+            ? 'Updating this area...'
+            : serverClusters.length > 0
+              ? `${serverClusters.length.toLocaleString()} areas - zoom in for spots`
+              : `${pins.length.toLocaleString()} spots in this area`}
         </span>
-        <div className="flex gap-3">
-          {Object.entries(CATEGORY_COLORS)
-            .filter(([key]) => key !== 'default')
-            .map(([cat, color]) => (
-              <span key={cat} className="flex items-center gap-1 text-xs text-muted-foreground">
-                <span
-                  className="w-2.5 h-2.5 rounded-full inline-block"
-                  style={{ backgroundColor: color }}
-                />
-                {cat}
-              </span>
-            ))}
-        </div>
       </div>
     </div>
   );

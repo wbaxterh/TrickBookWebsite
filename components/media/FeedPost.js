@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import UserAvatar from '../UserAvatar';
 import CommentSection from './CommentSection';
-import VideoPlayer from './VideoPlayer';
+import FeedVideo from './FeedVideo';
 
 export default function FeedPost({
   post,
@@ -30,25 +30,7 @@ export default function FeedPost({
   const [saved, setSaved] = useState(post.isSaved || false);
   const [showComments, setShowComments] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const containerRef = useRef(null);
   const menuRef = useRef(null);
-
-  // Intersection observer for autoplay when in view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting && entry.intersectionRatio >= 0.5);
-      },
-      { threshold: 0.5 },
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -134,10 +116,7 @@ export default function FeedPost({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-card rounded-lg overflow-hidden border border-border w-full"
-    >
+    <div className="bg-card rounded-lg overflow-hidden border border-border w-full">
       {/* Creator Header */}
       <div className="flex items-center justify-between p-3">
         <Link
@@ -208,20 +187,7 @@ export default function FeedPost({
       {/* Video/Image Content */}
       <div className="relative bg-black flex justify-center">
         {post.mediaType === 'video' ? (
-          <div
-            className={`w-full ${post.aspectRatio === '9:16' || !post.aspectRatio ? 'max-w-[400px]' : ''}`}
-          >
-            <VideoPlayer
-              src={post.signedHlsUrl || post.signedMp4Url || post.hlsUrl || post.videoUrl}
-              poster={post.signedThumbnailUrl || post.thumbnailUrl}
-              loop
-              autoPlay={autoPlay && isInView}
-              controls={true}
-              aspectRatio={post.aspectRatio || '9:16'}
-              objectFit="cover"
-              className="max-h-[600px]"
-            />
-          </div>
+          <FeedVideo post={post} autoPlay={autoPlay} />
         ) : (
           <Image
             src={post.imageUrls?.[0] || post.thumbnailUrl}

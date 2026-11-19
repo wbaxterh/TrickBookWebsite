@@ -351,14 +351,20 @@ img {
   font-size: 1.5rem;
 }
 
-/* Site header (formerly react-bootstrap Navbar, expand="lg"). Breakpoints
-   follow Tailwind's lg (1024px) so the `lg:` utilities in Header.js agree. */
+/* Keep navigation below companions and the portaled z-50 dialogs/dropdowns. */
+:root {
+  --tb-layer-header: 40;
+  --tb-layer-companion: 45;
+  --tb-layer-navigation: 48;
+}
+
+/* The full navigation needs more room than Tailwind's 1024px lg breakpoint. */
 .site-header {
   top: 0;
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 999999;
+  z-index: var(--tb-layer-header);
   padding: 0.5rem 0;
   background-color: #f5f5f5;
   transition: background-color 0.2s ease;
@@ -369,10 +375,13 @@ img {
 }
 
 .site-header-inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
+  max-width: 1400px;
+  max-height: calc(100vh - 1rem);
+  max-height: calc(100dvh - 1rem);
 }
 
 .site-brand {
@@ -384,6 +393,7 @@ img {
 }
 
 .nav-toggle {
+  grid-column: 3;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -395,6 +405,30 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.375rem;
   cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.site-header-kaori-toggle {
+  display: inline-flex;
+  flex: 0 0 44px;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: 12px;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+  background: #0c4a6e;
+  color: #e0f2fe;
+}
+
+.site-header-kaori-toggle:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
 }
 
 .dark .nav-toggle {
@@ -403,9 +437,29 @@ img {
 }
 
 .site-nav-collapse {
-  flex-basis: 100%;
-  flex-grow: 1;
+  display: none;
+  grid-column: 1 / -1;
+  align-self: stretch;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  flex-direction: column;
   align-items: center;
+}
+
+.site-header[data-expanded="true"] {
+  z-index: var(--tb-layer-navigation);
+}
+
+.site-nav-collapse[data-expanded="true"] {
+  display: flex;
+}
+
+.site-nav-account {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
 }
 
 .site-nav {
@@ -716,7 +770,7 @@ textarea::placeholder {
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .theme-toggle-btn {
     width: auto;
     padding: 8px 12px;
@@ -820,14 +874,14 @@ textarea::placeholder {
   color: #1a1a1a;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .language-selector-toggle {
     padding: 8px 12px;
     margin-right: 12px;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   .language-selector-toggle {
     width: 100%;
   }
@@ -851,9 +905,11 @@ textarea::placeholder {
   transition: all 0.2s ease;
   width: 100%;
   min-height: 44px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .login-btn {
     width: auto;
     padding: 8px 16px;
@@ -872,10 +928,23 @@ textarea::placeholder {
   color: #1a1a1a;
 }
 
-/* Desktop header (>= lg) */
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
+  .site-header-inner {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .nav-toggle,
+  .mobile-nav-divider {
+    display: none;
+  }
+
   .site-nav-collapse {
-    flex-basis: auto;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    min-width: 0;
+    overflow: visible;
   }
 
   .site-nav {
@@ -893,14 +962,28 @@ textarea::placeholder {
   .site-nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
   }
 }
 
-/* Mobile header (< lg): the open panel sits inside the fixed bar */
-@media (max-width: 1023px) {
+/* A constrained second grid row scrolls; the logo and toggle stay reachable. */
+@media (max-width: 1279px) {
+  .site-header[data-expanded="true"] .site-header-inner {
+    height: calc(100vh - 1rem);
+    height: calc(100dvh - 1rem);
+    grid-template-rows: min-content minmax(0, 1fr);
+  }
+
   .site-nav-collapse {
-    padding-bottom: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    width: 100%;
+    align-items: stretch;
     background-color: #f5f5f5;
+  }
+
+  .site-nav-collapse > * {
+    flex-shrink: 0;
   }
 
   .dark .site-nav-collapse {

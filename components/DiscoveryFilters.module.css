@@ -1,0 +1,13 @@
+.advanced {
+  display: none;
+}
+
+.advanced[data-open="true"] {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .advanced {
+    display: block;
+  }
+}

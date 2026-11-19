@@ -173,8 +173,7 @@ export default function SpotListDetail() {
                 No spots in this list yet
               </h2>
               <p className="text-muted-foreground max-w-md mb-6">
-                Use our Chrome extension to add spots from Google Maps, or browse spots and add them
-                to your lists.
+                Browse spots and add the places you want to ride to your lists.
               </p>
               <Button
                 onClick={() => router.push('/spots')}

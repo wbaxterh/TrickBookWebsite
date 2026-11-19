@@ -10,7 +10,9 @@ export default function VideoPlayer({
   controls = true,
   onTimeUpdate,
   onEnded,
+  onPlay,
   onProgress,
+  initialTime = 0,
   aspectRatio = '16:9',
   objectFit = 'contain',
   className = '',
@@ -30,66 +32,80 @@ export default function VideoPlayer({
   const [showQualityMenu, setShowQualityMenu] = useState(false);
   const [_isFullscreen, setIsFullscreen] = useState(false);
   const controlsTimeoutRef = useRef(null);
+  const initialTimeRef = useRef(initialTime);
+  const releasingRef = useRef(false);
+  const timeUpdateRef = useRef(onTimeUpdate);
+  timeUpdateRef.current = onTimeUpdate;
 
   // Dynamic import of hls.js to avoid SSR issues
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !src) return;
+    releasingRef.current = false;
+    let disposed = false;
+    let hls = null;
 
     const initHls = async () => {
       // Check if it's an HLS stream
       const isHlsSource = src.includes('.m3u8');
 
-      if (isHlsSource) {
-        const Hls = (await import('hls.js')).default;
-
-        if (Hls.isSupported()) {
-          hlsRef.current = new Hls({
-            enableWorker: true,
-            lowLatencyMode: true,
-            backBufferLength: 90,
-          });
-
-          hlsRef.current.loadSource(src);
-          hlsRef.current.attachMedia(video);
-
-          hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_event, data) => {
-            const availableQualities = data.levels.map((level, i) => ({
-              index: i,
-              height: level.height,
-              bitrate: level.bitrate,
-              label: `${level.height}p`,
-            }));
-            setQualities([{ index: -1, label: 'Auto', height: 0 }, ...availableQualities]);
-
-            if (autoPlay) {
-              video.play().catch(() => {});
-            }
-          });
-
-          hlsRef.current.on(Hls.Events.ERROR, (_event, data) => {
-            if (data.fatal) {
-            }
-          });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari native HLS support
-          video.src = src;
-          if (autoPlay) video.play().catch(() => {});
-        }
-      } else {
-        // Regular video source (mp4, webm, etc.)
+      const setNativeSource = () => {
         video.src = src;
         if (autoPlay) video.play().catch(() => {});
+      };
+      if (!isHlsSource) {
+        setNativeSource();
+        return;
       }
+      const Hls = (await import('hls.js')).default;
+      // The feed card may have left view while the dynamic import was pending.
+      if (disposed) return;
+      if (!Hls.isSupported()) {
+        if (video.canPlayType('application/vnd.apple.mpegurl')) setNativeSource();
+        return;
+      }
+      hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+        backBufferLength: 90,
+      });
+      hlsRef.current = hls;
+
+      hlsRef.current.loadSource(src);
+      hlsRef.current.attachMedia(video);
+
+      hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_event, data) => {
+        const availableQualities = data.levels.map((level, i) => ({
+          index: i,
+          height: level.height,
+          bitrate: level.bitrate,
+          label: `${level.height}p`,
+        }));
+        setQualities([{ index: -1, label: 'Auto', height: 0 }, ...availableQualities]);
+
+        if (!disposed && autoPlay) {
+          video.play().catch(() => {});
+        }
+      });
+
+      hlsRef.current.on(Hls.Events.ERROR, (_event, data) => {
+        if (data.fatal) {
+        }
+      });
     };
 
-    initHls();
+    initHls().catch(() => {});
 
     return () => {
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
+      disposed = true;
+      releasingRef.current = true;
+      if (video.readyState > 0) timeUpdateRef.current?.(video.currentTime, video.duration);
+      video.pause();
+      hls?.destroy();
+      if (hlsRef.current === hls) hlsRef.current = null;
+      // Also release native HLS/MP4 downloads, not just the hls.js instance.
+      video.removeAttribute('src');
+      video.load();
     };
   }, [src, autoPlay]);
 
@@ -156,6 +172,8 @@ export default function VideoPlayer({
     if (!video) return;
 
     const handleTimeUpdate = () => {
+      // Clearing a native source can emit a final timeupdate at zero during teardown.
+      if (releasingRef.current || video.readyState === 0) return;
       const pct = (video.currentTime / video.duration) * 100;
       setProgress(pct);
       setCurrentTime(video.currentTime);
@@ -166,6 +184,14 @@ export default function VideoPlayer({
       setDuration(video.duration);
     };
 
+    const restorePosition = () => {
+      // Native players may reset a seek made before their first frame is loaded.
+      if (initialTimeRef.current > 0 && Number.isFinite(video.duration)) {
+        video.currentTime = Math.min(initialTimeRef.current, Math.max(0, video.duration - 0.1));
+        initialTimeRef.current = 0;
+      }
+    };
+
     const handleProgress = () => {
       if (video.buffered.length > 0) {
         const bufferedEnd = video.buffered.end(video.buffered.length - 1);
@@ -174,7 +200,10 @@ export default function VideoPlayer({
       }
     };
 
-    const handlePlay = () => setIsPlaying(true);
+    const handlePlay = () => {
+      setIsPlaying(true);
+      onPlay?.();
+    };
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => {
       setIsPlaying(false);
@@ -187,6 +216,7 @@ export default function VideoPlayer({
 
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('loadeddata', restorePosition);
     video.addEventListener('progress', handleProgress);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
@@ -196,13 +226,14 @@ export default function VideoPlayer({
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('loadeddata', restorePosition);
       video.removeEventListener('progress', handleProgress);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handleEnded);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, [onTimeUpdate, onEnded]);
+  }, [onTimeUpdate, onEnded, onPlay]);
 
   // Auto-hide controls
   useEffect(() => {
@@ -256,6 +287,8 @@ export default function VideoPlayer({
       {!isPlaying && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/30">
           <button
+            type="button"
+            aria-label="Play video"
             onClick={(e) => {
               e.stopPropagation();
               togglePlay();
@@ -302,6 +335,8 @@ export default function VideoPlayer({
             <div className="flex items-center gap-3">
               {/* Play/Pause */}
               <button
+                type="button"
+                aria-label={isPlaying ? 'Pause video' : 'Play video'}
                 onClick={togglePlay}
                 className="text-white hover:text-yellow-500 transition-colors"
               >
@@ -310,6 +345,8 @@ export default function VideoPlayer({
 
               {/* Volume */}
               <button
+                type="button"
+                aria-label={isMuted ? 'Unmute video' : 'Mute video'}
                 onClick={toggleMute}
                 className="text-white hover:text-yellow-500 transition-colors"
               >
@@ -327,6 +364,8 @@ export default function VideoPlayer({
               {qualities.length > 0 && (
                 <div className="relative">
                   <button
+                    type="button"
+                    aria-label="Video quality"
                     onClick={() => setShowQualityMenu(!showQualityMenu)}
                     className="text-white hover:text-yellow-500 transition-colors flex items-center gap-1"
                   >
@@ -338,6 +377,7 @@ export default function VideoPlayer({
                     <div className="absolute bottom-full right-0 mb-2 bg-black/90 rounded-lg py-2 min-w-[100px]">
                       {qualities.map((q) => (
                         <button
+                          type="button"
                           key={q.index}
                           onClick={() => handleQualityChange(q.index)}
                           className={`block w-full px-4 py-1 text-left text-sm hover:bg-white/10 ${
@@ -354,6 +394,8 @@ export default function VideoPlayer({
 
               {/* Fullscreen */}
               <button
+                type="button"
+                aria-label="Fullscreen video"
                 onClick={toggleFullscreen}
                 className="text-white hover:text-yellow-500 transition-colors"
               >

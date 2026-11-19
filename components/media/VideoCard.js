@@ -2,6 +2,7 @@ import { Clock, Play, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import CouchArtwork from './CouchArtwork';
 
 export default function VideoCard({
   video,
@@ -11,7 +12,6 @@ export default function VideoCard({
   className = '',
 }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [imageError, setImageError] = useState(false);
 
   const formatDuration = (seconds) => {
     if (!seconds) return '';
@@ -40,22 +40,10 @@ export default function VideoCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Thumbnail */}
-      {(video.thumbnails?.poster || video.driveThumbnail) && !imageError ? (
-        <Image
-          src={video.thumbnails?.poster || video.driveThumbnail}
-          alt={video.title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          onError={() => setImageError(true)}
-          unoptimized={Boolean(
-            video.driveThumbnail || video.thumbnails?.poster?.includes('ytimg.com'),
-          )}
-        />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-black/50 flex items-center justify-center">
-          <Play className="h-12 w-12 text-white/50" />
-        </div>
-      )}
+      <CouchArtwork
+        video={video}
+        className="object-cover transition-transform duration-300 group-hover:scale-105"
+      />
 
       {/* Hover Overlay */}
       <div
